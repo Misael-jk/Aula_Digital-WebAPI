@@ -3,6 +3,7 @@
 public class ElementosDTO
 {
     public int IdElemento { get; set; }
+    public required string Equipo { get; set; }
     public required string NumeroSerie { get; set; }
     public required string CodigoBarra { get; set; }
     public required string TipoElemento { get; set; }

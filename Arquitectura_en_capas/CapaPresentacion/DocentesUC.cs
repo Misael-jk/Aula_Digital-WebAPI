@@ -14,21 +14,16 @@ namespace CapaPresentacion
 {
     public partial class DocentesUC : UserControl
     {
-        private readonly IRepoDocentes repoDocentes = null!; 
-        public DocentesUC(IRepoDocentes repoDocentes)
+        private readonly DocentesCN docentesCN = null!; 
+        public DocentesUC(DocentesCN docentesCN)
         {
             InitializeComponent();
-            this.repoDocentes = repoDocentes;
+            this.docentesCN = docentesCN;
         }
 
         public void MostrarDocentes()
         {
-            dataGridView1.DataSource = repoDocentes.GetAll();
-
-            dataGridView1.Columns["IdDocente"].HeaderText = "ID";
-            dataGridView1.Columns[0].Width = 39;
-
-            dataGridView1.Columns[4].Width = 155;
+            dgvDocentes.DataSource = docentesCN.MostrarDocente();
         }
     }
 }

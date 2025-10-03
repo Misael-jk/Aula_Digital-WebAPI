@@ -1,4 +1,5 @@
 ﻿using CapaDatos.Interfaces;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,16 +14,22 @@ namespace CapaPresentacion
 {
     public partial class CategoriasUC : UserControl
     {
-        private readonly IRepoTipoElemento repoTipoElemento = null!;
-        public CategoriasUC(IRepoTipoElemento repoTipoElemento)
+        private readonly IRepoTipoElemento repoTipoElemento;
+        private readonly IRepoUbicacion repoUbicacion;
+        private readonly ModeloCN modeloCN = null!;
+        public CategoriasUC(IRepoTipoElemento repoTipoElemento, IRepoUbicacion repoUbicacion, ModeloCN modeloCN)
         {
             InitializeComponent();
             this.repoTipoElemento = repoTipoElemento;
+            this.repoUbicacion = repoUbicacion;
+            this.modeloCN = modeloCN;
         }
 
         public void MostrarCategoria()
         {
-            dataGridView1.DataSource = repoTipoElemento.GetAll();
+            dgvTipoElemento.DataSource = repoTipoElemento.GetAll();
+            dgvUbicacion.DataSource = repoUbicacion.GetAll();
+            dgvModelo.DataSource = modeloCN.ObtenerModelos();
         }
     }
 }

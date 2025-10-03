@@ -5,10 +5,10 @@
 delimiter $$
 
 drop procedure if exists InsertCarrito $$
-create procedure InsertCarrito(out unidCarrito tinyint, in unnumeroSerieCarrito varchar(40), in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint, in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
+create procedure InsertCarrito(out unidCarrito tinyint, in unequipo varchar(40), in unnumeroSerieCarrito varchar(40), in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint, in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
 begin
-    insert into Carritos (numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, habilitado, fechaBaja)
-    values (unnumeroSerieCarrito, unidEstadoMantenimiento, unidUbicacion, unidModelo, unhabilitado, unafechaBaja);
+    insert into Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, habilitado, fechaBaja)
+    values (unequipo, unnumeroSerieCarrito, unidEstadoMantenimiento, unidUbicacion, unidModelo, unhabilitado, unafechaBaja);
 
     set unidCarrito = last_insert_id();
 end $$
@@ -43,10 +43,10 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertElemento $$
-create procedure InsertElemento (out unidElemento tinyint, in unidTipoElemento tinyint, in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime)
+create procedure InsertElemento (out unidElemento tinyint, in unidTipoElemento tinyint, in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unequipo varchar(40), in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime)
 begin
-    insert into Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja)
-    values (unidTipoElemento, unidModelo, unidUbicacion, unidEstadoMantenimiento, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);
+    insert into Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, equipo, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja)
+    values (unidTipoElemento, unidModelo, unidUbicacion, unidEstadoMantenimiento, unequipo, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);
 
     set unidElemento = last_insert_id();
 end $$
@@ -136,10 +136,10 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertDevolucionDetalle $$
-create procedure InsertDevolucionDetalle (in unidDevolucion int ,in unidElemento tinyint ,in unidEstadoMantenimiento tinyint ,in unaobservacion varchar(200))
+create procedure InsertDevolucionDetalle (in unidDevolucion int ,in unidElemento tinyint ,in unaobservacion varchar(200))
 begin
-    insert into DevolucionDetalle (idDevolucion, idElemento, idEstadoMantenimiento, observaciones)
-    values (unidDevolucion, unidElemento, unidEstadoMantenimiento, unaobservacion);
+    insert into DevolucionDetalle (idDevolucion, idElemento, observaciones)
+    values (unidDevolucion, unidElemento, unaobservacion);
 end $$
 
 delimiter ;

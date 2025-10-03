@@ -15,7 +15,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     #region Mostrar todos los estados de los elementos
     public IEnumerable<EstadosMantenimiento> GetAll()
     {
-        string query = "select * from EstadosElemento";
+        string query = "select * from EstadosMantenimiento";
 
         try
         {

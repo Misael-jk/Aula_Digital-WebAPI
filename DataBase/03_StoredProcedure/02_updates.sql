@@ -5,10 +5,11 @@
 delimiter $$ 
 
 drop procedure if exists UpdateCarrito $$
-create procedure UpdateCarrito(in unidCarrito tinyint, in unnumeroSerieCarrito varchar(40), in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint , in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
+create procedure UpdateCarrito(in unidCarrito tinyint, in unequipo varchar(40), in unnumeroSerieCarrito varchar(40), in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint , in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
 begin
     update Carritos 
-    set numeroSerieCarrito = unnumeroSerieCarrito,
+    set equipo = unequipo,
+        numeroSerieCarrito = unnumeroSerieCarrito,
         idEstadoMantenimiento = unidEstadoMantenimiento,
         idUbicacion = unidUbicacion,
         idModelo = unidModelo,
@@ -51,13 +52,14 @@ delimiter ;
 delimiter $$ 
 
 drop procedure if exists UpdateElemento $$
-create procedure UpdateElemento(in unidElemento tinyint, in unidTipoElemento tinyint ,in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40) , in undisponible boolean, in unafechaBaja datetime)
+create procedure UpdateElemento(in unidElemento tinyint, in unidTipoElemento tinyint ,in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unequipo varchar(40), in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40) , in undisponible boolean, in unafechaBaja datetime)
 begin
     update Elementos 
     set idTipoElemento = unidTipoElemento,
         idModelo = unidModelo,
         idUbicacion = unidUbicacion,
         idEstadoMantenimiento = unidEstadoMantenimiento,
+        equipo = unequipo,
         numeroSerie = unnumeroSerie,
         codigoBarra = uncodigoBarra,
         patrimonio = unpatrimonio,

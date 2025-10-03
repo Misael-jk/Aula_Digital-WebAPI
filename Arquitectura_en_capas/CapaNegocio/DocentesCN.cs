@@ -10,16 +10,17 @@ namespace CapaNegocio;
 public class DocentesCN
 {
     private readonly IRepoDocentes _repoDocente;
-
-    public DocentesCN(IRepoDocentes repoDocente)
+    private readonly IMapperDocentes mapperDocentes;
+    public DocentesCN(IRepoDocentes repoDocente, IMapperDocentes mapperDocentes)
     {
         _repoDocente = repoDocente;
+        this.mapperDocentes = mapperDocentes;
     }
 
     #region Mostrar Docentes
-    public IEnumerable<Docentes> MostrarDocente()
+    public IEnumerable<DocentesDTO> MostrarDocente()
     {
-        return _repoDocente.GetAll();
+        return mapperDocentes.GetAllDTO();
     }
     #endregion
 

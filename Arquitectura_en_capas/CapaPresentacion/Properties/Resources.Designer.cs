@@ -193,6 +193,16 @@ namespace CapaPresentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Perfil_default {
+            get {
+                object obj = ResourceManager.GetObject("Perfil_default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap perfil_usuario {
             get {
                 object obj = ResourceManager.GetObject("perfil_usuario", resourceCulture);

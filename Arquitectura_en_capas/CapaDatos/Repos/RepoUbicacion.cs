@@ -45,7 +45,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
 
     public IEnumerable<Ubicacion> GetAll()
     {
-        string query = "select * from Ubicacion";
+        string query = "select idUbicacion, ubicacion as 'NombreUbicacion' from Ubicacion";
 
         return Conexion.Query<Ubicacion>(query);
     }

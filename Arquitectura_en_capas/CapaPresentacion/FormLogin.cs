@@ -57,20 +57,34 @@ namespace CapaPresentacion
             string usuario = TxtUser.Text.Trim();
             string password = TxtPass.Text.Trim();
 
-            Usuarios? userVerificado = usuariosCN.Login(usuario, password);
-
-            if (userVerificado != null)
+            try
             {
+                Usuarios? userVerificado = usuariosCN.Login(usuario, password);
+
                 Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
 
                 FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
                 principal.Show();
                 this.Hide();
             }
-            else
+            catch
             {
                 TxtError.Visible = true;
             }
+
+
+            //if (userVerificado != null)
+            //{
+            //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
+
+            //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
+            //    principal.Show();
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    TxtError.Visible = true;
+            //}
         }
 
         private void TxtUser_KeyDown(object sender, KeyEventArgs e)
@@ -90,6 +104,15 @@ namespace CapaPresentacion
                 e.SuppressKeyPress = true;
                 BtnLogin.PerformClick();
             }
+        }
+
+        private void LoginState_Load(object sender, EventArgs e)
+        {
+            TxtUser.Focus();
+            TxtPass.PlaceholderForeColor = Color.DarkGray;
+            TxtPass.PlaceholderText = "Ingresar contraseña";
+            TxtUser.PlaceholderForeColor = Color.DarkGray;
+            TxtUser.PlaceholderText = "Ingresar usuario";
         }
     }
 }

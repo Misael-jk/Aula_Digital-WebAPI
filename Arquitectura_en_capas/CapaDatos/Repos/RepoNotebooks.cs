@@ -257,7 +257,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where habilitado = 1
-                         where idEstadoMantenimiento = 1";
+                         and idEstadoMantenimiento = 1";
 
         try
         {
@@ -275,7 +275,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where habilitado = 1
-                         where idEstadoMantenimiento = 1";
+                         and idEstadoMantenimiento = 1";
 
         try
         {
@@ -284,6 +284,54 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         catch (Exception)
         {
             throw new Exception("Hubo un error al traer los codigos de barra de las notebooks");
+        }
+    }
+
+    public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito)
+    {
+        string query = @"select posicionCarrito, idEstadoMantenimiento
+                        from elementos e
+                        join Notebooks n using (idElemento)
+                        where n.idCarrito = @unIdCarrito
+                        and (idEstadoMantenimiento = 1
+                        or idEstadoMantenimiento = 3);";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("@unIdCarrito", idCarrito);
+
+        try
+        {
+            return Conexion.Query<Notebooks>(query, parameters);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al obtener notebooks del carrito: " + ex.Message);
+        }
+    }
+
+    public Elemento? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
+    {
+        string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
+                         from Elementos e
+                         LEFT JOIN Notebooks n ON e.idElemento = n.idElemento
+                         where (numeroSerie = @numeroSerie or codigoBarra = @codigoBarra)
+                         and n.idCarrito is null
+                         and idEstadoMantenimiento = 1 
+                         and habilitado = 1
+                         limit 1;";
+
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("numeroSerie", numeroSerie);
+        parameters.Add("codigoBarra", codigoBarra);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters);
+        }
+        catch (Exception)
+        {
+            throw new Exception("No se encontro el elemento con su numero de serie o codigo de barra");
         }
     }
 }

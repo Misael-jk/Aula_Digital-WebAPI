@@ -40,17 +40,24 @@ INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 ('Prestado');
 
 -- CARRITOS inserts
-INSERT INTO Carritos (numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
-('CARR-001', 1, 1, 1, TRUE),
-('CARR-002', 1, 2, 1, TRUE);
+INSERT INTO Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
+('Carro de guarda 1', 'CARR-001', 1, 1, 1, TRUE),
+('Carro de guarda 2', 'CARR-002', 1, 2, 1, TRUE);
 
 -- ELEMENTOS inserts
-INSERT INTO Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado)
+-- ELEMENTOS extra (Proyectores y Tablets que sí aparecen en la vista)
+INSERT INTO Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, equipo, numeroSerie, codigoBarra, patrimonio, habilitado)
 VALUES
-(1, 1, 1, 1, 'NB001', 'CB001', 'PAT001', TRUE),
-(2, 3, 1, 1, 'PR001', 'CB002', 'PAT002', TRUE),
-(3, 4, 2, 2, 'TB001', 'CB003', 'PAT003', FALSE),
-(1, 1, 1, 1, 'NB002', 'CB004', 'PAT004', TRUE);
+-- Proyectores (modelo Epson X200)
+(2, 3, 1, 1, 'Proyector A', 'PR002', 'CB005', 'PAT005', TRUE),
+(2, 3, 1, 2, 'Proyector B', 'PR003', 'CB006', 'PAT006', TRUE),
+(2, 3, 2, 3, 'Proyector C', 'PR004', 'CB007', 'PAT007', TRUE),
+
+-- Tablets (modelo Samsung Tab A)
+(3, 4, 2, 1, 'Tablet A', 'TB002', 'CB008', 'PAT008', TRUE),
+(3, 4, 2, 1, 'Tablet B', 'TB003', 'CB009', 'PAT009', TRUE),
+(3, 4, 1, 2, 'Tablet C', 'TB004', 'CB010', 'PAT010', TRUE);
+
 
 -- NOTEBOOKS (ligadas a Elementos tipo Notebook)
 INSERT INTO Notebooks (idElemento, idCarrito, posicionCarrito) VALUES
@@ -85,9 +92,9 @@ INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observ
 (2, 2, '2025-08-06 16:00:00', 'Con problemas en batería');
 
 -- DEVOLUCION DETALLE inserts 
-INSERT INTO DevolucionDetalle (idDevolucion, idElemento, idEstadoMantenimiento, observaciones) VALUES
-(1, 1, 1, NULL),
-(2, 3, 1, 'Devuelto con anomalías');
+INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
+(1, 1, NULL),
+(2, 3, 'Devuelto con anomalías');
 
 -- TIPO ACCION inserts
 INSERT INTO TipoAccion (accion) VALUES
@@ -97,20 +104,23 @@ INSERT INTO TipoAccion (accion) VALUES
 ('Préstamo'),
 ('Devolución');
 
--- HISTORIAL CAMBIO + HISTORIAL ELEMENTOS
+-- Cambios de proyectores
 INSERT INTO HistorialCambio (idTipoAccion, idUsuario, fechaCambio, observacion) VALUES
-(1, 1, '2025-07-31 09:00:00', 'Ingreso al sistema - disponible'),
-(4, 1, '2025-08-01 10:00:00', 'Préstamo al docente María Fernández - curso Matemáticas'),
-(5, 1, '2025-08-05 15:00:00', 'Devolución sin daños'),
-(1, 2, '2025-07-31 09:30:00', 'Ingreso al sistema - en mantenimiento'),
-(4, 2, '2025-08-02 11:00:00', 'Préstamo al docente Carlos Sánchez - curso Lengua'),
-(5, 2, '2025-08-06 16:00:00', 'Devolución con problemas en batería');
+(1, 1, '2025-09-01 09:00:00', 'Ingreso de Proyector A - disponible'),
+(1, 1, '2025-09-01 09:10:00', 'Ingreso de Proyector B - en mantenimiento'),
+(1, 2, '2025-09-01 09:20:00', 'Ingreso de Proyector C - prestado'),
 
--- Relacionamos cambios con elementos
+-- Cambios de tablets
+(1, 1, '2025-09-02 10:00:00', 'Ingreso de Tablet A - disponible'),
+(1, 1, '2025-09-02 10:05:00', 'Ingreso de Tablet B - disponible'),
+(1, 2, '2025-09-02 10:15:00', 'Ingreso de Tablet C - en mantenimiento');
+
+-- Relacionar con elementos
 INSERT INTO HistorialElemento (idHistorialCambio, idElemento) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 3),
-(5, 3),
-(6, 3);
+(7, 5), -- Proyector A
+(8, 6), -- Proyector B
+(9, 7), -- Proyector C
+(10, 8), -- Tablet A
+(11, 9), -- Tablet B
+(12, 10); -- Tablet C
+

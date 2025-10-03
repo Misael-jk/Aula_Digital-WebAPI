@@ -6,13 +6,17 @@ drop view if exists View_GetElementosDTO;
 create view View_GetElementosDTO as 
     select 
         e.idElemento,
+        e.equipo,
         e.numeroSerie,
         e.codigoBarra,
-        te.elemento as ElementoTipo,
-        ee.estadoMantenimiento as EstadoMantenimientoNombre,
-        c.numeroSerieCarrito
+        e.patrimonio,
+        t.elemento as 'ElementoTipo',
+        ee.estadoMantenimiento as 'EstadoMantenimientoNombre',
+        m.modelo as 'NombreModelo',
+        u.ubicacion as 'NombreUbicacion'
     from Elementos e
-    join tipoElemento te using(idTipoElemento)
+    join modelo m using (idModelo)
+    join tipoElemento t on t.idTipoElemento = m.idTipoElemento
     join EstadosMantenimiento ee using(idEstadoMantenimiento)
-    left join Carritos c using(idCarrito)
-    where e.disponible = 1;
+    join Ubicacion u using (idUbicacion)
+    where e.habilitado = 1;

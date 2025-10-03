@@ -14,17 +14,17 @@ public class MapperCarrritos : RepoBase, IMapperCarritos
 
     public IEnumerable<CarritosDTO> GetAllDTO()
     {
-        return Conexion.Query<Carritos, Ubicacion, Modelos, EstadosMantenimiento, CarritosDTO>(
-        "GetCarritosDTO",
-        (carrito, ubicacion, modelo, estadoMantenimiento) => new CarritosDTO
+        return Conexion.Query<Carritos, EstadosMantenimiento, Ubicacion, Modelos, CarritosDTO>(
+        "select * from View_GetCarritoDTO",
+        (carrito, estadoMantenimiento, ubicacion, modelo) => new CarritosDTO
         {
             IdCarrito = carrito.IdCarrito,
+            Equipo = carrito.Equipo,
             NumeroSerieCarrito = carrito.NumeroSerieCarrito,
             EstadoMantenimiento = estadoMantenimiento.EstadoMantenimientoNombre,
             UbicacionActual = ubicacion.NombreUbicacion,
             Modelo = modelo.NombreModelo,
         },
-        commandType: CommandType.StoredProcedure,
-        splitOn: "NombreUbicacion,NombreModelo,EstadoMantenimientoNombre");
+        splitOn: "IdCarrito,EstadoMantenimientoNombre,NombreUbicacion,NombreModelo");
     }
 }

@@ -16,11 +16,12 @@ public class MapperElementos : RepoBase, IMapperElementos
     #region consulta join con splitOn para mostrar en la UI
     public IEnumerable<ElementosDTO> GetAllDTO()
     {
-        return Conexion.Query<Elemento, TipoElemento, Modelos, Ubicacion, EstadosMantenimiento, ElementosDTO>(
-            "GetElementosDTO",
-            (elemento, tipo, modelo, ubicacion, estado) => new ElementosDTO
+        return Conexion.Query<Elemento, TipoElemento, EstadosMantenimiento, Modelos, Ubicacion, ElementosDTO>(
+            "select * from View_GetElementosDTO",
+            (elemento, tipo, estado, modelo, ubicacion) => new ElementosDTO
             {
                 IdElemento = elemento.IdElemento,
+                Equipo = elemento.Equipo,
                 NumeroSerie = elemento.NumeroSerie,
                 CodigoBarra = elemento.CodigoBarra,
                 Patrimonio = elemento.Patrimonio,
@@ -29,8 +30,7 @@ public class MapperElementos : RepoBase, IMapperElementos
                 Modelo = modelo.NombreModelo,
                 Ubicacion = ubicacion.NombreUbicacion
             },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "ElementoTipo,NombreModelo,NombreUbicacion,EstadoMantenimientoNombre"
+            splitOn: "IdElemento,ElementoTipo,EstadoMantenimientoNombre,NombreModelo,NombreUbicacion"
         ).ToList();
     }
     #endregion

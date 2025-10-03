@@ -16,7 +16,7 @@ public class MapperUsuarios : RepoBase, IMapperUsuarios
     public IEnumerable<UsuariosDTO> GetAllDTO()
     {
         return Conexion.Query<Usuarios, Roles, UsuariosDTO>(
-            "GetUsuariosDTO",
+            "select * from View_GetUsuariosDTO",
             (usuario, rol) => new UsuariosDTO
             {
                 IdUsuario = usuario.IdUsuario,
@@ -28,7 +28,6 @@ public class MapperUsuarios : RepoBase, IMapperUsuarios
                 Rol = rol.Rol,
                 FotoPerfil = usuario.FotoPerfil
             },
-            commandType: CommandType.StoredProcedure,
             splitOn: "Rol"
         ).ToList();
     }

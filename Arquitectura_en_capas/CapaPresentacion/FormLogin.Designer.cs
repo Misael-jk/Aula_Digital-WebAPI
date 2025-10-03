@@ -301,6 +301,7 @@
             Name = "LoginState";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormLogin";
+            Load += LoginState_Load;
             BarraTopLogin1.ResumeLayout(false);
             PanelWelcome.ResumeLayout(false);
             PanelWelcome.PerformLayout();

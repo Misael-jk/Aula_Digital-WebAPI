@@ -20,6 +20,7 @@ public class MapperCarritosBajas : RepoBase, IMapperCarritosBajas
             (carrito, ubicacion, modelo, estado) => new CarritosBajasDTO
             {
                 IdCarrito = carrito.IdCarrito,
+                Equipo = carrito.Equipo,
                 NumeroSerieCarrito = carrito.NumeroSerieCarrito,
                 EstadoMantenimiento = estado.EstadoMantenimientoNombre,
                 Ubicacion = ubicacion.NombreUbicacion,

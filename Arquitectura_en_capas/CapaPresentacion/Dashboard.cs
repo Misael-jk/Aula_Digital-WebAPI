@@ -1,5 +1,4 @@
 ﻿using CapaDatos.MappersDTO;
-using CapaDTOs;
 using CapaEntidad;
 using CapaNegocio;
 using Google.Protobuf.Collections;
@@ -17,40 +16,18 @@ namespace CapaPresentacion
 {
     public partial class Dashboard : UserControl
     {
-        private readonly MapperTransaccion mapperTransaccion;
-        public Dashboard(MapperTransaccion mapperTransaccion)
+        private readonly MapperHistorialElemento mapperHistorialElemento;
+        public Dashboard(MapperHistorialElemento mapperHistorialElemento)
         {
             InitializeComponent();
-            this.mapperTransaccion = mapperTransaccion;
+            this.mapperHistorialElemento = mapperHistorialElemento;
 
         }
 
         public void MostrarDatos()
         {
-            var elemento = mapperTransaccion.GetAllDTO();
-            dataGridView1.DataSource = elemento.ToList();
-
-            dataGridView1.Columns["IdPrestamo"].HeaderText = "ID";
-            dataGridView1.Columns[0].Width = 35;
-
-            dataGridView1.Columns["NombreCurso"].HeaderText = "Curso";
-            dataGridView1.Columns["ApellidoDocentes"].HeaderText = "Docente";
-            //dataGridView1.Columns["ApellidoEncargados"].HeaderText = "Encargado";
-            dataGridView1.Columns["NumeroSerieCarrito"].HeaderText = "Carrito";
-            dataGridView1.Columns["EstadoPrestamo"].HeaderText = "Estado";
-
-            dataGridView1.Columns["IdDevolucion"].HeaderText = "ID";
-            dataGridView1.Columns[6].Width = 35;
-
-            dataGridView1.RowHeadersVisible = false;
-        }
-
-        private void Dashboard_Load(object sender, EventArgs e)
-        {
-
-            
-
-            
+            //var elemento = mapperHistorialElemento.GetAllDTO();
+            //dataGridView1.DataSource = elemento.ToList();
         }
     }
 }

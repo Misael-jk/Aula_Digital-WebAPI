@@ -24,14 +24,14 @@ namespace CapaPresentacion
         private ElementosUC elementosUC;
         private CarritoUC carritoUC;
         private DocentesUC docentesUC;
-        private PrestamosUC prestamosUC;
-        private DevolucionUC devolucionUC;
         private CategoriasUC categoriasUC;
         private UsuariosUC usuariosUC;
         private MantenimientoUC mantenimientoUC;
+        private HistorialUC historialUC;
+        private InventarioUC inventarioUC;
         #endregion
 
-        #region Variables Interface
+        #region Variables Interface - Repositorios
         private readonly IRepoCarritos repoCarritos;
         private readonly IRepoElemento repoElementos;
         private readonly IRepoTipoElemento repoTipoElemento;
@@ -43,26 +43,37 @@ namespace CapaPresentacion
         private readonly IRepoRoles repoRoles;
         private readonly IRepoEstadosPrestamo repoEstadosPrestamo;
         private readonly IRepoDevolucionDetalle repoDevolucionDetalle;
+        private readonly IRepoHistorialElementos repoHistorialElementos;
+        private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
+        private readonly IRepoUbicacion repoUbicacion;
+        private readonly IRepoModelo repoModelo;
+        private readonly IRepoNotebooks repoNotebooks;
+        private readonly IRepoHistorialCambio repoHistorialCambio;
+        private readonly IRepoHistorialCarrito repoHistorialCarrito;
+        private readonly IRepoHistorialNotebook repoHistorialNotebook;
         #endregion
 
-        #region Variables Mappers Interface
+        #region Variables Mapper Interfaces
         private readonly IMapperElementos mapperElementos;
         private readonly IMapperPrestamos mapperPrestamos;
         private readonly IMapperDevoluciones mapperDevoluciones;
         private readonly IMapperUsuarios mapperUsuarios;
-        private readonly IMapperCarritos mapperCarritos;
+        private readonly IMapperElementosBajas mapperElementosBajas;
         private readonly MapperHistorialElemento mapperHistorialElemento;
-        private readonly MapperTransaccion mapperTransaccion;
+        private readonly IMapperCarritos mapperCarritos;
+        private readonly IMapperModelo mapperModelos;
+        private readonly IMapperDocentes mapperDocentes;
         #endregion
 
-        #region Variables capacidad Negocio
+        #region Variables Capa Negocio
         private readonly ElementosCN elementoCN;
         private readonly CarritosCN carritosCN;
         private readonly DocentesCN docentesCN;
         private readonly PrestamosCN prestamosCN;
         private readonly TiposElementoCN tiposElementoCN;
         private readonly UsuariosCN usuariosCN;
-        private readonly ElementosBajasCN mantenimientoCN;
+        private readonly ModeloCN modeloCN;
+        //private readonly MantenimientoCN mantenimientoCN;
         private readonly DevolucionCN devolucionCN;
         #endregion
 
@@ -87,28 +98,40 @@ namespace CapaPresentacion
             repoRoles = new RepoRoles(conexion);
             repoDevolucionDetalle = new RepoDevolucionDetalle(conexion);
             repoEstadosPrestamo = new RepoEstadosPrestamo(conexion);
+            repoHistorialElementos = new RepoHistorialElemento(conexion);
+            repoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion);
+            repoUbicacion = new RepoUbicacion(conexion);
+            repoModelo = new RepoModelo(conexion);
+            repoNotebooks = new RepoNotebooks(conexion);
+            repoHistorialCambio = new RepoHistorialCambio(conexion);
+            repoHistorialCarrito = new RepoHistorialCarrito(conexion);
+            repoHistorialNotebook = new RepoHistorialNotebook(conexion);
 
             mapperElementos = new MapperElementos(conexion);
             mapperPrestamos = new MapperPrestamos(conexion);
             mapperDevoluciones = new MapperDevoluciones(conexion);
             mapperUsuarios = new MapperUsuarios(conexion);
-            mapperCarritos = new MapperCarrritos(conexion);
+            mapperElementosBajas = new MapperElementosBajas(conexion);
             mapperHistorialElemento = new MapperHistorialElemento(conexion);
-            mapperTransaccion = new MapperTransaccion(conexion);
+            mapperCarritos = new MapperCarrritos(conexion);
+            mapperModelos = new MapperModelo(conexion);
+            mapperDocentes = new MapperDocentes(conexion);
 
-            //elementoCN = new ElementosCN(mapperElementos, repoElementos, repoCarritos, repoHistorialElemento);
-            //carritosCN = new CarritosCN(repoCarritos, repoElementos, mapperCarritos);
-            //docentesCN = new DocentesCN(repoDocentes);
-            //prestamosCN = new PrestamosCN(repoPrestamos, repoCarritos, repoElementos, repoPrestamoDetalle, repoUsuarios, repoDocentes, mapperPrestamos, repoHistorialElemento);
-            //tiposElementoCN = new TiposElementoCN(repoTipoElemento);
-            //usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios);
-            //devolucionCN = new DevolucionCN(repoDevolucion, repoPrestamos, repoUsuarios, repoElementos, repoEstadosPrestamo, repoDocentes, repoDevolucionDetalle, repoHistorialElemento, repoCarritos, mapperDevoluciones);
-            //mantenimientoCN = new MantenimientoCN(repoElementos, mapperElementoMantenimiento, repoHistorialElemento);
+            elementoCN = new ElementosCN(mapperElementos, repoModelo, repoUbicacion, repoElementos);
+            carritosCN = new CarritosCN(repoCarritos, repoNotebooks, repoUbicacion, repoModelo, repoHistorialCambio, repoHistorialCarrito, mapperCarritos);
+            docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
+            prestamosCN = new PrestamosCN(repoPrestamos, repoCarritos, repoElementos, repoPrestamoDetalle, repoUsuarios, repoDocentes, mapperPrestamos);
+            tiposElementoCN = new TiposElementoCN(repoTipoElemento);
+            usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios);
+            modeloCN = new ModeloCN(repoModelo, mapperModelos);
+            devolucionCN = new DevolucionCN(repoDevolucion, repoPrestamos, repoUsuarios, repoElementos, repoEstadosPrestamo, repoDocentes, repoDevolucionDetalle, repoCarritos, mapperDevoluciones);
+            //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
         }
+
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            if(rolUserVerficado.Rol == "Administrador")
+            if (rolUserVerficado.Rol == "Administrador")
             {
                 btnMantenimiento.Visible = true;
                 BtnUsuario.Visible = true;
@@ -116,8 +139,12 @@ namespace CapaPresentacion
             else
             {
                 btnMantenimiento.Visible = false;
-                BtnUsuario.Visible = false; 
+                BtnUsuario.Visible = false;
+
             }
+
+            lblUsuario.Text = userVerificado.Nombre + " " + userVerificado.Apellido;
+            lblRol.Text = rolUserVerficado.Rol;
         }
 
         private void BtnCerrar1_Click(object sender, EventArgs e)
@@ -126,9 +153,15 @@ namespace CapaPresentacion
 
         }
 
+        private void CambiarNombrePort(string nombre)
+        {
+            lblPort.Text = nombre;
+        }
+
         private void BtnDashboard_Click(object sender, EventArgs e)
         {
-            dashboard = new Dashboard(mapperTransaccion);
+            dashboard = new Dashboard(mapperHistorialElemento);
+            CambiarNombrePort(BtnDashboard.Text);
 
             if (!pnlContenedor.Controls.Contains(dashboard))
             {
@@ -149,7 +182,8 @@ namespace CapaPresentacion
 
         private void BtnElementos_Click(object sender, EventArgs e)
         {
-            elementosUC = new ElementosUC(elementoCN);
+            elementosUC = new ElementosUC(elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN);
+            CambiarNombrePort(BtnElementos.Text);
 
             if (!pnlContenedor.Controls.Contains(elementosUC))
             {
@@ -171,7 +205,8 @@ namespace CapaPresentacion
 
         private void BtnCarritos_Click(object sender, EventArgs e)
         {
-            carritoUC = new CarritoUC(carritosCN);
+            carritoUC = new CarritoUC(carritosCN, repoNotebooks, repoEstadosMantenimiento, userVerificado, repoUbicacion);
+            CambiarNombrePort(BtnCarritos.Text);
 
             if (!pnlContenedor.Controls.Contains(carritoUC))
             {
@@ -180,20 +215,12 @@ namespace CapaPresentacion
 
             carritoUC.Visible = true;
             carritoUC.BringToFront();
-
-            try
-            {
-                carritoUC.MostrarCarrito();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar datos en TipoElementoUC: " + ex.Message);
-            }
         }
 
         private void BtnDocentes_Click(object sender, EventArgs e)
         {
-            docentesUC = new DocentesUC(repoDocentes);
+            docentesUC = new DocentesUC(docentesCN);
+            CambiarNombrePort(BtnDocentes.Text);
 
             if (!pnlContenedor.Controls.Contains(docentesUC))
             {
@@ -213,53 +240,10 @@ namespace CapaPresentacion
             }
         }
 
-        private void BtnPrestamos_Click(object sender, EventArgs e)
-        {
-            prestamosUC = new PrestamosUC(prestamosCN);
-
-            if (!pnlContenedor.Controls.Contains(prestamosUC))
-            {
-                pnlContenedor.Controls.Add(prestamosUC);
-            }
-
-            prestamosUC.Visible = true;
-            prestamosUC.BringToFront();
-
-            try
-            {
-                prestamosUC.MostrarPrestamos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar datos en TipoElementoUC: " + ex.Message);
-            }
-        }
-
-        private void BtnDevolucion_Click(object sender, EventArgs e)
-        {
-            devolucionUC = new DevolucionUC(devolucionCN);
-
-            if (!pnlContenedor.Controls.Contains(devolucionUC))
-            {
-                pnlContenedor.Controls.Add(devolucionUC);
-            }
-
-            devolucionUC.Visible = true;
-            devolucionUC.BringToFront();
-
-            try
-            {
-                devolucionUC.MostrarDevoluciones();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar datos en TipoElementoUC: " + ex.Message);
-            }
-        }
-
         private void BtnCategoria_Click(object sender, EventArgs e)
         {
-            categoriasUC = new CategoriasUC(repoTipoElemento);
+            categoriasUC = new CategoriasUC(repoTipoElemento, repoUbicacion, modeloCN);
+            CambiarNombrePort(BtnCategoria.Text);
 
             if (!pnlContenedor.Controls.Contains(categoriasUC))
             {
@@ -281,7 +265,8 @@ namespace CapaPresentacion
 
         private void BtnUsuario_Click(object sender, EventArgs e)
         {
-            usuariosUC = new UsuariosUC(usuariosCN);
+            usuariosUC = new UsuariosUC(usuariosCN, repoRoles, repoUsuarios);
+            CambiarNombrePort(BtnUsuario.Text);
 
             if (!pnlContenedor.Controls.Contains(usuariosUC))
             {
@@ -303,7 +288,8 @@ namespace CapaPresentacion
 
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
-            mantenimientoUC = new MantenimientoUC(mantenimientoCN);
+            mantenimientoUC = new MantenimientoUC(tiposElementoCN, repoElementos);
+            CambiarNombrePort(btnMantenimiento.Text);
 
             if (!pnlContenedor.Controls.Contains(mantenimientoUC))
             {
@@ -323,6 +309,42 @@ namespace CapaPresentacion
             }
         }
 
-        
+        private void btnPrestAndDevo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnInventario_Click(object sender, EventArgs e)
+        {
+            inventarioUC = new InventarioUC(elementoCN);
+            CambiarNombrePort(btnInventario.Text);
+
+            if (!pnlContenedor.Controls.Contains(inventarioUC))
+            {
+                pnlContenedor.Controls.Add(inventarioUC);
+            }
+
+            inventarioUC.Visible = true;
+
+            try
+            {
+                inventarioUC.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar datos en Historial: " + ex.Message);
+            }
+        }
+
+        private void btnSkip_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnInfoadminadminUser_Click(object sender, EventArgs e)
+        {
+            var entrar = new InfoUsuario();
+            entrar.Show();
+        }
     }
 }

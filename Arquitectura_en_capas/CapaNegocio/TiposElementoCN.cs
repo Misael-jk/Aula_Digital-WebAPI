@@ -1,10 +1,5 @@
 ﻿using CapaDatos.Interfaces;
 using CapaEntidad;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CapaNegocio;
 
@@ -35,7 +30,7 @@ public class TiposElementoCN
     #endregion
 
     #region READ TIPO ELEMENTO
-    public IEnumerable<TipoElemento> ObtenerTodosTiposElementos()
+    public IEnumerable<TipoElemento> GetAllTipo()
     {
         return _repoTipoElemento.GetAll();
     }

@@ -76,13 +76,15 @@ create table EstadosMantenimiento (
 
 create table Carritos (
     idCarrito tinyint not null auto_increment,
-    numeroSerieCarrito varchar(40)not null,
+    equipo varchar(40) not null,
+    numeroSerieCarrito varchar(40) not null,
     idEstadoMantenimiento tinyint not null,
     idUbicacion tinyint not null,
     idModelo tinyint not null,
     Habilitado boolean not null,
     fechaBaja datetime,
     constraint PK_Carritos primary key (idCarrito),
+    constraint UQ_Carritos_equipo unique (equipo),
     constraint FK_Carritos_EstadoMantenimiento foreign key (idEstadoMantenimiento)
     	references EstadosMantenimiento (idEstadoMantenimiento),
     constraint FK_Carritos_Ubicacion foreign key (idUbicacion)
@@ -98,12 +100,14 @@ create table Elementos (
     idModelo tinyint not null,
     idUbicacion tinyint not null,
     idEstadoMantenimiento tinyint not null,
+    equipo varchar(40) not null,
     numeroSerie varchar(40) not null,
     codigoBarra varchar(40) not null,
     patrimonio varchar(60) not null,
     habilitado boolean not null,
     fechaBaja datetime,
     constraint PK_Elementos primary key (idElemento),
+    constraint UQ_Elementos_equipo unique (equipo),
     constraint UQ_Elementos_numeroSerie unique (numeroSerie),
     constraint UQ_Elementos_codigoBarra unique (codigoBarra),
     constraint UQ_Elementos_patrimonio unique (patrimonio),
@@ -196,15 +200,12 @@ create table Devoluciones (
 create table DevolucionDetalle (
     idDevolucion int not null,
     idElemento smallint not null,
-    idEstadoMantenimiento tinyint not null,
     observaciones varchar(200),
     constraint PK_DevolucionDetalle primary key (idDevolucion, idElemento),
     constraint FK_DevolucionDetalle_Devoluciones foreign key (idDevolucion)
         references Devoluciones(idDevolucion),
     constraint FK_DevolucionDetalle_Elementos foreign key (idElemento)
-        references Elementos(idElemento),
-    constraint FK_DevolucionDetalle_EstadosMantenimiento foreign key (idEstadoMantenimiento)
-    	references EstadosMantenimiento (idEstadoMantenimiento)
+        references Elementos(idElemento)
 );
 
 
@@ -244,7 +245,7 @@ create table HistorialElemento(
 idHistorialCambio int not null,
 idElemento smallint not null,
 constraint PK_HistorialElemento primary key (idHistorialCambio, idElemento),
-constraint FK_HistorialElemento_HistorialCambio foreign key (idHistorialCambio)
+constraint FK_HistorialElemento_Cambio foreign key (idHistorialCambio)
 	references HistorialCambio (idHistorialCambio),
 constraint FK_HistorialElemento_Elemento foreign key (idElemento)
 	references Elementos (idElemento)

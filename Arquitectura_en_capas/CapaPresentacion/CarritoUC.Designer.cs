@@ -28,427 +28,638 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarritoUC));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
-            dataGridView1 = new DataGridView();
+            dtgCarrito = new Guna.UI2.WinForms.Guna2DataGridView();
             panel2 = new Panel();
             panel4 = new Panel();
-            button9 = new Button();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button7 = new Button();
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
-            button13 = new Button();
-            button12 = new Button();
-            button11 = new Button();
-            button10 = new Button();
-            button8 = new Button();
+            btnNotebook1 = new Button();
+            btnNotebook2 = new Button();
+            btnNotebook3 = new Button();
+            btnNotebook4 = new Button();
+            btnNotebook5 = new Button();
+            btnNotebook6 = new Button();
+            btnNotebook7 = new Button();
+            btnNotebook8 = new Button();
+            btnNotebook9 = new Button();
+            btnNotebook10 = new Button();
+            btnNotebook11 = new Button();
+            btnNotebook12 = new Button();
+            btnNotebook13 = new Button();
             panel5 = new Panel();
-            button25 = new Button();
-            button24 = new Button();
-            button23 = new Button();
-            button22 = new Button();
-            button21 = new Button();
-            button20 = new Button();
-            button19 = new Button();
-            button18 = new Button();
-            button17 = new Button();
-            button16 = new Button();
-            button15 = new Button();
-            button14 = new Button();
+            btnNotebook14 = new Button();
+            btnNotebook15 = new Button();
+            btnNotebook16 = new Button();
+            btnNotebook17 = new Button();
+            btnNotebook18 = new Button();
+            btnNotebook19 = new Button();
+            btnNotebook20 = new Button();
+            btnNotebook21 = new Button();
+            btnNotebook22 = new Button();
+            btnNotebook23 = new Button();
+            btnNotebook24 = new Button();
+            btnNotebook25 = new Button();
             pictureBox1 = new PictureBox();
+            panel3 = new Panel();
+            btnQuitar = new Guna.UI2.WinForms.Guna2Button();
+            btnAgregar = new Guna.UI2.WinForms.Guna2Button();
+            txtCodBarra = new Guna.UI2.WinForms.Guna2TextBox();
+            cmbEstados = new Guna.UI2.WinForms.Guna2ComboBox();
+            txtNroSerie = new Guna.UI2.WinForms.Guna2TextBox();
+            pictureBox2 = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtgCarrito).BeginInit();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ButtonHighlight;
-            panel1.Controls.Add(dataGridView1);
-            panel1.Location = new Point(16, 422);
+            panel1.Controls.Add(dtgCarrito);
+            panel1.Location = new Point(18, 465);
             panel1.Name = "panel1";
-            panel1.Size = new Size(839, 168);
+            panel1.Size = new Size(561, 189);
             panel1.TabIndex = 0;
             // 
-            // dataGridView1
+            // dtgCarrito
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(190, 18);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(478, 136);
-            dataGridView1.TabIndex = 0;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dtgCarrito.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dtgCarrito.BackgroundColor = Color.Silver;
+            dtgCarrito.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dtgCarrito.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Indigo;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dtgCarrito.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dtgCarrito.ColumnHeadersHeight = 30;
+            dtgCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dtgCarrito.DefaultCellStyle = dataGridViewCellStyle3;
+            dtgCarrito.GridColor = Color.LightGray;
+            dtgCarrito.Location = new Point(19, 15);
+            dtgCarrito.Name = "dtgCarrito";
+            dtgCarrito.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dtgCarrito.RowHeadersVisible = false;
+            dtgCarrito.Size = new Size(521, 159);
+            dtgCarrito.TabIndex = 0;
+            dtgCarrito.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dtgCarrito.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dtgCarrito.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dtgCarrito.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dtgCarrito.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dtgCarrito.ThemeStyle.BackColor = Color.Silver;
+            dtgCarrito.ThemeStyle.GridColor = Color.LightGray;
+            dtgCarrito.ThemeStyle.HeaderStyle.BackColor = Color.Indigo;
+            dtgCarrito.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dtgCarrito.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dtgCarrito.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dtgCarrito.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dtgCarrito.ThemeStyle.HeaderStyle.Height = 30;
+            dtgCarrito.ThemeStyle.ReadOnly = false;
+            dtgCarrito.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dtgCarrito.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.Single;
+            dtgCarrito.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dtgCarrito.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            dtgCarrito.ThemeStyle.RowsStyle.Height = 25;
+            dtgCarrito.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dtgCarrito.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dtgCarrito.CellClick += dtgCarrito_CellClick;
             // 
             // panel2
             // 
-            panel2.BackColor = SystemColors.ButtonHighlight;
+            panel2.BackColor = SystemColors.ControlLightLight;
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(pictureBox1);
-            panel2.Location = new Point(16, 31);
+            panel2.Location = new Point(18, 16);
             panel2.Name = "panel2";
-            panel2.Size = new Size(839, 385);
+            panel2.Size = new Size(561, 429);
             panel2.TabIndex = 1;
             // 
             // panel4
             // 
             panel4.BackColor = Color.SlateGray;
-            panel4.Controls.Add(button8);
-            panel4.Controls.Add(button10);
-            panel4.Controls.Add(button11);
-            panel4.Controls.Add(button12);
-            panel4.Controls.Add(button13);
-            panel4.Controls.Add(button4);
-            panel4.Controls.Add(button5);
-            panel4.Controls.Add(button6);
-            panel4.Controls.Add(button7);
-            panel4.Controls.Add(button3);
-            panel4.Controls.Add(button2);
-            panel4.Controls.Add(button1);
-            panel4.Controls.Add(button9);
-            panel4.Location = new Point(236, 81);
+            panel4.Controls.Add(btnNotebook1);
+            panel4.Controls.Add(btnNotebook2);
+            panel4.Controls.Add(btnNotebook3);
+            panel4.Controls.Add(btnNotebook4);
+            panel4.Controls.Add(btnNotebook5);
+            panel4.Controls.Add(btnNotebook6);
+            panel4.Controls.Add(btnNotebook7);
+            panel4.Controls.Add(btnNotebook8);
+            panel4.Controls.Add(btnNotebook9);
+            panel4.Controls.Add(btnNotebook10);
+            panel4.Controls.Add(btnNotebook11);
+            panel4.Controls.Add(btnNotebook12);
+            panel4.Controls.Add(btnNotebook13);
+            panel4.Location = new Point(88, 105);
             panel4.Name = "panel4";
             panel4.Size = new Size(384, 112);
             panel4.TabIndex = 1;
             // 
-            // button9
+            // btnNotebook1
             // 
-            button9.Location = new Point(352, 3);
-            button9.Name = "button9";
-            button9.Size = new Size(29, 106);
-            button9.TabIndex = 11;
-            button9.Text = "13";
-            button9.TextAlign = ContentAlignment.BottomCenter;
-            button9.UseVisualStyleBackColor = true;
+            btnNotebook1.Location = new Point(3, 3);
+            btnNotebook1.Name = "btnNotebook1";
+            btnNotebook1.Size = new Size(29, 106);
+            btnNotebook1.TabIndex = 23;
+            btnNotebook1.Text = "1";
+            btnNotebook1.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnNotebook2
             // 
-            button1.Location = new Point(323, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(29, 106);
-            button1.TabIndex = 12;
-            button1.Text = "12";
-            button1.TextAlign = ContentAlignment.BottomCenter;
-            button1.UseVisualStyleBackColor = true;
+            btnNotebook2.Location = new Point(32, 3);
+            btnNotebook2.Name = "btnNotebook2";
+            btnNotebook2.Size = new Size(29, 106);
+            btnNotebook2.TabIndex = 22;
+            btnNotebook2.Text = "2";
+            btnNotebook2.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook2.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnNotebook3
             // 
-            button2.Location = new Point(294, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(29, 106);
-            button2.TabIndex = 13;
-            button2.Text = "11";
-            button2.TextAlign = ContentAlignment.BottomCenter;
-            button2.UseVisualStyleBackColor = true;
+            btnNotebook3.Location = new Point(61, 3);
+            btnNotebook3.Name = "btnNotebook3";
+            btnNotebook3.Size = new Size(29, 106);
+            btnNotebook3.TabIndex = 21;
+            btnNotebook3.Text = "3";
+            btnNotebook3.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook3.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnNotebook4
             // 
-            button3.Location = new Point(265, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(29, 106);
-            button3.TabIndex = 14;
-            button3.Text = "10";
-            button3.TextAlign = ContentAlignment.BottomCenter;
-            button3.UseVisualStyleBackColor = true;
+            btnNotebook4.Location = new Point(90, 3);
+            btnNotebook4.Name = "btnNotebook4";
+            btnNotebook4.Size = new Size(29, 106);
+            btnNotebook4.TabIndex = 20;
+            btnNotebook4.Text = "4";
+            btnNotebook4.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook4.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btnNotebook5
             // 
-            button7.Location = new Point(236, 3);
-            button7.Name = "button7";
-            button7.Size = new Size(29, 106);
-            button7.TabIndex = 15;
-            button7.Text = "9";
-            button7.TextAlign = ContentAlignment.BottomCenter;
-            button7.UseVisualStyleBackColor = true;
+            btnNotebook5.Location = new Point(119, 3);
+            btnNotebook5.Name = "btnNotebook5";
+            btnNotebook5.Size = new Size(29, 106);
+            btnNotebook5.TabIndex = 19;
+            btnNotebook5.Text = "5";
+            btnNotebook5.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnNotebook6
             // 
-            button6.Location = new Point(207, 3);
-            button6.Name = "button6";
-            button6.Size = new Size(29, 106);
-            button6.TabIndex = 16;
-            button6.Text = "8";
-            button6.TextAlign = ContentAlignment.BottomCenter;
-            button6.UseVisualStyleBackColor = true;
+            btnNotebook6.Location = new Point(149, 3);
+            btnNotebook6.Name = "btnNotebook6";
+            btnNotebook6.Size = new Size(29, 106);
+            btnNotebook6.TabIndex = 18;
+            btnNotebook6.Text = "6";
+            btnNotebook6.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook6.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnNotebook7
             // 
-            button5.BackColor = Color.Transparent;
-            button5.Location = new Point(178, 3);
-            button5.Name = "button5";
-            button5.Size = new Size(29, 106);
-            button5.TabIndex = 17;
-            button5.Text = "7";
-            button5.TextAlign = ContentAlignment.BottomCenter;
-            button5.UseVisualStyleBackColor = false;
+            btnNotebook7.BackColor = Color.Transparent;
+            btnNotebook7.Location = new Point(178, 3);
+            btnNotebook7.Name = "btnNotebook7";
+            btnNotebook7.Size = new Size(29, 106);
+            btnNotebook7.TabIndex = 17;
+            btnNotebook7.Text = "7";
+            btnNotebook7.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook7.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnNotebook8
             // 
-            button4.Location = new Point(149, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(29, 106);
-            button4.TabIndex = 18;
-            button4.Text = "6";
-            button4.TextAlign = ContentAlignment.BottomCenter;
-            button4.UseVisualStyleBackColor = true;
+            btnNotebook8.Location = new Point(207, 3);
+            btnNotebook8.Name = "btnNotebook8";
+            btnNotebook8.Size = new Size(29, 106);
+            btnNotebook8.TabIndex = 16;
+            btnNotebook8.Text = "8";
+            btnNotebook8.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook8.UseVisualStyleBackColor = true;
             // 
-            // button13
+            // btnNotebook9
             // 
-            button13.Location = new Point(119, 3);
-            button13.Name = "button13";
-            button13.Size = new Size(29, 106);
-            button13.TabIndex = 19;
-            button13.Text = "5";
-            button13.TextAlign = ContentAlignment.BottomCenter;
-            button13.UseVisualStyleBackColor = true;
+            btnNotebook9.Location = new Point(236, 3);
+            btnNotebook9.Name = "btnNotebook9";
+            btnNotebook9.Size = new Size(29, 106);
+            btnNotebook9.TabIndex = 15;
+            btnNotebook9.Text = "9";
+            btnNotebook9.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook9.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // btnNotebook10
             // 
-            button12.Location = new Point(90, 3);
-            button12.Name = "button12";
-            button12.Size = new Size(29, 106);
-            button12.TabIndex = 20;
-            button12.Text = "4";
-            button12.TextAlign = ContentAlignment.BottomCenter;
-            button12.UseVisualStyleBackColor = true;
+            btnNotebook10.Location = new Point(265, 3);
+            btnNotebook10.Name = "btnNotebook10";
+            btnNotebook10.Size = new Size(29, 106);
+            btnNotebook10.TabIndex = 14;
+            btnNotebook10.Text = "10";
+            btnNotebook10.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook10.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // btnNotebook11
             // 
-            button11.Location = new Point(61, 3);
-            button11.Name = "button11";
-            button11.Size = new Size(29, 106);
-            button11.TabIndex = 21;
-            button11.Text = "3";
-            button11.TextAlign = ContentAlignment.BottomCenter;
-            button11.UseVisualStyleBackColor = true;
+            btnNotebook11.Location = new Point(294, 3);
+            btnNotebook11.Name = "btnNotebook11";
+            btnNotebook11.Size = new Size(29, 106);
+            btnNotebook11.TabIndex = 13;
+            btnNotebook11.Text = "11";
+            btnNotebook11.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook11.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // btnNotebook12
             // 
-            button10.Location = new Point(32, 3);
-            button10.Name = "button10";
-            button10.Size = new Size(29, 106);
-            button10.TabIndex = 22;
-            button10.Text = "2";
-            button10.TextAlign = ContentAlignment.BottomCenter;
-            button10.UseVisualStyleBackColor = true;
+            btnNotebook12.Location = new Point(323, 3);
+            btnNotebook12.Name = "btnNotebook12";
+            btnNotebook12.Size = new Size(29, 106);
+            btnNotebook12.TabIndex = 12;
+            btnNotebook12.Text = "12";
+            btnNotebook12.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook12.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btnNotebook13
             // 
-            button8.Location = new Point(3, 3);
-            button8.Name = "button8";
-            button8.Size = new Size(29, 106);
-            button8.TabIndex = 23;
-            button8.Text = "1";
-            button8.TextAlign = ContentAlignment.BottomCenter;
-            button8.UseVisualStyleBackColor = true;
+            btnNotebook13.Location = new Point(352, 3);
+            btnNotebook13.Name = "btnNotebook13";
+            btnNotebook13.Size = new Size(29, 106);
+            btnNotebook13.TabIndex = 11;
+            btnNotebook13.Text = "13";
+            btnNotebook13.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook13.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
             panel5.BackColor = Color.SlateGray;
-            panel5.Controls.Add(button14);
-            panel5.Controls.Add(button15);
-            panel5.Controls.Add(button16);
-            panel5.Controls.Add(button17);
-            panel5.Controls.Add(button18);
-            panel5.Controls.Add(button19);
-            panel5.Controls.Add(button20);
-            panel5.Controls.Add(button21);
-            panel5.Controls.Add(button22);
-            panel5.Controls.Add(button23);
-            panel5.Controls.Add(button24);
-            panel5.Controls.Add(button25);
-            panel5.Location = new Point(236, 209);
+            panel5.Controls.Add(btnNotebook14);
+            panel5.Controls.Add(btnNotebook15);
+            panel5.Controls.Add(btnNotebook16);
+            panel5.Controls.Add(btnNotebook17);
+            panel5.Controls.Add(btnNotebook18);
+            panel5.Controls.Add(btnNotebook19);
+            panel5.Controls.Add(btnNotebook20);
+            panel5.Controls.Add(btnNotebook21);
+            panel5.Controls.Add(btnNotebook22);
+            panel5.Controls.Add(btnNotebook23);
+            panel5.Controls.Add(btnNotebook24);
+            panel5.Controls.Add(btnNotebook25);
+            panel5.Location = new Point(88, 233);
             panel5.Name = "panel5";
             panel5.Size = new Size(384, 112);
             panel5.TabIndex = 24;
             // 
-            // button25
+            // btnNotebook14
             // 
-            button25.Location = new Point(323, 3);
-            button25.Name = "button25";
-            button25.Size = new Size(29, 106);
-            button25.TabIndex = 12;
-            button25.Text = "25";
-            button25.TextAlign = ContentAlignment.BottomCenter;
-            button25.UseVisualStyleBackColor = true;
+            btnNotebook14.Location = new Point(3, 3);
+            btnNotebook14.Name = "btnNotebook14";
+            btnNotebook14.Size = new Size(29, 106);
+            btnNotebook14.TabIndex = 23;
+            btnNotebook14.Text = "14";
+            btnNotebook14.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook14.UseVisualStyleBackColor = true;
             // 
-            // button24
+            // btnNotebook15
             // 
-            button24.Location = new Point(294, 3);
-            button24.Name = "button24";
-            button24.Size = new Size(29, 106);
-            button24.TabIndex = 13;
-            button24.Text = "24";
-            button24.TextAlign = ContentAlignment.BottomCenter;
-            button24.UseVisualStyleBackColor = true;
+            btnNotebook15.Location = new Point(32, 3);
+            btnNotebook15.Name = "btnNotebook15";
+            btnNotebook15.Size = new Size(29, 106);
+            btnNotebook15.TabIndex = 22;
+            btnNotebook15.Text = "15";
+            btnNotebook15.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook15.UseVisualStyleBackColor = true;
             // 
-            // button23
+            // btnNotebook16
             // 
-            button23.BackColor = Color.Transparent;
-            button23.Location = new Point(265, 3);
-            button23.Name = "button23";
-            button23.Size = new Size(29, 106);
-            button23.TabIndex = 14;
-            button23.Text = "23";
-            button23.TextAlign = ContentAlignment.BottomCenter;
-            button23.UseVisualStyleBackColor = false;
+            btnNotebook16.BackColor = Color.Transparent;
+            btnNotebook16.Location = new Point(61, 3);
+            btnNotebook16.Name = "btnNotebook16";
+            btnNotebook16.Size = new Size(29, 106);
+            btnNotebook16.TabIndex = 21;
+            btnNotebook16.Text = "16";
+            btnNotebook16.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook16.UseVisualStyleBackColor = false;
             // 
-            // button22
+            // btnNotebook17
             // 
-            button22.Location = new Point(236, 3);
-            button22.Name = "button22";
-            button22.Size = new Size(29, 106);
-            button22.TabIndex = 15;
-            button22.Text = "22";
-            button22.TextAlign = ContentAlignment.BottomCenter;
-            button22.UseVisualStyleBackColor = true;
+            btnNotebook17.Location = new Point(90, 3);
+            btnNotebook17.Name = "btnNotebook17";
+            btnNotebook17.Size = new Size(29, 106);
+            btnNotebook17.TabIndex = 20;
+            btnNotebook17.Text = "17";
+            btnNotebook17.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook17.UseVisualStyleBackColor = true;
             // 
-            // button21
+            // btnNotebook18
             // 
-            button21.Location = new Point(207, 3);
-            button21.Name = "button21";
-            button21.Size = new Size(29, 106);
-            button21.TabIndex = 16;
-            button21.Text = "21";
-            button21.TextAlign = ContentAlignment.BottomCenter;
-            button21.UseVisualStyleBackColor = true;
+            btnNotebook18.Location = new Point(119, 3);
+            btnNotebook18.Name = "btnNotebook18";
+            btnNotebook18.Size = new Size(29, 106);
+            btnNotebook18.TabIndex = 19;
+            btnNotebook18.Text = "18";
+            btnNotebook18.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook18.UseVisualStyleBackColor = true;
             // 
-            // button20
+            // btnNotebook19
             // 
-            button20.Location = new Point(178, 3);
-            button20.Name = "button20";
-            button20.Size = new Size(29, 106);
-            button20.TabIndex = 17;
-            button20.Text = "20";
-            button20.TextAlign = ContentAlignment.BottomCenter;
-            button20.UseVisualStyleBackColor = true;
+            btnNotebook19.Location = new Point(149, 3);
+            btnNotebook19.Name = "btnNotebook19";
+            btnNotebook19.Size = new Size(29, 106);
+            btnNotebook19.TabIndex = 18;
+            btnNotebook19.Text = "19";
+            btnNotebook19.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook19.UseVisualStyleBackColor = true;
             // 
-            // button19
+            // btnNotebook20
             // 
-            button19.Location = new Point(149, 3);
-            button19.Name = "button19";
-            button19.Size = new Size(29, 106);
-            button19.TabIndex = 18;
-            button19.Text = "19";
-            button19.TextAlign = ContentAlignment.BottomCenter;
-            button19.UseVisualStyleBackColor = true;
+            btnNotebook20.Location = new Point(178, 3);
+            btnNotebook20.Name = "btnNotebook20";
+            btnNotebook20.Size = new Size(29, 106);
+            btnNotebook20.TabIndex = 17;
+            btnNotebook20.Text = "20";
+            btnNotebook20.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook20.UseVisualStyleBackColor = true;
             // 
-            // button18
+            // btnNotebook21
             // 
-            button18.Location = new Point(119, 3);
-            button18.Name = "button18";
-            button18.Size = new Size(29, 106);
-            button18.TabIndex = 19;
-            button18.Text = "18";
-            button18.TextAlign = ContentAlignment.BottomCenter;
-            button18.UseVisualStyleBackColor = true;
+            btnNotebook21.Location = new Point(207, 3);
+            btnNotebook21.Name = "btnNotebook21";
+            btnNotebook21.Size = new Size(29, 106);
+            btnNotebook21.TabIndex = 16;
+            btnNotebook21.Text = "21";
+            btnNotebook21.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook21.UseVisualStyleBackColor = true;
             // 
-            // button17
+            // btnNotebook22
             // 
-            button17.Location = new Point(90, 3);
-            button17.Name = "button17";
-            button17.Size = new Size(29, 106);
-            button17.TabIndex = 20;
-            button17.Text = "17";
-            button17.TextAlign = ContentAlignment.BottomCenter;
-            button17.UseVisualStyleBackColor = true;
+            btnNotebook22.Location = new Point(236, 3);
+            btnNotebook22.Name = "btnNotebook22";
+            btnNotebook22.Size = new Size(29, 106);
+            btnNotebook22.TabIndex = 15;
+            btnNotebook22.Text = "22";
+            btnNotebook22.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook22.UseVisualStyleBackColor = true;
             // 
-            // button16
+            // btnNotebook23
             // 
-            button16.BackColor = Color.Transparent;
-            button16.Location = new Point(61, 3);
-            button16.Name = "button16";
-            button16.Size = new Size(29, 106);
-            button16.TabIndex = 21;
-            button16.Text = "16";
-            button16.TextAlign = ContentAlignment.BottomCenter;
-            button16.UseVisualStyleBackColor = false;
+            btnNotebook23.BackColor = Color.Transparent;
+            btnNotebook23.Location = new Point(265, 3);
+            btnNotebook23.Name = "btnNotebook23";
+            btnNotebook23.Size = new Size(29, 106);
+            btnNotebook23.TabIndex = 14;
+            btnNotebook23.Text = "23";
+            btnNotebook23.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook23.UseVisualStyleBackColor = false;
             // 
-            // button15
+            // btnNotebook24
             // 
-            button15.Location = new Point(32, 3);
-            button15.Name = "button15";
-            button15.Size = new Size(29, 106);
-            button15.TabIndex = 22;
-            button15.Text = "15";
-            button15.TextAlign = ContentAlignment.BottomCenter;
-            button15.UseVisualStyleBackColor = true;
+            btnNotebook24.Location = new Point(294, 3);
+            btnNotebook24.Name = "btnNotebook24";
+            btnNotebook24.Size = new Size(29, 106);
+            btnNotebook24.TabIndex = 13;
+            btnNotebook24.Text = "24";
+            btnNotebook24.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook24.UseVisualStyleBackColor = true;
             // 
-            // button14
+            // btnNotebook25
             // 
-            button14.Location = new Point(3, 3);
-            button14.Name = "button14";
-            button14.Size = new Size(29, 106);
-            button14.TabIndex = 23;
-            button14.Text = "14";
-            button14.TextAlign = ContentAlignment.BottomCenter;
-            button14.UseVisualStyleBackColor = true;
+            btnNotebook25.Location = new Point(323, 3);
+            btnNotebook25.Name = "btnNotebook25";
+            btnNotebook25.Size = new Size(29, 106);
+            btnNotebook25.TabIndex = 12;
+            btnNotebook25.Text = "25";
+            btnNotebook25.TextAlign = ContentAlignment.BottomCenter;
+            btnNotebook25.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.CarritosED;
-            pictureBox1.Location = new Point(190, -24);
+            pictureBox1.Location = new Point(42, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(478, 427);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // Carrito
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.ControlLightLight;
+            panel3.Controls.Add(btnQuitar);
+            panel3.Controls.Add(btnAgregar);
+            panel3.Controls.Add(txtCodBarra);
+            panel3.Controls.Add(cmbEstados);
+            panel3.Controls.Add(txtNroSerie);
+            panel3.Controls.Add(pictureBox2);
+            panel3.Location = new Point(602, 16);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(419, 638);
+            panel3.TabIndex = 2;
+            // 
+            // btnQuitar
+            // 
+            btnQuitar.CustomizableEdges = customizableEdges1;
+            btnQuitar.DisabledState.BorderColor = Color.DarkGray;
+            btnQuitar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnQuitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnQuitar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnQuitar.Font = new Font("Segoe UI", 9F);
+            btnQuitar.ForeColor = Color.White;
+            btnQuitar.Location = new Point(282, 575);
+            btnQuitar.Name = "btnQuitar";
+            btnQuitar.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnQuitar.Size = new Size(80, 25);
+            btnQuitar.TabIndex = 27;
+            btnQuitar.Text = "Quitar";
+            btnQuitar.Click += btnQuitar_Click;
+            // 
+            // btnAgregar
+            // 
+            btnAgregar.CustomizableEdges = customizableEdges3;
+            btnAgregar.DisabledState.BorderColor = Color.DarkGray;
+            btnAgregar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAgregar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAgregar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAgregar.Font = new Font("Segoe UI", 9F);
+            btnAgregar.ForeColor = Color.White;
+            btnAgregar.Location = new Point(62, 575);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnAgregar.Size = new Size(80, 25);
+            btnAgregar.TabIndex = 25;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.Click += btnAgregar_Click;
+            // 
+            // txtCodBarra
+            // 
+            txtCodBarra.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtCodBarra.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtCodBarra.BorderRadius = 7;
+            txtCodBarra.CustomizableEdges = customizableEdges5;
+            txtCodBarra.DefaultText = "";
+            txtCodBarra.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtCodBarra.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtCodBarra.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtCodBarra.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtCodBarra.FocusedState.BorderColor = Color.DodgerBlue;
+            txtCodBarra.Font = new Font("Segoe UI", 9F);
+            txtCodBarra.HoverState.BorderColor = Color.DodgerBlue;
+            txtCodBarra.IconLeft = (Image)resources.GetObject("txtCodBarra.IconLeft");
+            txtCodBarra.IconLeftSize = new Size(25, 25);
+            txtCodBarra.Location = new Point(62, 421);
+            txtCodBarra.Name = "txtCodBarra";
+            txtCodBarra.PlaceholderForeColor = Color.DarkGray;
+            txtCodBarra.PlaceholderText = "Codigo de barra";
+            txtCodBarra.SelectedText = "";
+            txtCodBarra.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtCodBarra.Size = new Size(300, 36);
+            txtCodBarra.TabIndex = 23;
+            txtCodBarra.TextChanged += txtCodBarra_TextChanged;
+            // 
+            // cmbEstados
+            // 
+            cmbEstados.AllowDrop = true;
+            cmbEstados.BackColor = Color.Transparent;
+            cmbEstados.CustomizableEdges = customizableEdges7;
+            cmbEstados.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbEstados.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstados.FocusedColor = Color.FromArgb(94, 148, 255);
+            cmbEstados.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cmbEstados.Font = new Font("Segoe UI", 10F);
+            cmbEstados.ForeColor = Color.FromArgb(68, 88, 112);
+            cmbEstados.ItemHeight = 30;
+            cmbEstados.Location = new Point(62, 497);
+            cmbEstados.Name = "cmbEstados";
+            cmbEstados.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            cmbEstados.Size = new Size(300, 36);
+            cmbEstados.TabIndex = 22;
+            // 
+            // txtNroSerie
+            // 
+            txtNroSerie.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtNroSerie.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtNroSerie.BorderRadius = 7;
+            txtNroSerie.CharacterCasing = CharacterCasing.Upper;
+            txtNroSerie.CustomizableEdges = customizableEdges9;
+            txtNroSerie.DefaultText = "";
+            txtNroSerie.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtNroSerie.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtNroSerie.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtNroSerie.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtNroSerie.FocusedState.BorderColor = Color.DodgerBlue;
+            txtNroSerie.Font = new Font("Segoe UI", 9F);
+            txtNroSerie.HoverState.BorderColor = Color.DodgerBlue;
+            txtNroSerie.IconLeft = (Image)resources.GetObject("txtNroSerie.IconLeft");
+            txtNroSerie.IconLeftSize = new Size(25, 25);
+            txtNroSerie.Location = new Point(62, 344);
+            txtNroSerie.Name = "txtNroSerie";
+            txtNroSerie.PlaceholderForeColor = Color.DarkGray;
+            txtNroSerie.PlaceholderText = "Notebook";
+            txtNroSerie.SelectedText = "";
+            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtNroSerie.Size = new Size(300, 36);
+            txtNroSerie.TabIndex = 17;
+            txtNroSerie.TextChanged += txtNroSerie_TextChanged;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(62, 13);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(300, 300);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            // 
+            // CarritoUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightGray;
+            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "Carrito";
-            Size = new Size(871, 606);
+            Name = "CarritoUC";
+            Size = new Size(1054, 671);
+            Load += CarritoUC_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtgCarrito).EndInit();
             panel2.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
-        private DataGridView dataGridView1;
         private Panel panel2;
         private Panel panel4;
-        private Button button8;
-        private Button button10;
-        private Button button11;
-        private Button button12;
-        private Button button13;
-        private Button button4;
-        private Button button5;
-        private Button button6;
-        private Button button7;
-        private Button button3;
-        private Button button2;
-        private Button button1;
-        private Button button9;
+        private Button btnNotebook1;
+        private Button btnNotebook2;
+        private Button btnNotebook3;
+        private Button btnNotebook4;
+        private Button btnNotebook5;
+        private Button btnNotebook6;
+        private Button btnNotebook7;
+        private Button btnNotebook8;
+        private Button btnNotebook9;
+        private Button btnNotebook10;
+        private Button btnNotebook11;
+        private Button btnNotebook12;
+        private Button btnNotebook13;
         private Panel panel5;
-        private Button button14;
-        private Button button15;
-        private Button button16;
-        private Button button17;
-        private Button button18;
-        private Button button19;
-        private Button button20;
-        private Button button21;
-        private Button button22;
-        private Button button23;
-        private Button button24;
-        private Button button25;
+        private Button btnNotebook14;
+        private Button btnNotebook15;
+        private Button btnNotebook16;
+        private Button btnNotebook17;
+        private Button btnNotebook18;
+        private Button btnNotebook19;
+        private Button btnNotebook20;
+        private Button btnNotebook21;
+        private Button btnNotebook22;
+        private Button btnNotebook23;
+        private Button btnNotebook24;
+        private Button btnNotebook25;
         private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2DataGridView dtgCarrito;
+        private Panel panel3;
+        private PictureBox pictureBox2;
+        private Guna.UI2.WinForms.Guna2TextBox txtNroSerie;
+        private Guna.UI2.WinForms.Guna2TextBox txtCodBarra;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbEstados;
+        private Guna.UI2.WinForms.Guna2Button btnAgregar;
+        private Guna.UI2.WinForms.Guna2Button btnQuitar;
     }
 }
