@@ -45,24 +45,30 @@ INSERT INTO Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbica
 ('Carro de guarda 2', 'CARR-002', 1, 2, 1, TRUE);
 
 -- ELEMENTOS inserts
--- ELEMENTOS extra (Proyectores y Tablets que sí aparecen en la vista)
 INSERT INTO Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, equipo, numeroSerie, codigoBarra, patrimonio, habilitado)
 VALUES
--- Proyectores (modelo Epson X200)
+-- Notebooks
+(1, 1, 1, 1, 'Notebook Dell A', 'NB001', 'CB001', 'PAT001', TRUE),
+(1, 1, 1, 1, 'Notebook Dell B', 'NB002', 'CB002', 'PAT002', TRUE),
+(1, 2, 2, 1, 'Notebook HP A',   'NB003', 'CB003', 'PAT003', TRUE),
+(1, 2, 2, 2, 'Notebook HP B',   'NB004', 'CB004', 'PAT004', TRUE),
+
+-- Proyectores
 (2, 3, 1, 1, 'Proyector A', 'PR002', 'CB005', 'PAT005', TRUE),
 (2, 3, 1, 2, 'Proyector B', 'PR003', 'CB006', 'PAT006', TRUE),
 (2, 3, 2, 3, 'Proyector C', 'PR004', 'CB007', 'PAT007', TRUE),
 
--- Tablets (modelo Samsung Tab A)
+-- Tablets
 (3, 4, 2, 1, 'Tablet A', 'TB002', 'CB008', 'PAT008', TRUE),
 (3, 4, 2, 1, 'Tablet B', 'TB003', 'CB009', 'PAT009', TRUE),
 (3, 4, 1, 2, 'Tablet C', 'TB004', 'CB010', 'PAT010', TRUE);
 
-
--- NOTEBOOKS (ligadas a Elementos tipo Notebook)
+-- NOTEBOOKS asociadas a carritos
 INSERT INTO Notebooks (idElemento, idCarrito, posicionCarrito) VALUES
-(1, 1, 1),
-(4, 2, 2);
+(1, 1, 1), -- Notebook Dell A en Carro 1
+(2, 1, 2), -- Notebook Dell B en Carro 1
+(3, 2, 1), -- Notebook HP A en Carro 2
+(4, 2, 2); -- Notebook HP B en Carro 2
 
 -- CURSOS inserts
 INSERT INTO Cursos (curso) VALUES
@@ -76,7 +82,7 @@ INSERT INTO EstadosPrestamo (estadoPrestamo) VALUES
 ('Finalizado'),
 ('Cancelado');
 
--- PRESTAMOS inserts (ahora requieren idUsuarioRecibio)
+-- PRESTAMOS inserts
 INSERT INTO Prestamos (idUsuarioRecibio, idCurso, idDocente, idCarrito, idEstadoPrestamo, fechaPrestamo) VALUES
 (1, 1, 1, 1, 1, '2025-08-01 10:00:00'),
 (2, 2, 2, 2, 1, '2025-08-02 11:00:00');
@@ -84,9 +90,9 @@ INSERT INTO Prestamos (idUsuarioRecibio, idCurso, idDocente, idCarrito, idEstado
 -- PRESTAMOS DETALLES inserts
 INSERT INTO PrestamoDetalle (idPrestamo, idElemento) VALUES
 (1, 1),
-(2, 3);
+(2, 5);
 
--- DEVOLUCIONES inserts (ajustado a nueva estructura)
+-- DEVOLUCIONES inserts
 INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observaciones) VALUES
 (1, 1, '2025-08-05 15:00:00', 'Sin daños'),
 (2, 2, '2025-08-06 16:00:00', 'Con problemas en batería');
@@ -94,7 +100,7 @@ INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observ
 -- DEVOLUCION DETALLE inserts 
 INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
 (1, 1, NULL),
-(2, 3, 'Devuelto con anomalías');
+(2, 5, 'Devuelto con anomalías');
 
 -- TIPO ACCION inserts
 INSERT INTO TipoAccion (accion) VALUES
@@ -104,23 +110,20 @@ INSERT INTO TipoAccion (accion) VALUES
 ('Préstamo'),
 ('Devolución');
 
--- Cambios de proyectores
+-- HISTORIAL CAMBIO inserts (correlativos)
 INSERT INTO HistorialCambio (idTipoAccion, idUsuario, fechaCambio, observacion) VALUES
-(1, 1, '2025-09-01 09:00:00', 'Ingreso de Proyector A - disponible'),
-(1, 1, '2025-09-01 09:10:00', 'Ingreso de Proyector B - en mantenimiento'),
-(1, 2, '2025-09-01 09:20:00', 'Ingreso de Proyector C - prestado'),
+(1, 1, '2025-09-01 09:00:00', 'Ingreso de Proyector A - disponible'),   -- ID 1
+(1, 1, '2025-09-01 09:10:00', 'Ingreso de Proyector B - en mantenimiento'), -- ID 2
+(1, 2, '2025-09-01 09:20:00', 'Ingreso de Proyector C - prestado'),     -- ID 3
+(1, 1, '2025-09-02 10:00:00', 'Ingreso de Tablet A - disponible'),      -- ID 4
+(1, 1, '2025-09-02 10:05:00', 'Ingreso de Tablet B - disponible'),      -- ID 5
+(1, 2, '2025-09-02 10:15:00', 'Ingreso de Tablet C - en mantenimiento');-- ID 6
 
--- Cambios de tablets
-(1, 1, '2025-09-02 10:00:00', 'Ingreso de Tablet A - disponible'),
-(1, 1, '2025-09-02 10:05:00', 'Ingreso de Tablet B - disponible'),
-(1, 2, '2025-09-02 10:15:00', 'Ingreso de Tablet C - en mantenimiento');
-
--- Relacionar con elementos
+-- RELACIÓN HISTORIAL ↔ ELEMENTOS
 INSERT INTO HistorialElemento (idHistorialCambio, idElemento) VALUES
-(7, 5), -- Proyector A
-(8, 6), -- Proyector B
-(9, 7), -- Proyector C
-(10, 8), -- Tablet A
-(11, 9), -- Tablet B
-(12, 10); -- Tablet C
-
+(1, 5), -- Proyector A
+(2, 6), -- Proyector B
+(3, 7), -- Proyector C
+(4, 8), -- Tablet A
+(5, 9), -- Tablet B
+(6, 10); -- Tablet C

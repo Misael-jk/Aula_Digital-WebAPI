@@ -1,16 +1,15 @@
 -- Mostrar Usuario disponibles en la UI
 
-drop view if exists View_GetUsuariosDTO;
+drop view if exists View_GetUsuarioDTO;
 
-create view View_GetUsuariosDTO as
-	select 
+create view View_GetUsuarioDTO as
+    SELECT 
         u.idUsuario,
         u.usuario,
         u.pass as Password,
         u.nombre,
         u.apellido,
         u.email as Email,
-        r.rol,
-        fotoPerfil
-    from Usuarios u
-    join Rol r using(idRol);
+        r.rol
+    FROM Usuarios u
+    JOIN Rol r ON u.idRol = r.idRol;
