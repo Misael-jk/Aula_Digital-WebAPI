@@ -9,5 +9,4 @@ public class UsuariosDTO
     public required string Apellido { get; set; }
     public required string Rol { get; set; }
     public required string Email { get; set; }
-    public string? FotoPerfil { get; set; }
 }
