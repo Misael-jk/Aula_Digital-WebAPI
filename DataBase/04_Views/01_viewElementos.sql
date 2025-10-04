@@ -5,11 +5,11 @@ drop view if exists View_GetElementosDTO;
 
 create view View_GetElementosDTO as 
     select 
-        e.idElemento,
+        e.idElemento as 'IdElemento',
+        e.numeroSerie as 'NumeroSerie',
+        e.codigoBarra as 'CodigoBarra',
+        e.patrimonio as 'Patrimonio',
         v.subtipo as 'Variante',
-        e.numeroSerie,
-        e.codigoBarra,
-        e.patrimonio,
         t.elemento as 'ElementoTipo',
         ee.estadoMantenimiento as 'EstadoMantenimientoNombre',
         m.modelo as 'NombreModelo',

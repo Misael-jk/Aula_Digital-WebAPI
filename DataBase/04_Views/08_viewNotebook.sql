@@ -2,14 +2,15 @@ drop view if exists View_GetNotebookDTO;
 
 create view View_GetNotebookDTO as 
     select 
-        e.idElemento,
+        n.idElemento,
         n.equipo as "Equipo",
-        c.equipo as "Carrito",
+        n.posicionCarrito,
         e.numeroSerie,
         e.codigoBarra,
         e.patrimonio,
-        ee.estadoMantenimiento as 'EstadoMantenimientoNombre',
-        m.modelo as 'NombreModelo'
+        c.equipo as "EquipoCarrito",
+        ee.estadoMantenimiento as 'Estado',
+        m.modelo
     from Elementos e
     join notebooks n using (idElemento)
     left join carritos c on n.idCarrito = c.idCarrito
