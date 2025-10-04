@@ -20,15 +20,15 @@ public class MapperNotebooks : RepoBase, IMapperNotebooks
             {
                 IdNotebook = notebook.IdElemento,
                 Equipo = notebook.Equipo,
-                Carrito = carritos.Equipo,
                 PosicionCarrito = notebook.PosicionCarrito,
                 NumeroSerieNotebook = notebook.NumeroSerie,
                 CodigoBarra = notebook.CodigoBarra,
                 Patrimonio = notebook.Patrimonio,
+                Carrito = carritos.EquipoCarrito,
                 Estado = elementos.Estado,
                 Modelo = elementos.Modelo
             },
-            splitOn: "Equipo,Carrito,Estado"
+            splitOn: "IdElemento,EquipoCarrito,Estado"
         ).ToList();
     }
 }

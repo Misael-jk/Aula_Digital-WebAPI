@@ -3,7 +3,7 @@
 public class Carritos
 {
     public int IdCarrito {get; set;}
-    public required string Equipo { get; set; }
+    public required string EquipoCarrito { get; set; }
     public required string NumeroSerieCarrito { get; set; }
     public int IdEstadoMantenimiento { get; set; }
     public int IdUbicacion { get; set; }

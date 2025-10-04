@@ -65,6 +65,7 @@ namespace CapaPresentacion
         private readonly IMapperModelo mapperModelos;
         private readonly IMapperDocentes mapperDocentes;
         private readonly IMapperNotebooks mapperNotebooks;
+        private readonly IMapperInventario mapperInventario;
         #endregion
 
         #region Variables Capa Negocio
@@ -120,6 +121,7 @@ namespace CapaPresentacion
             mapperModelos = new MapperModelo(conexion);
             mapperDocentes = new MapperDocentes(conexion);
             mapperNotebooks = new MapperNotebooks(conexion);
+            mapperInventario = new MapperInventario(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, repoModelo, repoUbicacion, repoElementos);
             carritosCN = new CarritosCN(repoCarritos, repoNotebooks, repoUbicacion, repoModelo, repoHistorialCambio, repoHistorialCarrito, mapperCarritos);
@@ -321,7 +323,7 @@ namespace CapaPresentacion
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-            inventarioUC = new InventarioUC(elementoCN);
+            inventarioUC = new InventarioUC(mapperInventario);
             CambiarNombrePort(btnInventario.Text);
 
             if (!pnlContenedor.Controls.Contains(inventarioUC))

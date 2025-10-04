@@ -16,6 +16,8 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidNotebook", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        parameters.Add("unidTipoElemento", notebooks.IdTipoElemento);
+        parameters.Add("unidVariante", notebooks.IdVarianteElemento);
         parameters.Add("unidModelo", notebooks.IdModelo);
         parameters.Add("unidEstado", notebooks.IdEstadoMantenimiento);
         parameters.Add("unnumeroSerie", notebooks.NumeroSerie);
@@ -43,15 +45,18 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidNotebook", notebooks.IdElemento);
+        parameters.Add("unidTipoElemento", notebooks.IdTipoElemento);
+        parameters.Add("unidVariante", notebooks.IdVarianteElemento);
+        parameters.Add("unidModelo", notebooks.IdModelo);
+        parameters.Add("unidEstado", notebooks.IdEstadoMantenimiento);
         parameters.Add("unnumeroSerie", notebooks.NumeroSerie);
         parameters.Add("uncodigoBarra", notebooks.CodigoBarra);
-        parameters.Add("unidModelo", notebooks.IdModelo);
-        parameters.Add("unidCarrito", notebooks.IdCarrito);
-        parameters.Add("unaposicionCarrito", notebooks.PosicionCarrito);
-        parameters.Add("unidEstado", notebooks.IdEstadoMantenimiento);
         parameters.Add("unpatrimonio", notebooks.Patrimonio);
         parameters.Add("unhabilitado", notebooks.Habilitado);
         parameters.Add("unfechaBaja", notebooks.FechaBaja);
+        parameters.Add("unequipo", notebooks.Equipo);
+        parameters.Add("unidCarrito", notebooks.IdCarrito);
+        parameters.Add("unaposicionCarrito", notebooks.PosicionCarrito);
         try
         {
             Conexion.Execute("UpdateNotebook", parameters, commandType: CommandType.StoredProcedure);

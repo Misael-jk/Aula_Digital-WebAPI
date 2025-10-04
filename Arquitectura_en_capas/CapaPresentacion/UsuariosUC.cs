@@ -60,8 +60,6 @@ namespace CapaPresentacion
             dtgUsuarios.Columns["Rol"].HeaderText = "Rol";
             dtgUsuarios.Columns[5].Width = 100;
             dtgUsuarios.Columns["Email"].HeaderText = "Email";
-            dtgUsuarios.Columns[6].Width = 140;
-            dtgUsuarios.Columns["FotoPerfil"].Visible = false;
         }
         #endregion
 

@@ -77,7 +77,7 @@ create table EstadosMantenimiento (
 create table VariantesElemento (
     idVariante smallint not null auto_increment,
     idTipoElemento tinyint not null,
-    subtipo varchar(80) not null,        
+    subtipo varchar(40) not null,        
     idModelo tinyint null,                
     constraint PK_VariantesElemento primary key (idVariante),
     constraint UQ_VariantesElemento unique (idTipoElemento, subtipo),

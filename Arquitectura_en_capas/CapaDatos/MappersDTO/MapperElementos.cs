@@ -21,10 +21,10 @@ public class MapperElementos : RepoBase, IMapperElementos
             (elemento, variante, tipo, estado, modelo, ubicacion) => new ElementosDTO
             {
                 IdElemento = elemento.IdElemento,
-                Equipo = variante.Variante,
                 NumeroSerie = elemento.NumeroSerie,
                 CodigoBarra = elemento.CodigoBarra,
                 Patrimonio = elemento.Patrimonio,
+                Equipo = variante.Variante,
                 TipoElemento = tipo.ElementoTipo,
                 Estado = estado.EstadoMantenimientoNombre,
                 Modelo = modelo.NombreModelo,
