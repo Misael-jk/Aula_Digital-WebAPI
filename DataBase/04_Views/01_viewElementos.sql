@@ -6,7 +6,7 @@ drop view if exists View_GetElementosDTO;
 create view View_GetElementosDTO as 
     select 
         e.idElemento,
-        e.equipo,
+        v.subtipo,
         e.numeroSerie,
         e.codigoBarra,
         e.patrimonio,
@@ -16,8 +16,9 @@ create view View_GetElementosDTO as
         u.ubicacion as 'NombreUbicacion'
     from Elementos e
     join modelo m using (idModelo)
+    join varianteselemento v using (idVariante)
     join tipoElemento t on t.idTipoElemento = m.idTipoElemento
     join EstadosMantenimiento ee using(idEstadoMantenimiento)
     join Ubicacion u using (idUbicacion)
     where e.habilitado = 1
-    and elemento not in ("Notebooks")
+    and t.elemento not in ('Notebook');

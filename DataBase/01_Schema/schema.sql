@@ -74,47 +74,62 @@ create table EstadosMantenimiento (
 );
 
 
+create table VariantesElemento (
+    idVariante smallint not null auto_increment,
+    idTipoElemento tinyint not null,
+    subtipo varchar(80) not null,        
+    idModelo tinyint null,                
+    constraint PK_VariantesElemento primary key (idVariante),
+    constraint UQ_VariantesElemento unique (idTipoElemento, subtipo),
+    constraint FK_VariantesElemento_TipoElemento foreign key (idTipoElemento)
+        references TipoElemento (idTipoElemento),
+    constraint FK_VariantesElemento_Modelo foreign key (idModelo)
+        references Modelo (idModelo)
+);
+
+
 create table Carritos (
     idCarrito tinyint not null auto_increment,
     equipo varchar(40) not null,
+    idModelo tinyint,
     numeroSerieCarrito varchar(40) not null,
     idEstadoMantenimiento tinyint not null,
     idUbicacion tinyint not null,
-    idModelo tinyint not null,
     Habilitado boolean not null,
     fechaBaja datetime,
     constraint PK_Carritos primary key (idCarrito),
-    constraint UQ_Carritos_equipo unique (equipo),
+    constraint UQ_Carritos_numeroSerieCarrito unique (equipo,numeroSerieCarrito),
+    constraint FK_Carritos_Modelo foreign key (idModelo)
+        references Modelo (idModelo),
     constraint FK_Carritos_EstadoMantenimiento foreign key (idEstadoMantenimiento)
     	references EstadosMantenimiento (idEstadoMantenimiento),
     constraint FK_Carritos_Ubicacion foreign key (idUbicacion)
-    	references Ubicacion (idUbicacion),
-    constraint FK_Carrito_Modelo foreign key (idModelo)
-    	references Modelo(idModelo)
+    	references Ubicacion (idUbicacion)
 ); 
     
     
 create table Elementos (
     idElemento smallint not null auto_increment,
     idTipoElemento tinyint not null,
-    idModelo tinyint not null,
+    idVariante smallint not null,
+    idModelo tinyint,
     idUbicacion tinyint not null,
     idEstadoMantenimiento tinyint not null,
-    equipo varchar(40) not null,
     numeroSerie varchar(40) not null,
     codigoBarra varchar(40) not null,
     patrimonio varchar(60) not null,
     habilitado boolean not null,
     fechaBaja datetime,
     constraint PK_Elementos primary key (idElemento),
-    constraint UQ_Elementos_equipo unique (equipo),
     constraint UQ_Elementos_numeroSerie unique (numeroSerie),
     constraint UQ_Elementos_codigoBarra unique (codigoBarra),
     constraint UQ_Elementos_patrimonio unique (patrimonio),
     constraint FK_Elementos_TipoElemento foreign key (idTipoElemento)
         references tipoElemento(idTipoElemento),
+    constraint FK_Elementos_VariantesElementos foreign key (idVariante)
+        references VariantesElemento (idVariante),
     constraint FK_Elementos_Modelo foreign key (idModelo)
-    	references Modelo(idModelo),
+        references Modelo (idModelo),
     constraint FK_Elementos_Ubicacion foreign key (idUbicacion)
         references Ubicacion(idUbicacion),
     constraint FK_Elementos_EstadoMantenimiento foreign key (idEstadoMantenimiento)
@@ -124,9 +139,11 @@ create table Elementos (
 
 create table Notebooks (
     idElemento smallint not null,
+    equipo varchar(40) not null,
     idCarrito tinyint,
     posicionCarrito tinyint,
     constraint PK_Notebooks primary key (idElemento),
+    constraint UQ_Notebooks unique (equipo),
     constraint FK_Notebooks_Elementos foreign key (idElemento)
     	references Elementos (idElemento),
     constraint FK_Notebooks_Carrito foreign key (idCarrito) 

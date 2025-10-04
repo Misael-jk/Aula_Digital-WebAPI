@@ -23,6 +23,27 @@ delimiter ;
 
 
 -- =====================================================================
+-- UPDATE PARA LA TABLA DE VARIANTES DE ELEMENTOS
+-- =====================================================================
+
+delimiter $$ 
+
+drop procedure if exists UpdateVarianteElemento $$
+create procedure UpdateVarianteElemento(in unidVariante smallint, in unidTipoElemento tinyint, in unsubtipo varchar(40), in unidModelo tinyint)
+begin
+    update VariantesElemento
+    set 
+        idTipoElemento = unidTipoElemento,
+        subtipo = unsubtipo,
+        idModelo = unidModelo
+    where idVariante = unidVariante;
+end $$
+
+delimiter ;
+
+
+
+-- =====================================================================
 -- UPDATE PARA LA TABLA DE DOCENTES
 -- =====================================================================
 
@@ -52,14 +73,14 @@ delimiter ;
 delimiter $$ 
 
 drop procedure if exists UpdateElemento $$
-create procedure UpdateElemento(in unidElemento tinyint, in unidTipoElemento tinyint ,in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unequipo varchar(40), in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40) , in undisponible boolean, in unafechaBaja datetime)
+create procedure UpdateElemento(in unidElemento smallint, in unidTipoElemento tinyint, in unidVariante smallint ,in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40) , in unhabilitado boolean, in unafechaBaja datetime)
 begin
     update Elementos 
     set idTipoElemento = unidTipoElemento,
+        idVariante = unidVariante,
         idModelo = unidModelo,
         idUbicacion = unidUbicacion,
         idEstadoMantenimiento = unidEstadoMantenimiento,
-        equipo = unequipo,
         numeroSerie = unnumeroSerie,
         codigoBarra = uncodigoBarra,
         patrimonio = unpatrimonio,
@@ -77,14 +98,17 @@ delimiter ;
 -- =====================================================================
 
 delimiter $$ 
+
 drop procedure if exists UpdateNotebook $$
-create procedure UpdateNotebook(in unidElemento smallint, in unidCarrito tinyint, in unaposicionCarrito tinyint
-)
+create procedure UpdateNotebook (in unidNotebook smallint, in unidTipoElemento tinyint, in unidVariante smallint, in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime, in unequipo varchar(40), in unidCarrito tinyint, in unaposicionCarrito tinyint)
 begin
+    call UpdateElemento(unidNotebook, unidTipoElemento, unidVariante, unidModelo, unidUbicacion, unidEstadoMantenimiento, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);
+
     update Notebooks
     set idCarrito = unidCarrito,
-        posicionCarrito = unaposicionCarrito
-    where idElemento = unidElemento;
+        posicionCarrito = unaposicionCarrito,
+        equipo = unequipo
+    where idElemento = unidNotebook;
 end $$
 
 delimiter ;

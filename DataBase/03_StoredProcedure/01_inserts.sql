@@ -18,6 +18,25 @@ delimiter ;
 
 
 -- =====================================================================
+-- INSERT PARA LA TABLA DE VARIANTE DE ELEMENTOS
+-- =====================================================================
+
+delimiter $$
+
+drop procedure if exists InsertVarianteElemento $$
+create procedure InsertVarianteElemento(out unidVariante smallint, in unidTipoElemento tinyint, in unsubtipo varchar(40), in unidModelo tinyint)
+begin
+    insert into VariantesElemento (idTipoElemento, subtipo, idModelo)
+    values (unidTipoElemento, unsubtipo, unidModelo);
+
+    set unidVariante = last_insert_id();
+end $$
+
+delimiter ;
+
+
+
+-- =====================================================================
 -- INSERT PARA LA TABLA DE DOCENTES
 -- =====================================================================
 
@@ -43,12 +62,35 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertElemento $$
-create procedure InsertElemento (out unidElemento tinyint, in unidTipoElemento tinyint, in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unequipo varchar(40), in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime)
+create procedure InsertElemento (out unidElemento smallint, in unidTipoElemento tinyint,  in unidVariante varchar(80), in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unequipo varchar(40), in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime)
 begin
-    insert into Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, equipo, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja)
-    values (unidTipoElemento, unidModelo, unidUbicacion, unidEstadoMantenimiento, unequipo, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);
+    insert into Elementos (idTipoElemento, idVariante, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja)
+    values (unidTipoElemento, unidVariante, unidModelo, unidUbicacion, unidEstadoMantenimiento, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);
 
     set unidElemento = last_insert_id();
+end $$
+
+delimiter ;
+
+
+
+-- =====================================================================
+-- INSERT PARA LA TABLA DE NOTEBOOKS
+-- =====================================================================
+
+delimiter $$
+
+drop procedure if exists InsertNotebook $$
+create procedure InsertNotebook (out unidNotebook smallint, in unidTipoElemento tinyint, in unidVariante smallint, in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime, in unequipo varchar(40), in unidCarrito tinyint, in unaposicionCarrito tinyint)
+begin
+declare unidElemento smallint;
+
+call InsertElemento(unidElemento, unidTipoElemento, unidVariante, unidModelo, unidUbicacion, unidEstadoMantenimiento, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);
+
+    insert into Notebooks (idElemento, equipo, idCarrito, posicionCarrito)
+    values (unidElemento, unequipo, unidCarrito, unaposicionCarrito);
+
+    set unidNotebook = last_insert_id();
 end $$
 
 delimiter ;
