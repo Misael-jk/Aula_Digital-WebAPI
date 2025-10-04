@@ -16,7 +16,7 @@ public class MapperUsuarios : RepoBase, IMapperUsuarios
     public IEnumerable<UsuariosDTO> GetAllDTO()
     {
         return Conexion.Query<Usuarios, Roles, UsuariosDTO>(
-            "select * from View_GetUsuariosDTO",
+            "select * from View_GetUsuarioDTO",
             (usuario, rol) => new UsuariosDTO
             {
                 IdUsuario = usuario.IdUsuario,

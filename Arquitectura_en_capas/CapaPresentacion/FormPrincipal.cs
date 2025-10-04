@@ -29,6 +29,7 @@ namespace CapaPresentacion
         private MantenimientoUC mantenimientoUC;
         private HistorialUC historialUC;
         private InventarioUC inventarioUC;
+        private NotebooksUC notebooksUC;
         #endregion
 
         #region Variables Interface - Repositorios
@@ -63,6 +64,7 @@ namespace CapaPresentacion
         private readonly IMapperCarritos mapperCarritos;
         private readonly IMapperModelo mapperModelos;
         private readonly IMapperDocentes mapperDocentes;
+        private readonly IMapperNotebooks mapperNotebooks;
         #endregion
 
         #region Variables Capa Negocio
@@ -75,6 +77,7 @@ namespace CapaPresentacion
         private readonly ModeloCN modeloCN;
         //private readonly MantenimientoCN mantenimientoCN;
         private readonly DevolucionCN devolucionCN;
+        private readonly NotebooksCN notebooksCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -116,6 +119,7 @@ namespace CapaPresentacion
             mapperCarritos = new MapperCarrritos(conexion);
             mapperModelos = new MapperModelo(conexion);
             mapperDocentes = new MapperDocentes(conexion);
+            mapperNotebooks = new MapperNotebooks(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, repoModelo, repoUbicacion, repoElementos);
             carritosCN = new CarritosCN(repoCarritos, repoNotebooks, repoUbicacion, repoModelo, repoHistorialCambio, repoHistorialCarrito, mapperCarritos);
@@ -126,6 +130,7 @@ namespace CapaPresentacion
             modeloCN = new ModeloCN(repoModelo, mapperModelos);
             devolucionCN = new DevolucionCN(repoDevolucion, repoPrestamos, repoUsuarios, repoElementos, repoEstadosPrestamo, repoDocentes, repoDevolucionDetalle, repoCarritos, mapperDevoluciones);
             //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
+            notebooksCN = new NotebooksCN(repoNotebooks, repoCarritos, repoModelo, repoUbicacion, mapperNotebooks);
         }
 
 
@@ -345,6 +350,28 @@ namespace CapaPresentacion
         {
             var entrar = new InfoUsuario();
             entrar.Show();
+        }
+
+        private void btnNotebooks_Click(object sender, EventArgs e)
+        {
+            notebooksUC = new NotebooksUC(notebooksCN);
+            CambiarNombrePort(btnInventario.Text);
+
+            if (!pnlContenedor.Controls.Contains(notebooksUC))
+            {
+                pnlContenedor.Controls.Add(notebooksUC);
+            }
+
+            notebooksUC.Visible = true;
+
+            try
+            {
+                notebooksUC.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar datos en Notebook: " + ex.Message);
+            }
         }
     }
 }

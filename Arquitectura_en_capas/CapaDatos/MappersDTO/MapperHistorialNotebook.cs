@@ -23,7 +23,7 @@ public class MapperHistorialNotebook : RepoBase, IMapperHistorialNotebook
                 NumeroSerie = notebook.NumeroSerieNotebook,
                 CodigoBarra = notebook.CodigoBarra,
                 Modelo = notebook.Modelo,
-                Carrito = notebook.NumeroSerieCarrito,
+                Carrito = notebook.Carrito,
                 PosicionCarrito = notebook.PosicionCarrito,
                 EstadoMantenimiento = notebook.Estado,
                 Descripcion = cambios?.Descripcion,

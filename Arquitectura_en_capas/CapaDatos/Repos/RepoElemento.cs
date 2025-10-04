@@ -19,10 +19,10 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         parametros.Add("unidElemento", dbType: DbType.Int32, direction: ParameterDirection.Output);
         parametros.Add("unidTipoElemento", elemento.IdTipoElemento);
+        parametros.Add("unidVariante", elemento.IdVarianteElemento);
         parametros.Add("unidEstadoMantenimiento", elemento.IdEstadoMantenimiento);
         parametros.Add("unidubicacion", elemento.IdUbicacion);
         parametros.Add("unidmodelo", elemento.IdModelo);
-        parametros.Add("unequipo", elemento.Equipo);
         parametros.Add("unnumeroSerie", elemento.NumeroSerie);
         parametros.Add("uncodigoBarra", elemento.CodigoBarra);
         parametros.Add("unpatrimonio", elemento.Patrimonio);
@@ -48,10 +48,10 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         parametros.Add("unidElemento", elemento.IdElemento);
         parametros.Add("unidTipoElemento", elemento.IdTipoElemento);
+        parametros.Add("unidVariante", elemento.IdVarianteElemento);
         parametros.Add("unidEstadoMantenimiento", elemento.IdEstadoMantenimiento);
         parametros.Add("unidubicacion", elemento.IdUbicacion);
         parametros.Add("unidmodelo", elemento.IdModelo);
-        parametros.Add("unequipo", elemento.Equipo);
         parametros.Add("unnumeroSerie", elemento.NumeroSerie);
         parametros.Add("uncodigoBarra", elemento.CodigoBarra);
         parametros.Add("unPatrimonio", elemento.Patrimonio);

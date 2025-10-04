@@ -3,7 +3,8 @@
 public class NotebooksDTO
 {
     public int IdNotebook { get; set; }
-    public string? NumeroSerieCarrito { get; set; }
+    public required string Equipo { get; set; }
+    public string? Carrito { get; set; }
     public required string CodigoBarra { get; set; }
     public int? PosicionCarrito { get; set; }
     public required string NumeroSerieNotebook { get; set; }

@@ -233,6 +233,7 @@
             btnNotebooks.Size = new Size(249, 39);
             btnNotebooks.TabIndex = 15;
             btnNotebooks.Text = "Notebooks";
+            btnNotebooks.Click += btnNotebooks_Click;
             // 
             // btnInventario
             // 
@@ -516,7 +517,6 @@
             btnInfoUser.ShadowDecoration.CustomizableEdges = customizableEdges25;
             btnInfoUser.Size = new Size(249, 77);
             btnInfoUser.TabIndex = 14;
-
             // 
             // Mover_Principal
             // 

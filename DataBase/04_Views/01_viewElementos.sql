@@ -6,7 +6,7 @@ drop view if exists View_GetElementosDTO;
 create view View_GetElementosDTO as 
     select 
         e.idElemento,
-        v.subtipo,
+        v.subtipo as 'Variante',
         e.numeroSerie,
         e.codigoBarra,
         e.patrimonio,
