@@ -1,6 +1,6 @@
-DROP VIEW IF EXISTS View_Inventario;
+DROP VIEW IF EXISTS View_InventarioDTO;
 
-CREATE VIEW View_Inventario AS 
+CREATE VIEW View_InventarioDTO AS 
 SELECT 
     v.subtipo as 'Equipo',
     m.modelo,

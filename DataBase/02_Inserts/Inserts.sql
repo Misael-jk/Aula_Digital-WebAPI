@@ -167,16 +167,23 @@ INSERT INTO HistorialCambio (idTipoAccion, idUsuario, fechaCambio, observacion) 
 (1, 1, '2025-09-01 08:05:00', 'Ingreso Notebook Dell A - disponible'),   -- ID 2
 (1, 2, '2025-09-01 08:10:00', 'Ingreso Notebook HP B - disponible'),     -- ID 3
 (1, 2, '2025-09-01 08:15:00', 'Ingreso Notebook HP B - en mantenimiento'), -- ID 4
+(2, 1, '2025-09-10 09:00:00', 'Notebook 1 enviada a mantenimiento'),
+(2, 2, '2025-09-10 09:10:00', 'Notebook 2 con actualización de sistema'),
+(2, 2, '2025-09-10 09:20:00', 'Notebook 3 con limpieza interna'),
+
+-- Baja de un carrito
+(3, 1, '2025-09-12 10:00:00', 'Carrito 1 dado de baja por rotura'),
+(3, 2, '2025-09-12 13:00:00', 'Carrito 2 dado de baja por Algooo'),
 
 -- Proyectores
 (1, 1, '2025-09-01 09:00:00', 'Ingreso Proyector A - disponible'),       -- ID 5
 (1, 1, '2025-09-01 09:05:00', 'Ingreso Proyector A - disponible'),       -- ID 6
-(1, 2, '2025-09-01 09:10:00', 'Ingreso Proyector B - en mantenimiento'), -- ID 7
+(2, 2, '2025-09-01 09:10:00', 'Ingreso Proyector B - en mantenimiento'), -- ID 7
 
 -- Tablets
 (1, 1, '2025-09-01 10:00:00', 'Ingreso Tablet A - disponible'),          -- ID 8
 (1, 1, '2025-09-01 10:05:00', 'Ingreso Tablet A - disponible'),          -- ID 9
-(1, 2, '2025-09-01 10:10:00', 'Ingreso Tablet B - en mantenimiento');    -- ID 10
+(2, 2, '2025-09-01 10:10:00', 'Ingreso Tablet B - en mantenimiento');    -- ID 10
 
 -- ======================
 -- HISTORIAL ELEMENTO
@@ -187,13 +194,31 @@ INSERT INTO HistorialElemento (idHistorialCambio, idElemento) VALUES
 (2, 2),
 (3, 3),
 (4, 4),
+(5, 1),
+(6, 2),
+(7, 3),
 
 -- Proyectores
-(5, 5),
-(6, 6),
-(7, 7),
+(10, 5),
+(11, 6),
+(12, 7),
 
 -- Tablets
-(8, 8),
-(9, 9),
-(10, 10);
+(13, 8),
+(14, 9),
+(15, 10);
+
+INSERT INTO HistorialCarrito (idHistorialCambio, idCarrito) VALUES
+-- Carritos
+(8, 1),
+(9, 2);
+
+Insert into HistorialNotebook (idHistorialCambio, idElemento) values
+-- Notebooks
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 1),
+(6, 2),
+(7, 3);
