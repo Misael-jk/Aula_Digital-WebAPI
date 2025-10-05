@@ -60,12 +60,14 @@ namespace CapaPresentacion
         private readonly IMapperDevoluciones mapperDevoluciones;
         private readonly IMapperUsuarios mapperUsuarios;
         private readonly IMapperElementosBajas mapperElementosBajas;
-        private readonly MapperHistorialElemento mapperHistorialElemento;
         private readonly IMapperCarritos mapperCarritos;
         private readonly IMapperModelo mapperModelos;
         private readonly IMapperDocentes mapperDocentes;
         private readonly IMapperNotebooks mapperNotebooks;
         private readonly IMapperInventario mapperInventario;
+        private readonly MapperHistorialElemento mapperHistorialElemento;
+        private readonly IMapperHistorialNotebook mapperHistorialNotebook;
+        private readonly IMapperHistorialCarrito mapperHistorialCarrito;
         #endregion
 
         #region Variables Capa Negocio
@@ -117,6 +119,8 @@ namespace CapaPresentacion
             mapperUsuarios = new MapperUsuarios(conexion);
             mapperElementosBajas = new MapperElementosBajas(conexion);
             mapperHistorialElemento = new MapperHistorialElemento(conexion);
+            mapperHistorialNotebook = new MapperHistorialNotebook(conexion);
+            mapperHistorialCarrito = new MapperHistorialCarrito(conexion);
             mapperCarritos = new MapperCarrritos(conexion);
             mapperModelos = new MapperModelo(conexion);
             mapperDocentes = new MapperDocentes(conexion);
@@ -167,24 +171,16 @@ namespace CapaPresentacion
 
         private void BtnDashboard_Click(object sender, EventArgs e)
         {
-            dashboard = new Dashboard(mapperHistorialElemento);
+            historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
             CambiarNombrePort(BtnDashboard.Text);
 
-            if (!pnlContenedor.Controls.Contains(dashboard))
+            if (!pnlContenedor.Controls.Contains(historialUC))
             {
-                pnlContenedor.Controls.Add(dashboard);
+                pnlContenedor.Controls.Add(historialUC);
             }
 
-            dashboard.Visible = true;
-
-            try
-            {
-                dashboard.MostrarDatos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar datos en Dashboard: " + ex.Message);
-            }
+            historialUC.Visible = true;
+            historialUC.BringToFront();
         }
 
         private void BtnElementos_Click(object sender, EventArgs e)
