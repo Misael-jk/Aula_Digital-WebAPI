@@ -7,14 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaNegocio;
 
 namespace CapaPresentacion
 {
-    public partial class NotebooksUC: UserControl
+    public partial class NotebooksUC : UserControl
     {
-        public NotebooksUC()
+        public readonly NotebooksCN notebooksCN;
+        public NotebooksUC(NotebooksCN notebooksCN)
         {
             InitializeComponent();
+
+            this.notebooksCN = notebooksCN;
+        }
+
+        private void NotebooksUC_Load(object sender, EventArgs e)
+        {
+            guna2DataGridView1.DataSource = notebooksCN.GetAll();   
         }
     }
 }

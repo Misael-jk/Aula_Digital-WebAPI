@@ -15,24 +15,8 @@ public class MapperHistorialNotebook : RepoBase, IMapperHistorialNotebook
 
     public IEnumerable<HistorialNotebooksDTO> GetAllDTO()
     {
-        return Conexion.Query<HistorialNotebooks, HistorialCambios, TipoAccion, NotebooksDTO, UsuariosDTO, HistorialNotebooksDTO>(
-            "GetHistorialNotebooksDTO",
-            (historial, cambios, accion, notebook, usuario) => new HistorialNotebooksDTO
-            {
-                IdHistorialNotebook = historial.IdHistorialCambio,
-                NumeroSerie = notebook.NumeroSerieNotebook,
-                CodigoBarra = notebook.CodigoBarra,
-                Modelo = notebook.Modelo,
-                Carrito = notebook.NumeroSerieCarrito,
-                PosicionCarrito = notebook.PosicionCarrito,
-                EstadoMantenimiento = notebook.Estado,
-                Descripcion = cambios?.Descripcion,
-                FechaCambio = cambios.FechaCambio,
-                AccionRealizada = accion.Accion,
-                Usuario = usuario.Apellido
-            },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "FechaCambio,Accion,NombreNotebook,Apellido"
+        return Conexion.Query<HistorialNotebooksDTO>(
+            "select * from View_HistorialNotebookDTO"
         ).ToList();
     }
 }

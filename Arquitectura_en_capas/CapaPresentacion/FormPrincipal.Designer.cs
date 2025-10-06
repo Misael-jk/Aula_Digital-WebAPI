@@ -239,6 +239,7 @@
             btnNotebooks.Size = new Size(249, 39);
             btnNotebooks.TabIndex = 15;
             btnNotebooks.Text = "Notebooks";
+            btnNotebooks.Click += btnNotebooks_Click;
             // 
             // btnInventario
             // 

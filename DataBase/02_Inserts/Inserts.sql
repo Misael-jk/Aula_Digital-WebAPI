@@ -1,108 +1,156 @@
--- ROL insert
+-- ======================
+-- ROLES
+-- ======================
 INSERT INTO Rol (rol) VALUES
 ('Administrador'),
 ('Usuario'),
 ('Invitado');
 
--- USUARIOS inserts 
+-- ======================
+-- USUARIOS
+-- ======================
 INSERT INTO Usuarios (usuario, pass, nombre, apellido, idRol, email, FotoPerfil, habilitado) VALUES
 ('admin', 'hashed_password1', 'Juan', 'Perez', 1, 'juan.perez@mail.com', NULL, TRUE),
 ('user1', 'hashed_password2', 'Ana', 'Gomez', 2, 'ana.gomez@mail.com', NULL, TRUE),
 ('guest', 'hashed_password3', 'Luis', 'Ramirez', 3, 'luis.ramirez@mail.com', NULL, TRUE);
 
--- DOCENTES inserts 
+-- ======================
+-- DOCENTES
+-- ======================
 INSERT INTO Docentes (dni, nombre, apellido, email, habilitado) VALUES
 (30123456, 'Maria', 'Fernandez', 'maria.fernandez@mail.com', TRUE),
-(30123457, 'Carlos', 'Sanchez', 'carlos.sanchez@mail.com', TRUE);
+(30123457, 'Carlos', 'Sanchez', 'carlos.sanchez@mail.com', TRUE),
+(30123458, 'Pedro', 'Lopez', 'pedro.lopez@mail.com', TRUE);
 
--- UBICACION inserts
+-- ======================
+-- UBICACION
+-- ======================
 INSERT INTO Ubicacion (ubicacion) VALUES
 ('Depósito A'),
-('Depósito B');
+('Depósito B'),
+('Sala de Profesores');
 
--- TIPO ELEMENTOS inserts 
+-- ======================
+-- TIPO ELEMENTOS
+-- ======================
 INSERT INTO TipoElemento (elemento) VALUES
 ('Notebook'),
 ('Proyector'),
 ('Tablet');
 
--- MODELOS inserts
+-- ======================
+-- MODELOS
+-- ======================
 INSERT INTO Modelo (idTipoElemento, modelo) VALUES
 (1, 'Dell Latitude 3410'),
 (1, 'HP ProBook 450'),
 (2, 'Epson X200'),
 (3, 'Samsung Tab A');
 
--- ESTADOS MANTENIMIENTO inserts
+-- ======================
+-- VARIANTES ELEMENTO
+-- ======================
+INSERT INTO VariantesElemento (idTipoElemento, subtipo, idModelo) VALUES
+(1, 'Notebook Dell 14"', 1),
+(1, 'Notebook HP 15"', 2),
+(2, 'Proyector Epson estándar', 3),
+(3, 'Tablet Samsung 10"', 4);
+
+-- ======================
+-- ESTADOS MANTENIMIENTO
+-- ======================
 INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 ('Disponible'),
 ('En mantenimiento'),
 ('Prestado');
 
--- CARRITOS inserts
+-- ======================
+-- CARRITOS
+-- ======================
 INSERT INTO Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
 ('Carro de guarda 1', 'CARR-001', 1, 1, 1, TRUE),
 ('Carro de guarda 2', 'CARR-002', 1, 2, 1, TRUE);
 
--- ELEMENTOS inserts
-INSERT INTO Elementos (idTipoElemento, idModelo, idUbicacion, idEstadoMantenimiento, equipo, numeroSerie, codigoBarra, patrimonio, habilitado)
+-- ======================
+-- ELEMENTOS
+-- ======================
+INSERT INTO Elementos (idTipoElemento, idVariante, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado)
 VALUES
--- Notebooks
-(1, 1, 1, 1, 'Notebook Dell A', 'NB001', 'CB001', 'PAT001', TRUE),
-(1, 1, 1, 1, 'Notebook Dell B', 'NB002', 'CB002', 'PAT002', TRUE),
-(1, 2, 2, 1, 'Notebook HP A',   'NB003', 'CB003', 'PAT003', TRUE),
-(1, 2, 2, 2, 'Notebook HP B',   'NB004', 'CB004', 'PAT004', TRUE),
+-- Notebooks Dell Latitude 3410
+(1, 1, 1, 1, 1, 'NB001', 'CB001', 'PAT001', TRUE),
+(1, 1, 1, 1, 1, 'NB002', 'CB002', 'PAT002', TRUE),
 
--- Proyectores
-(2, 3, 1, 1, 'Proyector A', 'PR002', 'CB005', 'PAT005', TRUE),
-(2, 3, 1, 2, 'Proyector B', 'PR003', 'CB006', 'PAT006', TRUE),
-(2, 3, 2, 3, 'Proyector C', 'PR004', 'CB007', 'PAT007', TRUE),
+-- Notebooks HP ProBook 450
+(1, 2, 2, 2, 1, 'NB003', 'CB003', 'PAT003', TRUE),
+(1, 2, 2, 2, 2, 'NB004', 'CB004', 'PAT004', TRUE),
 
--- Tablets
-(3, 4, 2, 1, 'Tablet A', 'TB002', 'CB008', 'PAT008', TRUE),
-(3, 4, 2, 1, 'Tablet B', 'TB003', 'CB009', 'PAT009', TRUE),
-(3, 4, 1, 2, 'Tablet C', 'TB004', 'CB010', 'PAT010', TRUE);
+-- Proyectores (Epson X200)
+(2, 3, 3, 1, 1, 'PR001', 'CB011', 'PAT011', TRUE),
+(2, 3, 3, 1, 1, 'PR002', 'CB012', 'PAT012', TRUE),
+(2, 3, 3, 2, 2, 'PR003', 'CB013', 'PAT013', TRUE),
 
--- NOTEBOOKS asociadas a carritos
-INSERT INTO Notebooks (idElemento, idCarrito, posicionCarrito) VALUES
-(1, 1, 1), -- Notebook Dell A en Carro 1
-(2, 1, 2), -- Notebook Dell B en Carro 1
-(3, 2, 1), -- Notebook HP A en Carro 2
-(4, 2, 2); -- Notebook HP B en Carro 2
+-- Tablets (Samsung Tab A)
+(3, 4, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE),
+(3, 4, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE),
+(3, 4, 4, 2, 2, 'TB003', 'CB016', 'PAT016', TRUE);
 
--- CURSOS inserts
+-- ======================
+-- NOTEBOOKS (asociadas a carritos)
+-- ======================
+INSERT INTO Notebooks (idElemento, idCarrito, posicionCarrito, equipo) VALUES
+(1, 1, 1, 'Notebook 1'),
+(2, 1, 2, 'Notebook 2'),
+(3, 2, 1, 'Notebook 3'),
+(4, 2, 2, 'Notebook 4');
+
+-- ======================
+-- CURSOS
+-- ======================
 INSERT INTO Cursos (curso) VALUES
 ('Matemáticas'),
 ('Lengua'),
-('Ciencias');
+('Ciencias'),
+('Historia');
 
--- ESTADOS PRESTAMO inserts
+-- ======================
+-- ESTADOS PRESTAMO
+-- ======================
 INSERT INTO EstadosPrestamo (estadoPrestamo) VALUES
 ('Activo'),
 ('Finalizado'),
 ('Cancelado');
 
--- PRESTAMOS inserts
+-- ======================
+-- PRESTAMOS
+-- ======================
 INSERT INTO Prestamos (idUsuarioRecibio, idCurso, idDocente, idCarrito, idEstadoPrestamo, fechaPrestamo) VALUES
 (1, 1, 1, 1, 1, '2025-08-01 10:00:00'),
 (2, 2, 2, 2, 1, '2025-08-02 11:00:00');
 
--- PRESTAMOS DETALLES inserts
+-- ======================
+-- PRESTAMO DETALLE
+-- ======================
 INSERT INTO PrestamoDetalle (idPrestamo, idElemento) VALUES
 (1, 1),
 (2, 5);
 
--- DEVOLUCIONES inserts
+-- ======================
+-- DEVOLUCIONES
+-- ======================
 INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observaciones) VALUES
 (1, 1, '2025-08-05 15:00:00', 'Sin daños'),
 (2, 2, '2025-08-06 16:00:00', 'Con problemas en batería');
 
--- DEVOLUCION DETALLE inserts 
+-- ======================
+-- DEVOLUCION DETALLE
+-- ======================
 INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
 (1, 1, NULL),
 (2, 5, 'Devuelto con anomalías');
 
--- TIPO ACCION inserts
+-- ======================
+-- TIPO ACCION
+-- ======================
 INSERT INTO TipoAccion (accion) VALUES
 ('Alta'),
 ('Modificación'),
@@ -110,20 +158,67 @@ INSERT INTO TipoAccion (accion) VALUES
 ('Préstamo'),
 ('Devolución');
 
--- HISTORIAL CAMBIO inserts (correlativos)
+-- ======================
+-- HISTORIAL CAMBIO
+-- ======================
 INSERT INTO HistorialCambio (idTipoAccion, idUsuario, fechaCambio, observacion) VALUES
-(1, 1, '2025-09-01 09:00:00', 'Ingreso de Proyector A - disponible'),   -- ID 1
-(1, 1, '2025-09-01 09:10:00', 'Ingreso de Proyector B - en mantenimiento'), -- ID 2
-(1, 2, '2025-09-01 09:20:00', 'Ingreso de Proyector C - prestado'),     -- ID 3
-(1, 1, '2025-09-02 10:00:00', 'Ingreso de Tablet A - disponible'),      -- ID 4
-(1, 1, '2025-09-02 10:05:00', 'Ingreso de Tablet B - disponible'),      -- ID 5
-(1, 2, '2025-09-02 10:15:00', 'Ingreso de Tablet C - en mantenimiento');-- ID 6
+-- Notebooks
+(1, 1, '2025-09-01 08:00:00', 'Ingreso Notebook Dell A - disponible'),   -- ID 1
+(1, 1, '2025-09-01 08:05:00', 'Ingreso Notebook Dell A - disponible'),   -- ID 2
+(1, 2, '2025-09-01 08:10:00', 'Ingreso Notebook HP B - disponible'),     -- ID 3
+(1, 2, '2025-09-01 08:15:00', 'Ingreso Notebook HP B - en mantenimiento'), -- ID 4
+(2, 1, '2025-09-10 09:00:00', 'Notebook 1 enviada a mantenimiento'),
+(2, 2, '2025-09-10 09:10:00', 'Notebook 2 con actualización de sistema'),
+(2, 2, '2025-09-10 09:20:00', 'Notebook 3 con limpieza interna'),
 
--- RELACIÓN HISTORIAL ↔ ELEMENTOS
+-- Baja de un carrito
+(3, 1, '2025-09-12 10:00:00', 'Carrito 1 dado de baja por rotura'),
+(3, 2, '2025-09-12 13:00:00', 'Carrito 2 dado de baja por Algooo'),
+
+-- Proyectores
+(1, 1, '2025-09-01 09:00:00', 'Ingreso Proyector A - disponible'),       -- ID 5
+(1, 1, '2025-09-01 09:05:00', 'Ingreso Proyector A - disponible'),       -- ID 6
+(2, 2, '2025-09-01 09:10:00', 'Ingreso Proyector B - en mantenimiento'), -- ID 7
+
+-- Tablets
+(1, 1, '2025-09-01 10:00:00', 'Ingreso Tablet A - disponible'),          -- ID 8
+(1, 1, '2025-09-01 10:05:00', 'Ingreso Tablet A - disponible'),          -- ID 9
+(2, 2, '2025-09-01 10:10:00', 'Ingreso Tablet B - en mantenimiento');    -- ID 10
+
+-- ======================
+-- HISTORIAL ELEMENTO
+-- ======================
 INSERT INTO HistorialElemento (idHistorialCambio, idElemento) VALUES
-(1, 5), -- Proyector A
-(2, 6), -- Proyector B
-(3, 7), -- Proyector C
-(4, 8), -- Tablet A
-(5, 9), -- Tablet B
-(6, 10); -- Tablet C
+-- Notebooks
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 1),
+(6, 2),
+(7, 3),
+
+-- Proyectores
+(10, 5),
+(11, 6),
+(12, 7),
+
+-- Tablets
+(13, 8),
+(14, 9),
+(15, 10);
+
+INSERT INTO HistorialCarrito (idHistorialCambio, idCarrito) VALUES
+-- Carritos
+(8, 1),
+(9, 2);
+
+Insert into HistorialNotebook (idHistorialCambio, idElemento) values
+-- Notebooks
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 1),
+(6, 2),
+(7, 3);

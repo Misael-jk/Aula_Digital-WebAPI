@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CapaNegocio;
+﻿using CapaDatos.InterfacesDTO;
 
 namespace CapaPresentacion
 {
     public partial class InventarioUC : UserControl
     {
-        private readonly ElementosCN elementosCN;
-        public InventarioUC(ElementosCN elementosCN)
+        private readonly IMapperInventario mapperInventario;
+        public InventarioUC(IMapperInventario mapperInventario)
         {
             InitializeComponent();
 
-            this.elementosCN = elementosCN;
+            this.mapperInventario = mapperInventario;
         }
 
         private void InventarioUC_Load(object sender, EventArgs e)
         {
-
+            guna2DataGridView1.DataSource = mapperInventario.GetAllDTO();
         }
     }
 }

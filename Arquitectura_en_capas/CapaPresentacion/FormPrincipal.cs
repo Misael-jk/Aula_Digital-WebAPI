@@ -29,6 +29,7 @@ namespace CapaPresentacion
         private MantenimientoUC mantenimientoUC;
         private HistorialUC historialUC;
         private InventarioUC inventarioUC;
+        private NotebooksUC notebooksUC;
         #endregion
 
         #region Variables Interface - Repositorios
@@ -59,10 +60,14 @@ namespace CapaPresentacion
         private readonly IMapperDevoluciones mapperDevoluciones;
         private readonly IMapperUsuarios mapperUsuarios;
         private readonly IMapperElementosBajas mapperElementosBajas;
-        private readonly MapperHistorialElemento mapperHistorialElemento;
         private readonly IMapperCarritos mapperCarritos;
         private readonly IMapperModelo mapperModelos;
         private readonly IMapperDocentes mapperDocentes;
+        private readonly IMapperNotebooks mapperNotebooks;
+        private readonly IMapperInventario mapperInventario;
+        private readonly MapperHistorialElemento mapperHistorialElemento;
+        private readonly IMapperHistorialNotebook mapperHistorialNotebook;
+        private readonly IMapperHistorialCarrito mapperHistorialCarrito;
         #endregion
 
         #region Variables Capa Negocio
@@ -75,6 +80,7 @@ namespace CapaPresentacion
         private readonly ModeloCN modeloCN;
         //private readonly MantenimientoCN mantenimientoCN;
         private readonly DevolucionCN devolucionCN;
+        private readonly NotebooksCN notebooksCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -113,9 +119,13 @@ namespace CapaPresentacion
             mapperUsuarios = new MapperUsuarios(conexion);
             mapperElementosBajas = new MapperElementosBajas(conexion);
             mapperHistorialElemento = new MapperHistorialElemento(conexion);
+            mapperHistorialNotebook = new MapperHistorialNotebook(conexion);
+            mapperHistorialCarrito = new MapperHistorialCarrito(conexion);
             mapperCarritos = new MapperCarrritos(conexion);
             mapperModelos = new MapperModelo(conexion);
             mapperDocentes = new MapperDocentes(conexion);
+            mapperNotebooks = new MapperNotebooks(conexion);
+            mapperInventario = new MapperInventario(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, repoModelo, repoUbicacion, repoElementos);
             carritosCN = new CarritosCN(repoCarritos, repoNotebooks, repoUbicacion, repoModelo, repoHistorialCambio, repoHistorialCarrito, mapperCarritos);
@@ -126,6 +136,7 @@ namespace CapaPresentacion
             modeloCN = new ModeloCN(repoModelo, mapperModelos);
             devolucionCN = new DevolucionCN(repoDevolucion, repoPrestamos, repoUsuarios, repoElementos, repoEstadosPrestamo, repoDocentes, repoDevolucionDetalle, repoCarritos, mapperDevoluciones);
             //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
+            notebooksCN = new NotebooksCN(repoNotebooks, repoCarritos, repoModelo, repoUbicacion, mapperNotebooks);
         }
 
 
@@ -160,24 +171,16 @@ namespace CapaPresentacion
 
         private void BtnDashboard_Click(object sender, EventArgs e)
         {
-            dashboard = new Dashboard(mapperHistorialElemento);
+            historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
             CambiarNombrePort(BtnDashboard.Text);
 
-            if (!pnlContenedor.Controls.Contains(dashboard))
+            if (!pnlContenedor.Controls.Contains(historialUC))
             {
-                pnlContenedor.Controls.Add(dashboard);
+                pnlContenedor.Controls.Add(historialUC);
             }
 
-            dashboard.Visible = true;
-
-            try
-            {
-                dashboard.MostrarDatos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar datos en Dashboard: " + ex.Message);
-            }
+            historialUC.Visible = true;
+            historialUC.BringToFront();
         }
 
         private void BtnElementos_Click(object sender, EventArgs e)
@@ -318,7 +321,7 @@ namespace CapaPresentacion
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-            inventarioUC = new InventarioUC(elementoCN);
+            inventarioUC = new InventarioUC(mapperInventario);
             CambiarNombrePort(btnInventario.Text);
 
             if (!pnlContenedor.Controls.Contains(inventarioUC))
@@ -347,6 +350,28 @@ namespace CapaPresentacion
         {
             var entrar = new InfoUsuario();
             entrar.Show();
+        }
+
+        private void btnNotebooks_Click(object sender, EventArgs e)
+        {
+            notebooksUC = new NotebooksUC(notebooksCN);
+            CambiarNombrePort(btnInventario.Text);
+
+            if (!pnlContenedor.Controls.Contains(notebooksUC))
+            {
+                pnlContenedor.Controls.Add(notebooksUC);
+            }
+
+            notebooksUC.Visible = true;
+
+            try
+            {
+                notebooksUC.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar datos en Notebook: " + ex.Message);
+            }
         }
     }
 }

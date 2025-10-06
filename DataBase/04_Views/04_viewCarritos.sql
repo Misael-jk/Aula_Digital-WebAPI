@@ -3,7 +3,7 @@ drop view if exists View_GetCarritoDTO;
 create view View_GetCarritoDTO as
 	select 
 		c.idCarrito,
-		c.equipo,
+		c.equipo as 'EquipoCarrito',
 		c.numeroSerieCarrito,
 		e.estadoMantenimiento as 'EstadoMantenimientoNombre',
 		u.ubicacion as 'NombreUbicacion',

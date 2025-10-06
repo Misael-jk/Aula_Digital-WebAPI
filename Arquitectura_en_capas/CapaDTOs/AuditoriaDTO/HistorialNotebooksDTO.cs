@@ -3,8 +3,8 @@
 public class HistorialNotebooksDTO
 {
     public int IdHistorialNotebook { get; set; }
+    public required string Equipo { get; set; }
     public required string NumeroSerie { get; set; }
-    public required string CodigoBarra { get; set; }
     public string? Carrito { get; set; }
     public int? PosicionCarrito { get; set; }
     public required string Modelo { get; set; }

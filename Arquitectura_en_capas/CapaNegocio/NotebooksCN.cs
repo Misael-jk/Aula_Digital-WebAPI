@@ -1,5 +1,7 @@
 ﻿using CapaDatos.Interfaces;
+using CapaDatos.InterfacesDTO;
 using CapaDatos.Repos;
+using CapaDTOs;
 using CapaEntidad;
 
 namespace CapaNegocio;
@@ -10,14 +12,23 @@ public class NotebooksCN
     private readonly IRepoCarritos repoCarritos;
     private readonly IRepoModelo repoModelo;
     private readonly IRepoUbicacion repoUbicacion;
+    private readonly IMapperNotebooks mapperNotebook;
 
-    public NotebooksCN(IRepoNotebooks repoNotebooks, IRepoCarritos repoCarritos, IRepoModelo repoModelo, IRepoUbicacion repoUbicacion)
+    public NotebooksCN(IRepoNotebooks repoNotebooks, IRepoCarritos repoCarritos, IRepoModelo repoModelo, IRepoUbicacion repoUbicacion, IMapperNotebooks mapperNotebooks)
     {
         this.repoNotebooks = repoNotebooks;
         this.repoCarritos = repoCarritos;
         this.repoModelo = repoModelo;
         this.repoUbicacion = repoUbicacion;
+        this.mapperNotebook = mapperNotebooks;
     }
+
+    #region READ
+    public IEnumerable<NotebooksDTO> GetAll()
+    {
+        return mapperNotebook.GetAllDTO();
+    }
+    #endregion
 
     #region Alta
     public void CrearNotebook(Notebooks notebookNEW)

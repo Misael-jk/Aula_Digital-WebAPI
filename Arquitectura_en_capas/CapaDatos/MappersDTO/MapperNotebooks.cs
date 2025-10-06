@@ -15,19 +15,20 @@ public class MapperNotebooks : RepoBase, IMapperNotebooks
     public IEnumerable<NotebooksDTO> GetAllDTO()
     {
         return Conexion.Query<Notebooks, Carritos, ElementosDTO, NotebooksDTO>(
-            "GetNotebooksDTO",
+            "select * from View_GetNotebookDTO",
             (notebook, carritos, elementos) => new NotebooksDTO
             {
                 IdNotebook = notebook.IdElemento,
+                Equipo = notebook.Equipo,
+                PosicionCarrito = notebook.PosicionCarrito,
                 NumeroSerieNotebook = notebook.NumeroSerie,
                 CodigoBarra = notebook.CodigoBarra,
                 Patrimonio = notebook.Patrimonio,
-                Modelo = elementos.Modelo,
-                NumeroSerieCarrito = carritos.NumeroSerieCarrito,
-                PosicionCarrito = notebook.PosicionCarrito,
-                Estado = elementos.Estado
+                Carrito = carritos.EquipoCarrito,
+                Estado = elementos.Estado,
+                Modelo = elementos.Modelo
             },
-            commandType: CommandType.StoredProcedure
+            splitOn: "IdElemento,EquipoCarrito,Estado"
         ).ToList();
     }
 }
