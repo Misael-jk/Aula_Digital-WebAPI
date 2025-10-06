@@ -291,6 +291,8 @@ namespace CapaPresentacion
 
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
+            cmsMantenimiento.Show(btnMantenimiento, new Point(0, btnMantenimiento.Height));
+
             mantenimientoUC = new MantenimientoUC(tiposElementoCN, repoElementos);
             CambiarNombrePort(btnMantenimiento.Text);
 
