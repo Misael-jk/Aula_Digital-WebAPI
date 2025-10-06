@@ -19,7 +19,7 @@ namespace CapaPresentacion
 
         private void BtnCerrar1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
     }
 }

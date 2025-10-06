@@ -79,9 +79,14 @@
             BtnDashboard = new Guna.UI2.WinForms.Guna2Button();
             btnInfoUser = new Guna.UI2.WinForms.Guna2Button();
             Mover_Principal = new Guna.UI2.WinForms.Guna2DragControl(components);
+            cmsMantenimiento = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            cmsElementos = new ToolStripMenuItem();
+            cmsNotebooks = new ToolStripMenuItem();
+            cmsCarritos = new ToolStripMenuItem();
             pnlBanner.SuspendLayout();
             pnlSeccion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).BeginInit();
+            cmsMantenimiento.SuspendLayout();
             SuspendLayout();
             // 
             // pnlBanner
@@ -160,6 +165,7 @@
             // pnlSeccion
             // 
             pnlSeccion.BackColor = Color.Transparent;
+            pnlSeccion.BorderRadius = 1;
             pnlSeccion.Controls.Add(guna2Button3);
             pnlSeccion.Controls.Add(btnNotebooks);
             pnlSeccion.Controls.Add(btnInventario);
@@ -288,7 +294,7 @@
             // 
             guna2CirclePictureBox1.Enabled = false;
             guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.Location = new Point(12, 8);
+            guna2CirclePictureBox1.Location = new Point(12, 4);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -302,7 +308,7 @@
             lblRol.Enabled = false;
             lblRol.Font = new Font("Segoe UI", 8F, FontStyle.Italic);
             lblRol.ForeColor = SystemColors.ButtonHighlight;
-            lblRol.Location = new Point(88, 45);
+            lblRol.Location = new Point(85, 39);
             lblRol.Name = "lblRol";
             lblRol.Size = new Size(22, 13);
             lblRol.TabIndex = 10;
@@ -314,7 +320,7 @@
             lblUsuario.Enabled = false;
             lblUsuario.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold);
             lblUsuario.ForeColor = SystemColors.ButtonHighlight;
-            lblUsuario.Location = new Point(85, 23);
+            lblUsuario.Location = new Point(85, 19);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(84, 20);
             lblUsuario.TabIndex = 9;
@@ -511,18 +517,50 @@
             btnInfoUser.ForeColor = Color.White;
             btnInfoUser.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
             btnInfoUser.ImageAlign = HorizontalAlignment.Left;
-            btnInfoUser.Location = new Point(0, 4);
+            btnInfoUser.Location = new Point(0, 0);
             btnInfoUser.Name = "btnInfoUser";
             btnInfoUser.ShadowDecoration.CustomizableEdges = customizableEdges25;
             btnInfoUser.Size = new Size(249, 77);
             btnInfoUser.TabIndex = 14;
-
             // 
             // Mover_Principal
             // 
             Mover_Principal.DockIndicatorTransparencyValue = 0.6D;
             Mover_Principal.TargetControl = pnlBanner;
             Mover_Principal.UseTransparentDrag = true;
+            // 
+            // cmsMantenimiento
+            // 
+            cmsMantenimiento.Items.AddRange(new ToolStripItem[] { cmsElementos, cmsNotebooks, cmsCarritos });
+            cmsMantenimiento.Name = "cmsMantenimiento";
+            cmsMantenimiento.RenderStyle.ArrowColor = Color.FromArgb(151, 143, 255);
+            cmsMantenimiento.RenderStyle.BorderColor = Color.Gainsboro;
+            cmsMantenimiento.RenderStyle.ColorTable = null;
+            cmsMantenimiento.RenderStyle.RoundedEdges = true;
+            cmsMantenimiento.RenderStyle.SelectionArrowColor = Color.White;
+            cmsMantenimiento.RenderStyle.SelectionBackColor = Color.FromArgb(100, 88, 255);
+            cmsMantenimiento.RenderStyle.SelectionForeColor = Color.White;
+            cmsMantenimiento.RenderStyle.SeparatorColor = Color.Gainsboro;
+            cmsMantenimiento.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            cmsMantenimiento.Size = new Size(133, 70);
+            // 
+            // cmsElementos
+            // 
+            cmsElementos.Name = "cmsElementos";
+            cmsElementos.Size = new Size(132, 22);
+            cmsElementos.Text = "Elementos";
+            // 
+            // cmsNotebooks
+            // 
+            cmsNotebooks.Name = "cmsNotebooks";
+            cmsNotebooks.Size = new Size(132, 22);
+            cmsNotebooks.Text = "Notebooks";
+            // 
+            // cmsCarritos
+            // 
+            cmsCarritos.Name = "cmsCarritos";
+            cmsCarritos.Size = new Size(132, 22);
+            cmsCarritos.Text = "Carritos";
             // 
             // FormPrincipal
             // 
@@ -543,6 +581,7 @@
             pnlSeccion.ResumeLayout(false);
             pnlSeccion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).EndInit();
+            cmsMantenimiento.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -570,5 +609,9 @@
         private Guna.UI2.WinForms.Guna2Button btnInfoUser;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button btnNotebooks;
+        private Guna.UI2.WinForms.Guna2ContextMenuStrip cmsMantenimiento;
+        private ToolStripMenuItem cmsElementos;
+        private ToolStripMenuItem cmsNotebooks;
+        private ToolStripMenuItem cmsCarritos;
     }
 }
