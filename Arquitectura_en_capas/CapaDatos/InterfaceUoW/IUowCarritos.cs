@@ -1,0 +1,15 @@
+﻿using CapaDatos.Interfaces;
+
+namespace CapaDatos.InterfaceUoW;
+
+public interface IUowCarritos : IDisposable
+{
+    public IRepoCarritos RepoCarritos { get; }
+    public IRepoHistorialCambio RepoHistorialCambio { get; }
+    public IRepoHistorialCarrito RepoHistorialCarrito { get; }
+    public IRepoModelo RepoModelo { get; }
+    public IRepoUbicacion RepoUbicacion { get; }
+    public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
+    public void Commit();
+    public void Rollback();
+}
