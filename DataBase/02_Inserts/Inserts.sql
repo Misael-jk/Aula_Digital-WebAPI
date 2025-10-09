@@ -10,9 +10,9 @@ INSERT INTO Rol (rol) VALUES
 -- USUARIOS
 -- ======================
 INSERT INTO Usuarios (usuario, pass, nombre, apellido, idRol, email, FotoPerfil, habilitado) VALUES
-('admin', 'hashed_password1', 'Juan', 'Perez', 1, 'juan.perez@mail.com', NULL, TRUE),
-('user1', 'hashed_password2', 'Ana', 'Gomez', 2, 'ana.gomez@mail.com', NULL, TRUE),
-('guest', 'hashed_password3', 'Luis', 'Ramirez', 3, 'luis.ramirez@mail.com', NULL, TRUE);
+('admin', '12345678', 'Juan', 'Perez', 1, 'juan.perez@mail.com', NULL, TRUE),
+('user1', 'password123', 'Ana', 'Gomez', 2, 'ana.gomez@mail.com', NULL, TRUE),
+('guest', 'et12d1', 'Luis', 'Ramirez', 3, 'luis.ramirez@mail.com', NULL, TRUE);
 
 -- ======================
 -- DOCENTES
@@ -26,8 +26,8 @@ INSERT INTO Docentes (dni, nombre, apellido, email, habilitado) VALUES
 -- UBICACION
 -- ======================
 INSERT INTO Ubicacion (ubicacion) VALUES
-('Depósito A'),
-('Depósito B'),
+('Deposito A'),
+('Deposito B'),
 ('Sala de Profesores');
 
 -- ======================
@@ -53,7 +53,7 @@ INSERT INTO Modelo (idTipoElemento, modelo) VALUES
 INSERT INTO VariantesElemento (idTipoElemento, subtipo, idModelo) VALUES
 (1, 'Notebook Dell 14"', 1),
 (1, 'Notebook HP 15"', 2),
-(2, 'Proyector Epson estándar', 3),
+(2, 'Proyector Epson estandar', 3),
 (3, 'Tablet Samsung 10"', 4);
 
 -- ======================
@@ -107,10 +107,10 @@ INSERT INTO Notebooks (idElemento, idCarrito, posicionCarrito, equipo) VALUES
 -- CURSOS
 -- ======================
 INSERT INTO Cursos (curso) VALUES
-('Matemáticas'),
-('Lengua'),
-('Ciencias'),
-('Historia');
+('1°3'),
+('2°3'),
+('3°3'),
+('4°8');
 
 -- ======================
 -- ESTADOS PRESTAMO
@@ -161,29 +161,29 @@ INSERT INTO TipoAccion (accion) VALUES
 -- ======================
 -- HISTORIAL CAMBIO
 -- ======================
-INSERT INTO HistorialCambio (idTipoAccion, idUsuario, fechaCambio, observacion) VALUES
+INSERT INTO HistorialCambio (idTipoAccion, idUsuario, fechaCambio, descripcion, motivo) VALUES
 -- Notebooks
-(1, 1, '2025-09-01 08:00:00', 'Ingreso Notebook Dell A - disponible'),   -- ID 1
-(1, 1, '2025-09-01 08:05:00', 'Ingreso Notebook Dell A - disponible'),   -- ID 2
-(1, 2, '2025-09-01 08:10:00', 'Ingreso Notebook HP B - disponible'),     -- ID 3
-(1, 2, '2025-09-01 08:15:00', 'Ingreso Notebook HP B - en mantenimiento'), -- ID 4
-(2, 1, '2025-09-10 09:00:00', 'Notebook 1 enviada a mantenimiento'),
-(2, 2, '2025-09-10 09:10:00', 'Notebook 2 con actualización de sistema'),
-(2, 2, '2025-09-10 09:20:00', 'Notebook 3 con limpieza interna'),
+(1, 1, '2025-09-01 08:00:00', 'Ingreso Notebook Dell A - disponible', null),   -- ID 1
+(1, 1, '2025-09-01 08:05:00', 'Ingreso Notebook Dell A - disponible', null),   -- ID 2
+(1, 2, '2025-09-01 08:10:00', 'Ingreso Notebook HP B - disponible', null),     -- ID 3
+(1, 2, '2025-09-01 08:15:00', 'Ingreso Notebook HP B - en mantenimiento', null), -- ID 4
+(2, 1, '2025-09-10 09:00:00', 'Notebook 1 enviada a mantenimiento', null),
+(2, 2, '2025-09-10 09:10:00', 'Notebook 2 con actualización de sistema', null),
+(2, 2, '2025-09-10 09:20:00', 'Notebook 3 con limpieza interna', null),
 
 -- Baja de un carrito
-(3, 1, '2025-09-12 10:00:00', 'Carrito 1 dado de baja por rotura'),
-(3, 2, '2025-09-12 13:00:00', 'Carrito 2 dado de baja por Algooo'),
+(3, 1, '2025-09-12 10:00:00', 'Carrito 1 dado de baja por rotura', null),
+(3, 2, '2025-09-12 13:00:00', 'Carrito 2 dado de baja por Algooo', null),
 
 -- Proyectores
-(1, 1, '2025-09-01 09:00:00', 'Ingreso Proyector A - disponible'),       -- ID 5
-(1, 1, '2025-09-01 09:05:00', 'Ingreso Proyector A - disponible'),       -- ID 6
-(2, 2, '2025-09-01 09:10:00', 'Ingreso Proyector B - en mantenimiento'), -- ID 7
+(1, 1, '2025-09-01 09:00:00', 'Ingreso Proyector A - disponible', null),       -- ID 5
+(1, 1, '2025-09-01 09:05:00', 'Ingreso Proyector A - disponible', null),       -- ID 6
+(2, 2, '2025-09-01 09:10:00', 'Ingreso Proyector B - en mantenimiento', null), -- ID 7
 
 -- Tablets
-(1, 1, '2025-09-01 10:00:00', 'Ingreso Tablet A - disponible'),          -- ID 8
-(1, 1, '2025-09-01 10:05:00', 'Ingreso Tablet A - disponible'),          -- ID 9
-(2, 2, '2025-09-01 10:10:00', 'Ingreso Tablet B - en mantenimiento');    -- ID 10
+(1, 1, '2025-09-01 10:00:00', 'Ingreso Tablet A - disponible', null),          -- ID 8
+(1, 1, '2025-09-01 10:05:00', 'Ingreso Tablet A - disponible', null),          -- ID 9
+(2, 2, '2025-09-01 10:10:00', 'Ingreso Tablet B - en mantenimiento', null);    -- ID 10
 
 -- ======================
 -- HISTORIAL ELEMENTO

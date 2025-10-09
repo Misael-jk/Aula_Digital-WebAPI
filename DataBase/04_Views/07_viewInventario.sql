@@ -19,7 +19,7 @@ SELECT
     ) AS 'FechaCambio',
 
     -- Última observación del subtipo
-    (SELECT hc2.observacion
+    (SELECT hc2.descripcion
      FROM HistorialElemento he2
      JOIN HistorialCambio hc2 ON he2.idHistorialCambio = hc2.idHistorialCambio
      WHERE he2.idElemento IN (
@@ -30,6 +30,19 @@ SELECT
      ORDER BY hc2.fechaCambio DESC
      LIMIT 1
     ) AS 'Observacion',
+
+    -- Ultimo Motivo del usuario
+    (select hc4.motivo
+     from HistorialElemento he4
+     join HistorialCambio hc4 ON he4.idHistorialCambio = hc4.idHistorialCambio
+     where he4.idElemento in(
+        select e4.idElemento
+        from Elementos e4
+        where e4.idVariante = e.idVariante
+     )
+     ORDER by hc4.fechaCambio DESC
+     LIMIT 1
+     ) as 'Motivo',
 
     -- Último usuario que hizo el cambio
     (SELECT u.usuario

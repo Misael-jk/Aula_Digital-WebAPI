@@ -9,7 +9,8 @@ create view View_HistorialNotebookDTO as
     n.posicionCarrito,
     m.modelo,
     em.estadoMantenimiento,
-    hc.observacion AS Descripcion,
+    hc.descripcion AS Descripcion,
+    hc.motivo as 'Motivo',
     hc.fechaCambio,
     ta.accion AS AccionRealizada,
     concat(u.nombre, ' ', u.apellido) AS Usuario

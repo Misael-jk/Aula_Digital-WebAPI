@@ -8,7 +8,8 @@ create view View_HistorialElementoDTO as
     m.modelo,
     em.estadoMantenimiento,
     u2.ubicacion AS UbicacionActual,
-    hc.observacion AS Descripcion,
+    hc.descripcion AS Descripcion,
+    hc.motivo as Motivo,
     hc.fechaCambio,
     ta.accion AS AccionRealizada,
     concat(u.nombre, ' ', u.apellido) AS Usuario

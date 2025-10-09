@@ -8,7 +8,8 @@ create view View_HistorialCarritoDTO as
 		u2.ubicacion as 'UbicacionActual',
 		m.modelo,
 		em.estadoMantenimiento,
-		hc.observacion as 'Descripcion',
+		hc.descripcion as 'Descripcion',
+		hc.motivo as 'Motivo',
 		hc.fechaCambio,
 		ta.accion as 'AccionRealizada',
 		concat(u.nombre, ' ', u.apellido) AS Usuario

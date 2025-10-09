@@ -345,10 +345,10 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertHistorialCambio $$
-create procedure InsertHistorialCambio (out unidHistorialCambio int, in unidTipoAccion tinyint, in unidUsuario tinyint, in unfechaCambio datetime, in unaobservacion varchar(200))
+create procedure InsertHistorialCambio (out unidHistorialCambio int, in unidTipoAccion tinyint, in unidUsuario tinyint, in unfechaCambio datetime, in unadescripcion varchar(200), in unmotivo varchar(200))
 begin
-    insert into HistorialCambio (idTipoAccion, idUsuario, fechaCambio, observacion)
-    values (unidTipoAccion, unidUsuario, unfechaCambio, unaobservacion);
+    insert into HistorialCambio (idTipoAccion, idUsuario, fechaCambio, descripcion)
+    values (unidTipoAccion, unidUsuario, unfechaCambio, unadescripcion, unmotivo);
 
     set unidHistorialCambio = last_insert_id();
 end $$
