@@ -9,6 +9,7 @@ public class HistoralElementoDTO
     public required string EstadoMantenimiento { get; set; }
     public required string UbicacionActual { get; set; }
     public required string Descripcion { get; set; }
+    public string? Motivo { get; set; }
     public DateTime FechaCambio { get; set; }
     public required string AccionRealizada { get; set; }
     public required string Usuario { get; set; }

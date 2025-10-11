@@ -8,8 +8,8 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperCarritosBajas : RepoBase, IMapperCarritosBajas
 {
-    public MapperCarritosBajas(IDbConnection conexion)
-        : base(conexion)
+    public MapperCarritosBajas(IDbConnection conexion, IDbTransaction? transaction = null)
+        : base(conexion, transaction)
     {
     }
 

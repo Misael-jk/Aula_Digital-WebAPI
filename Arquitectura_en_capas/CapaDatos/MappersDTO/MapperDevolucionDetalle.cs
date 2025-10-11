@@ -8,8 +8,8 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperDevolucionDetalle : RepoBase, IMapperDevolucionDetalle
 {
-    public MapperDevolucionDetalle(IDbConnection conexion)
-    : base(conexion)
+    public MapperDevolucionDetalle(IDbConnection conexion, IDbTransaction? transaction = null)
+    : base(conexion, transaction)
     {
     }
 

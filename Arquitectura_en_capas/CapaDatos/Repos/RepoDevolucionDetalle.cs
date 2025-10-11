@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
 {
-    public RepoDevolucionDetalle(IDbConnection conexion)
-        : base(conexion)
+    public RepoDevolucionDetalle(IDbConnection conexion, IDbTransaction? transaction = null)
+        : base(conexion, transaction)
     {
     }
 
@@ -19,12 +19,11 @@ public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
 
         parametros.Add("unidDevolucion", devolucionDetalle.IdDevolucion);
         parametros.Add("unidElemento", devolucionDetalle.IdElemento);
-        parametros.Add("unidEstadoMantenimiento", devolucionDetalle.IdEstadoMantenimiento);
         parametros.Add("unaObservacion", devolucionDetalle.Observaciones);
 
         try
         {
-            Conexion.Execute("InsertDevolucionDetalle", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertDevolucionDetalle", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -33,45 +32,26 @@ public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
     }
     #endregion
 
-    #region Actualizar los detalles
-    public void Update(DevolucionDetalle devolucionDetalle)
-    {
-        DynamicParameters parametros = new DynamicParameters();
+    //#region Actualizar los detalles
+    //public void Update(DevolucionDetalle devolucionDetalle)
+    //{
+    //    DynamicParameters parametros = new DynamicParameters();
 
-        parametros.Add("unidDevolucion", devolucionDetalle.IdDevolucion);
-        parametros.Add("unidElemento", devolucionDetalle.IdElemento);
-        parametros.Add("unidEstadoMantenimiento", devolucionDetalle.IdEstadoMantenimiento);
-        parametros.Add("unaObservacion", devolucionDetalle.Observaciones);
+    //    parametros.Add("unidDevolucion", devolucionDetalle.IdDevolucion);
+    //    parametros.Add("unidElemento", devolucionDetalle.IdElemento);
+    //    parametros.Add("unidEstadoMantenimiento", devolucionDetalle.IdEstadoMantenimiento);
+    //    parametros.Add("unaObservacion", devolucionDetalle.Observaciones);
 
-        try
-        {
-            Conexion.Execute("UpdateDevolucionDetalle", parametros, commandType: CommandType.StoredProcedure);
-        }
-        catch (Exception)
-        {
-            throw new Exception("Hubo un error al actualizar el Detalle de la devolucion");
-        }
-    }
-    #endregion
-
-    #region Eliminar detalles
-    public void Delete(int idDevolucion, int idElemento)
-    {
-        DynamicParameters parametros = new DynamicParameters();
-
-        parametros.Add("unidPrestamo", idDevolucion);
-        parametros.Add("unidElemento", idElemento);
-
-        try
-        {
-            Conexion.Execute("DeleteDevolucionDetalle", parametros, commandType: CommandType.StoredProcedure);
-        }
-        catch (Exception)
-        {
-            throw new Exception("Hubo un error al eliminar los detalles de la devolucion");
-        }
-    }
-    #endregion
+    //    try
+    //    {
+    //        Conexion.Execute("UpdateDevolucionDetalle", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
+    //    }
+    //    catch (Exception)
+    //    {
+    //        throw new Exception("Hubo un error al actualizar el Detalle de la devolucion");
+    //    }
+    //}
+    //#endregion
 
     #region ver los datos del detalle
     public IEnumerable<DevolucionDetalle> GetAll()
@@ -100,7 +80,7 @@ public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
         try
         {
             parametros.Add("unidDevolucion", idDevolucion);
-            return Conexion.Query<DevolucionDetalle>(query, parametros);
+            return Conexion.Query<DevolucionDetalle>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

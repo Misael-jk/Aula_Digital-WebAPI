@@ -9,7 +9,7 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperModelo : RepoBase, IMapperModelo
 {
-    public MapperModelo(IDbConnection conexion) : base(conexion)
+    public MapperModelo(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
 

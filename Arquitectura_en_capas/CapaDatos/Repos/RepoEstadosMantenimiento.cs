@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
 {
-    public RepoEstadosMantenimiento(IDbConnection conexion)
-    : base(conexion)
+    public RepoEstadosMantenimiento(IDbConnection conexion, IDbTransaction? transaction = null)
+    : base(conexion, transaction)
     {
     }
 
@@ -19,7 +19,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
 
         try
         {
-            return Conexion.Query<EstadosMantenimiento>(query);
+            return Conexion.Query<EstadosMantenimiento>(query, Transaction);
         }
         catch (Exception)
         {
@@ -38,7 +38,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
         {
             parameters.Add("unidEstadoMantenimiento", idEstadoMantenimiento);
 
-            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters);
+            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters, Transaction);
         }
         catch (Exception ex)
         {

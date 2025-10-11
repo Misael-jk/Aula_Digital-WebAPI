@@ -8,8 +8,8 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperDocentesBajas : RepoBase, IMapperDocentesBajas
 {
-    public MapperDocentesBajas(IDbConnection conexion)
-        : base(conexion)
+    public MapperDocentesBajas(IDbConnection conexion, IDbTransaction? transaction = null)
+        : base(conexion, transaction)
     {
     }
 

@@ -1,36 +1,20 @@
-﻿using CapaDatos.Repos;
-using CapaNegocio;
-using CapaEntidad;
-using System.Data;
-using CapaDatos.Interfaces;
+﻿using CapaEntidad;
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
 using System.Transactions;
-using System.Data.Common;
-using Org.BouncyCastle.Bcpg.OpenPgp;
-using System.Configuration;
+using CapaDatos.InterfaceUoW;
 
 namespace CapaNegocio;
 
 public class PrestamosCN
 {
-    private readonly IRepoPrestamos repoPrestamos;
-    private readonly IRepoCarritos repoCarritos;
-    private readonly IRepoElemento repoElemento;
-    private readonly IRepoDocentes repoDocentes;
-    private readonly IRepoPrestamoDetalle repoPrestamoDetalle;
-    private readonly IRepoUsuarios repoUsuarios;
+    private readonly IUowPrestamos uow;
     private readonly IMapperPrestamos mapperPrestamos;
 
-    public PrestamosCN(IRepoPrestamos repoPrestamos, IRepoCarritos repoCarritos, IRepoElemento repoElemento, IRepoPrestamoDetalle repoPrestamoDetalle, IRepoUsuarios repoUsuarios, IRepoDocentes repoDocentes, IMapperPrestamos mapperPrestamos)
+    public PrestamosCN(IMapperPrestamos mapperPrestamos, IUowPrestamos uow)
     {
-        this.repoPrestamos = repoPrestamos;
+        this.uow = uow;
         this.mapperPrestamos = mapperPrestamos;
-        this.repoCarritos = repoCarritos;
-        this.repoElemento = repoElemento;
-        this.repoDocentes = repoDocentes;
-        this.repoUsuarios = repoUsuarios;
-        this.repoPrestamoDetalle = repoPrestamoDetalle;
     }
 
     public IEnumerable<PrestamosDTO> ObtenerTodo()
@@ -43,12 +27,12 @@ public class PrestamosCN
         using (TransactionScope scope = new TransactionScope())
         {
 
-            if(repoDocentes.GetById(prestamo.IdDocente) == null)
+            if(uow.RepoDocentes.GetById(prestamo.IdDocente) == null)
             {
                 throw new Exception("El docente no existe");
             }
 
-            if (repoUsuarios.GetById(prestamo.IdUsuario) == null)
+            if (uow.RepoUsuarios.GetById(prestamo.IdUsuario) == null)
             {
                 throw new Exception("El usuario no existe");
             }
@@ -61,45 +45,45 @@ public class PrestamosCN
 
             if (idCarrito.HasValue)
             {
-                if(repoCarritos.GetById(idCarrito.Value) == null)
+                if(uow.RepoCarritos.GetById(idCarrito.Value) == null)
                 {
                     throw new Exception("El carrito no existe.");
                 }
 
-                if(repoCarritos.GetCountByCarrito(idCarrito.Value) < 25)
+                if(uow.RepoCarritos.GetCountByCarrito(idCarrito.Value) < 25)
                 {
                     throw new Exception("El carrito debe tener al menos 25 elementos para ser prestado.");
                 }
 
-                if (!repoCarritos.GetDisponible(idCarrito.Value))
+                if (!uow.RepoCarritos.GetDisponible(idCarrito.Value))
                 {
                     throw new Exception("El carrito no esta disponible.");
                 }
 
                 prestamo.IdCarrito = idCarrito.Value;
 
-                repoCarritos.UpdateDisponible(idCarrito.Value, 2);
+                uow.RepoCarritos.UpdateDisponible(idCarrito.Value, 2);
             }
 
             foreach (int idElemento in idsElementos)
             {
-                if (!repoElemento.GetDisponible(idElemento))
+                if (!uow.RepoElemento.GetDisponible(idElemento))
                 {
                     throw new Exception($"El elemento {idElemento} no esta disponible.");
                 }
             }
 
-            repoPrestamos.Insert(prestamo);
+            uow.RepoPrestamos.Insert(prestamo);
 
             foreach (int idElemento in idsElementos)
             {
-                repoPrestamoDetalle.Insert(new PrestamoDetalle
+                uow.RepoPrestamoDetalle.Insert(new PrestamoDetalle
                 {
                     IdPrestamo = prestamo.IdPrestamo,
                     IdElemento = idElemento
                 });
 
-                repoElemento.UpdateEstado(idElemento, 2);
+                uow.RepoElemento.UpdateEstado(idElemento, 2);
             }
 
 
@@ -112,12 +96,12 @@ public class PrestamosCN
     {
         using (TransactionScope scope = new TransactionScope())
         {
-            if (repoDocentes.GetById(prestamo.IdDocente) == null)
+            if (uow.RepoDocentes.GetById(prestamo.IdDocente) == null)
             {
                 throw new Exception("El docente no existe");
             }
 
-            if (repoUsuarios.GetById(prestamo.IdUsuario) == null)
+            if (uow.RepoUsuarios.GetById(prestamo.IdUsuario) == null)
             {
                 throw new Exception("El usuario no existe");
             }
@@ -129,47 +113,47 @@ public class PrestamosCN
 
             if (nuevoIdCarrito.HasValue)
             {
-                if (repoCarritos.GetById(nuevoIdCarrito.Value) == null)
+                if (uow.RepoCarritos.GetById(nuevoIdCarrito.Value) == null)
                 {
                     throw new Exception("El carrito no existe");
                 }
 
-                if (repoCarritos.GetCountByCarrito(nuevoIdCarrito.Value) < 25)
+                if (uow.RepoCarritos.GetCountByCarrito(nuevoIdCarrito.Value) < 25)
                 {
                     throw new Exception("El carrito debe tener al menos 25 elementos para ser prestado");
                 }
 
-                if (!repoCarritos.GetDisponible(nuevoIdCarrito.Value))
+                if (!uow.RepoCarritos.GetDisponible(nuevoIdCarrito.Value))
                 {
                     throw new Exception("El carrito no esta disponible");
                 }
                 prestamo.IdCarrito = nuevoIdCarrito.Value;
 
-                repoCarritos.UpdateDisponible(nuevoIdCarrito.Value, 2);
+                uow.RepoCarritos.UpdateDisponible(nuevoIdCarrito.Value, 2);
             }
 
 
             foreach (int idElemento in nuevosIdsElementos)
             {
-                if (!repoElemento.GetDisponible(idElemento))
+                if (!uow.RepoElemento.GetDisponible(idElemento))
                 {
                     throw new Exception($"El elemento {idElemento} no esta disponible");
                 }
             }
 
-            repoPrestamos.Update(prestamo);
+            uow.RepoPrestamos.Update(prestamo);
 
-            repoPrestamoDetalle.Delete(prestamo.IdPrestamo);
+            uow.RepoPrestamoDetalle.Delete(prestamo.IdPrestamo);
 
             foreach (int idElemento in nuevosIdsElementos)
             {
-                repoPrestamoDetalle.Insert(new PrestamoDetalle
+                uow.RepoPrestamoDetalle.Insert(new PrestamoDetalle
                 {
                     IdPrestamo = prestamo.IdPrestamo,
                     IdElemento = idElemento,
                 });
 
-                repoElemento.UpdateEstado(idElemento, 2);
+                uow.RepoElemento.UpdateEstado(idElemento, 2);
 
             }
 
@@ -181,7 +165,7 @@ public class PrestamosCN
     {
         using (TransactionScope scope = new TransactionScope())
         {
-            Prestamos? prestamo = repoPrestamos.GetById(idPrestamo);
+            Prestamos? prestamo = uow.RepoPrestamos.GetById(idPrestamo);
 
             if (prestamo == null)
             {
@@ -190,20 +174,20 @@ public class PrestamosCN
 
             if (prestamo.IdCarrito.HasValue)
             {
-                repoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
+                uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
             }
 
-            IEnumerable<PrestamoDetalle> detalles = repoPrestamoDetalle.GetByPrestamo(idPrestamo);
+            IEnumerable<PrestamoDetalle> detalles = uow.RepoPrestamoDetalle.GetByPrestamo(idPrestamo);
 
             foreach (var detalle in detalles)
             {
-                repoElemento.UpdateEstado(detalle.IdElemento, 1);
+                uow.RepoElemento.UpdateEstado(detalle.IdElemento, 1);
 
             }
 
-            repoPrestamoDetalle.Delete(idPrestamo);
+            uow.RepoPrestamoDetalle.Delete(idPrestamo);
 
-            repoPrestamos.Delete(idPrestamo);
+            uow.RepoPrestamos.Delete(idPrestamo);
 
             scope.Complete();
         }

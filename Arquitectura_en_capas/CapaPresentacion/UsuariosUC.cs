@@ -14,15 +14,13 @@ namespace CapaPresentacion
 {
     public partial class UsuariosUC : UserControl
     {
-        #region Campos
+
         private readonly UsuariosCN usuariosCN = null!;
         private bool mostrarPassword = false;
         private readonly IRepoRoles repoRoles;
         private int IdUser = 4;
         private readonly IRepoUsuarios repoUsuarios;
-        #endregion
 
-        #region Constructor
         public UsuariosUC(UsuariosCN usuariosCN, IRepoRoles repoRoles, IRepoUsuarios repoUsuarios)
         {
             InitializeComponent();
@@ -30,9 +28,7 @@ namespace CapaPresentacion
             this.repoRoles = repoRoles;
             this.repoUsuarios = repoUsuarios;
         }
-        #endregion
 
-        #region Carga y Configuración Inicial
         private void UsuariosUC_Load_1(object sender, EventArgs e)
         {
             IEnumerable<Roles> todo = repoRoles.GetAll();
@@ -62,9 +58,7 @@ namespace CapaPresentacion
             dtgUsuarios.Columns["Email"].HeaderText = "Email";
             dtgUsuarios.Columns[6].Width = 140;
         }
-        #endregion
 
-        #region DataGridView Eventos
         private void dtgUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dtgUsuarios.Columns[e.ColumnIndex].Name == "Password" && e.Value != null)
@@ -95,64 +89,57 @@ namespace CapaPresentacion
             string nombreFoto = fila.Cells["FotoPerfil"].Value?.ToString();
             string carpetaFotos = Path.Combine(Application.StartupPath, "FotosUsuarios");
 
-            if (!string.IsNullOrEmpty(nombreFoto))
-            {
-                string rutaFoto = Path.Combine(carpetaFotos, nombreFoto);
-                if (File.Exists(rutaFoto))
-                    using (var fs = new FileStream(rutaFoto, FileMode.Open, FileAccess.Read))
-                        ptbPerfil.Image = Image.FromStream(fs);
-                else
-                    ptbPerfil.Image = Properties.Resources.Perfil_default;
-            }
-            else
-            {
-                ptbPerfil.Image = Properties.Resources.Perfil_default;
-            }
+            //if (!string.IsNullOrEmpty(nombreFoto))
+            //{
+            //    string rutaFoto = Path.Combine(carpetaFotos, nombreFoto);
+            //    if (File.Exists(rutaFoto))
+            //        using (var fs = new FileStream(rutaFoto, FileMode.Open, FileAccess.Read))
+            //            ptbPerfil.Image = Image.FromStream(fs);
+            //    else
+            //        ptbPerfil.Image = Properties.Resources.Perfil_default;
+            //}
+            //else
+            //{
+            //    ptbPerfil.Image = Properties.Resources.Perfil_default;
+            //}
 
-            ptbPerfil.Tag = nombreFoto;
+            //ptbPerfil.Tag = nombreFoto;
         }
-        #endregion
 
-        #region CheckBox Mostrar Contraseña
         private void cbxMostraPassword_CheckedChanged(object sender, EventArgs e)
         {
             mostrarPassword = cbxMostraPassword.Checked;
             dtgUsuarios.Refresh();
         }
-        #endregion
 
-        #region Manejo de Imagen
         private void btnSeleccionarImagen_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog ofd = new OpenFileDialog
-            {
-                Filter = "Imágenes|*.jpg;*.jpeg;*.png",
-                Title = "Seleccione una imagen"
-            };
+            //using OpenFileDialog ofd = new OpenFileDialog
+            //{
+            //    Filter = "Imágenes|*.jpg;*.jpeg;*.png",
+            //    Title = "Seleccione una imagen"
+            //};
 
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                if (ptbPerfil.Image != null && ptbPerfil.Image != Properties.Resources.Perfil_default)
-                {
-                    ptbPerfil.Image.Dispose();
-                    ptbPerfil.Image = null;
-                }
+            //if (ofd.ShowDialog() == DialogResult.OK)
+            //{
+            //    if (ptbPerfil.Image != null && ptbPerfil.Image != Properties.Resources.Perfil_default)
+            //    {
+            //        ptbPerfil.Image.Dispose();
+            //        ptbPerfil.Image = null;
+            //    }
 
-                using (Image imgTemp = Image.FromFile(ofd.FileName))
-                    ptbPerfil.Image = new Bitmap(imgTemp);
+            //    using (Image imgTemp = Image.FromFile(ofd.FileName))
+            //        ptbPerfil.Image = new Bitmap(imgTemp);
 
-                ptbPerfil.Tag = ofd.FileName;
-            }
+            //    ptbPerfil.Tag = ofd.FileName;
+            //}
         }
 
         private void btnQuitarPerfil_Click(object sender, EventArgs e)
         {
-            ptbPerfil.Image = Properties.Resources.Perfil_default;
-            ptbPerfil.Tag = "__ELIMINAR__"; // marcador especial para actualizar
+            //ptbPerfil.Image = Properties.Resources.Perfil_default;
+            //ptbPerfil.Tag = "__ELIMINAR__";
         }
-        #endregion
-
-        #region Botones CRUD
         private void btnCrear_Click(object sender, EventArgs e)
         {
             string fotoPerfil = null;
@@ -264,6 +251,5 @@ namespace CapaPresentacion
         {
             // TODO: Implementar eliminación
         }
-        #endregion
     }
 }

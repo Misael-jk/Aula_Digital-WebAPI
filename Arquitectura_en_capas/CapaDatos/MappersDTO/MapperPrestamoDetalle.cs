@@ -8,8 +8,8 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperPrestamoDetalle : RepoBase, IMapperPrestamoDetalle
 {
-    public MapperPrestamoDetalle(IDbConnection conexion) 
-        : base(conexion)
+    public MapperPrestamoDetalle(IDbConnection conexion, IDbTransaction? transaction = null) 
+        : base(conexion, transaction)
     {
     }
 

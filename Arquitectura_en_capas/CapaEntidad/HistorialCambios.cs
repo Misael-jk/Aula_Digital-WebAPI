@@ -6,5 +6,6 @@ public class HistorialCambios
     public int IdTipoAccion { get; set; }
     public int IdUsuario { get; set; }
     public DateTime FechaCambio { get; set; }
-    public string? Descripcion { get; set; }
+    public required string Descripcion { get; set; }
+    public string? Motivo { get; set; }
 }

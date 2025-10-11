@@ -7,9 +7,11 @@ namespace CapaDatos.Repos;
 
 public class RepoNotebooks : RepoBase, IRepoNotebooks
 {
-    public RepoNotebooks(IDbConnection conexion) : base(conexion)
+    public RepoNotebooks(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
+
+    // CRUD / GESTION
 
     #region Insert Notebooks
     public void Insert(Notebooks notebooks)
@@ -31,11 +33,11 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            Conexion.Execute("InsertNotebook", parameters, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertNotebook", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw new Exception("Hubo un error al insertar una notebook");
+            throw new Exception("Hubo un error al insertar una notebook", ex);
         }
     }
     #endregion
@@ -59,11 +61,11 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("unaposicionCarrito", notebooks.PosicionCarrito);
         try
         {
-            Conexion.Execute("UpdateNotebook", parameters, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateNotebook", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw new Exception("Hubo un error al actualizar una notebook");
+            throw new Exception("Hubo un error al actualizar una notebook", ex);
         }
     }
     #endregion
@@ -81,7 +83,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -89,66 +91,6 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
-
-    public Notebooks? GetByNumeroSerie(string numeroSerie)
-    {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
-                         from Elementos e
-                         join Notebooks n using (idElemento)
-                         where e.numeroSerie = @unnumeroSerie;";
-
-        DynamicParameters parameters = new DynamicParameters();
-        parameters.Add("unnumeroSerie", numeroSerie);
-
-        try
-        {
-            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters);
-        }
-        catch (Exception)
-        {
-            throw new Exception("Hubo un error al obtener la notebook por numero de serie");
-        }
-    }
-
-    public Notebooks? GetByCodigoBarra(string codigoBarra)
-    {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
-                         from Elementos e
-                         join Notebooks n using (idElemento)
-                         where e.codigoBarra = @uncodigoBarra;";
-
-        DynamicParameters parameters = new DynamicParameters();
-        parameters.Add("uncodigoBarra", codigoBarra);
-
-        try
-        {
-            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters);
-        }
-        catch (Exception)
-        {
-            throw new Exception("Hubo un error al obtener la notebook por codigo de barra");
-        }
-    }
-
-    public Notebooks? GetByPatrimonio(string patrimonio)
-    {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
-                         from Elementos e
-                         join Notebooks n using (idElemento)
-                         where e.patrimonio = @unpatrimonio;";
-
-        DynamicParameters parameters = new DynamicParameters();
-        parameters.Add("unpatrimonio", patrimonio);
-
-        try
-        {
-            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters);
-        }
-        catch (Exception)
-        {
-            throw new Exception("Hubo un error al obtener la notebook por patrimonio");
-        }
-    }
 
     #region Obtener Todas las Notebooks
     public IEnumerable<Notebooks> GetAll()
@@ -169,6 +111,97 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     }
     #endregion
 
+
+    // VALIDACIONES
+
+    #region OBTENER POR NUMERO DE SERIE
+    public Notebooks? GetByNumeroSerie(string numeroSerie)
+    {
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+                         from Elementos e
+                         join Notebooks n using (idElemento)
+                         where e.numeroSerie = @unnumeroSerie;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unnumeroSerie", numeroSerie);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la notebook por numero de serie");
+        }
+    }
+    #endregion
+
+    #region OBTENER POR CODIGO DE BARRAS
+    public Notebooks? GetByCodigoBarra(string codigoBarra)
+    {
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+                         from Elementos e
+                         join Notebooks n using (idElemento)
+                         where e.codigoBarra = @uncodigoBarra;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("uncodigoBarra", codigoBarra);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la notebook por codigo de barra");
+        }
+    }
+    #endregion
+
+    #region OBTENER POR PATRIMONIO
+    public Notebooks? GetByPatrimonio(string patrimonio)
+    {
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+                         from Elementos e
+                         join Notebooks n using (idElemento)
+                         where e.patrimonio = @unpatrimonio;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unpatrimonio", patrimonio);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la notebook por patrimonio");
+        }
+    }
+    #endregion
+
+    #region OBTENER POR EQUIPO 
+    public Notebooks? GetByEquipo(string equipo)
+    {
+        string query = @"select *
+                         from Elementos e
+                         join Notebooks n using (idElemento)
+                         where n.equipo = @unequipo;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unequipo", equipo);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la notebook por equipo");
+        }
+    }
+    #endregion
+
     #region Obtener por carrito
     public IEnumerable<Notebooks> GetByCarrito(int idCarrito)
     {
@@ -182,7 +215,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.Query<Notebooks>(query, parameters);
+            return Conexion.Query<Notebooks>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -191,6 +224,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     }
     #endregion
 
+    #region OBTENER NOTEBOOK POR SU POSICION
     public Notebooks? GetNotebookByPosicion(int idCarrito, int posicionCarrito)
     {
         string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
@@ -207,13 +241,16 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("posicionCarrito", posicionCarrito);
         try
         {
-            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("No se encontro el elemento en la posicion indicada");
         }
     }
+    #endregion
+
+    #region VERIFICAR POSICION | true: si existe, false: no existe
     public bool DuplicatePosition(int idCarrito, int posicionCarrito)
     {
         string query = @"select count(*) 
@@ -225,9 +262,12 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("idCarrito", idCarrito);
         parameters.Add("posicionCarrito", posicionCarrito);
 
-        int count = Conexion.ExecuteScalar<int>(query, parameters);
+        int count = Conexion.ExecuteScalar<int>(query, parameters, transaction: Transaction);
         return count > 0;
     }
+    #endregion
+
+    #region VERIFICAR DISPONIBILIDAD | true: disponible, false: no disponible
     public bool GetDisponible(int idElemento)
     {
         string query = @"select e.idElemento
@@ -240,10 +280,12 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("idElemento", idElemento);
 
-        int resultado = Conexion.ExecuteScalar<int>(query, parameters);
+        int resultado = Conexion.ExecuteScalar<int>(query, parameters, transaction: Transaction);
 
         return resultado > 0;
     }
+    #endregion
+
     public void UpdateEstado(int idElemento, int idEstadoMantenimiento)
     {
         string sql = @"update Elementos
@@ -254,9 +296,10 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("@IdElemento", idElemento);
         parameters.Add("@idEstadoMantenimiento", idEstadoMantenimiento);
 
-        Conexion.Execute(sql, parameters);
+        Conexion.Execute(sql, parameters, transaction: Transaction);
     }
 
+    #region OBTENER LOS NROS DE SERIE DE TODAS LAS NOTEBOOKS
     public IEnumerable<Notebooks> GetNroSerieByNotebook()
     {
         string query = @"select e.numeroSerie
@@ -267,14 +310,16 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.Query<Notebooks>(query);
+            return Conexion.Query<Notebooks>(query, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("Hubo un error al traer los numeros de serie de las notebooks");
         }
     }
+    #endregion
 
+    #region OBTENER TODOS LOS CODIGOS DE BARRA DE LAS NOTEBOOKS
     public IEnumerable<Notebooks> GetCodBarraByNotebook()
     {
         string query = @"select e.codigoBarra
@@ -285,14 +330,16 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.Query<Notebooks>(query);
+            return Conexion.Query<Notebooks>(query, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("Hubo un error al traer los codigos de barra de las notebooks");
         }
     }
+    #endregion
 
+    #region OBTENER TODAS LAS NOTEBOOKS DE UN CARRITO
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito)
     {
         string query = @"select posicionCarrito, idEstadoMantenimiento
@@ -307,14 +354,16 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.Query<Notebooks>(query, parameters);
+            return Conexion.Query<Notebooks>(query, parameters, transaction: Transaction);
         }
         catch (Exception ex)
         {
             throw new Exception("Error al obtener notebooks del carrito: " + ex.Message);
         }
     }
+    #endregion
 
+    #region OBTENER NOTEBOOK POR CODIGO O SERIE
     public Elemento? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
     {
         string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
@@ -333,11 +382,12 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("No se encontro el elemento con su numero de serie o codigo de barra");
         }
     }
+    #endregion
 }

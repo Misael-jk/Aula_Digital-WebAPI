@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CapaDatos.Interfaces;
 
-namespace CapaDatos.InterfaceUoW
+namespace CapaDatos.InterfaceUoW;
+
+public interface IUowElementos
 {
-    interface IUowElementos
-    {
-    }
+    public IRepoElemento RepoElemento { get; }
+    public IRepoHistorialCambio RepoHistorialCambio { get; }
+    public IRepoHistorialElementos RepoHistorialElementos { get; }
+    public IRepoUbicacion RepoUbicacion { get; }
+    public IRepoModelo RepoModelo { get; }
+    public IRepoVarianteElemento RepoVarianteElemento { get; }
+    public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
+    public IRepoTipoElemento RepoTipoElemento { get; }
+    public void BeginTransaction();
+    public void Commit();
+    public void Rollback();
 }

@@ -1,5 +1,4 @@
 ﻿using CapaEntidad;
-using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace CapaDatos.Interfaces;
 

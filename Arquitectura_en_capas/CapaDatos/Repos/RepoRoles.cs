@@ -6,8 +6,8 @@ using System.Data;
 namespace CapaDatos.Repos;
 public class RepoRoles : RepoBase, IRepoRoles
 {
-    public RepoRoles(IDbConnection conexion)
-        : base(conexion)
+    public RepoRoles(IDbConnection conexion, IDbTransaction? transaction = null)
+        : base(conexion, transaction)
     {
     }
 

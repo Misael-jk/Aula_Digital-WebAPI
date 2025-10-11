@@ -1,25 +1,20 @@
-﻿using CapaDatos.Interfaces;
-using CapaDatos.InterfacesDTO;
-using CapaDatos.Repos;
+﻿using CapaDatos.InterfacesDTO;
+using CapaDatos.InterfaceUoW;
 using CapaDTOs;
 using CapaEntidad;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace CapaNegocio;
 
 public class NotebooksCN
 {
-    private readonly IRepoNotebooks repoNotebooks;
-    private readonly IRepoCarritos repoCarritos;
-    private readonly IRepoModelo repoModelo;
-    private readonly IRepoUbicacion repoUbicacion;
+    private readonly IUowNotebooks uow;
     private readonly IMapperNotebooks mapperNotebook;
 
-    public NotebooksCN(IRepoNotebooks repoNotebooks, IRepoCarritos repoCarritos, IRepoModelo repoModelo, IRepoUbicacion repoUbicacion, IMapperNotebooks mapperNotebooks)
+    public NotebooksCN(IMapperNotebooks mapperNotebooks, IUowNotebooks uow)
     {
-        this.repoNotebooks = repoNotebooks;
-        this.repoCarritos = repoCarritos;
-        this.repoModelo = repoModelo;
-        this.repoUbicacion = repoUbicacion;
+        this.uow = uow;
         this.mapperNotebook = mapperNotebooks;
     }
 
@@ -31,24 +26,160 @@ public class NotebooksCN
     #endregion
 
     #region Alta
-    public void CrearNotebook(Notebooks notebookNEW)
+    public void CrearNotebook(Notebooks notebookNEW, int idUsuario)
     {
-        if (string.IsNullOrWhiteSpace(notebookNEW.NumeroSerie))
+        ValidarDatos(notebookNEW);
+
+        try
         {
-            throw new Exception("La notebook debe tener número de serie.");
+            uow.BeginTransaction();
+            ValidarInsert(notebookNEW);
+
+            uow.RepoNotebooks.Insert(notebookNEW);
+
+            HistorialCambios historial = new HistorialCambios
+            {
+                IdTipoAccion = 1,
+                FechaCambio = DateTime.Now,
+                Descripcion = $"Se creó la notebook con número de serie {notebookNEW.NumeroSerie}.",
+                Motivo = null,
+                IdUsuario = idUsuario
+            };
+
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialNotebook.Insert(new HistorialNotebooks
+            {
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdNotebook = notebookNEW.IdElemento
+            });
+
+            uow.Commit();
+        }
+        catch
+        {
+            uow.Rollback();
+            throw;
+        }
+    }
+    #endregion
+
+    #region Actualización
+    public void ActualizarNotebook(Notebooks notebookNEW, int idUsuario)
+    {
+        ValidarDatos(notebookNEW);
+
+        try
+        {
+            uow.BeginTransaction();
+
+            ValidarUpdate(notebookNEW);
+
+            uow.RepoNotebooks.Update(notebookNEW);
+
+            HistorialCambios historial = new HistorialCambios
+            {
+                IdTipoAccion = 2,
+                FechaCambio = DateTime.Now,
+                Descripcion = $"Se Modeifico la notebook con número de serie {notebookNEW.NumeroSerie}.",
+                Motivo = null,
+                IdUsuario = idUsuario
+            };
+
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialNotebook.Insert(new HistorialNotebooks
+            {
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdNotebook = notebookNEW.IdElemento
+            });
+            uow.Commit();
+        }
+        catch
+        {
+            uow.Rollback();
+            throw;
+        }
+    }
+    #endregion
+
+    #region VALIDACIONES
+    public void ValidarDatos(Notebooks notebooks)
+    {
+        if (string.IsNullOrEmpty(notebooks.NumeroSerie))
+        {
+            throw new Exception("El numero de serie es obligatorio");
         }
 
-        if (string.IsNullOrWhiteSpace(notebookNEW.CodigoBarra))
+        if (notebooks.NumeroSerie.Length > 40)
         {
-            throw new Exception("La notebook debe tener código de barra.");
+            throw new ValidationException("El número de serie no puede superar los 40 caracteres.");
         }
 
-        if (string.IsNullOrWhiteSpace(notebookNEW.Patrimonio))
+        if (!Regex.IsMatch(notebooks.NumeroSerie, @"^[A-Z0-9\-]+$"))
         {
-            throw new Exception("La notebook debe tener patrimonio.");
+            throw new ValidationException("El número de serie contiene caracteres inválidos.");
         }
 
-        Notebooks? nroSerieHabilitado = repoNotebooks.GetByNumeroSerie(notebookNEW.NumeroSerie);
+        if (string.IsNullOrEmpty(notebooks.CodigoBarra))
+        {
+            throw new Exception("El código de barras es obligatorio");
+        }
+
+        if (notebooks.CodigoBarra.Length > 40)
+        {
+            throw new ValidationException("El codigo de barra no puede superar los 40 caracteres.");
+        }
+
+        if (!Regex.IsMatch(notebooks.CodigoBarra, @"^[A-Z0-9\-]+$"))
+        {
+            throw new ValidationException("El codigo de barra contiene caracteres inválidos.");
+        }
+
+        if ((string.IsNullOrEmpty(notebooks.Patrimonio)))
+        {
+            throw new Exception("El patrimonio es obligatorio");
+        }
+
+        if (notebooks.Patrimonio.Length > 40)
+        {
+            throw new ValidationException("El patrimonio no puede superar los 40 caracteres.");
+        }
+
+        if (!Regex.IsMatch(notebooks.Patrimonio, @"^[A-Z0-9\-]+$"))
+        {
+            throw new ValidationException("El patrimonio contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrEmpty(notebooks.Equipo))
+        {
+            throw new Exception("El equipo es obligatorio");
+        }
+
+        if (notebooks.Equipo.Length > 40)
+        {
+            throw new ValidationException("El equipo no puede superar los 40 caracteres.");
+        }
+
+        if (!Regex.IsMatch(notebooks.Equipo, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El equipo contiene caracteres inválidos.");
+        }
+    }
+    #endregion
+
+    #region VALIDAR INSERT
+    public void ValidarInsert(Notebooks notebooks)
+    {
+        #region VALIDAR ID NOTEBOOK
+        if(notebooks.IdElemento != 0 && uow.RepoNotebooks.GetById(notebooks.IdElemento) != null)
+        {
+            throw new Exception("La notebook ya existe");
+        }
+        #endregion
+
+        #region NUMERO SERIE
+        Notebooks? nroSerieHabilitado = uow.RepoNotebooks.GetByNumeroSerie(notebooks.NumeroSerie);
 
         if (nroSerieHabilitado != null)
         {
@@ -61,9 +192,10 @@ public class NotebooksCN
                 throw new Exception("La notebook con ese numero de serie ya existe pero está deshabilitado, por favor habilitelo antes de crear uno nuevo.");
             }
         }
+        #endregion
 
-        Notebooks? codigoBarraHabilitado = repoNotebooks.GetByCodigoBarra(notebookNEW.CodigoBarra);
-
+        #region CODIGO BARRA
+        Notebooks? codigoBarraHabilitado = uow.RepoNotebooks.GetByCodigoBarra(notebooks.CodigoBarra);
         if (codigoBarraHabilitado != null)
         {
             if (codigoBarraHabilitado.Habilitado == true)
@@ -75,12 +207,13 @@ public class NotebooksCN
                 throw new Exception("La notebook con ese codigo ya existe pero está deshabilitado, por favor habilitelo antes de crear uno nuevo.");
             }
         }
+        #endregion
 
-        Notebooks? patrimonioHabilitado = repoNotebooks.GetByPatrimonio(notebookNEW.Patrimonio);
-
-        if(patrimonioHabilitado != null)
+        #region PATRIMONIO
+        Notebooks? patrimonioHabilitado = uow.RepoNotebooks.GetByPatrimonio(notebooks.Patrimonio);
+        if (patrimonioHabilitado != null)
         {
-            if(patrimonioHabilitado.Habilitado == true)
+            if (patrimonioHabilitado.Habilitado == true)
             {
                 throw new Exception("La notebook con ese patrimonio ya existe y esta habilitado");
             }
@@ -89,124 +222,134 @@ public class NotebooksCN
                 throw new Exception("La notebook con ese patrimonio ya existe pero esta deshabilitado, por favor habilitelo antes de crear uno nuevo");
             }
         }
+        #endregion
 
-        if (notebookNEW.IdEstadoMantenimiento != 1)
+        #region EQUIPO
+        Notebooks? equipoHabilitado = uow.RepoNotebooks.GetByEquipo(notebooks.Equipo);
+
+        if (equipoHabilitado != null)
+        {
+            if (equipoHabilitado.Habilitado == true)
+            {
+                throw new Exception("La notebook con ese equipo ya existe y esta habilitado");
+            }
+            else
+            {
+                throw new Exception("La notebook con ese equipo ya existe pero esta deshabilitado, por favor habilitelo antes de crear uno nuevo");
+            }
+        }
+        #endregion
+
+        #region ESTADO
+        if (notebooks.IdEstadoMantenimiento != 1)
         {
             throw new Exception("El estado del elemento debe ser 'Disponible' al momento de crearlo");
         }
 
-        if(notebookNEW.IdTipoElemento != 1)
+        if (uow.RepoEstadosMantenimiento.GetById(notebooks.IdEstadoMantenimiento) == null)
+        {
+            throw new Exception("Estado de mantenimiento de la notebook es invalida");
+        }
+        #endregion
+
+        #region TIPO ElEMENTO
+        if (notebooks.IdTipoElemento != 1)
         {
             throw new Exception("El tipo de elemento debe ser 'Notebook'");
         }
 
-        if (repoUbicacion.GetById(notebookNEW.IdUbicacion) == null)
+        if (uow.RepoTipoElemento.GetById(notebooks.IdTipoElemento) == null)
         {
-            throw new Exception("Ubicacion del elemento invalida");
+            throw new Exception("El tipo elemento es invalido");
         }
+        #endregion
 
-        if (repoModelo.GetById(notebookNEW.IdModelo) == null)
+        #region UBICACION
+        if (notebooks.IdUbicacion != 0)
         {
-            throw new Exception("Modelo del elemento invalida");
-        }
+            Ubicacion? ubicacion = uow.RepoUbicacion.GetById(notebooks.IdUbicacion);
 
-        if (repoModelo.GetByTipo(notebookNEW.IdTipoElemento) == null)
+            Carritos? carritos = uow.RepoCarritos.GetById(notebooks.IdCarrito ?? 0);
+
+            if (ubicacion == null)
+            {
+                throw new Exception("La ubicacion del elemento es inválido.");
+            }
+        }
+        #endregion
+
+        #region MODELO
+        if (notebooks.IdModelo != 0)
         {
-            throw new Exception("El modelo debe ser correspondiente al tipo de elemento");
+            Modelos? modelo = uow.RepoModelo.GetById(notebooks.IdModelo);
+
+            if (modelo == null)
+            {
+                throw new Exception("El modelo de la notebook es inválido.");
+            }
+
+            if (modelo.IdTipoElemento != notebooks.IdTipoElemento)
+            {
+                throw new Exception("El modelo seleccionado no corresponde al tipo de la notebook.");
+            }
         }
+        #endregion
 
+        #region CARRITO
+        if (notebooks.IdCarrito.HasValue)
+        {
+            throw new Exception("La Notebook no puede estar ligada a un carrito al crearse, Valla al area de CARRITOS para llevarlo a cabo");
+        }
+        #endregion
 
-        notebookNEW.IdEstadoMantenimiento = 1;
-        notebookNEW.IdCarrito = null;
-        notebookNEW.PosicionCarrito = null;
-        notebookNEW.Habilitado = true;
-        notebookNEW.FechaBaja = null;
+        #region POSICION CARRITOS
+        if(notebooks.PosicionCarrito.HasValue)
+        {
+            throw new Exception("La Notebook no puede tener una posicion en el carrito al crearse, Valla al area de CARRITOS para llevarlo a cabo");
+        }
+        #endregion
 
-        repoNotebooks.Insert(notebookNEW);
+        #region VARIANTE ELEMENTO
+        if (notebooks.IdVarianteElemento.HasValue && notebooks.IdVarianteElemento != 0)
+        {
+            throw new Exception("La notebook no puede tener variante");
+        }
+        #endregion
     }
     #endregion
 
-    #region Actualización
-    public void ActualizarNotebook(Notebooks notebookNEW)
+    #region VALIDAR UPDATE
+    public void ValidarUpdate(Notebooks notebooks)
     {
-        if(string.IsNullOrWhiteSpace(notebookNEW.NumeroSerie))
+        #region VALIDAR ID NOTEBOOK
+        Notebooks? notebookOLD = uow.RepoNotebooks.GetById(notebooks.IdElemento);
+
+        if (notebooks.IdElemento != 0 && notebookOLD != null)
         {
-            throw new Exception("La notebook debe tener número de serie.");
+            throw new Exception("La notebook no existe");
         }
+        #endregion
 
-        if (string.IsNullOrWhiteSpace(notebookNEW.CodigoBarra))
-        {
-            throw new Exception("La notebook debe tener código de barra.");
-        }
+        #region NUMERO SERIE
+        Notebooks? nroSerieHabilitado = uow.RepoNotebooks.GetByNumeroSerie(notebooks.NumeroSerie);
 
-        if (string.IsNullOrWhiteSpace(notebookNEW.Patrimonio))
-        {
-            throw new Exception("La notebook debe tener patrimonio.");
-        }
-
-        Notebooks? notebookOLD = repoNotebooks.GetById(notebookNEW.IdElemento);
-
-        if (notebookOLD == null)
-        {
-            throw new Exception("El elemento no existe");
-        }
-
-        if (repoUbicacion.GetById(notebookNEW.IdUbicacion) == null)
-        {
-            throw new Exception("Ubicacion del elemento invalida");
-        }
-
-        if (repoModelo.GetById(notebookNEW.IdModelo) == null)
-        {
-            throw new Exception("Modelo del elemento invalida");
-        }
-
-        if (repoNotebooks.GetByPatrimonio(notebookNEW.Patrimonio) == null)
-        {
-            throw new Exception("El patrimonio no existe en otro elemento, por favor elija uno existente");
-        }
-
-        if (notebookOLD.IdTipoElemento != notebookNEW.IdTipoElemento)
-        {
-            throw new Exception("No se puede cambiar el tipo de elemento");
-        }
-
-        if (repoModelo.GetByTipo(notebookNEW.IdTipoElemento) == null)
-        {
-            throw new Exception("El modelo debe ser correspondiente al tipo de elemento");
-        }
-
-        Notebooks? patrimonioHabilitado = repoNotebooks.GetByPatrimonio(notebookNEW.Patrimonio);
-
-        if (notebookOLD.Patrimonio != notebookNEW.Patrimonio && patrimonioHabilitado != null)
-        {
-            if (patrimonioHabilitado.Habilitado == true)
-            {
-                throw new Exception("Ya existe otro elemento con el mismo patrimonio.");
-            }
-            else
-            {
-                throw new Exception("El elemento ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
-            }
-        }
-
-        Notebooks? nroSerieHabilitado = repoNotebooks.GetByNumeroSerie(notebookNEW.NumeroSerie);
-
-        if (notebookOLD.NumeroSerie != notebookNEW.NumeroSerie && nroSerieHabilitado != null)
+        if (notebookOLD?.NumeroSerie != notebooks.NumeroSerie && nroSerieHabilitado != null)
         {
             if (nroSerieHabilitado.Habilitado == true)
             {
-                throw new Exception("Ya existe otro elemento con el mismo numero de serie.");
+                throw new Exception("Ya existe otra notebook con el mismo numero de serie.");
             }
             else
             {
-                throw new Exception("El elemento ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
+                throw new Exception("La notebook con ese numero de serie ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
             }
         }
+        #endregion
 
-        Notebooks? codigoBarraHabilitado = repoNotebooks.GetByCodigoBarra(notebookNEW.CodigoBarra);
+        #region CODIGO BARRA
+        Notebooks? codigoBarraHabilitado = uow.RepoNotebooks.GetByCodigoBarra(notebooks.CodigoBarra);
 
-        if (notebookOLD.CodigoBarra != notebookNEW.CodigoBarra && codigoBarraHabilitado != null)
+        if (notebookOLD?.CodigoBarra != notebooks.CodigoBarra && codigoBarraHabilitado != null)
         {
             if (codigoBarraHabilitado.Habilitado == true)
             {
@@ -217,19 +360,170 @@ public class NotebooksCN
                 throw new Exception("El elemento ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
             }
         }
+        #endregion
 
-        if (notebookNEW.IdEstadoMantenimiento == 2 && notebookOLD.IdEstadoMantenimiento != 2)
+        #region PATRIMONIO
+        Notebooks? patrimonioHabilitado = uow.RepoNotebooks.GetByPatrimonio(notebooks.Patrimonio);
+
+        if (notebookOLD?.Patrimonio != notebooks.Patrimonio && patrimonioHabilitado != null)
+        {
+            if (patrimonioHabilitado.Habilitado == true)
+            {
+                throw new Exception("Ya existe otra notebook con el mismo patrimonio.");
+            }
+            else
+            {
+                throw new Exception("La notebook con ese patrimonio ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
+            }
+        }
+        #endregion
+
+        #region EQUIPO
+        Notebooks? equipoHabilitado = uow.RepoNotebooks.GetByEquipo(notebooks.Equipo);
+
+        if (equipoHabilitado != null && notebookOLD?.Equipo != notebooks.Equipo)
+        {
+            if (equipoHabilitado.Habilitado == true)
+            {
+                throw new Exception("La notebook con ese equipo ya existe y esta habilitado");
+            }
+            else
+            {
+                throw new Exception("La notebook con ese equipo ya existe pero esta deshabilitado, por favor habilitelo antes de crear uno nuevo");
+            }
+        }
+        #endregion
+
+        #region UBICACION  
+
+        if (notebooks.IdCarrito.HasValue)
+        {
+            Carritos? carrito = uow.RepoCarritos.GetById(notebooks.IdCarrito.Value);
+
+            if (carrito == null)
+            {
+                throw new Exception("El carrito asociado no existe.");
+            }
+
+            Ubicacion? ubicacionCarrito = uow.RepoUbicacion.GetById(carrito.IdUbicacion);
+
+            if (ubicacionCarrito == null)
+            {
+                throw new Exception("La ubicación del carrito es invalida.");
+            }
+
+            if (notebooks.IdUbicacion != ubicacionCarrito.IdUbicacion)
+            {
+                throw new Exception("La ubicación de la notebook no coincide con la ubicación del carrito.");
+            }
+        }
+        else
+        {
+            Ubicacion? ubicacion = uow.RepoUbicacion.GetById(notebooks.IdUbicacion);
+            if (ubicacion == null)
+            {
+                throw new Exception("La ubicación seleccionada no existe.");
+            }
+        }
+        #endregion
+
+        #region MODELOS
+        if (notebooks.IdModelo != 0)
+        {
+            Modelos? modelo = uow.RepoModelo.GetById(notebooks.IdModelo);
+
+            if (modelo == null)
+            {
+                throw new Exception("El modelo de la notebook es inválido.");
+            }
+
+            if (modelo.IdTipoElemento != notebooks.IdTipoElemento)
+            {
+                throw new Exception("El modelo seleccionado no corresponde al tipo de la notebook.");
+            }
+        }
+        #endregion
+
+        #region TIPO ELEMENTO
+        if (notebookOLD?.IdTipoElemento != notebooks.IdTipoElemento)
+        {
+            throw new Exception("No se puede cambiar el tipo de elemento");
+        }
+
+        if (uow.RepoTipoElemento.GetById(notebooks.IdTipoElemento) == null)
+        {
+            throw new Exception("El tipo elemento es invalido");
+        }
+        #endregion
+
+        #region ESTADO
+        if (notebooks.IdEstadoMantenimiento == 2 && notebookOLD.IdEstadoMantenimiento != 2)
         {
             throw new Exception("No se puede cambiar el estado a 'En Prestamo' por que no se hiso un prestamo");
         }
 
-        if (notebookNEW.IdEstadoMantenimiento != 2 && notebookOLD.IdEstadoMantenimiento == 2)
+        if (notebooks.IdEstadoMantenimiento != 2 && notebookOLD.IdEstadoMantenimiento == 2)
         {
             throw new Exception("No se puede cambiar el estado de un elemento en prestamo sin terminar su devolucion");
         }
 
+        if (uow.RepoEstadosMantenimiento.GetById(notebooks.IdEstadoMantenimiento) == null)
+        {
+            throw new Exception("El estado de mantenimiento indicado es inválido.");
+        }
+        #endregion
 
-        repoNotebooks.Update(notebookNEW);
+        #region CARRITOS Y POSICION
+        Carritos? carritoOLD = uow.RepoCarritos.GetById(notebooks.IdCarrito.Value);
+
+        if (notebooks.IdCarrito.HasValue)
+        {
+            if (carritoOLD == null)
+            {
+                throw new Exception("El carrito asociado no existe.");
+            }
+
+            if (carritoOLD.IdEstadoMantenimiento == 2)
+            {
+                throw new Exception("No se puede asignar la notebook a un carrito que está en préstamo.");
+            }
+
+            Ubicacion? ubicCarrito = uow.RepoUbicacion.GetById(carritoOLD.IdUbicacion);
+            if (ubicCarrito == null)
+            {
+                throw new Exception("La ubicación asociada al carrito es inválida.");
+            }
+
+            if (notebooks.PosicionCarrito.HasValue)
+            {
+                if (notebooks.PosicionCarrito < 1 || notebooks.PosicionCarrito > 25)
+                {
+                    throw new Exception("La posicion en el carrito debe estar entre 1 y 25");
+                }
+                Notebooks? notebookEnPosicion = uow.RepoNotebooks.GetNotebookByPosicion(notebooks.IdCarrito.Value, notebooks.PosicionCarrito.Value);
+
+                if (notebookEnPosicion != null && notebookEnPosicion.IdElemento != notebooks.IdElemento)
+                {
+                    throw new Exception("La posicion en el carrito ya está ocupada por otra notebook");
+                }
+            }
+        }
+        else
+        {
+            if (notebooks.PosicionCarrito.HasValue)
+            {
+                throw new Exception("La posicion en el carrito no puede estar asignada si no tiene un carrito asociado");
+            }
+        }
+
+        #endregion
+
+        #region VARIANTE ELEMENTO
+        if (notebooks.IdVarianteElemento.HasValue && notebooks.IdVarianteElemento != 0)
+        {
+           throw new Exception("Las notebooks no pueden tener variante de elemento.");
+        }
+        #endregion
     }
     #endregion
 }

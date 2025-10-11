@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoUsuarios : RepoBase, IRepoUsuarios
 {
-    public RepoUsuarios(IDbConnection conexion) 
-    : base (conexion)
+    public RepoUsuarios(IDbConnection conexion, IDbTransaction? transaction = null) 
+    : base (conexion, transaction)
     {
     }
 
@@ -31,7 +31,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
 
         try
         {
-            Conexion.Execute("InsertUsuario", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertUsuario", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
             usuarios.IdUsuario = parametros.Get<int>("unidUsuario");
         }
         catch (Exception)
@@ -59,7 +59,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
 
         try
         {
-            Conexion.Execute("UpdateUsuario", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateUsuario", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -87,16 +87,16 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     #endregion
 
     #region Obtener por usuario y contraseña
-    public Usuarios? GetByUserPass(string user, string pass)
+    public Usuarios? GetByUserPass(string usuario, string pass)
     {
-        string query = "select * from Usuarios where usuario = @unuser and pass = @unpass";
+        string query = "select * from Usuarios where usuario = @usuario and pass = @pass";
 
         DynamicParameters parametros = new DynamicParameters();
 
         try
         {
-            parametros.Add("@unuser", user);
-            parametros.Add("@unpass", pass);
+            parametros.Add("@usuario", usuario);
+            parametros.Add("@pass", pass);
             return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros);
         }
         catch (Exception)
@@ -115,7 +115,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
         try
         {
             parametros.Add("@email", Email);
-            return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -133,7 +133,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
         try
         {
             parametros.Add("@idUsuario", idUsuario);
-            return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -151,7 +151,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
         try
         {
             parametros.Add("@usuario", user);
-            return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

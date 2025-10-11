@@ -7,10 +7,11 @@ namespace CapaDatos.Repos;
 
 public class RepoModelo : RepoBase, IRepoModelo
 {
-    public RepoModelo(IDbConnection dbConnection) : base(dbConnection)
+    public RepoModelo(IDbConnection dbConnection, IDbTransaction? transaction = null) : base(dbConnection, transaction)
     {
     }
 
+    #region INSERT MODELOS
     public void Insert(Modelos modelo)
     {
         DynamicParameters parameters = new DynamicParameters();
@@ -19,14 +20,16 @@ public class RepoModelo : RepoBase, IRepoModelo
         parameters.Add("unidTipoElemento", modelo.IdTipoElemento);
         try
         {
-            Conexion.Execute("InsertModelo", parameters, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertModelo", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
             throw new Exception("Hubo un error al insertar un modelo");
         }
     }
+    #endregion
 
+    #region ACTUALIZAR MODELO
     public void Update(Modelos modelo)
     {
         DynamicParameters parameters = new DynamicParameters();
@@ -35,38 +38,44 @@ public class RepoModelo : RepoBase, IRepoModelo
         parameters.Add("unidTipoElemento", modelo.IdTipoElemento);
         try
         {
-            Conexion.Execute("UpdateModelo", parameters, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateModelo", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
             throw new Exception("Hubo un error al actualizar un modelo");
         }
     }
+    #endregion
 
+    #region OBTENER TODOS
     public IEnumerable<Modelos> GetAll()
     {
         string query = "selecto * from Modelos";
 
         return Conexion.Query<Modelos>(query);
     }
+    #endregion
 
+    #region OBTENER POR ID
     public Modelos? GetById(int idModelo)
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidModelo", idModelo);
 
         string query = "select * from Modelos where idModelo = @unidModelo";
-        
+
         try
         {
-            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("Hubo un error al obtener un modelo por id");
         }
     }
+    #endregion
 
+    #region OBTENER POR TIPO
     public IEnumerable<Modelos> GetByTipo(int idTipoElemento)
     {
         DynamicParameters parameters = new DynamicParameters();
@@ -76,11 +85,30 @@ public class RepoModelo : RepoBase, IRepoModelo
 
         try
         {
-            return Conexion.Query<Modelos>(query, parameters);
+            return Conexion.Query<Modelos>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("Hubo un error al obtener los modelos por tipo de elemento");
         }
     }
+    #endregion
+
+    #region OBTENER POR NOMBRE
+    public Modelos? GetByNombre(string nombreModelo)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unnombre", nombreModelo);
+
+        string query = "select * from Modelos where modelo = @unnombre";
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener un modelo por nombre");
+        }
+    }
+    #endregion
 }

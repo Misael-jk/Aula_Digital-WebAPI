@@ -1,24 +1,22 @@
-﻿using CapaDatos.Interfaces;
-using CapaDatos.InterfacesDTO;
+﻿using CapaDatos.InterfacesDTO;
+using CapaDatos.InterfaceUoW;
 using CapaDTOs;
 using CapaEntidad;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace CapaNegocio
 {
     public class ElementosCN
     {
         private readonly IMapperElementos _mapperElementos;
-        private readonly IRepoElemento _repoElemento;
-        private readonly IRepoUbicacion repoUbicacion;
-        private readonly IRepoModelo repoModelo;
+        private readonly IUowElementos uow;
 
-        public ElementosCN(IMapperElementos mapperElementos, IRepoModelo repoModelo, IRepoUbicacion repoUbicacion, IRepoElemento repoElemento)
+        public ElementosCN(IMapperElementos mapperElementos, IUowElementos uow)
         {
             _mapperElementos = mapperElementos;
-            this.repoModelo = repoModelo;
-            this.repoUbicacion = repoUbicacion;
-            _repoElemento = repoElemento;
-
+            this.uow = uow;
         }
 
         #region Metodos de Lectura para la UI DTOs
@@ -57,26 +55,202 @@ namespace CapaNegocio
         #region INSERT ELEMENTO
         public void CrearElemento(Elemento elementoNEW, int idUsuario)
         {
-            if(string.IsNullOrEmpty(elementoNEW.NumeroSerie))
+            ValidarDatos(elementoNEW);
+
+            try
+            {
+                uow.BeginTransaction();
+                ValidarInsert(elementoNEW);
+
+                uow.RepoElemento.Insert(elementoNEW);
+
+                HistorialCambios historial = new HistorialCambios
+                {
+                    IdTipoAccion = 1,
+                    FechaCambio = DateTime.Now,
+                    Descripcion = $"Se creó el elemento con número de serie {elementoNEW.NumeroSerie}.",
+                    Motivo = null,
+                    IdUsuario = idUsuario
+                };
+
+                uow.RepoHistorialCambio.Insert(historial);
+
+                uow.RepoHistorialElementos.Insert(new HistorialElementos
+                {
+                    IdHistorialCambio = historial.IdHistorialCambio,
+                    IdElementos = elementoNEW.IdElemento
+                });
+
+                uow.Commit();
+            }
+            catch
+            {
+                uow.Rollback();
+                throw;
+            }
+        }
+        #endregion
+
+        #region UPDATE ELEMENTO
+        public void ActualizarElemento(Elemento elementoNEW, int idUsuario)
+        {
+            ValidarDatos(elementoNEW);
+
+            try
+            {
+                uow.BeginTransaction();
+                ValidarUpdate(elementoNEW);
+
+                uow.RepoElemento.Update(elementoNEW);
+
+                HistorialCambios historial = new HistorialCambios
+                {
+                    IdTipoAccion = 2,
+                    FechaCambio = DateTime.Now,
+                    Descripcion = $"Se modifico el elemento con número de serie {elementoNEW.NumeroSerie}.",
+                    IdUsuario = idUsuario
+                };
+
+                uow.RepoHistorialCambio.Insert(historial);
+
+                uow.RepoHistorialElementos.Insert(new HistorialElementos
+                {
+                    IdHistorialCambio = historial.IdHistorialCambio,
+                    IdElementos = elementoNEW.IdElemento
+                });
+
+                uow.Commit();
+            }
+            catch
+            {
+                uow.Rollback();
+                throw;
+            }
+        }
+        #endregion
+
+        #region DESHABILITAR ELEMENTO
+        public void DeshabilitarElemento(int idElemento, int idEstadoMantenimiento, int idUsuario)
+        {
+            try
+            {
+                uow.BeginTransaction();
+
+                Elemento? elemento = uow.RepoElemento.GetById(idElemento);
+
+                if (elemento == null)
+                {
+                    throw new Exception("El elemento no existe.");
+                }
+
+                if (elemento.IdEstadoMantenimiento == 2)
+                {
+                    throw new Exception("No se puede deshabilitar un elemento que está en préstamo.");
+                }
+
+                if (!elemento.Habilitado)
+                {
+                    throw new Exception("El elemento ya está deshabilitado.");
+                }
+
+                elemento.Habilitado = false;
+                elemento.IdEstadoMantenimiento = idEstadoMantenimiento;
+                elemento.FechaBaja = DateTime.Now;
+
+                uow.RepoElemento.Update(elemento);
+
+                HistorialCambios historial = new HistorialCambios
+                {
+                    IdTipoAccion = 3,
+                    FechaCambio = DateTime.Now,
+                    Descripcion = $"Se dio de baja el elemento con número de serie {elemento.NumeroSerie}.",
+                    IdUsuario = idUsuario
+                };
+
+                uow.RepoHistorialCambio.Insert(historial);
+
+                uow.RepoHistorialElementos.Insert(new HistorialElementos
+                {
+                    IdHistorialCambio = historial.IdHistorialCambio,
+                    IdElementos = elemento.IdElemento
+                });
+
+                uow.Commit();
+            }
+            catch
+            {
+                uow.Rollback();
+                throw;
+            }
+        }
+        #endregion
+
+        #region VALIDACIONES
+        private void ValidarDatos(Elemento elemento)
+        {
+            if (string.IsNullOrEmpty(elemento.NumeroSerie))
             {
                 throw new Exception("El numero de serie es obligatorio");
             }
 
-            if(string.IsNullOrEmpty(elementoNEW.CodigoBarra))
+            if (elemento.NumeroSerie.Length > 40)
+            {
+                throw new ValidationException("El número de serie no puede superar los 40 caracteres.");
+            }
+
+            if (!Regex.IsMatch(elemento.NumeroSerie, @"^[A-Z0-9\-]+$"))
+            {
+                throw new ValidationException("El número de serie contiene caracteres inválidos.");
+            }
+
+            if (string.IsNullOrEmpty(elemento.CodigoBarra))
             {
                 throw new Exception("El código de barras es obligatorio");
             }
 
-            if((string.IsNullOrEmpty(elementoNEW.Patrimonio)))
+            if (elemento.CodigoBarra.Length > 40)
+            {
+                throw new ValidationException("El codigo de barra no puede superar los 40 caracteres.");
+            }
+
+            if (!Regex.IsMatch(elemento.CodigoBarra, @"^[A-Z0-9\-]+$"))
+            {
+                throw new ValidationException("El codigo de barra contiene caracteres inválidos.");
+            }
+
+            if ((string.IsNullOrEmpty(elemento.Patrimonio)))
             {
                 throw new Exception("El patrimonio es obligatorio");
             }
 
-            Elemento? nroSerieHabilitado = _repoElemento.GetByNumeroSerie(elementoNEW.NumeroSerie);
-
-            if(nroSerieHabilitado != null)
+            if (elemento.Patrimonio.Length > 40)
             {
-                if(nroSerieHabilitado.Habilitado == true)
+                throw new ValidationException("El patrimonio no puede superar los 40 caracteres.");
+            }
+
+            if (!Regex.IsMatch(elemento.Patrimonio, @"^[A-Z0-9\-]+$"))
+            {
+                throw new ValidationException("El patrimonio contiene caracteres inválidos.");
+            }
+        }
+        #endregion
+
+        #region VALIDACION INSERT
+        public void ValidarInsert(Elemento elementoNEW)
+        {
+            #region VALIDACION ELEMENTO
+            if (elementoNEW.IdElemento != 0 && uow.RepoElemento.GetById(elementoNEW.IdElemento) != null)
+            {
+                throw new Exception("El elemento ya existe");
+            }
+            #endregion
+
+            #region NUMERO SERIE
+            Elemento? nroSerieHabilitado = uow.RepoElemento.GetByNumeroSerie(elementoNEW.NumeroSerie);
+
+            if (nroSerieHabilitado != null)
+            {
+                if (nroSerieHabilitado.Habilitado == true)
                 {
                     throw new Exception("El elemento ya existe con ese numero de serie y está habilitado.");
                 }
@@ -85,10 +259,12 @@ namespace CapaNegocio
                     throw new Exception("El elemento ya existe con ese numero de serie pero está deshabilitado, por favor habilitelo antes de crear uno nuevo.");
                 }
             }
+            #endregion
 
-            Elemento? codigoBarraHabilitado = _repoElemento.GetByCodigoBarra(elementoNEW.CodigoBarra);
+            #region CODIGO BARRA
+            Elemento? codigoBarraHabilitado = uow.RepoElemento.GetByCodigoBarra(elementoNEW.CodigoBarra);
 
-            if(codigoBarraHabilitado != null)
+            if (codigoBarraHabilitado != null)
             {
                 if (codigoBarraHabilitado.Habilitado == true)
                 {
@@ -99,8 +275,10 @@ namespace CapaNegocio
                     throw new Exception("El elemento ya existe con ese codigo de barra pero está deshabilitado, por favor habilitelo antes de crear uno nuevo.");
                 }
             }
+            #endregion
 
-            Elemento? patrimonioHabilitado = _repoElemento.GetByPatrimonio(elementoNEW.Patrimonio);
+            #region PATRIMONIO
+            Elemento? patrimonioHabilitado = uow.RepoElemento.GetByPatrimonio(elementoNEW.Patrimonio);
 
             if (patrimonioHabilitado != null)
             {
@@ -113,97 +291,127 @@ namespace CapaNegocio
                     throw new Exception("El elemento ya existe con ese patrimonio pero está deshabilitado, por favor habilitelo antes de crear uno nuevo.");
                 }
             }
+            #endregion
 
-            if (elementoNEW.IdTipoElemento <= 0)
-            {
-                throw new Exception("El tipo de elemento es obligatorio");
-            }
-
+            #region ESTADO
             if (elementoNEW.IdEstadoMantenimiento != 1)
             {
                 throw new Exception("El estado del elemento debe ser 'Disponible' al momento de crearlo");
             }
 
-            if(repoUbicacion.GetById(elementoNEW.IdUbicacion) == null)
+            if (uow.RepoEstadosMantenimiento.GetById(elementoNEW.IdEstadoMantenimiento) == null)
+            {
+                throw new Exception("Estado de mantenimiento del elemento invalido");
+            }
+            #endregion
+
+            #region UBICACION
+            if (uow.RepoUbicacion.GetById(elementoNEW.IdUbicacion) == null)
             {
                 throw new Exception("Ubicacion del elemento invalida");
             }
+            #endregion
 
-            if(repoModelo.GetById(elementoNEW.IdModelo) == null)
+            #region MODELO
+            if (elementoNEW.IdModelo != 0)
             {
-                throw new Exception("Modelo del elemento invalida");
-            }
+                Modelos? modelo = uow.RepoModelo.GetById(elementoNEW.IdModelo);
 
-            if(repoModelo.GetByTipo(elementoNEW.IdTipoElemento) == null)
+                if (modelo == null)
+                {
+                    throw new Exception("El modelo del elemento es inválido.");
+                }
+
+                if (modelo.IdTipoElemento != elementoNEW.IdTipoElemento)
+                {
+                    throw new Exception("El modelo seleccionado no corresponde al tipo de elemento.");
+                }
+            }
+            #endregion
+
+            #region VARIANTE ELEMENTO
+            if (elementoNEW.IdVarianteElemento != 0)
             {
-                throw new Exception("El modelo debe ser correspondiente al tipo de elemento");
-            }
+                VariantesElemento? variante = uow.RepoVarianteElemento.GetById(elementoNEW.IdVarianteElemento ?? 0);
+                if (variante == null)
+                {
+                    throw new ValidationException("Variante del elemento inválida.");
+                }
 
-            if (elementoNEW.Habilitado == false)
+                if (variante.IdTipoElemento != elementoNEW.IdTipoElemento)
+                {
+                    throw new ValidationException("La variante seleccionada no corresponde al tipo de elemento.");
+                }
+
+                if (variante.IdModelo != 0)
+                {
+                    if (elementoNEW.IdModelo == 0)
+                    {
+                        throw new ValidationException("La variante seleccionada requiere que se especifique un modelo.");
+                    }
+
+                    if (variante.IdModelo != elementoNEW.IdModelo)
+                    {
+                        throw new ValidationException("La variante seleccionada no corresponde al modelo elegido.");
+                    }
+                }
+            }
+            #endregion
+
+            #region TIPO ELEMENTO
+            if (uow.RepoTipoElemento.GetById(elementoNEW.IdTipoElemento) == null)
             {
-                throw new Exception("El elemento debe estar disponible al momento de crearlo");
+                throw new Exception("El tipo elemento es invalido");
             }
-
-
-            _repoElemento.Insert(elementoNEW);
-
+            #endregion
         }
         #endregion
 
-        #region UPDATE ELEMENTO
-        public void ActualizarElemento(Elemento elementoNEW, int idUsuario)
+        #region VALIDACION UPDATE
+        public void ValidarUpdate(Elemento elementoNEW)
         {
-
-            if (string.IsNullOrEmpty(elementoNEW.NumeroSerie))
-            {
-                throw new Exception("El numero de serie es obligatorio");
-            }
-
-            if (string.IsNullOrEmpty(elementoNEW.CodigoBarra))
-            {
-                throw new Exception("El código de barras es obligatorio");
-            }
-
-            if(string.IsNullOrEmpty(elementoNEW.Patrimonio))
-            {
-                throw new Exception("El patrimonio es obligatorio");
-            }
-
-            Elemento? elementoOLD = _repoElemento.GetById(elementoNEW.IdElemento);
+            #region VALIDAR ELEMENTO
+            Elemento? elementoOLD = uow.RepoElemento.GetById(elementoNEW.IdElemento);
 
             if (elementoOLD == null)
             {
                 throw new Exception("El elemento no existe");
             }
+            #endregion
 
-            if (repoUbicacion.GetById(elementoNEW.IdUbicacion) == null)
+            #region UBICACION
+            if (uow.RepoUbicacion.GetById(elementoNEW.IdUbicacion) == null)
             {
                 throw new Exception("Ubicacion del elemento invalida");
             }
+            #endregion
 
-            if (repoModelo.GetById(elementoNEW.IdModelo) == null)
+            #region MODELO
+            if (elementoNEW.IdModelo != 0)
             {
-                throw new Exception("Modelo del elemento invalida");
-            }
+                Modelos? modelo = uow.RepoModelo.GetById(elementoNEW.IdModelo);
 
-            if(_repoElemento.GetByPatrimonio(elementoNEW.Patrimonio) == null)
+                if (modelo == null)
+                {
+                    throw new ValidationException("Modelo del elemento inválido.");
+                }
+
+                if (modelo.IdTipoElemento != elementoNEW.IdTipoElemento)
+                {
+                    throw new ValidationException("El modelo seleccionado no corresponde al tipo de elemento.");
+                }
+            }
+            #endregion
+
+            #region PATRIMONIO
+            if (uow.RepoElemento.GetByPatrimonio(elementoNEW.Patrimonio) == null)
             {
                 throw new Exception("El patrimonio no existe en otro elemento, por favor elija uno existente");
             }
 
-            if(elementoOLD.IdTipoElemento != elementoNEW.IdTipoElemento)
-            {
-                throw new Exception("No se puede cambiar el tipo de elemento");
-            }
+            Elemento? patrimonioHabilitado = uow.RepoElemento.GetByPatrimonio(elementoNEW.Patrimonio);
 
-            if (repoModelo.GetByTipo(elementoNEW.IdTipoElemento) == null)
-            {
-                throw new Exception("El modelo debe ser correspondiente al tipo de elemento");
-            }
-
-            Elemento? patrimonioHabilitado = _repoElemento.GetByPatrimonio(elementoNEW.Patrimonio);
-
-            if(elementoOLD.Patrimonio != elementoNEW.Patrimonio && patrimonioHabilitado != null)
+            if (elementoOLD.Patrimonio != elementoNEW.Patrimonio && patrimonioHabilitado != null)
             {
                 if (patrimonioHabilitado.Habilitado == true)
                 {
@@ -214,8 +422,17 @@ namespace CapaNegocio
                     throw new Exception("El elemento ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
                 }
             }
+            #endregion
 
-            Elemento? nroSerieHabilitado = _repoElemento.GetByNumeroSerie(elementoNEW.NumeroSerie);
+            #region TIPO ELEMENTO
+            if (uow.RepoModelo.GetByTipo(elementoNEW.IdTipoElemento) == null)
+            {
+                throw new Exception("El modelo debe ser correspondiente al tipo de elemento");
+            }
+            #endregion
+
+            #region NUMERO DE SERIE
+            Elemento? nroSerieHabilitado = uow.RepoElemento.GetByNumeroSerie(elementoNEW.NumeroSerie);
 
             if (elementoOLD.NumeroSerie != elementoNEW.NumeroSerie && nroSerieHabilitado != null)
             {
@@ -228,8 +445,10 @@ namespace CapaNegocio
                     throw new Exception("El elemento ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
                 }
             }
+            #endregion
 
-            Elemento? codigoBarraHabilitado = _repoElemento.GetByCodigoBarra(elementoNEW.CodigoBarra);
+            #region CODIGO DE BARRA
+            Elemento? codigoBarraHabilitado = uow.RepoElemento.GetByCodigoBarra(elementoNEW.CodigoBarra);
 
             if (elementoOLD.CodigoBarra != elementoNEW.CodigoBarra && codigoBarraHabilitado != null)
             {
@@ -242,50 +461,51 @@ namespace CapaNegocio
                     throw new Exception("El elemento ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
                 }
             }
+            #endregion
 
-            if(elementoNEW.IdEstadoMantenimiento == 2 && elementoOLD.IdEstadoMantenimiento != 2)
+            #region ESTADO
+            if (elementoNEW.IdEstadoMantenimiento == 2 && elementoOLD.IdEstadoMantenimiento != 2)
             {
                 throw new Exception("No se puede cambiar el estado a 'En Prestamo' por que no se hiso un prestamo");
             }
 
-            if(elementoNEW.IdEstadoMantenimiento != 2 && elementoOLD.IdEstadoMantenimiento == 2)
+            if (elementoOLD.IdEstadoMantenimiento == 2 && elementoNEW.IdEstadoMantenimiento != 2)
             {
                 throw new Exception("No se puede cambiar el estado de un elemento en prestamo sin terminar su devolucion");
             }
+            #endregion
 
+            #region VARIANTE ELEMENTO
+            if (elementoNEW.IdVarianteElemento != 0)
+            {
+                VariantesElemento? variante = uow.RepoVarianteElemento.GetById(elementoNEW.IdVarianteElemento);
 
-            _repoElemento.Update(elementoNEW);
+                if (variante == null)
+                {
+                    throw new ValidationException("Variante del elemento inválida.");
+                }
+
+                if (variante.IdTipoElemento != elementoNEW.IdTipoElemento)
+                {
+                    throw new ValidationException("La variante seleccionada no corresponde al tipo de elemento.");
+                }
+
+                if (variante.IdModelo != 0)
+                {
+                    if (elementoNEW.IdModelo == 0)
+                    {
+                        throw new ValidationException("La variante seleccionada requiere que se especifique un modelo.");
+                    }
+
+                    if (variante.IdModelo != elementoNEW.IdModelo)
+                    {
+                        throw new ValidationException("La variante seleccionada no corresponde al modelo elegido.");
+                    }
+                }
+            }
+            #endregion
 
         }
         #endregion
-
-        public void DeshabilitarElemento(int idElemento, int idEstadoMantenimiento, int idUsuario)
-        {
-            Elemento? elemento = _repoElemento.GetById(idElemento);
-
-            if (elemento == null)
-            {
-                throw new Exception("El elemento no existe.");
-            }
-
-            if (elemento.IdEstadoMantenimiento == 2)
-            {
-                throw new Exception("No se puede deshabilitar un elemento que está en préstamo.");
-            }
-
-            if (!elemento.Habilitado)
-            {
-                throw new Exception("El elemento ya está deshabilitado.");
-            }
-
-            elemento.Habilitado = false;
-            elemento.IdEstadoMantenimiento = idEstadoMantenimiento; 
-            elemento.FechaBaja = DateTime.Now;
-
-            _repoElemento.Update(elemento);
-
-        }
-
-
     }
 }

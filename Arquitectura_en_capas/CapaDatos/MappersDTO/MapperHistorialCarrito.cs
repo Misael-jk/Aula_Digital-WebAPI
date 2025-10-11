@@ -9,7 +9,7 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperHistorialCarrito : RepoBase, IMapperHistorialCarrito
 {
-    public MapperHistorialCarrito(IDbConnection conexion) : base(conexion)
+    public MapperHistorialCarrito(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
 

@@ -12,7 +12,8 @@ public interface IRepoNotebooks
     public Notebooks? GetByNumeroSerie(string numeroSerie);
     public Notebooks? GetByCodigoBarra(string codigoBarra);
     public Notebooks? GetByPatrimonio(string patrimonio);
-    public Notebooks? GetNotebookByPosicion(int idCarrito, int posicionCarrito);
+    public Notebooks? GetByEquipo(string equipo);
+    public Notebooks? GetNotebookByPosicion(int? idCarrito, int posicionCarrito);
     public bool DuplicatePosition(int idCarrito, int posicionCarrito);
     public bool GetDisponible(int idElemento);
     public void UpdateEstado(int idElemento, int idEstadoMantenimiento);

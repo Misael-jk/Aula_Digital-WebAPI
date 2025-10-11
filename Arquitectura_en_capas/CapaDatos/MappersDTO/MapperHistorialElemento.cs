@@ -9,7 +9,7 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperHistorialElemento : RepoBase, IMapperHistorialElemento
 {
-    public MapperHistorialElemento(IDbConnection conexion) : base(conexion)
+    public MapperHistorialElemento(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
     public IEnumerable<HistoralElementoDTO> GetAllDTO()

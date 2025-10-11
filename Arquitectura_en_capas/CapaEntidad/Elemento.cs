@@ -4,7 +4,7 @@ public class Elemento
 {
     public int IdElemento {get; set;}
     public int IdTipoElemento {get; set;}
-    public int IdVarianteElemento {get; set;}   
+    public int? IdVarianteElemento {get; set;}   
     public int IdEstadoMantenimiento { get; set; }
     public int IdUbicacion { get; set; }   
     public int IdModelo { get; set; }

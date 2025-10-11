@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
 {
-    public RepoPrestamoDetalle(IDbConnection conexion)
-   : base(conexion)
+    public RepoPrestamoDetalle(IDbConnection conexion, IDbTransaction? transaction = null)
+   : base(conexion, transaction)
     {
     }
 
@@ -22,7 +22,7 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
 
         try
         {
-            Conexion.Execute("InsertPrestamoDetalle", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertPrestamoDetalle", parametros , transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -41,7 +41,7 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
 
         try
         {
-            Conexion.Execute("UpdatePrestamoDetalle", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdatePrestamoDetalle", parametros , transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -95,7 +95,7 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
         try
         {
             parametros.Add("unidPrestamo", idPrestamo);
-            return Conexion.Query<PrestamoDetalle>(query, parametros);
+            return Conexion.Query<PrestamoDetalle>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

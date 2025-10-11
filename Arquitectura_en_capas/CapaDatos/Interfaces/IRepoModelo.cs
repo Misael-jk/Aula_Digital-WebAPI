@@ -9,4 +9,5 @@ public interface IRepoModelo
     public IEnumerable<Modelos> GetAll();
     public Modelos? GetById(int idModelo);
     public IEnumerable<Modelos> GetByTipo(int idTipoElemento);
+    public Modelos? GetByNombre(string nombreModelo);
 }

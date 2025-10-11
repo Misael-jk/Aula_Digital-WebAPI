@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoDevolucion : RepoBase, IRepoDevolucion
 {
-    public RepoDevolucion(IDbConnection conexion) 
-    : base(conexion)
+    public RepoDevolucion(IDbConnection conexion, IDbTransaction? transaction = null) 
+    : base(conexion, transaction)
     {
     }
 
@@ -27,7 +27,7 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
 
         try
         {
-            Conexion.Execute("InsertDevolucion", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertDevolucion", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
             devolucion.IdDevolucion = parametros.Get<int>("unidDevolucion");
         }
         catch (Exception)
@@ -37,7 +37,7 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
     }
     #endregion
 
-    #region ver los prestamos
+    #region Obtener todas las devoluciones
     public IEnumerable<Devolucion> GetAll()
     {
         string query = "select * from Devoluciones";
@@ -62,7 +62,7 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
         try
         {
             parametros.Add("unidDevolucion", iddevolucion);
-            return Conexion.QueryFirstOrDefault<Devolucion>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Devolucion>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -80,7 +80,7 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
         try
         {
             parametros.Add("unidPrestamo", idPrestamo);
-            return Conexion.Query<Devolucion>(query, parametros);
+            return Conexion.Query<Devolucion>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

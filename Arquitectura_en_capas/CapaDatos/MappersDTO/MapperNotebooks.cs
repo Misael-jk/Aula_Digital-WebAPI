@@ -8,7 +8,7 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperNotebooks : RepoBase, IMapperNotebooks
 {
-    public MapperNotebooks(IDbConnection conexion) : base(conexion)
+    public MapperNotebooks(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
 

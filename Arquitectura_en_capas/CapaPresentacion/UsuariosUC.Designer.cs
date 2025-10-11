@@ -44,6 +44,7 @@ namespace CapaPresentacion
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -60,7 +61,6 @@ namespace CapaPresentacion
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
             dtgUsuarios = new Guna2DataGridView();
             cbxMostraPassword = new Guna2CheckBox();
@@ -70,6 +70,7 @@ namespace CapaPresentacion
             btnCrear = new Guna2Button();
             btnSeleccionarImagen = new Guna2CircleButton();
             guna2Panel1 = new Guna2Panel();
+            ptbPerfil = new Guna2CirclePictureBox();
             cmbRoles = new Guna2ComboBox();
             txtEmail = new Guna2TextBox();
             txtContraseña = new Guna2TextBox();
@@ -78,12 +79,11 @@ namespace CapaPresentacion
             txtUsuario = new Guna2TextBox();
             btnDeseleccion = new Guna2Button();
             pnlUsuarioData = new Guna2CustomGradientPanel();
-            ptbPerfil = new Guna2CirclePictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).BeginInit();
             guna2Panel1.SuspendLayout();
-            pnlUsuarioData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
+            pnlUsuarioData.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -187,6 +187,7 @@ namespace CapaPresentacion
             btnQuitarPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnQuitarPerfil.Size = new Size(40, 39);
             btnQuitarPerfil.TabIndex = 27;
+            btnQuitarPerfil.Visible = false;
             btnQuitarPerfil.Click += btnQuitarPerfil_Click;
             // 
             // btnEliminar
@@ -256,6 +257,7 @@ namespace CapaPresentacion
             btnSeleccionarImagen.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnSeleccionarImagen.Size = new Size(40, 39);
             btnSeleccionarImagen.TabIndex = 22;
+            btnSeleccionarImagen.Visible = false;
             btnSeleccionarImagen.Click += btnSeleccionarImagen_Click;
             // 
             // guna2Panel1
@@ -271,6 +273,21 @@ namespace CapaPresentacion
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges11;
             guna2Panel1.Size = new Size(190, 190);
             guna2Panel1.TabIndex = 23;
+            // 
+            // ptbPerfil
+            // 
+            ptbPerfil.BackColor = Color.Transparent;
+            ptbPerfil.FillColor = Color.Transparent;
+            ptbPerfil.Image = (Image)resources.GetObject("ptbPerfil.Image");
+            ptbPerfil.ImageRotate = 0F;
+            ptbPerfil.Location = new Point(0, 0);
+            ptbPerfil.Name = "ptbPerfil";
+            ptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            ptbPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            ptbPerfil.Size = new Size(190, 190);
+            ptbPerfil.SizeMode = PictureBoxSizeMode.StretchImage;
+            ptbPerfil.TabIndex = 0;
+            ptbPerfil.TabStop = false;
             // 
             // cmbRoles
             // 
@@ -457,21 +474,6 @@ namespace CapaPresentacion
             pnlUsuarioData.Size = new Size(325, 639);
             pnlUsuarioData.TabIndex = 28;
             // 
-            // ptbPerfil
-            // 
-            ptbPerfil.BackColor = Color.Transparent;
-            ptbPerfil.FillColor = Color.Transparent;
-            ptbPerfil.Image = (Image)resources.GetObject("ptbPerfil.Image");
-            ptbPerfil.ImageRotate = 0F;
-            ptbPerfil.Location = new Point(0, 0);
-            ptbPerfil.Name = "ptbPerfil";
-            ptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            ptbPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            ptbPerfil.Size = new Size(190, 190);
-            ptbPerfil.SizeMode = PictureBoxSizeMode.StretchImage;
-            ptbPerfil.TabIndex = 0;
-            ptbPerfil.TabStop = false;
-            // 
             // UsuariosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -487,8 +489,8 @@ namespace CapaPresentacion
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).EndInit();
             guna2Panel1.ResumeLayout(false);
-            pnlUsuarioData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
+            pnlUsuarioData.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }

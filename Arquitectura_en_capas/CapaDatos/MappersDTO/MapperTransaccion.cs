@@ -7,7 +7,7 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperTransaccion : RepoBase, IMapperTransaccion
 {
-    public MapperTransaccion(IDbConnection conexion) : base(conexion)
+    public MapperTransaccion(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
 

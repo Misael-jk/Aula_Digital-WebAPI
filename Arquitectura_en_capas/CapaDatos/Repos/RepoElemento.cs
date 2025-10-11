@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoElemento : RepoBase, IRepoElemento
 {
-    public RepoElemento(IDbConnection conexion)
-   : base(conexion)
+    public RepoElemento(IDbConnection conexion, IDbTransaction? transaction = null)
+   : base(conexion, transaction)
     {
     }
 
@@ -31,7 +31,7 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         try
         {
-            Conexion.Execute("InsertElemento", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertElemento", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
             elemento.IdElemento = parametros.Get<int>("unidElemento");
         }
         catch (Exception)
@@ -60,7 +60,7 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         try
         {
-            Conexion.Execute("UpdateElemento", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateElemento", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -78,7 +78,7 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         try
         {
-            Conexion.Execute("DeleteElemento", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("DeleteElemento", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -96,7 +96,7 @@ public class RepoElemento : RepoBase, IRepoElemento
         try
         {
             parametros.Add("@numeroSerieElemento", numeroSerieElemento);
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -114,7 +114,7 @@ public class RepoElemento : RepoBase, IRepoElemento
         try
         {
             parametros.Add("codigoBarra", codigoBarra);
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -132,7 +132,7 @@ public class RepoElemento : RepoBase, IRepoElemento
         try
         {
             parametros.Add("@idElemento", idElemento);
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -151,7 +151,7 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         parameters.Add("IdElemento", idElemento);
 
-        int disponible = Conexion.ExecuteScalar<int>(sql, parameters);
+        int disponible = Conexion.ExecuteScalar<int>(sql, parameters, transaction: Transaction);
 
         return disponible > 0;
     }
@@ -169,10 +169,11 @@ public class RepoElemento : RepoBase, IRepoElemento
         parameters.Add("@IdElemento", idElemento);
         parameters.Add("@IdEstadoElemento", idEstadoElemento);
 
-        Conexion.Execute(sql, parameters);
+        Conexion.Execute(sql, parameters, transaction: Transaction);
     }
     #endregion
 
+    #region OBTENER NOTEBOOK POR NRO SERIE O COD BARRA
     public Elemento? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
     {
         string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
@@ -190,14 +191,16 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("No se encontro el elemento con su numero de serie o codigo de barra");
         }
     }
+    #endregion
 
+    #region OBTENER PATRIMONIO
     public Elemento? GetByPatrimonio(string patrimonio)
     {
         string query = "select * from Elementos where patrimonio = @unpatrimonio";
@@ -206,37 +209,13 @@ public class RepoElemento : RepoBase, IRepoElemento
         try
         {
             parametros.Add("unpatrimonio", patrimonio);
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
             throw new Exception("No se encontro el elemento con su patrimonio");
         }
     }
+    #endregion
 
-    //public Elemento? GetNotebookByPosicion(int idCarrito, int posicionCarrito)
-    //{
-    //    string query = "select * from Elementos where idCarrito = @idCarrito and posicionCarrito = @posicionCarrito and disponible = 1 limit 1;";
-
-    //    DynamicParameters parameters = new DynamicParameters();
-
-    //    parameters.Add("unidCarrito", idCarrito);
-    //    parameters.Add("unaposicionCarrito", posicionCarrito);
-
-    //    return Conexion.QueryFirstOrDefault<Elemento>(query, parameters);
-
-    //}
-
-    //public bool DuplicatePosition(int idCarrito, int posicionCarrito)
-    //{
-    //    string query = "select count(*) from Elementos where idCarrito = @idCarrito and posicionCarrito = @posicionCarrito and disponible = 1;";
-
-    //    DynamicParameters parameters = new DynamicParameters();
-
-    //    parameters.Add("unidCarrito", idCarrito);
-    //    parameters.Add("unaposicionCarrito", posicionCarrito);
-
-    //    int count = Conexion.ExecuteScalar<int>(query, parameters);
-    //    return count > 0;
-    //}
 }

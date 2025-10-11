@@ -10,6 +10,7 @@ public interface IRepoCarritos
     public IEnumerable<Carritos> GetAll();
     public Carritos? GetById(int idCarrito);
     public Carritos? GetByNumeroSerie(string numeroSerieCarrito);
+    public Carritos? GetByEquipo(string equipo);
     public int GetCountByCarrito(int idCarrito);
     public void UpdateDisponible(int idCarrito, int idEstadoMantenimiento);
     public bool GetDisponible(int idCarrito);

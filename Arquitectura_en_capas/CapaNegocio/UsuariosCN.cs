@@ -2,7 +2,9 @@
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
 using CapaEntidad;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace CapaNegocio;
 
@@ -27,32 +29,9 @@ public class UsuariosCN
     public void CrearDocente(Usuarios usuariosNEW)
     {
 
-        ValidarEmail(usuariosNEW.Email);
+        ValidarDatos(usuariosNEW);
 
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Usuario))
-        {
-            throw new Exception("El Usuario esta vacio");
-        }
-
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Password))
-        {
-            throw new Exception("La contraseña esta vacia");
-        }
-
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Nombre))
-        {
-            throw new Exception("El nombre es obligatorio");
-        }
-
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Apellido))
-        {
-            throw new Exception("El apellido es obligatorio");
-        }
-
-        if (repoUsuarios.GetByEmail(usuariosNEW.Email) != null)
-        {
-            throw new Exception("Ya existe un docente ese email");
-        }
+        
 
         repoUsuarios.Insert(usuariosNEW);
     }
@@ -154,16 +133,91 @@ public class UsuariosCN
     #endregion
 
     #region Validaciones Privadas
-    private void ValidarEmail(string email)
+    private void ValidarDatos(Usuarios usuariosNEW)
     {
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(usuariosNEW.Usuario))
+        {
+            throw new Exception("El Usuario esta vacio");
+        }
+
+        if (usuariosNEW.Usuario.Length >= 40)
+        {
+            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+        }
+
+        if (!Regex.IsMatch(usuariosNEW.Usuario, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrWhiteSpace(usuariosNEW.Password))
+        {
+            throw new Exception("La contraseña esta vacia");
+        }
+
+        if (usuariosNEW.Password.Length >= 40)
+        {
+            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+        }
+
+        if (!Regex.IsMatch(usuariosNEW.Password, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrWhiteSpace(usuariosNEW.Nombre))
+        {
+            throw new Exception("El nombre es obligatorio");
+        }
+
+        if (usuariosNEW.Nombre.Length >= 40)
+        {
+            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+        }
+
+        if (!Regex.IsMatch(usuariosNEW.Nombre, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrWhiteSpace(usuariosNEW.Apellido))
+        {
+            throw new Exception("El apellido es obligatorio");
+        }
+
+        if (usuariosNEW.Apellido.Length >= 40)
+        {
+            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+        }
+
+        if (!Regex.IsMatch(usuariosNEW.Apellido, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+        }
+
+        if (repoUsuarios.GetByEmail(usuariosNEW.Email) != null)
+        {
+            throw new Exception("Ya existe un docente ese email");
+        }
+
+        if (string.IsNullOrWhiteSpace(usuariosNEW.Email))
         {
             throw new Exception("No completo la casilla del email");
         }
 
+        if (usuariosNEW.Email.Length >= 70)
+        {
+            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+        }
+
+        if (!Regex.IsMatch(usuariosNEW.Email, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+        }
+
         try
         {
-            MailAddress mail = new MailAddress(email);
+            MailAddress mail = new MailAddress(usuariosNEW.Email);
         }
         catch (FormatException)
         {

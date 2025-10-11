@@ -7,7 +7,7 @@ namespace CapaDatos.Repos;
 
 public class RepoTipoAccion : RepoBase, IRepoTipoAccion
 {
-    public RepoTipoAccion(IDbConnection dbConnection) : base(dbConnection)
+    public RepoTipoAccion(IDbConnection dbConnection, IDbTransaction? transaction = null) : base(dbConnection, transaction)
     {
     }
 

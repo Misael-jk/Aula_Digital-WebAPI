@@ -1,8 +1,9 @@
 using Microsoft.Extensions.Configuration;
 using CapaDatos;
 using System.Data;
-using MySql.Data.MySqlClient;
+//using Mysql.Data.MySqlClient;
 using CapaPresentacion;
+using MySqlConnector;
 
 namespace Sistema_de_notebooks
 {
@@ -20,17 +21,13 @@ namespace Sistema_de_notebooks
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             IConfiguration configuration = builder.Build();
-            string ConnectionString = configuration.GetConnectionString("Conexion");
+            string ConnectionString = configuration.GetConnectionString("Conexion")!;
 
             IDbConnection dbConnection = new MySqlConnection(ConnectionString);
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            //if (dbConnection.State == ConnectionState.Closed)
-            //{
-            //    dbConnection.Open();
-            //}
                 Application.Run(new LoginState(dbConnection));
         }
     }

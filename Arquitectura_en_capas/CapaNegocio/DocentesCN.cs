@@ -3,7 +3,10 @@ using CapaDatos.InterfacesDTO;
 using CapaDatos.Repos;
 using CapaDTOs;
 using CapaEntidad;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace CapaNegocio;
 
@@ -27,19 +30,12 @@ public class DocentesCN
     #region INSERT DOCENTE
     public void CrearDocente(Docentes docenteNEW)
     {
-        ValidarDni(docenteNEW.Dni);
+        //docenteNEW.Nombre = docenteNEW.Nombre.Trim();
+        //docenteNEW.Apellido = docenteNEW.Apellido.Trim();
+        //docenteNEW.Dni = docenteNEW.Dni.Trim();
+        //docenteNEW.Email = docenteNEW.Email.Trim().ToLower();
 
-        ValidarEmail(docenteNEW.Email);
-
-        if (string.IsNullOrWhiteSpace(docenteNEW.Nombre))
-        {
-            throw new Exception("El nombre es obligatorio");
-        }
-
-        if (string.IsNullOrWhiteSpace(docenteNEW.Apellido))
-        {
-            throw new Exception("El apellido es obligatorio");
-        }
+        ValidarDocente(docenteNEW);
 
         if (_repoDocente.GetByDni(docenteNEW.Dni) != null)
         {
@@ -58,19 +54,12 @@ public class DocentesCN
     #region UPDATE DOCENTE
     public void ActualizarDocente(Docentes docenteNEW)
     {
-        ValidarDni(docenteNEW.Dni);
+        //docenteNEW.Nombre = docenteNEW.Nombre.Trim();
+        //docenteNEW.Apellido = docenteNEW.Apellido.Trim();
+        //docenteNEW.Dni = docenteNEW.Dni.Trim();
+        //docenteNEW.Email = docenteNEW.Email.Trim().ToLower();
 
-        ValidarEmail(docenteNEW.Email);
-
-        if (string.IsNullOrWhiteSpace(docenteNEW.Nombre))
-        {
-            throw new Exception("El nombre es obligatorio");
-        }
-
-        if (string.IsNullOrWhiteSpace(docenteNEW.Apellido))
-        {
-            throw new Exception("El apellido es obligatorio");
-        }
+        ValidarDocente(docenteNEW);
 
         Docentes? docentesOLD = _repoDocente.GetById(docenteNEW.IdDocente);
 
@@ -107,33 +96,63 @@ public class DocentesCN
     }
     #endregion
 
+    #region Validaciones 
 
-
-    #region Validaciones Privadas
-
-    private void ValidarDni(string dni)
+    private void ValidarDocente(Docentes docentes)
     {
-        if(string.IsNullOrWhiteSpace(dni))
+        if (string.IsNullOrWhiteSpace(docentes.Nombre))
+        {
+            throw new Exception("El nombre es obligatorio");
+        }
+
+        if (docentes.Nombre.Length > 20)
+        {
+            throw new ValidationException("El nombre del docente no puede superar los 20 caracteres.");
+        }
+
+        if (!Regex.IsMatch(docentes.Nombre, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+$"))
+        {
+            throw new ValidationException("El nombre del docente contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrWhiteSpace(docentes.Apellido))
+        {
+            throw new Exception("El apellido es obligatorio");
+        }
+
+        if (docentes.Apellido.Length > 20)
+        {
+            throw new ValidationException("El apellido del docente no puede superar los 20 caracteres.");
+        }
+
+        if (!Regex.IsMatch(docentes.Apellido, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+$"))
+        {
+            throw new ValidationException("El apellido del docente contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrWhiteSpace(docentes.Dni))
         {
             throw new Exception("No completo la casilla del DNI");
         }
 
-        if (dni.Length != 8)
+        if (!Regex.IsMatch(docentes.Dni, @"^\d{8}$"))
         {
-            throw new Exception("El DNI debe tener exactamente 8 dígitos");
+            throw new ValidationException("El DNI debe tener exactamente 8 dígitos numéricos.");
         }
-    }
 
-    private void ValidarEmail(string email)
-    {
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(docentes.Email))
         {
             throw new Exception("No completo la casilla del email");
         }
 
+        if (docentes.Email.Length > 70)
+        {
+            throw new ValidationException("El email del docente no puede superar los 70 caracteres.");
+        }
+
         try
         {
-            MailAddress mail = new MailAddress(email);
+            MailAddress mail = new MailAddress(docentes.Email);
         }
         catch (FormatException)
         {

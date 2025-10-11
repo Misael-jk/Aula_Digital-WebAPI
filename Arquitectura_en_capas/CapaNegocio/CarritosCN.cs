@@ -1,32 +1,22 @@
 ﻿using CapaEntidad;
-using CapaDatos.Interfaces;
 using System.Transactions;
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
-using CapaDatos.Repos;
+using System.Text.RegularExpressions;
+using System.ComponentModel.DataAnnotations;
+using CapaDatos.InterfaceUoW;
 
 namespace CapaNegocio;
 
 public class CarritosCN
 {
-    private readonly IRepoCarritos repoCarrito;
-    private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
-    private readonly IRepoUbicacion repoUbicacion;
-    private readonly IRepoModelo repoModelo;
-    private readonly IRepoNotebooks repoNotebooks;
-    private readonly IRepoHistorialCambio repoHistorialCambio;
-    private readonly IRepoHistorialCarrito repoHistorialCarrito;
     private readonly IMapperCarritos mapperCarritos;
+    private readonly IUowCarritos uow;
 
-    public CarritosCN(IRepoCarritos repoCarrito, IRepoNotebooks repoNotebooks, IRepoUbicacion repoUbicacion, IRepoModelo repoModelo, IRepoHistorialCambio repoHistorialCambio, IRepoHistorialCarrito repoHistorialCarrito, IMapperCarritos mapperCarritos)
+    public CarritosCN(IMapperCarritos mapperCarritos, IUowCarritos uowCarritos)
     {
-        this.repoCarrito = repoCarrito;
-        this.repoNotebooks = repoNotebooks;
-        this.repoUbicacion = repoUbicacion;
-        this.repoModelo = repoModelo;
-        this.repoHistorialCambio = repoHistorialCambio;
-        this.repoHistorialCarrito = repoHistorialCarrito; 
         this.mapperCarritos = mapperCarritos;
+        uow = uowCarritos;
     }
 
     #region Mostrar Carritos
@@ -39,318 +29,273 @@ public class CarritosCN
     #region INSERT CARRITO
     public void CrearCarrito(Carritos CarritoNEW, int idUsuario)
     {
-        if(string.IsNullOrWhiteSpace(CarritoNEW.NumeroSerieCarrito))
+        ValidarDatos(CarritoNEW);
+
+        try
         {
-            throw new Exception("El numero de serie del carrito es obligatorio");
+            uow.BeginTransaction();
+
+            ValidarReposInsert(CarritoNEW);
+
+            uow.RepoCarritos.Insert(CarritoNEW);
+
+            HistorialCambios historial = new HistorialCambios
+            {
+                IdTipoAccion = 1,
+                FechaCambio = DateTime.Now,
+                Descripcion = $"Se creó el carrito con número de serie {CarritoNEW.EquipoCarrito}.",
+                IdUsuario = idUsuario
+            };
+
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialCarrito.Insert(new HistorialCarritos
+            {
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdCarrito = CarritoNEW.IdCarrito
+            });
+
+            uow.Commit();
         }
-
-        if(repoCarrito.GetByNumeroSerie(CarritoNEW.NumeroSerieCarrito) != null)
+        catch
         {
-            throw new Exception("Ya existe un carrito con ese numero de serie, por favor elija uno nuevo");
+            uow.Rollback();
+            throw;
         }
-
-        if(repoEstadosMantenimiento.GetById(CarritoNEW.IdEstadoMantenimiento) == null)
-        {
-            throw new Exception("El estado de mantenimiento del carrito no es valido");
-        }
-
-        if(repoUbicacion.GetById(CarritoNEW.IdUbicacion) == null)
-        {
-            throw new Exception("La ubicacion del carrito no es valido");
-        }
-
-        if(repoModelo.GetById(CarritoNEW.IdModelo) == null)
-        {
-            throw new Exception("El modelo del carrito no es valido");
-        }
-
-        if (CarritoNEW.IdEstadoMantenimiento != 1)
-        {
-            throw new Exception("El carrito debe estar disponible al crearse");
-        }
-
-        repoCarrito.Insert(CarritoNEW);
-
-        HistorialCambios historial = new HistorialCambios
-        {
-            IdTipoAccion = 1,
-            FechaCambio = DateTime.Now,
-            Descripcion = $"Se creó el carrito con número de serie {CarritoNEW.NumeroSerieCarrito}.",
-            IdUsuario = idUsuario
-        };
-
-        repoHistorialCambio.Insert(historial);
-
-        repoHistorialCarrito.Insert(new HistorialCarritos
-        {
-            IdHistorialCambio = historial.IdHistorialCambio,
-            IdCarrito = CarritoNEW.IdCarrito
-        });
     }
     #endregion
 
     #region UPDATE CARRITO
+    /// <summary>
+    /// Estados de mantenimiento: <br/>
+    /// 1. Disponible <br/>
+    /// 2. En Préstamo <br/>
+    /// 3. En Mantenimiento <br/>
+    /// 4. Dado de Baja <br/>
+    /// </summary>
+    /// <param name="carritoNEW"></param>
+    /// <param name="idUsuario"></param>
     public void ActualizarCarrito(Carritos carritoNEW, int idUsuario)
     {
-        if (string.IsNullOrWhiteSpace(carritoNEW.NumeroSerieCarrito))
+        ValidarDatos(carritoNEW);
+
+        try
         {
-            throw new Exception("El numero de serie del carrito es obligatorio");
-        } 
+            uow.BeginTransaction();
 
-        Carritos? carritoOLD = repoCarrito.GetById(carritoNEW.IdCarrito);
+            ValidarReposUpdate(carritoNEW);
 
-        if (carritoOLD == null)
-        {
-            throw new Exception("El carrito no existe");
-        }
+            uow.RepoCarritos.Update(carritoNEW);
 
-        if (repoEstadosMantenimiento.GetById(carritoNEW.IdEstadoMantenimiento) == null)
-        {
-            throw new Exception("El estado de mantenimiento seleccionado no es válido");
-        }
-
-        if (repoUbicacion.GetById(carritoNEW.IdUbicacion) == null)
-        {
-            throw new Exception("La ubicación seleccionada no existe");
-        }
-
-        if (repoModelo.GetById(carritoNEW.IdModelo) == null)
-        {
-            throw new Exception("El modelo seleccionado no es válido");
-        }
-
-        if (!repoCarrito.GetDisponible(carritoNEW.IdCarrito))
-        {
-            throw new Exception("No se puede actualizar un carrito que está en préstamo");
-        }
-
-        var estado = repoEstadosMantenimiento.GetById(carritoNEW.IdEstadoMantenimiento);
-
-        if (carritoOLD.NumeroSerieCarrito != carritoNEW.NumeroSerieCarrito && repoCarrito.GetByNumeroSerie(carritoNEW.NumeroSerieCarrito) != null)
-        {
-            throw new Exception("Ya existe otro carrito con el mismo numero de serie");
-        }
-
-        if (carritoOLD.IdUbicacion != carritoNEW.IdUbicacion)
-        {
-            IEnumerable<Notebooks> notebooksEnCarrito = repoNotebooks.GetByCarrito(carritoNEW.IdCarrito);
-
-            IEnumerable<int> idsNotebooks = notebooksEnCarrito.Select(p => p.IdElemento);
-
-            foreach(int idNotebook in idsNotebooks)
+            HistorialCambios historial = new HistorialCambios
             {
-                if(!repoNotebooks.GetDisponible(idNotebook))
-                {
-                    throw new Exception($"El elemento {idNotebook} no esta disponible.");
-                }
-            }
+                IdTipoAccion = 2,
+                FechaCambio = DateTime.Now,
+                Descripcion = $"Se actualizó el carrito con número de serie {carritoNEW.NumeroSerieCarrito}.",
+                IdUsuario = idUsuario
+            };
 
-            foreach (Notebooks? notebook in notebooksEnCarrito)
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialCarrito.Insert(new HistorialCarritos
             {
-                notebook.IdUbicacion = carritoNEW.IdUbicacion;
-                repoNotebooks.Update(notebook);
-            }
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdCarrito = carritoNEW.IdCarrito
+            });
+
+            uow.Commit();
         }
-
-        if (estado != null && carritoNEW.IdEstadoMantenimiento == 2)
+        catch
         {
-            throw new Exception("No se puede poner el estado de mantenimiento del carrito en 'En Préstamo'.");
+            uow.Rollback();
+            throw;
         }
-
-        if (carritoOLD.IdEstadoMantenimiento != carritoNEW.IdEstadoMantenimiento && carritoNEW.IdEstadoMantenimiento == 2)
-        {
-            throw new Exception("No se puede cambiar el estado de mantenimiento del carrito a 'En Préstamo' si tiene notebooks en préstamo.");
-        }
-
-        repoCarrito.Update(carritoNEW);
-
-        HistorialCambios historial = new HistorialCambios
-        {
-            IdTipoAccion = 2,
-            FechaCambio = DateTime.Now,
-            Descripcion = $"Se actualizó el carrito con número de serie {carritoNEW.NumeroSerieCarrito}.",
-            IdUsuario = idUsuario
-        };
-
-        repoHistorialCambio.Insert(historial);
-
-        repoHistorialCarrito.Insert(new HistorialCarritos
-        {
-            IdHistorialCambio = historial.IdHistorialCambio,
-            IdCarrito = carritoNEW.IdCarrito
-        });
     }
     #endregion
 
+    #region DESHABILITAR UN CARRITO
     public void DeshabilitarCarrito(Carritos carritos, int idEstadoMantenimiento, int idUsuario)
     {
-        if (string.IsNullOrWhiteSpace(carritos.NumeroSerieCarrito))
-        {
-            throw new Exception("El numero de serie del carrito es obligatorio");
-        } 
+        ValidarDatos(carritos);
 
-        Carritos? carritoOLD = repoCarrito.GetById(carritos.IdCarrito);
-
-        if (carritoOLD == null)
+        try
         {
-            throw new Exception("El carrito no existe");
+            uow.BeginTransaction();
+
+            Carritos? carritoOLD = uow.RepoCarritos.GetById(carritos.IdCarrito);
+
+            if (carritoOLD == null)
+            {
+                throw new Exception("El carrito no existe");
+            }
+
+            if (uow.RepoEstadosMantenimiento.GetById(carritos.IdEstadoMantenimiento) == null)
+            {
+                throw new Exception("El estado de mantenimiento seleccionado no es valido");
+            }
+
+            if (uow.RepoUbicacion.GetById(carritos.IdUbicacion) == null)
+            {
+                throw new Exception("La ubicacion seleccionada no existe");
+            }
+
+            if (carritoOLD.IdModelo.HasValue)
+            {
+                Modelos? modeloCarrito = uow.RepoModelo.GetById(carritoOLD.IdModelo.Value);
+                if (modeloCarrito == null)
+                {
+                    throw new Exception("El modelo del carrito no es valido.");
+                }
+            }
+
+            if (!uow.RepoCarritos.GetDisponible(carritos.IdCarrito))
+            {
+                throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
+            }
+
+            if (uow.RepoNotebooks.GetByCarrito(carritoOLD.IdCarrito).Any())
+            {
+                throw new Exception("No se puede deshabilitar un carrito que aún contiene notebooks.");
+            }
+
+            carritos.IdEstadoMantenimiento = idEstadoMantenimiento;
+            carritos.FechaBaja = DateTime.Now;
+            carritos.Habilitado = false;
+
+            uow.RepoCarritos.Update(carritoOLD);
+
+            HistorialCambios historial = new HistorialCambios()
+            {
+                IdTipoAccion = 3,
+                IdUsuario = idUsuario,
+                Descripcion = $"Se deshabilito el carrito con numero de serie {carritos.NumeroSerieCarrito}",
+                FechaCambio = DateTime.Now
+            };
+
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialCarrito.Insert(new HistorialCarritos
+            {
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdCarrito = carritos.IdCarrito
+            });
+
+            uow.Commit();
         }
-
-        if (repoEstadosMantenimiento.GetById(carritos.IdEstadoMantenimiento) == null)
+        catch
         {
-            throw new Exception("El estado de mantenimiento seleccionado no es válido");
+            uow.Rollback();
+            throw;
         }
-
-        if (repoUbicacion.GetById(carritos.IdUbicacion) == null)
-        {
-            throw new Exception("La ubicación seleccionada no existe");
-        }
-
-        if (repoModelo.GetById(carritos.IdModelo) == null)
-        {
-            throw new Exception("El modelo seleccionado no es válido");
-        }
-
-        if (!repoCarrito.GetDisponible(carritos.IdCarrito))
-        {
-            throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
-        }
-
-        if (repoNotebooks.GetByCarrito(carritoOLD.IdCarrito).Any())
-        {
-            throw new Exception("No se puede deshabilitar un carrito que aún contiene notebooks.");
-        }
-
-        carritos.IdEstadoMantenimiento = idEstadoMantenimiento;
-        carritos.FechaBaja = DateTime.Now;
-        carritos.Habilitado = false;
-
-        repoCarrito.Update(carritoOLD);
-
-        HistorialCambios historial = new HistorialCambios()
-        {
-            IdTipoAccion = 3,
-            IdUsuario = idUsuario,
-            Descripcion = $"Se deshabilito el carrito con numero de serie {carritos.NumeroSerieCarrito}",
-            FechaCambio = DateTime.Now
-        };
-
-        repoHistorialCambio.Insert(historial);
-
-        repoHistorialCarrito.Insert(new HistorialCarritos
-        {
-            IdHistorialCambio = historial.IdHistorialCambio,
-            IdCarrito = carritos.IdCarrito
-        });
-
     }
+    #endregion
 
     #region DELETE CARRITO
     public void EliminarCarrito(int idCarrito)
     {
-        Carritos? carrito = repoCarrito.GetById(idCarrito);
+        Carritos? carrito = uow.RepoCarritos.GetById(idCarrito);
 
         if (carrito == null)
         {
             throw new Exception("El carrito no existe");
         }
 
-        repoCarrito.Delete(idCarrito);
+        uow.RepoCarritos.Delete(idCarrito);
     }
     #endregion
 
     #region READ CARRITO
     public IEnumerable<Carritos> ListarCarritos()
     {
-        return repoCarrito.GetAll();
+        return uow.RepoCarritos.GetAll();
     }
+    #endregion
 
+    #region AGREGAR NOTEBOOK AL CARRITO
     public void AddNotebook(int idCarrito, int posicion, int idNotebook, int idUsuario)
     {
-        using (TransactionScope scope = new TransactionScope())
+        Carritos? carrito = uow.RepoCarritos.GetById(idCarrito);
+
+        if (carrito == null)
         {
-            Carritos? carrito = repoCarrito.GetById(idCarrito);
-
-            if (carrito == null)
-            {
-                throw new Exception("El carrito no existe");
-            }
-
-            Notebooks? notebooks = repoNotebooks.GetById(idNotebook);
-
-            if (notebooks == null)
-            {
-                throw new Exception("Notebook no encontrado");
-            }
-
-            if (notebooks.IdEstadoMantenimiento == 2 && notebooks.IdCarrito != null)
-            {
-                throw new Exception("Un elemento en prestamo no puede estar asignado a un carrito");
-            }
-
-            if (!repoNotebooks.GetDisponible(idNotebook))
-            {
-                throw new Exception("La notebook no esta disponible");
-            }
-
-            if (notebooks.IdCarrito.HasValue && notebooks.IdCarrito != idCarrito)
-            {
-                throw new Exception("La notebook ya esta en otro carrito.");
-            }
-
-            if (repoCarrito.GetCountByCarrito(idCarrito) >= 25)
-            {
-                throw new Exception("El carrito que selecciono esta al maximo de notebooks");
-            }
-
-            if (notebooks.PosicionCarrito < 1 || notebooks.PosicionCarrito > 25)
-            {
-                throw new Exception("La posición en el carrito debe estar entre 1 y 25.");
-            }
-
-            if (notebooks.IdTipoElemento == 1 && notebooks.IdCarrito != 0)
-            {
-                if (notebooks.IdCarrito.HasValue && notebooks.PosicionCarrito.HasValue && repoNotebooks.DuplicatePosition(notebooks.IdCarrito.Value, notebooks.PosicionCarrito.Value))
-                {
-                    throw new Exception("La posición dentro del carrito ya está ocupada, por favor elija otra.");
-                }
-
-                if (notebooks.PosicionCarrito <= 0)
-                {
-                    throw new Exception("Debe asignar una posición válida dentro del carrito.");
-                }
-            }
-            else
-            {
-                if (notebooks.PosicionCarrito != 0)
-                {
-                    throw new Exception("Solo las notebooks pueden tener posición en carrito.");
-                }
-            }
-
-            notebooks.IdUbicacion = carrito.IdUbicacion;
-            notebooks.IdCarrito = idCarrito;
-            notebooks.PosicionCarrito = posicion;
-
-            repoNotebooks.Update(notebooks);
-
-
-            scope.Complete();
+            throw new Exception("El carrito no existe");
         }
-    }
 
+        Notebooks? notebooks = uow.RepoNotebooks.GetById(idNotebook);
+
+        if (notebooks == null)
+        {
+            throw new Exception("Notebook no encontrado");
+        }
+
+        if (notebooks.IdEstadoMantenimiento == 2 && notebooks.IdCarrito != null)
+        {
+            throw new Exception("Un elemento en prestamo no puede estar asignado a un carrito");
+        }
+
+        if (!uow.RepoNotebooks.GetDisponible(idNotebook))
+        {
+            throw new Exception("La notebook no esta disponible");
+        }
+
+        if (notebooks.IdCarrito.HasValue && notebooks.IdCarrito != idCarrito)
+        {
+            throw new Exception("La notebook ya esta en otro carrito.");
+        }
+
+        if (uow.RepoCarritos.GetCountByCarrito(idCarrito) >= 25)
+        {
+            throw new Exception("El carrito que selecciono esta al maximo de notebooks");
+        }
+
+        if (notebooks.PosicionCarrito < 1 || notebooks.PosicionCarrito > 25)
+        {
+            throw new Exception("La posición en el carrito debe estar entre 1 y 25.");
+        }
+
+        if (notebooks.IdTipoElemento == 1 && notebooks.IdCarrito != 0)
+        {
+            if (notebooks.IdCarrito.HasValue && notebooks.PosicionCarrito.HasValue && uow.RepoNotebooks.DuplicatePosition(notebooks.IdCarrito.Value, notebooks.PosicionCarrito.Value))
+            {
+                throw new Exception("La posición dentro del carrito ya está ocupada, por favor elija otra.");
+            }
+
+            if (notebooks.PosicionCarrito <= 0)
+            {
+                throw new Exception("Debe asignar una posición válida dentro del carrito.");
+            }
+        }
+        else
+        {
+            if (notebooks.PosicionCarrito != 0)
+            {
+                throw new Exception("Solo las notebooks pueden tener posición en carrito.");
+            }
+        }
+
+        notebooks.IdUbicacion = carrito.IdUbicacion;
+        notebooks.IdCarrito = idCarrito;
+        notebooks.PosicionCarrito = posicion;
+
+        uow.RepoNotebooks.Update(notebooks);
+
+
+    }
+    #endregion
+
+    #region QUITAR NOTEBOOK DEL CARRITO
     public void RemoveNotebook(int idCarrito, int idNotebook, int idUsuario, int idUbicacion)
     {
         using (TransactionScope scope = new TransactionScope())
         {
-            Notebooks? notebooks = repoNotebooks.GetById(idNotebook);
+            Notebooks? notebooks = uow.RepoNotebooks.GetById(idNotebook);
 
             if (notebooks == null || notebooks.IdCarrito != idCarrito)
             {
                 throw new Exception("La notebook no esta asignada a este carrito");
             }
 
-            if (!repoNotebooks.GetDisponible(idNotebook))
+            if (!uow.RepoNotebooks.GetDisponible(idNotebook))
             {
                 throw new Exception("La notebook no esta disponible para quitar del carrito");
             }
@@ -359,13 +304,258 @@ public class CarritosCN
             notebooks.IdCarrito = null;
             notebooks.PosicionCarrito = null;
 
-            repoNotebooks.Update(notebooks);
+            uow.RepoNotebooks.Update(notebooks);
 
             scope.Complete();
         }
     }
+    #endregion
+
+    #region VALIDACIONES
+
+    #region VALIDACIONES DE CARACTERES
+    /// <summary>
+    /// Validar Datos del carrito (String, Cadena): <br/>
+    /// 1. No puede estar vacio o ser nulo. <br/>
+    /// 2. No puede superar los 40 caracteres. <br/>
+    /// 3. Solo puede contener letras, números, espacios y guiones. <br/>
+    /// </summary>
+    /// <param name="carrito"></param>
+    /// <exception cref="ValidationException"></exception>
+    private void ValidarDatos(Carritos carrito)
+    {
+        if (string.IsNullOrWhiteSpace(carrito.NumeroSerieCarrito))
+        {
+            throw new ValidationException("El numero de serie es obligatorio.");
+        }
+
+        if (carrito.NumeroSerieCarrito.Length > 40)
+        {
+            throw new ValidationException("El número de serie no puede superar los 40 caracteres.");
+        }
+
+        if (!Regex.IsMatch(carrito.NumeroSerieCarrito, @"^[A-Za-z0-9\-]+$"))
+        {
+            throw new ValidationException("El número de serie contiene caracteres inválidos.");
+        }
+
+        if (string.IsNullOrWhiteSpace(carrito.EquipoCarrito))
+        {
+            throw new ValidationException("El nombre del equipo es obligatorio.");
+        }
+
+        if (carrito.EquipoCarrito.Length > 40)
+        {
+            throw new ValidationException("El nombre del equipo no puede superar los 40 caracteres.");
+        }
+
+        if (!Regex.IsMatch(carrito.EquipoCarrito, @"^[A-Za-z0-9\s\-]+$"))
+        {
+            throw new ValidationException("El nombre del equipo contiene caracteres inválidos.");
+        }
+    }
+    #endregion
 
     #endregion
+
+    #region Validar Insert
+    private void ValidarReposInsert(Carritos carritoNEW)
+    {
+        #region VALIDACION DE CARRITOS
+        if(uow.RepoCarritos.GetById(carritoNEW.IdCarrito) == null)
+        {
+            throw new Exception("El carrito no existe");
+        }
+        #endregion
+
+        #region UBICACION
+        if (uow.RepoUbicacion.GetById(carritoNEW.IdUbicacion) == null)
+        {
+            throw new Exception("La ubicación seleccionada no existe.");
+        }
+        #endregion
+
+        #region ESTADO
+        if (carritoNEW.IdEstadoMantenimiento != 1)
+        {
+            throw new Exception("El carrito debe estar disponible al crearse");
+        }
+
+        if (uow.RepoEstadosMantenimiento.GetById(carritoNEW.IdEstadoMantenimiento) == null)
+        {
+            throw new Exception("El estado de mantenimiento seleccionado no es valido.");
+        }
+        #endregion
+
+        #region MODELOS
+        if (carritoNEW.IdModelo != null && uow.RepoModelo.GetById(carritoNEW.IdModelo.Value) == null)
+        {
+            throw new Exception("El modelo del carrito no es valido.");
+        }
+
+        Modelos? modeloCarrito = carritoNEW.IdModelo.HasValue ? uow.RepoModelo.GetById(carritoNEW.IdModelo.Value) : null;
+
+        if (modeloCarrito != null)
+        {
+            IEnumerable<Modelos> modelosDelTipo = uow.RepoModelo.GetByTipo(modeloCarrito.IdTipoElemento);
+
+            if (!modelosDelTipo.Any(m => m.IdModelo == carritoNEW.IdModelo))
+            {
+                throw new Exception("El modelo seleccionado no corresponde a un carrito.");
+            }
+        }
+        #endregion
+
+        #region NUMERO SERIE
+        Carritos? serieHabilitado = uow.RepoCarritos.GetByNumeroSerie(carritoNEW.NumeroSerieCarrito);
+
+        if (serieHabilitado != null)
+        {
+            if (serieHabilitado.Habilitado == true)
+            {
+                throw new Exception("Ya existe otro carrito con el mismo numero de serie.");
+            }
+            else
+            {
+                throw new Exception("El carrito ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
+            }
+        }
+        #endregion
+
+        #region NOMBRE EQUIPO
+        Carritos? equipoHabilitado = uow.RepoCarritos.GetByEquipo(carritoNEW.EquipoCarrito);
+
+        if (equipoHabilitado != null)
+        {
+            if (equipoHabilitado.Habilitado == true)
+            {
+                throw new Exception("Ya existe otro carrito con el mismo nombre de equipo.");
+            }
+            else
+            {
+                throw new Exception("El carrito ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
+            }
+        }
+        #endregion
+    }
+    #endregion
+
+    #region Validar Update
+    private void ValidarReposUpdate(Carritos carritoNEW)
+    {
+        #region VALIDAR CARRITO
+        Carritos? carritoOLD = uow.RepoCarritos.GetById(carritoNEW.IdCarrito);
+
+        if (carritoOLD == null)
+        {
+            throw new Exception("El carrito que intenta actualizar no existe.");
+        }
+        #endregion
+
+        #region ESTADO
+        if (uow.RepoEstadosMantenimiento.GetById(carritoNEW.IdEstadoMantenimiento) == null)
+        {
+            throw new Exception("El estado de mantenimiento seleccionado no es valido.");
+        }
+
+        if (!uow.RepoCarritos.GetDisponible(carritoNEW.IdCarrito) && carritoNEW.IdEstadoMantenimiento == 2)
+        {
+            throw new Exception("No se puede actualizar un carrito que esta en prestamo");
+        }
+
+        if (carritoNEW.IdEstadoMantenimiento == 2)
+        {
+            throw new Exception("No se puede poner el estado del carrito en 'En Préstamo'.");
+        }
+        #endregion
+
+        #region UBICACION
+        if (uow.RepoUbicacion.GetById(carritoNEW.IdUbicacion) == null)
+        {
+            throw new Exception("La ubicación seleccionada no existe.");
+        }
+
+        if (carritoOLD?.IdUbicacion != carritoNEW.IdUbicacion)
+        {
+            IEnumerable<Notebooks> notebooksEnCarrito = uow.RepoNotebooks.GetByCarrito(carritoNEW.IdCarrito);
+
+            if (notebooksEnCarrito.Any(nb => !uow.RepoNotebooks.GetDisponible(nb.IdElemento)))
+            {
+                throw new Exception("No se puede cambiar la ubicacion: existen notebooks en prestamo dentro del carrito.");
+            }
+
+            foreach (Notebooks? notebook in notebooksEnCarrito)
+            {
+                notebook.IdUbicacion = carritoNEW.IdUbicacion;
+                uow.RepoNotebooks.Update(notebook);
+            }
+        }
+        #endregion
+
+        #region MODELOS
+        if (carritoNEW.IdModelo != null)
+        {
+            Modelos? modelo = uow.RepoModelo.GetById(carritoNEW.IdModelo.Value);
+            if (modelo == null)
+            {
+                throw new Exception("El modelo del carrito no es valido.");
+            }
+
+            if (!uow.RepoModelo.GetByTipo(modelo.IdTipoElemento).Any(m => m.IdModelo == carritoNEW.IdModelo))
+            {
+                throw new Exception("El modelo seleccionado no corresponde a un carrito.");
+            }
+        }
+        #endregion
+
+        #region NUMERO SERIE
+        Carritos? serie = uow.RepoCarritos.GetByNumeroSerie(carritoNEW.NumeroSerieCarrito);
+
+        if (serie != null && serie.IdCarrito != carritoNEW.IdCarrito)
+        {
+            throw new Exception("Ya existe otro carrito con el mismo numero de serie.");
+        }
+
+        Carritos? serieHabilitado = uow.RepoCarritos.GetByNumeroSerie(carritoNEW.NumeroSerieCarrito);
+
+        if (carritoOLD?.NumeroSerieCarrito != carritoNEW.NumeroSerieCarrito && serieHabilitado != null)
+        {
+            if (serieHabilitado.Habilitado == true)
+            {
+                throw new Exception("Ya existe otro carrito con el mismo numero de serie.");
+            }
+            else
+            {
+                throw new Exception("El carrito ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
+            }
+        }
+        #endregion
+
+        #region EQUIPO
+        Carritos? equipo = uow.RepoCarritos.GetByEquipo(carritoNEW.EquipoCarrito);
+
+        if (equipo != null && equipo.IdCarrito != carritoNEW.IdCarrito)
+        {
+            throw new Exception("Ya existe otro carrito con el mismo nombre de equipo.");
+        }
+
+        Carritos? equipoHabilitado = uow.RepoCarritos.GetByEquipo(carritoNEW.EquipoCarrito);
+
+        if (carritoOLD?.EquipoCarrito != carritoNEW.EquipoCarrito && equipoHabilitado != null)
+        {
+            if (equipoHabilitado.Habilitado == true)
+            {
+                throw new Exception("Ya existe otro carrito con el mismo nombre de equipo.");
+            }
+            else
+            {
+                throw new Exception("El carrito ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
+            }
+        }
+        #endregion
+    }
+    #endregion
+
 
 }
 

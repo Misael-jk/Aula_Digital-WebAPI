@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoEstadosPrestamo : RepoBase, IRepoEstadosPrestamo
 {
-    public RepoEstadosPrestamo(IDbConnection conexion)
-    : base(conexion)
+    public RepoEstadosPrestamo(IDbConnection conexion, IDbTransaction? transaction = null)
+    : base(conexion, transaction)
     {
     }
 
@@ -38,7 +38,7 @@ public class RepoEstadosPrestamo : RepoBase, IRepoEstadosPrestamo
         {
             parameters.Add("unidEstadoPrestamo", idEstadoPrestamo);
 
-            return Conexion.QueryFirstOrDefault<EstadosPrestamo>(query, parameters);
+            return Conexion.QueryFirstOrDefault<EstadosPrestamo>(query, parameters, transaction: Transaction);
         }
         catch (Exception ex)
         {

@@ -8,32 +8,19 @@ using CapaDTOs;
 using System.Transactions;
 using System.Data.Common;
 using System.ComponentModel.DataAnnotations;
+using CapaDatos.InterfaceUoW;
 
 namespace CapaNegocio;
 
 public class DevolucionCN
 {
-    private readonly IRepoDevolucion repoDevolucion;
-    private readonly IRepoPrestamos repoPrestamos;
-    private readonly IRepoUsuarios repoUsuarios;
-    private readonly IRepoElemento repoElementos;
-    private readonly IRepoDocentes repoDocentes;
-    private readonly IRepoEstadosPrestamo repoEstadosPrestamo;
-    private readonly IRepoDevolucionDetalle repoDevolucionDetalle;
+    private readonly IUowDevolucion uow;
     private readonly IMapperDevoluciones mapperDevolucion;
-    private readonly IRepoCarritos repoCarritos;
 
-    public DevolucionCN(IRepoDevolucion repoDevolucion, IRepoPrestamos repoPrestamos, IRepoUsuarios repoUsuarios, IRepoElemento repoElementos, IRepoEstadosPrestamo repoEstadosPrestamo, IRepoDocentes repoDocentes, IRepoDevolucionDetalle repoDevolucionDetalle, IRepoCarritos repoCarritos, IMapperDevoluciones mapperDevolucion)
+    public DevolucionCN(IMapperDevoluciones mapperDevolucion, IUowDevolucion uow)
     {
-        this.repoDevolucion = repoDevolucion;
-        this.repoPrestamos = repoPrestamos;
-        this.repoUsuarios = repoUsuarios;
-        this.repoElementos = repoElementos;
-        this.repoDocentes = repoDocentes;
-        this.repoEstadosPrestamo = repoEstadosPrestamo;
-        this.repoDevolucionDetalle = repoDevolucionDetalle;
         this.mapperDevolucion = mapperDevolucion;
-        this.repoCarritos = repoCarritos;
+        this.uow = uow;
     }
 
     public IEnumerable<DevolucionesDTO> ObtenerElementos()
@@ -47,14 +34,14 @@ public class DevolucionCN
         using (TransactionScope scope = new TransactionScope())
         {
 
-            Prestamos? prestamo = repoPrestamos.GetById(devolucionNEW.IdPrestamo);
+            Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucionNEW.IdPrestamo);
 
             if (prestamo == null)
             {
                 throw new Exception("El prestamo no existe");
             }
 
-            if (repoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
+            if (uow.RepoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
             {
                 throw new Exception("El prestamo ya fue devuelto");
             }
@@ -64,14 +51,14 @@ public class DevolucionCN
             //    throw new Exception("El docente no existe");
             //}
 
-            if (repoUsuarios.GetById(devolucionNEW.IdUsuario) == null)
+            if (uow.RepoUsuarios.GetById(devolucionNEW.IdUsuario) == null)
             {
                 throw new Exception("El usuario no existe");
             }
 
             foreach (int idElemento in idsElementos)
             {
-                if (repoElementos.GetDisponible(idElemento))
+                if (uow.RepoElementos.GetDisponible(idElemento))
                 {
                     throw new Exception($"El elemento {idElemento} no debe estar disponible.");
                 }
@@ -89,10 +76,10 @@ public class DevolucionCN
 
             if (prestamo.IdCarrito != null)
             {
-                repoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
+                uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
             }
 
-            repoDevolucion.Insert(devolucionNEW);
+            uow.RepoDevolucion.Insert(devolucionNEW);
 
             int cont = 0;
             foreach (int idElemento in idsElementos)
@@ -100,15 +87,14 @@ public class DevolucionCN
                 int estadoElemento = idsEstadosElemento.ElementAt(cont);
                 string? obs = Observaciones?.ElementAtOrDefault(cont);
 
-                repoDevolucionDetalle.Insert(new DevolucionDetalle
+                uow.RepoDevolucionDetalle.Insert(new DevolucionDetalle
                 {
                     IdDevolucion = devolucionNEW.IdDevolucion,
                     IdElemento = idElemento,
-                    IdEstadoMantenimiento = estadoElemento,
                     Observaciones = obs
                 });
 
-                repoElementos.UpdateEstado(idElemento, estadoElemento);
+                uow.RepoElementos.UpdateEstado(idElemento, estadoElemento);
 
                 //repoHistorialElemento.Insert(new HistorialElemento
                 //{

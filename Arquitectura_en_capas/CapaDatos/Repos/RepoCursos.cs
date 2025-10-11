@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoCursos : RepoBase, IRepoCursos
 {
-    public RepoCursos (IDbConnection conexion) 
-    : base (conexion)
+    public RepoCursos (IDbConnection conexion, IDbTransaction? transaction = null) 
+    : base (conexion, transaction)
     {
     }
 

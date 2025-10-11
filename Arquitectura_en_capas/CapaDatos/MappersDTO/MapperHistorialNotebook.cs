@@ -9,7 +9,7 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperHistorialNotebook : RepoBase, IMapperHistorialNotebook
 {
-    public MapperHistorialNotebook(IDbConnection conexion) : base(conexion)
+    public MapperHistorialNotebook(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
 

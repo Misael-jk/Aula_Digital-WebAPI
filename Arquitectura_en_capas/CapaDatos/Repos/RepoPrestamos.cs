@@ -7,8 +7,8 @@ namespace CapaDatos.Repos;
 
 public class RepoPrestamos : RepoBase, IRepoPrestamos
 {
-    public RepoPrestamos(IDbConnection conexion)
-   : base(conexion)
+    public RepoPrestamos(IDbConnection conexion, IDbTransaction? transaction = null)
+   : base(conexion, transaction)
     {
     }
 
@@ -28,7 +28,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
 
         try
         {
-            Conexion.Execute("InsertPrestamo", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertPrestamo", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
             prestamos.IdPrestamo = parametros.Get<int>("unidPrestamo");
         }
         catch (Exception)
@@ -53,7 +53,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
 
         try
         {
-            Conexion.Execute("UpdatePrestamo", parametros, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdatePrestamo", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -105,7 +105,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
         try
         {
             parametros.Add("unidPrestamo", idPrestamo);
-            return Conexion.QueryFirstOrDefault<Prestamos>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Prestamos>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -123,7 +123,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
         try
         {
             parametros.Add("unidDocente", idDocente);
-            return Conexion.Query<Prestamos>(query, parametros);
+            return Conexion.Query<Prestamos>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -141,7 +141,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
         try
         {
             parametros.Add("unidUsuario", idEncargado);
-            return Conexion.Query<Prestamos>(query, parametros);
+            return Conexion.Query<Prestamos>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

@@ -7,14 +7,14 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperInventario : RepoBase, IMapperInventario
 {
-    public MapperInventario(IDbConnection conexion) : base(conexion)
+    public MapperInventario(IDbConnection conexion, IDbTransaction? transaction = null) : base(conexion, transaction)
     {
     }
 
     public IEnumerable<InventarioDTO> GetAllDTO()
     {
         return Conexion.Query<InventarioDTO>(
-        "select * from View_Inventario"
+        "select * from View_InventarioDTO"
     ).ToList();
     }
 }

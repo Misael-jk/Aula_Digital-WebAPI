@@ -8,8 +8,8 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperElementosBajas : RepoBase, IMapperElementosBajas
 {
-    public MapperElementosBajas(IDbConnection conexion) 
-        : base(conexion)
+    public MapperElementosBajas(IDbConnection conexion, IDbTransaction? transaction = null) 
+        : base(conexion, transaction)
     {
     }
 

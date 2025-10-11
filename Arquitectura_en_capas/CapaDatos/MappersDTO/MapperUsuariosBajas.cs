@@ -8,8 +8,8 @@ namespace CapaDatos.MappersDTO;
 
 public class MapperUsuariosBajas : RepoBase, IMapperUsuariosBajas
 {
-    public MapperUsuariosBajas(IDbConnection conexion)
-        : base(conexion)
+    public MapperUsuariosBajas(IDbConnection conexion, IDbTransaction? transaction = null)
+        : base(conexion, transaction)
     {
     }
 
