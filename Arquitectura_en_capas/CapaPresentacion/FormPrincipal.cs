@@ -189,7 +189,7 @@ namespace CapaPresentacion
             prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios);
-            modeloCN = new ModeloCN(repoModelo, mapperModelos);
+            modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
             devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
             //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
             notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);

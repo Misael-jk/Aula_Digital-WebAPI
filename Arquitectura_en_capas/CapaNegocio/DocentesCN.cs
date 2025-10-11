@@ -20,7 +20,7 @@ public class DocentesCN
         this.mapperDocentes = mapperDocentes;
     }
 
-    #region Mostrar Docentes
+    #region READ DOCENTE
     public IEnumerable<DocentesDTO> MostrarDocente()
     {
         return mapperDocentes.GetAllDTO();

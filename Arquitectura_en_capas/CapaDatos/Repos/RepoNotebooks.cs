@@ -225,7 +225,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #endregion
 
     #region OBTENER NOTEBOOK POR SU POSICION
-    public Notebooks? GetNotebookByPosicion(int idCarrito, int posicionCarrito)
+    public Notebooks? GetNotebookByPosicion(int? idCarrito, int posicionCarrito)
     {
         string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
                          from Elementos e

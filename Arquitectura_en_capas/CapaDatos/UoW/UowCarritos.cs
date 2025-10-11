@@ -10,6 +10,7 @@ public class UowCarritos : UowBase, IUowCarritos
     public IRepoCarritos RepoCarritos { get; }
     public IRepoHistorialCarrito RepoHistorialCarrito { get; }
     public IRepoHistorialCambio RepoHistorialCambio { get; }
+    public IRepoHistorialNotebook RepoHistorialNotebooks { get; }
     public IRepoModelo RepoModelo { get; }
     public IRepoUbicacion RepoUbicacion { get; }
     public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
@@ -24,5 +25,6 @@ public class UowCarritos : UowBase, IUowCarritos
         RepoUbicacion = new RepoUbicacion(Conexion, Transaction);
         RepoEstadosMantenimiento = new RepoEstadosMantenimiento(Conexion, Transaction);
         RepoNotebooks = new RepoNotebooks(Conexion, Transaction);
+        RepoHistorialNotebooks = new RepoHistorialNotebook(Conexion, Transaction);
     }
 }

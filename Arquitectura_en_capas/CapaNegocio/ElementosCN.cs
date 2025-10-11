@@ -478,7 +478,7 @@ namespace CapaNegocio
             #region VARIANTE ELEMENTO
             if (elementoNEW.IdVarianteElemento != 0)
             {
-                VariantesElemento? variante = uow.RepoVarianteElemento.GetById(elementoNEW.IdVarianteElemento);
+                VariantesElemento? variante = uow.RepoVarianteElemento.GetById(elementoNEW.IdVarianteElemento.Value);
 
                 if (variante == null)
                 {

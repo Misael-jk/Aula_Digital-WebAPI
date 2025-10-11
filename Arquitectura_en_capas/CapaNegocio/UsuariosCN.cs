@@ -11,19 +11,23 @@ namespace CapaNegocio;
 public class UsuariosCN
 {
     private readonly IRepoUsuarios repoUsuarios;
+    private readonly IRepoRoles repoRoles;
     private readonly IMapperUsuarios mapperUsuarios;
 
 
     public UsuariosCN(IRepoUsuarios repoUsuarios, IRepoRoles repoRoles, IMapperUsuarios mapperUsuarios)
     {
         this.repoUsuarios = repoUsuarios;
+        this.repoRoles = repoRoles;
         this.mapperUsuarios = mapperUsuarios;
     }
 
+    #region READ
     public IEnumerable<UsuariosDTO> ObtenerElementos()
     {
         return mapperUsuarios.GetAllDTO();
     }
+    #endregion
 
     #region INSERT USUARIO
     public void CrearDocente(Usuarios usuariosNEW)
@@ -31,7 +35,21 @@ public class UsuariosCN
 
         ValidarDatos(usuariosNEW);
 
-        
+        if (repoUsuarios.GetById(usuariosNEW.IdUsuario) != null)
+        {
+            throw new Exception("Ya existe un usuario con ese ID");
+        }
+
+        if(repoUsuarios.GetByUser(usuariosNEW.Usuario) != null)
+        {
+            throw new Exception("Ya existe un usuario con ese nombre de usuario");
+        }
+
+        if(repoRoles.GetById(usuariosNEW.IdRol) != null)
+        {
+            throw new Exception("El rol que eligio no existe");
+        }
+
 
         repoUsuarios.Insert(usuariosNEW);
     }
@@ -40,23 +58,11 @@ public class UsuariosCN
     #region UPDATE USUARIO
     public void ActualizarUsuario(Usuarios usuariosNEW)
     {
-        ValidarEmail(usuariosNEW.Email);
+        ValidarDatos(usuariosNEW);
 
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Usuario))
+        if (usuariosNEW.IdUsuario <= 0)
         {
-            throw new Exception("El Usuario esta vacio");
-        }
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Password))
-        {
-            throw new Exception("La contraseña esta vacia");
-        }
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Nombre))
-        {
-            throw new Exception("El nombre es obligatorio");
-        }
-        if (string.IsNullOrWhiteSpace(usuariosNEW.Apellido))
-        {
-            throw new Exception("El apellido es obligatorio");
+            throw new Exception("El ID de usuario no es valido.");
         }
 
         Usuarios? usuariosOLD = repoUsuarios.GetById(usuariosNEW.IdUsuario);
@@ -75,6 +81,13 @@ public class UsuariosCN
         {
             throw new Exception("Ya existe un usuario con ese email");
         }
+
+        if (repoRoles.GetById(usuariosNEW.IdRol) == null)
+        {
+            throw new Exception("El rol que eligio no existe");
+        }
+
+
         repoUsuarios.Update(usuariosNEW);
 
     }
@@ -84,13 +97,14 @@ public class UsuariosCN
     public void EliminarUsuario(int idUsuario)
     {
         Usuarios? usuariosOLD = repoUsuarios.GetById(idUsuario);
+        Roles? roles = repoRoles.GetById(usuariosOLD.IdRol);
 
         if (usuariosOLD == null)
         {
             throw new Exception("El usuario no existe");
         }
 
-        if (usuariosOLD.IdRol == 1)
+        if (roles?.Rol == "Administrador")
         {
             throw new Exception("No se puede eliminar un usuario con rol de administrador");
         }
@@ -132,37 +146,32 @@ public class UsuariosCN
     }
     #endregion
 
-    #region Validaciones Privadas
+    #region VALIDACIONES
     private void ValidarDatos(Usuarios usuariosNEW)
     {
         if (string.IsNullOrWhiteSpace(usuariosNEW.Usuario))
         {
-            throw new Exception("El Usuario esta vacio");
+            throw new Exception("El nombre de usuario no puede estar vacio");
         }
 
-        if (usuariosNEW.Usuario.Length >= 40)
+        if (usuariosNEW.Usuario.Length > 40)
         {
-            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+            throw new Exception("El nombre de usuario no puede tener mas de 40 caracteres");
         }
 
-        if (!Regex.IsMatch(usuariosNEW.Usuario, @"^[A-Za-z0-9\s\-]+$"))
+        if (!Regex.IsMatch(usuariosNEW.Usuario, @"^[A-Za-z0-9_-]+$"))
         {
-            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+            throw new Exception("El nombre de usuario solo puede contener letras, números, guiones y guiones bajos.");
         }
 
         if (string.IsNullOrWhiteSpace(usuariosNEW.Password))
         {
-            throw new Exception("La contraseña esta vacia");
+            throw new Exception("La contraseña no puede estar vacía");
         }
 
-        if (usuariosNEW.Password.Length >= 40)
+        if (usuariosNEW.Password.Length > 40)
         {
-            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
-        }
-
-        if (!Regex.IsMatch(usuariosNEW.Password, @"^[A-Za-z0-9\s\-]+$"))
-        {
-            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+            throw new Exception("La contraseña no puede tener más de 40 caracteres");
         }
 
         if (string.IsNullOrWhiteSpace(usuariosNEW.Nombre))
@@ -170,14 +179,14 @@ public class UsuariosCN
             throw new Exception("El nombre es obligatorio");
         }
 
-        if (usuariosNEW.Nombre.Length >= 40)
+        if (usuariosNEW.Nombre.Length > 40)
         {
-            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+            throw new Exception("El nombre no puede tener mas de 40 caracteres");
         }
 
-        if (!Regex.IsMatch(usuariosNEW.Nombre, @"^[A-Za-z0-9\s\-]+$"))
+        if (!Regex.IsMatch(usuariosNEW.Nombre, @"^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"))
         {
-            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+            throw new Exception("El nombre contiene caracteres invalidos.");
         }
 
         if (string.IsNullOrWhiteSpace(usuariosNEW.Apellido))
@@ -185,43 +194,38 @@ public class UsuariosCN
             throw new Exception("El apellido es obligatorio");
         }
 
-        if (usuariosNEW.Apellido.Length >= 40)
+        if (usuariosNEW.Apellido.Length > 40)
         {
-            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
+            throw new Exception("El apellido no puede tener más de 40 caracteres");
         }
 
-        if (!Regex.IsMatch(usuariosNEW.Apellido, @"^[A-Za-z0-9\s\-]+$"))
+        if (!Regex.IsMatch(usuariosNEW.Apellido, @"^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"))
         {
-            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
-        }
-
-        if (repoUsuarios.GetByEmail(usuariosNEW.Email) != null)
-        {
-            throw new Exception("Ya existe un docente ese email");
+            throw new Exception("El apellido contiene caracteres invalidos.");
         }
 
         if (string.IsNullOrWhiteSpace(usuariosNEW.Email))
         {
-            throw new Exception("No completo la casilla del email");
+            throw new Exception("El email es obligatorio");
         }
 
-        if (usuariosNEW.Email.Length >= 70)
+        if (usuariosNEW.Email.Length > 70)
         {
-            throw new Exception("El tipo de elemento no puede tener más de 40 caracteres");
-        }
-
-        if (!Regex.IsMatch(usuariosNEW.Email, @"^[A-Za-z0-9\s\-]+$"))
-        {
-            throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
+            throw new Exception("El email no puede tener más de 70 caracteres");
         }
 
         try
         {
-            MailAddress mail = new MailAddress(usuariosNEW.Email);
+            new MailAddress(usuariosNEW.Email);
         }
-        catch (FormatException)
+        catch
         {
-            throw new Exception("Email invalido, intente de nuevo");
+            throw new Exception("Formato de email invalido");
+        }
+
+        if (repoUsuarios.GetByEmail(usuariosNEW.Email) != null)
+        {
+            throw new Exception("Ya existe un usuario con ese email");
         }
     }
     #endregion
