@@ -1,0 +1,18 @@
+﻿using CapaDatos.Interfaces;
+
+namespace CapaDatos.InterfaceUoW;
+
+public interface IUowDevolucion
+{
+    public IRepoDevolucion RepoDevolucion { get; }
+    public IRepoPrestamos RepoPrestamos { get; }
+    public IRepoUsuarios RepoUsuarios {get; }
+    public IRepoElemento RepoElementos { get; }
+    public IRepoDocentes RepoDocentes { get; }
+    public IRepoEstadosPrestamo RepoEstadosPrestamo { get; }
+    public IRepoDevolucionDetalle RepoDevolucionDetalle { get; }
+    public IRepoCarritos RepoCarritos { get; }
+    public void BeginTransaction();
+    public void Commit();
+    public void Rollback();
+}
