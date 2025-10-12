@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -9,5 +10,6 @@ public interface IRepoPrestamoDetalle
     public void Delete(int idPrestamo);
     public IEnumerable<PrestamoDetalle> GetByPrestamo(int idPrestamo);
     public IEnumerable<PrestamoDetalle> GetAll();
+    public void SetTransaction(IDbTransaction? transaction);
 
 }

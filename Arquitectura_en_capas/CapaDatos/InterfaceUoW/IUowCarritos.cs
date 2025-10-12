@@ -1,4 +1,5 @@
 ﻿using CapaDatos.Interfaces;
+using System.Data;
 
 namespace CapaDatos.InterfaceUoW;
 

@@ -22,7 +22,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            Conexion.Execute("InsertTipoElemento", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertTipoElemento", parametros, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -41,7 +41,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            Conexion.Execute("UpdateTipoElemento", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateTipoElemento", parametros, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -59,7 +59,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            Conexion.Execute("DeleteTipoElemento", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("DeleteTipoElemento", parametros, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -95,7 +95,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros);
         }
         catch (Exception)
         {
@@ -113,7 +113,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros);
         }
         catch (Exception)
         {

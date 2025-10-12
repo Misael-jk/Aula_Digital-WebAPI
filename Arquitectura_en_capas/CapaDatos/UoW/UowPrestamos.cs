@@ -19,8 +19,19 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoPrestamos = new RepoPrestamos(conexion, Transaction);
         RepoCarritos = new RepoCarritos(conexion, Transaction);
         RepoElemento = new RepoElemento(conexion, Transaction);
-        RepoDocentes = new RepoDocentes(conexion, Transaction);
         RepoPrestamoDetalle = new RepoPrestamoDetalle(conexion, Transaction);
-        RepoUsuarios = new RepoUsuarios(conexion, Transaction);
+
+
+        // REPO DE LECTURA
+        RepoDocentes = new RepoDocentes(conexion);
+        RepoUsuarios = new RepoUsuarios(conexion);
+    }
+
+    protected override void CambiarTransacion(IDbTransaction? transaction)
+    {
+        RepoPrestamos.SetTransaction(transaction);
+        RepoCarritos.SetTransaction(transaction);
+        RepoElemento.SetTransaction(transaction);
+        RepoPrestamoDetalle.SetTransaction(transaction);
     }
 }

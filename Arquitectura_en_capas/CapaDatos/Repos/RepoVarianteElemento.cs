@@ -24,7 +24,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
 
         try
         {
-            Conexion.Execute("InsertVarianteElemento", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertVarianteElemento", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -43,7 +43,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         parameters.Add("unidModelo", variantesElemento.IdModelo);
         try
         {
-            Conexion.Execute("UpdateVarianteElemento", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateVarianteElemento", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -70,7 +70,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<VariantesElemento>(query, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<VariantesElemento>(query, parameters);
         }
         catch (Exception)
         {
@@ -93,7 +93,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         string query = "select * from VariantesElemento where idModelo = @unidModelo";
         try
         {
-            return Conexion.Query<VariantesElemento>(query, parameters, transaction: Transaction);
+            return Conexion.Query<VariantesElemento>(query, parameters);
         }
         catch (Exception)
         {
@@ -111,7 +111,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         string query = "select * from VariantesElemento where idTipoElemento = @unidTipoElemento";
         try
         {
-            return Conexion.Query<VariantesElemento>(query, parameters, transaction: Transaction);
+            return Conexion.Query<VariantesElemento>(query, parameters);
         }
         catch (Exception)
         {

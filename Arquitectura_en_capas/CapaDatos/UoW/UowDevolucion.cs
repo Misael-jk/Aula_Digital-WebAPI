@@ -20,11 +20,23 @@ public class UowDevolucion : UowBase, IUowDevolucion
     {
         RepoDevolucion = new RepoDevolucion(conexion, Transaction);
         RepoPrestamos = new RepoPrestamos(conexion, Transaction);
-        RepoUsuarios = new RepoUsuarios(conexion, Transaction);
-        RepoElementos = new RepoElemento(conexion, Transaction);
-        RepoDocentes = new RepoDocentes(conexion, Transaction);
-        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion, Transaction);
         RepoDevolucionDetalle = new RepoDevolucionDetalle(conexion, Transaction);
+        RepoElementos = new RepoElemento(conexion, Transaction);
         RepoCarritos = new RepoCarritos(conexion, Transaction);
+
+
+        // REPO AUXILIARES / DE LECTURA
+        RepoUsuarios = new RepoUsuarios(conexion);
+        RepoDocentes = new RepoDocentes(conexion);
+        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion);   
+    }
+
+    protected override void CambiarTransacion(IDbTransaction? transaction)
+    {
+        RepoDevolucion.SetTransaction(transaction);
+        RepoPrestamos.SetTransaction(transaction);
+        RepoDevolucionDetalle.SetTransaction(transaction);
+        RepoElementos.SetTransaction(transaction);
+        RepoCarritos.SetTransaction(transaction);
     }
 }

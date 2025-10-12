@@ -19,7 +19,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
 
         try
         {
-            return Conexion.Query<EstadosMantenimiento>(query, Transaction);
+            return Conexion.Query<EstadosMantenimiento>(query);
         }
         catch (Exception)
         {
@@ -38,7 +38,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
         {
             parameters.Add("unidEstadoMantenimiento", idEstadoMantenimiento);
 
-            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters, Transaction);
+            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters);
         }
         catch (Exception ex)
         {

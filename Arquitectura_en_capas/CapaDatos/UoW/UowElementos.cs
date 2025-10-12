@@ -22,10 +22,20 @@ public class UowElementos : UowBase, IUowElementos
         RepoElemento = new RepoElemento(conexion, Transaction);
         RepoHistorialCambio = new RepoHistorialCambio(conexion, Transaction);
         RepoHistorialElementos = new RepoHistorialElemento(conexion, Transaction);
-        RepoUbicacion = new RepoUbicacion(conexion, Transaction);
-        RepoModelo = new RepoModelo(conexion, Transaction);
-        RepoVarianteElemento = new RepoVarianteElemento(conexion, Transaction);
-        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion, Transaction);
-        RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
+
+
+        //REPOS DE LECTURA
+        RepoUbicacion = new RepoUbicacion(conexion);
+        RepoModelo = new RepoModelo(conexion);
+        RepoVarianteElemento = new RepoVarianteElemento(conexion);
+        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion);
+        RepoTipoElemento = new RepoTipoElemento(conexion);
+    }
+
+    protected override void CambiarTransacion(IDbTransaction? transaction)
+    {
+        RepoElemento.SetTransaction(transaction);
+        RepoHistorialCambio.SetTransaction(transaction);
+        RepoHistorialElementos.SetTransaction(transaction);
     }
 }

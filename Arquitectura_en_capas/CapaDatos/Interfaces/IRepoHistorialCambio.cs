@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -8,4 +9,5 @@ public interface IRepoHistorialCambio
     public IEnumerable<HistorialCambios> GetAll();
     public HistorialCambios? GetById(int idHistorialCambio);
     public IEnumerable<HistorialCambios> GetByAccion(int idTipoAccion);
+    public void SetTransaction(IDbTransaction? transaction);
 }

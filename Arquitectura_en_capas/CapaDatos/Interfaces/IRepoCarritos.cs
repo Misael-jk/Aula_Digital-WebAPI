@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -14,4 +15,5 @@ public interface IRepoCarritos
     public int GetCountByCarrito(int idCarrito);
     public void UpdateDisponible(int idCarrito, int idEstadoMantenimiento);
     public bool GetDisponible(int idCarrito);
+    public void SetTransaction(IDbTransaction? transaction);
 }

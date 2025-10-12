@@ -21,7 +21,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
 
         try
         {
-            Conexion.Execute("InsertUbicacion", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertUbicacion", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -38,7 +38,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
         parameters.Add("unaubicacion", ubicacion.NombreUbicacion);
         try
         {
-            Conexion.Execute("UpdateUbicacion", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateUbicacion", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -66,7 +66,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters);
         }
         catch (Exception)
         {
@@ -84,7 +84,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
         try
         {
             string sql = "select * from Ubicacion where idUbicacion = @unidUbicacion";
-            return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters);
         }
         catch (Exception)
         {
@@ -104,7 +104,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
                        where idTipoElemento = @unidTipoElemento";
         try
         {
-            return Conexion.Query<Ubicacion>(sql, parameters, transaction: Transaction);
+            return Conexion.Query<Ubicacion>(sql, parameters);
         }
         catch (Exception)
         {

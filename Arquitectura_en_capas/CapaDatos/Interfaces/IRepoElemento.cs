@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -14,4 +15,5 @@ public interface IRepoElemento
     public Elemento? GetById(int idElemento);
     public bool GetDisponible(int idElemento);
     public Elemento? GetNotebookBySerieOrCodigo(string nroSerie, string codigoBarra);
+    public void SetTransaction(IDbTransaction? transaction);
 }

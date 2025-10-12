@@ -22,6 +22,7 @@ public abstract class UowBase : IDisposable
             throw new InvalidOperationException("Ya existe una transaccion activa.");
 
         Transaction = Conexion.BeginTransaction();
+        CambiarTransacion(Transaction);
     }
 
     public void Commit()
@@ -32,6 +33,7 @@ public abstract class UowBase : IDisposable
         Transaction.Commit();
         Transaction.Dispose();
         Transaction = null;
+        CambiarTransacion(null);
     }
 
     public void Rollback()
@@ -42,7 +44,10 @@ public abstract class UowBase : IDisposable
         Transaction.Rollback();
         Transaction.Dispose();
         Transaction = null;
+        CambiarTransacion(null);
     }
+
+    protected abstract void CambiarTransacion(IDbTransaction? transaction);
 
     public void Dispose()
     {

@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -11,4 +12,5 @@ public interface IRepoPrestamos
     public Prestamos? GetById(int idPrestamo);
     public IEnumerable<Prestamos> GetByEncargado(int idEncargado);
     public IEnumerable<Prestamos> GetByDocente(int idDocente);
+    public void SetTransaction(IDbTransaction? transaction);
 }

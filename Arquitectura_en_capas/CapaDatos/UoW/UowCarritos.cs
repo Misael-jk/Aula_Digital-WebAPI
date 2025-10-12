@@ -21,10 +21,25 @@ public class UowCarritos : UowBase, IUowCarritos
         RepoCarritos = new RepoCarritos(Conexion, Transaction);
         RepoHistorialCarrito = new RepoHistorialCarrito(Conexion, Transaction);
         RepoHistorialCambio = new RepoHistorialCambio(Conexion, Transaction);
+        RepoHistorialNotebooks = new RepoHistorialNotebook(Conexion, Transaction);
+        RepoNotebooks = new RepoNotebooks(Conexion, Transaction);
+
+
+        // REPOS AUXILIARES / LECTURA
+
         RepoModelo = new RepoModelo(Conexion, Transaction);
         RepoUbicacion = new RepoUbicacion(Conexion, Transaction);
         RepoEstadosMantenimiento = new RepoEstadosMantenimiento(Conexion, Transaction);
-        RepoNotebooks = new RepoNotebooks(Conexion, Transaction);
-        RepoHistorialNotebooks = new RepoHistorialNotebook(Conexion, Transaction);
+        
+        
+    }
+
+    protected override void CambiarTransacion(IDbTransaction? transaction)
+    {
+        RepoCarritos.SetTransaction(transaction);
+        RepoHistorialCambio.SetTransaction(transaction);
+        RepoHistorialCarrito.SetTransaction(transaction);
+        RepoHistorialNotebooks.SetTransaction(transaction);
+        RepoNotebooks.SetTransaction(transaction);
     }
 }

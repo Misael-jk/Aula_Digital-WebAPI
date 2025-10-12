@@ -20,7 +20,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         parameters.Add("unidTipoElemento", modelo.IdTipoElemento);
         try
         {
-            Conexion.Execute("InsertModelo", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("InsertModelo", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -38,7 +38,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         parameters.Add("unidTipoElemento", modelo.IdTipoElemento);
         try
         {
-            Conexion.Execute("UpdateModelo", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            Conexion.Execute("UpdateModelo", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (Exception)
         {
@@ -66,7 +66,7 @@ public class RepoModelo : RepoBase, IRepoModelo
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);
         }
         catch (Exception)
         {
@@ -85,7 +85,7 @@ public class RepoModelo : RepoBase, IRepoModelo
 
         try
         {
-            return Conexion.Query<Modelos>(query, parameters, transaction: Transaction);
+            return Conexion.Query<Modelos>(query, parameters);
         }
         catch (Exception)
         {
@@ -103,7 +103,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         string query = "select * from Modelos where modelo = @unnombre";
         try
         {
-            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);
         }
         catch (Exception)
         {
