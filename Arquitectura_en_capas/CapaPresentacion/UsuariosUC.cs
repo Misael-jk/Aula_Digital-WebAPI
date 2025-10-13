@@ -14,7 +14,6 @@ namespace CapaPresentacion
 {
     public partial class UsuariosUC : UserControl
     {
-
         private readonly UsuariosCN usuariosCN = null!;
         private bool mostrarPassword = false;
         private readonly IRepoRoles repoRoles;
@@ -28,7 +27,6 @@ namespace CapaPresentacion
             this.repoRoles = repoRoles;
             this.repoUsuarios = repoUsuarios;
         }
-
         private void UsuariosUC_Load_1(object sender, EventArgs e)
         {
             IEnumerable<Roles> todo = repoRoles.GetAll();
@@ -58,7 +56,6 @@ namespace CapaPresentacion
             dtgUsuarios.Columns["Email"].HeaderText = "Email";
             dtgUsuarios.Columns[6].Width = 140;
         }
-
         private void dtgUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dtgUsuarios.Columns[e.ColumnIndex].Name == "Password" && e.Value != null)
@@ -105,15 +102,15 @@ namespace CapaPresentacion
 
             //ptbPerfil.Tag = nombreFoto;
         }
-
         private void cbxMostraPassword_CheckedChanged(object sender, EventArgs e)
         {
             mostrarPassword = cbxMostraPassword.Checked;
             dtgUsuarios.Refresh();
         }
-
         private void btnSeleccionarImagen_Click(object sender, EventArgs e)
         {
+            //Codigo en proceso
+
             //using OpenFileDialog ofd = new OpenFileDialog
             //{
             //    Filter = "Imágenes|*.jpg;*.jpeg;*.png",
@@ -140,6 +137,7 @@ namespace CapaPresentacion
             //ptbPerfil.Image = Properties.Resources.Perfil_default;
             //ptbPerfil.Tag = "__ELIMINAR__";
         }
+
         private void btnCrear_Click(object sender, EventArgs e)
         {
             string fotoPerfil = null;
@@ -153,7 +151,7 @@ namespace CapaPresentacion
                 string destino = Path.Combine(carpetaDestino, nombreArchivo);
 
                 File.Copy(ptbPerfil.Tag.ToString(), destino, true);
-                fotoPerfil = nombreArchivo; // guardamos solo nombre
+                fotoPerfil = nombreArchivo;
             }
 
             Usuarios usuario = new Usuarios()
@@ -249,7 +247,7 @@ namespace CapaPresentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            // TODO: Implementar eliminación
+            
         }
     }
 }

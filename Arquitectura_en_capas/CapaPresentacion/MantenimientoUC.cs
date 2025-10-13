@@ -42,22 +42,12 @@ namespace CapaPresentacion
 
         private void dgvMantenimiento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-
-            DataGridViewRow fila = dgvMantenimiento.Rows[e.RowIndex];
-
-            txtNroSerie.Text = fila.Cells["NumeroSerie"].Value?.ToString();
-
-            Elemento? elemento = repoElemento.GetByNumeroSerie(txtNroSerie.Text);
-            cmbTipoElemento.SelectedIndex = elemento.IdTipoElemento - 1;
+            
         }
 
         private void MantenimientoUC_Load(object sender, EventArgs e)
         {
-            var tipos = tiposElementoCN.GetAllTipo();
-            cmbTipoElemento.DataSource = tipos.ToList(); 
-            cmbTipoElemento.ValueMember = "IdTipoElemento";
-            cmbTipoElemento.DisplayMember = "ElementoTipo";
+
         }
     }
 }

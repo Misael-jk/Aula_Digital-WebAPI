@@ -23,7 +23,9 @@ namespace CapaPresentacion
 
         private void NotebooksUC_Load(object sender, EventArgs e)
         {
-            guna2DataGridView1.DataSource = notebooksCN.GetAll();   
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 1200);
+            dtgNotebook.DataSource = notebooksCN.GetAll();   
         }
     }
 }

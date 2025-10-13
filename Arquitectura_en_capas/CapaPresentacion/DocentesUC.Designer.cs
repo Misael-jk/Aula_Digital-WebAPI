@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocentesUC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -46,8 +47,8 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
+            ptbPerfil = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             txtDNI = new Guna.UI2.WinForms.Guna2TextBox();
             btnEliminar = new Guna.UI2.WinForms.Guna2Button();
             txtNombre = new Guna.UI2.WinForms.Guna2TextBox();
@@ -57,11 +58,10 @@
             txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             panel2 = new Panel();
             dgvDocentes = new Guna.UI2.WinForms.Guna2DataGridView();
-            ptbPerfil = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDocentes).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -79,6 +79,21 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(353, 638);
             panel1.TabIndex = 0;
+            // 
+            // ptbPerfil
+            // 
+            ptbPerfil.BackColor = Color.Transparent;
+            ptbPerfil.FillColor = Color.Transparent;
+            ptbPerfil.Image = Properties.Resources.perfil_usuario;
+            ptbPerfil.ImageRotate = 0F;
+            ptbPerfil.Location = new Point(76, 30);
+            ptbPerfil.Name = "ptbPerfil";
+            ptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            ptbPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            ptbPerfil.Size = new Size(190, 190);
+            ptbPerfil.SizeMode = PictureBoxSizeMode.StretchImage;
+            ptbPerfil.TabIndex = 0;
+            ptbPerfil.TabStop = false;
             // 
             // txtDNI
             // 
@@ -285,21 +300,6 @@
             dgvDocentes.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvDocentes.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
-            // ptbPerfil
-            // 
-            ptbPerfil.BackColor = Color.Transparent;
-            ptbPerfil.FillColor = Color.Transparent;
-            ptbPerfil.Image = Properties.Resources.perfil_usuario;
-            ptbPerfil.ImageRotate = 0F;
-            ptbPerfil.Location = new Point(78, 36);
-            ptbPerfil.Name = "ptbPerfil";
-            ptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges1;
-            ptbPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            ptbPerfil.Size = new Size(190, 190);
-            ptbPerfil.SizeMode = PictureBoxSizeMode.StretchImage;
-            ptbPerfil.TabIndex = 0;
-            ptbPerfil.TabStop = false;
-            // 
             // DocentesUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -308,11 +308,11 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "DocentesUC";
-            Size = new Size(1054, 671);
+            Size = new Size(1050, 670);
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvDocentes).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
             ResumeLayout(false);
         }
 
@@ -329,7 +329,6 @@
         private Guna.UI2.WinForms.Guna2Button btnCrear;
         private Guna.UI2.WinForms.Guna2CircleButton btnSeleccionarImagen;
         private Guna.UI2.WinForms.Guna2TextBox txtEmail;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ptbPerfil;
         private Guna.UI2.WinForms.Guna2TextBox txtDNI;
     }

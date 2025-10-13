@@ -61,7 +61,8 @@ namespace CapaPresentacion
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            panel1 = new Panel();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             dtgUsuarios = new Guna2DataGridView();
             cbxMostraPassword = new Guna2CheckBox();
             btnQuitarPerfil = new Guna2CircleButton();
@@ -78,23 +79,14 @@ namespace CapaPresentacion
             txtNombre = new Guna2TextBox();
             txtUsuario = new Guna2TextBox();
             btnDeseleccion = new Guna2Button();
-            pnlUsuarioData = new Guna2CustomGradientPanel();
-            panel1.SuspendLayout();
+            pnlUsuario = new Guna2Panel();
+            pnlDatagridUsuarios = new Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).BeginInit();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
-            pnlUsuarioData.SuspendLayout();
+            pnlUsuario.SuspendLayout();
+            pnlDatagridUsuarios.SuspendLayout();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(dtgUsuarios);
-            panel1.Location = new Point(357, 15);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(684, 345);
-            panel1.TabIndex = 1;
             // 
             // dtgUsuarios
             // 
@@ -122,7 +114,7 @@ namespace CapaPresentacion
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dtgUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
             dtgUsuarios.GridColor = Color.Silver;
-            dtgUsuarios.Location = new Point(24, 15);
+            dtgUsuarios.Location = new Point(24, 16);
             dtgUsuarios.MultiSelect = false;
             dtgUsuarios.Name = "dtgUsuarios";
             dtgUsuarios.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -181,13 +173,12 @@ namespace CapaPresentacion
             btnQuitarPerfil.Font = new Font("Segoe UI", 9F);
             btnQuitarPerfil.ForeColor = Color.White;
             btnQuitarPerfil.Image = (Image)resources.GetObject("btnQuitarPerfil.Image");
-            btnQuitarPerfil.Location = new Point(269, 119);
+            btnQuitarPerfil.Location = new Point(266, 122);
             btnQuitarPerfil.Name = "btnQuitarPerfil";
             btnQuitarPerfil.ShadowDecoration.CustomizableEdges = customizableEdges1;
             btnQuitarPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnQuitarPerfil.Size = new Size(40, 39);
             btnQuitarPerfil.TabIndex = 27;
-            btnQuitarPerfil.Visible = false;
             btnQuitarPerfil.Click += btnQuitarPerfil_Click;
             // 
             // btnEliminar
@@ -199,7 +190,7 @@ namespace CapaPresentacion
             btnEliminar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnEliminar.Font = new Font("Segoe UI", 9F);
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(217, 595);
+            btnEliminar.Location = new Point(214, 596);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.ShadowDecoration.CustomizableEdges = customizableEdges3;
             btnEliminar.Size = new Size(80, 25);
@@ -216,7 +207,7 @@ namespace CapaPresentacion
             btnActualizar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnActualizar.Font = new Font("Segoe UI", 9F);
             btnActualizar.ForeColor = Color.White;
-            btnActualizar.Location = new Point(123, 595);
+            btnActualizar.Location = new Point(120, 596);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.ShadowDecoration.CustomizableEdges = customizableEdges5;
             btnActualizar.Size = new Size(80, 25);
@@ -233,7 +224,7 @@ namespace CapaPresentacion
             btnCrear.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnCrear.Font = new Font("Segoe UI", 9F);
             btnCrear.ForeColor = Color.White;
-            btnCrear.Location = new Point(28, 595);
+            btnCrear.Location = new Point(25, 596);
             btnCrear.Name = "btnCrear";
             btnCrear.ShadowDecoration.CustomizableEdges = customizableEdges7;
             btnCrear.Size = new Size(80, 25);
@@ -251,13 +242,12 @@ namespace CapaPresentacion
             btnSeleccionarImagen.Font = new Font("Segoe UI", 9F);
             btnSeleccionarImagen.ForeColor = Color.White;
             btnSeleccionarImagen.Image = (Image)resources.GetObject("btnSeleccionarImagen.Image");
-            btnSeleccionarImagen.Location = new Point(269, 164);
+            btnSeleccionarImagen.Location = new Point(266, 167);
             btnSeleccionarImagen.Name = "btnSeleccionarImagen";
             btnSeleccionarImagen.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnSeleccionarImagen.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnSeleccionarImagen.Size = new Size(40, 39);
             btnSeleccionarImagen.TabIndex = 22;
-            btnSeleccionarImagen.Visible = false;
             btnSeleccionarImagen.Click += btnSeleccionarImagen_Click;
             // 
             // guna2Panel1
@@ -268,7 +258,7 @@ namespace CapaPresentacion
             guna2Panel1.BorderThickness = 1;
             guna2Panel1.Controls.Add(ptbPerfil);
             guna2Panel1.CustomizableEdges = customizableEdges10;
-            guna2Panel1.Location = new Point(62, 13);
+            guna2Panel1.Location = new Point(59, 16);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges11;
             guna2Panel1.Size = new Size(190, 190);
@@ -301,7 +291,7 @@ namespace CapaPresentacion
             cmbRoles.Font = new Font("Segoe UI", 10F);
             cmbRoles.ForeColor = Color.FromArgb(68, 88, 112);
             cmbRoles.ItemHeight = 30;
-            cmbRoles.Location = new Point(28, 541);
+            cmbRoles.Location = new Point(25, 542);
             cmbRoles.Name = "cmbRoles";
             cmbRoles.ShadowDecoration.CustomizableEdges = customizableEdges13;
             cmbRoles.Size = new Size(269, 36);
@@ -324,7 +314,7 @@ namespace CapaPresentacion
             txtEmail.HoverState.BorderColor = Color.DodgerBlue;
             txtEmail.IconLeft = (Image)resources.GetObject("txtEmail.IconLeft");
             txtEmail.IconLeftSize = new Size(25, 25);
-            txtEmail.Location = new Point(28, 477);
+            txtEmail.Location = new Point(25, 478);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderForeColor = Color.DarkGray;
             txtEmail.PlaceholderText = "Ingresar Email";
@@ -348,7 +338,7 @@ namespace CapaPresentacion
             txtContraseña.HoverState.BorderColor = Color.DodgerBlue;
             txtContraseña.IconLeft = Properties.Resources.PasswordIcon;
             txtContraseña.IconLeftSize = new Size(25, 25);
-            txtContraseña.Location = new Point(28, 415);
+            txtContraseña.Location = new Point(25, 416);
             txtContraseña.Name = "txtContraseña";
             txtContraseña.PlaceholderForeColor = Color.DarkGray;
             txtContraseña.PlaceholderText = "Ingresar contraseña";
@@ -372,7 +362,7 @@ namespace CapaPresentacion
             txtApellido.HoverState.BorderColor = Color.DodgerBlue;
             txtApellido.IconLeft = (Image)resources.GetObject("txtApellido.IconLeft");
             txtApellido.IconLeftSize = new Size(25, 25);
-            txtApellido.Location = new Point(28, 353);
+            txtApellido.Location = new Point(25, 356);
             txtApellido.Name = "txtApellido";
             txtApellido.PlaceholderForeColor = Color.DarkGray;
             txtApellido.PlaceholderText = "Ingresar apellido";
@@ -396,7 +386,7 @@ namespace CapaPresentacion
             txtNombre.HoverState.BorderColor = Color.DodgerBlue;
             txtNombre.IconLeft = (Image)resources.GetObject("txtNombre.IconLeft");
             txtNombre.IconLeftSize = new Size(25, 25);
-            txtNombre.Location = new Point(28, 295);
+            txtNombre.Location = new Point(25, 298);
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderForeColor = Color.DarkGray;
             txtNombre.PlaceholderText = "Ingresar nombre";
@@ -420,7 +410,7 @@ namespace CapaPresentacion
             txtUsuario.HoverState.BorderColor = Color.DodgerBlue;
             txtUsuario.IconLeft = Properties.Resources.UserIcon;
             txtUsuario.IconLeftSize = new Size(25, 25);
-            txtUsuario.Location = new Point(28, 234);
+            txtUsuario.Location = new Point(25, 237);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.PlaceholderForeColor = Color.DarkGray;
             txtUsuario.PlaceholderText = "Ingresar usuario";
@@ -446,58 +436,65 @@ namespace CapaPresentacion
             btnDeseleccion.Text = "Deseleccionar";
             btnDeseleccion.Click += btnDeseleccion_Click;
             // 
-            // pnlUsuarioData
+            // pnlUsuario
             // 
-            pnlUsuarioData.BorderColor = Color.Black;
-            pnlUsuarioData.BorderRadius = 20;
-            pnlUsuarioData.BorderThickness = 1;
-            pnlUsuarioData.Controls.Add(btnQuitarPerfil);
-            pnlUsuarioData.Controls.Add(txtApellido);
-            pnlUsuarioData.Controls.Add(btnEliminar);
-            pnlUsuarioData.Controls.Add(txtUsuario);
-            pnlUsuarioData.Controls.Add(btnActualizar);
-            pnlUsuarioData.Controls.Add(txtNombre);
-            pnlUsuarioData.Controls.Add(btnCrear);
-            pnlUsuarioData.Controls.Add(txtContraseña);
-            pnlUsuarioData.Controls.Add(btnSeleccionarImagen);
-            pnlUsuarioData.Controls.Add(txtEmail);
-            pnlUsuarioData.Controls.Add(guna2Panel1);
-            pnlUsuarioData.Controls.Add(cmbRoles);
-            pnlUsuarioData.CustomizableEdges = customizableEdges26;
-            pnlUsuarioData.FillColor = Color.MediumVioletRed;
-            pnlUsuarioData.FillColor2 = Color.Blue;
-            pnlUsuarioData.FillColor3 = Color.Magenta;
-            pnlUsuarioData.FillColor4 = Color.DarkSlateGray;
-            pnlUsuarioData.Location = new Point(18, 15);
-            pnlUsuarioData.Name = "pnlUsuarioData";
-            pnlUsuarioData.ShadowDecoration.CustomizableEdges = customizableEdges27;
-            pnlUsuarioData.Size = new Size(325, 639);
-            pnlUsuarioData.TabIndex = 28;
+            pnlUsuario.BackColor = Color.DarkSlateBlue;
+            pnlUsuario.BorderColor = Color.Black;
+            pnlUsuario.BorderThickness = 1;
+            pnlUsuario.Controls.Add(guna2Panel1);
+            pnlUsuario.Controls.Add(btnQuitarPerfil);
+            pnlUsuario.Controls.Add(btnEliminar);
+            pnlUsuario.Controls.Add(btnSeleccionarImagen);
+            pnlUsuario.Controls.Add(txtApellido);
+            pnlUsuario.Controls.Add(txtNombre);
+            pnlUsuario.Controls.Add(btnActualizar);
+            pnlUsuario.Controls.Add(txtUsuario);
+            pnlUsuario.Controls.Add(txtContraseña);
+            pnlUsuario.Controls.Add(txtEmail);
+            pnlUsuario.Controls.Add(cmbRoles);
+            pnlUsuario.Controls.Add(btnCrear);
+            pnlUsuario.CustomizableEdges = customizableEdges26;
+            pnlUsuario.Location = new Point(20, 15);
+            pnlUsuario.Name = "pnlUsuario";
+            pnlUsuario.ShadowDecoration.CustomizableEdges = customizableEdges27;
+            pnlUsuario.Size = new Size(320, 639);
+            pnlUsuario.TabIndex = 28;
+            // 
+            // pnlDatagridUsuarios
+            // 
+            pnlDatagridUsuarios.BackColor = Color.DarkSlateBlue;
+            pnlDatagridUsuarios.BorderColor = Color.Black;
+            pnlDatagridUsuarios.BorderThickness = 1;
+            pnlDatagridUsuarios.Controls.Add(dtgUsuarios);
+            pnlDatagridUsuarios.CustomizableEdges = customizableEdges28;
+            pnlDatagridUsuarios.Location = new Point(357, 15);
+            pnlDatagridUsuarios.Name = "pnlDatagridUsuarios";
+            pnlDatagridUsuarios.ShadowDecoration.CustomizableEdges = customizableEdges29;
+            pnlDatagridUsuarios.Size = new Size(684, 345);
+            pnlDatagridUsuarios.TabIndex = 29;
             // 
             // UsuariosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            Controls.Add(pnlUsuarioData);
+            Controls.Add(pnlDatagridUsuarios);
+            Controls.Add(pnlUsuario);
             Controls.Add(btnDeseleccion);
             Controls.Add(cbxMostraPassword);
-            Controls.Add(panel1);
             Name = "UsuariosUC";
-            Size = new Size(1054, 671);
+            Size = new Size(1050, 670);
             Load += UsuariosUC_Load_1;
-            panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).EndInit();
             guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
-            pnlUsuarioData.ResumeLayout(false);
+            pnlUsuario.ResumeLayout(false);
+            pnlDatagridUsuarios.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Panel panel1;
         private Guna.UI2.WinForms.Guna2DataGridView dtgUsuarios;
         private Guna2CheckBox cbxMostraPassword;
         private Guna2TextBox txtContraseña;
@@ -513,7 +510,8 @@ namespace CapaPresentacion
         private Guna2Button btnActualizar;
         private Guna2Button btnDeseleccion;
         private Guna2CircleButton btnQuitarPerfil;
-        private Guna2CustomGradientPanel pnlUsuarioData;
         private Guna2CirclePictureBox ptbPerfil;
+        private Guna2Panel pnlUsuario;
+        private Guna2Panel pnlDatagridUsuarios;
     }
 }

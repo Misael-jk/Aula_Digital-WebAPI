@@ -35,7 +35,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "PrestamoMovimientoUC";
-            Size = new Size(1054, 671);
+            Size = new Size(1050, 670);
             ResumeLayout(false);
         }
 

@@ -96,7 +96,7 @@
             panel1.Controls.Add(txtCodBarra);
             panel1.Controls.Add(txtNroSerie);
             panel1.Controls.Add(cmbEstados);
-            panel1.Location = new Point(17, 15);
+            panel1.Location = new Point(13, 15);
             panel1.Name = "panel1";
             panel1.Size = new Size(349, 304);
             panel1.TabIndex = 0;
@@ -245,7 +245,7 @@
             // 
             panel2.BackColor = SystemColors.ButtonHighlight;
             panel2.Controls.Add(dgvElementos);
-            panel2.Location = new Point(387, 15);
+            panel2.Location = new Point(379, 15);
             panel2.Name = "panel2";
             panel2.Size = new Size(650, 639);
             panel2.TabIndex = 1;
@@ -315,7 +315,7 @@
             panel3.Controls.Add(cmbBuscarEstado);
             panel3.Controls.Add(txtBuscarCodBarra);
             panel3.Controls.Add(txtBuscarNroSerie);
-            panel3.Location = new Point(17, 339);
+            panel3.Location = new Point(13, 339);
             panel3.Name = "panel3";
             panel3.Size = new Size(349, 315);
             panel3.TabIndex = 2;
@@ -484,7 +484,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ElementosUC";
-            Size = new Size(1054, 671);
+            Size = new Size(1050, 670);
             Load += ElementosUC_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
