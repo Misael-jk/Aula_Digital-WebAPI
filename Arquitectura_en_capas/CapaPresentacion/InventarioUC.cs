@@ -14,7 +14,7 @@ namespace CapaPresentacion
 
         private void InventarioUC_Load(object sender, EventArgs e)
         {
-            guna2DataGridView1.DataSource = mapperInventario.GetAllDTO();
+            dgvInventario.DataSource = mapperInventario.GetAllDTO();
         }
     }
 }

@@ -1,7 +1,17 @@
-﻿using CapaDatos.Repos;
+﻿using CapaDatos.Interfaces;
+using CapaDatos.Repos;
 using CapaNegocio;
 using CapaDatos.MappersDTO;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using CapaDatos.InterfacesDTO;
 using CapaEntidad;
 
@@ -47,22 +57,19 @@ namespace CapaPresentacion
             string usuario = TxtUser.Text.Trim();
             string password = TxtPass.Text.Trim();
 
-           try
+            try
             {
                 Usuarios? userVerificado = usuariosCN.Login(usuario, password);
 
                 Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
 
-                if (conexion.State != ConnectionState.Open)
-                    conexion.Open();
-
                 FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
                 principal.Show();
                 this.Hide();
             }
-            catch(Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error de login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TxtError.Visible = true;
             }
 
 

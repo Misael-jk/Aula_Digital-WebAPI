@@ -31,5 +31,13 @@ namespace CapaPresentacion
             dgvUbicacion.DataSource = repoUbicacion.GetAll();
             dgvModelo.DataSource = modeloCN.ObtenerModelos();
         }
+
+        private void CategoriasUC_Load(object sender, EventArgs e)
+        {
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 1253);
+
+            MostrarCategoria();
+        }
     }
 }

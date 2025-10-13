@@ -608,7 +608,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "CarritoUC";
-            Size = new Size(1054, 671);
+            Size = new Size(1050, 670);
             Load += CarritoUC_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtgCarrito).EndInit();
