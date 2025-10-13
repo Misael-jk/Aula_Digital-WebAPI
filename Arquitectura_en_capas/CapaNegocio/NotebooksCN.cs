@@ -295,19 +295,19 @@ public class NotebooksCN
         }
         #endregion
 
-        #region CARRITO
-        if (notebooks.IdCarrito.HasValue)
-        {
-            throw new Exception("La Notebook no puede estar ligada a un carrito al crearse, Valla al area de CARRITOS para llevarlo a cabo");
-        }
-        #endregion
+        //#region CARRITO
+        //if (notebooks.IdCarrito.HasValue)
+        //{
+        //    throw new Exception("La Notebook no puede estar ligada a un carrito al crearse, Valla al area de CARRITOS para llevarlo a cabo");
+        //}
+        //#endregion
 
-        #region POSICION CARRITOS
-        if(notebooks.PosicionCarrito.HasValue)
-        {
-            throw new Exception("La Notebook no puede tener una posicion en el carrito al crearse, Valla al area de CARRITOS para llevarlo a cabo");
-        }
-        #endregion
+        //#region POSICION CARRITOS
+        //if(notebooks.PosicionCarrito.HasValue)
+        //{
+        //    throw new Exception("La Notebook no puede tener una posicion en el carrito al crearse, Valla al area de CARRITOS para llevarlo a cabo");
+        //}
+        //#endregion
 
         #region VARIANTE ELEMENTO
         if (notebooks.IdVarianteElemento.HasValue && notebooks.IdVarianteElemento != 0)

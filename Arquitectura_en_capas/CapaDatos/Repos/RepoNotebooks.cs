@@ -364,7 +364,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #endregion
 
     #region OBTENER NOTEBOOK POR CODIGO O SERIE
-    public Elemento? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
+    public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
     {
         string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
                          from Elementos e

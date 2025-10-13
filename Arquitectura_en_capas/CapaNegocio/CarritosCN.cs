@@ -209,13 +209,65 @@ public class CarritosCN
 
 
     // FILTROS Y CONSULTAS DE LOS REPOS RELACIONADOS CON EL CARRITO
-    #region FILTROS PARA LA UI
+    #region CARRITOS
     public IEnumerable<Carritos> ListarCarritos()
     {
         return uow.RepoCarritos.GetAll();
     }
     #endregion
 
+    #region ESTADO MANTENIMIENTO
+    public IEnumerable<EstadosMantenimiento> ListarEstadosMatenimiento()
+    {
+        return uow.RepoEstadosMantenimiento.GetAll();
+    }
+    #endregion
+
+    #region UBICACION
+    public IEnumerable<Ubicacion> ListarUbicaciones()
+    {
+        return uow.RepoUbicacion.GetAll();
+    }
+    #endregion
+
+    #region MODELOS
+    public IEnumerable<Modelos> ListarModelosCarritos()
+    {
+        return uow.RepoModelo.GetByTipo(3);
+    }
+    #endregion
+
+    #region NOTEBOOK
+    public IEnumerable<Notebooks> ObtenerSeriePorNotebook()
+    {
+        return uow.RepoNotebooks.GetNroSerieByNotebook();
+    }
+
+    public IEnumerable<Notebooks> ObtenerCodBarraPorNotebook()
+    {
+        return uow.RepoNotebooks.GetCodBarraByNotebook();
+    }
+
+    public IEnumerable<Notebooks> ObtenerNotebooksPorCarrito(int idCarrito)
+    {
+        return uow.RepoNotebooks.GetNotebookByCarrito(idCarrito);
+    }
+
+    public Notebooks? ObtenerNotebookPorPosicion(int? idCarrito, int posicion)
+    {
+        return uow.RepoNotebooks.GetNotebookByPosicion(idCarrito, posicion);
+    }
+
+    public Notebooks? ObtenerPorSerie(string numSerie)
+    {
+        return uow.RepoNotebooks.GetByNumeroSerie(numSerie);
+    }
+
+    public Notebooks? ObtenerPorSerieOCodBarra(string numSerie, string CodBarra)
+    {
+        return uow.RepoNotebooks.GetNotebookBySerieOrCodigo(numSerie, CodBarra);
+    }
+    #endregion
 
 
 

@@ -21,6 +21,6 @@ public interface IRepoNotebooks
     public IEnumerable<Notebooks> GetNroSerieByNotebook();
     public IEnumerable<Notebooks> GetCodBarraByNotebook();
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito);
-    public Elemento? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra);
+    public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra);
     public void SetTransaction(IDbTransaction? transaction);
 }
