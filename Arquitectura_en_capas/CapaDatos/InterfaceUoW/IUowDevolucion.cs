@@ -12,6 +12,11 @@ public interface IUowDevolucion
     public IRepoEstadosPrestamo RepoEstadosPrestamo { get; }
     public IRepoDevolucionDetalle RepoDevolucionDetalle { get; }
     public IRepoCarritos RepoCarritos { get; }
+    public IRepoHistorialCambio RepoHistorialCambio { get; }
+    public IRepoHistorialElementos RepoHistorialElementos { get; }
+    public IRepoHistorialCarrito RepoHistorialCarrito { get; }
+    public IRepoHistorialNotebook RepoHistorialNotebook { get; }
+    public IRepoPrestamoDetalle RepoPrestamoDetalle { get; }
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

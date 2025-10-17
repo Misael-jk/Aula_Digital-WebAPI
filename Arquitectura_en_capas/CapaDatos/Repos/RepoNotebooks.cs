@@ -382,7 +382,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<Notebooks>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {

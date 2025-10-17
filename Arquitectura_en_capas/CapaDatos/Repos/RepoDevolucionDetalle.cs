@@ -89,4 +89,39 @@ public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
     }
     #endregion
 
+    #region Verificar existencia del detalle
+    public bool Exists(int idDevolucion, int idElemento)
+    {
+        string query = "select count(1) from DevolucionDetalle where idDevolucion = @idDevolucion and idElemento = @idElemento";
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("unidDevolucion", idDevolucion);
+            parametros.Add("unidElemento", idElemento);
+
+            return Conexion.ExecuteScalar<bool>(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al verificar la existencia del detalle de la devolucion");
+        }
+    }
+    #endregion
+
+    #region Obtener cantidad de detalles por devolucion
+    public int CountByDevolucion(int idDevolucion)
+    {
+        string query = "select count(*) from DevolucionDetalle where idDevolucion = @idDevolucion";
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("unidDevolucion", idDevolucion);
+            return Conexion.ExecuteScalar<int>(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al contar los detalles de la devolucion");
+        }
+    }
+    #endregion
 }

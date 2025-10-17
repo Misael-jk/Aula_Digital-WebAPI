@@ -17,61 +17,21 @@ public class PrestamosCN
         this.mapperPrestamos = mapperPrestamos;
     }
 
+    #region READ PRESTAMO
     public IEnumerable<PrestamosDTO> ObtenerTodo()
     {
         return mapperPrestamos.GetAllDTO();
     }
+    #endregion
 
+    #region CREATE PRESTAMO
     public void CrearPrestamo(Prestamos prestamo, IEnumerable<int> idsElementos, int? idCarrito)
     {
-        using (TransactionScope scope = new TransactionScope())
+        try
         {
+            uow.BeginTransaction();
 
-            if(uow.RepoDocentes.GetById(prestamo.IdDocente) == null)
-            {
-                throw new Exception("El docente no existe");
-            }
-
-            if (uow.RepoUsuarios.GetById(prestamo.IdUsuario) == null)
-            {
-                throw new Exception("El usuario no existe");
-            }
-
-            if (idsElementos == null || !idsElementos.Any())
-            {
-                throw new Exception("Debe prestar al menos un elemento.");
-            }
-
-
-            if (idCarrito.HasValue)
-            {
-                if(uow.RepoCarritos.GetById(idCarrito.Value) == null)
-                {
-                    throw new Exception("El carrito no existe.");
-                }
-
-                if(uow.RepoCarritos.GetCountByCarrito(idCarrito.Value) < 25)
-                {
-                    throw new Exception("El carrito debe tener al menos 25 elementos para ser prestado.");
-                }
-
-                if (!uow.RepoCarritos.GetDisponible(idCarrito.Value))
-                {
-                    throw new Exception("El carrito no esta disponible.");
-                }
-
-                prestamo.IdCarrito = idCarrito.Value;
-
-                uow.RepoCarritos.UpdateDisponible(idCarrito.Value, 2);
-            }
-
-            foreach (int idElemento in idsElementos)
-            {
-                if (!uow.RepoElemento.GetDisponible(idElemento))
-                {
-                    throw new Exception($"El elemento {idElemento} no esta disponible.");
-                }
-            }
+            ValidarPrestamos(prestamo, idsElementos, idCarrito);
 
             uow.RepoPrestamos.Insert(prestamo);
 
@@ -84,14 +44,78 @@ public class PrestamosCN
                 });
 
                 uow.RepoElemento.UpdateEstado(idElemento, 2);
+
+                Elemento? elemento = uow.RepoElemento.GetById(idElemento);
+
+                HistorialCambios? historial = new HistorialCambios
+                {
+                    IdTipoAccion = 2, 
+                    FechaCambio = DateTime.Now,
+                    IdUsuario = prestamo.IdUsuario,
+                    Descripcion = elemento.IdTipoElemento == 1
+                        ? $"La notebook {idElemento} fue prestada."
+                        : $"El elemento {idElemento} fue prestado.",
+                    Motivo = null
+                };
+
+                uow.RepoHistorialCambio.Insert(historial);
+
+                if (elemento.IdTipoElemento == 1)
+                {
+                    uow.RepoHistorialNotebook.Insert(new HistorialNotebooks
+                    {
+                        IdHistorialCambio = historial.IdHistorialCambio,
+                        IdNotebook = idElemento
+                    });
+                }
+                else
+                {
+                    uow.RepoHistorialElementos.Insert(new HistorialElementos
+                    {
+                        IdHistorialCambio = historial.IdHistorialCambio,
+                        IdElementos = idElemento
+                    });
+                }
             }
 
+            if (idCarrito.HasValue)
+            {
+                prestamo.IdCarrito = idCarrito.Value;
+                uow.RepoCarritos.UpdateDisponible(idCarrito.Value, 2);
 
+                HistorialCambios historial = new HistorialCambios
+                {
+                    IdTipoAccion = 2,
+                    FechaCambio = DateTime.Now,
+                    IdUsuario = prestamo.IdUsuario,
+                    Descripcion = $"Carrito {idCarrito} fue Prestamo",
+                    Motivo = null
+                };
 
-            scope.Complete();
+                uow.RepoHistorialCambio.Insert(historial);
+
+                uow.RepoHistorialCarrito.Insert(new HistorialCarritos
+                {
+                    IdHistorialCambio = historial.IdHistorialCambio,
+                    IdCarrito = idCarrito.Value
+                });
+            }
+            else
+            {
+                prestamo.IdCarrito = null;
+            }
+
+            uow.Commit();
+        }
+        catch
+        {
+            uow.Rollback();
+            throw;
         }
     }
+    #endregion
 
+    #region UPDATE PRESTAMO
     public void ActualizarPrestamo(Prestamos prestamo, IEnumerable<int> nuevosIdsElementos, int? nuevoIdCarrito)
     {
         using (TransactionScope scope = new TransactionScope())
@@ -160,7 +184,9 @@ public class PrestamosCN
             scope.Complete();
         }
     }
+    #endregion
 
+    #region Eliminar PRESTAMO
     public void EliminarPrestamo(int idPrestamo)
     {
         using (TransactionScope scope = new TransactionScope())
@@ -192,7 +218,91 @@ public class PrestamosCN
             scope.Complete();
         }
     }
+    #endregion
+
+
+    #region Validaciones INsert
+    public void ValidarPrestamos(Prestamos prestamos, IEnumerable<int> idsElemento, int? idCarrito)
+    {
+        Prestamos? oldPrestamo = uow.RepoPrestamos.GetById(prestamos.IdPrestamo);
+
+        #region CURSO
+        if (prestamos.IdCurso.HasValue)
+        {
+            if (uow.RepoCursos.GetById(prestamos.IdCurso.Value) == null)
+            {
+                throw new Exception("El curso no existe");
+            }
+        }
+        #endregion
+
+        #region USUARIO
+        if (uow.RepoUsuarios.GetById(prestamos.IdUsuario) == null)
+        {
+            throw new Exception("El usuario no existe");
+        }
+        #endregion
+
+        #region DOCENTE
+        if (uow.RepoDocentes.GetById(prestamos.IdDocente) == null)
+        {
+            throw new Exception("El docente no existe");
+        }
+        #endregion
+
+        #region ELEMENTO
+        if (idsElemento == null || !idsElemento.Any())
+        {
+            throw new Exception("Debe prestar al menos un elemento.");
+        }
+
+        foreach (int idElementos in idsElemento)
+        {
+            if(uow.RepoElemento.GetById(idElementos) == null)
+            {
+                throw new Exception($"El elemento {idElementos} no existe.");
+            }
+
+            if (!uow.RepoElemento.GetDisponible(idElementos))
+            {
+                throw new Exception($"El elemento {idElementos} no esta disponible.");
+            }
+
+            if(uow.RepoPrestamoDetalle.GetByElemento(idElementos) != null)
+            {
+                throw new Exception($"El elemento {idElementos} ya esta en un prestamo activo.");
+            }
+
+            if (idsElemento.Count(x => x == idElementos) > 1)
+            {
+                throw new Exception($"El elemento {idElementos} está repetido en la lista de prestamos.");
+            }
+        }
+        #endregion
+
+        #region CARRITO
+        if (idCarrito.HasValue)
+        {
+            if (uow.RepoCarritos.GetById(idCarrito.Value) == null)
+            {
+                throw new Exception("El carrito no existe.");
+            }
+
+            if (uow.RepoCarritos.GetCountByCarrito(idCarrito.Value) < 25)
+            {
+                throw new Exception("El carrito debe tener al menos 25 elementos para ser prestado.");
+            }
+
+            if (!uow.RepoCarritos.GetDisponible(idCarrito.Value))
+            {
+                throw new Exception("El carrito no esta disponible.");
+            }
+
+        }
+
+        #endregion
+    }
+    #endregion
 
 }
-
 

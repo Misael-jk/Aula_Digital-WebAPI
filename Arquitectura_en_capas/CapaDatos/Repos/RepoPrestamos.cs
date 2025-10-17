@@ -149,4 +149,23 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
         }
     }
     #endregion
+
+    #region Cambiar estado del prestamo
+    public void UpdateEstado(int idPrestamo, int idEstadoPrestamo)
+    {
+        string query = "Update Prestamos set idEstadoPrestamo = unidEstadoPrestamo where idPrestamo = unidPrestamo";
+
+        DynamicParameters parametros = new DynamicParameters();
+        parametros.Add("unidPrestamo", idPrestamo);
+        parametros.Add("unidEstadoPrestamo", idEstadoPrestamo);
+        try
+        {
+            Conexion.Execute(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al actualizar el estado del prestamo");
+        }
+    }
+    #endregion
 }

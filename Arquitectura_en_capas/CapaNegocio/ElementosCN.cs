@@ -59,6 +59,7 @@ namespace CapaNegocio
             try
             {
                 uow.BeginTransaction();
+
                 ValidarInsert(elementoNEW);
 
                 uow.RepoElemento.Insert(elementoNEW);

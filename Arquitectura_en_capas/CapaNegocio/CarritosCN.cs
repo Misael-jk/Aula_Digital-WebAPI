@@ -135,6 +135,11 @@ public class CarritosCN
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
 
+            if(carritos.IdEstadoMantenimiento == 1)
+            {
+                throw new Exception("No se puede deshabilitar un carrito con estado 'Disponible'");
+            }
+
             if (uow.RepoUbicacion.GetById(carritos.IdUbicacion) == null)
             {
                 throw new Exception("La ubicacion seleccionada no existe");
@@ -571,14 +576,14 @@ public class CarritosCN
     private void ValidarReposInsert(Carritos carritoNEW)
     {
         #region VALIDACION DE CARRITOS
-        if(uow.RepoCarritos.GetById(carritoNEW.IdCarrito) == null)
+        if(uow.RepoCarritos.GetById(carritoNEW.IdCarrito) != null)
         {
-            throw new Exception("El carrito no existe");
+            throw new Exception("Ya existe ese carrito");
         }
         #endregion
 
         #region UBICACION
-        if (uow.RepoUbicacion.GetById(carritoNEW.IdUbicacion) == null)
+        if (uow.RepoUbicacion.GetById(carritoNEW.IdUbicacion) == null && carritoNEW.IdCarrito != 0)
         {
             throw new Exception("La ubicación seleccionada no existe.");
         }

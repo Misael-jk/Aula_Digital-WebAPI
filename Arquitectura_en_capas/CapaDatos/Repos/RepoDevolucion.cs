@@ -21,7 +21,6 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
 
         parametros.Add("unidPrestamo", devolucion.IdPrestamo);
         parametros.Add("unidEncargado", devolucion.IdUsuario);
-        parametros.Add("unidEstdoPrestamo", devolucion.IdEstadoPrestamo);
         parametros.Add("unafechaDevolucion", devolucion.FechaDevolucion);
         parametros.Add("unaobservaciones", devolucion.Observaciones);
 

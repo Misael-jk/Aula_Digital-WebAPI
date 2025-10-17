@@ -14,7 +14,12 @@ public class UowDevolucion : UowBase, IUowDevolucion
     public IRepoDocentes RepoDocentes { get; }
     public IRepoEstadosPrestamo RepoEstadosPrestamo { get; }
     public IRepoDevolucionDetalle RepoDevolucionDetalle { get; }
+    public IRepoPrestamoDetalle RepoPrestamoDetalle { get; }
     public IRepoCarritos RepoCarritos { get; }
+    public IRepoHistorialCambio RepoHistorialCambio {get;}
+    public IRepoHistorialElementos RepoHistorialElementos { get; }
+    public IRepoHistorialCarrito RepoHistorialCarrito { get; }
+    public IRepoHistorialNotebook RepoHistorialNotebook { get; }
 
     public UowDevolucion(IDbConnection conexion) : base(conexion)
     {
@@ -23,12 +28,17 @@ public class UowDevolucion : UowBase, IUowDevolucion
         RepoDevolucionDetalle = new RepoDevolucionDetalle(conexion, Transaction);
         RepoElementos = new RepoElemento(conexion, Transaction);
         RepoCarritos = new RepoCarritos(conexion, Transaction);
+        RepoHistorialCambio = new RepoHistorialCambio(conexion, Transaction);
+        RepoHistorialElementos = new RepoHistorialElemento(conexion, Transaction);
+        RepoHistorialCarrito = new RepoHistorialCarrito(conexion, Transaction);
+        RepoHistorialNotebook = new RepoHistorialNotebook(conexion, Transaction);
 
 
         // REPO AUXILIARES / DE LECTURA
         RepoUsuarios = new RepoUsuarios(conexion);
         RepoDocentes = new RepoDocentes(conexion);
-        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion);   
+        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion);
+        RepoPrestamoDetalle = new RepoPrestamoDetalle(conexion);
     }
 
     protected override void CambiarTransacion(IDbTransaction? transaction)

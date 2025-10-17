@@ -78,7 +78,7 @@ create table VariantesElemento (
     idVariante smallint not null auto_increment,
     idTipoElemento tinyint not null,
     subtipo varchar(40) not null,        
-    idModelo tinyint null,                
+    idModelo tinyint,                
     constraint PK_VariantesElemento primary key (idVariante),
     constraint UQ_VariantesElemento unique (idTipoElemento, subtipo),
     constraint FK_VariantesElemento_TipoElemento foreign key (idTipoElemento)
@@ -111,7 +111,7 @@ create table Carritos (
 create table Elementos (
     idElemento smallint not null auto_increment,
     idTipoElemento tinyint not null,
-    idVariante smallint not null,
+    idVariante smallint,
     idModelo tinyint,
     idUbicacion tinyint not null,
     idEstadoMantenimiento tinyint not null,
@@ -224,6 +224,11 @@ create table DevolucionDetalle (
     constraint FK_DevolucionDetalle_Elementos foreign key (idElemento)
         references Elementos(idElemento)
 );
+
+
+-- create table TipoAnomalias (
+--     idTipoAnomalia tinyint not null auto_increment,
+--     nombreAnomalia varchar(70) not null,
 
 
 create table TipoAccion(

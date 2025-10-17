@@ -1,10 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using CapaDatos;
 using System.Data;
-<<<<<<< HEAD
-using MySql.Data.MySqlClient;
-=======
->>>>>>> c54633f (Actualizacion del CN)
+using MySqlConnector;
 using CapaPresentacion;
 
 namespace Sistema_de_notebooks

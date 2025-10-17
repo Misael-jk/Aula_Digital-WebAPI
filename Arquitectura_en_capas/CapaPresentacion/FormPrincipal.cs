@@ -1,4 +1,6 @@
-﻿using CapaDatos.Interfaces;
+﻿
+
+using CapaDatos.Interfaces;
 using CapaDatos.MappersDTO;
 using CapaNegocio;
 using CapaDatos.Repos;
@@ -14,6 +16,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using CapaDatos.InterfacesDTO;
+using CapaDatos.InterfaceUoW;
+using CapaDatos.UoW;
 
 namespace CapaPresentacion
 {
@@ -32,26 +36,54 @@ namespace CapaPresentacion
         private NotebooksUC notebooksUC;
         #endregion
 
-        #region Variables Interface - Repositorios
+        #region Variables UoW(UnitOfWork) - Repositorios
+
+        #region Carritos
         private readonly IRepoCarritos repoCarritos;
-        private readonly IRepoElemento repoElementos;
-        private readonly IRepoTipoElemento repoTipoElemento;
-        private readonly IRepoDocentes repoDocentes;
-        private readonly IRepoPrestamos repoPrestamos;
-        private readonly IRepoPrestamoDetalle repoPrestamoDetalle;
-        private readonly IRepoDevolucion repoDevolucion;
-        private readonly IRepoUsuarios repoUsuarios;
-        private readonly IRepoRoles repoRoles;
-        private readonly IRepoEstadosPrestamo repoEstadosPrestamo;
-        private readonly IRepoDevolucionDetalle repoDevolucionDetalle;
-        private readonly IRepoHistorialElementos repoHistorialElementos;
-        private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
+        private readonly IRepoHistorialCambio repoHistorialCambio;
+        private readonly IRepoHistorialCarrito repoHistorialCarrito;
         private readonly IRepoUbicacion repoUbicacion;
         private readonly IRepoModelo repoModelo;
         private readonly IRepoNotebooks repoNotebooks;
-        private readonly IRepoHistorialCambio repoHistorialCambio;
-        private readonly IRepoHistorialCarrito repoHistorialCarrito;
+        private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
+        #endregion
+
+        #region Elementos
+        private readonly IRepoElemento repoElementos;
+        private readonly IRepoTipoElemento repoTipoElemento;
+        private readonly IRepoHistorialElementos repoHistorialElementos;
+        #endregion
+
+        #region Notebook
         private readonly IRepoHistorialNotebook repoHistorialNotebook;
+        #endregion
+
+        #region Prestamo
+        private readonly IRepoPrestamos repoPrestamos;
+        private readonly IRepoPrestamoDetalle repoPrestamoDetalle;
+        private readonly IRepoUsuarios repoUsuarios;
+        private readonly IRepoDocentes repoDocentes;
+        #endregion
+
+        #region Devolucion
+        private readonly IRepoEstadosPrestamo repoEstadosPrestamo;
+        private readonly IRepoDevolucionDetalle repoDevolucionDetalle;
+        private readonly IRepoDevolucion repoDevolucion;
+        #endregion
+
+
+        private readonly IUowCarritos uowCarritos;
+        private readonly IUowElementos uowElementos;
+        private readonly IUowNotebooks uowNotebooks;
+        private readonly IUowPrestamos uowPrestamos;
+        private readonly IUowDevolucion uowDevolucion;
+
+        private readonly IRepoRoles repoRoles;
+        //private readonly IRepoDocentes repoDocentes;
+        //private readonly IRepoModelo repoModelo;
+        //private readonly IRepoUbicacion repoUbicacion;
+        //private readonly IRepoTipoElemento repoTipoElemento;
+        //private readonly IRepoUsuarios repoUsuarios;
         #endregion
 
         #region Variables Mapper Interfaces
@@ -94,25 +126,51 @@ namespace CapaPresentacion
             this.userVerificado = userVerificado;
             this.rolUserVerficado = rolUserVerificado;
 
+            #region Carritos
             repoCarritos = new RepoCarritos(conexion);
-            repoElementos = new RepoElemento(conexion);
-            repoTipoElemento = new RepoTipoElemento(conexion);
-            repoDocentes = new RepoDocentes(conexion);
-            repoPrestamos = new RepoPrestamos(conexion);
-            repoPrestamoDetalle = new RepoPrestamoDetalle(conexion);
-            repoDevolucion = new RepoDevolucion(conexion);
-            repoUsuarios = new RepoUsuarios(conexion);
-            repoRoles = new RepoRoles(conexion);
-            repoDevolucionDetalle = new RepoDevolucionDetalle(conexion);
-            repoEstadosPrestamo = new RepoEstadosPrestamo(conexion);
-            repoHistorialElementos = new RepoHistorialElemento(conexion);
             repoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion);
             repoUbicacion = new RepoUbicacion(conexion);
             repoModelo = new RepoModelo(conexion);
             repoNotebooks = new RepoNotebooks(conexion);
             repoHistorialCambio = new RepoHistorialCambio(conexion);
             repoHistorialCarrito = new RepoHistorialCarrito(conexion);
+            #endregion
+
+            #region Elementos
+            repoElementos = new RepoElemento(conexion);
+            repoTipoElemento = new RepoTipoElemento(conexion);
+            repoHistorialElementos = new RepoHistorialElemento(conexion);
+            #endregion
+
+            #region Notebook
             repoHistorialNotebook = new RepoHistorialNotebook(conexion);
+            #endregion
+
+            #region Prestamos
+            repoPrestamos = new RepoPrestamos(conexion);
+            repoPrestamoDetalle = new RepoPrestamoDetalle(conexion);
+            repoUsuarios = new RepoUsuarios(conexion);
+            repoDocentes = new RepoDocentes(conexion);
+            #endregion
+
+            #region Devolucion
+            repoDevolucionDetalle = new RepoDevolucionDetalle(conexion);
+            repoEstadosPrestamo = new RepoEstadosPrestamo(conexion);
+            repoDevolucion = new RepoDevolucion(conexion);
+            #endregion
+
+            uowCarritos = new UowCarritos(conexion);
+            uowElementos = new UowElementos(conexion);
+            uowNotebooks = new UowNotebooks(conexion);
+            uowPrestamos = new UowPrestamos(conexion);
+            uowDevolucion = new UowDevolucion(conexion);
+
+            repoRoles = new RepoRoles(conexion);
+            //repoDocentes = new RepoDocentes(conexion);
+            //repoUsuarios = new RepoUsuarios(conexion);
+            //repoTipoElemento = new RepoTipoElemento(conexion);
+            //repoModelo = new RepoModelo(conexion);
+
 
             mapperElementos = new MapperElementos(conexion);
             mapperPrestamos = new MapperPrestamos(conexion);
@@ -128,17 +186,19 @@ namespace CapaPresentacion
             mapperNotebooks = new MapperNotebooks(conexion);
             mapperInventario = new MapperInventario(conexion);
 
-            elementoCN = new ElementosCN(mapperElementos, repoModelo, repoUbicacion, repoElementos);
-            carritosCN = new CarritosCN(repoCarritos, repoNotebooks, repoUbicacion, repoModelo, repoHistorialCambio, repoHistorialCarrito, mapperCarritos);
+            elementoCN = new ElementosCN(mapperElementos, uowElementos);
+            carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
-            prestamosCN = new PrestamosCN(repoPrestamos, repoCarritos, repoElementos, repoPrestamoDetalle, repoUsuarios, repoDocentes, mapperPrestamos);
+            prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios);
-            modeloCN = new ModeloCN(repoModelo, mapperModelos);
-            devolucionCN = new DevolucionCN(repoDevolucion, repoPrestamos, repoUsuarios, repoElementos, repoEstadosPrestamo, repoDocentes, repoDevolucionDetalle, repoCarritos, mapperDevoluciones);
+            modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
+            devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
             //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
-            notebooksCN = new NotebooksCN(repoNotebooks, repoCarritos, repoModelo, repoUbicacion, mapperNotebooks);
+            notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
         }
+
+        
 
         #region Eventos del Formulario
 
