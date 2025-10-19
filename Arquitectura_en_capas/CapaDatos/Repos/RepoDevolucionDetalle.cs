@@ -90,6 +90,13 @@ public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
     #endregion
 
     #region Verificar existencia del detalle
+    /// <summary>
+    /// HOLAAAA
+    /// </summary>
+    /// <param name="idDevolucion"></param>
+    /// <param name="idElemento"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public bool Exists(int idDevolucion, int idElemento)
     {
         string query = "select count(1) from DevolucionDetalle where idDevolucion = @idDevolucion and idElemento = @idElemento";

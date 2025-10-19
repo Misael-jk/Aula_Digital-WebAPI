@@ -117,6 +117,23 @@ delimiter ;
 
 
 -- =====================================================================
+-- INSERT PARA LA TABLA DE TIPO ANOMALIAS
+-- =====================================================================
+
+-- delimiter $$
+
+-- create procedure InsertTipoAnomalia (out unidTipoAnomalia tinyint, in unidTipoElemento smallint, in unnombreAnomalia varchar(70))
+-- begin
+--     insert into TipoAnomalia (idTipoElemento, nombreAnomalia)
+--     values (unidTipoElemento, unnombreAnomalia);
+--     set unidTipoAnomalia = last_insert_id();
+-- end$$
+
+-- delimiter ;
+
+
+
+-- =====================================================================
 -- INSERT PARA LA TABLA DE PRESTAMOS
 -- =====================================================================
 
@@ -142,7 +159,7 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertPrestamoDetalle $$
-create procedure InsertPrestamoDetalle (in unidPrestamo int, in unidElemento tinyint)
+create procedure InsertPrestamoDetalle (in unidPrestamo int, in unidElemento smallint)
 begin
     insert into PrestamoDetalle (idPrestamo, idElemento)
     values (unidPrestamo, unidElemento);
@@ -178,13 +195,31 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertDevolucionDetalle $$
-create procedure InsertDevolucionDetalle (in unidDevolucion int ,in unidElemento tinyint ,in unaobservacion varchar(200))
+create procedure InsertDevolucionDetalle (in unidDevolucion int ,in unidElemento smallint ,in unaobservacion varchar(200))
 begin
     insert into DevolucionDetalle (idDevolucion, idElemento, observaciones)
     values (unidDevolucion, unidElemento, unaobservacion);
 end $$
 
 delimiter ;
+
+
+
+
+-- =====================================================================
+-- INSERT PARA LA TABLA DE DEVOLUCION ANOMALIAS
+-- =====================================================================
+
+-- delimiter $$
+
+-- create procedure InsertrDevolucionAnomalia (in unidDevolucion int, in unidElemento smallint, in unidTipoAnomalia tinyint, in unadescripcion(200))
+-- begin
+--     insert into DevolucionAnomalia (idDevolucion, idElemento, idTipoAnomalia, descripcion)
+--     values (unidDevolucion, unidElemento, unidTipoAnomalia, unadescripcion);
+-- end$$
+
+-- delimiter ;
+
 
 
 

@@ -148,4 +148,66 @@ public class ElementoCNTests : IClassFixture<FixtureElementos>
     }
     #endregion
 
+    #region Validar Update Transaccion
+    [Fact]
+    public void ValidarUpdate()
+    {
+        int idUsuario = 2;
+        Elemento? existente = fixture.CreateElemento(1);
+
+        fixture.RepoElemento.Setup(r => r.GetById(existente.IdElemento)).Returns(existente);
+        fixture.RepoElemento.Setup(r => r.GetByNumeroSerie(existente.NumeroSerie)).Returns(existente);
+        fixture.RepoElemento.Setup(r => r.GetByCodigoBarra(existente.CodigoBarra)).Returns(existente);
+        fixture.RepoElemento.Setup(r => r.GetByPatrimonio(existente.Patrimonio)).Returns(existente);
+
+        fixture.RepoVarianteElemento.Setup(r => r.GetById(existente.IdVarianteElemento ?? 0))
+            .Returns(new VariantesElemento
+            {
+                IdVarianteElemento = existente.IdVarianteElemento ?? 0,
+                IdModelo = existente.IdModelo,
+                IdTipoElemento = existente.IdTipoElemento,
+                Variante = "Cable HDMI"
+            });
+
+        fixture.RepoEstadosMantenimiento.Setup(r => r.GetById(existente.IdEstadoMantenimiento))
+            .Returns(new EstadosMantenimiento
+            {
+                IdEstadoMantenimiento = 1,
+                EstadoMantenimientoNombre = "Disponible"
+            });
+
+        fixture.RepoUbicacion.Setup(r => r.GetById(existente.IdUbicacion))
+            .Returns(new Ubicacion
+            {
+                IdUbicacion = 1,
+                NombreUbicacion = "Armario A"
+            });
+
+        fixture.RepoModelo.Setup(r => r.GetById(existente.IdModelo))
+            .Returns(new Modelos
+            {
+                IdModelo = 1,
+                IdTipoElemento = 1,
+                NombreModelo = "HP 3014"
+            });
+
+        fixture.RepoTipoElemento.Setup(r => r.GetById(existente.IdTipoElemento))
+            .Returns(new TipoElemento
+            {
+                IdTipoElemento = 1,
+                ElementoTipo = "Cable"
+            });
+
+        fixture.Service.ActualizarElemento(existente, idUsuario);
+
+        fixture.RepoElemento.Verify(r => r.Update(It.Is<Elemento>(e =>
+            e.IdElemento == existente.IdElemento &&
+            e.NumeroSerie == existente.NumeroSerie &&
+            e.CodigoBarra == existente.CodigoBarra &&
+            e.Patrimonio == existente.Patrimonio
+        )), Times.Once);
+        fixture.MockUow.Verify(u => u.Commit(), Times.Once);
+        fixture.MockUow.Verify(u => u.Rollback(), Times.Never);
+    }
+    #endregion
 }

@@ -166,6 +166,17 @@ create table EstadosPrestamo (
 );
 
 
+-- create table TipoAnomalias (
+--    idTipoAnomalia tinyint not null auto_increment,
+--    idTipoElemento tinyint,
+--    nombreAnomalia varchar(70) not null,
+--    constraint FK_TipoAnomalia primary key (idTipoAnomalia),
+--    constraint UQ_TipoAnomalia_nombreAnomalia unique (nombreAnomalia),
+--    constraint FK_TipoAnomalia_TipoElemento foreign key (idTipoElemento)
+--        references TipoElemento (idTipoElemento)
+-- );
+
+
 create table Prestamos (
     idPrestamo int auto_increment,
     idUsuarioRecibio tinyint not null,
@@ -226,9 +237,18 @@ create table DevolucionDetalle (
 );
 
 
--- create table TipoAnomalias (
---     idTipoAnomalia tinyint not null auto_increment,
---     nombreAnomalia varchar(70) not null,
+-- create table DevolucionAnomalia (
+--    idDevolucion int not null,
+--    idElemento smallint not null,
+--    idTipoAnomalia tinyint not null,
+--    descripcion varchar(200), 
+--    constraint PK_DevolucionAnomalia primary key (idDevolucion, idElemento, idTipoAnomalia),
+--    constraint FK_DevolucionAnomalia_DevolucionDetalle foreign key (idDevolucion, idElemento)
+--        references DevolucionDetalle(idDevolucion, idElemento),
+--    constraint FK_DevolucionAnomalia_TipoAnomalia foreign key (idTipoAnomalia)
+--        references TipoAnomalia(idTipoAnomalia)
+-- );
+
 
 
 create table TipoAccion(

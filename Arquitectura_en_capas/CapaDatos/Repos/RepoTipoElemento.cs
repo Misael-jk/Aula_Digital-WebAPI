@@ -17,7 +17,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
     {
         DynamicParameters parametros = new DynamicParameters();
 
-        parametros.Add("unidTipoElemento", tipoElemento.IdTipoElemento);
+        parametros.Add("unidTipoElemento", tipoElemento.IdTipoElemento, dbType: DbType.Int32, direction: ParameterDirection.Output);
         parametros.Add("unidElemento", tipoElemento.ElementoTipo);
 
         try

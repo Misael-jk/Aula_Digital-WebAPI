@@ -59,7 +59,7 @@ public class FixtureElementos : IDisposable
         {
             IdElemento = id,
             IdVarianteElemento = 1,
-            NumeroSerie = $"SN-{id}",
+            NumeroSerie = $"NS-{id}",
             CodigoBarra = $"CB-{id}",
             Patrimonio = $"P-{id}",
             IdEstadoMantenimiento = 1,
