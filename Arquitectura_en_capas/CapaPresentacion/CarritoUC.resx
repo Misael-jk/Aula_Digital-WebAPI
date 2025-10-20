@@ -118,6 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnAddCarrito.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAAO5JREFUSEvt
+        lssNgzAQBWkDiUPuKYwKUgkFUANpgFJSBeeJFhlrs/izEHLLSBYHv51nwcE0zZ9fAHTABMwn1s36sgAt
+        3+MrBJ5h4JU4dW0dK1RDs93zcKjQlpnhLMahyRdeUWbm8m/owrL657Ah5StS8yRxhRy4PK6QA5fHEwLu
+        wEOedm/D46mGgCXsbyw2I9Q8K6UQMKoSzZjIZj2RUkjJdySyWU+kFFLuHYls1hMphYBe+TV9Ipv1RGoh
+        YFAlwmAzQs2z4go5cHnCDS2cuc/0knlhsh2R8EtwJZ3t+CD8GsiNbU97ZMl8a91/LuEN9w1LTDUh7+YA
+        AAAASUVORK5CYII=
+</value>
+  </data>
   <data name="txtCodBarra.IconLeft" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAvhJREFUaEPt

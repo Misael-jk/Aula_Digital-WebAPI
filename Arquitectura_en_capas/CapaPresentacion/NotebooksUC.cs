@@ -25,7 +25,13 @@ namespace CapaPresentacion
         {
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1200);
-            dtgNotebook.DataSource = notebooksCN.GetAll();   
+            dtgNotebook.DataSource = notebooksCN.GetAll();
+        }
+
+        private void btnInventario_Click(object sender, EventArgs e)
+        {
+            var Notebook = new FormCRUDNotebook();
+            Notebook.Show();
         }
     }
 }

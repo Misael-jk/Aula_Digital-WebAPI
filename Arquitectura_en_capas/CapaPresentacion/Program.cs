@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using CapaDatos;
 using System.Data;
-using MySql.Data.MySqlClient;
 using CapaPresentacion;
+using MySqlConnector;
 
 namespace Sistema_de_notebooks
 {
