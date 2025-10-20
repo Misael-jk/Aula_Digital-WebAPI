@@ -135,6 +135,11 @@ public class CarritosCN
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
 
+            if(carritos.IdEstadoMantenimiento == 1)
+            {
+                throw new Exception("No se puede deshabilitar un carrito con estado 'Disponible'");
+            }
+
             if (uow.RepoUbicacion.GetById(carritos.IdUbicacion) == null)
             {
                 throw new Exception("La ubicacion seleccionada no existe");
@@ -209,13 +214,65 @@ public class CarritosCN
 
 
     // FILTROS Y CONSULTAS DE LOS REPOS RELACIONADOS CON EL CARRITO
-    #region FILTROS PARA LA UI
+    #region CARRITOS
     public IEnumerable<Carritos> ListarCarritos()
     {
         return uow.RepoCarritos.GetAll();
     }
     #endregion
 
+    #region ESTADO MANTENIMIENTO
+    public IEnumerable<EstadosMantenimiento> ListarEstadosMatenimiento()
+    {
+        return uow.RepoEstadosMantenimiento.GetAll();
+    }
+    #endregion
+
+    #region UBICACION
+    public IEnumerable<Ubicacion> ListarUbicaciones()
+    {
+        return uow.RepoUbicacion.GetAll();
+    }
+    #endregion
+
+    #region MODELOS
+    public IEnumerable<Modelos> ListarModelosCarritos()
+    {
+        return uow.RepoModelo.GetByTipo(3);
+    }
+    #endregion
+
+    #region NOTEBOOK
+    public IEnumerable<Notebooks> ObtenerSeriePorNotebook()
+    {
+        return uow.RepoNotebooks.GetNroSerieByNotebook();
+    }
+
+    public IEnumerable<Notebooks> ObtenerCodBarraPorNotebook()
+    {
+        return uow.RepoNotebooks.GetCodBarraByNotebook();
+    }
+
+    public IEnumerable<Notebooks> ObtenerNotebooksPorCarrito(int idCarrito)
+    {
+        return uow.RepoNotebooks.GetNotebookByCarrito(idCarrito);
+    }
+
+    public Notebooks? ObtenerNotebookPorPosicion(int? idCarrito, int posicion)
+    {
+        return uow.RepoNotebooks.GetNotebookByPosicion(idCarrito, posicion);
+    }
+
+    public Notebooks? ObtenerPorSerie(string numSerie)
+    {
+        return uow.RepoNotebooks.GetByNumeroSerie(numSerie);
+    }
+
+    public Notebooks? ObtenerPorSerieOCodBarra(string numSerie, string CodBarra)
+    {
+        return uow.RepoNotebooks.GetNotebookBySerieOrCodigo(numSerie, CodBarra);
+    }
+    #endregion
 
 
 
@@ -519,14 +576,14 @@ public class CarritosCN
     private void ValidarReposInsert(Carritos carritoNEW)
     {
         #region VALIDACION DE CARRITOS
-        if(uow.RepoCarritos.GetById(carritoNEW.IdCarrito) == null)
+        if(uow.RepoCarritos.GetById(carritoNEW.IdCarrito) != null)
         {
-            throw new Exception("El carrito no existe");
+            throw new Exception("Ya existe ese carrito");
         }
         #endregion
 
         #region UBICACION
-        if (uow.RepoUbicacion.GetById(carritoNEW.IdUbicacion) == null)
+        if (uow.RepoUbicacion.GetById(carritoNEW.IdUbicacion) == null && carritoNEW.IdCarrito != 0)
         {
             throw new Exception("La ubicación seleccionada no existe.");
         }

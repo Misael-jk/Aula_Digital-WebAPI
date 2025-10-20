@@ -187,6 +187,25 @@ delimiter ;
 
 
 -- =====================================================================
+-- UPDATE PARA LA TABLA DE TIPO ANOMALIAS
+-- =====================================================================
+
+-- delimiter $$
+
+-- drop procedure if exists UpdateTipoAnomalias $$
+-- create procedure UpdateTipoAnomalias (in unidTipoAnomalia tinyint, in unidTipoElemento tinyint, in unnombreAnomalia varchar(70))
+-- begin
+--     update TipoAnomalias
+--     set idTipoElemento = unidTipoElemento,
+--        unnombreAnomalia = nombreAnomalia
+--     where idCurso = unidCurso;
+-- end $$
+
+-- delimiter ;
+
+
+
+-- =====================================================================
 -- UPDATE PARA LA TABLA DE CURSOS
 -- =====================================================================
 

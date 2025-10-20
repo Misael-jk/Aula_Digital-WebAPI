@@ -33,6 +33,7 @@ namespace CapaPresentacion
             this.repoNotebooks = repoNotebooks;
             this.repoEstadosMantenimiento = repoEstadosMantenimiento;
             this.repoUbicacion = repoUbicacion;
+            this.userVerificado = userVerificado;
         }
 
 

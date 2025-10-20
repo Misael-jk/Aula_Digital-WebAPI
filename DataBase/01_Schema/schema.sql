@@ -78,7 +78,7 @@ create table VariantesElemento (
     idVariante smallint not null auto_increment,
     idTipoElemento tinyint not null,
     subtipo varchar(40) not null,        
-    idModelo tinyint null,                
+    idModelo tinyint,                
     constraint PK_VariantesElemento primary key (idVariante),
     constraint UQ_VariantesElemento unique (idTipoElemento, subtipo),
     constraint FK_VariantesElemento_TipoElemento foreign key (idTipoElemento)
@@ -111,7 +111,7 @@ create table Carritos (
 create table Elementos (
     idElemento smallint not null auto_increment,
     idTipoElemento tinyint not null,
-    idVariante smallint not null,
+    idVariante smallint,
     idModelo tinyint,
     idUbicacion tinyint not null,
     idEstadoMantenimiento tinyint not null,
@@ -164,6 +164,17 @@ create table EstadosPrestamo (
     constraint PK_EstadoPrestamo primary key (idEstadoPrestamo),
     constraint UQ_EstadoPrestamo unique (estadoPrestamo)
 );
+
+
+-- create table TipoAnomalias (
+--    idTipoAnomalia tinyint not null auto_increment,
+--    idTipoElemento tinyint,
+--    nombreAnomalia varchar(70) not null,
+--    constraint FK_TipoAnomalia primary key (idTipoAnomalia),
+--    constraint UQ_TipoAnomalia_nombreAnomalia unique (nombreAnomalia),
+--    constraint FK_TipoAnomalia_TipoElemento foreign key (idTipoElemento)
+--        references TipoElemento (idTipoElemento)
+-- );
 
 
 create table Prestamos (
@@ -224,6 +235,20 @@ create table DevolucionDetalle (
     constraint FK_DevolucionDetalle_Elementos foreign key (idElemento)
         references Elementos(idElemento)
 );
+
+
+-- create table DevolucionAnomalia (
+--    idDevolucion int not null,
+--    idElemento smallint not null,
+--    idTipoAnomalia tinyint not null,
+--    descripcion varchar(200), 
+--    constraint PK_DevolucionAnomalia primary key (idDevolucion, idElemento, idTipoAnomalia),
+--    constraint FK_DevolucionAnomalia_DevolucionDetalle foreign key (idDevolucion, idElemento)
+--        references DevolucionDetalle(idDevolucion, idElemento),
+--    constraint FK_DevolucionAnomalia_TipoAnomalia foreign key (idTipoAnomalia)
+--        references TipoAnomalia(idTipoAnomalia)
+-- );
+
 
 
 create table TipoAccion(

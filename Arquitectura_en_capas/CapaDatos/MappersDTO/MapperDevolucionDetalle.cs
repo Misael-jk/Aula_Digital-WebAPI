@@ -21,7 +21,7 @@ public class MapperDevolucionDetalle : RepoBase, IMapperDevolucionDetalle
             {
                 TipoElemento = tipo.ElementoTipo,
                 NumeroSerieElemento = elemento.NumeroSerie,
-                NumeroSerieCarrito = carrito?.NumeroSerieCarrito ?? "Sin carrito",
+                NumeroSerieCarrito = carrito.NumeroSerieCarrito,
                 EstadoMantenimiento = estado.EstadoMantenimientoNombre,
                 FechaDevolucion = devolucion.FechaDevolucion,
                 Observacion = devolucion?.Observaciones ?? "Sin observaciones"

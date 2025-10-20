@@ -120,6 +120,26 @@ INSERT INTO EstadosPrestamo (estadoPrestamo) VALUES
 ('Finalizado'),
 ('Cancelado');
 
+
+-- ======================
+-- TIPO ANOMALIAS
+-- ======================
+-- INSERT INTO TipoAnomalias (idTipoElemento, nombreAnomalia) VALUES
+-- Notebooks
+-- (1, 'Pantalla rota'),
+-- (1, 'Batería dañada'),
+-- (1, 'Teclas faltantes'),
+-- (1, 'No enciende'),
+-- Proyectores
+-- (2, 'Lámpara quemada'),
+-- (2, 'Problemas de enfoque'),
+-- (2, 'Sin señal HDMI'),
+-- Tablets
+-- (3, 'Pantalla táctil no responde'),
+-- (3, 'Puerto de carga dañado'),
+-- (3, 'Carcasa rota');
+
+
 -- ======================
 -- PRESTAMOS
 -- ======================
@@ -147,6 +167,18 @@ INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observ
 INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
 (1, 1, NULL),
 (2, 5, 'Devuelto con anomalías');
+
+
+-- ======================
+-- DEVOLUCION ANOMALIA
+-- ======================
+-- INSERT INTO DevolucionAnomalia (idDevolucion, idElemento, idTipoAnomalia, descripcion) VALUES
+--  Devolución 1 → Sin anomalías, no se agrega nada
+--  Devolución 2 → Problemas con la Notebook 3 (de idElemento 5 es un proyector en tu caso)
+-- (2, 5, 5, 'El proyector devuelve con la lámpara quemada y necesita reemplazo'),
+--  Simulamos que otro elemento del mismo préstamo también tuvo un problema
+-- (2, 5, 7, 'Además, no detecta entrada HDMI correctamente');
+
 
 -- ======================
 -- TIPO ACCION

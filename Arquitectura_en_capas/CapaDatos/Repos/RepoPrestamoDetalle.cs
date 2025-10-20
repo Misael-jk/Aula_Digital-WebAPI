@@ -104,5 +104,89 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
     }
     #endregion
 
+    #region Obtener Detalle por elemento
+    public Elemento? GetByElemento(int idElemento)
+    {
+        string query = "select idElemento from Elementos where idElemento = @idElemento";
 
+        DynamicParameters parametros = new DynamicParameters();
+
+        try
+        {
+            parametros.Add("unidElemento", idElemento);
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener el elemento");
+        }
+    }
+    #endregion
+
+    #region Verificar si el elemento pertenece al prestamo
+    public bool PerteneceAlPrestamo(int idPrestamo, int idElemento)
+    {
+        string query = "select idElemento from PrestamoDetalle where idPrestamo = @idPrestamo and idElemento = @idElemento";
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("unidPrestamo", idPrestamo);
+            parametros.Add("unidElemento", idElemento);
+
+            Elemento? result = Conexion.QueryFirstOrDefault<Elemento>(query, parametros, transaction: Transaction);
+
+            return result != null;
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al verificar si el elemento pertenece al prestamo");
+        }
+    }
+    #endregion
+
+    #region Obtener cantidad de elementos por prestamo
+    public int GetCountByPrestamo(int idPrestamo)
+    {
+        string query = "select COUNT(*) from PrestamoDetalle where idPrestamo = @idPrestamo";
+        DynamicParameters parametros = new DynamicParameters();
+
+        try
+        {
+            parametros.Add("unidPrestamo", idPrestamo);
+            return Conexion.ExecuteScalar<int>(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener la cantidad de elementos del prestamo");
+        }
+    }
+    #endregion
+
+    #region Obtener Elementos pendientes por prestamo
+    public IEnumerable<Elemento> GetElementosPendientes(int idPrestamo)
+    {
+        string query = @"
+            SELECT e.*
+            FROM Elementos e
+            INNER JOIN PrestamoDetalle pd ON e.idElemento = pd.idElemento
+            WHERE pd.idPrestamo = @idPrestamo
+            AND e.idElemento NOT IN (
+                SELECT dd.idElemento
+                FROM DevolucionDetalle dd
+                INNER JOIN Devoluciones d ON dd.idDevolucion = d.idDevolucion
+                WHERE d.idPrestamo = @idPrestamo
+            )";
+
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("unidPrestamo", idPrestamo);
+            return Conexion.Query<Elemento>(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener los elementos pendientes del prestamo");
+        }
+    }
+    #endregion
 }

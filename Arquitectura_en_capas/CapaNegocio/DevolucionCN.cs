@@ -1,13 +1,7 @@
-﻿using CapaDatos.Repos;
-using CapaNegocio;
-using CapaEntidad;
+﻿using CapaEntidad;
 using System.Data;
-using CapaDatos.Interfaces;
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
-using System.Transactions;
-using System.Data.Common;
-using System.ComponentModel.DataAnnotations;
 using CapaDatos.InterfaceUoW;
 
 namespace CapaNegocio;
@@ -31,87 +25,279 @@ public class DevolucionCN
     #region INSERT DEVOLUCION
     public void CrearDevolucion(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadosElemento, IEnumerable<string>? Observaciones)
     {
-        using (TransactionScope scope = new TransactionScope())
+        try
         {
+            uow.BeginTransaction();
 
-            Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucionNEW.IdPrestamo);
-
-            if (prestamo == null)
-            {
-                throw new Exception("El prestamo no existe");
-            }
+            ValidarDevolucion(devolucionNEW, idsElementos, idsEstadosElemento);
 
             if (uow.RepoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
             {
-                throw new Exception("El prestamo ya fue devuelto");
+                throw new Exception("Ya existe una devolución asociada a este prestamo.");
             }
 
-            //if (repoDocentes.GetById(devolucionNEW.IdDocente) == null)
-            //{
-            //    throw new Exception("El docente no existe");
-            //}
-
-            if (uow.RepoUsuarios.GetById(devolucionNEW.IdUsuario) == null)
-            {
-                throw new Exception("El usuario no existe");
-            }
-
-            foreach (int idElemento in idsElementos)
-            {
-                if (uow.RepoElementos.GetDisponible(idElemento))
-                {
-                    throw new Exception($"El elemento {idElemento} no debe estar disponible.");
-                }
-            }
-
-            if (idsElementos.Count() != idsEstadosElemento.Count())
-            {
-                throw new Exception("Error: el número de elementos y estados no coincide.");
-            }
-
-            if (idsElementos.Any())
-            {
-                throw new Exception("Debe seleccionar al menos un elemento para devolver.");
-            }
-
-            if (prestamo.IdCarrito != null)
-            {
-                uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
-            }
+            Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucionNEW.IdPrestamo);
 
             uow.RepoDevolucion.Insert(devolucionNEW);
 
-            int cont = 0;
-            foreach (int idElemento in idsElementos)
+            InsertDevolucionDetalle(devolucionNEW, idsElementos, idsEstadosElemento, Observaciones);
+
+            int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(prestamo.IdPrestamo);
+            int totalDevueltos = uow.RepoDevolucionDetalle.CountByDevolucion(devolucionNEW.IdDevolucion);
+
+            if (totalPrestados == totalDevueltos)
             {
-                int estadoElemento = idsEstadosElemento.ElementAt(cont);
-                string? obs = Observaciones?.ElementAtOrDefault(cont);
-
-                uow.RepoDevolucionDetalle.Insert(new DevolucionDetalle
-                {
-                    IdDevolucion = devolucionNEW.IdDevolucion,
-                    IdElemento = idElemento,
-                    Observaciones = obs
-                });
-
-                uow.RepoElementos.UpdateEstado(idElemento, estadoElemento);
-
-                //repoHistorialElemento.Insert(new HistorialElemento
-                //{
-                //    IdElemento = idElemento,
-                //    IdCarrito = prestamo.IdCarrito,
-                //    idUsuario = devolucionNEW.IdUsuario,
-                //    IdEstadoMantenimiento = estadoElemento,
-                //    FechaHora = DateTime.Now,
-                //    Observacion = obs ?? "Devolución realizada"
-                //});
-
-                cont++;
+                uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 3); //Devuelto Sin Problemas
+            }
+            else
+            {
+                uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 4); //Devuelto Con Anomalias
             }
 
+            if (prestamo.IdCarrito.HasValue)
+            {
+                IEnumerable<Elemento> carritoLibre = uow.RepoPrestamoDetalle.GetElementosPendientes(prestamo.IdPrestamo);
 
-            scope.Complete();
+                if (!carritoLibre.Any())
+                {
+                    uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
+
+
+                    HistorialCambios? historial = new HistorialCambios
+                    {
+                        IdTipoAccion = 2,
+                        IdUsuario = devolucionNEW.IdUsuario,
+                        FechaCambio = DateTime.Now,
+                        Descripcion = $"El carrito {prestamo.IdCarrito.Value} fue liberado.",
+                        Motivo = null
+                    };
+
+                    uow.RepoHistorialCambio.Insert(historial);
+
+                    uow.RepoHistorialCarrito.Insert(new HistorialCarritos
+                    {
+                        IdHistorialCambio = historial.IdHistorialCambio,
+                        IdCarrito = prestamo.IdCarrito.Value
+                    });
+                }
+            }
+            uow.Commit();
+
+        }
+        catch (Exception ex)
+        { 
+            uow.Rollback();
+            throw new Exception("Hubo un error al crear la devolucion: " + ex.Message);
         }
     }
     #endregion
+
+    #region DEVOLUCION PARCIAL
+    public void CrearDevolucionParcial(int idPrestamo, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento, IEnumerable<string>? Observaciones)
+    {
+        try
+        {
+            uow.BeginTransaction();
+
+            Devolucion? devolucion = uow.RepoDevolucion.GetByPrestamo(idPrestamo);
+
+            if (devolucion == null)
+            {
+                throw new Exception("No existe una devolución asociada al prestamo. Debe crearla primero.");
+            }
+
+            Prestamos? prestamo = uow.RepoPrestamos.GetById(idPrestamo);
+
+            if(prestamo == null)
+            {
+                throw new Exception("No existe el prestamo asociado a la devolucion.");
+            }
+
+            ValidarDevolucion(devolucion, idsElementos, idsEstadoMantenimiento);
+
+            InsertDevolucionDetalle(devolucion, idsElementos, idsEstadoMantenimiento, Observaciones);
+
+            if (prestamo.IdCarrito.HasValue)
+            {
+                IEnumerable<Elemento> carritoLibre = uow.RepoPrestamoDetalle.GetElementosPendientes(prestamo.IdPrestamo);
+
+                if (carritoLibre.Any())
+                {
+                    uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
+
+
+                    HistorialCambios? historial = new HistorialCambios
+                    {
+                        IdTipoAccion = 2,
+                        IdUsuario = devolucion.IdUsuario,
+                        FechaCambio = DateTime.Now,
+                        Descripcion = $"El carrito {prestamo.IdCarrito.Value} fue liberado.",
+                        Motivo = null
+                    };
+
+                    uow.RepoHistorialCambio.Insert(historial);
+
+                    uow.RepoHistorialCarrito.Insert(new HistorialCarritos
+                    {
+                        IdHistorialCambio = historial.IdHistorialCambio,
+                        IdCarrito = prestamo.IdCarrito.Value
+                    });
+                }
+            }
+
+            uow.Commit();
+        }
+        catch
+        {
+            uow.Rollback();
+            throw;
+        }
+    }
+    #endregion
+
+    #region AUX INSERT DEVOLUCION DETALLE, HISTORICOS y ANOMALIAS
+    public void InsertDevolucionDetalle(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento, IEnumerable<string>? Observaciones)
+    {
+        if (idsElementos == null)
+        {
+            throw new ArgumentNullException(nameof(idsElementos));
+        }
+
+        if (idsEstadoMantenimiento == null)
+        {
+            throw new ArgumentNullException(nameof(idsEstadoMantenimiento));
+        }
+
+        if (idsElementos.Count() != idsEstadoMantenimiento.Count())
+        {
+            throw new Exception("La cantidad de elementos y de estados debe coincidir.");
+        }
+
+        int cont = 0;
+        foreach (int idElemento in idsElementos)
+        {
+            int estadoElemento = idsEstadoMantenimiento.ElementAt(cont);
+            string? obs = Observaciones?.ElementAtOrDefault(cont);
+
+            bool yaDevuelto = uow.RepoDevolucionDetalle.Exists(devolucionNEW.IdDevolucion, idElemento);
+            if (yaDevuelto)
+            {
+                throw new Exception($"El elemento {idElemento} ya fue devuelto previamente para este préstamo.");
+            }
+
+            uow.RepoDevolucionDetalle.Insert(new DevolucionDetalle
+            {
+                IdDevolucion = devolucionNEW.IdDevolucion,
+                IdElemento = idElemento,
+                Observaciones = obs
+            });
+
+            uow.RepoElementos.UpdateEstado(idElemento, estadoElemento);
+
+            Elemento? elemento = uow.RepoElementos.GetById(idElemento);
+
+            HistorialCambios Historial = new HistorialCambios
+            {
+                IdTipoAccion = 3,
+                FechaCambio = DateTime.Now,
+                IdUsuario = devolucionNEW.IdUsuario,
+                Descripcion = elemento?.IdTipoElemento == 1 ?
+                    $"El Elemento {idElemento} fue Devuelto" :
+                    $"La notebook {idElemento} fue devuelta",
+                Motivo = obs
+            };
+
+            uow.RepoHistorialCambio.Insert(Historial);
+
+            if (elemento != null && elemento?.IdTipoElemento == 1)
+            {
+                uow.RepoHistorialNotebook.Insert(new HistorialNotebooks
+                {
+                    IdHistorialCambio = Historial.IdHistorialCambio,
+                    IdNotebook = idElemento
+                });
+            }
+            else
+            {
+                uow.RepoHistorialElementos.Insert(new HistorialElementos
+                {
+                    IdHistorialCambio = Historial.IdHistorialCambio,
+                    IdElementos = idElemento
+                });
+            }
+
+            cont++;
+        }
+    }
+    #endregion
+
+    public void ValidarDevolucion(Devolucion devolucion, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento)
+    {
+        Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucion.IdPrestamo);
+
+        #region DEVOLUCION
+        if (devolucion == null)
+        {
+            throw new ArgumentNullException(nameof(devolucion));
+        }
+        #endregion
+
+        #region USUARIOS
+        if (uow.RepoUsuarios.GetById(devolucion.IdUsuario) == null)
+        {
+            throw new Exception("El usuario no existe");
+        }
+        #endregion
+
+        #region ESTADOS
+        if (idsEstadoMantenimiento == null || idsEstadoMantenimiento.Count() < idsElementos.Count())
+        {
+            throw new Exception("Debe indicar el estado para cada elemento devuelto.");
+        }
+
+        foreach (var idEstado in idsEstadoMantenimiento.Distinct())
+        {
+            if (uow.RepoEstadosMantenimiento.GetById(idEstado) == null)
+            {
+                throw new Exception($"El estado de mantenimiento {idEstado} no existe.");
+            }
+        }
+        #endregion
+
+        #region ELEMENTOS
+        if (idsElementos == null || !idsElementos.Any())
+        {
+            throw new Exception("Debe seleccionar al menos un elemento para devolver.");
+        }
+
+        foreach (int idElemento in idsElementos)
+        {
+            if (uow.RepoElementos.GetById(idElemento) == null)
+            {
+                throw new Exception($"El elemento {idElemento} no existe.");
+            }
+
+            if (uow.RepoElementos.GetDisponible(idElemento))
+            {
+                throw new Exception($"El elemento {idElemento} no debe estar disponible.");
+            }
+
+            if (!uow.RepoPrestamoDetalle.PerteneceAlPrestamo(devolucion.IdPrestamo, idElemento))
+            {
+                throw new Exception($"El elemento {idElemento} no pertenece a este prestamo.");
+            }
+
+            if (uow.RepoDevolucionDetalle.Exists(devolucion.IdDevolucion, idElemento))
+            {
+                throw new Exception($"El elemento {idElemento} ya fue devuelto previamente.");
+            }
+
+            if (idsElementos.Count(x => x == idElemento) > 1)
+            {
+                throw new Exception($"El elemento {idElemento} está repetido en la lista de devolución.");
+            }
+        }
+
+        #endregion
+    }
 }

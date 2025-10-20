@@ -21,7 +21,6 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
 
         parametros.Add("unidPrestamo", devolucion.IdPrestamo);
         parametros.Add("unidEncargado", devolucion.IdUsuario);
-        parametros.Add("unidEstdoPrestamo", devolucion.IdEstadoPrestamo);
         parametros.Add("unafechaDevolucion", devolucion.FechaDevolucion);
         parametros.Add("unaobservaciones", devolucion.Observaciones);
 
@@ -72,7 +71,7 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
     #endregion
 
     #region obtener por Prestamo
-    public IEnumerable<Devolucion> GetByPrestamo(int idPrestamo)
+    public Devolucion? GetByPrestamo(int idPrestamo)
     {
         string query = "select * from Devoluciones where idPrestamo = unidPrestamo";
 
@@ -80,7 +79,8 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
         try
         {
             parametros.Add("unidPrestamo", idPrestamo);
-            return Conexion.Query<Devolucion>(query, parametros, transaction: Transaction);
+
+            return Conexion.QueryFirstOrDefault<Devolucion>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

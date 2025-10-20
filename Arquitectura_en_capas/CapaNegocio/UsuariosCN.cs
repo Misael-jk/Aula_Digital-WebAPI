@@ -27,6 +27,16 @@ public class UsuariosCN
     {
         return mapperUsuarios.GetAllDTO();
     }
+
+    public Usuarios? ObtenerPorUsuario(string usuario)
+    {
+        return repoUsuarios.GetByUser(usuario);
+    }
+
+    public IEnumerable<Roles> ObtenerRoles()
+    {
+        return repoRoles.GetAll();
+    }
     #endregion
 
     #region INSERT USUARIO

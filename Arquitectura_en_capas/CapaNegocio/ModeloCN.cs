@@ -93,6 +93,7 @@ namespace CapaNegocio
         }
         #endregion
 
+
         #region VALIDACIONES
         public void ValidarDatos(Modelos modeloNEW)
         {

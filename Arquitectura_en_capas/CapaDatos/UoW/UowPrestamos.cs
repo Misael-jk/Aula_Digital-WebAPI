@@ -13,6 +13,11 @@ public class UowPrestamos : UowBase, IUowPrestamos
     public IRepoDocentes RepoDocentes { get; }
     public IRepoPrestamoDetalle RepoPrestamoDetalle { get; }
     public IRepoUsuarios RepoUsuarios { get; }
+    public IRepoCursos RepoCursos { get; }
+    public IRepoHistorialCambio RepoHistorialCambio { get; }
+    public IRepoHistorialElementos RepoHistorialElementos { get; }
+    public IRepoHistorialCarrito RepoHistorialCarrito { get; }
+    public IRepoHistorialNotebook RepoHistorialNotebook { get; }
 
     public UowPrestamos(IDbConnection conexion) : base(conexion)
     {
@@ -20,11 +25,16 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoCarritos = new RepoCarritos(conexion, Transaction);
         RepoElemento = new RepoElemento(conexion, Transaction);
         RepoPrestamoDetalle = new RepoPrestamoDetalle(conexion, Transaction);
+        RepoHistorialCambio = new RepoHistorialCambio(conexion, Transaction);
+        RepoHistorialElementos = new RepoHistorialElemento(conexion, Transaction);
+        RepoHistorialCarrito = new RepoHistorialCarrito(conexion, Transaction);
+        RepoHistorialNotebook = new RepoHistorialNotebook(conexion, Transaction);
 
 
         // REPO DE LECTURA
         RepoDocentes = new RepoDocentes(conexion);
         RepoUsuarios = new RepoUsuarios(conexion);
+        RepoCursos = new RepoCursos(conexion);
     }
 
     protected override void CambiarTransacion(IDbTransaction? transaction)
@@ -33,5 +43,8 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoCarritos.SetTransaction(transaction);
         RepoElemento.SetTransaction(transaction);
         RepoPrestamoDetalle.SetTransaction(transaction);
+        RepoHistorialCambio.SetTransaction(transaction);
+        RepoHistorialElementos.SetTransaction(transaction);
+        RepoHistorialCarrito.SetTransaction(transaction);
     }
 }

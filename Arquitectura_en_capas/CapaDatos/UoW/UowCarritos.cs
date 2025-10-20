@@ -27,9 +27,9 @@ public class UowCarritos : UowBase, IUowCarritos
 
         // REPOS AUXILIARES / LECTURA
 
-        RepoModelo = new RepoModelo(Conexion, Transaction);
-        RepoUbicacion = new RepoUbicacion(Conexion, Transaction);
-        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(Conexion, Transaction);
+        RepoModelo = new RepoModelo(Conexion);
+        RepoUbicacion = new RepoUbicacion(Conexion);
+        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(Conexion);
         
         
     }

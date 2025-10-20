@@ -3,7 +3,6 @@ using CapaDatos.InterfaceUoW;
 using CapaDTOs;
 using CapaEntidad;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace CapaNegocio
@@ -19,6 +18,7 @@ namespace CapaNegocio
             this.uow = uow;
         }
 
+        // PROCEDIMIENTOS CRUD
         #region Metodos de Lectura para la UI DTOs
 
         #region Mostrar Elementos completos
@@ -51,7 +51,6 @@ namespace CapaNegocio
 
         #endregion
 
-
         #region INSERT ELEMENTO
         public void CrearElemento(Elemento elementoNEW, int idUsuario)
         {
@@ -60,6 +59,7 @@ namespace CapaNegocio
             try
             {
                 uow.BeginTransaction();
+
                 ValidarInsert(elementoNEW);
 
                 uow.RepoElemento.Insert(elementoNEW);
@@ -185,6 +185,61 @@ namespace CapaNegocio
         }
         #endregion
 
+
+
+
+        // REPOS PARA CONSULATAS DE LA UI PARA ELEMENTOS
+        #region ELEMENTOS
+        public Elemento? ObtenerPorId(int idElemento)
+        {
+            return uow.RepoElemento.GetById(idElemento);
+        }
+
+        public Elemento? ObtenerPorNumeroSerie(string numeroSerie)
+        {
+            return uow.RepoElemento.GetByNumeroSerie(numeroSerie);
+        }
+        #endregion
+
+        #region ESTADOS MANTENIMIENTO
+        public IEnumerable<EstadosMantenimiento> ObtenerEstadosMantenimiento()
+        {
+            return uow.RepoEstadosMantenimiento.GetAll();
+        }
+        #endregion
+
+        #region TIPOS ELEMENTO
+        public IEnumerable<TipoElemento> ObtenerTiposElemento()
+        {
+            return uow.RepoTipoElemento.GetAll();
+        }
+        #endregion
+
+        #region MODELOS
+        public IEnumerable<Modelos> ObtenerModelosPorTipo(int idTipoElemento)
+        {
+            return uow.RepoModelo.GetByTipo(idTipoElemento);
+        }
+        #endregion
+
+        #region VARIANTES ELEMENTO
+        public IEnumerable<VariantesElemento> ObtenerVariantesPorTipo(int idTipoElemento)
+        {
+            return uow.RepoVarianteElemento.GetByTipo(idTipoElemento);
+        }
+        #endregion
+
+        #region UBICACIONES
+        public IEnumerable<Ubicacion> ObtenerUbicaciones()
+        {
+            return uow.RepoUbicacion.GetAll();
+        }
+        #endregion
+
+
+
+
+        // VALIDACIONES 
         #region VALIDACIONES
         private void ValidarDatos(Elemento elemento)
         {
