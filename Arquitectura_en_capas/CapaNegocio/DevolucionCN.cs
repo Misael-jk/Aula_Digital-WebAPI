@@ -23,7 +23,7 @@ public class DevolucionCN
     }
 
     #region INSERT DEVOLUCION
-    public void CrearDevolucion(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadosElemento, IEnumerable<string>? Observaciones)
+    public void CrearDevolucion(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadosElemento, IEnumerable<string>? Observaciones /*, Dictionary<int, List<int>>? anomaliasPorElemento = null*/)
     {
         try
         {
@@ -40,8 +40,11 @@ public class DevolucionCN
 
             uow.RepoDevolucion.Insert(devolucionNEW);
 
-            InsertDevolucionDetalle(devolucionNEW, idsElementos, idsEstadosElemento, Observaciones);
+            /*bool tuvoAnomalias = */InsertDevolucionDetalle(devolucionNEW, idsElementos, idsEstadosElemento, Observaciones /*,anomaliasPorElemento*/);
 
+            //ActualizarEstadoPrestamoYDevolucion(prestamo.IdPrestamo, devolucionNEW.IdDevolucion, tuvoAnomalias);
+
+            // ___________________
             int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(prestamo.IdPrestamo);
             int totalDevueltos = uow.RepoDevolucionDetalle.CountByDevolucion(devolucionNEW.IdDevolucion);
 
@@ -53,6 +56,7 @@ public class DevolucionCN
             {
                 uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 4); //Devuelto Con Anomalias
             }
+            //__________________
 
             if (prestamo.IdCarrito.HasValue)
             {
@@ -93,7 +97,7 @@ public class DevolucionCN
     #endregion
 
     #region DEVOLUCION PARCIAL
-    public void CrearDevolucionParcial(int idPrestamo, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento, IEnumerable<string>? Observaciones)
+    public void CrearDevolucionParcial(int idPrestamo, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento, IEnumerable<string>? Observaciones /*, Dictionary<int, List<int>>? anomaliasPorElemento = null*/)
     {
         try
         {
@@ -115,7 +119,9 @@ public class DevolucionCN
 
             ValidarDevolucion(devolucion, idsElementos, idsEstadoMantenimiento);
 
-            InsertDevolucionDetalle(devolucion, idsElementos, idsEstadoMantenimiento, Observaciones);
+            /*bool tuvoAnomalias = */InsertDevolucionDetalle(devolucion, idsElementos, idsEstadoMantenimiento, Observaciones);
+
+            //ActualizarEstadoPrestamoYDevolucion(prestamo.IdPrestamo, devolucion.IdDevolucion, tuvoAnomalias);
 
             if (prestamo.IdCarrito.HasValue)
             {
@@ -156,7 +162,7 @@ public class DevolucionCN
     #endregion
 
     #region AUX INSERT DEVOLUCION DETALLE, HISTORICOS y ANOMALIAS
-    public void InsertDevolucionDetalle(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento, IEnumerable<string>? Observaciones)
+    private /*bool */void InsertDevolucionDetalle(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento, IEnumerable<string>? Observaciones/*, Dictionary<int, List<int>>? anomaliasPorElemento = null; */ )
     {
         if (idsElementos == null)
         {
@@ -173,7 +179,9 @@ public class DevolucionCN
             throw new Exception("La cantidad de elementos y de estados debe coincidir.");
         }
 
+        //bool huboAnomaliasEnEsteLote = false;
         int cont = 0;
+        
         foreach (int idElemento in idsElementos)
         {
             int estadoElemento = idsEstadoMantenimiento.ElementAt(cont);
@@ -191,6 +199,22 @@ public class DevolucionCN
                 IdElemento = idElemento,
                 Observaciones = obs
             });
+
+            //if (anomaliasPorElemento != null && anomaliasPorElemento.TryGetValue(idElemento, out var listaAnomalia) && listaAnomalia.Any())
+            //{
+            //    huboAnomaliasEnEsteLote = true;
+
+            //    foreach (var idTipoAnomalia in listaAnomalia)
+            //    {
+            //        uow.RepoDevolucionAnomalia.Insert(new DevolucionAnomalia
+            //        {
+            //            IdDevolucion = devolucionNEW.IdDevolucion,
+            //            IdElemento = idElemento,
+            //            IdTipoAnomalia = idTipoAnomalia,
+            //            Descripcion = obs
+            //        });
+            //    }
+            //}
 
             uow.RepoElementos.UpdateEstado(idElemento, estadoElemento);
 
@@ -228,9 +252,43 @@ public class DevolucionCN
 
             cont++;
         }
+        //return huboAnomaliasEnEsteLote;
     }
     #endregion
 
+    #region Actualizar los estados de mantenimiento de los elementos devueltos
+    //private void ActualizarEstadoPrestamoYDevolucion(int idPrestamo, int idDevolucion, bool huboAnomaliasEnEsteLote)
+    //{
+    //    int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(idPrestamo);
+    //    int totalDevueltos = uow.RepoDevolucionDetalle.CountByDevolucion(idDevolucion); 
+
+    //    bool hayAnomaliasGlobales = false;
+    //    try
+    //    {
+    //        // Si tienes RepoDevolucionAnomalia, podrías hacer:
+    //        var hayAnomaliasGlobales = uow.RepoDevolucionAnomalia.ExistsByDevolucion(idDevolucion);
+    //        // Aquí lo dejamos en false para no depender obligatoriamente del repo.
+    //        hayAnomaliasGlobales = false;
+    //    }
+    //    catch { hayAnomaliasGlobales = false; }
+
+    //    bool tieneAnomalias = huboAnomaliasEnEsteLote || hayAnomaliasGlobales;
+
+    //    if (totalPrestados == totalDevueltos)
+    //    {
+    //        uow.RepoPrestamos.UpdateEstado(idPrestamo, tieneAnomalias ? 4 : 3); // 4 = con anomalías, 3 = sin problemas
+
+    //        uow.RepoDevolucion.SetParcial?.Invoke(idDevolucion, false); // si tu UoW/Repo implementa SetParcial
+    //    }
+    //    else
+    //    {
+    //        uow.RepoPrestamos.UpdateEstado(idPrestamo, 5); // 5 = Parcial (elige el id que uses)
+    //        uow.RepoDevolucion.SetParcial?.Invoke(idDevolucion, true);
+    //    }
+    //}
+    #endregion
+
+    #region VALIDACION DE LA DEVOLUCION
     public void ValidarDevolucion(Devolucion devolucion, IEnumerable<int> idsElementos, IEnumerable<int> idsEstadoMantenimiento)
     {
         Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucion.IdPrestamo);
@@ -300,4 +358,5 @@ public class DevolucionCN
 
         #endregion
     }
+    #endregion
 }

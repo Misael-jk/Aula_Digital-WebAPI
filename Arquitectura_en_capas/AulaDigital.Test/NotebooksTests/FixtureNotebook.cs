@@ -91,7 +91,7 @@ public class FixtureNotebook : IDisposable
             Habilitado = true,
             FechaBaja = null,
             IdCarrito = 1,
-            PosicionCarrito = 12
+            PosicionCarrito = 13
         };
     }
     #endregion

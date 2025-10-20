@@ -449,11 +449,6 @@ public class NotebooksCN
         {
             throw new Exception("No se puede cambiar el tipo de elemento");
         }
-
-        if (uow.RepoTipoElemento.GetById(notebooks.IdTipoElemento) == null)
-        {
-            throw new Exception("El tipo elemento es invalido");
-        }
         #endregion
 
         #region ESTADO

@@ -187,6 +187,12 @@ namespace CapaNegocio
 
 
 
+        // FILTROS PARA LA UI
+        #region Filtros
+
+        #endregion
+
+
 
         // REPOS PARA CONSULATAS DE LA UI PARA ELEMENTOS
         #region ELEMENTOS

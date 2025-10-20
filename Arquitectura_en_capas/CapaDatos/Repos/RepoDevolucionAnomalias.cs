@@ -55,4 +55,17 @@
 //            throw new Exception("Hubo un error al obtener todas las anomalias de devoluciones");
 //        }
 //    }
+
+//public bool ExistsByDevolucion(int idDevolucion)
+//{
+//    string sql = @"SELECT COUNT(1) FROM DevolucionAnomalias WHERE idDevolucion = @idDevolucion";
+//    try
+//    {
+//        return Conexion.ExecuteScalar<int>(sql, new { idDevolucion }, transaction: Transaction) > 0;
+//    }
+//    catch (Exception)
+//    {
+//        throw new Exception("Error al verificar anomalías por devolución");
+//    }
+//}
 //}
