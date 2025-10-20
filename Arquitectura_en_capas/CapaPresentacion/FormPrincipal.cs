@@ -198,7 +198,6 @@ namespace CapaPresentacion
             notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
         }
 
-        
 
         #region Eventos del Formulario
 

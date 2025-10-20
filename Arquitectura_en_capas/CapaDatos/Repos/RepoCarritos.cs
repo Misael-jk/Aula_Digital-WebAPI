@@ -153,9 +153,6 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     }
     #endregion
 
-
-
-
     // VALIDACIONES/CAPA DE NEGOCIO
 
     #region Obtener por Numero de Serie

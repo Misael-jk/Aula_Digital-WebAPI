@@ -117,8 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="MoverVentanaNotebook.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnDeshabiliar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAAN5JREFUSEvt
+        lcENgkAURDlbBS148GQDhqa0E5vgoCdvHmyCFowNjBmyJJ/xB+LfRS+8ZBMyA/tgdxOqaqU0ALYArgBu
+        BcYFwE4dPQAOWIa9uih7prJz3jIyOA95qYuygZN2ETjPMKF2szIAZ83IRB6TAWhT10k+LFVr89SFZY3p
+        e6ERkcZ5JiYjIrR8iEiWjDhCV0RKyOzSkdEeWrJkIjqaa1cYlnmHwTs08kxYVqdutEdGWNs8dTEZAbDR
+        jEzkcdm3zMnuRliSh7p69K4SqOO3OP+i4sPKFuc/X7aSyxtyVbAz58TCYAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnGuardarCambios.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAAO5JREFUSEvt
+        lssNgzAQBWkDiUPuKYwKUgkFUANpgFJSBeeJFhlrs/izEHLLSBYHv51nwcE0zZ9fAHTABMwn1s36sgAt
+        3+MrBJ5h4JU4dW0dK1RDs93zcKjQlpnhLMahyRdeUWbm8m/owrL657Ah5StS8yRxhRy4PK6QA5fHEwLu
+        wEOedm/D46mGgCXsbyw2I9Q8K6UQMKoSzZjIZj2RUkjJdySyWU+kFFLuHYls1hMphYBe+TV9Ipv1RGoh
+        YFAlwmAzQs2z4go5cHnCDS2cuc/0knlhsh2R8EtwJZ3t+CD8GsiNbU97ZMl8a91/LuEN9w1LTDUh7+YA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnCrearNotebook.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAANBJREFUSEvt
+        lTEKwkAQRT2Fta12FmLhBTyRtefxBFrZWVin9wriBZ5M2JHlu0Hd3ShCHgyb5M/OS2Aho9FAbYA5cACO
+        FWoPLNTRAqzph5W6THYN4SXxljllc4ybukzmbDXLweb4QM0+kgE7faZUkQFN6Gs0iymWRSKnU1gkS4ic
+        pDBbJiI/Zb4aT8IS2dKzcKwNWzfhepbYkyczgGlYH7JwP9Zeo0jmqKyLv5RNvDSLqSJ7l1eyUySsyVld
+        LdpVA3V8l8S/qHrFst75zZcNlHIHEoKTNSUo91gAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="ptbNotebook.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABLAAAASwCAYAAADrIbPPAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAGKfSURBVHhe7d3Bq2TZfeB5r2pdD7TrXiRYi+5dQrfB
@@ -545,11 +576,7 @@
         AAAAAAAAAAAAAAAAADCb/w+/JZSB02ghHQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnAgregarNotebook.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAADFJREFUOE9j
-        YBgFQxP8hwJ0cbLBCDAQZgAhgK4PJ0DXiAug6yMaUGwAOhiBBo4C+gIA+T+PcdZOoUoAAAAASUVORK5C
-        YII=
-</value>
-  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
 </root>

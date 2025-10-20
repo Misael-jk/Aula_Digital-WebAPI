@@ -269,5 +269,11 @@ namespace CapaPresentacion
                 CambiarDisponibilidadDatos(true, true, true);
             }
         }
+
+        private void btnAddCarrito_Click(object sender, EventArgs e)
+        {
+            var CrearCarrito = new FormCRUDCarritos();
+            CrearCarrito.Show();
+        }
     }
 }
