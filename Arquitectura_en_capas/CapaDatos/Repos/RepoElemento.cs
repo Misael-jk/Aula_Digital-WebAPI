@@ -21,8 +21,8 @@ public class RepoElemento : RepoBase, IRepoElemento
         parametros.Add("unidTipoElemento", elemento.IdTipoElemento);
         parametros.Add("unidVariante", elemento.IdVarianteElemento);
         parametros.Add("unidEstadoMantenimiento", elemento.IdEstadoMantenimiento);
-        parametros.Add("unidubicacion", elemento.IdUbicacion);
-        parametros.Add("unidmodelo", elemento.IdModelo);
+        parametros.Add("unidUbicacion", elemento.IdUbicacion);
+        parametros.Add("unidModelo", elemento.IdModelo);
         parametros.Add("unnumeroSerie", elemento.NumeroSerie);
         parametros.Add("uncodigoBarra", elemento.CodigoBarra);
         parametros.Add("unpatrimonio", elemento.Patrimonio);

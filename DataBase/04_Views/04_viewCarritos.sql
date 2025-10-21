@@ -5,6 +5,7 @@ create view View_GetCarritoDTO as
 		c.idCarrito,
 		c.equipo as 'EquipoCarrito',
 		c.numeroSerieCarrito,
+		c.capacidad,
 		e.estadoMantenimiento as 'EstadoMantenimientoNombre',
 		u.ubicacion as 'NombreUbicacion',
 		m.modelo as 'NombreModelo'

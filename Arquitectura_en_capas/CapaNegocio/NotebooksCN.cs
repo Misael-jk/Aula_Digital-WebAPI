@@ -137,7 +137,7 @@ public class NotebooksCN
             throw new ValidationException("El número de serie no puede superar los 40 caracteres.");
         }
 
-        if (!Regex.IsMatch(notebooks.NumeroSerie, @"^[A-Z0-9\-]+$"))
+        if (!Regex.IsMatch(notebooks.NumeroSerie, @"^[A-Za-z0-9\s\-]+$"))
         {
             throw new ValidationException("El número de serie contiene caracteres inválidos.");
         }
@@ -152,7 +152,7 @@ public class NotebooksCN
             throw new ValidationException("El codigo de barra no puede superar los 40 caracteres.");
         }
 
-        if (!Regex.IsMatch(notebooks.CodigoBarra, @"^[A-Z0-9\-]+$"))
+        if (!Regex.IsMatch(notebooks.CodigoBarra, @"^[A-Za-z0-9\s\-]+$"))
         {
             throw new ValidationException("El codigo de barra contiene caracteres inválidos.");
         }
@@ -167,7 +167,7 @@ public class NotebooksCN
             throw new ValidationException("El patrimonio no puede superar los 40 caracteres.");
         }
 
-        if (!Regex.IsMatch(notebooks.Patrimonio, @"^[A-Z0-9\-]+$"))
+        if (!Regex.IsMatch(notebooks.Patrimonio, @"^[A-Za-z0-9\s\-]+$"))
         {
             throw new ValidationException("El patrimonio contiene caracteres inválidos.");
         }

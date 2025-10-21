@@ -5,6 +5,7 @@ create view View_HistorialCarritoDTO as
 		hc.idHistorialCambio as 'IdHistorialCarrito',
 		c.equipo,
 		c.numeroSerieCarrito,
+		c.capacidad,
 		u2.ubicacion as 'UbicacionActual',
 		m.modelo,
 		em.estadoMantenimiento,

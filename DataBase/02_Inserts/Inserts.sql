@@ -35,6 +35,7 @@ INSERT INTO Ubicacion (ubicacion) VALUES
 -- ======================
 INSERT INTO TipoElemento (elemento) VALUES
 ('Notebook'),
+('Carritos'),
 ('Proyector'),
 ('Tablet');
 
@@ -44,17 +45,16 @@ INSERT INTO TipoElemento (elemento) VALUES
 INSERT INTO Modelo (idTipoElemento, modelo) VALUES
 (1, 'Dell Latitude 3410'),
 (1, 'HP ProBook 450'),
-(2, 'Epson X200'),
-(3, 'Samsung Tab A');
+(2, 'ENOVA'),
+(3, 'Samsung Tab A'),
+(4, 'Epson X10');
 
 -- ======================
 -- VARIANTES ELEMENTO
 -- ======================
 INSERT INTO VariantesElemento (idTipoElemento, subtipo, idModelo) VALUES
-(1, 'Notebook Dell 14"', 1),
-(1, 'Notebook HP 15"', 2),
-(2, 'Proyector Epson estandar', 3),
-(3, 'Tablet Samsung 10"', 4);
+(3, 'Proyector Epson estandar', 3),
+(4, 'Tablet Samsung 10"', 4);
 
 -- ======================
 -- ESTADOS MANTENIMIENTO
@@ -67,9 +67,9 @@ INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 -- ======================
 -- CARRITOS
 -- ======================
-INSERT INTO Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
-('Carro de guarda 1', 'CARR-001', 1, 1, 1, TRUE),
-('Carro de guarda 2', 'CARR-002', 1, 2, 1, TRUE);
+INSERT INTO Carritos (equipo, numeroSerieCarrito, capacidad, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
+('Carro de guarda 1', 'CARR-001', 32, 1, 2, 1, TRUE),
+('Carro de guarda 2', 'CARR-002', 32, 1, 2, 1, TRUE);
 
 -- ======================
 -- ELEMENTOS
@@ -77,22 +77,22 @@ INSERT INTO Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbica
 INSERT INTO Elementos (idTipoElemento, idVariante, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado)
 VALUES
 -- Notebooks Dell Latitude 3410
-(1, 1, 1, 1, 1, 'NB001', 'CB001', 'PAT001', TRUE),
-(1, 1, 1, 1, 1, 'NB002', 'CB002', 'PAT002', TRUE),
+(1, null, 1, 1, 1, 'NB001', 'CB001', 'PAT001', TRUE),
+(1, null, 1, 1, 1, 'NB002', 'CB002', 'PAT002', TRUE),
 
 -- Notebooks HP ProBook 450
-(1, 2, 2, 2, 1, 'NB003', 'CB003', 'PAT003', TRUE),
-(1, 2, 2, 2, 2, 'NB004', 'CB004', 'PAT004', TRUE),
+(1, null, 1, 2, 1, 'NB003', 'CB003', 'PAT003', TRUE),
+(1, null, 1, 2, 2, 'NB004', 'CB004', 'PAT004', TRUE),
 
 -- Proyectores (Epson X200)
-(2, 3, 3, 1, 1, 'PR001', 'CB011', 'PAT011', TRUE),
-(2, 3, 3, 1, 1, 'PR002', 'CB012', 'PAT012', TRUE),
-(2, 3, 3, 2, 2, 'PR003', 'CB013', 'PAT013', TRUE),
+(2, 1, 3, 3, 1, 'PR001', 'CB011', 'PAT011', TRUE),
+(2, 1, 3, 3, 1, 'PR002', 'CB012', 'PAT012', TRUE),
+(2, 1, 3, 3, 2, 'PR003', 'CB013', 'PAT013', TRUE),
 
 -- Tablets (Samsung Tab A)
-(3, 4, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE),
-(3, 4, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE),
-(3, 4, 4, 2, 2, 'TB003', 'CB016', 'PAT016', TRUE);
+(3, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE),
+(3, 2, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE),
+(3, 2, 4, 2, 2, 'TB003', 'CB016', 'PAT016', TRUE);
 
 -- ======================
 -- NOTEBOOKS (asociadas a carritos)

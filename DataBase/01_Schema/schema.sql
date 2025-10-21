@@ -91,6 +91,7 @@ create table VariantesElemento (
 create table Carritos (
     idCarrito tinyint not null auto_increment,
     equipo varchar(40) not null,
+    capacidad tinyint not null,
     idModelo tinyint,
     numeroSerieCarrito varchar(40) not null,
     idEstadoMantenimiento tinyint not null,

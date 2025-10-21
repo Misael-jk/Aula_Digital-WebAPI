@@ -8,16 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaNegocio;
+using CapaDatos.InterfacesDTO;
 
 namespace CapaPresentacion
 {
     public partial class NotebooksUC : UserControl
     {
         public readonly NotebooksCN notebooksCN;
-        public NotebooksUC(NotebooksCN notebooksCN)
+        private readonly IMapperModelo mapperModelos;
+        public NotebooksUC(NotebooksCN notebooksCN, IMapperModelo mapperModelo)
         {
             InitializeComponent();
-
+            mapperModelos = mapperModelo;
             this.notebooksCN = notebooksCN;
         }
 
@@ -30,7 +32,7 @@ namespace CapaPresentacion
 
         private void btnAgregarNotebook_Click(object sender, EventArgs e)
         {
-            var Notebook = new FormCRUDNotebook(notebooksCN);
+            var Notebook = new FormCRUDNotebook(notebooksCN, mapperModelos);
             Notebook.Show();
         }
     }

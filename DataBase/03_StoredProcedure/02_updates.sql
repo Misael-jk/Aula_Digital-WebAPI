@@ -5,11 +5,12 @@
 delimiter $$ 
 
 drop procedure if exists UpdateCarrito $$
-create procedure UpdateCarrito(in unidCarrito tinyint, in unequipo varchar(40), in unnumeroSerieCarrito varchar(40), in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint , in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
+create procedure UpdateCarrito(in unidCarrito tinyint, in unequipo varchar(40), in unnumeroSerieCarrito varchar(40), in unacapacidad tinyint, in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint , in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
 begin
     update Carritos 
     set equipo = unequipo,
         numeroSerieCarrito = unnumeroSerieCarrito,
+        capacidad = unacapacidad,
         idEstadoMantenimiento = unidEstadoMantenimiento,
         idUbicacion = unidUbicacion,
         idModelo = unidModelo,

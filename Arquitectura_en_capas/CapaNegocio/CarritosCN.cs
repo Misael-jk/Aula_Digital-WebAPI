@@ -135,7 +135,7 @@ public class CarritosCN
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
 
-            if(carritos.IdEstadoMantenimiento == 1)
+            if (carritos.IdEstadoMantenimiento == 1)
             {
                 throw new Exception("No se puede deshabilitar un carrito con estado 'Disponible'");
             }
@@ -240,7 +240,6 @@ public class CarritosCN
     {
         return uow.RepoModelo.GetAll();
     }
-
     #endregion
 
     #region NOTEBOOK
@@ -333,7 +332,7 @@ public class CarritosCN
                 throw new Exception("La notebook ya esta en otro carrito.");
             }
 
-            if(notebooks.IdTipoElemento != 1)
+            if (notebooks.IdTipoElemento != 1)
             {
                 throw new Exception("El elemento que intenta agregar no es una notebook.");
             }
@@ -415,17 +414,17 @@ public class CarritosCN
                 throw new Exception("La notebook no existe");
             }
 
-            if(notebooks.IdCarrito != idCarrito)
+            if (notebooks.IdCarrito != idCarrito)
             {
                 throw new Exception("La notebook no pertenece al carrito seleccionado");
             }
 
-            if(notebooks.IdTipoElemento != 1)
+            if (notebooks.IdTipoElemento != 1)
             {
                 throw new Exception("El elemento que intenta quitar no es una notebook.");
             }
 
-            if(notebooks.IdEstadoMantenimiento == 2)
+            if (notebooks.IdEstadoMantenimiento == 2)
             {
                 throw new Exception("Un elemento en prestamo no puede estar asignado a un carrito");
             }
@@ -577,7 +576,7 @@ public class CarritosCN
     private void ValidarReposInsert(Carritos carritoNEW)
     {
         #region VALIDACION DE CARRITOS
-        if(uow.RepoCarritos.GetById(carritoNEW.IdCarrito) != null)
+        if (uow.RepoCarritos.GetById(carritoNEW.IdCarrito) != null)
         {
             throw new Exception("Ya existe ese carrito");
         }
@@ -771,6 +770,4 @@ public class CarritosCN
     }
     #endregion
 
-
 }
-

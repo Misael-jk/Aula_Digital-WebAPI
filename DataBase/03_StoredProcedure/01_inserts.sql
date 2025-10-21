@@ -5,10 +5,10 @@
 delimiter $$
 
 drop procedure if exists InsertCarrito $$
-create procedure InsertCarrito(out unidCarrito tinyint, in unequipo varchar(40), in unnumeroSerieCarrito varchar(40), in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint, in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
+create procedure InsertCarrito(out unidCarrito tinyint, in unequipo varchar(40), in unnumeroSerieCarrito varchar(40), in unacapacidad tinyint, in unidEstadoMantenimiento tinyint, in unidUbicacion tinyint, in unidModelo tinyint, in unhabilitado boolean, in unafechaBaja datetime)
 begin
-    insert into Carritos (equipo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, idModelo, habilitado, fechaBaja)
-    values (unequipo, unnumeroSerieCarrito, unidEstadoMantenimiento, unidUbicacion, unidModelo, unhabilitado, unafechaBaja);
+    insert into Carritos (equipo, numeroSerieCarrito, capacidad, idEstadoMantenimiento, idUbicacion, idModelo, habilitado, fechaBaja)
+    values (unequipo, unnumeroSerieCarrito, unacapacidad, unidEstadoMantenimiento, unidUbicacion, unidModelo, unhabilitado, unafechaBaja);
 
     set unidCarrito = last_insert_id();
 end $$
@@ -62,7 +62,7 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertElemento $$
-create procedure InsertElemento (out unidElemento smallint, in unidTipoElemento tinyint,  in unidVariante varchar(80), in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unequipo varchar(40), in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime)
+create procedure InsertElemento (out unidElemento smallint, in unidTipoElemento tinyint,  in unidVariante smallint, in unidModelo tinyint, in unidUbicacion tinyint, in unidEstadoMantenimiento tinyint, in unnumeroSerie varchar(40), in uncodigoBarra varchar(40), in unpatrimonio varchar(40), in unhabilitado boolean, in unafechaBaja datetime)
 begin
     insert into Elementos (idTipoElemento, idVariante, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja)
     values (unidTipoElemento, unidVariante, unidModelo, unidUbicacion, unidEstadoMantenimiento, unnumeroSerie, uncodigoBarra, unpatrimonio, unhabilitado, unafechaBaja);

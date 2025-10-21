@@ -15,7 +15,7 @@ public class RepoHistorialNotebook : RepoBase, IRepoHistorialNotebook
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidHistorialCambio", historialNotebooks.IdHistorialCambio);
-        parameters.Add("unidNotebook", historialNotebooks.IdNotebook);
+        parameters.Add("unidElemento", historialNotebooks.IdNotebook);
         try
         {
             Conexion.Execute("InsertHistorialNotebook", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);

@@ -473,7 +473,7 @@ namespace CapaPresentacion
         private void btnNotebooks_Click(object sender, EventArgs e)
         {
             if (notebooksUC == null)
-                notebooksUC = new NotebooksUC(notebooksCN);
+                notebooksUC = new NotebooksUC(notebooksCN, mapperModelos);
 
             CambiarNombrePort(btnNotebooks.Text);
 

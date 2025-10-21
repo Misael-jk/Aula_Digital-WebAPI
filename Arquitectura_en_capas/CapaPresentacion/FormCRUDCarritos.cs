@@ -31,7 +31,7 @@ namespace CapaPresentacion
 
         private void FormCRUDCarritos_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = mapperModelos.GetAll();
+            cmbModelo.DataSource = mapperModelos.GetByTipo(2);
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "Modelo";
 
@@ -46,6 +46,7 @@ namespace CapaPresentacion
             {
                 EquipoCarrito = txtEquipo.Text,
                 NumeroSerieCarrito = txtNroSerie.Text,
+                Capacidad = 32,
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
                 IdEstadoMantenimiento = 1,

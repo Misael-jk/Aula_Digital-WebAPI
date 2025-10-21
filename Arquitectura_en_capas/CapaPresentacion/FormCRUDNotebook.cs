@@ -1,4 +1,5 @@
-﻿using CapaEntidad;
+﻿using CapaDatos.InterfacesDTO;
+using CapaEntidad;
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,17 @@ namespace CapaPresentacion
     public partial class FormCRUDNotebook : Form
     {
         private readonly NotebooksCN notebooksCN;
-        public FormCRUDNotebook(NotebooksCN notebooksCN)
+        private readonly IMapperModelo mapperModelos;
+        public FormCRUDNotebook(NotebooksCN notebooksCN, IMapperModelo mapperModelos)
         {
             InitializeComponent();
-            this.notebooksCN = notebooksCN;
+            this.notebooksCN = notebooksCN;            this.mapperModelos = mapperModelos;
+
         }
 
         private void FormCRUDNotebook_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = notebooksCN.ListarModelos();
+            cmbModelo.DataSource = mapperModelos.GetByTipo(1);
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "Modelo";
 

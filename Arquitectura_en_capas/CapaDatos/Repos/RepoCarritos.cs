@@ -34,6 +34,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
         parametros.Add("unidCarrito", dbType: DbType.Int32, direction: ParameterDirection.Output);
         parametros.Add("unequipo", carritos.EquipoCarrito);
         parametros.Add("unnumeroSerieCarrito", carritos.NumeroSerieCarrito);
+        parametros.Add("unaCapacidad", carritos.Capacidad);
         parametros.Add("unidEstadoMantenimiento", carritos.IdEstadoMantenimiento);
         parametros.Add("unidUbicacion", carritos.IdUbicacion);
         parametros.Add("unidModelo", carritos.IdModelo);
@@ -155,6 +156,8 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     }
     #endregion
 
+
+
     // VALIDACIONES/CAPA DE NEGOCIO
 
     #region Obtener por Numero de Serie
@@ -274,3 +277,4 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     }
     #endregion
 }
+ 

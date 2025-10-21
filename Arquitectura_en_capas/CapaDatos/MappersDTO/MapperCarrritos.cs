@@ -21,6 +21,7 @@ public class MapperCarrritos : RepoBase, IMapperCarritos
             IdCarrito = carrito.IdCarrito,
             Equipo = carrito.EquipoCarrito,
             NumeroSerieCarrito = carrito.NumeroSerieCarrito,
+            Capacidad = carrito.Capacidad,
             EstadoMantenimiento = estadoMantenimiento.EstadoMantenimientoNombre,
             UbicacionActual = ubicacion.NombreUbicacion,
             Modelo = modelo.NombreModelo,

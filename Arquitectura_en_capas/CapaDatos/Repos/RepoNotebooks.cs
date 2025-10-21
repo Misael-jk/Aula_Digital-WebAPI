@@ -27,7 +27,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("uncodigoBarra", notebooks.CodigoBarra);
         parameters.Add("unpatrimonio", notebooks.Patrimonio);
         parameters.Add("unhabilitado", notebooks.Habilitado);
-        parameters.Add("unfechaBaja", notebooks.FechaBaja);
+        parameters.Add("unafechaBaja", notebooks.FechaBaja);
         parameters.Add("unequipo", notebooks.Equipo);
         parameters.Add("unidCarrito", notebooks.IdCarrito);
         parameters.Add("unaposicionCarrito", notebooks.PosicionCarrito);
@@ -35,6 +35,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         try
         {
             Conexion.Execute("InsertNotebook", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+            notebooks.IdElemento = parameters.Get<int>("unidNotebook");
         }
         catch (Exception ex)
         {
