@@ -15,13 +15,16 @@ namespace CapaPresentacion
 {
     public partial class FormCRUDCarritos : Form
     {
+        private UserControl carritoUC;
         private readonly CarritosCN carritosCN;
         private readonly IMapperModelo mapperModelos;
-        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo)
+        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo, UserControl uc)
         {
             InitializeComponent();
             this.mapperModelos = mapperModelo;
             this.carritosCN = carritosCN;
+            carritoUC = uc;
+            
         }
 
         private void BtnCerrar1_Click(object sender, EventArgs e)
@@ -54,7 +57,6 @@ namespace CapaPresentacion
             };
 
             carritosCN.CrearCarrito(carrito, 1);
-
         }
     }
 }
