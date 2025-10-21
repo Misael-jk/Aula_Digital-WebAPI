@@ -103,6 +103,27 @@ public class NotebooksCN
     }
     #endregion
 
+
+    // Filtros
+    #region Filtros para la UI
+    public IEnumerable<Modelos> ListarModelos()
+    {
+        return uow.RepoModelo.GetAll();
+    }
+
+    public IEnumerable<Ubicacion> ListarUbicaciones()
+    {
+        return uow.RepoUbicacion.GetAll();
+    }
+
+    public IEnumerable<EstadosMantenimiento> ListarEstadoMantenimiento()
+    {
+        return uow.RepoEstadosMantenimiento.GetAll();
+    }
+    #endregion
+
+
+
     #region VALIDACIONES
     public void ValidarDatos(Notebooks notebooks)
     {
