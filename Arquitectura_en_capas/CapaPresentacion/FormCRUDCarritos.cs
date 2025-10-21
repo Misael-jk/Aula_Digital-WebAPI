@@ -9,16 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaEntidad;
+using CapaDatos.InterfacesDTO;
 
 namespace CapaPresentacion
 {
     public partial class FormCRUDCarritos : Form
     {
         private readonly CarritosCN carritosCN;
-        public FormCRUDCarritos(CarritosCN carritosCN)
+        private readonly IMapperModelo mapperModelos;
+        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo)
         {
             InitializeComponent();
-
+            this.mapperModelos = mapperModelo;
             this.carritosCN = carritosCN;
         }
 
@@ -29,9 +31,9 @@ namespace CapaPresentacion
 
         private void FormCRUDCarritos_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = carritosCN.ListarModelosCarritos();
+            cmbModelo.DataSource = mapperModelos.GetAll();
             cmbModelo.ValueMember = "IdModelo";
-            cmbModelo.DisplayMember = "NombreModelo";
+            cmbModelo.DisplayMember = "Modelo";
 
             cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
             cmbUbicacion.ValueMember = "IdUbicacion";
@@ -47,13 +49,12 @@ namespace CapaPresentacion
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
                 IdEstadoMantenimiento = 1,
+                Habilitado = true,
+                FechaBaja = null
             };
 
             carritosCN.CrearCarrito(carrito, 1);
 
-            MessageBox.Show("Carrito creado correctamente");
-
-            this.Close();
         }
     }
 }

@@ -25,11 +25,11 @@ public class UowElementos : UowBase, IUowElementos
 
 
         //REPOS DE LECTURA
-        RepoUbicacion = new RepoUbicacion(conexion);
-        RepoModelo = new RepoModelo(conexion);
-        RepoVarianteElemento = new RepoVarianteElemento(conexion);
-        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion);
-        RepoTipoElemento = new RepoTipoElemento(conexion);
+        RepoUbicacion = new RepoUbicacion(conexion, Transaction);
+        RepoModelo = new RepoModelo(conexion, Transaction);
+        RepoVarianteElemento = new RepoVarianteElemento(conexion, Transaction);
+        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion, Transaction);
+        RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
     }
 
     protected override void CambiarTransacion(IDbTransaction? transaction)
@@ -37,5 +37,11 @@ public class UowElementos : UowBase, IUowElementos
         RepoElemento.SetTransaction(transaction);
         RepoHistorialCambio.SetTransaction(transaction);
         RepoHistorialElementos.SetTransaction(transaction);
+
+        RepoUbicacion.SetTransaction(transaction);
+        RepoModelo.SetTransaction(transaction);
+        RepoVarianteElemento.SetTransaction(transaction);
+        RepoEstadosMantenimiento.SetTransaction(transaction);
+        RepoTipoElemento.SetTransaction(transaction);
     }
 }

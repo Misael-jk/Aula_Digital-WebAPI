@@ -62,11 +62,11 @@ public class RepoModelo : RepoBase, IRepoModelo
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidModelo", idModelo);
 
-        string query = "select * from Modelos where idModelo = @unidModelo";
+        string query = "select * from Modelo where idModelo = @unidModelo";
 
         try
         {
-            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -85,7 +85,7 @@ public class RepoModelo : RepoBase, IRepoModelo
 
         try
         {
-            return Conexion.Query<Modelos>(query, parameters);
+            return Conexion.Query<Modelos>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {

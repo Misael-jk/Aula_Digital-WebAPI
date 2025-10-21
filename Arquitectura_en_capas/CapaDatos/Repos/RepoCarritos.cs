@@ -38,11 +38,13 @@ public class RepoCarritos : RepoBase, IRepoCarritos
         parametros.Add("unidUbicacion", carritos.IdUbicacion);
         parametros.Add("unidModelo", carritos.IdModelo);
         parametros.Add("unhabilitado", carritos.Habilitado);
-        parametros.Add("unfechaBaja", carritos.FechaBaja);
+        parametros.Add("unafechaBaja", carritos.FechaBaja);
 
         try
         {
             Conexion.Execute("InsertCarrito", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
+
+            carritos.IdCarrito = parametros.Get<int>("unidCarrito");
         }
         catch (Exception ex)
         {

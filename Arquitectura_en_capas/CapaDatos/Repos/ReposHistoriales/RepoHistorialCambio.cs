@@ -16,14 +16,16 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidHistorialCambio", dbType: DbType.Int32, direction: ParameterDirection.Output);
         parameters.Add("unidTipoAccion", historialCambio.IdTipoAccion);
+        parameters.Add("unidUsuario", historialCambio.IdUsuario);
         parameters.Add("unfechaCambio", historialCambio.FechaCambio);
         parameters.Add("unadescripcion", historialCambio.Descripcion);
         parameters.Add("unmotivo", historialCambio.Motivo);
-        parameters.Add("unidUsuario", historialCambio.IdUsuario);
 
         try
         {
             Conexion.Execute("InsertHistorialCambio", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
+
+            historialCambio.IdHistorialCambio = parameters.Get<int>("unidHistorialCambio");
         }
         catch (Exception)
         {

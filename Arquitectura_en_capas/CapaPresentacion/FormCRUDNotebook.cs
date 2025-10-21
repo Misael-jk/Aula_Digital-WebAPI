@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +14,49 @@ namespace CapaPresentacion
 {
     public partial class FormCRUDNotebook : Form
     {
-        public FormCRUDNotebook()
+        private readonly NotebooksCN notebooksCN;
+        public FormCRUDNotebook(NotebooksCN notebooksCN)
         {
             InitializeComponent();
+            this.notebooksCN = notebooksCN;
         }
 
         private void FormCRUDNotebook_Load(object sender, EventArgs e)
         {
+            cmbModelo.DataSource = notebooksCN.ListarModelos();
+            cmbModelo.ValueMember = "IdModelo";
+            cmbModelo.DisplayMember = "Modelo";
 
+            cmbUbicacion.DataSource = notebooksCN.ListarUbicaciones();
+            cmbUbicacion.ValueMember = "IdUbicacion";
+            cmbUbicacion.DisplayMember = "NombreUbicacion";
         }
 
         private void BtnCerrar1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnCrearNotebook_Click(object sender, EventArgs e)
+        {
+            Notebooks notebooks = new Notebooks
+            {
+                Equipo = txtEquipo.Text,
+                NumeroSerie = txtNroSerie.Text,
+                CodigoBarra = txtCodBarra.Text,
+                Patrimonio = txtPatrimonio.Text,
+                IdModelo = (int)cmbModelo.SelectedValue,
+                IdUbicacion = (int)cmbUbicacion.SelectedValue,
+                IdEstadoMantenimiento = 1,
+                IdTipoElemento = 1,
+                IdVarianteElemento = null,
+                IdCarrito = null,
+                PosicionCarrito = null,
+                Habilitado = true,
+                FechaBaja = null
+            };
+
+            notebooksCN.CrearNotebook(notebooks, 1);
         }
     }
 }

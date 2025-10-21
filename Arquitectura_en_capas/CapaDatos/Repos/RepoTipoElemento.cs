@@ -76,7 +76,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            return Conexion.Query<TipoElemento>(query);
+            return Conexion.Query<TipoElemento>(query, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -95,7 +95,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros);
+            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -113,7 +113,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros);
+            return Conexion.QueryFirstOrDefault<TipoElemento>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

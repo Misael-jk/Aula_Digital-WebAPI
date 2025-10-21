@@ -84,7 +84,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
         try
         {
             string sql = "select * from Ubicacion where idUbicacion = @unidUbicacion";
-            return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters);
+            return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -104,7 +104,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
                        where idTipoElemento = @unidTipoElemento";
         try
         {
-            return Conexion.Query<Ubicacion>(sql, parameters);
+            return Conexion.Query<Ubicacion>(sql, parameters, transaction: Transaction);
         }
         catch (Exception)
         {

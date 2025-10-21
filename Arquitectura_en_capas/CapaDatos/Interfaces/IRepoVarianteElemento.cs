@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -10,4 +11,5 @@ public interface IRepoVarianteElemento
     public VariantesElemento? GetById(int idVarianteElemento);
     public IEnumerable<VariantesElemento> GetByModelo(int idModelo);
     public IEnumerable<VariantesElemento> GetByTipo(int idTipoElemento);
+    public void SetTransaction(IDbTransaction? transaction);
 }

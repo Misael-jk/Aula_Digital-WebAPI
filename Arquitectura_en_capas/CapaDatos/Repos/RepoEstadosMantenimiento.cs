@@ -31,14 +31,14 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     #region Mostrar por id estados
     public EstadosMantenimiento? GetById(int idEstadoMantenimiento)
     {
-        string query = "select * from EstadosMantenimiento where idEstadoMantenimiento = @idEstadoMantenimiento";
+        string query = "select * from EstadosMantenimiento where idEstadoMantenimiento = @unidEstadoMantenimiento";
 
         DynamicParameters parameters = new DynamicParameters();
         try
         {
             parameters.Add("unidEstadoMantenimiento", idEstadoMantenimiento);
 
-            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters);
+            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters, transaction: Transaction);
         }
         catch (Exception ex)
         {

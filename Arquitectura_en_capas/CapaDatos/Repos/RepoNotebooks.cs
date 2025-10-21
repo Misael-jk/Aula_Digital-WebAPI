@@ -21,7 +21,8 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("unidTipoElemento", notebooks.IdTipoElemento);
         parameters.Add("unidVariante", notebooks.IdVarianteElemento);
         parameters.Add("unidModelo", notebooks.IdModelo);
-        parameters.Add("unidEstado", notebooks.IdEstadoMantenimiento);
+        parameters.Add("unidUbicacion", notebooks.IdUbicacion);
+        parameters.Add("unidEstadoMantenimiento", notebooks.IdEstadoMantenimiento);
         parameters.Add("unnumeroSerie", notebooks.NumeroSerie);
         parameters.Add("uncodigoBarra", notebooks.CodigoBarra);
         parameters.Add("unpatrimonio", notebooks.Patrimonio);

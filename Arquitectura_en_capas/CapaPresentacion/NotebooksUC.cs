@@ -30,7 +30,7 @@ namespace CapaPresentacion
 
         private void btnAgregarNotebook_Click(object sender, EventArgs e)
         {
-            var Notebook = new FormCRUDNotebook();
+            var Notebook = new FormCRUDNotebook(notebooksCN);
             Notebook.Show();
         }
     }

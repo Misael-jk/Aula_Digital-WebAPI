@@ -56,7 +56,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
     public IEnumerable<VariantesElemento> GetAll()
     {
         string query = "select * from VariantesElemento";
-        return Conexion.Query<VariantesElemento>(query);
+        return Conexion.Query<VariantesElemento>(query, transaction: Transaction);
     }
     #endregion
 
@@ -70,7 +70,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
 
         try
         {
-            return Conexion.QueryFirstOrDefault<VariantesElemento>(query, parameters);
+            return Conexion.QueryFirstOrDefault<VariantesElemento>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -93,7 +93,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         string query = "select * from VariantesElemento where idModelo = @unidModelo";
         try
         {
-            return Conexion.Query<VariantesElemento>(query, parameters);
+            return Conexion.Query<VariantesElemento>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {
@@ -111,7 +111,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         string query = "select * from VariantesElemento where idTipoElemento = @unidTipoElemento";
         try
         {
-            return Conexion.Query<VariantesElemento>(query, parameters);
+            return Conexion.Query<VariantesElemento>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {

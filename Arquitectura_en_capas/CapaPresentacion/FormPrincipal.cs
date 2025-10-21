@@ -330,7 +330,7 @@ namespace CapaPresentacion
         private void BtnCarritos_Click(object sender, EventArgs e)
         {
             if (carritoUC == null)
-                carritoUC = new CarritoUC(carritosCN, userVerificado);
+                carritoUC = new CarritoUC(carritosCN, userVerificado, mapperModelos);
 
             CambiarNombrePort(BtnCarritos.Text);
 

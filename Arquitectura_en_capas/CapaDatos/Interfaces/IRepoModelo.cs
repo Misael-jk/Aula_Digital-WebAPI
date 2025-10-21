@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -10,4 +11,5 @@ public interface IRepoModelo
     public Modelos? GetById(int idModelo);
     public IEnumerable<Modelos> GetByTipo(int idTipoElemento);
     public Modelos? GetByNombre(string nombreModelo);
+    public void SetTransaction(IDbTransaction? transaction);
 }

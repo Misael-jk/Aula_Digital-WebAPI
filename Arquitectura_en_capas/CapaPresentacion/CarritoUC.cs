@@ -1,4 +1,6 @@
 ﻿using CapaDatos.Interfaces;
+using CapaDatos.InterfacesDTO;
+using CapaDatos.MappersDTO;
 using CapaDatos.Repos;
 using CapaEntidad;
 using CapaNegocio;
@@ -17,17 +19,20 @@ namespace CapaPresentacion
     public partial class CarritoUC : UserControl
     {
         private readonly CarritosCN carritosCN;
+        private readonly IMapperModelo mapperModelo;
         private List<Button> botonesCarrito;
         private int _idCarritoActual = 0;
         private int posicion;
         private readonly Usuarios userVerificado;
 
-        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado)
+        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado, IMapperModelo mapperModelo)
         {
             InitializeComponent();
 
             this.carritosCN = carritosCN;
             this.userVerificado = userVerificado;
+            this.mapperModelo = mapperModelo;
+
         }
 
 
@@ -266,7 +271,7 @@ namespace CapaPresentacion
 
         private void btnAddCarrito_Click(object sender, EventArgs e)
         {
-            var CrearCarrito = new FormCRUDCarritos(carritosCN);
+            var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo);
             CrearCarrito.Show();
         }
     }
