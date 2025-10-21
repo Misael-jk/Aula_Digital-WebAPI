@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCRUDCarritos));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlFondoLateral = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pnlBanner = new Panel();
             iconButton1 = new FontAwesome.Sharp.IconButton();
@@ -72,7 +72,7 @@
             pnlFondoLateral.Controls.Add(pnlBanner);
             pnlFondoLateral.Controls.Add(lblIDCarrito);
             pnlFondoLateral.Controls.Add(ptbCarrito);
-            pnlFondoLateral.CustomizableEdges = customizableEdges15;
+            pnlFondoLateral.CustomizableEdges = customizableEdges1;
             pnlFondoLateral.Dock = DockStyle.Left;
             pnlFondoLateral.FillColor = Color.Indigo;
             pnlFondoLateral.FillColor2 = Color.MediumPurple;
@@ -80,7 +80,7 @@
             pnlFondoLateral.FillColor4 = Color.DarkMagenta;
             pnlFondoLateral.Location = new Point(0, 0);
             pnlFondoLateral.Name = "pnlFondoLateral";
-            pnlFondoLateral.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            pnlFondoLateral.ShadowDecoration.CustomizableEdges = customizableEdges2;
             pnlFondoLateral.Size = new Size(392, 404);
             pnlFondoLateral.TabIndex = 5;
             // 
@@ -143,10 +143,10 @@
             pnlDatoCarrito.Controls.Add(btnCrearCarrito);
             pnlDatoCarrito.Controls.Add(txtEquipo);
             pnlDatoCarrito.Controls.Add(txtNroSerie);
-            pnlDatoCarrito.CustomizableEdges = customizableEdges27;
+            pnlDatoCarrito.CustomizableEdges = customizableEdges13;
             pnlDatoCarrito.Location = new Point(409, 41);
             pnlDatoCarrito.Name = "pnlDatoCarrito";
-            pnlDatoCarrito.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            pnlDatoCarrito.ShadowDecoration.CustomizableEdges = customizableEdges14;
             pnlDatoCarrito.Size = new Size(343, 351);
             pnlDatoCarrito.TabIndex = 6;
             // 
@@ -154,7 +154,7 @@
             // 
             cmbUbicacion.AllowDrop = true;
             cmbUbicacion.BackColor = Color.Transparent;
-            cmbUbicacion.CustomizableEdges = customizableEdges17;
+            cmbUbicacion.CustomizableEdges = customizableEdges3;
             cmbUbicacion.DrawMode = DrawMode.OwnerDrawFixed;
             cmbUbicacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbUbicacion.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -164,7 +164,7 @@
             cmbUbicacion.ItemHeight = 30;
             cmbUbicacion.Location = new Point(28, 197);
             cmbUbicacion.Name = "cmbUbicacion";
-            cmbUbicacion.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            cmbUbicacion.ShadowDecoration.CustomizableEdges = customizableEdges4;
             cmbUbicacion.Size = new Size(288, 36);
             cmbUbicacion.TabIndex = 33;
             // 
@@ -172,7 +172,7 @@
             // 
             cmbModelo.AllowDrop = true;
             cmbModelo.BackColor = Color.Transparent;
-            cmbModelo.CustomizableEdges = customizableEdges19;
+            cmbModelo.CustomizableEdges = customizableEdges5;
             cmbModelo.DrawMode = DrawMode.OwnerDrawFixed;
             cmbModelo.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbModelo.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -182,7 +182,7 @@
             cmbModelo.ItemHeight = 30;
             cmbModelo.Location = new Point(28, 132);
             cmbModelo.Name = "cmbModelo";
-            cmbModelo.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            cmbModelo.ShadowDecoration.CustomizableEdges = customizableEdges6;
             cmbModelo.Size = new Size(288, 36);
             cmbModelo.TabIndex = 32;
             // 
@@ -192,7 +192,7 @@
             btnCrearCarrito.BorderColor = Color.Chocolate;
             btnCrearCarrito.BorderRadius = 11;
             btnCrearCarrito.BorderThickness = 1;
-            btnCrearCarrito.CustomizableEdges = customizableEdges21;
+            btnCrearCarrito.CustomizableEdges = customizableEdges7;
             btnCrearCarrito.DisabledState.BorderColor = Color.DarkGray;
             btnCrearCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
             btnCrearCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -205,16 +205,17 @@
             btnCrearCarrito.ImageAlign = HorizontalAlignment.Left;
             btnCrearCarrito.Location = new Point(133, 279);
             btnCrearCarrito.Name = "btnCrearCarrito";
-            btnCrearCarrito.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            btnCrearCarrito.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnCrearCarrito.Size = new Size(79, 26);
             btnCrearCarrito.TabIndex = 15;
             btnCrearCarrito.Text = "Crear";
             btnCrearCarrito.TextAlign = HorizontalAlignment.Left;
+            btnCrearCarrito.Click += btnCrearCarrito_Click;
             // 
             // txtEquipo
             // 
             txtEquipo.BorderRadius = 7;
-            txtEquipo.CustomizableEdges = customizableEdges23;
+            txtEquipo.CustomizableEdges = customizableEdges9;
             txtEquipo.DefaultText = "";
             txtEquipo.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEquipo.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -230,14 +231,14 @@
             txtEquipo.PlaceholderForeColor = Color.DarkGray;
             txtEquipo.PlaceholderText = "Ingresar Equipo/Nombre";
             txtEquipo.SelectedText = "";
-            txtEquipo.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            txtEquipo.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtEquipo.Size = new Size(288, 32);
             txtEquipo.TabIndex = 17;
             // 
             // txtNroSerie
             // 
             txtNroSerie.BorderRadius = 7;
-            txtNroSerie.CustomizableEdges = customizableEdges25;
+            txtNroSerie.CustomizableEdges = customizableEdges11;
             txtNroSerie.DefaultText = "";
             txtNroSerie.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNroSerie.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -253,7 +254,7 @@
             txtNroSerie.PlaceholderForeColor = Color.DarkGray;
             txtNroSerie.PlaceholderText = "Ingresar Numero de serie";
             txtNroSerie.SelectedText = "";
-            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtNroSerie.Size = new Size(288, 32);
             txtNroSerie.TabIndex = 18;
             // 

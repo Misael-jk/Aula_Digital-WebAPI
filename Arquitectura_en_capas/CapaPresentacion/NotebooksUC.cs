@@ -28,7 +28,7 @@ namespace CapaPresentacion
             dtgNotebook.DataSource = notebooksCN.GetAll();
         }
 
-        private void btnInventario_Click(object sender, EventArgs e)
+        private void btnAgregarNotebook_Click(object sender, EventArgs e)
         {
             var Notebook = new FormCRUDNotebook();
             Notebook.Show();
