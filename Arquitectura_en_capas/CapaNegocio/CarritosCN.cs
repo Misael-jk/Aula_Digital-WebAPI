@@ -238,8 +238,9 @@ public class CarritosCN
     #region MODELOS
     public IEnumerable<Modelos> ListarModelosCarritos()
     {
-        return uow.RepoModelo.GetByTipo(3);
+        return uow.RepoModelo.GetAll();
     }
+
     #endregion
 
     #region NOTEBOOK

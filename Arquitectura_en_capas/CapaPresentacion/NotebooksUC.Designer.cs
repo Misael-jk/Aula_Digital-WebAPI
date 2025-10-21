@@ -41,6 +41,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotebooksUC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -53,21 +55,19 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             dtgNotebook = new Guna.UI2.WinForms.Guna2DataGridView();
             pictureBox2 = new PictureBox();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            btnAgregarNotebook = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel9 = new Guna.UI2.WinForms.Guna2Panel();
             guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2Panel7 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel8 = new Guna.UI2.WinForms.Guna2Panel();
             guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
-            btnAgregarNotebook = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel1.SuspendLayout();
             guna2Panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgNotebook).BeginInit();
@@ -218,6 +218,32 @@
             guna2Panel2.Size = new Size(189, 160);
             guna2Panel2.TabIndex = 2;
             // 
+            // btnAgregarNotebook
+            // 
+            btnAgregarNotebook.BackColor = Color.Transparent;
+            btnAgregarNotebook.BorderColor = Color.DarkOrange;
+            btnAgregarNotebook.BorderRadius = 5;
+            btnAgregarNotebook.BorderThickness = 1;
+            btnAgregarNotebook.CustomizableEdges = customizableEdges7;
+            btnAgregarNotebook.DisabledState.BorderColor = Color.DarkGray;
+            btnAgregarNotebook.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAgregarNotebook.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAgregarNotebook.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAgregarNotebook.FillColor = Color.Indigo;
+            btnAgregarNotebook.Font = new Font("Segoe UI", 7F);
+            btnAgregarNotebook.ForeColor = Color.White;
+            btnAgregarNotebook.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
+            btnAgregarNotebook.Image = (Image)resources.GetObject("btnAgregarNotebook.Image");
+            btnAgregarNotebook.ImageAlign = HorizontalAlignment.Left;
+            btnAgregarNotebook.ImageSize = new Size(16, 16);
+            btnAgregarNotebook.Location = new Point(3, 136);
+            btnAgregarNotebook.Name = "btnAgregarNotebook";
+            btnAgregarNotebook.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnAgregarNotebook.Size = new Size(183, 21);
+            btnAgregarNotebook.TabIndex = 14;
+            btnAgregarNotebook.Text = "Agregar notebook";
+            btnAgregarNotebook.Click += btnAgregarNotebook_Click;
+            // 
             // guna2Panel4
             // 
             guna2Panel4.BackColor = SystemColors.ButtonHighlight;
@@ -318,32 +344,6 @@
             guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2TextBox3.Size = new Size(196, 32);
             guna2TextBox3.TabIndex = 2;
-            // 
-            // btnAgregarNotebook
-            // 
-            btnAgregarNotebook.BackColor = Color.Transparent;
-            btnAgregarNotebook.BorderColor = Color.DarkOrange;
-            btnAgregarNotebook.BorderRadius = 5;
-            btnAgregarNotebook.BorderThickness = 1;
-            btnAgregarNotebook.CustomizableEdges = customizableEdges7;
-            btnAgregarNotebook.DisabledState.BorderColor = Color.DarkGray;
-            btnAgregarNotebook.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAgregarNotebook.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAgregarNotebook.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAgregarNotebook.FillColor = Color.Indigo;
-            btnAgregarNotebook.Font = new Font("Segoe UI", 7F);
-            btnAgregarNotebook.ForeColor = Color.White;
-            btnAgregarNotebook.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
-            btnAgregarNotebook.Image = (Image)resources.GetObject("btnAgregarNotebook.Image");
-            btnAgregarNotebook.ImageAlign = HorizontalAlignment.Left;
-            btnAgregarNotebook.ImageSize = new Size(16, 16);
-            btnAgregarNotebook.Location = new Point(3, 136);
-            btnAgregarNotebook.Name = "btnAgregarNotebook";
-            btnAgregarNotebook.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnAgregarNotebook.Size = new Size(183, 21);
-            btnAgregarNotebook.TabIndex = 14;
-            btnAgregarNotebook.Text = "Agregar notebook";
-            btnAgregarNotebook.Click += btnInventario_Click;
             // 
             // NotebooksUC
             // 

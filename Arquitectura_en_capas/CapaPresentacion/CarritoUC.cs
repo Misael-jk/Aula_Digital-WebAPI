@@ -16,23 +16,17 @@ namespace CapaPresentacion
 {
     public partial class CarritoUC : UserControl
     {
-        private readonly CarritosCN carritosCN = null!;
-        private readonly IRepoNotebooks repoNotebooks;
-        private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
-        private readonly IRepoUbicacion repoUbicacion;
+        private readonly CarritosCN carritosCN;
         private List<Button> botonesCarrito;
         private int _idCarritoActual = 0;
         private int posicion;
         private readonly Usuarios userVerificado;
 
-        public CarritoUC(CarritosCN carritosCN, IRepoNotebooks repoNotebooks, IRepoEstadosMantenimiento repoEstadosMantenimiento, Usuarios userVerificado, IRepoUbicacion repoUbicacion)
+        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado)
         {
             InitializeComponent();
 
             this.carritosCN = carritosCN;
-            this.repoNotebooks = repoNotebooks;
-            this.repoEstadosMantenimiento = repoEstadosMantenimiento;
-            this.repoUbicacion = repoUbicacion;
             this.userVerificado = userVerificado;
         }
 
@@ -56,7 +50,7 @@ namespace CapaPresentacion
                 btnNotebook21, btnNotebook22, btnNotebook23, btnNotebook24, btnNotebook25
             };
 
-            IEnumerable<EstadosMantenimiento> todo = repoEstadosMantenimiento.GetAll();
+            IEnumerable<EstadosMantenimiento> todo = carritosCN.ListarEstadosMatenimiento();
             cmbEstados.DataSource = todo;
             cmbEstados.ValueMember = "IdEstadoMantenimiento";
             cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
@@ -69,7 +63,7 @@ namespace CapaPresentacion
 
         private void RenovarDatos()
         {
-            var numSeriesBD = repoNotebooks.GetNroSerieByNotebook();
+            var numSeriesBD = carritosCN.ObtenerSeriePorNotebook();
 
             string[] numSeries = numSeriesBD.Select(p => p.NumeroSerie).ToArray();
 
@@ -79,7 +73,7 @@ namespace CapaPresentacion
 
             txtNroSerie.AutoCompleteCustomSource = lista;
 
-            var codBarraBD = repoNotebooks.GetCodBarraByNotebook();
+            var codBarraBD = carritosCN.ObtenerCodBarraPorNotebook();
 
             string[] codBarras = codBarraBD.Select(p => p.CodigoBarra).ToArray();
 
@@ -97,7 +91,7 @@ namespace CapaPresentacion
             var fila = dtgCarrito.Rows[e.RowIndex];
             _idCarritoActual = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
 
-            var notebooks = repoNotebooks.GetNotebookByCarrito(_idCarritoActual);
+            var notebooks = carritosCN.ObtenerNotebooksPorCarrito(_idCarritoActual);
 
             for (int i = 0; i < botonesCarrito.Count; i++)
             {
@@ -138,7 +132,7 @@ namespace CapaPresentacion
 
             posicion = (int)boton.Tag;
 
-            var notebook = repoNotebooks.GetNotebookByPosicion(_idCarritoActual, posicion);
+            var notebook = carritosCN.ObtenerNotebookPorPosicion(_idCarritoActual, posicion);
 
             if (notebook == null)
             {
@@ -172,7 +166,7 @@ namespace CapaPresentacion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            Notebooks? notebook = repoNotebooks.GetByNumeroSerie(txtNroSerie.Text);
+            Notebooks? notebook = carritosCN.ObtenerPorSerie(txtNroSerie.Text);
             int idNotebook = notebook.IdElemento;
 
             carritosCN.AddNotebook(_idCarritoActual, posicion, idNotebook, userVerificado.IdUsuario);
@@ -190,7 +184,7 @@ namespace CapaPresentacion
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            Notebooks? notebook = repoNotebooks.GetByNumeroSerie(txtNroSerie.Text);
+            Notebooks? notebook = carritosCN.ObtenerPorSerie(txtNroSerie.Text);
             int idNotebook = notebook.IdElemento;
 
             //carritosCN.RemoveNotebook(_idCarritoActual, idNotebook, userVerificado.IdUsuario, );
@@ -218,7 +212,7 @@ namespace CapaPresentacion
                 return;
             }
 
-            var datos = repoNotebooks.GetNotebookBySerieOrCodigo(txtNroSerie.Text, null);
+            var datos = carritosCN.ObtenerPorSerieOCodBarra(txtNroSerie.Text, null);
 
             if (datos != null)
             {
@@ -254,7 +248,7 @@ namespace CapaPresentacion
                 return;
             }
 
-            var datos = repoNotebooks.GetNotebookBySerieOrCodigo(null, txtCodBarra.Text);
+            var datos = carritosCN.ObtenerPorSerieOCodBarra(null, txtCodBarra.Text);
 
             if (datos != null)
             {
@@ -272,7 +266,7 @@ namespace CapaPresentacion
 
         private void btnAddCarrito_Click(object sender, EventArgs e)
         {
-            var CrearCarrito = new FormCRUDCarritos();
+            var CrearCarrito = new FormCRUDCarritos(carritosCN);
             CrearCarrito.Show();
         }
     }

@@ -28,28 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarritoUC));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             dtgCarrito = new Guna.UI2.WinForms.Guna2DataGridView();
             panel2 = new Panel();
-            btnAddCarrito = new Guna.UI2.WinForms.Guna2Button();
+            btnAgregarCarrito = new Guna.UI2.WinForms.Guna2Button();
             panel4 = new Panel();
             btnNotebook1 = new Button();
             btnNotebook2 = new Button();
@@ -98,42 +98,42 @@
             // 
             // dtgCarrito
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dtgCarrito.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = Color.White;
+            dtgCarrito.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dtgCarrito.BackgroundColor = Color.Silver;
             dtgCarrito.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dtgCarrito.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Indigo;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dtgCarrito.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.Indigo;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dtgCarrito.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dtgCarrito.ColumnHeadersHeight = 30;
             dtgCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(125, 137, 149);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dtgCarrito.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.White;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = Color.FromArgb(125, 137, 149);
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle7.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            dtgCarrito.DefaultCellStyle = dataGridViewCellStyle7;
             dtgCarrito.Dock = DockStyle.Fill;
             dtgCarrito.GridColor = Color.LightGray;
             dtgCarrito.Location = new Point(0, 40);
             dtgCarrito.Name = "dtgCarrito";
             dtgCarrito.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dtgCarrito.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Control;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dtgCarrito.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             dtgCarrito.RowHeadersVisible = false;
             dtgCarrito.Size = new Size(510, 382);
             dtgCarrito.TabIndex = 0;
@@ -163,7 +163,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
-            panel2.Controls.Add(btnAddCarrito);
+            panel2.Controls.Add(btnAgregarCarrito);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(pictureBox1);
@@ -172,31 +172,31 @@
             panel2.Size = new Size(485, 422);
             panel2.TabIndex = 1;
             // 
-            // btnAddCarrito
+            // btnAgregarCarrito
             // 
-            btnAddCarrito.BackColor = Color.Transparent;
-            btnAddCarrito.BorderColor = Color.DarkOliveGreen;
-            btnAddCarrito.BorderRadius = 11;
-            btnAddCarrito.BorderThickness = 1;
-            btnAddCarrito.CustomizableEdges = customizableEdges1;
-            btnAddCarrito.DisabledState.BorderColor = Color.DarkGray;
-            btnAddCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAddCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAddCarrito.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAddCarrito.FillColor = Color.YellowGreen;
-            btnAddCarrito.Font = new Font("Segoe UI", 9F);
-            btnAddCarrito.ForeColor = Color.White;
-            btnAddCarrito.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
-            btnAddCarrito.Image = (Image)resources.GetObject("btnAddCarrito.Image");
-            btnAddCarrito.ImageAlign = HorizontalAlignment.Left;
-            btnAddCarrito.Location = new Point(167, 385);
-            btnAddCarrito.Name = "btnAddCarrito";
-            btnAddCarrito.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnAddCarrito.Size = new Size(147, 26);
-            btnAddCarrito.TabIndex = 25;
-            btnAddCarrito.Text = "Agregar Carrito";
-            btnAddCarrito.TextAlign = HorizontalAlignment.Left;
-            btnAddCarrito.Click += btnAddCarrito_Click;
+            btnAgregarCarrito.BackColor = Color.Transparent;
+            btnAgregarCarrito.BorderColor = Color.DarkOliveGreen;
+            btnAgregarCarrito.BorderRadius = 11;
+            btnAgregarCarrito.BorderThickness = 1;
+            btnAgregarCarrito.CustomizableEdges = customizableEdges15;
+            btnAgregarCarrito.DisabledState.BorderColor = Color.DarkGray;
+            btnAgregarCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAgregarCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAgregarCarrito.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAgregarCarrito.FillColor = Color.YellowGreen;
+            btnAgregarCarrito.Font = new Font("Segoe UI", 9F);
+            btnAgregarCarrito.ForeColor = Color.White;
+            btnAgregarCarrito.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
+            btnAgregarCarrito.Image = (Image)resources.GetObject("btnAgregarCarrito.Image");
+            btnAgregarCarrito.ImageAlign = HorizontalAlignment.Left;
+            btnAgregarCarrito.Location = new Point(167, 385);
+            btnAgregarCarrito.Name = "btnAgregarCarrito";
+            btnAgregarCarrito.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            btnAgregarCarrito.Size = new Size(147, 26);
+            btnAgregarCarrito.TabIndex = 25;
+            btnAgregarCarrito.Text = "Agregar Carrito";
+            btnAgregarCarrito.TextAlign = HorizontalAlignment.Left;
+            btnAgregarCarrito.Click += btnAddCarrito_Click;
             // 
             // panel4
             // 
@@ -519,7 +519,7 @@
             // 
             // btnQuitar
             // 
-            btnQuitar.CustomizableEdges = customizableEdges3;
+            btnQuitar.CustomizableEdges = customizableEdges17;
             btnQuitar.DisabledState.BorderColor = Color.DarkGray;
             btnQuitar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnQuitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -528,7 +528,7 @@
             btnQuitar.ForeColor = Color.White;
             btnQuitar.Location = new Point(261, 464);
             btnQuitar.Name = "btnQuitar";
-            btnQuitar.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnQuitar.ShadowDecoration.CustomizableEdges = customizableEdges18;
             btnQuitar.Size = new Size(80, 25);
             btnQuitar.TabIndex = 27;
             btnQuitar.Text = "Quitar";
@@ -536,7 +536,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.CustomizableEdges = customizableEdges5;
+            btnAgregar.CustomizableEdges = customizableEdges19;
             btnAgregar.DisabledState.BorderColor = Color.DarkGray;
             btnAgregar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAgregar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -545,7 +545,7 @@
             btnAgregar.ForeColor = Color.White;
             btnAgregar.Location = new Point(41, 464);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnAgregar.ShadowDecoration.CustomizableEdges = customizableEdges20;
             btnAgregar.Size = new Size(80, 25);
             btnAgregar.TabIndex = 25;
             btnAgregar.Text = "Agregar";
@@ -556,7 +556,7 @@
             txtCodBarra.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtCodBarra.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtCodBarra.BorderRadius = 7;
-            txtCodBarra.CustomizableEdges = customizableEdges7;
+            txtCodBarra.CustomizableEdges = customizableEdges21;
             txtCodBarra.DefaultText = "";
             txtCodBarra.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtCodBarra.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -572,7 +572,7 @@
             txtCodBarra.PlaceholderForeColor = Color.DarkGray;
             txtCodBarra.PlaceholderText = "Codigo de barra";
             txtCodBarra.SelectedText = "";
-            txtCodBarra.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtCodBarra.ShadowDecoration.CustomizableEdges = customizableEdges22;
             txtCodBarra.Size = new Size(300, 36);
             txtCodBarra.TabIndex = 23;
             txtCodBarra.TextChanged += txtCodBarra_TextChanged;
@@ -581,7 +581,7 @@
             // 
             cmbEstados.AllowDrop = true;
             cmbEstados.BackColor = Color.Transparent;
-            cmbEstados.CustomizableEdges = customizableEdges9;
+            cmbEstados.CustomizableEdges = customizableEdges23;
             cmbEstados.DrawMode = DrawMode.OwnerDrawFixed;
             cmbEstados.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstados.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -591,7 +591,7 @@
             cmbEstados.ItemHeight = 30;
             cmbEstados.Location = new Point(41, 380);
             cmbEstados.Name = "cmbEstados";
-            cmbEstados.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            cmbEstados.ShadowDecoration.CustomizableEdges = customizableEdges24;
             cmbEstados.Size = new Size(300, 36);
             cmbEstados.TabIndex = 22;
             // 
@@ -601,7 +601,7 @@
             txtNroSerie.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtNroSerie.BorderRadius = 7;
             txtNroSerie.CharacterCasing = CharacterCasing.Upper;
-            txtNroSerie.CustomizableEdges = customizableEdges11;
+            txtNroSerie.CustomizableEdges = customizableEdges25;
             txtNroSerie.DefaultText = "";
             txtNroSerie.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNroSerie.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -617,7 +617,7 @@
             txtNroSerie.PlaceholderForeColor = Color.DarkGray;
             txtNroSerie.PlaceholderText = "Notebook";
             txtNroSerie.SelectedText = "";
-            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges26;
             txtNroSerie.Size = new Size(300, 36);
             txtNroSerie.TabIndex = 17;
             txtNroSerie.TextChanged += txtNroSerie_TextChanged;
@@ -635,12 +635,12 @@
             // guna2GroupBox1
             // 
             guna2GroupBox1.Controls.Add(dtgCarrito);
-            guna2GroupBox1.CustomizableEdges = customizableEdges13;
+            guna2GroupBox1.CustomizableEdges = customizableEdges27;
             guna2GroupBox1.Font = new Font("Segoe UI", 9F);
             guna2GroupBox1.ForeColor = Color.FromArgb(125, 137, 149);
             guna2GroupBox1.Location = new Point(524, 11);
             guna2GroupBox1.Name = "guna2GroupBox1";
-            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2GroupBox1.Size = new Size(510, 422);
             guna2GroupBox1.TabIndex = 3;
             guna2GroupBox1.Text = "- Carritos -";
@@ -706,7 +706,7 @@
         private Guna.UI2.WinForms.Guna2ComboBox cmbEstados;
         private Guna.UI2.WinForms.Guna2Button btnAgregar;
         private Guna.UI2.WinForms.Guna2Button btnQuitar;
-        private Guna.UI2.WinForms.Guna2Button btnAddCarrito;
+        private Guna.UI2.WinForms.Guna2Button btnAgregarCarrito;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
     }
 }

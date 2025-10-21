@@ -50,7 +50,7 @@ public class RepoModelo : RepoBase, IRepoModelo
     #region OBTENER TODOS
     public IEnumerable<Modelos> GetAll()
     {
-        string query = "selecto * from Modelos";
+        string query = "select * from Modelo";
 
         return Conexion.Query<Modelos>(query);
     }
@@ -81,7 +81,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidTipoElemento", idTipoElemento);
 
-        string query = "select * from Modelos where idTipoElemento = @unidTipoElemento";
+        string query = "select * from Modelo where idTipoElemento = @unidTipoElemento";
 
         try
         {
