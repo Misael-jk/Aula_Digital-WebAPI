@@ -219,6 +219,9 @@ public class CarritosCN
     {
         return uow.RepoCarritos.GetAll();
     }
+
+    //public void ObtenerCarritoPorID()
+
     #endregion
 
     #region ESTADO MANTENIMIENTO

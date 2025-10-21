@@ -35,10 +35,17 @@ namespace CapaPresentacion
 
         }
 
+        public void ActualizarDatagrid()
+        {
+            dtgCarrito.DataSource = carritosCN.MostrarCarritos();
+        }
+
 
         private void CarritoUC_Load(object sender, EventArgs e)
         {
             dtgCarrito.DataSource = carritosCN.MostrarCarritos();
+
+
 
             CambiarDisponibilidadDatos(false, false, false);
 
@@ -55,10 +62,17 @@ namespace CapaPresentacion
                 btnNotebook21, btnNotebook22, btnNotebook23, btnNotebook24, btnNotebook25
             };
 
-            IEnumerable<EstadosMantenimiento> todo = carritosCN.ListarEstadosMatenimiento();
-            cmbEstados.DataSource = todo;
+            cmbEstados.DataSource = carritosCN.ListarEstadosMatenimiento();
             cmbEstados.ValueMember = "IdEstadoMantenimiento";
             cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+
+            cmbModelo.DataSource = mapperModelo.GetAll();
+            cmbModelo.ValueMember = "IdModelo";
+            cmbModelo.DisplayMember = "Modelo";
+
+            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
+            cmbUbicacion.ValueMember = "IdUbicacion";
+            cmbUbicacion.DisplayMember = "NombreUbicacion";
 
             foreach (var btn in botonesCarrito)
             {
@@ -123,6 +137,18 @@ namespace CapaPresentacion
             }
 
             RestaurarValores();
+
+            txtEquipoCarrito.Text = fila.Cells["Usuario"].Value?.ToString();
+            txtNroSerie.Text = fila.Cells["Password"].Value?.ToString();
+
+            Usuarios? user = carritosCN.(txtUsuario.Text);
+            cmbRoles.SelectedIndex = user.IdRol - 1;
+
+            Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
+            cmbRoles.SelectedIndex = user.IdRol - 1;
+
+            Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
+            cmbRoles.SelectedIndex = user.IdRol - 1;
         }
 
         private void btnNotebook_Click(object sender, EventArgs e)
@@ -271,7 +297,7 @@ namespace CapaPresentacion
 
         private void btnAddCarrito_Click(object sender, EventArgs e)
         {
-            var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo);
+            var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo, this);
             CrearCarrito.Show();
         }
     }
