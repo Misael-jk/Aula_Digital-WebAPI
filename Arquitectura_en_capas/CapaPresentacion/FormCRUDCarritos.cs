@@ -33,7 +33,7 @@ namespace CapaPresentacion
 
         private void FormCRUDCarritos_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = mapperModelos.GetByTipo(2);
+            cmbModelo.DataSource = mapperModelos.GetByTipo(3); //QUITAR MAP y poner "carritoCN.ListarModeloPorTipo(3);
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "Modelo";
 

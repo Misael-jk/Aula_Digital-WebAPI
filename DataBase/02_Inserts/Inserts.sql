@@ -68,8 +68,8 @@ INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 -- CARRITOS
 -- ======================
 INSERT INTO Carritos (equipo, numeroSerieCarrito, capacidad, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
-('Carro de guarda 1', 'CARR-001', 32, 1, 2, 1, TRUE),
-('Carro de guarda 2', 'CARR-002', 32, 1, 2, 1, TRUE);
+('Carro de guarda 1', 'CARR-001', 32, 1, 3, 1, TRUE),
+('Carro de guarda 2', 'CARR-002', 32, 1, 3, 1, TRUE);
 
 -- ======================
 -- ELEMENTOS

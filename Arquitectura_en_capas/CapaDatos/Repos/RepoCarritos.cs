@@ -139,7 +139,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     #region Obtener por Id
     public Carritos? GetById(int idCarrito)
     {
-        string query = "select idCarrito, equipo, idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, habilitado, fechaBaja from Carritos where idCarrito = @unidCarrito";
+        string query = "select idCarrito, equipo as 'EquipoCarrito', idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, habilitado, fechaBaja from Carritos where idCarrito = @unidCarrito";
 
         DynamicParameters parametros = new DynamicParameters();
 

@@ -50,7 +50,7 @@ public class RepoModelo : RepoBase, IRepoModelo
     #region OBTENER TODOS
     public IEnumerable<Modelos> GetAll()
     {
-        string query = "select * from Modelo";
+        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelo";
 
         return Conexion.Query<Modelos>(query);
     }
@@ -62,7 +62,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidModelo", idModelo);
 
-        string query = "select * from Modelo where idModelo = @unidModelo";
+        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelo where idModelo = @unidModelo";
 
         try
         {
@@ -81,7 +81,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidTipoElemento", idTipoElemento);
 
-        string query = "select * from Modelo where idTipoElemento = @unidTipoElemento";
+        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelo where idTipoElemento = @unidTipoElemento";
 
         try
         {
@@ -100,7 +100,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unnombre", nombreModelo);
 
-        string query = "select * from Modelos where modelo = @unnombre";
+        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelos where modelo = @unnombre";
         try
         {
             return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);

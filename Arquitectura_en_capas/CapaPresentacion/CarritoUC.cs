@@ -2,6 +2,7 @@
 using CapaDatos.InterfacesDTO;
 using CapaDatos.MappersDTO;
 using CapaDatos.Repos;
+using CapaDTOs;
 using CapaEntidad;
 using CapaNegocio;
 using System;
@@ -19,19 +20,17 @@ namespace CapaPresentacion
     public partial class CarritoUC : UserControl
     {
         private readonly CarritosCN carritosCN;
-        private readonly IMapperModelo mapperModelo;
         private List<Button> botonesCarrito;
         private int _idCarritoActual = 0;
         private int posicion;
         private readonly Usuarios userVerificado;
 
-        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado, IMapperModelo mapperModelo)
+        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado)
         {
             InitializeComponent();
 
             this.carritosCN = carritosCN;
             this.userVerificado = userVerificado;
-            this.mapperModelo = mapperModelo;
 
         }
 
@@ -62,15 +61,15 @@ namespace CapaPresentacion
                 btnNotebook21, btnNotebook22, btnNotebook23, btnNotebook24, btnNotebook25
             };
 
-            cmbEstados.DataSource = carritosCN.ListarEstadosMatenimiento();
-            cmbEstados.ValueMember = "IdEstadoMantenimiento";
-            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+            cmbEstadoMantenimientoCarrito.DataSource = carritosCN.ListarEstadosMatenimiento();
+            cmbEstadoMantenimientoCarrito.ValueMember = "IdEstadoMantenimiento";
+            cmbEstadoMantenimientoCarrito.DisplayMember = "EstadoMantenimientoNombre";
 
-            cmbModelo.DataSource = mapperModelo.GetAll();
+            cmbModelo.DataSource = carritosCN.ListarModelosCarritos(); // Cambiar luego al modelo segun su tipo (ListarModelosPorTipo)
             cmbModelo.ValueMember = "IdModelo";
-            cmbModelo.DisplayMember = "Modelo";
+            cmbModelo.DisplayMember = "NombreModelo";
 
-            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
+            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones(); 
             cmbUbicacion.ValueMember = "IdUbicacion";
             cmbUbicacion.DisplayMember = "NombreUbicacion";
 
@@ -136,7 +135,7 @@ namespace CapaPresentacion
                 }
             }
 
-            RestaurarValores();
+            //RestaurarValores();
 
             int idCarrito = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
 
@@ -298,6 +297,7 @@ namespace CapaPresentacion
             Action _Actualizardatagrid = ActualizarDatagrid;
 
             var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo, _Actualizardatagrid);
+            
             CrearCarrito.Show();
         }
     }
