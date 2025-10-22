@@ -138,17 +138,18 @@ namespace CapaPresentacion
 
             RestaurarValores();
 
-            txtEquipoCarrito.Text = fila.Cells["Usuario"].Value?.ToString();
-            txtNroSerie.Text = fila.Cells["Password"].Value?.ToString();
+            int idCarrito = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
 
-            Usuarios? user = carritosCN.(txtUsuario.Text);
-            cmbRoles.SelectedIndex = user.IdRol - 1;
+            Carritos? carritos = carritosCN.ObtenerCarritoPorID(idCarrito);
 
-            Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
-            cmbRoles.SelectedIndex = user.IdRol - 1;
-
-            Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
-            cmbRoles.SelectedIndex = user.IdRol - 1;
+            //if (carritos != null)
+            //{
+                txtEquipoCarrito.Text = carritos?.EquipoCarrito;
+                txtNroSerieCarrito.Text = carritos?.NumeroSerieCarrito;
+                cmbModelo.SelectedValue = carritos?.IdModelo;
+                cmbUbicacion.SelectedValue = carritos?.IdUbicacion;
+                cmbEstadoMantenimientoCarrito.SelectedValue = carritos?.IdEstadoMantenimiento;
+            //}
         }
 
         private void btnNotebook_Click(object sender, EventArgs e)
