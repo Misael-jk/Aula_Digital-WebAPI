@@ -128,9 +128,9 @@ namespace CapaPresentacion
                 {
                     switch (nb.IdEstadoMantenimiento)
                     {
-                        case 1: boton.BackColor = Color.Green; break; // Disponible
-                        case 2: boton.BackColor = Color.Orange; break; // Mantenimiento
-                        case 3: boton.BackColor = Color.Red; break; // Prestado
+                        case 1: boton.BackColor = Color.Green; break;
+                        case 2: boton.BackColor = Color.Orange; break;
+                        case 3: boton.BackColor = Color.Red; break;
                         default: boton.BackColor = SystemColors.Control; break;
                     }
                 }
@@ -142,16 +142,13 @@ namespace CapaPresentacion
 
             Carritos? carritos = carritosCN.ObtenerCarritoPorID(idCarrito);
 
-            //if (carritos != null)
-            //{
-                txtEquipoCarrito.Text = carritos?.EquipoCarrito;
-                txtNroSerieCarrito.Text = carritos?.NumeroSerieCarrito;
-                cmbModelo.SelectedValue = carritos?.IdModelo;
-                cmbUbicacion.SelectedValue = carritos?.IdUbicacion;
-                cmbEstadoMantenimientoCarrito.SelectedValue = carritos?.IdEstadoMantenimiento;
-            //}
+            txtEquipoCarrito.Text = carritos?.EquipoCarrito;
+            txtNroSerieCarrito.Text = carritos?.NumeroSerieCarrito;
+            cmbModelo.SelectedValue = carritos?.IdModelo;
+            cmbUbicacion.SelectedValue = carritos?.IdUbicacion;
+            cmbEstadoMantenimientoCarrito.SelectedValue = carritos?.IdEstadoMantenimiento;
         }
-
+        
         private void btnNotebook_Click(object sender, EventArgs e)
         {
             if (_idCarritoActual == 0)
@@ -298,7 +295,9 @@ namespace CapaPresentacion
 
         private void btnAddCarrito_Click(object sender, EventArgs e)
         {
-            var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo, this);
+            Action _Actualizardatagrid = ActualizarDatagrid;
+
+            var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo, _Actualizardatagrid);
             CrearCarrito.Show();
         }
     }
