@@ -15,16 +15,15 @@ namespace CapaPresentacion
 {
     public partial class FormCRUDCarritos : Form
     {
-        private UserControl carritoUC;
         private readonly CarritosCN carritosCN;
-        private readonly IMapperModelo mapperModelos; //Quitar el MAPPER MODELO
-        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo, UserControl uc) //MAPPERR
+        private readonly IMapperModelo mapperModelos;
+        private readonly Action _actualizarDatagrid;
+        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo, Action actualizarDatagrid)
         {
             InitializeComponent();
-            this.mapperModelos = mapperModelo; // <== HOLAA
+            this.mapperModelos = mapperModelo;
             this.carritosCN = carritosCN;
-            carritoUC = uc;
-            
+            _actualizarDatagrid = actualizarDatagrid;
         }
 
         private void BtnCerrar1_Click(object sender, EventArgs e)
@@ -58,6 +57,7 @@ namespace CapaPresentacion
             };
 
             carritosCN.CrearCarrito(carrito, 1);
+            _actualizarDatagrid.Invoke();
         }
     }
 }
