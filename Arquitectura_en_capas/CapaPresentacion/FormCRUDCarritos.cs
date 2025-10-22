@@ -17,11 +17,11 @@ namespace CapaPresentacion
     {
         private UserControl carritoUC;
         private readonly CarritosCN carritosCN;
-        private readonly IMapperModelo mapperModelos;
-        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo, UserControl uc)
+        private readonly IMapperModelo mapperModelos; //Quitar el MAPPER MODELO
+        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo, UserControl uc) //MAPPERR
         {
             InitializeComponent();
-            this.mapperModelos = mapperModelo;
+            this.mapperModelos = mapperModelo; // <== HOLAA
             this.carritosCN = carritosCN;
             carritoUC = uc;
             
@@ -34,7 +34,7 @@ namespace CapaPresentacion
 
         private void FormCRUDCarritos_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = mapperModelos.GetByTipo(2);
+            cmbModelo.DataSource = mapperModelos.GetByTipo(3); //QUITAR MAP y poner "carritoCN.ListarModeloPorTipo(3);
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "Modelo";
 

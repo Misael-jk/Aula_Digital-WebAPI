@@ -15,7 +15,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     #region Mostrar todos los estados de los elementos
     public IEnumerable<EstadosMantenimiento> GetAll()
     {
-        string query = "select * from EstadosMantenimiento";
+        string query = "select idEstadoMantenimiento, estadoMantenimiento as 'EstadoMantenimientoNombre' from EstadosMantenimiento";
 
         try
         {
@@ -31,7 +31,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     #region Mostrar por id estados
     public EstadosMantenimiento? GetById(int idEstadoMantenimiento)
     {
-        string query = "select * from EstadosMantenimiento where idEstadoMantenimiento = @unidEstadoMantenimiento";
+        string query = "select idEstadoMantenimiento, estadoMantenimiento as 'EstadoMantenimientoNombre' from EstadosMantenimiento where idEstadoMantenimiento = @unidEstadoMantenimiento";
 
         DynamicParameters parameters = new DynamicParameters();
         try

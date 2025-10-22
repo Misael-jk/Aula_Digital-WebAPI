@@ -246,6 +246,11 @@ public class CarritosCN
     {
         return uow.RepoModelo.GetAll();
     }
+
+    public IEnumerable<Modelos> ListarModelosPorTipo(int idTipo)
+    {
+        return uow.RepoModelo.GetByTipo(idTipo);
+    }
     #endregion
 
     #region NOTEBOOK
