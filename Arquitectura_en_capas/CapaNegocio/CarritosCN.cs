@@ -220,7 +220,10 @@ public class CarritosCN
         return uow.RepoCarritos.GetAll();
     }
 
-    //public void ObtenerCarritoPorID()
+    public Carritos? ObtenerCarritoPorID(int idCarrito)
+    {
+        return uow.RepoCarritos.GetById(idCarrito);
+    }
 
     #endregion
 
