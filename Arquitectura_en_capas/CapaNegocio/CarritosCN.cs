@@ -345,19 +345,21 @@ public class CarritosCN
             #endregion
 
             #region VALIDACIONES DE LA POSICION Y CAPACIDAD DEL CARRITO
-            if (uow.RepoCarritos.GetCountByCarrito(idCarrito) >= 25)
+            int cantidadActual = uow.RepoCarritos.GetCountByCarrito(idCarrito);
+
+            if (cantidadActual >= carrito.Capacidad)
             {
-                throw new Exception("El carrito que selecciono esta al maximo de notebooks");
+                throw new Exception("El carrito que selecciono esta al maximo de notebooks (capacidad: " + carrito.Capacidad + ").");
             }
 
-            if (posicion < 1 || posicion > 25)
+            if (posicion < 1 || posicion > carrito.Capacidad)
             {
-                throw new Exception("La posición en el carrito debe estar entre 1 y 25.");
+                throw new Exception($"La posición en el carrito debe estar entre 1 y {carrito.Capacidad}.");
             }
 
             if (uow.RepoNotebooks.DuplicatePosition(idCarrito, posicion))
             {
-                throw new Exception("La posición dentro del carrito ya esta ocupada, elija otra.");
+                throw new Exception("La posición dentro del carrito ya está ocupada, elija otra.");
             }
             #endregion
 
@@ -573,6 +575,14 @@ public class CarritosCN
         {
             throw new ValidationException("El nombre del equipo contiene caracteres inválidos.");
         }
+
+        if (carrito.Capacidad < 25)
+        {
+            throw new ValidationException("La capacidad del carrito debe ser mayor que 25.");
+        }
+
+        if (carrito.Capacidad > 40) 
+            throw new ValidationException("La capacidad del carrito no puede superar 40.");
     }
     #endregion
 
@@ -771,6 +781,15 @@ public class CarritosCN
             {
                 throw new Exception("El carrito ya existe pero está deshabilitado, por favor habilitelo antes de actualizar uno nuevo.");
             }
+        }
+        #endregion
+
+        #region CAPACIDAD
+        int actuales = uow.RepoCarritos.GetCountByCarrito(carritoNEW.IdCarrito);
+
+        if (actuales > carritoNEW.Capacidad)
+        {
+            throw new Exception($"No se puede reducir la capacidad a {carritoNEW.Capacidad} porque el carrito contiene {actuales} notebooks. Quite notebooks primero o elija una capacidad mayor o igual a {actuales}");
         }
         #endregion
     }

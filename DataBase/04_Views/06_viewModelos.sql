@@ -7,3 +7,4 @@ create view View_GetModeloDTO as
 		t.elemento as 'ElementoTipo'
 	from modelo m 
 	join tipoelemento t using (idTipoElemento);
+
