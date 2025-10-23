@@ -115,22 +115,20 @@ public class CarritosCN
     #endregion
 
     #region DESHABILITAR UN CARRITO
-    public void DeshabilitarCarrito(Carritos carritos, int idEstadoMantenimiento, int idUsuario)
+    public void DeshabilitarCarrito(int idCarritos, int idEstadoMantenimiento, int idUsuario)
     {
-        ValidarDatos(carritos);
-
         try
         {
             uow.BeginTransaction();
 
-            Carritos? carritoOLD = uow.RepoCarritos.GetById(carritos.IdCarrito);
+            Carritos? carritoOLD = uow.RepoCarritos.GetById(idCarritos);
 
             if (carritoOLD == null)
             {
                 throw new Exception("El carrito no existe");
             }
 
-            if (uow.RepoEstadosMantenimiento.GetById(carritos.IdEstadoMantenimiento) == null)
+            if (uow.RepoEstadosMantenimiento.GetById(carritoOLD.IdEstadoMantenimiento) == null)
             {
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
@@ -149,7 +147,7 @@ public class CarritosCN
                 }
             }
 
-            if (!uow.RepoCarritos.GetDisponible(carritos.IdCarrito))
+            if (!uow.RepoCarritos.GetDisponible(carritoOLD.IdCarrito))
             {
                 throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
             }
@@ -159,9 +157,9 @@ public class CarritosCN
                 throw new Exception("No se puede deshabilitar un carrito que aún contiene notebooks.");
             }
 
-            carritos.IdEstadoMantenimiento = idEstadoMantenimiento;
-            carritos.FechaBaja = DateTime.Now;
-            carritos.Habilitado = false;
+            carritoOLD.IdEstadoMantenimiento = idEstadoMantenimiento;
+            carritoOLD.FechaBaja = DateTime.Now;
+            carritoOLD.Habilitado = false;
 
             uow.RepoCarritos.Update(carritoOLD);
 
@@ -169,7 +167,8 @@ public class CarritosCN
             {
                 IdTipoAccion = 3,
                 IdUsuario = idUsuario,
-                Descripcion = $"Se deshabilito el carrito con numero de serie {carritos.NumeroSerieCarrito}",
+                Descripcion = $"Se deshabilito el carrito con numero de serie {carritoOLD.NumeroSerieCarrito}",
+                Motivo = null,
                 FechaCambio = DateTime.Now
             };
 
@@ -178,7 +177,7 @@ public class CarritosCN
             uow.RepoHistorialCarrito.Insert(new HistorialCarritos
             {
                 IdHistorialCambio = historial.IdHistorialCambio,
-                IdCarrito = carritos.IdCarrito
+                IdCarrito = carritoOLD.IdCarrito
             });
 
             uow.Commit();
