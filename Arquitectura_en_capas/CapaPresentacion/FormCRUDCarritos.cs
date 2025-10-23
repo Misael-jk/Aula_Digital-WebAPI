@@ -18,10 +18,9 @@ namespace CapaPresentacion
         private readonly CarritosCN carritosCN;
         private readonly IMapperModelo mapperModelos;
         private readonly Action _actualizarDatagrid;
-        public FormCRUDCarritos(CarritosCN carritosCN, IMapperModelo mapperModelo, Action actualizarDatagrid)
+        public FormCRUDCarritos(CarritosCN carritosCN, Action actualizarDatagrid)
         {
             InitializeComponent();
-            this.mapperModelos = mapperModelo;
             this.carritosCN = carritosCN;
             _actualizarDatagrid = actualizarDatagrid;
         }
@@ -33,7 +32,7 @@ namespace CapaPresentacion
 
         private void FormCRUDCarritos_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = mapperModelos.GetByTipo(3); //QUITAR MAP y poner "carritoCN.ListarModeloPorTipo(3);
+            cmbModelo.DataSource = carritosCN.ListarModelosPorTipo(2); //QUITAR MAP y poner "carritoCN.ListarModeloPorTipo(3);
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "Modelo";
 
