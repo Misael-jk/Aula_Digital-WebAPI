@@ -62,11 +62,12 @@ public class RepoCarritos : RepoBase, IRepoCarritos
         parametros.Add("unidCarrito", carritos.IdCarrito);
         parametros.Add("unequipo", carritos.EquipoCarrito);
         parametros.Add("unnumeroSerieCarrito", carritos.NumeroSerieCarrito);
+        parametros.Add("unacapacidad", carritos.Capacidad);
         parametros.Add("unidEstadoMantenimiento", carritos.IdEstadoMantenimiento);
         parametros.Add("unidUbicacion", carritos.IdUbicacion);
         parametros.Add("unidModelo", carritos.IdModelo);
         parametros.Add("unhabilitado", carritos.Habilitado);
-        parametros.Add("unfechaBaja", carritos.FechaBaja);
+        parametros.Add("unafechaBaja", carritos.FechaBaja);
 
         try
         {
@@ -139,7 +140,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     #region Obtener por Id
     public Carritos? GetById(int idCarrito)
     {
-        string query = "select idCarrito, equipo as 'EquipoCarrito', idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, habilitado, fechaBaja from Carritos where idCarrito = @unidCarrito";
+        string query = "select idCarrito, equipo as 'EquipoCarrito', capacidad as 'Capacidad', idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, habilitado, fechaBaja from Carritos where idCarrito = @unidCarrito";
 
         DynamicParameters parametros = new DynamicParameters();
 
@@ -259,7 +260,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     /// <exception cref="Exception">Error al obtener el numero de serie del carrito</exception>
     public int GetCountByCarrito(int idCarrito)
     {
-        string query = "select COUNT(*) from Elementos where idCarrito = @idCarrito";
+        string query = "select COUNT(*) from Notebooks where idCarrito = @idCarrito";
 
         DynamicParameters parametros = new DynamicParameters();
 

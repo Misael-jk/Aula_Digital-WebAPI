@@ -52,31 +52,17 @@ namespace CapaPresentacion
 
             RenovarDatos();
 
-            botonesCarrito = new List<Button>
-            {
-                btnNotebook1, btnNotebook2, btnNotebook3, btnNotebook4, btnNotebook5,
-                btnNotebook6, btnNotebook7, btnNotebook8, btnNotebook9, btnNotebook10,
-                btnNotebook11, btnNotebook12, btnNotebook13, btnNotebook14, btnNotebook15,
-                btnNotebook16, btnNotebook17, btnNotebook18, btnNotebook19, btnNotebook20,
-                btnNotebook21, btnNotebook22, btnNotebook23, btnNotebook24, btnNotebook25
-            };
-
             cmbEstadoMantenimientoCarrito.DataSource = carritosCN.ListarEstadosMatenimiento();
             cmbEstadoMantenimientoCarrito.ValueMember = "IdEstadoMantenimiento";
             cmbEstadoMantenimientoCarrito.DisplayMember = "EstadoMantenimientoNombre";
 
-            cmbModelo.DataSource = carritosCN.ListarModelosCarritos(); // Cambiar luego al modelo segun su tipo (ListarModelosPorTipo)
+            cmbModelo.DataSource = carritosCN.ListarModelosPorTipo(2); // Cambiar luego al modelo segun su tipo (ListarModelosPorTipo)
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "NombreModelo";
 
-            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones(); 
+            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
             cmbUbicacion.ValueMember = "IdUbicacion";
             cmbUbicacion.DisplayMember = "NombreUbicacion";
-
-            foreach (var btn in botonesCarrito)
-            {
-                btn.Click += btnNotebook_Click;
-            }
         }
 
         private void RenovarDatos()
@@ -109,45 +95,20 @@ namespace CapaPresentacion
             var fila = dtgCarrito.Rows[e.RowIndex];
             _idCarritoActual = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
 
-            var notebooks = carritosCN.ObtenerNotebooksPorCarrito(_idCarritoActual);
+            Carritos? carrito = carritosCN.ObtenerCarritoPorID(_idCarritoActual);
 
-            for (int i = 0; i < botonesCarrito.Count; i++)
-            {
-                var boton = botonesCarrito[i];
+            lblIDCarrito.Text = Convert.ToString(carrito?.IdCarrito);
+            txtEquipoCarrito.Text = carrito?.EquipoCarrito;
+            txtNroSerieCarrito.Text = carrito?.NumeroSerieCarrito;
+            cmbModelo.SelectedValue = carrito?.IdModelo;
+            cmbUbicacion.SelectedValue = carrito?.IdUbicacion;
+            cmbEstadoMantenimientoCarrito.SelectedValue = carrito?.IdEstadoMantenimiento;
 
-                boton.Tag = i + 1;
-
-                var nb = notebooks.FirstOrDefault(n => n.PosicionCarrito == i + 1);
-
-                if (nb == null)
-                {
-                    boton.BackColor = Color.LightGray;
-                }
-                else
-                {
-                    switch (nb.IdEstadoMantenimiento)
-                    {
-                        case 1: boton.BackColor = Color.Green; break;
-                        case 2: boton.BackColor = Color.Orange; break;
-                        case 3: boton.BackColor = Color.Red; break;
-                        default: boton.BackColor = SystemColors.Control; break;
-                    }
-                }
-            }
-
-            //RestaurarValores();
-
-            int idCarrito = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
-
-            Carritos? carritos = carritosCN.ObtenerCarritoPorID(idCarrito);
-
-            txtEquipoCarrito.Text = carritos?.EquipoCarrito;
-            txtNroSerieCarrito.Text = carritos?.NumeroSerieCarrito;
-            cmbModelo.SelectedValue = carritos?.IdModelo;
-            cmbUbicacion.SelectedValue = carritos?.IdUbicacion;
-            cmbEstadoMantenimientoCarrito.SelectedValue = carritos?.IdEstadoMantenimiento;
+            // Genera dinámicamente los botones según la capacidad del carrito
+            GenerarBotonesCarrito(carrito.Capacidad);
         }
-        
+
+
         private void btnNotebook_Click(object sender, EventArgs e)
         {
             if (_idCarritoActual == 0)
@@ -296,9 +257,142 @@ namespace CapaPresentacion
         {
             Action _Actualizardatagrid = ActualizarDatagrid;
 
-            var CrearCarrito = new FormCRUDCarritos(carritosCN, mapperModelo, _Actualizardatagrid);
-            
+            var CrearCarrito = new FormCRUDCarritos(carritosCN, _Actualizardatagrid);
+
             CrearCarrito.Show();
+        }
+
+        private void GenerarBotonesCarrito(int capacidad)
+        {
+            pnlContenedorCasilleros1.Controls.Clear();
+            pnlContenedorCasilleros2.Controls.Clear();
+            botonesCarrito = new List<Button>();
+
+            if (capacidad <= 0)
+            {
+                Console.WriteLine("Capacidad inválida o vacía. No se generaron botones.");
+                return;
+            }
+
+            pnlContenedorCasilleros1.AutoScroll = false;
+            pnlContenedorCasilleros2.AutoScroll = false;
+
+            int arriba = (capacidad + 1) / 2;
+            int abajo = capacidad - arriba;
+
+            int panelWidth = pnlContenedorCasilleros1.Width;
+            int panelHeight = pnlContenedorCasilleros1.Height;
+
+            int margenX = 8;
+            int margenY = 6;
+            int espacio = 5;
+
+            // Calcular ancho y alto según el tamaño del panel
+            int ancho = (panelWidth - (margenX * 2) - (espacio * (arriba - 1))) / arriba;
+            int alto = panelHeight - 15; // Reducido 15 px
+
+            var notebooks = carritosCN.ObtenerNotebooksPorCarrito(_idCarritoActual);
+
+            // Fila superior
+            for (int i = 0; i < arriba; i++)
+            {
+                int numero = i + 1;
+                var nb = notebooks.FirstOrDefault(n => n.PosicionCarrito == numero);
+                Button btn = CrearBotonCasillero(numero, ancho, alto, nb);
+                btn.Location = new Point(margenX + i * (ancho + espacio), margenY);
+                pnlContenedorCasilleros1.Controls.Add(btn);
+                botonesCarrito.Add(btn);
+            }
+
+            // Fila inferior
+            for (int i = 0; i < abajo; i++)
+            {
+                int numero = arriba + i + 1;
+                var nb = notebooks.FirstOrDefault(n => n.PosicionCarrito == numero);
+                Button btn = CrearBotonCasillero(numero, ancho, alto, nb);
+                btn.Location = new Point(margenX + i * (ancho + espacio), margenY);
+                pnlContenedorCasilleros2.Controls.Add(btn);
+                botonesCarrito.Add(btn);
+            }
+
+            Console.WriteLine($"Generados {botonesCarrito.Count} botones para el carrito {_idCarritoActual}");
+        }
+
+        private Button CrearBotonCasillero(int numero, int ancho, int alto, Notebooks notebook = null)
+        {
+            Button btn = new Button
+            {
+                Size = new Size(ancho, alto),
+                Text = numero.ToString(),
+                TextAlign = ContentAlignment.BottomCenter,
+                UseVisualStyleBackColor = true,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = Color.White,
+                Tag = notebook
+            };
+
+            btn.BackColor = notebook == null ? Color.LightGray : notebook.IdEstadoMantenimiento switch
+            {
+                1 => Color.Green,
+                2 => Color.Orange,
+                3 => Color.Red,
+                _ => SystemColors.Control
+            };
+
+            btn.Click += BotonNotebook_Click;
+
+            return btn;
+        }
+
+
+        private void BotonNotebook_Click(object sender, EventArgs e)
+        {
+            if (_idCarritoActual == 0)
+            {
+                MessageBox.Show("Primero seleccioná un carrito.");
+                return;
+            }
+
+            Button btn = sender as Button;
+            Notebooks notebook = btn.Tag as Notebooks;
+            posicion = int.Parse(btn.Text);
+
+            if (notebook == null)
+            {
+                MessageBox.Show($"Casillero {btn.Text} vacío en el carrito.");
+                CambiarDisponibilidadBotones(true, false);
+                CambiarDisponibilidadDatos(true, true, true);
+                RestaurarValores();
+                return;
+            }
+
+            txtNroSerie.Text = notebook.NumeroSerie;
+            txtCodBarra.Text = notebook.CodigoBarra;
+            cmbEstados.SelectedValue = notebook.IdEstadoMantenimiento;
+
+            CambiarDisponibilidadBotones(false, true);
+            CambiarDisponibilidadDatos(false, false, true);
+        }
+
+        private void btnActualizarCarrito_Click(object sender, EventArgs e)
+        {
+            Carritos carritos = new Carritos()
+            {
+                IdCarrito = _idCarritoActual,
+                EquipoCarrito = txtEquipoCarrito.Text,
+                NumeroSerieCarrito = txtNroSerieCarrito.Text,
+                Capacidad = 32,
+                IdModelo = (int)cmbModelo.SelectedValue,
+                IdUbicacion = (int)cmbUbicacion.SelectedValue,
+                IdEstadoMantenimiento = (int)cmbEstadoMantenimientoCarrito.SelectedValue,
+                Habilitado = true,
+                FechaBaja = null
+            };
+
+            carritosCN.ActualizarCarrito(carritos, userVerificado.IdRol);
+
+            ActualizarDatagrid();
         }
     }
 }
