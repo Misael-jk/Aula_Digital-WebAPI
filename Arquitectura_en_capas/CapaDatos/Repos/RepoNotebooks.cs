@@ -52,12 +52,13 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         parameters.Add("unidTipoElemento", notebooks.IdTipoElemento);
         parameters.Add("unidVariante", notebooks.IdVarianteElemento);
         parameters.Add("unidModelo", notebooks.IdModelo);
-        parameters.Add("unidEstado", notebooks.IdEstadoMantenimiento);
+        parameters.Add("unidUbicacion", notebooks.IdUbicacion);
+        parameters.Add("unidEstadoMantenimiento", notebooks.IdEstadoMantenimiento);
         parameters.Add("unnumeroSerie", notebooks.NumeroSerie);
         parameters.Add("uncodigoBarra", notebooks.CodigoBarra);
         parameters.Add("unpatrimonio", notebooks.Patrimonio);
         parameters.Add("unhabilitado", notebooks.Habilitado);
-        parameters.Add("unfechaBaja", notebooks.FechaBaja);
+        parameters.Add("unafechaBaja", notebooks.FechaBaja);
         parameters.Add("unequipo", notebooks.Equipo);
         parameters.Add("unidCarrito", notebooks.IdCarrito);
         parameters.Add("unaposicionCarrito", notebooks.PosicionCarrito);
@@ -75,7 +76,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region Obtener por ID
     public Notebooks? GetById(int idNotebook)
     {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, e.idTipoElemento, n.posicionCarrito, e.idEstadoMantenimiento, e.idUbicacion, e.numeroSerie, e.codigoBarra, e.patrimonio, n.equipo, e.habilitado, e.fechaBaja
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where e.idElemento = @unidNotebook;";

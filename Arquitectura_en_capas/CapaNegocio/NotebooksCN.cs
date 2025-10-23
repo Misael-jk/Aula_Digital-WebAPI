@@ -103,12 +103,66 @@ public class NotebooksCN
     }
     #endregion
 
+    #region Deshabilitar Notebook
+    public void DeshabilitarNotebook(int idNotebook,/* string motivo, */ int idUsuario, int idEstadoMantenimiento)
+    {
+        try
+        {
+            uow.BeginTransaction();
+
+            Notebooks? notebook = uow.RepoNotebooks.GetById(idNotebook);
+            if (notebook == null)
+            {
+                throw new Exception("La notebook no existe.");
+            }
+
+            if (uow.RepoEstadosMantenimiento.GetById(notebook.IdEstadoMantenimiento) == null)
+            {
+                throw new Exception("El estado de mantenimiento seleccionado no es valido");
+            }
+
+            if (!uow.RepoNotebooks.GetDisponible(notebook.IdElemento))
+            {
+                throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
+            }
+
+            notebook.IdEstadoMantenimiento = idEstadoMantenimiento;
+            notebook.Habilitado = false;
+            notebook.FechaBaja = DateTime.Now;
+
+            uow.RepoNotebooks.Update(notebook);
+            HistorialCambios historial = new HistorialCambios
+            {
+                IdTipoAccion = 3,
+                FechaCambio = DateTime.Now,
+                Descripcion = $"Se deshabilitó la notebook con número de serie {notebook.NumeroSerie}.",
+                Motivo = null /* motivo */,
+                IdUsuario = idUsuario
+            };
+
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialNotebook.Insert(new HistorialNotebooks
+            {
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdNotebook = notebook.IdElemento
+            });
+
+            uow.Commit();
+        }
+        catch
+        {
+            uow.Rollback();
+            throw;
+        }
+    }
+    #endregion
 
     // Filtros
     #region Filtros para la UI
-    public IEnumerable<Modelos> ListarModelos()
+    public IEnumerable<Modelos> ListarModelosPorTipo(int idModelo)
     {
-        return uow.RepoModelo.GetAll();
+        return uow.RepoModelo.GetByTipo(1);
     }
 
     public IEnumerable<Ubicacion> ListarUbicaciones()
@@ -119,6 +173,11 @@ public class NotebooksCN
     public IEnumerable<EstadosMantenimiento> ListarEstadoMantenimiento()
     {
         return uow.RepoEstadosMantenimiento.GetAll();
+    }
+
+    public Notebooks? ObtenerNotebookPorID(int idNotebook)
+    {
+        return uow.RepoNotebooks.GetById(idNotebook);
     }
     #endregion
 
@@ -345,7 +404,7 @@ public class NotebooksCN
         #region VALIDAR ID NOTEBOOK
         Notebooks? notebookOLD = uow.RepoNotebooks.GetById(notebooks.IdElemento);
 
-        if (notebooks.IdElemento != 0 && notebookOLD != null)
+        if (notebooks.IdElemento == 0 || notebookOLD == null)
         {
             throw new Exception("La notebook no existe");
         }
@@ -490,10 +549,10 @@ public class NotebooksCN
         #endregion
 
         #region CARRITOS Y POSICION
-        Carritos? carritoOLD = uow.RepoCarritos.GetById(notebooks.IdCarrito.Value);
 
         if (notebooks.IdCarrito.HasValue)
         {
+            Carritos? carritoOLD = uow.RepoCarritos.GetById(notebooks.IdCarrito.Value);
             if (carritoOLD == null)
             {
                 throw new Exception("El carrito asociado no existe.");

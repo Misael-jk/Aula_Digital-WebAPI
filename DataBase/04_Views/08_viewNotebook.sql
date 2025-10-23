@@ -10,10 +10,12 @@ create view View_GetNotebookDTO as
         e.patrimonio,
         c.equipo as "EquipoCarrito",
         ee.estadoMantenimiento as 'Estado',
-        m.modelo
+        m.modelo,
+        u.ubicacion
     from Elementos e
     join notebooks n using (idElemento)
     left join carritos c on n.idCarrito = c.idCarrito
     join modelo m on e.idModelo = m.idModelo
     join EstadosMantenimiento ee on e.idEstadoMantenimiento = ee.idEstadoMantenimiento
+    join Ubicacion u on u.idUbicacion = e.idUbicacion
     where e.habilitado = 1;

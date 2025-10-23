@@ -37,7 +37,7 @@ namespace CapaPresentacion
         {
             Carritos? carrito = _carritosCN.ObtenerCarritoPorID(_id);
 
-            _carritosCN.DeshabilitarCarrito(carrito, (int)cmbEstadoMantenimiento.SelectedValue, idUsuario);
+            _carritosCN.DeshabilitarCarrito(_id, (int)cmbEstadoMantenimiento.SelectedValue, idUsuario);
         }
     }
 }

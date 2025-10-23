@@ -16,19 +16,20 @@ namespace CapaPresentacion
     public partial class FormCRUDNotebook : Form
     {
         private readonly NotebooksCN notebooksCN;
-        private readonly IMapperModelo mapperModelos;
-        public FormCRUDNotebook(NotebooksCN notebooksCN, IMapperModelo mapperModelos)
+        private readonly Action _actualizarGrid;
+        public FormCRUDNotebook(NotebooksCN notebooksCN, Action ActualizarGrid)
         {
             InitializeComponent();
-            this.notebooksCN = notebooksCN;            this.mapperModelos = mapperModelos;
+            this.notebooksCN = notebooksCN;
+            _actualizarGrid = ActualizarGrid;
 
         }
 
         private void FormCRUDNotebook_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = mapperModelos.GetByTipo(1);
+            cmbModelo.DataSource = notebooksCN.ListarModelosPorTipo(1);
             cmbModelo.ValueMember = "IdModelo";
-            cmbModelo.DisplayMember = "Modelo";
+            cmbModelo.DisplayMember = "NombreModelo";
 
             cmbUbicacion.DataSource = notebooksCN.ListarUbicaciones();
             cmbUbicacion.ValueMember = "IdUbicacion";
@@ -60,6 +61,8 @@ namespace CapaPresentacion
             };
 
             notebooksCN.CrearNotebook(notebooks, 1);
+            _actualizarGrid.Invoke();
+            this.Close();
         }
     }
 }
