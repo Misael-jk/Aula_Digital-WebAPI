@@ -28,7 +28,7 @@ INSERT INTO Docentes (dni, nombre, apellido, email, habilitado) VALUES
 INSERT INTO Ubicacion (ubicacion) VALUES
 ('Deposito A'),
 ('Deposito B'),
-('Sala de Profesores');
+('Aula Digital');
 
 -- ======================
 -- TIPO ELEMENTOS
@@ -61,15 +61,15 @@ INSERT INTO VariantesElemento (idTipoElemento, subtipo, idModelo) VALUES
 -- ======================
 INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 ('Disponible'),
-('En mantenimiento'),
-('Prestado');
+('Prestado'),
+('En mantenimiento');
 
 -- ======================
 -- CARRITOS
 -- ======================
 INSERT INTO Carritos (equipo, numeroSerieCarrito, capacidad, idEstadoMantenimiento, idUbicacion, idModelo, Habilitado) VALUES
-('Carro de guarda 1', 'CARR-001', 32, 1, 3, 1, TRUE),
-('Carro de guarda 2', 'CARR-002', 32, 1, 3, 1, TRUE);
+('Carro de guarda 1', 'CARR-001', 32, 1, 3, 3, TRUE),
+('Carro de guarda 2', 'CARR-002', 32, 1, 3, 3, TRUE);
 
 -- ======================
 -- ELEMENTOS
@@ -82,17 +82,17 @@ VALUES
 
 -- Notebooks HP ProBook 450
 (1, null, 1, 2, 1, 'NB003', 'CB003', 'PAT003', TRUE),
-(1, null, 1, 2, 2, 'NB004', 'CB004', 'PAT004', TRUE),
+(1, null, 1, 2, 3, 'NB004', 'CB004', 'PAT004', TRUE),
 
 -- Proyectores (Epson X200)
 (2, 1, 3, 3, 1, 'PR001', 'CB011', 'PAT011', TRUE),
 (2, 1, 3, 3, 1, 'PR002', 'CB012', 'PAT012', TRUE),
-(2, 1, 3, 3, 2, 'PR003', 'CB013', 'PAT013', TRUE),
+(2, 1, 3, 3, 3, 'PR003', 'CB013', 'PAT013', TRUE),
 
 -- Tablets (Samsung Tab A)
 (3, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE),
 (3, 2, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE),
-(3, 2, 4, 2, 2, 'TB003', 'CB016', 'PAT016', TRUE);
+(3, 2, 4, 2, 3, 'TB003', 'CB016', 'PAT016', TRUE);
 
 -- ======================
 -- NOTEBOOKS (asociadas a carritos)
