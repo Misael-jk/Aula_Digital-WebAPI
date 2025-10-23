@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaNegocio;
+using CapaEntidad;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,30 @@ namespace CapaPresentacion
 {
     public partial class FormDeshabilitarCNE : Form
     {
-        public FormDeshabilitarCNE()
+        private readonly CarritosCN _carritosCN;
+        private int _id;
+        private int idUsuario;
+        public FormDeshabilitarCNE(int id, CarritosCN carritosCN, int usuario)
         {
             InitializeComponent();
+
+            _carritosCN = carritosCN;
+            _id = id;
+            idUsuario = usuario;
+        }
+
+        private void FormDeshabilitarCNE_Load(object sender, EventArgs e)
+        {
+            cmbEstadoMantenimiento.DataSource = _carritosCN.ListarEstadosMatenimiento();
+            cmbEstadoMantenimiento.ValueMember = "IdEstadoMantenimiento";
+            cmbEstadoMantenimiento.DisplayMember = "EstadoMantenimientoNombre";
+        }
+
+        private void btnDeshabiliar_Click(object sender, EventArgs e)
+        {
+            Carritos? carrito = _carritosCN.ObtenerCarritoPorID(_id);
+
+            _carritosCN.DeshabilitarCarrito(carrito, (int)cmbEstadoMantenimiento.SelectedValue, idUsuario);
         }
     }
 }

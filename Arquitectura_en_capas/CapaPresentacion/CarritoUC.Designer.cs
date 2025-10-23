@@ -529,6 +529,7 @@
             btnDeshabiliarCarrito.TabIndex = 41;
             btnDeshabiliarCarrito.Text = "Deshabilitar Notebook";
             btnDeshabiliarCarrito.TextAlign = HorizontalAlignment.Left;
+            btnDeshabiliarCarrito.Click += btnDeshabiliarCarrito_Click;
             // 
             // grbApartadoVisual
             // 
