@@ -135,11 +135,6 @@ public class CarritosCN
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
 
-            if (carritos.IdEstadoMantenimiento == 1)
-            {
-                throw new Exception("No se puede deshabilitar un carrito con estado 'Disponible'");
-            }
-
             if (uow.RepoUbicacion.GetById(carritos.IdUbicacion) == null)
             {
                 throw new Exception("La ubicacion seleccionada no existe");

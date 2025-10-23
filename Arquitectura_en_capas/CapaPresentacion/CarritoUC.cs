@@ -394,5 +394,11 @@ namespace CapaPresentacion
 
             ActualizarDatagrid();
         }
+
+        private void btnDeshabiliarCarrito_Click(object sender, EventArgs e)
+        {
+            var formDeshabiltar = new FormDeshabilitarCNE(_idCarritoActual, carritosCN, userVerificado.IdRol);
+            formDeshabiltar.Show();
+        }
     }
 }
