@@ -50,11 +50,17 @@ namespace CapaPresentacion
             //Action ActualizarGrid = ActualizarDataGrid; No es necesario crear esta variable temporal, ya que puedo pasar el metodo directamente
 
             var Notebook = new FormCRUDNotebook(notebooksCN, ActualizarDataGrid);
-            Notebook.Show();
+            Notebook.ShowDialog();
         }
 
         private void dtgNotebook_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Limpiar los labels, porque el operador += provoca problemas y concatena las palabras al tocar varias veces el cellclick.
+
+            lblCarroAsignado.Text = "Carrito Asignado: ";
+            lblCasillero.Text = "Casillero: ";
+            lblIDNotebook.Text = "ID: ";
+
             if (e.RowIndex < 0) return;
 
             IdActual = Convert.ToInt32(dtgNotebook.Rows[e.RowIndex].Cells["IdNotebook"].Value);
@@ -74,15 +80,39 @@ namespace CapaPresentacion
             lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
             lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
 
-            Carritos? carritos = notebooksCN.ObtenerCarritoPorID((int)notebook.IdCarrito);
+            /* 
+             * Corregi el problema del metodo ObtenerCarritoPorID ya que esta propiedad no admite null por eso debemos usar
+             * el .HasValue para identificar si tiene o no carrito antes de invocar el metodo, si ves arriba de este sms tambien
+             * hay otro metodo ObtenerEstadoMantenimientoPorID y seguro pienses que tambien necesita esto, pero a diferencia de esto
+             * el metodo de arriba si apuntas el cursor ahi veras que dice "puede ser NULL aqui" lo que no pasa nada si no hacemos 
+             * validaciones lo de abajo decia que un tipo que acepta valores nullos recibe un valor null, por eso ahi que verificar eso.
+             */
+            if (notebook?.IdCarrito.HasValue == true)
+            {
+                Carritos? carritos = notebooksCN.ObtenerCarritoPorID(notebook.IdCarrito.Value);
 
-            lblCarroAsignado.Text += carritos?.EquipoCarrito;
-            lblCasillero.Text += notebook?.PosicionCarrito.ToString();
-
+                if (carritos != null)
+                {
+                    lblCarroAsignado.Text += carritos.EquipoCarrito;
+                    lblCasillero.Text += notebook.PosicionCarrito.ToString();
+                }
+                else
+                {
+                    lblCarroAsignado.Text += "Sin Carrito";
+                    lblCasillero.Text += "-";
+                }
+            }
+            else
+            {
+                lblCarroAsignado.Text += "Sin Carrito";
+                lblCasillero.Text += "-";
+            }
         }
 
         private void btnActualizarNotebook_Click(object sender, EventArgs e)
         {
+            Notebooks? notebooks = notebooksCN.ObtenerNotebookPorID(IdActual);
+
             Notebooks? notebook = new Notebooks
             {
                 IdElemento = IdActual,
@@ -92,11 +122,11 @@ namespace CapaPresentacion
                 Patrimonio = txtPatrimonio.Text,
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
-                //IdEstadoMantenimiento = (int)cmbEstados.SelectedValue,
+                IdEstadoMantenimiento = (int)lblEstado.Tag,   //(int)cmbEstados.SelectedValue, use el TAG y force a que sea de tipo int
                 IdTipoElemento = 1,
                 IdVarianteElemento = null,
-                IdCarrito = null,
-                PosicionCarrito = null,
+                IdCarrito = notebooks?.IdCarrito,
+                PosicionCarrito = notebooks?.PosicionCarrito,
                 Habilitado = true,
                 FechaBaja = null
             };

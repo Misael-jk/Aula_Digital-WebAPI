@@ -189,6 +189,11 @@ public class NotebooksCN
     {
         return uow.RepoCarritos.GetById(idCarrito);
     }
+
+    public Carritos? ObtenerCarritoPorNotebook(int idNotebook)
+    {
+        return uow.RepoNotebooks.GetCarritoByNotebook(idNotebook);
+    }
     #endregion
 
 

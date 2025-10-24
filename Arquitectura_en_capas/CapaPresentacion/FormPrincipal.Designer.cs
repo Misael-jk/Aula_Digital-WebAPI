@@ -575,10 +575,8 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPrincipal";
-            ShowInTaskbar = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormPrincipal";
-            TopMost = true;
             Load += FormPrincipal_Load;
             pnlBanner.ResumeLayout(false);
             pnlBanner.PerformLayout();
