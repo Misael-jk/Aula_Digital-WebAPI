@@ -133,7 +133,7 @@ public class CarritosCN
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
 
-            if (uow.RepoUbicacion.GetById(carritos.IdUbicacion) == null)
+            if (uow.RepoUbicacion.GetById(carritoOLD.IdUbicacion) == null)
             {
                 throw new Exception("La ubicacion seleccionada no existe");
             }
