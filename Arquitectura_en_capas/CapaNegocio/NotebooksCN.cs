@@ -179,6 +179,16 @@ public class NotebooksCN
     {
         return uow.RepoNotebooks.GetById(idNotebook);
     }
+
+    public EstadosMantenimiento? ObtenerEstadoMantenimientoPorID(int idEatadoMantenimiento)
+    {
+        return uow.RepoEstadosMantenimiento.GetById(idEatadoMantenimiento);
+    }
+
+    public Carritos? ObtenerCarritoPorID(int idCarrito)
+    {
+        return uow.RepoCarritos.GetById(idCarrito);
+    }
     #endregion
 
 

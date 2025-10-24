@@ -36,10 +36,6 @@ namespace CapaPresentacion
             cmbUbicacion.DataSource = notebooksCN.ListarUbicaciones();
             cmbUbicacion.ValueMember = "IdUbicacion";
             cmbUbicacion.DisplayMember = "NombreUbicacion";
-
-            cmbEstados.DataSource = notebooksCN.ListarEstadoMantenimiento();
-            cmbEstados.ValueMember = "IdEstadoMantenimiento";
-            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
         }
 
         private void NotebooksUC_Load(object sender, EventArgs e)
@@ -65,13 +61,24 @@ namespace CapaPresentacion
 
             Notebooks? notebook = notebooksCN.ObtenerNotebookPorID(IdActual);
 
+            lblIDNotebook.Text += notebook?.IdElemento.ToString();
             txtEquipo.Text = notebook?.Equipo;
             txtNroSerie.Text = notebook?.NumeroSerie;
             txtCodBarra.Text = notebook?.CodigoBarra;
             txtPatrimonio.Text = notebook?.Patrimonio;
             cmbModelo.SelectedValue = notebook?.IdModelo;
             cmbUbicacion.SelectedValue = notebook?.IdUbicacion;
-            cmbEstados.SelectedValue = notebook?.IdEstadoMantenimiento;
+
+            EstadosMantenimiento? estadosMantenimiento = notebooksCN.ObtenerEstadoMantenimientoPorID(notebook.IdEstadoMantenimiento);
+
+            lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
+            lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
+
+            Carritos? carritos = notebooksCN.ObtenerCarritoPorID((int)notebook.IdCarrito);
+
+            lblCarroAsignado.Text += carritos?.EquipoCarrito;
+            lblCasillero.Text += notebook?.PosicionCarrito.ToString();
+
         }
 
         private void btnActualizarNotebook_Click(object sender, EventArgs e)
@@ -85,7 +92,7 @@ namespace CapaPresentacion
                 Patrimonio = txtPatrimonio.Text,
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
-                IdEstadoMantenimiento = (int)cmbEstados.SelectedValue,
+                //IdEstadoMantenimiento = (int)cmbEstados.SelectedValue,
                 IdTipoElemento = 1,
                 IdVarianteElemento = null,
                 IdCarrito = null,
@@ -100,7 +107,7 @@ namespace CapaPresentacion
 
         private void btnDeshabiliar_Click(object sender, EventArgs e)
         {
-            notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, (int)cmbEstados.SelectedValue);
+            //notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, (int)cmbEstados.SelectedValue);
 
             ActualizarDataGrid();
         }
