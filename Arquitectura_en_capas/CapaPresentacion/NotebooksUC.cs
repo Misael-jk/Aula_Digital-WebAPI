@@ -16,14 +16,16 @@ namespace CapaPresentacion
     public partial class NotebooksUC : UserControl
     {
         private readonly NotebooksCN notebooksCN;
+        private readonly CarritosCN carritosCN;
         private Usuarios usuarioActual;
         private int IdActual = 0;
 
-        public NotebooksUC(NotebooksCN notebooksCN, Usuarios user)
+        public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN)
         {
             InitializeComponent();
             this.notebooksCN = notebooksCN;
             this.usuarioActual = user;
+            this.carritosCN = carritosCN;
         }
         public void ActualizarDataGrid()
         {
@@ -107,6 +109,10 @@ namespace CapaPresentacion
                 lblCarroAsignado.Text += "Sin Carrito";
                 lblCasillero.Text += "-";
             }
+
+            #region Agregar cellClick para agregar al carrito
+            txtEquipo_AddCarrito.Text += notebook?.Equipo;
+            #endregion
         }
 
         private void btnActualizarNotebook_Click(object sender, EventArgs e)
@@ -139,6 +145,21 @@ namespace CapaPresentacion
         {
             //notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, (int)cmbEstados.SelectedValue);
 
+            ActualizarDataGrid();
+        }
+
+        private void btnAgragarAlCarrito_Click(object sender, EventArgs e)
+        {
+            Carritos? carrito = carritosCN.ObtenerCarritoPorEquipo(txtCarrito_AddCarrito.Text);
+            int posicion = Convert.ToInt32(txtPosicion.Text);
+
+            if(carrito == null)
+            {
+                MessageBox.Show("El carrito no existe.");
+                return;
+            }
+
+            carritosCN.AddNotebook(carrito.IdCarrito, posicion, IdActual, usuarioActual.IdUsuario);
             ActualizarDataGrid();
         }
     }

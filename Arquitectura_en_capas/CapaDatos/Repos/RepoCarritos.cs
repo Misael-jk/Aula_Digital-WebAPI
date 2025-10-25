@@ -164,7 +164,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     #region Obtener por Numero de Serie
     public Carritos? GetByNumeroSerie(string numeroSerie)
     {
-        string query = "select * from Carritos where numeroSerieCarrito = @numeroSerie";
+        string query = "select idCarrito, equipo as 'EquipoCarrito', capacidad as 'Capacidad', idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, habilitado, fechaBaja from Carritos where numeroSerieCarrito = @numeroSerie";
 
         DynamicParameters parametros = new DynamicParameters();
 
@@ -184,7 +184,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     #region Obtener por el nombre del equipo
     public Carritos? GetByEquipo(string equipo)
     {
-        string query = "select * from Carritos where equipo = @equipo";
+        string query = "select idCarrito, equipo as 'EquipoCarrito', capacidad as 'Capacidad', idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, habilitado, fechaBaja from Carritos where equipo = @equipo";
         DynamicParameters parametros = new DynamicParameters();
         try
         {
