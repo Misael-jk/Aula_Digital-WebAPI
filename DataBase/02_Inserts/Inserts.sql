@@ -82,12 +82,12 @@ VALUES
 
 -- Notebooks HP ProBook 450
 (1, null, 1, 2, 1, 'NB003', 'CB003', 'PAT003', TRUE),
-(1, null, 1, 2, 3, 'NB004', 'CB004', 'PAT004', TRUE),
+(1, null, 1, 2, 3, 'NB004', 'CB004', 'PAT004', false),
 
 -- Proyectores (Epson X200)
 (2, 1, 3, 3, 1, 'PR001', 'CB011', 'PAT011', TRUE),
 (2, 1, 3, 3, 1, 'PR002', 'CB012', 'PAT012', TRUE),
-(2, 1, 3, 3, 3, 'PR003', 'CB013', 'PAT013', TRUE),
+(2, 1, 3, 3, 3, 'PR003', 'CB013', 'PAT013', false),
 
 -- Tablets (Samsung Tab A)
 (3, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE),

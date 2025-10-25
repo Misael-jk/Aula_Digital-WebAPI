@@ -676,6 +676,16 @@
         iqIoJ3J19T+KVwvk+ZtjhQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnRemoveCarrito.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAAQRJREFUSEvt
+        lUEOgjAQRVl7Cq7gwpUXMFxKb+IlWOjKnQsvwRWMFxj/dH6ghYaEtuiGl0xK/yfzYWhCtVEcEdmj7qhH
+        gbqhDmwdAuOEWoMjIwYgvs2TDhV70qWlfZQPIwZoKBdKWWgfaydCaYC6Eg2DfuVlwIyeFgatNUs6Sg7d
+        mywtpR5oyWGNWQ4XqKttHY270QNa1hj9QJ9JkAI9PUyBNw6MBinwssP80SnBN/SBlzVGP+jMVYkGQk8+
+        IJPDoKttHZNAaMlhtVnhN9K9yVJT6oGWNcYdLwNm9LwDsgTtY+3iYU+zivNiRAjNorD1n8ADxP5HRYtR
+        64xvDKN+/GYbeVTVF3JVsDMSeV5jAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="btnAgragarAlCarrito.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAAQBJREFUSEvt

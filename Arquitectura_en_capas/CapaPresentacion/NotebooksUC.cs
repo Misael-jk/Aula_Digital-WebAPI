@@ -45,6 +45,10 @@ namespace CapaPresentacion
             ActualizarDataGrid();
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1200);
+
+            cmbUbicacion_RemoveCarrito.DataSource = notebooksCN.ListarUbicaciones();
+            cmbUbicacion_RemoveCarrito.ValueMember = "IdUbicacion";
+            cmbUbicacion_RemoveCarrito.DisplayMember = "NombreUbicacion";
         }
 
         private void btnAgregarNotebook_Click(object sender, EventArgs e)
@@ -111,7 +115,12 @@ namespace CapaPresentacion
             }
 
             #region Agregar cellClick para agregar al carrito
-            txtEquipo_AddCarrito.Text += notebook?.Equipo;
+            txtEquipo_AddCarrito.Text = notebook?.Equipo;
+            #endregion
+
+            #region Quitar CellClick para quitar del carrito
+            txtEquipo_RemoveCarrito.Text = notebook?.Equipo;
+            txtCarrito_RemoveCarrito.Text = notebook?.IdCarrito.HasValue == true ? notebooksCN.ObtenerCarritoPorID(notebook.IdCarrito.Value)?.EquipoCarrito : "Sin Carrito";
             #endregion
         }
 
@@ -153,13 +162,29 @@ namespace CapaPresentacion
             Carritos? carrito = carritosCN.ObtenerCarritoPorEquipo(txtCarrito_AddCarrito.Text);
             int posicion = Convert.ToInt32(txtPosicion.Text);
 
-            if(carrito == null)
+            if (carrito == null)
             {
                 MessageBox.Show("El carrito no existe.");
                 return;
             }
 
             carritosCN.AddNotebook(carrito.IdCarrito, posicion, IdActual, usuarioActual.IdUsuario);
+            ActualizarDataGrid();
+        }
+
+        private void btnRemoveCarrito_Click(object sender, EventArgs e)
+        {
+            Carritos? carrito = carritosCN.ObtenerCarritoPorEquipo(txtCarrito_RemoveCarrito.Text);
+            if (carrito == null)
+            {
+                MessageBox.Show("El carrito no existe.");
+                return;
+            }
+
+            int idUbicacion = cmbUbicacion_RemoveCarrito.SelectedValue != null ? (int)cmbUbicacion_RemoveCarrito.SelectedValue : 0;
+
+            carritosCN.RemoveNotebook(carrito.IdCarrito, IdActual, usuarioActual.IdUsuario, idUbicacion);
+
             ActualizarDataGrid();
         }
     }
