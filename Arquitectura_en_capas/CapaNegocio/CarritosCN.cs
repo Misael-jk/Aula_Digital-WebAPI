@@ -226,6 +226,11 @@ public class CarritosCN
     {
         return uow.RepoEstadosMantenimiento.GetAll();
     }
+
+    public EstadosMantenimiento? ObtenerEstadoMantenimientoPorID(int idEatadoMantenimiento)
+    {
+        return uow.RepoEstadosMantenimiento.GetById(idEatadoMantenimiento);
+    }
     #endregion
 
     #region UBICACION

@@ -102,7 +102,23 @@ namespace CapaPresentacion
             txtNroSerieCarrito.Text = carrito?.NumeroSerieCarrito;
             cmbModelo.SelectedValue = carrito?.IdModelo;
             cmbUbicacion.SelectedValue = carrito?.IdUbicacion;
-            cmbEstadoMantenimientoCarrito.SelectedValue = carrito?.IdEstadoMantenimiento;
+
+            EstadosMantenimiento? estadosMantenimiento = carritosCN.ObtenerEstadoMantenimientoPorID(carrito.IdEstadoMantenimiento);
+
+            lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
+            lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
+
+            lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
+            lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
+
+            if (estadosMantenimiento?.IdEstadoMantenimiento == 1)
+            {
+                ptbEstado.Image = Properties.Resources.disponibleIcon;
+            }
+            else
+            {
+                ptbEstado.Image = Properties.Resources.prestadoIcon;
+            }
 
             // Genera dinámicamente los botones según la capacidad del carrito
             GenerarBotonesCarrito(carrito.Capacidad);

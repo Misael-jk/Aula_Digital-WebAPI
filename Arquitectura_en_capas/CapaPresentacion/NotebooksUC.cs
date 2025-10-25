@@ -61,6 +61,7 @@ namespace CapaPresentacion
 
             Notebooks? notebook = notebooksCN.ObtenerNotebookPorID(IdActual);
 
+            lblIDNotebook.Text = "ID: ";
             lblIDNotebook.Text += notebook?.IdElemento.ToString();
             txtEquipo.Text = notebook?.Equipo;
             txtNroSerie.Text = notebook?.NumeroSerie;
@@ -74,8 +75,17 @@ namespace CapaPresentacion
             lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
             lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
 
-            Carritos? carritos = notebooksCN.ObtenerCarritoPorID((int)notebook.IdCarrito);
+            if(estadosMantenimiento?.IdEstadoMantenimiento == 1)
+            {
+                ptbEstado.Image = Properties.Resources.disponibleIcon;
+            } else
+            {
+                ptbEstado.Image = Properties.Resources.prestadoIcon;
+            }
 
+                Carritos? carritos = notebooksCN.ObtenerCarritoPorID((int)notebook.IdCarrito);
+            lblCarroAsignado.Text = "Carro asignado: ";
+            lblCasillero.Text = "Casillero: ";
             lblCarroAsignado.Text += carritos?.EquipoCarrito;
             lblCasillero.Text += notebook?.PosicionCarrito.ToString();
 

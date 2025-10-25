@@ -75,20 +75,20 @@
             grbCarritoSeleccionado = new Guna.UI2.WinForms.Guna2GroupBox();
             lblCasillero = new Label();
             lblCarroAsignado = new Label();
-            pictureBox3 = new PictureBox();
-            lblEstado = new Label();
             lblIDNotebook = new Label();
-            ptbNotebook = new PictureBox();
             guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
             guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
             guna2GroupBox3 = new Guna.UI2.WinForms.Guna2GroupBox();
+            ptbNotebook = new PictureBox();
+            lblEstado = new Label();
+            ptbEstado = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dtgNotebook).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             guna2Panel2.SuspendLayout();
             grbCarritoSeleccionado.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ptbNotebook).BeginInit();
             guna2GroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ptbNotebook).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ptbEstado).BeginInit();
             SuspendLayout();
             // 
             // dtgNotebook
@@ -100,7 +100,7 @@
             dtgNotebook.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.Indigo;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -110,8 +110,8 @@
             dtgNotebook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.GhostWhite;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
@@ -152,7 +152,7 @@
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(0, 0);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(189, 160);
+            pictureBox2.Size = new Size(169, 160);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
@@ -168,7 +168,7 @@
             guna2Panel2.Location = new Point(18, 14);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel2.Size = new Size(189, 160);
+            guna2Panel2.Size = new Size(169, 160);
             guna2Panel2.TabIndex = 2;
             // 
             // btnAgregarNotebook
@@ -382,7 +382,7 @@
             grbCarritoSeleccionado.BorderColor = Color.Indigo;
             grbCarritoSeleccionado.Controls.Add(lblCasillero);
             grbCarritoSeleccionado.Controls.Add(lblCarroAsignado);
-            grbCarritoSeleccionado.Controls.Add(pictureBox3);
+            grbCarritoSeleccionado.Controls.Add(ptbEstado);
             grbCarritoSeleccionado.Controls.Add(lblEstado);
             grbCarritoSeleccionado.Controls.Add(lblIDNotebook);
             grbCarritoSeleccionado.Controls.Add(ptbNotebook);
@@ -430,28 +430,6 @@
             lblCarroAsignado.TabIndex = 45;
             lblCarroAsignado.Text = "Carro asignado: ";
             // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(127, 87);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(20, 20);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 44;
-            pictureBox3.TabStop = false;
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.BackColor = SystemColors.ButtonHighlight;
-            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblEstado.ForeColor = Color.Black;
-            lblEstado.Location = new Point(147, 90);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(42, 15);
-            lblEstado.TabIndex = 43;
-            lblEstado.Text = "Estado";
-            // 
             // lblIDNotebook
             // 
             lblIDNotebook.AutoSize = true;
@@ -463,16 +441,6 @@
             lblIDNotebook.Size = new Size(48, 30);
             lblIDNotebook.TabIndex = 42;
             lblIDNotebook.Text = "ID: ";
-            // 
-            // ptbNotebook
-            // 
-            ptbNotebook.Image = (Image)resources.GetObject("ptbNotebook.Image");
-            ptbNotebook.Location = new Point(20, 54);
-            ptbNotebook.Name = "ptbNotebook";
-            ptbNotebook.Size = new Size(87, 87);
-            ptbNotebook.SizeMode = PictureBoxSizeMode.Zoom;
-            ptbNotebook.TabIndex = 41;
-            ptbNotebook.TabStop = false;
             // 
             // guna2GroupBox1
             // 
@@ -498,10 +466,10 @@
             guna2GroupBox2.CustomizableEdges = customizableEdges25;
             guna2GroupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox2.ForeColor = Color.GhostWhite;
-            guna2GroupBox2.Location = new Point(224, 14);
+            guna2GroupBox2.Location = new Point(204, 14);
             guna2GroupBox2.Name = "guna2GroupBox2";
             guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2GroupBox2.Size = new Size(799, 160);
+            guna2GroupBox2.Size = new Size(819, 160);
             guna2GroupBox2.TabIndex = 42;
             guna2GroupBox2.Text = "- Buscar notebook por: -";
             guna2GroupBox2.TextAlign = HorizontalAlignment.Center;
@@ -521,6 +489,39 @@
             guna2GroupBox3.Text = "- Analisis de inventario de notebooks por modelo -";
             guna2GroupBox3.TextAlign = HorizontalAlignment.Center;
             // 
+            // ptbNotebook
+            // 
+            ptbNotebook.Image = (Image)resources.GetObject("ptbNotebook.Image");
+            ptbNotebook.Location = new Point(20, 54);
+            ptbNotebook.Name = "ptbNotebook";
+            ptbNotebook.Size = new Size(87, 87);
+            ptbNotebook.SizeMode = PictureBoxSizeMode.Zoom;
+            ptbNotebook.TabIndex = 41;
+            ptbNotebook.TabStop = false;
+            // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.BackColor = SystemColors.ButtonHighlight;
+            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblEstado.ForeColor = Color.Black;
+            lblEstado.Location = new Point(147, 90);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(42, 15);
+            lblEstado.TabIndex = 43;
+            lblEstado.Text = "Estado";
+            // 
+            // ptbEstado
+            // 
+            ptbEstado.BackColor = SystemColors.ButtonHighlight;
+            ptbEstado.Image = (Image)resources.GetObject("ptbEstado.Image");
+            ptbEstado.Location = new Point(127, 87);
+            ptbEstado.Name = "ptbEstado";
+            ptbEstado.Size = new Size(20, 20);
+            ptbEstado.SizeMode = PictureBoxSizeMode.Zoom;
+            ptbEstado.TabIndex = 44;
+            ptbEstado.TabStop = false;
+            // 
             // NotebooksUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -538,9 +539,9 @@
             guna2Panel2.ResumeLayout(false);
             grbCarritoSeleccionado.ResumeLayout(false);
             grbCarritoSeleccionado.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ptbNotebook).EndInit();
             guna2GroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ptbNotebook).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ptbEstado).EndInit();
             ResumeLayout(false);
         }
 
@@ -561,11 +562,11 @@
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox3;
-        private PictureBox ptbNotebook;
-        private PictureBox pictureBox3;
-        private Label lblEstado;
         private Label lblIDNotebook;
         private Label lblCasillero;
         private Label lblCarroAsignado;
+        private PictureBox ptbEstado;
+        private Label lblEstado;
+        private PictureBox ptbNotebook;
     }
 }

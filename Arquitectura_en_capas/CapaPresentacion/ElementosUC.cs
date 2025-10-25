@@ -65,9 +65,9 @@ namespace CapaPresentacion
                 EstadoMantenimientoNombre = "Ningún estado"
             });
 
-            cmbBuscarEstado.DataSource = estadosBusqueda;
-            cmbBuscarEstado.ValueMember = "IdEstadoMantenimiento";
-            cmbBuscarEstado.DisplayMember = "EstadoMantenimientoNombre";
+            //cmbBuscarEstado.DataSource = estadosBusqueda;
+            //cmbBuscarEstado.ValueMember = "IdEstadoMantenimiento";
+            //cmbBuscarEstado.DisplayMember = "EstadoMantenimientoNombre";
 
 
             // -------------------- TIPOS --------------------
@@ -76,12 +76,12 @@ namespace CapaPresentacion
             cmbTipoElemento.ValueMember = "IdTipoElemento";
             cmbTipoElemento.DisplayMember = "ElementoTipo";
 
-            var tiposBusqueda = tipos.ToList();
-            tiposBusqueda.Insert(0, new TipoElemento { IdTipoElemento = 0, ElementoTipo = "Ningún tipo" });
+            //var tiposBusqueda = tipos.ToList();
+            //tiposBusqueda.Insert(0, new TipoElemento { IdTipoElemento = 0, ElementoTipo = "Ningún tipo" });
 
-            cmbBuscarTipo.DataSource = tiposBusqueda;
-            cmbBuscarTipo.ValueMember = "IdTipoElemento";
-            cmbBuscarTipo.DisplayMember = "ElementoTipo";
+            //cmbBuscarTipo.DataSource = tiposBusqueda;
+            //cmbBuscarTipo.ValueMember = "IdTipoElemento";
+            //cmbBuscarTipo.DisplayMember = "ElementoTipo";
         }
 
         private void dgvElementos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -106,11 +106,11 @@ namespace CapaPresentacion
 
         private void btnQuitarFiltros_Click(object sender, EventArgs e)
         {
-            txtBuscarNroSerie.Clear();
-            txtBuscarCodBarra.Clear();
-            txtBuscarCarrito.Clear();
-            cmbBuscarEstado.SelectedIndex = 0;
-            cmbBuscarTipo.SelectedIndex = 0;
+            //txtBuscarNroSerie.Clear();
+            //txtBuscarCodBarra.Clear();
+            //txtBuscarCarrito.Clear();
+            //cmbBuscarEstado.SelectedIndex = 0;
+            //cmbBuscarTipo.SelectedIndex = 0;
             CargarElementos();
         }
 
