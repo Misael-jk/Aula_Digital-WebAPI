@@ -1,5 +1,6 @@
 ﻿using CapaDatos.Interfaces;
 using CapaDatos.InterfacesDTO;
+using CapaDatos.InterfaceUoW;
 using CapaDatos.Repos;
 using CapaDTOs;
 using CapaEntidad;
@@ -9,13 +10,13 @@ namespace CapaNegocio;
 
 public class CarritosBajasCN
 {
-    private readonly IRepoCarritos repoCarritos;
+    private readonly IUowCarritos uow;
     private readonly IMapperCarritosBajas _mapperCarritosBajas;
 
-    public CarritosBajasCN(IMapperCarritosBajas mapperCarritosBajas, IRepoCarritos repoCarritos)
+    public CarritosBajasCN(IMapperCarritosBajas mapperCarritosBajas, IUowCarritos uowCarritos)
     {
         _mapperCarritosBajas = mapperCarritosBajas;
-        this.repoCarritos = repoCarritos;
+        uow = uowCarritos;
     }
 
     public IEnumerable<CarritosBajasDTO> GetAllDTO()
@@ -23,24 +24,58 @@ public class CarritosBajasCN
         return _mapperCarritosBajas.GetAllDTO();
     }
 
-    public void HabilitarCarrito(int idCarrito)
+    public void HabilitarCarrito(int idCarrito, int idUsuario)
     {
-        Carritos? carritos = repoCarritos.GetById(idCarrito);
-
-        if (carritos == null)
+        try
         {
-            throw new Exception("El elemento no existe.");
-        }
+            uow.BeginTransaction();
 
-        if (carritos.Habilitado)
+            Carritos? carritos = uow.RepoCarritos.GetById(idCarrito);
+
+            if (carritos == null)
+            {
+                throw new Exception("El elemento no existe.");
+            }
+
+            if (carritos.Habilitado)
+            {
+                throw new Exception("El elemento ya esta habilitado.");
+            }
+
+            if (uow.RepoCarritos.GetDisponible(carritos.IdCarrito))
+            {
+                throw new Exception("No se puede habilitar un carrito disponible");
+            }
+
+            carritos.Habilitado = true;
+            carritos.IdEstadoMantenimiento = 1;
+            carritos.FechaBaja = null;
+
+            uow.RepoCarritos.Update(carritos);
+
+            HistorialCambios historial = new HistorialCambios()
+            {
+                IdTipoAccion = 2,
+                IdUsuario = idUsuario,
+                Descripcion = $"Se habilito el carrito con numero de serie {carritos.EquipoCarrito}",
+                Motivo = null,
+                FechaCambio = DateTime.Now
+            };
+
+            uow.RepoHistorialCambio.Insert(historial);
+
+            uow.RepoHistorialCarrito.Insert(new HistorialCarritos
+            {
+                IdHistorialCambio = historial.IdHistorialCambio,
+                IdCarrito = carritos.IdCarrito
+            });
+
+            uow.Commit();
+        }
+        catch (Exception)
         {
-            throw new Exception("El elemento ya esta habilitado.");
+            uow.Rollback();
+            throw;
         }
-
-        carritos.Habilitado = true;
-        carritos.IdEstadoMantenimiento = 1;
-        carritos.FechaBaja = null;
-
-        repoCarritos.Update(carritos);
     }
 }

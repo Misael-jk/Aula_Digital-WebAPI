@@ -1,5 +1,6 @@
 ﻿using CapaDatos.Interfaces;
 using CapaDatos.InterfacesDTO;
+using CapaDatos.InterfaceUoW;
 using CapaDTOs;
 using CapaEntidad;
 
@@ -7,12 +8,12 @@ namespace CapaNegocio;
 
 public class ElementosBajasCN
 {
-    private readonly IRepoElemento _repoElemento;
+    private readonly IUowElementos uow;
     private readonly IMapperElementosBajas mapperElementosBajas;
 
-    public ElementosBajasCN(IRepoElemento repoElemento, IMapperElementosBajas mapperElementosBajas)
+    public ElementosBajasCN(IMapperElementosBajas mapperElementosBajas, IUowElementos uowElementos)
     {
-        _repoElemento = repoElemento;
+        uow = uowElementos;
         this.mapperElementosBajas = mapperElementosBajas;
     }
 
@@ -33,7 +34,8 @@ public class ElementosBajasCN
 
     public void HabilitarElemento(int idElemento, int idUsuario)
     {
-        Elemento? elemento = _repoElemento.GetById(idElemento);
+
+        Elemento? elemento = uow.RepoElemento.GetById(idElemento);
 
         if (elemento == null)
             throw new Exception("El elemento no existe.");
@@ -45,14 +47,14 @@ public class ElementosBajasCN
         elemento.IdEstadoMantenimiento = 1;
         elemento.FechaBaja = null;
 
-        _repoElemento.Update(elemento);
+        uow.RepoElemento.Update(elemento);
 
     }
 
     #region DELETE ELEMENTO 
     public void EliminarElemento(int idElemento)
     {
-        Elemento? elementoOLD = _repoElemento.GetById(idElemento);
+        Elemento? elementoOLD = uow.RepoElemento.GetById(idElemento);
 
         if (elementoOLD == null)
         {
@@ -70,7 +72,7 @@ public class ElementosBajasCN
         }
 
 
-        _repoElemento.Delete(idElemento);
+        uow.RepoElemento.Delete(idElemento);
     }
     #endregion
 }

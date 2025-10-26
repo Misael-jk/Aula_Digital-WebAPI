@@ -100,6 +100,7 @@ namespace CapaPresentacion
         private readonly MapperHistorialElemento mapperHistorialElemento;
         private readonly IMapperHistorialNotebook mapperHistorialNotebook;
         private readonly IMapperHistorialCarrito mapperHistorialCarrito;
+        private readonly IMapperCarritosBajas mapperCarritosBajas;
         #endregion
 
         #region Variables Capa Negocio
@@ -113,6 +114,8 @@ namespace CapaPresentacion
         //private readonly MantenimientoCN mantenimientoCN;
         private readonly DevolucionCN devolucionCN;
         private readonly NotebooksCN notebooksCN;
+        private readonly CarritosBajasCN carritosBajasCN;
+        private readonly ElementosBajasCN elementosBajasCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -185,6 +188,7 @@ namespace CapaPresentacion
             mapperDocentes = new MapperDocentes(conexion);
             mapperNotebooks = new MapperNotebooks(conexion);
             mapperInventario = new MapperInventario(conexion);
+            mapperCarritosBajas = new MapperCarritosBajas(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -196,6 +200,9 @@ namespace CapaPresentacion
             devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
             //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
             notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
+            carritosBajasCN = new CarritosBajasCN(mapperCarritosBajas, uowCarritos);
+            elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);
+
         }
 
 
@@ -424,7 +431,7 @@ namespace CapaPresentacion
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
             if (mantenimientoUC == null)
-                mantenimientoUC = new MantenimientoUC(car, not);
+                mantenimientoUC = new MantenimientoUC(carritosBajasCN, elementosBajasCN);
 
             cmsMantenimiento.Show(btnMantenimiento, new Point(0, btnMantenimiento.Height));
 
