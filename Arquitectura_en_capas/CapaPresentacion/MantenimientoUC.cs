@@ -30,8 +30,7 @@ namespace CapaPresentacion
 
         public void MostrarDatos()
         {
-            //var elementos = mantenimientoCN.GetAllElementos();
-            //dgvMantenimiento.DataSource = elementos.ToList();
+
         }
 
         private void btnHabilitar_Click(object sender, EventArgs e)

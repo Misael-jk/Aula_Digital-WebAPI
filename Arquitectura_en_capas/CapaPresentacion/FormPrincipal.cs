@@ -291,6 +291,9 @@ namespace CapaPresentacion
             if (historialUC == null)
                 historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
 
+            historialUC.RefrescarDatos();
+            pnlContenedor.Controls.Clear();
+
             CambiarNombrePort(BtnDashboard.Text);
 
             if (!pnlContenedor.Controls.Contains(historialUC))
@@ -421,7 +424,7 @@ namespace CapaPresentacion
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
             if (mantenimientoUC == null)
-                mantenimientoUC = new MantenimientoUC(tiposElementoCN, repoElementos);
+                mantenimientoUC = new MantenimientoUC(car, not);
 
             cmsMantenimiento.Show(btnMantenimiento, new Point(0, btnMantenimiento.Height));
 
