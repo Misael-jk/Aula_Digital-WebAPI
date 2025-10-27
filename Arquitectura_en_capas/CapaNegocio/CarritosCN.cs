@@ -224,12 +224,30 @@ public class CarritosCN
     {
         return uow.RepoCarritos.GetByEquipo(equipo);
     }
+<<<<<<< HEAD
+
+    public HistorialCambios? ObtenerUltimaFechaDeModiciacionPorID(int idCarrito)
+    {
+        return uow.RepoHistorialCambio.GetUltimateDateByIdNotebook(idCarrito);
+    }
+
+    public int ObtenerCantidadPorCarrito(int idCarrito)
+    {
+        return uow.RepoCarritos.GetCountByCarrito(idCarrito);
+    }
+=======
+>>>>>>> upstream/main
     #endregion
 
     #region ESTADO MANTENIMIENTO
     public IEnumerable<EstadosMantenimiento> ListarEstadosMatenimiento()
     {
         return uow.RepoEstadosMantenimiento.GetAll();
+    }
+
+    public EstadosMantenimiento? ObtenerEstadoMantenimientoPorID(int idEatadoMantenimiento)
+    {
+        return uow.RepoEstadosMantenimiento.GetById(idEatadoMantenimiento);
     }
     #endregion
 

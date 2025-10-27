@@ -194,6 +194,16 @@ public class NotebooksCN
     {
         return uow.RepoNotebooks.GetCarritoByNotebook(idNotebook);
     }
+
+    public HistorialCambios? ObtenerUltimaFechaDeModiciacionPorID(int idNotebook)
+    {
+        return uow.RepoHistorialCambio.GetUltimateDateByIdNotebook(idNotebook);
+    }
+
+    public List<(string Modelo, int Cantidad)> GetCantidadPorModelo()
+    {
+        return uow.RepoNotebooks.GetCantidadPorModelo();
+    }
     #endregion
 
 

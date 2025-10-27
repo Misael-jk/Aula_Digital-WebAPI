@@ -416,4 +416,28 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
+
+    #region ESTADISTICAS DE CANTIDAD DE NOTEBOOKS POR MODELO
+    public List<(string Modelo, int Cantidad)> GetCantidadPorModelo()
+    {
+        string query = @"
+        SELECT m.modelo AS Modelo, COUNT(*) AS Cantidad
+        FROM Notebooks n
+        JOIN Elementos e ON n.idElemento = e.idElemento
+        JOIN Modelo m ON e.idModelo = m.idModelo
+        WHERE e.habilitado = 1
+        GROUP BY m.modelo
+        ORDER BY Cantidad DESC;";
+
+        try
+        {
+            var resultado = Conexion.Query<(string Modelo, int Cantidad)>(query, transaction: Transaction);
+            return resultado.ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la cantidad de notebooks por modelo");
+        }
+    }
+    #endregion
 }
