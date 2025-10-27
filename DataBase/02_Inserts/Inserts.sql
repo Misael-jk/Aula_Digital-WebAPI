@@ -53,7 +53,7 @@ INSERT INTO Modelo (idTipoElemento, modelo) VALUES
 -- VARIANTES ELEMENTO
 -- ======================
 INSERT INTO VariantesElemento (idTipoElemento, subtipo, idModelo) VALUES
-(3, 'Proyector Epson estandar', 3),
+(3, 'Proyector Epson estandar', 5),
 (4, 'Tablet Samsung 10"', 4);
 
 -- ======================
@@ -74,25 +74,25 @@ INSERT INTO Carritos (equipo, numeroSerieCarrito, capacidad, idEstadoMantenimien
 -- ======================
 -- ELEMENTOS
 -- ======================
-INSERT INTO Elementos (idTipoElemento, idVariante, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado)
+INSERT INTO Elementos (idTipoElemento, idVariante, idModelo, idUbicacion, idEstadoMantenimiento, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja)
 VALUES
 -- Notebooks Dell Latitude 3410
-(1, null, 1, 1, 1, 'NB001', 'CB001', 'PAT001', TRUE),
-(1, null, 1, 1, 1, 'NB002', 'CB002', 'PAT002', TRUE),
+(1, null, 1, 3, 1, 'NB001', 'CB001', 'PAT001', TRUE, null),
+(1, null, 1, 3, 1, 'NB002', 'CB002', 'PAT002', TRUE, null),
 
 -- Notebooks HP ProBook 450
-(1, null, 1, 2, 1, 'NB003', 'CB003', 'PAT003', TRUE),
-(1, null, 1, 2, 3, 'NB004', 'CB004', 'PAT004', TRUE),
+(1, null, 1, 3, 1, 'NB003', 'CB003', 'PAT003', TRUE, null),
+(1, null, 1, 3, 3, 'NB004', 'CB004', 'PAT004', false, now()),
 
 -- Proyectores (Epson X200)
-(2, 1, 3, 3, 1, 'PR001', 'CB011', 'PAT011', TRUE),
-(2, 1, 3, 3, 1, 'PR002', 'CB012', 'PAT012', TRUE),
-(2, 1, 3, 3, 3, 'PR003', 'CB013', 'PAT013', TRUE),
+(2, 1, 3, 2, 1, 'PR001', 'CB011', 'PAT011', TRUE, null),
+(2, 1, 3, 2, 1, 'PR002', 'CB012', 'PAT012', TRUE, null),
+(2, 1, 3, 2, 3, 'PR003', 'CB013', 'PAT013', false, now()),
 
 -- Tablets (Samsung Tab A)
-(3, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE),
-(3, 2, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE),
-(3, 2, 4, 2, 3, 'TB003', 'CB016', 'PAT016', TRUE);
+(3, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE, null),
+(3, 2, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE, null),
+(3, 2, 4, 2, 3, 'TB003', 'CB016', 'PAT016', TRUE, null);
 
 -- ======================
 -- NOTEBOOKS (asociadas a carritos)

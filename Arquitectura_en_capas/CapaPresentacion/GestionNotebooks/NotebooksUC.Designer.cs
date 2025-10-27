@@ -56,6 +56,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -78,6 +79,28 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+=======
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             dtgNotebook = new Guna.UI2.WinForms.Guna2DataGridView();
             pictureBox2 = new PictureBox();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
@@ -115,7 +138,10 @@
             txtCarrito_AddCarrito = new Guna.UI2.WinForms.Guna2TextBox();
             txtPosicion = new Guna.UI2.WinForms.Guna2TextBox();
             txtEquipo_AddCarrito = new Guna.UI2.WinForms.Guna2TextBox();
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             pnlGrafico = new Guna.UI2.WinForms.Guna2Panel();
+=======
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             ((System.ComponentModel.ISupportInitialize)dtgNotebook).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             guna2Panel2.SuspendLayout();
@@ -123,7 +149,10 @@
             ((System.ComponentModel.ISupportInitialize)ptbEstado).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbNotebook).BeginInit();
             guna2GroupBox1.SuspendLayout();
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             guna2GroupBox2.SuspendLayout();
+=======
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             guna2GroupBox3.SuspendLayout();
             SuspendLayout();
             // 
@@ -645,15 +674,33 @@
             // guna2GroupBox3
             // 
             guna2GroupBox3.BorderColor = Color.Indigo;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             guna2GroupBox3.Controls.Add(pnlGrafico);
             guna2GroupBox3.CustomBorderColor = Color.Indigo;
             guna2GroupBox3.CustomizableEdges = customizableEdges45;
+=======
+            guna2GroupBox3.Controls.Add(cmbUbicacion_RemoveCarrito);
+            guna2GroupBox3.Controls.Add(txtCarrito_RemoveCarrito);
+            guna2GroupBox3.Controls.Add(txtEquipo_RemoveCarrito);
+            guna2GroupBox3.Controls.Add(btnRemoveCarrito);
+            guna2GroupBox3.Controls.Add(btnAgragarAlCarrito);
+            guna2GroupBox3.Controls.Add(txtCarrito_AddCarrito);
+            guna2GroupBox3.Controls.Add(txtPosicion);
+            guna2GroupBox3.Controls.Add(txtEquipo_AddCarrito);
+            guna2GroupBox3.CustomBorderColor = Color.Indigo;
+            guna2GroupBox3.CustomizableEdges = customizableEdges43;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             guna2GroupBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox3.ForeColor = Color.GhostWhite;
             guna2GroupBox3.Location = new Point(429, 669);
             guna2GroupBox3.Name = "guna2GroupBox3";
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             guna2GroupBox3.ShadowDecoration.CustomizableEdges = customizableEdges46;
             guna2GroupBox3.Size = new Size(580, 612);
+=======
+            guna2GroupBox3.ShadowDecoration.CustomizableEdges = customizableEdges44;
+            guna2GroupBox3.Size = new Size(580, 512);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             guna2GroupBox3.TabIndex = 41;
             guna2GroupBox3.Text = "- Analisis de inventario de notebooks por modelo -";
             guna2GroupBox3.TextAlign = HorizontalAlignment.Center;
@@ -670,7 +717,11 @@
             cmbUbicacion_RemoveCarrito.Font = new Font("Segoe UI", 10F);
             cmbUbicacion_RemoveCarrito.ForeColor = Color.FromArgb(68, 88, 112);
             cmbUbicacion_RemoveCarrito.ItemHeight = 30;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             cmbUbicacion_RemoveCarrito.Location = new Point(309, 133);
+=======
+            cmbUbicacion_RemoveCarrito.Location = new Point(338, 275);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             cmbUbicacion_RemoveCarrito.Name = "cmbUbicacion_RemoveCarrito";
             cmbUbicacion_RemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges28;
             cmbUbicacion_RemoveCarrito.Size = new Size(162, 36);
@@ -679,7 +730,11 @@
             // txtCarrito_RemoveCarrito
             // 
             txtCarrito_RemoveCarrito.BorderRadius = 7;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtCarrito_RemoveCarrito.CustomizableEdges = customizableEdges33;
+=======
+            txtCarrito_RemoveCarrito.CustomizableEdges = customizableEdges29;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtCarrito_RemoveCarrito.DefaultText = "";
             txtCarrito_RemoveCarrito.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtCarrito_RemoveCarrito.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -690,19 +745,31 @@
             txtCarrito_RemoveCarrito.ForeColor = Color.Black;
             txtCarrito_RemoveCarrito.HoverState.BorderColor = Color.DodgerBlue;
             txtCarrito_RemoveCarrito.IconLeft = Properties.Resources.UserIcon;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtCarrito_RemoveCarrito.Location = new Point(309, 75);
+=======
+            txtCarrito_RemoveCarrito.Location = new Point(338, 217);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtCarrito_RemoveCarrito.Name = "txtCarrito_RemoveCarrito";
             txtCarrito_RemoveCarrito.PlaceholderForeColor = Color.DarkGray;
             txtCarrito_RemoveCarrito.PlaceholderText = "Carrito";
             txtCarrito_RemoveCarrito.SelectedText = "";
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtCarrito_RemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges34;
+=======
+            txtCarrito_RemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges30;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtCarrito_RemoveCarrito.Size = new Size(194, 32);
             txtCarrito_RemoveCarrito.TabIndex = 42;
             // 
             // txtEquipo_RemoveCarrito
             // 
             txtEquipo_RemoveCarrito.BorderRadius = 7;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtEquipo_RemoveCarrito.CustomizableEdges = customizableEdges37;
+=======
+            txtEquipo_RemoveCarrito.CustomizableEdges = customizableEdges31;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtEquipo_RemoveCarrito.DefaultText = "";
             txtEquipo_RemoveCarrito.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEquipo_RemoveCarrito.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -713,12 +780,20 @@
             txtEquipo_RemoveCarrito.ForeColor = Color.Black;
             txtEquipo_RemoveCarrito.HoverState.BorderColor = Color.DodgerBlue;
             txtEquipo_RemoveCarrito.IconLeft = Properties.Resources.UserIcon;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtEquipo_RemoveCarrito.Location = new Point(309, 19);
+=======
+            txtEquipo_RemoveCarrito.Location = new Point(338, 161);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtEquipo_RemoveCarrito.Name = "txtEquipo_RemoveCarrito";
             txtEquipo_RemoveCarrito.PlaceholderForeColor = Color.DarkGray;
             txtEquipo_RemoveCarrito.PlaceholderText = "Ingresar Equipo/Nombre";
             txtEquipo_RemoveCarrito.SelectedText = "";
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtEquipo_RemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges38;
+=======
+            txtEquipo_RemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges32;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtEquipo_RemoveCarrito.Size = new Size(195, 32);
             txtEquipo_RemoveCarrito.TabIndex = 41;
             // 
@@ -728,7 +803,11 @@
             btnRemoveCarrito.BorderColor = Color.Maroon;
             btnRemoveCarrito.BorderRadius = 11;
             btnRemoveCarrito.BorderThickness = 1;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             btnRemoveCarrito.CustomizableEdges = customizableEdges25;
+=======
+            btnRemoveCarrito.CustomizableEdges = customizableEdges33;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             btnRemoveCarrito.DisabledState.BorderColor = Color.DarkGray;
             btnRemoveCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
             btnRemoveCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -739,9 +818,15 @@
             btnRemoveCarrito.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
             btnRemoveCarrito.Image = (Image)resources.GetObject("btnRemoveCarrito.Image");
             btnRemoveCarrito.ImageAlign = HorizontalAlignment.Left;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             btnRemoveCarrito.Location = new Point(501, 113);
             btnRemoveCarrito.Name = "btnRemoveCarrito";
             btnRemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges26;
+=======
+            btnRemoveCarrito.Location = new Point(338, 345);
+            btnRemoveCarrito.Name = "btnRemoveCarrito";
+            btnRemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges34;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             btnRemoveCarrito.Size = new Size(162, 28);
             btnRemoveCarrito.TabIndex = 40;
             btnRemoveCarrito.Text = "Quitar del carrito";
@@ -754,7 +839,11 @@
             btnAgragarAlCarrito.BorderColor = Color.Chocolate;
             btnAgragarAlCarrito.BorderRadius = 11;
             btnAgragarAlCarrito.BorderThickness = 1;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             btnAgragarAlCarrito.CustomizableEdges = customizableEdges29;
+=======
+            btnAgragarAlCarrito.CustomizableEdges = customizableEdges35;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             btnAgragarAlCarrito.DisabledState.BorderColor = Color.DarkGray;
             btnAgragarAlCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAgragarAlCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -765,9 +854,15 @@
             btnAgragarAlCarrito.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
             btnAgragarAlCarrito.Image = (Image)resources.GetObject("btnAgragarAlCarrito.Image");
             btnAgragarAlCarrito.ImageAlign = HorizontalAlignment.Left;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             btnAgragarAlCarrito.Location = new Point(214, 113);
             btnAgragarAlCarrito.Name = "btnAgragarAlCarrito";
             btnAgragarAlCarrito.ShadowDecoration.CustomizableEdges = customizableEdges30;
+=======
+            btnAgragarAlCarrito.Location = new Point(51, 345);
+            btnAgragarAlCarrito.Name = "btnAgragarAlCarrito";
+            btnAgragarAlCarrito.ShadowDecoration.CustomizableEdges = customizableEdges36;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             btnAgragarAlCarrito.Size = new Size(148, 28);
             btnAgragarAlCarrito.TabIndex = 37;
             btnAgragarAlCarrito.Text = "Agregar al carrito";
@@ -777,7 +872,11 @@
             // txtCarrito_AddCarrito
             // 
             txtCarrito_AddCarrito.BorderRadius = 7;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtCarrito_AddCarrito.CustomizableEdges = customizableEdges39;
+=======
+            txtCarrito_AddCarrito.CustomizableEdges = customizableEdges37;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtCarrito_AddCarrito.DefaultText = "";
             txtCarrito_AddCarrito.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtCarrito_AddCarrito.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -788,19 +887,31 @@
             txtCarrito_AddCarrito.ForeColor = Color.Black;
             txtCarrito_AddCarrito.HoverState.BorderColor = Color.DodgerBlue;
             txtCarrito_AddCarrito.IconLeft = Properties.Resources.UserIcon;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtCarrito_AddCarrito.Location = new Point(23, 133);
+=======
+            txtCarrito_AddCarrito.Location = new Point(52, 275);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtCarrito_AddCarrito.Name = "txtCarrito_AddCarrito";
             txtCarrito_AddCarrito.PlaceholderForeColor = Color.DarkGray;
             txtCarrito_AddCarrito.PlaceholderText = "Carrito";
             txtCarrito_AddCarrito.SelectedText = "";
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtCarrito_AddCarrito.ShadowDecoration.CustomizableEdges = customizableEdges40;
+=======
+            txtCarrito_AddCarrito.ShadowDecoration.CustomizableEdges = customizableEdges38;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtCarrito_AddCarrito.Size = new Size(194, 32);
             txtCarrito_AddCarrito.TabIndex = 36;
             // 
             // txtPosicion
             // 
             txtPosicion.BorderRadius = 7;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtPosicion.CustomizableEdges = customizableEdges35;
+=======
+            txtPosicion.CustomizableEdges = customizableEdges39;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtPosicion.DefaultText = "";
             txtPosicion.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPosicion.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -811,19 +922,31 @@
             txtPosicion.ForeColor = Color.Black;
             txtPosicion.HoverState.BorderColor = Color.DodgerBlue;
             txtPosicion.IconLeft = Properties.Resources.UserIcon;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtPosicion.Location = new Point(22, 75);
+=======
+            txtPosicion.Location = new Point(51, 217);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtPosicion.Name = "txtPosicion";
             txtPosicion.PlaceholderForeColor = Color.DarkGray;
             txtPosicion.PlaceholderText = "Posicion";
             txtPosicion.SelectedText = "";
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtPosicion.ShadowDecoration.CustomizableEdges = customizableEdges36;
+=======
+            txtPosicion.ShadowDecoration.CustomizableEdges = customizableEdges40;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtPosicion.Size = new Size(158, 32);
             txtPosicion.TabIndex = 35;
             // 
             // txtEquipo_AddCarrito
             // 
             txtEquipo_AddCarrito.BorderRadius = 7;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtEquipo_AddCarrito.CustomizableEdges = customizableEdges31;
+=======
+            txtEquipo_AddCarrito.CustomizableEdges = customizableEdges41;
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtEquipo_AddCarrito.DefaultText = "";
             txtEquipo_AddCarrito.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEquipo_AddCarrito.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -834,11 +957,16 @@
             txtEquipo_AddCarrito.ForeColor = Color.Black;
             txtEquipo_AddCarrito.HoverState.BorderColor = Color.DodgerBlue;
             txtEquipo_AddCarrito.IconLeft = Properties.Resources.UserIcon;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtEquipo_AddCarrito.Location = new Point(22, 19);
+=======
+            txtEquipo_AddCarrito.Location = new Point(51, 161);
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             txtEquipo_AddCarrito.Name = "txtEquipo_AddCarrito";
             txtEquipo_AddCarrito.PlaceholderForeColor = Color.DarkGray;
             txtEquipo_AddCarrito.PlaceholderText = "Ingresar Equipo/Nombre";
             txtEquipo_AddCarrito.SelectedText = "";
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             txtEquipo_AddCarrito.ShadowDecoration.CustomizableEdges = customizableEdges32;
             txtEquipo_AddCarrito.Size = new Size(195, 32);
             txtEquipo_AddCarrito.TabIndex = 34;
@@ -852,6 +980,12 @@
             pnlGrafico.Size = new Size(486, 437);
             pnlGrafico.TabIndex = 0;
             // 
+=======
+            txtEquipo_AddCarrito.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            txtEquipo_AddCarrito.Size = new Size(195, 32);
+            txtEquipo_AddCarrito.TabIndex = 34;
+            // 
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             // NotebooksUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -872,7 +1006,10 @@
             ((System.ComponentModel.ISupportInitialize)ptbEstado).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbNotebook).EndInit();
             guna2GroupBox1.ResumeLayout(false);
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
             guna2GroupBox2.ResumeLayout(false);
+=======
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
             guna2GroupBox3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -897,9 +1034,12 @@
         private Label lblIDNotebook;
         private Label lblCasillero;
         private Label lblCarroAsignado;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
         private PictureBox ptbEstado;
         private Label lblEstado;
         private PictureBox ptbNotebook;
+=======
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
         private Guna.UI2.WinForms.Guna2TextBox txtEquipo_AddCarrito;
         private Guna.UI2.WinForms.Guna2TextBox txtPosicion;
         private Guna.UI2.WinForms.Guna2Button btnAgragarAlCarrito;
@@ -908,6 +1048,7 @@
         private Guna.UI2.WinForms.Guna2ComboBox cmbUbicacion_RemoveCarrito;
         private Guna.UI2.WinForms.Guna2TextBox txtCarrito_RemoveCarrito;
         private Guna.UI2.WinForms.Guna2TextBox txtEquipo_RemoveCarrito;
+<<<<<<< HEAD:Arquitectura_en_capas/CapaPresentacion/NotebooksUC.Designer.cs
         private Label lblFechaModificacion;
         private Label lblEquipo;
         private Label lblNroSerie;
@@ -916,5 +1057,7 @@
         private Label lblPatrimonio;
         private Label lblCodBarra;
         private Guna.UI2.WinForms.Guna2Panel pnlGrafico;
+=======
+>>>>>>> upstream/main:Arquitectura_en_capas/CapaPresentacion/GestionNotebooks/NotebooksUC.Designer.cs
     }
 }

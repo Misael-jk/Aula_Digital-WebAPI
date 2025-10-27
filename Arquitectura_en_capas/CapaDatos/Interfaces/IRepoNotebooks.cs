@@ -23,6 +23,9 @@ public interface IRepoNotebooks
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito);
     public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra);
     public Carritos? GetCarritoByNotebook(int idNotebook);
+<<<<<<< HEAD
     public List<(string Modelo, int Cantidad)> GetCantidadPorModelo();
+=======
+>>>>>>> upstream/main
     public void SetTransaction(IDbTransaction? transaction);
 }

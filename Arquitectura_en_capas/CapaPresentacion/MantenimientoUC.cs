@@ -1,4 +1,5 @@
 ﻿using CapaDatos.Interfaces;
+using CapaDatos.InterfacesDTO;
 using CapaDatos.Repos;
 using CapaEntidad;
 using CapaNegocio;
@@ -18,20 +19,20 @@ namespace CapaPresentacion
     public partial class MantenimientoUC : UserControl
     {
         //private readonly MantenimientoCN mantenimientoCN;
-        private readonly TiposElementoCN tiposElementoCN;
-        private readonly IRepoElemento repoElemento;
-        public MantenimientoUC(TiposElementoCN tiposElementoCN, IRepoElemento repoElemento)
+        private readonly CarritosBajasCN carritosBajasCN;
+        private readonly ElementosBajasCN elementosBajasCN;
+        public MantenimientoUC(CarritosBajasCN carritosBajasCN, ElementosBajasCN elementosBajasCN)
         {
             InitializeComponent();
             //this.mantenimientoCN = mantenimientoCN;
-            this.tiposElementoCN = tiposElementoCN;
-            this.repoElemento = repoElemento;
+            this.carritosBajasCN = carritosBajasCN;
+            this.elementosBajasCN = elementosBajasCN;
         }
 
         public void MostrarDatos()
         {
-            //var elementos = mantenimientoCN.GetAllElementos();
-            //dgvMantenimiento.DataSource = elementos.ToList();
+            dtgMantenimientoCarrito.DataSource = carritosBajasCN.GetAllDTO();
+            dtgMantenimientoElemento.DataSource = elementosBajasCN.GetAllElementos(); 
         }
 
         private void btnHabilitar_Click(object sender, EventArgs e)

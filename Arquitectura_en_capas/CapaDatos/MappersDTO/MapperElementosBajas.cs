@@ -15,23 +15,22 @@ public class MapperElementosBajas : RepoBase, IMapperElementosBajas
 
     public IEnumerable<ElementoBajasDTO> GetAllDTO()
     {
-        return Conexion.Query<Elemento, TipoElemento, Modelos, Ubicacion, EstadosMantenimiento, ElementoBajasDTO>(
-            "GetElementosMantenimientoDTO",
-            (elemento, tipo, modelos, ubicacion, estado) => new ElementoBajasDTO
+        return Conexion.Query<Elemento, VariantesElemento, TipoElemento, Modelos, Ubicacion, EstadosMantenimiento, ElementoBajasDTO>(
+            "select * from View_GetElementosBajasDTO",
+            (elemento, variante, tipo, modelos, ubicacion, estado) => new ElementoBajasDTO
             {
                 IdElemento = elemento.IdElemento,
-                TipoElemento = tipo.ElementoTipo,
                 NumeroSerie = elemento.NumeroSerie,
                 CodigoBarra = elemento.CodigoBarra,
                 Patrimonio = elemento.Patrimonio,
-                Estado = estado.EstadoMantenimientoNombre,
+                FechaBaja = elemento.FechaBaja,
+                Equipo = variante.Variante,
+                TipoElemento = tipo.ElementoTipo,
                 Modelo = modelos.NombreModelo,
                 Ubicacion = ubicacion.NombreUbicacion,
-                Disponible = elemento.Habilitado,
-                FechaBaja = elemento.FechaBaja
+                Estado = estado.EstadoMantenimientoNombre
             },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "numeroSerie,ElementoTipo,NombreModelo,NombreUbicacion,EstadoMantenimientoNombre"
+            splitOn: "IdElemento,Variante,ElementoTipo,NombreModelo,NombreUbicacion,EstadoMantenimientoNombre"
         ).ToList();
     }
 

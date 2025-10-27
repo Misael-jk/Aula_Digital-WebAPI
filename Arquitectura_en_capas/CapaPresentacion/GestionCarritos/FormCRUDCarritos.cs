@@ -32,9 +32,9 @@ namespace CapaPresentacion
 
         private void FormCRUDCarritos_Load(object sender, EventArgs e)
         {
-            cmbModelo.DataSource = carritosCN.ListarModelosPorTipo(3); //QUITAR MAP y poner "carritoCN.ListarModeloPorTipo(3);
+            cmbModelo.DataSource = carritosCN.ListarModelosPorTipo(2); //QUITAR MAP y poner "carritoCN.ListarModeloPorTipo(3);
             cmbModelo.ValueMember = "IdModelo";
-            cmbModelo.DisplayMember = "Modelo";
+            cmbModelo.DisplayMember = "NombreModelo";
 
             cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
             cmbUbicacion.ValueMember = "IdUbicacion";

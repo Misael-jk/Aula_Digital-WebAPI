@@ -27,6 +27,10 @@ namespace CapaPresentacion
 
         private void HistorialUC_Load(object sender, EventArgs e)
         {
+        }
+
+        public void RefrescarDatos()
+        {
             guna2DataGridView1.DataSource = mapperHistorialNotebook.GetAllDTO();
             guna2DataGridView2.DataSource = mapperHistorialElemento.GetAllDTO();
             guna2DataGridView3.DataSource = mapperHistorialCarrito.GetAllDTO();
