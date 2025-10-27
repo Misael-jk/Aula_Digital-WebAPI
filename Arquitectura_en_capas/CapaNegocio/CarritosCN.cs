@@ -5,6 +5,7 @@ using CapaDTOs;
 using System.Text.RegularExpressions;
 using System.ComponentModel.DataAnnotations;
 using CapaDatos.InterfaceUoW;
+using System.Globalization;
 
 namespace CapaNegocio;
 
@@ -219,6 +220,20 @@ public class CarritosCN
         return uow.RepoCarritos.GetById(idCarrito);
     }
 
+    public Carritos? ObtenerCarritoPorEquipo(string equipo)
+    {
+        return uow.RepoCarritos.GetByEquipo(equipo);
+    }
+
+    public HistorialCambios? ObtenerUltimaFechaDeModiciacionPorID(int idCarrito)
+    {
+        return uow.RepoHistorialCambio.GetUltimateDateByIdNotebook(idCarrito);
+    }
+
+    public int ObtenerCantidadPorCarrito(int idCarrito)
+    {
+        return uow.RepoCarritos.GetCountByCarrito(idCarrito);
+    }
     #endregion
 
     #region ESTADO MANTENIMIENTO
@@ -283,6 +298,7 @@ public class CarritosCN
         return uow.RepoNotebooks.GetNotebookBySerieOrCodigo(numSerie, CodBarra);
     }
     #endregion
+
 
 
 

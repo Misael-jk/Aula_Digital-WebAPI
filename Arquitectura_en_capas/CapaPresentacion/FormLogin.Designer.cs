@@ -54,6 +54,10 @@
             TxtUser = new Guna.UI2.WinForms.Guna2TextBox();
             TxtPass = new Guna.UI2.WinForms.Guna2TextBox();
             TxtError = new Label();
+            lblUsuario = new Label();
+            lblContraseña = new Label();
+            label1 = new Label();
+            label2 = new Label();
             BarraTopLogin1.SuspendLayout();
             PanelWelcome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PictED).BeginInit();
@@ -115,6 +119,8 @@
             // 
             // PanelWelcome
             // 
+            PanelWelcome.Controls.Add(label2);
+            PanelWelcome.Controls.Add(label1);
             PanelWelcome.Controls.Add(BarraTopLogin2);
             PanelWelcome.Controls.Add(TxtWelcome);
             PanelWelcome.Controls.Add(PictED);
@@ -235,7 +241,7 @@
             TxtUser.HoverState.BorderColor = Color.DodgerBlue;
             TxtUser.IconLeft = Properties.Resources.UserIcon;
             TxtUser.IconLeftSize = new Size(25, 25);
-            TxtUser.Location = new Point(374, 219);
+            TxtUser.Location = new Point(374, 217);
             TxtUser.Name = "TxtUser";
             TxtUser.PlaceholderForeColor = Color.DarkGray;
             TxtUser.PlaceholderText = "Ingresar usuario";
@@ -259,7 +265,7 @@
             TxtPass.HoverState.BorderColor = Color.DodgerBlue;
             TxtPass.IconLeft = Properties.Resources.PasswordIcon;
             TxtPass.IconLeftSize = new Size(25, 25);
-            TxtPass.Location = new Point(374, 289);
+            TxtPass.Location = new Point(374, 286);
             TxtPass.Name = "TxtPass";
             TxtPass.PlaceholderForeColor = Color.DarkGray;
             TxtPass.PlaceholderText = "Ingresar contraseña";
@@ -276,18 +282,68 @@
             TxtError.BackColor = Color.Transparent;
             TxtError.Font = new Font("Segoe UI Semilight", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtError.ForeColor = Color.Red;
-            TxtError.Location = new Point(374, 197);
+            TxtError.Location = new Point(374, 180);
             TxtError.Name = "TxtError";
             TxtError.Size = new Size(240, 13);
             TxtError.TabIndex = 17;
             TxtError.Text = "Usuario o contraseña incorrecta, intente de nuevo";
             TxtError.Visible = false;
             // 
+            // lblUsuario
+            // 
+            lblUsuario.AutoSize = true;
+            lblUsuario.BackColor = Color.Transparent;
+            lblUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUsuario.ForeColor = Color.Black;
+            lblUsuario.Location = new Point(374, 199);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(94, 15);
+            lblUsuario.TabIndex = 51;
+            lblUsuario.Text = "Ingresar usuario:";
+            // 
+            // lblContraseña
+            // 
+            lblContraseña.AutoSize = true;
+            lblContraseña.BackColor = Color.Transparent;
+            lblContraseña.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblContraseña.ForeColor = Color.Black;
+            lblContraseña.Location = new Point(374, 268);
+            lblContraseña.Name = "lblContraseña";
+            lblContraseña.Size = new Size(113, 15);
+            lblContraseña.TabIndex = 52;
+            lblContraseña.Text = "Ingresar contraseña:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Emoji", 9.75F);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(45, 418);
+            label1.Name = "label1";
+            label1.Size = new Size(250, 17);
+            label1.TabIndex = 3;
+            label1.Text = "Por: Misael Piuca y Andres Torrico de 5°8";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Emoji", 9.75F);
+            label2.ForeColor = SystemColors.ButtonHighlight;
+            label2.Location = new Point(134, 440);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 17);
+            label2.TabIndex = 4;
+            label2.Text = "Año: 2025";
+            // 
             // LoginState
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(680, 466);
+            Controls.Add(lblContraseña);
+            Controls.Add(lblUsuario);
             Controls.Add(TxtError);
             Controls.Add(TxtPass);
             Controls.Add(TxtUser);
@@ -328,5 +384,9 @@
         private Guna.UI2.WinForms.Guna2TextBox TxtUser;
         private Guna.UI2.WinForms.Guna2TextBox TxtPass;
         private Label TxtError;
+        private Label lblContraseña;
+        private Label lblUsuario;
+        private Label label2;
+        private Label label1;
     }
 }

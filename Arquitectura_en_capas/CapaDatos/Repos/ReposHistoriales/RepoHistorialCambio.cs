@@ -72,4 +72,48 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
             throw new Exception("Hubo un error al obtener los historiales de cambio por accion");
         }
     }
+
+    #region Obtener fecha de ultima modificacion de una notebook
+    public HistorialCambios? GetUltimateDateByIdNotebook(int idNotebook)
+    {
+        string query = @"select max(fechaCambio) as 'fechaCambio'
+                        from historialcambio h 
+                        join historialnotebook h2 on h.idHistorialCambio = h2.idHistorialCambio
+                        where h2.idElemento = @unidNotebook;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidNotebook", idNotebook);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<HistorialCambios>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la ultima fecha de modificacion de notebook");
+        }
+    }
+    #endregion
+
+    #region Obtener fecha de ultima modificacion de un carrito
+    public HistorialCambios? GetUltimateDateByIdCarrito(int idCarrito)
+    {
+        string query = @"select max(fechaCambio) as 'FechaCambio'
+                        from historialcambio h
+                        join historialcarrito h2 on h.idHistorialCambio = h2.idHistorialCambio
+                        where h2.idElemento = @unidCarrito;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidCarrito", idCarrito);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<HistorialCambios>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la ultima fecha de modificacion de carrito");
+        }
+    }
+    #endregion
 }

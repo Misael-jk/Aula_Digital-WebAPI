@@ -120,7 +120,8 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region OBTENER POR NUMERO DE SERIE
     public Notebooks? GetByNumeroSerie(string numeroSerie)
     {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, e.idTipoElemento, n.posicionCarrito, e.idEstadoMantenimiento, e.idUbicacion, e.numeroSerie, e.codigoBarra, e.patrimonio, n.equipo, e.habilitado, e.fechaBaja
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where e.numeroSerie = @unnumeroSerie;";
@@ -142,7 +143,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region OBTENER POR CODIGO DE BARRAS
     public Notebooks? GetByCodigoBarra(string codigoBarra)
     {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, e.idTipoElemento, n.posicionCarrito, e.idEstadoMantenimiento, e.idUbicacion, e.numeroSerie, e.codigoBarra, e.patrimonio, n.equipo, e.habilitado, e.fechaBaja
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where e.codigoBarra = @uncodigoBarra;";
@@ -164,7 +165,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region OBTENER POR PATRIMONIO
     public Notebooks? GetByPatrimonio(string patrimonio)
     {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, e.idTipoElemento, n.posicionCarrito, e.idEstadoMantenimiento, e.idUbicacion, e.numeroSerie, e.codigoBarra, e.patrimonio, n.equipo, e.habilitado, e.fechaBaja
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where e.patrimonio = @unpatrimonio;";
@@ -393,4 +394,51 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
+
+    #region OBTENER CARRITO POR NOTEBOOK
+    public Carritos? GetCarritoByNotebook(int idNotebook)
+    {
+        string query = @"select c.idCarrito, c.equipo as 'EquipoCarrito', c.capacidad as 'Capacidad', c.idModelo, c.numeroSerieCarrito, c.idEstadoMantenimiento, c.idUbicacion, c.habilitado, c.fechaBaja
+                         from Carritos c
+                         join Notebooks n on c.idCarrito = n.idCarrito
+                         where n.idElemento = @idNotebook;";
+
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("idNotebook", idNotebook);
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Carritos>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener el carrito por notebook");
+        }
+    }
+    #endregion
+
+    #region ESTADISTICAS DE CANTIDAD DE NOTEBOOKS POR MODELO
+    public List<(string Modelo, int Cantidad)> GetCantidadPorModelo()
+    {
+        string query = @"
+        SELECT m.modelo AS Modelo, COUNT(*) AS Cantidad
+        FROM Notebooks n
+        JOIN Elementos e ON n.idElemento = e.idElemento
+        JOIN Modelo m ON e.idModelo = m.idModelo
+        WHERE e.habilitado = 1
+        GROUP BY m.modelo
+        ORDER BY Cantidad DESC;";
+
+        try
+        {
+            var resultado = Conexion.Query<(string Modelo, int Cantidad)>(query, transaction: Transaction);
+            return resultado.ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la cantidad de notebooks por modelo");
+        }
+    }
+    #endregion
+
 }
