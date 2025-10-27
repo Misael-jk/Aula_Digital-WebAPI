@@ -205,7 +205,6 @@ namespace CapaPresentacion
 
         private void CargarGrafico()
         {
-            // Datos de ejemplo, reemplazalos por tu repo
             var datos = notebooksCN.GetCantidadPorModelo(); // List<(string Modelo, int Cantidad)>
 
             if (datos == null || datos.Count == 0) return;
