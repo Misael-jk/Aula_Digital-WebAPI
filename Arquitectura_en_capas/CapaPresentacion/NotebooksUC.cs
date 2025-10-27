@@ -205,11 +205,11 @@ namespace CapaPresentacion
 
         private void CargarGrafico()
         {
-            var datos = notebooksCN.GetCantidadPorModelo(); // List<(string Modelo, int Cantidad)>
+            var datos = notebooksCN.GetCantidadPorModelo();
 
             if (datos == null || datos.Count == 0) return;
 
-            // Crear la colección de series para el PieChart
+            // Crear la colección de series para el PieCharts
             var series = new SeriesCollection();
             foreach (var d in datos)
             {
