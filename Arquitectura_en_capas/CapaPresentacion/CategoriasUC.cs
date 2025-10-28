@@ -38,7 +38,7 @@ namespace CapaPresentacion
         private void CategoriasUC_Load(object sender, EventArgs e)
         {
             this.AutoScroll = true;
-            this.AutoScrollMinSize = new Size(0, 1253);
+            this.AutoScrollMinSize = new Size(0, 2070);
 
             MostrarCategoria();
         }
