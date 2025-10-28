@@ -203,7 +203,7 @@ public class CarritosCNTests : IClassFixture<CarritosFixture>
         fixture.MockRepoCarritos.Setup(r => r.GetDisponible(carrito.IdCarrito)).Returns(false);
 
         // Act 
-        fixture.Service.DeshabilitarCarrito(carrito, idEstado, idUsuario);
+        fixture.Service.DeshabilitarCarrito(carrito.IdCarrito, idEstado, idUsuario);
 
         
         fixture.MockUow.Verify(u => u.Commit(), Times.Once);

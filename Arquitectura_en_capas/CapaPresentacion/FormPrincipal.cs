@@ -52,6 +52,7 @@ namespace CapaPresentacion
         private readonly IRepoElemento repoElementos;
         private readonly IRepoTipoElemento repoTipoElemento;
         private readonly IRepoHistorialElementos repoHistorialElementos;
+        private readonly IRepoVarianteElemento repoVarianteElemento;
         #endregion
 
         #region Notebook
@@ -101,6 +102,7 @@ namespace CapaPresentacion
         private readonly IMapperHistorialNotebook mapperHistorialNotebook;
         private readonly IMapperHistorialCarrito mapperHistorialCarrito;
         private readonly IMapperCarritosBajas mapperCarritosBajas;
+        private readonly IMapperVarianteElemento mapperVarianteElemento;
         #endregion
 
         #region Variables Capa Negocio
@@ -116,6 +118,8 @@ namespace CapaPresentacion
         private readonly NotebooksCN notebooksCN;
         private readonly CarritosBajasCN carritosBajasCN;
         private readonly ElementosBajasCN elementosBajasCN;
+        private readonly VarianteElementoCN varianteElementoCN;
+        private readonly UbicacionCN ubicacionCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -143,6 +147,7 @@ namespace CapaPresentacion
             repoElementos = new RepoElemento(conexion);
             repoTipoElemento = new RepoTipoElemento(conexion);
             repoHistorialElementos = new RepoHistorialElemento(conexion);
+            repoVarianteElemento = new RepoVarianteElemento(conexion);
             #endregion
 
             #region Notebook
@@ -189,6 +194,7 @@ namespace CapaPresentacion
             mapperNotebooks = new MapperNotebooks(conexion);
             mapperInventario = new MapperInventario(conexion);
             mapperCarritosBajas = new MapperCarritosBajas(conexion);
+            mapperVarianteElemento = new MapperVarianteElemento(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -202,6 +208,8 @@ namespace CapaPresentacion
             notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
             carritosBajasCN = new CarritosBajasCN(mapperCarritosBajas, uowCarritos);
             elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);
+            varianteElementoCN = new VarianteElementoCN(repoVarianteElemento, repoTipoElemento, repoModelo, mapperVarianteElemento);
+            ubicacionCN = new UbicacionCN(repoUbicacion);
 
         }
 
@@ -381,7 +389,7 @@ namespace CapaPresentacion
         private void BtnCategoria_Click(object sender, EventArgs e)
         {
             if (categoriasUC == null)
-                categoriasUC = new CategoriasUC(repoTipoElemento, repoUbicacion, modeloCN);
+                categoriasUC = new CategoriasUC(tiposElementoCN, ubicacionCN, modeloCN, varianteElementoCN);
 
             CambiarNombrePort(BtnCategoria.Text);
 

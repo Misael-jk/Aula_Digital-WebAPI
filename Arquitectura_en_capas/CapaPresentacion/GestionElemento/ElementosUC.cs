@@ -47,11 +47,19 @@ namespace CapaPresentacion
 
         private void ElementosUC_Load(object sender, EventArgs e)
         {
-           
-            IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll();
-            cmbEstados.DataSource = estados.ToList(); 
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 1100);
+
+            //IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll(); ya es el Listar Estado Mantenimiento de ElementosCN
+            IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
+
+            cmbEstados.DataSource = estados; 
             cmbEstados.ValueMember = "IdEstadoMantenimiento";
             cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+
+            cmbModelos.DataSource = elementosCN.ListarModelos();
+            cmbModelos.ValueMember = "IdModelo";
+            cmbModelos.DisplayMember = "ModeloNombre";
 
     
             var estadosBusqueda = estados
@@ -71,7 +79,8 @@ namespace CapaPresentacion
 
 
             // -------------------- TIPOS --------------------
-            var tipos = tiposElementoCN.GetAllTipo();
+            var tipos = elementosCN.ListarTiposElemento();
+
             cmbTipoElemento.DataSource = tipos.ToList();
             cmbTipoElemento.ValueMember = "IdTipoElemento";
             cmbTipoElemento.DisplayMember = "ElementoTipo";

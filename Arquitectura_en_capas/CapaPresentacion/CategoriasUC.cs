@@ -14,21 +14,24 @@ namespace CapaPresentacion
 {
     public partial class CategoriasUC : UserControl
     {
-        private readonly IRepoTipoElemento repoTipoElemento;
-        private readonly IRepoUbicacion repoUbicacion;
-        private readonly ModeloCN modeloCN = null!;
-        public CategoriasUC(IRepoTipoElemento repoTipoElemento, IRepoUbicacion repoUbicacion, ModeloCN modeloCN)
+        private readonly TiposElementoCN tiposElementoCN;
+        private readonly UbicacionCN ubicacionCN;
+        private readonly ModeloCN modeloCN;
+        private readonly VarianteElementoCN varianteElementoCN;
+
+        public CategoriasUC(TiposElementoCN tiposElementoCN, UbicacionCN ubicacionCN, ModeloCN modeloCN, VarianteElementoCN varianteElementoCN)
         {
             InitializeComponent();
-            this.repoTipoElemento = repoTipoElemento;
-            this.repoUbicacion = repoUbicacion;
+            this.tiposElementoCN = tiposElementoCN;
+            this.ubicacionCN = ubicacionCN;
             this.modeloCN = modeloCN;
+            this.varianteElementoCN = varianteElementoCN;
         }
 
         public void MostrarCategoria()
         {
-            dgvTipoElemento.DataSource = repoTipoElemento.GetAll();
-            dgvUbicacion.DataSource = repoUbicacion.GetAll();
+            dgvTipoElemento.DataSource = tiposElementoCN.GetAllTipo();
+            dgvUbicacion.DataSource = ubicacionCN.GetAll();
             dgvModelo.DataSource = modeloCN.ObtenerModelos();
         }
 
