@@ -228,7 +228,7 @@ namespace CapaNegocio
         #endregion
 
         #region TIPOS ELEMENTO
-        public IEnumerable<TipoElemento> ObtenerTiposElemento()
+        public IEnumerable<TipoElemento> ListarTiposElemento()
         {
             return uow.RepoTipoElemento.GetAll();
         }

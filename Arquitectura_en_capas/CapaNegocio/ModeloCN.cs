@@ -99,12 +99,12 @@ namespace CapaNegocio
         {
             if (string.IsNullOrWhiteSpace(modeloNEW.NombreModelo))
             {
-                throw new Exception("La descripcion no puede estar vacia");
+                throw new Exception("El nombre del modelo no puede estar vacia");
             }
 
             if (modeloNEW.NombreModelo.Length > 40)
             {
-                throw new Exception("La descripcion no puede superar los 40 caracteres");
+                throw new Exception("La nombre del modelo no puede superar los 40 caracteres");
             }
 
             if (!Regex.IsMatch(modeloNEW.NombreModelo, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+$"))

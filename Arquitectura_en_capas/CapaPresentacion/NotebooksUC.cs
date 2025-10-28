@@ -165,6 +165,7 @@ namespace CapaPresentacion
 
             notebooksCN.ActualizarNotebook(notebook, usuarioActual.IdUsuario);
             ActualizarDataGrid();
+            CargarGrafico();
         }
 
         private void btnDeshabiliar_Click(object sender, EventArgs e)

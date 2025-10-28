@@ -55,7 +55,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
     #region OBTENER TODOS
     public IEnumerable<VariantesElemento> GetAll()
     {
-        string query = "select * from VariantesElemento";
+        string query = "select IdVariante, IdTipoElemento, IdModelo, subtipo as 'Variante'  from VariantesElemento";
         return Conexion.Query<VariantesElemento>(query, transaction: Transaction);
     }
     #endregion
@@ -66,7 +66,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidVariante", idVariante);
 
-        string query = "select * from VariantesElemento where idVariante = @unidVariante";
+        string query = "select IdVariante, IdTipoElemento, IdModelo, subtipo as 'Variante' from VariantesElemento where idVariante = @unidVariante";
 
         try
         {
@@ -90,7 +90,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidModelo", idModelo);
 
-        string query = "select * from VariantesElemento where idModelo = @unidModelo";
+        string query = "select IdVariante, IdTipoElemento, IdModelo, subtipo as 'Variante'  from VariantesElemento where idModelo = @unidModelo";
         try
         {
             return Conexion.Query<VariantesElemento>(query, parameters, transaction: Transaction);
@@ -108,7 +108,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidTipoElemento", idTipoElemento);
 
-        string query = "select * from VariantesElemento where idTipoElemento = @unidTipoElemento";
+        string query = "select IdVariante, IdTipoElemento, IdModelo, subtipo as 'Variante'  from VariantesElemento where idTipoElemento = @unidTipoElemento";
         try
         {
             return Conexion.Query<VariantesElemento>(query, parameters, transaction: Transaction);
@@ -116,6 +116,25 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         catch (Exception)
         {
             throw new Exception("Hubo un error al obtener las variantes de elemento por tipo de elemento");
+        }
+    }
+    #endregion
+
+    #region OBTENER POR NOMBRE DE LA VARIANTE
+    public VariantesElemento? GetByNombre(string variante)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unavariante", variante);
+
+        string query = @"select IdVariante, IdTipoElemento, IdModelo, subtipo as 'Variante' from VariantesElemento where subtipo = unavariante";
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<VariantesElemento>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al obtener el nombre de la variante");
         }
     }
     #endregion

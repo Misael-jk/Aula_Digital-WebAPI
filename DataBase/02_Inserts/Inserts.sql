@@ -85,14 +85,14 @@ VALUES
 (1, null, 1, 3, 3, 'NB004', 'CB004', 'PAT004', false, now()),
 
 -- Proyectores (Epson X200)
-(2, 1, 3, 2, 1, 'PR001', 'CB011', 'PAT011', TRUE, null),
-(2, 1, 3, 2, 1, 'PR002', 'CB012', 'PAT012', TRUE, null),
-(2, 1, 3, 2, 3, 'PR003', 'CB013', 'PAT013', false, now()),
+(3, 1, 3, 2, 1, 'PR001', 'CB011', 'PAT011', TRUE, null),
+(3, 1, 3, 2, 1, 'PR002', 'CB012', 'PAT012', TRUE, null),
+(3, 1, 3, 2, 3, 'PR003', 'CB013', 'PAT013', false, now()),
 
 -- Tablets (Samsung Tab A)
-(3, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE, null),
-(3, 2, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE, null),
-(3, 2, 4, 2, 3, 'TB003', 'CB016', 'PAT016', TRUE, null);
+(4, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE, null),
+(4, 2, 4, 2, 1, 'TB002', 'CB015', 'PAT015', TRUE, null),
+(4, 2, 4, 2, 3, 'TB003', 'CB016', 'PAT016', TRUE, null);
 
 -- ======================
 -- NOTEBOOKS (asociadas a carritos)
