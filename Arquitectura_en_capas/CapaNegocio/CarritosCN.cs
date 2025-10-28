@@ -224,7 +224,6 @@ public class CarritosCN
     {
         return uow.RepoCarritos.GetByEquipo(equipo);
     }
-<<<<<<< HEAD
 
     public HistorialCambios? ObtenerUltimaFechaDeModiciacionPorID(int idCarrito)
     {
@@ -235,8 +234,6 @@ public class CarritosCN
     {
         return uow.RepoCarritos.GetCountByCarrito(idCarrito);
     }
-=======
->>>>>>> upstream/main
     #endregion
 
     #region ESTADO MANTENIMIENTO

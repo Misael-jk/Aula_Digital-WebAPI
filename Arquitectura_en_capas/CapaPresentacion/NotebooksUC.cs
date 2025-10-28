@@ -26,6 +26,7 @@ namespace CapaPresentacion
         public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN)
         {
             InitializeComponent();
+
             this.notebooksCN = notebooksCN;
             this.usuarioActual = user;
             this.carritosCN = carritosCN;
@@ -90,10 +91,11 @@ namespace CapaPresentacion
             lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
             lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
 
-            if(estadosMantenimiento?.IdEstadoMantenimiento == 1)
+            if (estadosMantenimiento?.IdEstadoMantenimiento == 1)
             {
                 ptbEstado.Image = Properties.Resources.disponibleIcon;
-            } else
+            }
+            else
             {
                 ptbEstado.Image = Properties.Resources.prestadoIcon;
             }
