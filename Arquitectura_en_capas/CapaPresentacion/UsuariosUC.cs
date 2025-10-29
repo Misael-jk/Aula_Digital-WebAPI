@@ -29,11 +29,6 @@ namespace CapaPresentacion
         }
         private void UsuariosUC_Load_1(object sender, EventArgs e)
         {
-            IEnumerable<Roles> todo = repoRoles.GetAll();
-            cmbRoles.DataSource = todo;
-            cmbRoles.ValueMember = "IdRol";
-            cmbRoles.DisplayMember = "Rol";
-
             MostrarUsuarios();
         }
 
@@ -75,13 +70,12 @@ namespace CapaPresentacion
             DataGridViewRow fila = dtgUsuarios.Rows[e.RowIndex];
 
             txtUsuario.Text = fila.Cells["Usuario"].Value?.ToString();
-            txtContraseña.Text = fila.Cells["Password"].Value?.ToString();
             txtNombre.Text = fila.Cells["Nombre"].Value?.ToString();
             txtApellido.Text = fila.Cells["Apellido"].Value?.ToString();
             txtEmail.Text = fila.Cells["Email"].Value?.ToString();
 
-            Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
-            cmbRoles.SelectedIndex = user.IdRol - 1;
+            //Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
+            //cmbRoles.SelectedIndex = user.IdRol - 1;
 
             string nombreFoto = fila.Cells["FotoPerfil"].Value?.ToString();
             string carpetaFotos = Path.Combine(Application.StartupPath, "FotosUsuarios");
@@ -158,11 +152,11 @@ namespace CapaPresentacion
             {
                 IdUsuario = IdUser,
                 Usuario = txtUsuario.Text,
-                Password = txtContraseña.Text,
+                Password = txtApellido.Text,
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
-                IdRol = (int)cmbRoles.SelectedValue,
+                IdRol = 1,
                 FotoPerfil = fotoPerfil
             };
 
@@ -218,11 +212,11 @@ namespace CapaPresentacion
             {
                 IdUsuario = Convert.ToInt32(fila.Cells["IdUsuario"].Value),
                 Usuario = txtUsuario.Text,
-                Password = txtContraseña.Text,
+                Password = "pe",
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
-                IdRol = (int)cmbRoles.SelectedValue,
+                IdRol = 1,
                 FotoPerfil = fotoPerfil
             };
 
@@ -235,11 +229,11 @@ namespace CapaPresentacion
         private void btnDeseleccion_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "";
-            txtContraseña.Text = "";
+            //txtContraseña.Text = "";
             txtNombre.Text = "";
             txtApellido.Text = "";
             txtEmail.Text = "";
-            cmbRoles.SelectedIndex = 0;
+            //cmbRoles.SelectedIndex = 0;
             dtgUsuarios.ClearSelection();
             ptbPerfil.Image = Properties.Resources.Perfil_default;
             ptbPerfil.Tag = null;
@@ -247,7 +241,7 @@ namespace CapaPresentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

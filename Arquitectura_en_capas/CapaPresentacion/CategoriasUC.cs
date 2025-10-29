@@ -31,7 +31,7 @@ namespace CapaPresentacion
         public void MostrarCategoria()
         {
             dgvTipoElemento.DataSource = tiposElementoCN.GetAllTipo();
-            dgvUbicacion.DataSource = ubicacionCN.GetAll();
+            //dgvUbicacion.DataSource = ubicacionCN.GetAll();
             dgvModelo.DataSource = modeloCN.ObtenerModelos();
         }
 
