@@ -18,7 +18,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
         DynamicParameters parametros = new DynamicParameters();
 
         parametros.Add("unidTipoElemento", tipoElemento.IdTipoElemento, dbType: DbType.Int32, direction: ParameterDirection.Output);
-        parametros.Add("unidElemento", tipoElemento.ElementoTipo);
+        parametros.Add("untipoElemento", tipoElemento.ElementoTipo);
 
         try
         {
@@ -37,7 +37,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
         DynamicParameters parametros = new DynamicParameters();
 
         parametros.Add("unidTipoElemento", tipoElemento.IdTipoElemento);
-        parametros.Add("unidElemento", tipoElemento.ElementoTipo);
+        parametros.Add("untipoElemento", tipoElemento.ElementoTipo);
 
         try
         {
@@ -72,7 +72,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
     public IEnumerable<TipoElemento> GetAll()
     {
 
-        string query = "select idTipoElemento, elemento AS elementoTipo from tipoElemento";
+        string query = "select IdTipoElemento, elemento AS 'ElementoTipo' from TipoElemento";
 
         try
         {
@@ -88,7 +88,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
     #region Obtener id del Tipo elemento
     public TipoElemento? GetById(int idTipoElemento)
     {
-        string query = "select * from TipoElemento where idTipoElemento = @unidTipoElemento";
+        string query = "select IdTipoElemento, elemento as 'ElementoTipo' from TipoElemento where idTipoElemento = @unidTipoElemento";
 
         DynamicParameters parametros = new DynamicParameters();
         parametros.Add("unidTipoElemento", idTipoElemento);
@@ -106,7 +106,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
 
     public TipoElemento? GetByTipo(string elementoTipo)
     {
-        string query = "select * from TipoElemento where tipoElemento = @elementoTipo";
+        string query = "select IdTipoElemento, elemento as 'ElementoTipo' from TipoElemento where elemento = @elementoTipo";
 
         DynamicParameters parametros = new DynamicParameters();
         parametros.Add("@elementoTipo", elementoTipo);
