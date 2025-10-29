@@ -8,3 +8,4 @@ SOURCE 04_Views/07_viewInventario.sql
 SOURCE 04_Views/08_viewNotebook.sql
 SOURCE 04_Views/09_viewHistorialCarrito.sql
 SOURCE 04_Views/10_viewHistorialNotebook.sql
+SOURCE 04_Views/11_viewVariantesElemento.sql

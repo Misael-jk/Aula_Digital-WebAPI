@@ -16,11 +16,12 @@ public class RepoModelo : RepoBase, IRepoModelo
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidModelo", dbType: DbType.Int32, direction: ParameterDirection.Output);
-        parameters.Add("unnombre", modelo.NombreModelo);
+        parameters.Add("unmodelo", modelo.NombreModelo);
         parameters.Add("unidTipoElemento", modelo.IdTipoElemento);
         try
         {
             Conexion.Execute("InsertModelo", parameters, commandType: CommandType.StoredProcedure);
+            modelo.IdModelo = parameters.Get<int>("unidModelo");
         }
         catch (Exception)
         {
@@ -34,7 +35,7 @@ public class RepoModelo : RepoBase, IRepoModelo
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidModelo", modelo.IdModelo);
-        parameters.Add("unnombre", modelo.NombreModelo);
+        parameters.Add("unmodelo", modelo.NombreModelo);
         parameters.Add("unidTipoElemento", modelo.IdTipoElemento);
         try
         {
@@ -100,7 +101,7 @@ public class RepoModelo : RepoBase, IRepoModelo
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unnombre", nombreModelo);
 
-        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelos where modelo = @unnombre";
+        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelo where modelo = @unnombre";
         try
         {
             return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);

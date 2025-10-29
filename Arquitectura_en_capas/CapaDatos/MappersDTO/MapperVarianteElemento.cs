@@ -16,7 +16,7 @@ public class MapperVarianteElemento : RepoBase, IMapperVarianteElemento
     public IEnumerable<VarianteElementoDTO> GetAllDTO()
     {
         return Conexion.Query<VariantesElemento, TipoElemento, Modelos, VarianteElementoDTO>(
-            "select * from View_GetVarianteElementoDTO",
+            "select * from View_GetVariantesElementoDTO",
             (variante, tipo, modelo) => new VarianteElementoDTO
             {
                 IdVarianteElmento = variante.IdVarianteElemento,

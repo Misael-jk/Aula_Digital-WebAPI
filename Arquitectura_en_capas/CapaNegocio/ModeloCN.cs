@@ -71,7 +71,7 @@ namespace CapaNegocio
                 throw new Exception("No existe el TipoElemento con el Id proporcionado");
             }
 
-            if (modeloOld.NombreModelo != modeloNEW.NombreModelo && modeloOld != null)
+            if (modeloOld.NombreModelo == modeloNEW.NombreModelo && modeloOld != null)
             {
                 throw new Exception("Ya existe otro modelo con la misma descripcion");
             }
@@ -93,6 +93,12 @@ namespace CapaNegocio
         }
         #endregion
 
+        #region FILTER
+        public Modelos? ObtenerPorId(int idModelo)
+        {
+            return repoModelo.GetById(idModelo);
+        }
+        #endregion
 
         #region VALIDACIONES
         public void ValidarDatos(Modelos modeloNEW)
