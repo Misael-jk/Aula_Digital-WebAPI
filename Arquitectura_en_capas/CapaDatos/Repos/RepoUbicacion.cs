@@ -22,6 +22,8 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
         try
         {
             Conexion.Execute("InsertUbicacion", parameters, commandType: CommandType.StoredProcedure);
+            ubicacion.IdUbicacion = parameters.Get<int>("unidUbicacion");
+            
         }
         catch (Exception)
         {
@@ -62,7 +64,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unaUbicacion", ubicacion);
 
-        string sql = "select * from Ubicacion where ubicacion = @unaubicacion";
+        string sql = "select idUbicacion, ubicacion as 'NombreUbicacion' from Ubicacion where ubicacion = @unaubicacion";
 
         try
         {
@@ -83,7 +85,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
 
         try
         {
-            string sql = "select * from Ubicacion where idUbicacion = @unidUbicacion";
+            string sql = "select idUbicacion, ubicacion as 'NombreUbicacion' from Ubicacion where idUbicacion = @unidUbicacion";
             return Conexion.QueryFirstOrDefault<Ubicacion>(sql, parameters, transaction: Transaction);
         }
         catch (Exception)
@@ -99,7 +101,7 @@ public class RepoUbicacion : RepoBase, IRepoUbicacion
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidTipoElemento", idTipoElemento);
 
-        string sql = @"select *' 
+        string sql = @"select idUbicacion, ubicacion as 'NombreUbicacion' 
                        from Ubicacion u
                        where idTipoElemento = @unidTipoElemento";
         try

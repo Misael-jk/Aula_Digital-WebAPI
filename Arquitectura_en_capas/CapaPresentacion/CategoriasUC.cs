@@ -52,6 +52,24 @@ namespace CapaPresentacion
             this.AutoScrollMinSize = new Size(0, 2070);
 
             MostrarCategoria();
+
+            #region Variante Elemento
+            cmbModeloVarianteActu.DataSource = modeloCN.ObtenerModelos();
+            cmbModeloVarianteActu.ValueMember = "IdModelo";
+            cmbModeloVarianteActu.DisplayMember = "NombreModelo";
+
+            cmbTipoElementoVarianteActu.DataSource = tiposElementoCN.GetAllTipo();
+            cmbTipoElementoVarianteActu.ValueMember = "IdTipoElemento";
+            cmbTipoElementoVarianteActu.DisplayMember = "ElementoTipo";
+
+            cmbModeloVariante.DataSource = modeloCN.ObtenerModelos();
+            cmbModeloVariante.ValueMember = "IdModelo";
+            cmbModeloVariante.DisplayMember = "NombreModelo";
+
+            cmbTipoElementoVariante.DataSource = tiposElementoCN.GetAllTipo();
+            cmbTipoElementoVariante.ValueMember = "IdTipoElemento";
+            cmbTipoElementoVariante.DisplayMember = "ElementoTipo";
+            #endregion
         }
 
         #region TIPO ELEMENTO
@@ -83,9 +101,7 @@ namespace CapaPresentacion
         }
         #endregion
 
-        #region UBICACION
-        #endregion
-
+        #region MODELOS
         private void dgvModelo_Elementos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -119,6 +135,75 @@ namespace CapaPresentacion
             };
 
             modeloCN.ActualizarModelo(modelo);
+            MostrarCategoria();
+        }
+        #endregion
+
+        #region UBICACIONES
+        private void dgvUbicaciones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            IdUbicacion = Convert.ToInt32(dgvUbicaciones.Rows[e.RowIndex].Cells["IdUbicacion"].Value);
+            Ubicacion? ubicacion = ubicacionCN.GetId(IdUbicacion);
+
+            txtUbicacionActu.Text = ubicacion?.NombreUbicacion;
+        }
+
+        private void btnCrearUbicacion_Click(object sender, EventArgs e)
+        {
+            Ubicacion? ubicacion = new Ubicacion { NombreUbicacion = txtUbicacion.Text };
+
+            ubicacionCN.Insert(ubicacion);
+            MostrarCategoria();
+        }
+
+        private void btnActualizarUbicacion_Click(object sender, EventArgs e)
+        {
+            Ubicacion? ubicacion = new Ubicacion { IdUbicacion = IdUbicacion, NombreUbicacion = txtUbicacionActu.Text };
+
+            ubicacionCN.Update(ubicacion);
+            MostrarCategoria();
+        }
+        #endregion
+
+
+        private void dgvVarianteElemento_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            IdVarianteElemento = Convert.ToInt32(dgvVarianteElemento.Rows[e.RowIndex].Cells["IdVarianteElemento"].Value);
+            VariantesElemento? variante = varianteElementoCN.GetById(IdVarianteElemento);
+
+            txtNombreVarianteActu.Text = variante?.Variante;
+            cmbModeloVarianteActu.DataSource = (int)cmbModeloVarianteActu.SelectedValue;
+            cmbTipoElementoVarianteActu.DataSource = (int)cmbTipoElementoVarianteActu.SelectedValue;
+        }
+
+        private void btnCrearVariante_Click(object sender, EventArgs e)
+        {
+            var variante = new VariantesElemento
+            {
+                Variante = txtNombreVariante.Text,
+                IdModelo = (int)cmbModeloVariante.SelectedValue,
+                IdTipoElemento = (int)cmbTipoElementoVariante.SelectedValue
+            };
+
+            varianteElementoCN.Insert(variante);
+            MostrarCategoria();
+        }
+
+        private void btnActuVariante_Click(object sender, EventArgs e)
+        {
+            var variante = new VariantesElemento
+            {
+                IdVarianteElemento = IdVarianteElemento,
+                Variante = txtNombreVarianteActu.Text,
+                IdModelo = (int)cmbModeloVarianteActu.SelectedValue,
+                IdTipoElemento = (int)cmbTipoElementoVarianteActu.SelectedValue
+            };
+
+            varianteElementoCN.Actualizar(variante);
             MostrarCategoria();
         }
     }

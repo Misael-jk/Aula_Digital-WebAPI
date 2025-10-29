@@ -80,6 +80,14 @@ public class VarianteElementoCN
     }
     #endregion
 
+
+    #region Filtros
+    public VariantesElemento? GetById(int idVariante)
+    {
+        return repoVarianteElemento.GetById(idVariante);
+    }
+    #endregion
+
     #region Validaciones
     private void ValidarDatos(VariantesElemento variantesElemento)
     {
