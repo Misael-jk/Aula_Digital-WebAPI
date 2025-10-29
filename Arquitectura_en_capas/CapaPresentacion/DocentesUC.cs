@@ -14,7 +14,7 @@ namespace CapaPresentacion
 {
     public partial class DocentesUC : UserControl
     {
-        private readonly DocentesCN docentesCN = null!; 
+        private readonly DocentesCN docentesCN = null!;
         public DocentesUC(DocentesCN docentesCN)
         {
             InitializeComponent();

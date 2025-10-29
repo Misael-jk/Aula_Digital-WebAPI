@@ -50,6 +50,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -64,8 +66,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             cmbEstados = new Guna.UI2.WinForms.Guna2ComboBox();
             txtNroSerie = new Guna.UI2.WinForms.Guna2TextBox();
             txtCodBarra = new Guna.UI2.WinForms.Guna2TextBox();
@@ -77,6 +77,7 @@
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             pictureBox2 = new PictureBox();
             guna2GroupBox3 = new Guna.UI2.WinForms.Guna2GroupBox();
+            cmbVarianteElementos = new Guna.UI2.WinForms.Guna2ComboBox();
             cmbUbicaciones = new Guna.UI2.WinForms.Guna2ComboBox();
             cmbModelos = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
@@ -84,7 +85,6 @@
             btnActualizarElemento = new Guna.UI2.WinForms.Guna2Button();
             btnCrearElemento = new Guna.UI2.WinForms.Guna2Button();
             guna2GroupBox4 = new Guna.UI2.WinForms.Guna2GroupBox();
-            cmbVarianteElementos = new Guna.UI2.WinForms.Guna2ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvElementos).BeginInit();
             guna2GroupBox1.SuspendLayout();
             guna2Panel2.SuspendLayout();
@@ -206,7 +206,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvElementos.DefaultCellStyle = dataGridViewCellStyle3;
             dgvElementos.GridColor = Color.LightGray;
-            dgvElementos.Location = new Point(3, 43);
+            dgvElementos.Location = new Point(3, 41);
             dgvElementos.Name = "dgvElementos";
             dgvElementos.RowHeadersVisible = false;
             dgvElementos.Size = new Size(999, 412);
@@ -261,7 +261,7 @@
             guna2GroupBox1.Location = new Point(20, 190);
             guna2GroupBox1.Name = "guna2GroupBox1";
             guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2GroupBox1.Size = new Size(1005, 458);
+            guna2GroupBox1.Size = new Size(1005, 455);
             guna2GroupBox1.TabIndex = 44;
             guna2GroupBox1.Text = "- Elementos -";
             guna2GroupBox1.TextAlign = HorizontalAlignment.Center;
@@ -341,6 +341,24 @@
             guna2GroupBox3.TabIndex = 46;
             guna2GroupBox3.Text = "- Datos de elemento seleccionada -";
             guna2GroupBox3.TextAlign = HorizontalAlignment.Center;
+            // 
+            // cmbVarianteElementos
+            // 
+            cmbVarianteElementos.AllowDrop = true;
+            cmbVarianteElementos.BackColor = Color.Transparent;
+            cmbVarianteElementos.CustomizableEdges = customizableEdges17;
+            cmbVarianteElementos.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbVarianteElementos.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbVarianteElementos.FocusedColor = Color.FromArgb(94, 148, 255);
+            cmbVarianteElementos.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cmbVarianteElementos.Font = new Font("Segoe UI", 10F);
+            cmbVarianteElementos.ForeColor = Color.FromArgb(68, 88, 112);
+            cmbVarianteElementos.ItemHeight = 30;
+            cmbVarianteElementos.Location = new Point(238, 341);
+            cmbVarianteElementos.Name = "cmbVarianteElementos";
+            cmbVarianteElementos.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            cmbVarianteElementos.Size = new Size(278, 36);
+            cmbVarianteElementos.TabIndex = 33;
             // 
             // cmbUbicaciones
             // 
@@ -470,24 +488,6 @@
             guna2GroupBox4.TabIndex = 46;
             guna2GroupBox4.Text = "- Buscar elementos por: -";
             guna2GroupBox4.TextAlign = HorizontalAlignment.Center;
-            // 
-            // cmbVarianteElementos
-            // 
-            cmbVarianteElementos.AllowDrop = true;
-            cmbVarianteElementos.BackColor = Color.Transparent;
-            cmbVarianteElementos.CustomizableEdges = customizableEdges17;
-            cmbVarianteElementos.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbVarianteElementos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbVarianteElementos.FocusedColor = Color.FromArgb(94, 148, 255);
-            cmbVarianteElementos.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            cmbVarianteElementos.Font = new Font("Segoe UI", 10F);
-            cmbVarianteElementos.ForeColor = Color.FromArgb(68, 88, 112);
-            cmbVarianteElementos.ItemHeight = 30;
-            cmbVarianteElementos.Location = new Point(238, 341);
-            cmbVarianteElementos.Name = "cmbVarianteElementos";
-            cmbVarianteElementos.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            cmbVarianteElementos.Size = new Size(278, 36);
-            cmbVarianteElementos.TabIndex = 33;
             // 
             // ElementosUC
             // 
