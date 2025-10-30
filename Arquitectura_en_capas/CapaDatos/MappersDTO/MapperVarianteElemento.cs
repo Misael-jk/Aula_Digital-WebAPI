@@ -19,7 +19,7 @@ public class MapperVarianteElemento : RepoBase, IMapperVarianteElemento
             "select * from View_GetVariantesElementoDTO",
             (variante, tipo, modelo) => new VarianteElementoDTO
             {
-                IdVarianteElmento = variante.IdVarianteElemento,
+                IdVarianteElemento = variante.IdVarianteElemento,
                 Equipo = variante.Variante,
                 TipoElemento = tipo.ElementoTipo,
                 Modelo = modelo.NombreModelo

@@ -10,6 +10,8 @@ public interface IRepoTipoElemento
     public void Delete(int idTipoElemento);
     public IEnumerable<TipoElemento> GetAll();
     public TipoElemento? GetById(int idTipoElemento);
-    public TipoElemento? GetByTipo(string elementoTipo);
+    public TipoElemento? GetByNombreTipo(string elementoTipo);
+    public IEnumerable<TipoElemento> GetByIdTipo(int idTipo);
+    public IEnumerable<TipoElemento> GetTiposByElemento();
     public void SetTransaction(IDbTransaction? transaction);
 }

@@ -104,7 +104,7 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
     }
     #endregion
 
-    public TipoElemento? GetByTipo(string elementoTipo)
+    public TipoElemento? GetByNombreTipo(string elementoTipo)
     {
         string query = "select IdTipoElemento, elemento as 'ElementoTipo' from TipoElemento where elemento = @elementoTipo";
 
@@ -118,6 +118,35 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
         catch (Exception)
         {
             throw new Exception("Error al obtener el tipo del Elemento");
+        }
+    }
+
+    public IEnumerable<TipoElemento> GetByIdTipo(int idTipo)
+    {
+        DynamicParameters dynamicParameters = new DynamicParameters();
+        dynamicParameters.Add("unidTipo", idTipo);
+
+        string query = "SELECT IdTipoElemento, elemento AS 'ElementoTipo' FROM TipoElemento where idTipoElemento = unidTipo";
+        try
+        {
+            return Conexion.Query<TipoElemento>(query, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener los tipos de elementos");
+        }
+    }
+
+    public IEnumerable<TipoElemento> GetTiposByElemento()
+    {
+        string query = "SELECT IdTipoElemento, elemento AS 'ElementoTipo' FROM TipoElemento where idTipoElemento not in (1, 2)";
+        try
+        {
+            return Conexion.Query<TipoElemento>(query, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener los tipos de elementos");
         }
     }
 }
