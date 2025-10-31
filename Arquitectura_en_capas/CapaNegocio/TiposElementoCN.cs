@@ -32,7 +32,7 @@ public class TiposElementoCN
             throw new ValidationException("El tipo del elemento contiene caracteres inválidos.");
         }
 
-        if (_repoTipoElemento.GetByTipo(tipoElemento.ElementoTipo) != null)
+        if (_repoTipoElemento.GetByNombreTipo(tipoElemento.ElementoTipo) != null)
         {
             throw new Exception("Ya existe un tipo de elemento con ese nombre, por favor elija uno nuevo");
         }
@@ -51,6 +51,11 @@ public class TiposElementoCN
     {
         return _repoTipoElemento.GetById(idTipoElemento);
     }
+    public IEnumerable<TipoElemento> GetTiposByElemento()
+    {
+        return _repoTipoElemento.GetTiposByElemento();
+    }
+
     #endregion
 
     #region UPDATE TIPO ELEMENTO
@@ -80,7 +85,7 @@ public class TiposElementoCN
 
         if (!tipoElementoOLD.ElementoTipo.Equals(tipoElemento.ElementoTipo, StringComparison.OrdinalIgnoreCase))
         {
-            TipoElemento? existente = _repoTipoElemento.GetByTipo(tipoElemento.ElementoTipo);
+            TipoElemento? existente = _repoTipoElemento.GetByNombreTipo(tipoElemento.ElementoTipo);
 
             if (existente != null)
             {

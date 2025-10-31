@@ -26,6 +26,16 @@ namespace CapaNegocio
                 return mapperModelo.GetAll();
             }
         }
+
+        public IEnumerable<ModeloDTO> ObtenerModelosPorTipoElemento(int idTipoElemento)
+        {
+                return mapperModelo.GetByTipo(idTipoElemento);
+        }
+
+        public IEnumerable<ModeloDTO> ObtenerModeloPorElementos()
+        {
+            return mapperModelo.GetByElementos();
+        }
         #endregion
 
         #region INSERT MODELO
@@ -113,7 +123,7 @@ namespace CapaNegocio
                 throw new Exception("La nombre del modelo no puede superar los 40 caracteres");
             }
 
-            if (!Regex.IsMatch(modeloNEW.NombreModelo, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+$"))
+            if (!Regex.IsMatch(modeloNEW.NombreModelo, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-]+$"))
             {
                 throw new Exception("El modelo contiene caracteres invalidas");
             }

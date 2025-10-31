@@ -17,14 +17,15 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
     {
         DynamicParameters parameters = new DynamicParameters();
 
-        parameters.Add("unidVarianteElemento", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        parameters.Add("unidVariante", dbType: DbType.Int32, direction: ParameterDirection.Output);
         parameters.Add("unidTipoElemento", variantesElemento.IdTipoElemento);
-        parameters.Add("unvariante", variantesElemento.Variante);
+        parameters.Add("unsubtipo", variantesElemento.Variante);
         parameters.Add("unidModelo", variantesElemento.IdModelo);
 
         try
         {
             Conexion.Execute("InsertVarianteElemento", parameters, commandType: CommandType.StoredProcedure);
+            variantesElemento.IdVarianteElemento = parameters.Get<int>("unidVariante");
         }
         catch (Exception)
         {
@@ -37,9 +38,9 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
     public void Update(VariantesElemento variantesElemento)
     {
         DynamicParameters parameters = new DynamicParameters();
-        parameters.Add("unidVarianteElemento", variantesElemento.IdVarianteElemento);
+        parameters.Add("unidVariante", variantesElemento.IdVarianteElemento);
         parameters.Add("unidTipoElemento", variantesElemento.IdTipoElemento);
-        parameters.Add("unvariante", variantesElemento.Variante);
+        parameters.Add("unsubtipo", variantesElemento.Variante);
         parameters.Add("unidModelo", variantesElemento.IdModelo);
         try
         {

@@ -51,7 +51,7 @@ delimiter ;
 delimiter $$ 
 
 drop procedure if exists UpdateDocente $$
-create procedure UpdateDocente (in unidDocente smallint, in undni int, in unnombre varchar(40), in unapellido varchar(40), in unemail varchar(70), in habilitado boolean, in unafechaBaja datetime)
+create procedure UpdateDocente (in unidDocente smallint, in undni int, in unnombre varchar(40), in unapellido varchar(40), in unemail varchar(70), in unhabilitado boolean, in unafechaBaja datetime)
 begin
 	update docentes 
 	set dni = undni,

@@ -50,4 +50,17 @@ public class MapperModelo : RepoBase, IMapperModelo
             parametros,
             splitOn: "IdModelo,ElementoTipo");
     }
+
+    public IEnumerable<ModeloDTO>GetByElementos()
+    {
+        return Conexion.Query<Modelos, TipoElemento, ModeloDTO>(
+            "select * from View_GetModeloElementoDTO",
+            (modelo, tipoElemento) => new ModeloDTO
+            {
+                IdModelo = modelo.IdModelo,
+                Modelo = modelo.NombreModelo,
+                Tipo = tipoElemento.ElementoTipo
+            },
+            splitOn: "IdModelo,ElementoTipo");
+    }
 }

@@ -22,6 +22,8 @@ namespace CapaPresentacion
         private int IdTipoElemento = 0;
         private int IdUbicacion = 0;
         private int IdModelo_Elementos = 0;
+        private int IdModelo_Notebook = 0;
+        private int IdModelo_Carrito = 0;
         private int IdVarianteElemento = 0;
 
         public CategoriasUC(TiposElementoCN tiposElementoCN, UbicacionCN ubicacionCN, ModeloCN modeloCN, VarianteElementoCN varianteElementoCN)
@@ -37,13 +39,19 @@ namespace CapaPresentacion
         {
             dgvTipoElemento.DataSource = tiposElementoCN.GetAllTipo();
             dgvUbicaciones.DataSource = ubicacionCN.GetAll();
-            dgvModelo_Elementos.DataSource = modeloCN.ObtenerModelos();
+            dgvModelo_Elementos.DataSource = modeloCN.ObtenerModeloPorElementos();
             dgvVarianteElemento.DataSource = varianteElementoCN.MostrarDatos();
+            dgvModelo_Notebook.DataSource = modeloCN.ObtenerModelosPorTipoElemento(1);
+            dgvModelo_Carritos.DataSource = modeloCN.ObtenerModelosPorTipoElemento(2);
 
 
-            cmbTipoElementoModelo.DataSource = tiposElementoCN.GetAllTipo();
+            cmbTipoElementoModelo.DataSource = tiposElementoCN.GetTiposByElemento();
             cmbTipoElementoModelo.ValueMember = "IdTipoElemento";
             cmbTipoElementoModelo.DisplayMember = "ElementoTipo";
+
+            cmbModeloVariante.DataSource = modeloCN.ObtenerModeloPorElementos();
+            cmbModeloVariante.ValueMember = "IdModelo";
+            cmbModeloVariante.DisplayMember = "Modelo";
         }
 
         private void CategoriasUC_Load(object sender, EventArgs e)
@@ -54,24 +62,23 @@ namespace CapaPresentacion
             MostrarCategoria();
 
             #region Variante Elemento
-            cmbModeloVarianteActu.DataSource = modeloCN.ObtenerModelos();
+            cmbModeloVarianteActu.DataSource = modeloCN.ObtenerModeloPorElementos();
             cmbModeloVarianteActu.ValueMember = "IdModelo";
-            cmbModeloVarianteActu.DisplayMember = "NombreModelo";
+            cmbModeloVarianteActu.DisplayMember = "Modelo";
 
-            cmbTipoElementoVarianteActu.DataSource = tiposElementoCN.GetAllTipo();
+            cmbTipoElementoVarianteActu.DataSource = tiposElementoCN.GetTiposByElemento();
             cmbTipoElementoVarianteActu.ValueMember = "IdTipoElemento";
             cmbTipoElementoVarianteActu.DisplayMember = "ElementoTipo";
 
-            cmbModeloVariante.DataSource = modeloCN.ObtenerModelos();
-            cmbModeloVariante.ValueMember = "IdModelo";
-            cmbModeloVariante.DisplayMember = "NombreModelo";
 
-            cmbTipoElementoVariante.DataSource = tiposElementoCN.GetAllTipo();
+
+            cmbTipoElementoVariante.DataSource = tiposElementoCN.GetTiposByElemento();
             cmbTipoElementoVariante.ValueMember = "IdTipoElemento";
             cmbTipoElementoVariante.DisplayMember = "ElementoTipo";
             #endregion
         }
 
+        // ELEMENTOS
         #region TIPO ELEMENTO
         private void dgvTipoElemento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -167,7 +174,7 @@ namespace CapaPresentacion
         }
         #endregion
 
-
+        #region VARIANTE ELEMENTO
         private void dgvVarianteElemento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -176,8 +183,8 @@ namespace CapaPresentacion
             VariantesElemento? variante = varianteElementoCN.GetById(IdVarianteElemento);
 
             txtNombreVarianteActu.Text = variante?.Variante;
-            cmbModeloVarianteActu.DataSource = (int)cmbModeloVarianteActu.SelectedValue;
-            cmbTipoElementoVarianteActu.DataSource = (int)cmbTipoElementoVarianteActu.SelectedValue;
+            cmbModeloVarianteActu.SelectedValue = (int)cmbModeloVarianteActu.SelectedValue;
+            cmbTipoElementoVarianteActu.SelectedValue = (int)cmbTipoElementoVarianteActu.SelectedValue;
         }
 
         private void btnCrearVariante_Click(object sender, EventArgs e)
@@ -206,5 +213,88 @@ namespace CapaPresentacion
             varianteElementoCN.Actualizar(variante);
             MostrarCategoria();
         }
+        #endregion
+        // -------------
+
+
+
+        // NOTEBOOK
+        #region MODELOS
+        private void dgvModelo_Notebook_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            IdModelo_Notebook = Convert.ToInt32(dgvModelo_Notebook.Rows[e.RowIndex].Cells["IdModelo"].Value);
+
+            Modelos? modelo = modeloCN.ObtenerPorId(IdModelo_Notebook);
+
+            txtNombreModeloNoteAct.Text = modelo?.NombreModelo;
+        }
+
+        private void btnCrearModeloNotebook1_Click(object sender, EventArgs e)
+        {
+            var modelo = new Modelos
+            {
+                NombreModelo = txtNombreModeloNote.Text,
+                IdTipoElemento = 1
+            };
+
+            modeloCN.CrearModelo(modelo);
+            MostrarCategoria();
+        }
+
+        private void btnActuModeloNote_Click(object sender, EventArgs e)
+        {
+            var modelo = new Modelos
+            {
+                IdModelo = IdModelo_Notebook,
+                NombreModelo = txtNombreModeloNoteAct.Text,
+                IdTipoElemento = 1
+            };
+
+            modeloCN.ActualizarModelo(modelo);
+            MostrarCategoria();
+        }
+        #endregion
+        // -------------
+
+
+
+        // CARRITOS
+        #region MODELOS
+        private void dgvModelo_Carritos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            IdModelo_Carrito = Convert.ToInt32(dgvModelo_Carritos.Rows[e.RowIndex].Cells["IdModelo"].Value);
+            Modelos? modelo = modeloCN.ObtenerPorId(IdModelo_Carrito);
+
+            txtNombreModeloCarrAct.Text = modelo?.NombreModelo;
+        }
+
+        private void btnCrearModeloCarrito1_Click(object sender, EventArgs e)
+        {
+            var modelo = new Modelos
+            {
+                NombreModelo = txtNombreModeloCarr.Text,
+                IdTipoElemento = 2
+            };
+
+            modeloCN.CrearModelo(modelo);
+            MostrarCategoria();
+        }
+
+        private void btnActuModeloCarr_Click_1(object sender, EventArgs e)
+        {
+            var modelo = new Modelos
+            {
+                IdModelo = IdModelo_Carrito,
+                NombreModelo = txtNombreModeloCarrAct.Text,
+                IdTipoElemento = 2
+            };
+
+            modeloCN.ActualizarModelo(modelo);
+            MostrarCategoria();
+        }
+        #endregion
     }
 }

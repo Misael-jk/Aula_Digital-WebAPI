@@ -25,6 +25,11 @@ public class DocentesCN
     {
         return mapperDocentes.GetAllDTO();
     }
+
+    public Docentes? GetById(int idDocente)
+    {
+        return _repoDocente.GetById(idDocente);
+    }
     #endregion
 
     #region INSERT DOCENTE
@@ -37,7 +42,7 @@ public class DocentesCN
 
         ValidarDocente(docenteNEW);
 
-        if (_repoDocente.GetByDni(docenteNEW.Dni) != null)
+        if (_repoDocente.GetByDni(docenteNEW.Dni) is not null)
         {
             throw new Exception("Ya existe un docente ese dni");
         }
@@ -79,6 +84,27 @@ public class DocentesCN
         }
 
         _repoDocente.Update(docenteNEW);
+    }
+    #endregion
+
+    #region DESHABILITAR DOCENTE
+    public void DeshabilitarDocente(int idDocente)
+    {
+        Docentes? docente = _repoDocente.GetById(idDocente);
+
+        ValidarDocente(docente!);
+
+        if (docente == null)
+        {
+            throw new Exception("No se encontro el docente");
+        }
+
+        if (_repoDocente.ExistsPrestamo(idDocente))
+        {
+            throw new Exception("No se puede deshabilitar, el docente porque tiene prestamos activos");
+        }
+
+        _repoDocente.Deshabilitar(idDocente, false);
     }
     #endregion
 

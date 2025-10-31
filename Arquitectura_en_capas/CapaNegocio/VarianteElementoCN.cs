@@ -77,6 +77,8 @@ public class VarianteElementoCN
         {
             throw new Exception("No coinciden el tipo Elemento de modelo y la variante");
         }
+
+        repoVarianteElemento.Update(variantes);
     }
     #endregion
 

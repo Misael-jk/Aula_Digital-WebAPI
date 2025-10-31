@@ -15,15 +15,17 @@ public class MapperDocentes : RepoBase, IMapperDocentes
 
     public IEnumerable<DocentesDTO> GetAllDTO()
     {
-        string query = "select * from View_GetDocenteDTO";
-
-        try
-        {
-            return Conexion.Query<DocentesDTO>(query);
-        }
-        catch
-        {
-            throw new Exception("Hubo un error al obtener los docentes");
-        }
+        return Conexion.Query<Docentes, EstadosPrestamo, DocentesDTO>(
+            "select * from View_GetDocenteDTO",
+            (docente, estado) => new DocentesDTO
+            {
+                IdDocente = docente.IdDocente,
+                Nombre = docente.Nombre,
+                Apellido = docente.Apellido,
+                Dni = docente.Dni,
+                Email = docente.Email,
+                EstadoPrestamo = estado.EstadoPrestamo
+            },
+            splitOn: "IdDocente,EstadoPrestamo");
     }
 }

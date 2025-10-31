@@ -24,11 +24,12 @@ public class RepoDocentes : RepoBase, IRepoDocentes
         parametros.Add("unapellido", docentes.Apellido);
         parametros.Add("unemail", docentes.Email);
         parametros.Add("unhabilitado", docentes.Habilitado);
-        parametros.Add("unfechabaja", docentes.FechaBaja);
+        parametros.Add("unafechabaja", docentes.FechaBaja);
 
         try
         {
             Conexion.Execute("InsertDocente", parametros, commandType: CommandType.StoredProcedure);
+            docentes.IdDocente = parametros.Get<int>("unidDocente");
         }
         catch (Exception)
         {
@@ -166,6 +167,33 @@ public class RepoDocentes : RepoBase, IRepoDocentes
         catch (Exception)
         {
             throw new Exception("Error al obtener todos los docentes");
+        }
+    }
+    #endregion
+
+    #region Esta en un prestamo
+    public bool ExistsPrestamo(int idDocente)
+    {
+        string query = @"
+        SELECT EXISTS(
+            SELECT 1
+            FROM Prestamos p
+            JOIN EstadosPrestamo e ON e.idEstadoPrestamo = p.idEstadoPrestamo
+            WHERE p.idDocente = @unidDocente
+              AND e.estadoPrestamo IN ('En Prestamo', 'En Parcial')
+        )";
+
+        DynamicParameters parametros = new DynamicParameters();
+
+        try
+        {
+            parametros.Add("unidDocente", idDocente);
+            int count = Conexion.ExecuteScalar<int>(query, parametros);
+            return count == 1;
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al verificar si el docente tiene prestamos activos");
         }
     }
     #endregion
