@@ -201,7 +201,7 @@ namespace CapaPresentacion
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
             prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
-            usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios);
+            usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
             modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
             devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
             //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
@@ -414,7 +414,7 @@ namespace CapaPresentacion
         private void BtnUsuario_Click(object sender, EventArgs e)
         {
             if (usuariosUC == null)
-                usuariosUC = new UsuariosUC(usuariosCN, repoRoles, repoUsuarios);
+                usuariosUC = new UsuariosUC(usuariosCN);
 
             CambiarNombrePort(BtnUsuario.Text);
 

@@ -11,5 +11,6 @@ public interface IRepoHistorialCambio
     public IEnumerable<HistorialCambios> GetByAccion(int idTipoAccion);
     public HistorialCambios? GetUltimateDateByIdNotebook(int idNotebook);
     public HistorialCambios? GetUltimateDateByIdCarrito(int idCarrito);
+    public HistorialCambios? GetLastDateByUser(int idUsuario);
     public void SetTransaction(IDbTransaction? transaction);
 }
