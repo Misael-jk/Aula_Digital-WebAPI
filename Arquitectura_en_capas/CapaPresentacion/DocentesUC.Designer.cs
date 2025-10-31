@@ -48,6 +48,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -60,30 +64,26 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             btnEliminar = new Guna.UI2.WinForms.Guna2Button();
             btnActualizar = new Guna.UI2.WinForms.Guna2Button();
             dgvDocentes = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.pictureBox2 = new PictureBox();
+            pictureBox2 = new PictureBox();
             txtDNICrear = new Guna.UI2.WinForms.Guna2TextBox();
             txtNombreCrear = new Guna.UI2.WinForms.Guna2TextBox();
             txtApellidoCrear = new Guna.UI2.WinForms.Guna2TextBox();
             btnCrear = new Guna.UI2.WinForms.Guna2Button();
             txtMailCrear = new Guna.UI2.WinForms.Guna2TextBox();
             guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
+            txtBuscarDocente = new Guna.UI2.WinForms.Guna2TextBox();
+            cmbHabilitado = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
             guna2GroupBox3 = new Guna.UI2.WinForms.Guna2GroupBox();
             txtDNI = new Guna.UI2.WinForms.Guna2TextBox();
             txtMail = new Guna.UI2.WinForms.Guna2TextBox();
             txtApellido = new Guna.UI2.WinForms.Guna2TextBox();
             txtNombre = new Guna.UI2.WinForms.Guna2TextBox();
-            cmbHabilitado = new Guna.UI2.WinForms.Guna2ComboBox();
-            txtBuscarDocente = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvDocentes).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             guna2GroupBox2.SuspendLayout();
             guna2GroupBox1.SuspendLayout();
             guna2GroupBox3.SuspendLayout();
@@ -103,7 +103,8 @@
             btnEliminar.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnEliminar.Size = new Size(145, 25);
             btnEliminar.TabIndex = 38;
-            btnEliminar.Text = "Eliminar";
+            btnEliminar.Text = "Deshabilitar";
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnActualizar
             // 
@@ -120,16 +121,16 @@
             btnActualizar.Size = new Size(145, 25);
             btnActualizar.TabIndex = 37;
             btnActualizar.Text = "Actualizar";
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // dgvDocentes
             // 
             dataGridViewCellStyle1.BackColor = Color.White;
             dgvDocentes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvDocentes.BackgroundColor = Color.Silver;
-            dgvDocentes.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvDocentes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Indigo;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
@@ -141,12 +142,12 @@
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.GhostWhite;
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvDocentes.DefaultCellStyle = dataGridViewCellStyle3;
-            dgvDocentes.GridColor = Color.Silver;
+            dgvDocentes.GridColor = Color.FromArgb(231, 229, 255);
             dgvDocentes.Location = new Point(2, 41);
             dgvDocentes.MultiSelect = false;
             dgvDocentes.Name = "dgvDocentes";
@@ -159,33 +160,33 @@
             dgvDocentes.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
             dgvDocentes.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
             dgvDocentes.ThemeStyle.BackColor = Color.Silver;
-            dgvDocentes.ThemeStyle.GridColor = Color.Silver;
+            dgvDocentes.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
             dgvDocentes.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
             dgvDocentes.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvDocentes.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dgvDocentes.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dgvDocentes.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgvDocentes.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dgvDocentes.ThemeStyle.HeaderStyle.Height = 30;
             dgvDocentes.ThemeStyle.ReadOnly = false;
             dgvDocentes.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgvDocentes.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.Single;
-            dgvDocentes.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dgvDocentes.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvDocentes.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dgvDocentes.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
             dgvDocentes.ThemeStyle.RowsStyle.Height = 25;
             dgvDocentes.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvDocentes.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dgvDocentes.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Default;
+            dgvDocentes.CellClick += dgvDocentes_CellClick;
             // 
-            // ptbDocenteIcon
+            // pictureBox2
             // 
-            this.pictureBox2.BackColor = Color.Orange;
-            this.pictureBox2.Image = (Image)resources.GetObject("ptbDocenteIcon.Image");
-            this.pictureBox2.Location = new Point(18, 65);
-            this.pictureBox2.Name = "ptbDocenteIcon";
-            this.pictureBox2.Size = new Size(99, 95);
-            this.pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            this.pictureBox2    .TabIndex = 41;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.BackColor = Color.Orange;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(18, 65);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(99, 95);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 41;
+            pictureBox2.TabStop = false;
             // 
             // txtDNICrear
             // 
@@ -271,6 +272,7 @@
             btnCrear.Size = new Size(80, 25);
             btnCrear.TabIndex = 36;
             btnCrear.Text = "Crear";
+            btnCrear.Click += btnCrear_Click;
             // 
             // txtMailCrear
             // 
@@ -315,13 +317,58 @@
             guna2GroupBox2.Text = "- Docentes -";
             guna2GroupBox2.TextAlign = HorizontalAlignment.Center;
             // 
+            // txtBuscarDocente
+            // 
+            txtBuscarDocente.BackColor = Color.Transparent;
+            txtBuscarDocente.BorderColor = Color.FromArgb(64, 0, 64);
+            txtBuscarDocente.BorderRadius = 18;
+            txtBuscarDocente.CustomizableEdges = customizableEdges15;
+            txtBuscarDocente.DefaultText = "";
+            txtBuscarDocente.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtBuscarDocente.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtBuscarDocente.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtBuscarDocente.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtBuscarDocente.FillColor = Color.DarkOrchid;
+            txtBuscarDocente.FocusedState.BorderColor = Color.DodgerBlue;
+            txtBuscarDocente.Font = new Font("Segoe UI", 9F);
+            txtBuscarDocente.ForeColor = Color.White;
+            txtBuscarDocente.HoverState.BorderColor = Color.DodgerBlue;
+            txtBuscarDocente.IconLeftSize = new Size(25, 25);
+            txtBuscarDocente.Location = new Point(3, 6);
+            txtBuscarDocente.Name = "txtBuscarDocente";
+            txtBuscarDocente.PlaceholderForeColor = Color.LightGray;
+            txtBuscarDocente.PlaceholderText = "Buscar por Nombre";
+            txtBuscarDocente.SelectedText = "";
+            txtBuscarDocente.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            txtBuscarDocente.Size = new Size(197, 28);
+            txtBuscarDocente.TabIndex = 42;
+            // 
+            // cmbHabilitado
+            // 
+            cmbHabilitado.AllowDrop = true;
+            cmbHabilitado.BackColor = Color.Transparent;
+            cmbHabilitado.CustomizableEdges = customizableEdges17;
+            cmbHabilitado.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbHabilitado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbHabilitado.FocusedColor = Color.FromArgb(94, 148, 255);
+            cmbHabilitado.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cmbHabilitado.Font = new Font("Segoe UI", 10F);
+            cmbHabilitado.ForeColor = Color.FromArgb(68, 88, 112);
+            cmbHabilitado.ItemHeight = 30;
+            cmbHabilitado.Location = new Point(428, 2);
+            cmbHabilitado.Name = "cmbHabilitado";
+            cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            cmbHabilitado.Size = new Size(203, 36);
+            cmbHabilitado.TabIndex = 58;
+            cmbHabilitado.SelectedIndexChanged += cmbHabilitado_SelectedIndexChanged;
+            // 
             // guna2GroupBox1
             // 
             guna2GroupBox1.BorderColor = Color.Indigo;
             guna2GroupBox1.Controls.Add(btnCrear);
             guna2GroupBox1.Controls.Add(txtDNICrear);
             guna2GroupBox1.Controls.Add(txtMailCrear);
-            guna2GroupBox1.Controls.Add(this.pictureBox2);
+            guna2GroupBox1.Controls.Add(pictureBox2);
             guna2GroupBox1.Controls.Add(txtApellidoCrear);
             guna2GroupBox1.Controls.Add(txtNombreCrear);
             guna2GroupBox1.CustomBorderColor = Color.Indigo;
@@ -451,50 +498,6 @@
             txtNombre.Size = new Size(145, 35);
             txtNombre.TabIndex = 29;
             // 
-            // cmbHabilitado
-            // 
-            cmbHabilitado.AllowDrop = true;
-            cmbHabilitado.BackColor = Color.Transparent;
-            cmbHabilitado.CustomizableEdges = customizableEdges17;
-            cmbHabilitado.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbHabilitado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbHabilitado.FocusedColor = Color.FromArgb(94, 148, 255);
-            cmbHabilitado.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            cmbHabilitado.Font = new Font("Segoe UI", 10F);
-            cmbHabilitado.ForeColor = Color.FromArgb(68, 88, 112);
-            cmbHabilitado.ItemHeight = 30;
-            cmbHabilitado.Location = new Point(428, 2);
-            cmbHabilitado.Name = "cmbHabilitado";
-            cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            cmbHabilitado.Size = new Size(203, 36);
-            cmbHabilitado.TabIndex = 58;
-            // 
-            // txtBuscarDocente
-            // 
-            txtBuscarDocente.BackColor = Color.Transparent;
-            txtBuscarDocente.BorderColor = Color.FromArgb(64, 0, 64);
-            txtBuscarDocente.BorderRadius = 18;
-            txtBuscarDocente.CustomizableEdges = customizableEdges15;
-            txtBuscarDocente.DefaultText = "";
-            txtBuscarDocente.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtBuscarDocente.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtBuscarDocente.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtBuscarDocente.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtBuscarDocente.FillColor = Color.DarkOrchid;
-            txtBuscarDocente.FocusedState.BorderColor = Color.DodgerBlue;
-            txtBuscarDocente.Font = new Font("Segoe UI", 9F);
-            txtBuscarDocente.ForeColor = Color.White;
-            txtBuscarDocente.HoverState.BorderColor = Color.DodgerBlue;
-            txtBuscarDocente.IconLeftSize = new Size(25, 25);
-            txtBuscarDocente.Location = new Point(3, 6);
-            txtBuscarDocente.Name = "txtBuscarDocente";
-            txtBuscarDocente.PlaceholderForeColor = Color.LightGray;
-            txtBuscarDocente.PlaceholderText = "Buscar por Nombre";
-            txtBuscarDocente.SelectedText = "";
-            txtBuscarDocente.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            txtBuscarDocente.Size = new Size(197, 28);
-            txtBuscarDocente.TabIndex = 42;
-            // 
             // DocentesUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -505,8 +508,9 @@
             Controls.Add(guna2GroupBox2);
             Name = "DocentesUC";
             Size = new Size(1050, 670);
+            Load += DocentesUC_Load;
             ((System.ComponentModel.ISupportInitialize)dgvDocentes).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             guna2GroupBox2.ResumeLayout(false);
             guna2GroupBox1.ResumeLayout(false);
             guna2GroupBox3.ResumeLayout(false);

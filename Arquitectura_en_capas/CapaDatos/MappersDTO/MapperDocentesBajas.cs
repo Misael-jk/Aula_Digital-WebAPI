@@ -15,7 +15,7 @@ public class MapperDocentesBajas : RepoBase, IMapperDocentesBajas
 
     public IEnumerable<DocentesBajasDTO> GetAllDTO()
     {
-        string query = @"select d.IdDocente, d.Dni, d.Nombre, d.Apellido, d.Email, d.Habilitado, d.FechaBaja
+        string query = @"select d.IdDocente, d.Dni, d.Nombre, d.Apellido, d.Email, d.FechaBaja
                        from Docentes d 
                        where d.Habilitado = 0";
         try

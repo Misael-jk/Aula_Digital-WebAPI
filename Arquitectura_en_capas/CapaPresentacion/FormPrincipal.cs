@@ -103,6 +103,7 @@ namespace CapaPresentacion
         private readonly IMapperHistorialCarrito mapperHistorialCarrito;
         private readonly IMapperCarritosBajas mapperCarritosBajas;
         private readonly IMapperVarianteElemento mapperVarianteElemento;
+        private readonly IMapperDocentesBajas mapperDocentesBajas;
         #endregion
 
         #region Variables Capa Negocio
@@ -120,6 +121,7 @@ namespace CapaPresentacion
         private readonly ElementosBajasCN elementosBajasCN;
         private readonly VarianteElementoCN varianteElementoCN;
         private readonly UbicacionCN ubicacionCN;
+        private readonly DocentesBajasCN docentesBajasCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -195,6 +197,7 @@ namespace CapaPresentacion
             mapperInventario = new MapperInventario(conexion);
             mapperCarritosBajas = new MapperCarritosBajas(conexion);
             mapperVarianteElemento = new MapperVarianteElemento(conexion);
+            mapperDocentesBajas = new MapperDocentesBajas(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -210,6 +213,7 @@ namespace CapaPresentacion
             elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);
             varianteElementoCN = new VarianteElementoCN(repoVarianteElemento, repoTipoElemento, repoModelo, mapperVarianteElemento);
             ubicacionCN = new UbicacionCN(repoUbicacion);
+            docentesBajasCN = new DocentesBajasCN(mapperDocentesBajas, repoDocentes);
 
         }
 
@@ -364,7 +368,7 @@ namespace CapaPresentacion
         private void BtnDocentes_Click(object sender, EventArgs e)
         {
             if (docentesUC == null)
-                docentesUC = new DocentesUC(docentesCN);
+                docentesUC = new DocentesUC(docentesCN, docentesBajasCN);
 
             CambiarNombrePort(BtnDocentes.Text);
 
@@ -375,15 +379,6 @@ namespace CapaPresentacion
             }
 
             MostrarSolo(docentesUC);
-
-            try
-            {
-                docentesUC.MostrarDocentes();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar datos en DocentesUC: " + ex.Message);
-            }
         }
 
         private void BtnCategoria_Click(object sender, EventArgs e)

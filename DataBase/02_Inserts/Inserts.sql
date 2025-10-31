@@ -116,9 +116,10 @@ INSERT INTO Cursos (curso) VALUES
 -- ESTADOS PRESTAMO
 -- ======================
 INSERT INTO EstadosPrestamo (estadoPrestamo) VALUES
-('Activo'),
-('Finalizado'),
-('Cancelado');
+('En Prestamo'),
+('Devuelto'),
+('Cancelado'),
+('En Parcial');
 
 
 -- ======================

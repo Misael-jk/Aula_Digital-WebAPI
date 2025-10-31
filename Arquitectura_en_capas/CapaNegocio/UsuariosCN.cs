@@ -149,13 +149,6 @@ public class UsuariosCN
     }
     #endregion
 
-    #region Obtener por usuario
-    public Usuarios? ObtenerUser(string User)
-    {
-        return repoUsuarios.GetByUser(User);
-    }
-    #endregion
-
     #region VALIDACIONES
     private void ValidarDatos(Usuarios usuariosNEW)
     {
