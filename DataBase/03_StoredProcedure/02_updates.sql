@@ -126,7 +126,7 @@ drop procedure if exists UpdateUsuario $$
 create procedure UpdateUsuario (in unidUsuario tinyint, in unusuario varchar(40), in unpassword varchar(70), in unnombre varchar(40), in unapellido varchar(40), in unrol tinyint, in unemail varchar(70), in unafotoperfil VARCHAR(255), in unhabilitado boolean, in unafechaBaja datetime)
 begin
     update usuarios u
-    set idUsuario = unidEncargado,
+    set idUsuario = unidUsuario,
         usuario = unusuario,
         pass = unpassword,
         nombre = unnombre,

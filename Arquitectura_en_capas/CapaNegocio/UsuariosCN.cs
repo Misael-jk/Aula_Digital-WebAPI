@@ -166,7 +166,7 @@ public class UsuariosCN
     #endregion
 
     #region Obtener ultima aportacion de usuario
-    public HistorialCambios? ObtenerUltimaAportacion(int idUsuario)
+    public string? ObtenerUltimaAportacion(int idUsuario)
     {
         return repoHistorialCambio.GetLastDateByUser(idUsuario);
     }

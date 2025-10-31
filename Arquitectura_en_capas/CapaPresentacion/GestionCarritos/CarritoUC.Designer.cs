@@ -41,13 +41,11 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -56,16 +54,20 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlContenedorCasilleros1 = new Panel();
             pnlContenedorCasilleros2 = new Panel();
             pictureBox1 = new PictureBox();
@@ -85,6 +87,11 @@
             txtNroSerieCarrito = new Guna.UI2.WinForms.Guna2TextBox();
             lblIDCarrito = new Label();
             grbCarritoSeleccionado = new Guna.UI2.WinForms.Guna2GroupBox();
+            lblFechaModificacion = new Label();
+            lblUbicacionCarrito = new Label();
+            lblModeloCarrito = new Label();
+            lblNroSerieCarrito = new Label();
+            lblEquipoCarrito = new Label();
             lblOcupados = new Label();
             lblCapacidad = new Label();
             ptbEstado = new PictureBox();
@@ -94,11 +101,7 @@
             grbApartadoVisual = new Guna.UI2.WinForms.Guna2GroupBox();
             grbAgregarNotebook = new Guna.UI2.WinForms.Guna2GroupBox();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            lblEquipoCarrito = new Label();
-            lblNroSerieCarrito = new Label();
-            lblModeloCarrito = new Label();
-            lblUbicacionCarrito = new Label();
-            lblFechaModificacion = new Label();
+            cmbHabilitado = new Guna.UI2.WinForms.Guna2ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             grbListaDeCarritos.SuspendLayout();
@@ -154,7 +157,7 @@
             btnAgregarCarrito.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
             btnAgregarCarrito.Image = (Image)resources.GetObject("btnAgregarCarrito.Image");
             btnAgregarCarrito.ImageAlign = HorizontalAlignment.Left;
-            btnAgregarCarrito.Location = new Point(561, 7);
+            btnAgregarCarrito.Location = new Point(16, 8);
             btnAgregarCarrito.Name = "btnAgregarCarrito";
             btnAgregarCarrito.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnAgregarCarrito.Size = new Size(147, 26);
@@ -287,15 +290,16 @@
             // 
             grbListaDeCarritos.BorderColor = Color.Indigo;
             grbListaDeCarritos.BorderThickness = 2;
+            grbListaDeCarritos.Controls.Add(cmbHabilitado);
             grbListaDeCarritos.Controls.Add(btnAgregarCarrito);
             grbListaDeCarritos.Controls.Add(dtgCarrito);
             grbListaDeCarritos.CustomBorderColor = Color.Indigo;
-            grbListaDeCarritos.CustomizableEdges = customizableEdges13;
+            grbListaDeCarritos.CustomizableEdges = customizableEdges15;
             grbListaDeCarritos.Font = new Font("Segoe UI Black", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grbListaDeCarritos.ForeColor = Color.White;
             grbListaDeCarritos.Location = new Point(320, 15);
             grbListaDeCarritos.Name = "grbListaDeCarritos";
-            grbListaDeCarritos.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            grbListaDeCarritos.ShadowDecoration.CustomizableEdges = customizableEdges16;
             grbListaDeCarritos.Size = new Size(714, 555);
             grbListaDeCarritos.TabIndex = 3;
             grbListaDeCarritos.Text = "- Carritos -";
@@ -360,7 +364,7 @@
             // 
             cmbUbicacion.AllowDrop = true;
             cmbUbicacion.BackColor = Color.Transparent;
-            cmbUbicacion.CustomizableEdges = customizableEdges15;
+            cmbUbicacion.CustomizableEdges = customizableEdges17;
             cmbUbicacion.DrawMode = DrawMode.OwnerDrawFixed;
             cmbUbicacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbUbicacion.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -370,7 +374,7 @@
             cmbUbicacion.ItemHeight = 30;
             cmbUbicacion.Location = new Point(18, 355);
             cmbUbicacion.Name = "cmbUbicacion";
-            cmbUbicacion.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            cmbUbicacion.ShadowDecoration.CustomizableEdges = customizableEdges18;
             cmbUbicacion.Size = new Size(251, 36);
             cmbUbicacion.TabIndex = 38;
             // 
@@ -378,7 +382,7 @@
             // 
             cmbModelo.AllowDrop = true;
             cmbModelo.BackColor = Color.Transparent;
-            cmbModelo.CustomizableEdges = customizableEdges17;
+            cmbModelo.CustomizableEdges = customizableEdges19;
             cmbModelo.DrawMode = DrawMode.OwnerDrawFixed;
             cmbModelo.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbModelo.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -388,7 +392,7 @@
             cmbModelo.ItemHeight = 30;
             cmbModelo.Location = new Point(18, 291);
             cmbModelo.Name = "cmbModelo";
-            cmbModelo.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            cmbModelo.ShadowDecoration.CustomizableEdges = customizableEdges20;
             cmbModelo.Size = new Size(251, 36);
             cmbModelo.TabIndex = 37;
             // 
@@ -398,7 +402,7 @@
             btnActualizarCarrito.BorderColor = Color.Chocolate;
             btnActualizarCarrito.BorderRadius = 11;
             btnActualizarCarrito.BorderThickness = 1;
-            btnActualizarCarrito.CustomizableEdges = customizableEdges19;
+            btnActualizarCarrito.CustomizableEdges = customizableEdges21;
             btnActualizarCarrito.DisabledState.BorderColor = Color.DarkGray;
             btnActualizarCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
             btnActualizarCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -411,7 +415,7 @@
             btnActualizarCarrito.ImageAlign = HorizontalAlignment.Left;
             btnActualizarCarrito.Location = new Point(18, 505);
             btnActualizarCarrito.Name = "btnActualizarCarrito";
-            btnActualizarCarrito.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btnActualizarCarrito.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnActualizarCarrito.Size = new Size(104, 37);
             btnActualizarCarrito.TabIndex = 34;
             btnActualizarCarrito.Text = "Guardar cambios";
@@ -421,7 +425,7 @@
             // txtEquipoCarrito
             // 
             txtEquipoCarrito.BorderRadius = 7;
-            txtEquipoCarrito.CustomizableEdges = customizableEdges21;
+            txtEquipoCarrito.CustomizableEdges = customizableEdges23;
             txtEquipoCarrito.DefaultText = "";
             txtEquipoCarrito.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEquipoCarrito.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -437,14 +441,14 @@
             txtEquipoCarrito.PlaceholderForeColor = Color.DarkGray;
             txtEquipoCarrito.PlaceholderText = "Ingresar Equipo/Nombre";
             txtEquipoCarrito.SelectedText = "";
-            txtEquipoCarrito.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            txtEquipoCarrito.ShadowDecoration.CustomizableEdges = customizableEdges24;
             txtEquipoCarrito.Size = new Size(251, 32);
             txtEquipoCarrito.TabIndex = 35;
             // 
             // txtNroSerieCarrito
             // 
             txtNroSerieCarrito.BorderRadius = 7;
-            txtNroSerieCarrito.CustomizableEdges = customizableEdges23;
+            txtNroSerieCarrito.CustomizableEdges = customizableEdges25;
             txtNroSerieCarrito.DefaultText = "";
             txtNroSerieCarrito.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNroSerieCarrito.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -460,7 +464,7 @@
             txtNroSerieCarrito.PlaceholderForeColor = Color.DarkGray;
             txtNroSerieCarrito.PlaceholderText = "Ingresar Numero de serie";
             txtNroSerieCarrito.SelectedText = "";
-            txtNroSerieCarrito.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            txtNroSerieCarrito.ShadowDecoration.CustomizableEdges = customizableEdges26;
             txtNroSerieCarrito.Size = new Size(251, 32);
             txtNroSerieCarrito.TabIndex = 36;
             // 
@@ -497,16 +501,76 @@
             grbCarritoSeleccionado.Controls.Add(cmbModelo);
             grbCarritoSeleccionado.Controls.Add(btnActualizarCarrito);
             grbCarritoSeleccionado.CustomBorderColor = Color.Indigo;
-            grbCarritoSeleccionado.CustomizableEdges = customizableEdges27;
+            grbCarritoSeleccionado.CustomizableEdges = customizableEdges29;
             grbCarritoSeleccionado.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grbCarritoSeleccionado.ForeColor = Color.GhostWhite;
             grbCarritoSeleccionado.Location = new Point(12, 15);
             grbCarritoSeleccionado.Name = "grbCarritoSeleccionado";
-            grbCarritoSeleccionado.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            grbCarritoSeleccionado.ShadowDecoration.CustomizableEdges = customizableEdges30;
             grbCarritoSeleccionado.Size = new Size(292, 555);
             grbCarritoSeleccionado.TabIndex = 5;
             grbCarritoSeleccionado.Text = "- Datos de carrito seleccionado -";
             grbCarritoSeleccionado.TextAlign = HorizontalAlignment.Center;
+            // 
+            // lblFechaModificacion
+            // 
+            lblFechaModificacion.AutoSize = true;
+            lblFechaModificacion.BackColor = SystemColors.ButtonHighlight;
+            lblFechaModificacion.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblFechaModificacion.ForeColor = Color.Black;
+            lblFechaModificacion.Location = new Point(18, 403);
+            lblFechaModificacion.Name = "lblFechaModificacion";
+            lblFechaModificacion.Size = new Size(129, 15);
+            lblFechaModificacion.TabIndex = 54;
+            lblFechaModificacion.Text = "Fecha de modificacion: ";
+            // 
+            // lblUbicacionCarrito
+            // 
+            lblUbicacionCarrito.AutoSize = true;
+            lblUbicacionCarrito.BackColor = SystemColors.ButtonHighlight;
+            lblUbicacionCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUbicacionCarrito.ForeColor = Color.Black;
+            lblUbicacionCarrito.Location = new Point(18, 337);
+            lblUbicacionCarrito.Name = "lblUbicacionCarrito";
+            lblUbicacionCarrito.Size = new Size(63, 15);
+            lblUbicacionCarrito.TabIndex = 53;
+            lblUbicacionCarrito.Text = "Ubicacion:";
+            // 
+            // lblModeloCarrito
+            // 
+            lblModeloCarrito.AutoSize = true;
+            lblModeloCarrito.BackColor = SystemColors.ButtonHighlight;
+            lblModeloCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblModeloCarrito.ForeColor = Color.Black;
+            lblModeloCarrito.Location = new Point(18, 273);
+            lblModeloCarrito.Name = "lblModeloCarrito";
+            lblModeloCarrito.Size = new Size(51, 15);
+            lblModeloCarrito.TabIndex = 52;
+            lblModeloCarrito.Text = "Modelo:";
+            // 
+            // lblNroSerieCarrito
+            // 
+            lblNroSerieCarrito.AutoSize = true;
+            lblNroSerieCarrito.BackColor = SystemColors.ButtonHighlight;
+            lblNroSerieCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNroSerieCarrito.ForeColor = Color.Black;
+            lblNroSerieCarrito.Location = new Point(18, 212);
+            lblNroSerieCarrito.Name = "lblNroSerieCarrito";
+            lblNroSerieCarrito.Size = new Size(73, 15);
+            lblNroSerieCarrito.TabIndex = 51;
+            lblNroSerieCarrito.Text = "Nro de serie:";
+            // 
+            // lblEquipoCarrito
+            // 
+            lblEquipoCarrito.AutoSize = true;
+            lblEquipoCarrito.BackColor = SystemColors.ButtonHighlight;
+            lblEquipoCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEquipoCarrito.ForeColor = Color.Black;
+            lblEquipoCarrito.Location = new Point(18, 150);
+            lblEquipoCarrito.Name = "lblEquipoCarrito";
+            lblEquipoCarrito.Size = new Size(47, 15);
+            lblEquipoCarrito.TabIndex = 50;
+            lblEquipoCarrito.Text = "Equipo:";
             // 
             // lblOcupados
             // 
@@ -571,7 +635,7 @@
             btnDeshabiliarCarrito.BorderColor = Color.Maroon;
             btnDeshabiliarCarrito.BorderRadius = 11;
             btnDeshabiliarCarrito.BorderThickness = 1;
-            btnDeshabiliarCarrito.CustomizableEdges = customizableEdges25;
+            btnDeshabiliarCarrito.CustomizableEdges = customizableEdges27;
             btnDeshabiliarCarrito.DisabledState.BorderColor = Color.DarkGray;
             btnDeshabiliarCarrito.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDeshabiliarCarrito.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -584,7 +648,7 @@
             btnDeshabiliarCarrito.ImageAlign = HorizontalAlignment.Left;
             btnDeshabiliarCarrito.Location = new Point(165, 505);
             btnDeshabiliarCarrito.Name = "btnDeshabiliarCarrito";
-            btnDeshabiliarCarrito.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            btnDeshabiliarCarrito.ShadowDecoration.CustomizableEdges = customizableEdges28;
             btnDeshabiliarCarrito.Size = new Size(104, 37);
             btnDeshabiliarCarrito.TabIndex = 41;
             btnDeshabiliarCarrito.Text = "Deshabilitar Notebook";
@@ -598,12 +662,12 @@
             grbApartadoVisual.Controls.Add(pnlContenedorCasilleros2);
             grbApartadoVisual.Controls.Add(pictureBox1);
             grbApartadoVisual.CustomBorderColor = Color.Indigo;
-            grbApartadoVisual.CustomizableEdges = customizableEdges29;
+            grbApartadoVisual.CustomizableEdges = customizableEdges31;
             grbApartadoVisual.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grbApartadoVisual.ForeColor = Color.GhostWhite;
             grbApartadoVisual.Location = new Point(12, 591);
             grbApartadoVisual.Name = "grbApartadoVisual";
-            grbApartadoVisual.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            grbApartadoVisual.ShadowDecoration.CustomizableEdges = customizableEdges32;
             grbApartadoVisual.Size = new Size(604, 492);
             grbApartadoVisual.TabIndex = 6;
             grbApartadoVisual.Text = "- Apartado visual de las notebooks del carrito seleccionado -";
@@ -620,12 +684,12 @@
             grbAgregarNotebook.Controls.Add(txtCodBarra);
             grbAgregarNotebook.Controls.Add(cmbEstados);
             grbAgregarNotebook.CustomBorderColor = Color.Indigo;
-            grbAgregarNotebook.CustomizableEdges = customizableEdges33;
+            grbAgregarNotebook.CustomizableEdges = customizableEdges35;
             grbAgregarNotebook.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grbAgregarNotebook.ForeColor = Color.GhostWhite;
             grbAgregarNotebook.Location = new Point(640, 591);
             grbAgregarNotebook.Name = "grbAgregarNotebook";
-            grbAgregarNotebook.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            grbAgregarNotebook.ShadowDecoration.CustomizableEdges = customizableEdges36;
             grbAgregarNotebook.Size = new Size(393, 492);
             grbAgregarNotebook.TabIndex = 41;
             grbAgregarNotebook.Text = "- Agregar notebook a carrito seleccionado -";
@@ -638,7 +702,7 @@
             guna2TextBox1.BackColor = SystemColors.ActiveBorder;
             guna2TextBox1.BorderRadius = 7;
             guna2TextBox1.CharacterCasing = CharacterCasing.Upper;
-            guna2TextBox1.CustomizableEdges = customizableEdges31;
+            guna2TextBox1.CustomizableEdges = customizableEdges33;
             guna2TextBox1.DefaultText = "";
             guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -654,69 +718,28 @@
             guna2TextBox1.PlaceholderForeColor = Color.DarkGray;
             guna2TextBox1.PlaceholderText = "Nro de serie";
             guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges34;
             guna2TextBox1.Size = new Size(325, 36);
             guna2TextBox1.TabIndex = 28;
             // 
-            // lblEquipoCarrito
+            // cmbHabilitado
             // 
-            lblEquipoCarrito.AutoSize = true;
-            lblEquipoCarrito.BackColor = SystemColors.ButtonHighlight;
-            lblEquipoCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblEquipoCarrito.ForeColor = Color.Black;
-            lblEquipoCarrito.Location = new Point(18, 150);
-            lblEquipoCarrito.Name = "lblEquipoCarrito";
-            lblEquipoCarrito.Size = new Size(47, 15);
-            lblEquipoCarrito.TabIndex = 50;
-            lblEquipoCarrito.Text = "Equipo:";
-            // 
-            // lblNroSerieCarrito
-            // 
-            lblNroSerieCarrito.AutoSize = true;
-            lblNroSerieCarrito.BackColor = SystemColors.ButtonHighlight;
-            lblNroSerieCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNroSerieCarrito.ForeColor = Color.Black;
-            lblNroSerieCarrito.Location = new Point(18, 212);
-            lblNroSerieCarrito.Name = "lblNroSerieCarrito";
-            lblNroSerieCarrito.Size = new Size(73, 15);
-            lblNroSerieCarrito.TabIndex = 51;
-            lblNroSerieCarrito.Text = "Nro de serie:";
-            // 
-            // lblModeloCarrito
-            // 
-            lblModeloCarrito.AutoSize = true;
-            lblModeloCarrito.BackColor = SystemColors.ButtonHighlight;
-            lblModeloCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblModeloCarrito.ForeColor = Color.Black;
-            lblModeloCarrito.Location = new Point(18, 273);
-            lblModeloCarrito.Name = "lblModeloCarrito";
-            lblModeloCarrito.Size = new Size(51, 15);
-            lblModeloCarrito.TabIndex = 52;
-            lblModeloCarrito.Text = "Modelo:";
-            // 
-            // lblUbicacionCarrito
-            // 
-            lblUbicacionCarrito.AutoSize = true;
-            lblUbicacionCarrito.BackColor = SystemColors.ButtonHighlight;
-            lblUbicacionCarrito.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblUbicacionCarrito.ForeColor = Color.Black;
-            lblUbicacionCarrito.Location = new Point(18, 337);
-            lblUbicacionCarrito.Name = "lblUbicacionCarrito";
-            lblUbicacionCarrito.Size = new Size(63, 15);
-            lblUbicacionCarrito.TabIndex = 53;
-            lblUbicacionCarrito.Text = "Ubicacion:";
-            // 
-            // lblFechaModificacion
-            // 
-            lblFechaModificacion.AutoSize = true;
-            lblFechaModificacion.BackColor = SystemColors.ButtonHighlight;
-            lblFechaModificacion.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblFechaModificacion.ForeColor = Color.Black;
-            lblFechaModificacion.Location = new Point(18, 403);
-            lblFechaModificacion.Name = "lblFechaModificacion";
-            lblFechaModificacion.Size = new Size(129, 15);
-            lblFechaModificacion.TabIndex = 54;
-            lblFechaModificacion.Text = "Fecha de modificacion: ";
+            cmbHabilitado.AllowDrop = true;
+            cmbHabilitado.BackColor = Color.Transparent;
+            cmbHabilitado.CustomizableEdges = customizableEdges13;
+            cmbHabilitado.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbHabilitado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbHabilitado.FocusedColor = Color.FromArgb(94, 148, 255);
+            cmbHabilitado.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cmbHabilitado.Font = new Font("Segoe UI", 10F);
+            cmbHabilitado.ForeColor = Color.FromArgb(68, 88, 112);
+            cmbHabilitado.ItemHeight = 30;
+            cmbHabilitado.Location = new Point(509, 2);
+            cmbHabilitado.Name = "cmbHabilitado";
+            cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            cmbHabilitado.Size = new Size(203, 36);
+            cmbHabilitado.TabIndex = 59;
+            cmbHabilitado.SelectedIndexChanged += cmbHabilitado_SelectedIndexChanged;
             // 
             // CarritoUC
             // 
@@ -778,5 +801,6 @@
         private Label lblNroSerieCarrito;
         private Label lblEquipoCarrito;
         private Label lblFechaModificacion;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbHabilitado;
     }
 }

@@ -148,7 +148,7 @@ public class CarritosCN
                 }
             }
 
-            if (!uow.RepoCarritos.GetDisponible(carritoOLD.IdCarrito))
+            if (uow.RepoCarritos.GetEstadoEnPrestamo(carritoOLD.IdCarrito))
             {
                 throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
             }
@@ -227,7 +227,7 @@ public class CarritosCN
 
     public HistorialCambios? ObtenerUltimaFechaDeModiciacionPorID(int idCarrito)
     {
-        return uow.RepoHistorialCambio.GetUltimateDateByIdNotebook(idCarrito);
+        return uow.RepoHistorialCambio.GetUltimateDateByIdCarrito(idCarrito);
     }
 
     public int ObtenerCantidadPorCarrito(int idCarrito)

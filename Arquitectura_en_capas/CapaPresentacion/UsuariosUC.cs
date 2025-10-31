@@ -98,11 +98,11 @@ namespace CapaPresentacion
                 ptbEstado.Image = Properties.Resources.prestadoIcon;
             }
 
-            string UltimaAportacion = usuariosCN.ObtenerUltimaAportacion(_IdUserActual);
+            string? UltimaAportacion = usuariosCN.ObtenerUltimaAportacion(_IdUserActual);
 
             if (UltimaAportacion != null)
             {
-                lblUltimoAporte.Text += historialCambios?.FechaCambio;
+                lblUltimoAporte.Text += UltimaAportacion;
             }
             else
             {

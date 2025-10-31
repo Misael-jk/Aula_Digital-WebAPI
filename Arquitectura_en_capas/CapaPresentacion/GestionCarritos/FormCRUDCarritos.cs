@@ -57,6 +57,7 @@ namespace CapaPresentacion
 
             carritosCN.CrearCarrito(carrito, 1);
             _actualizarDatagrid.Invoke();
+            this.Close();
         }
     }
 }

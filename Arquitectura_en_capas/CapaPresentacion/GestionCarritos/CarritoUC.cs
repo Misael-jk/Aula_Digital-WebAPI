@@ -20,28 +20,45 @@ namespace CapaPresentacion
     public partial class CarritoUC : UserControl
     {
         private readonly CarritosCN carritosCN;
+        private readonly CarritosBajasCN carritosBajas;
         private List<Button> botonesCarrito;
         private int _idCarritoActual = 0;
         private int posicion;
         private readonly Usuarios userVerificado;
+        private DateTime? fechaBaja;
 
-        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado)
+        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado, CarritosBajasCN carritosBajas)
         {
             InitializeComponent();
 
             this.carritosCN = carritosCN;
             this.userVerificado = userVerificado;
-
+            this.carritosBajas = carritosBajas;
         }
 
         public void ActualizarDatagrid()
         {
-            dtgCarrito.DataSource = carritosCN.MostrarCarritos();
+            switch (cmbHabilitado.SelectedItem?.ToString())
+            {
+                case "Habilitados":
+                    dtgCarrito.DataSource = carritosCN.MostrarCarritos();
+                    break;
+                case "Deshabilitados":
+                    dtgCarrito.DataSource = carritosBajas.GetAllDTO();
+                    break;
+            }
         }
 
 
         private void CarritoUC_Load(object sender, EventArgs e)
         {
+            cmbHabilitado.Items.Add("Habilitados");
+            cmbHabilitado.Items.Add("Deshabilitados");
+            cmbHabilitado.SelectedIndex = 0;
+
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 1100);
+
             dtgCarrito.DataSource = carritosCN.MostrarCarritos();
 
 
@@ -104,6 +121,7 @@ namespace CapaPresentacion
             cmbModelo.SelectedValue = carrito?.IdModelo;
             cmbUbicacion.SelectedValue = carrito?.IdUbicacion;
             lblCapacidad.Text += carrito?.Capacidad;
+            fechaBaja = carrito?.FechaBaja;
 
             EstadosMantenimiento? estadosMantenimiento = carritosCN.ObtenerEstadoMantenimientoPorID(carrito.IdEstadoMantenimiento);
 
@@ -173,7 +191,7 @@ namespace CapaPresentacion
         {
             txtNroSerie.Clear();
             txtCodBarra.Clear();
-            cmbEstados.SelectedIndex = 0;
+            //cmbEstados.SelectedIndex = 0;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -236,7 +254,7 @@ namespace CapaPresentacion
             else
             {
                 txtCodBarra.Clear();
-                cmbEstados.SelectedIndex = 0;
+                //cmbEstados.SelectedIndex = 0;
                 CambiarDisponibilidadDatos(true, true, true);
             }
         }
@@ -278,9 +296,7 @@ namespace CapaPresentacion
 
         private void btnAddCarrito_Click(object sender, EventArgs e)
         {
-            Action _Actualizardatagrid = ActualizarDatagrid;
-
-            var CrearCarrito = new FormCRUDCarritos(carritosCN, _Actualizardatagrid);
+            var CrearCarrito = new FormCRUDCarritos(carritosCN, ActualizarDatagrid);
 
             CrearCarrito.Show();
         }
@@ -400,6 +416,8 @@ namespace CapaPresentacion
 
         private void btnActualizarCarrito_Click(object sender, EventArgs e)
         {
+            int idEstado = Convert.ToInt32(lblEstado.Tag);
+
             Carritos carritos = new Carritos()
             {
                 IdCarrito = _idCarritoActual,
@@ -408,20 +426,25 @@ namespace CapaPresentacion
                 Capacidad = 32,
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
-                //IdEstadoMantenimiento = (int)cmbEstadoMantenimientoCarrito.SelectedValue,
-                Habilitado = true,
-                FechaBaja = null
+                IdEstadoMantenimiento = idEstado,
+                Habilitado = idEstado != 1 && idEstado != 2 ? false : true,
+                FechaBaja = idEstado != 1 && idEstado != 2 ? fechaBaja : null,
             };
 
             carritosCN.ActualizarCarrito(carritos, userVerificado.IdRol);
 
-            ActualizarDatagrid();
+            cmbHabilitado.SelectedIndex = 0; ;
         }
 
         private void btnDeshabiliarCarrito_Click(object sender, EventArgs e)
         {
-            var formDeshabiltar = new FormDeshabilitarCNE(_idCarritoActual, carritosCN, userVerificado.IdRol);
+            var formDeshabiltar = new FormDeshabilitarCNE(_idCarritoActual, carritosCN, userVerificado.IdRol, ActualizarDatagrid);
             formDeshabiltar.Show();
+        }
+
+        private void cmbHabilitado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActualizarDatagrid();
         }
     }
 }

@@ -154,7 +154,7 @@ namespace CapaPresentacion
                 Patrimonio = txtPatrimonio.Text,
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
-                IdEstadoMantenimiento = (int)lblEstado.Tag,   //(int)cmbEstados.SelectedValue, use el TAG y force a que sea de tipo int
+                IdEstadoMantenimiento = Convert.ToInt32(lblEstado.Tag),  
                 IdTipoElemento = 1,
                 IdVarianteElemento = null,
                 IdCarrito = notebooks?.IdCarrito,

@@ -12,7 +12,9 @@ create view View_GetCarritoDTO as
 	from carritos c 
 	join estadosmantenimiento e using (idEstadoMantenimiento)
 	join Ubicacion u using (idUbicacion)
-	join Modelo m using (idModelo);
+	join Modelo m using (idModelo)
+	where c.habilitado = 1
+	and c.idEstadoMantenimiento in (1, 2);
 
 
 

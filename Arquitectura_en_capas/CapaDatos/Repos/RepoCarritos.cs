@@ -34,7 +34,7 @@ public class RepoCarritos : RepoBase, IRepoCarritos
         parametros.Add("unidCarrito", dbType: DbType.Int32, direction: ParameterDirection.Output);
         parametros.Add("unequipo", carritos.EquipoCarrito);
         parametros.Add("unnumeroSerieCarrito", carritos.NumeroSerieCarrito);
-        parametros.Add("unaCapacidad", carritos.Capacidad);
+        parametros.Add("unacapacidad", carritos.Capacidad);
         parametros.Add("unidEstadoMantenimiento", carritos.IdEstadoMantenimiento);
         parametros.Add("unidUbicacion", carritos.IdUbicacion);
         parametros.Add("unidModelo", carritos.IdModelo);
@@ -277,5 +277,18 @@ public class RepoCarritos : RepoBase, IRepoCarritos
         }
     }
     #endregion
+
+    public bool GetEstadoEnPrestamo(int idCarrito)
+    {
+        string sql = "select count(*) from Carritos where idCarrito = @IdCarrito and idEstadoMantenimiento = 2 and habilitado = true;";
+
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("@IdCarrito", idCarrito);
+
+        int disponible = Conexion.ExecuteScalar<int>(sql, parameters, transaction: Transaction);
+
+        return disponible > 0;
+    }
 }
  
