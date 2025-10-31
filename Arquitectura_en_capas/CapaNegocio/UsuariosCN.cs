@@ -12,14 +12,16 @@ public class UsuariosCN
 {
     private readonly IRepoUsuarios repoUsuarios;
     private readonly IRepoRoles repoRoles;
+    private readonly IRepoHistorialCambio repoHistorialCambio;
     private readonly IMapperUsuarios mapperUsuarios;
 
 
-    public UsuariosCN(IRepoUsuarios repoUsuarios, IRepoRoles repoRoles, IMapperUsuarios mapperUsuarios)
+    public UsuariosCN(IRepoUsuarios repoUsuarios, IRepoRoles repoRoles, IMapperUsuarios mapperUsuarios, IRepoHistorialCambio repoHistorialCambio)
     {
         this.repoUsuarios = repoUsuarios;
         this.repoRoles = repoRoles;
         this.mapperUsuarios = mapperUsuarios;
+        this.repoHistorialCambio = repoHistorialCambio;
     }
 
     #region READ
@@ -146,6 +148,27 @@ public class UsuariosCN
     public Usuarios? ObtenerID(int idUsuario)
     {
         return repoUsuarios.GetById(idUsuario);
+    }
+    #endregion
+
+    #region Obtener por usuario
+    public Usuarios? ObtenerUser(string User)
+    {
+        return repoUsuarios.GetByUser(User);
+    }
+    #endregion
+
+    #region Obtener rol por ID
+    public Roles? ObtenerRolPorID(int idRol)
+    {
+        return repoRoles.GetById(idRol);
+    }
+    #endregion
+
+    #region Obtener ultima aportacion de usuario
+    public HistorialCambios? ObtenerUltimaAportacion(int idUsuario)
+    {
+        return repoHistorialCambio.GetLastDateByUser(idUsuario);
     }
     #endregion
 

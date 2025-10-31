@@ -116,4 +116,25 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
         }
     }
     #endregion
+
+    #region Obtener fecha de ultima aportacion de un Uusario
+    public void GetLastDateByUser(int idUsuario)
+    {
+        string query = @"select max(fechaCambio) as 'FechaCambio'
+                        from historialcambio h 
+                        where h.idUsuario = @unidUsuario;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidUsuario", idUsuario);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<HistorialCambios>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la ultima fecha de aporte de un usuario");
+        }
+    }
+    #endregion
 }

@@ -22,6 +22,7 @@ namespace CapaPresentacion
         private IDbConnection conexion;
         private readonly RepoRoles repoRoles;
         private readonly RepoUsuarios repoUsuarios;
+        private readonly RepoHistorialCambio repoHistorialCambio;
         private readonly UsuariosCN usuariosCN;
         private readonly IMapperUsuarios mapperUsuarios;
         public LoginState(IDbConnection conexion)
@@ -32,7 +33,7 @@ namespace CapaPresentacion
             repoUsuarios = new RepoUsuarios(conexion);
             repoRoles = new RepoRoles(conexion);
             mapperUsuarios = new MapperUsuarios(conexion);
-            usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios);
+            usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
         }
 
         private void iconButton1_Click(object sender, EventArgs e)

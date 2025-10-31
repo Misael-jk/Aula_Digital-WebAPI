@@ -6,6 +6,7 @@ using CapaNegocio;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -16,16 +17,13 @@ namespace CapaPresentacion
     {
         private readonly UsuariosCN usuariosCN = null!;
         private bool mostrarPassword = false;
-        private readonly IRepoRoles repoRoles;
-        private int IdUser = 4;
-        private readonly IRepoUsuarios repoUsuarios;
+        private int _IdUserActual = 0;
+        private int IdUser = 0;
 
-        public UsuariosUC(UsuariosCN usuariosCN, IRepoRoles repoRoles, IRepoUsuarios repoUsuarios)
+        public UsuariosUC(UsuariosCN usuariosCN)
         {
             InitializeComponent();
             this.usuariosCN = usuariosCN;
-            this.repoRoles = repoRoles;
-            this.repoUsuarios = repoUsuarios;
         }
         private void UsuariosUC_Load_1(object sender, EventArgs e)
         {
@@ -69,16 +67,53 @@ namespace CapaPresentacion
 
             DataGridViewRow fila = dtgUsuarios.Rows[e.RowIndex];
 
-            txtUsuario.Text = fila.Cells["Usuario"].Value?.ToString();
-            txtNombre.Text = fila.Cells["Nombre"].Value?.ToString();
-            txtApellido.Text = fila.Cells["Apellido"].Value?.ToString();
-            txtEmail.Text = fila.Cells["Email"].Value?.ToString();
+            lblIDEncargado.Text = "ID: ";
+            lblUltimoAporte.Text = "Ultimo aporte: ";
+
+            _IdUserActual = Convert.ToInt32(fila.Cells["IdUsuario"].Value);
+
+            lblIDEncargado.Text += _IdUserActual;
+
+            Usuarios? usuarios = usuariosCN.ObtenerID(_IdUserActual);
+
+            txtUsuario.Text = usuarios?.Usuario;
+            txtNombre.Text = usuarios?.Nombre;
+            txtApellido.Text = usuarios?.Apellido;
+            txtEmail.Text = usuarios?.Email;
+
+            if (usuarios is not null)
+            {
+                Roles? roles = usuariosCN.ObtenerRolPorID(usuarios.IdRol);
+                lblRol.Text = roles?.Rol;
+            }
+
+            if (usuarios?.Habilitado == true)
+            {
+                lblHabilitado.Text = "Usuario habilitado";
+                ptbEstado.Image = Properties.Resources.disponibleIcon;
+            } 
+            else
+            {
+                lblHabilitado.Text = "Usuario inhabilitado";
+                ptbEstado.Image = Properties.Resources.prestadoIcon;
+            }
+
+            string UltimaAportacion = usuariosCN.ObtenerUltimaAportacion(_IdUserActual);
+
+            if (UltimaAportacion != null)
+            {
+                lblUltimoAporte.Text += historialCambios?.FechaCambio;
+            }
+            else
+            {
+                lblUltimoAporte.Text += "Sin aportaciones";
+            }
 
             //Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
             //cmbRoles.SelectedIndex = user.IdRol - 1;
 
-            string nombreFoto = fila.Cells["FotoPerfil"].Value?.ToString();
-            string carpetaFotos = Path.Combine(Application.StartupPath, "FotosUsuarios");
+            //string nombreFoto = fila.Cells["FotoPerfil"].Value?.ToString();
+            //string carpetaFotos = Path.Combine(Application.StartupPath, "FotosUsuarios");
 
             //if (!string.IsNullOrEmpty(nombreFoto))
             //{
