@@ -46,24 +46,24 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     {
         DynamicParameters parametros = new DynamicParameters();
 
-        parametros.Add("unidEncargado", usuarios.IdUsuario);
+        parametros.Add("unidUsuario", usuarios.IdUsuario);
         parametros.Add("unusuario", usuarios.Usuario);
         parametros.Add("unpassword", usuarios.Password);
         parametros.Add("unnombre", usuarios.Nombre);
         parametros.Add("unapellido", usuarios.Apellido);
         parametros.Add("unrol", usuarios.IdRol);
         parametros.Add("unemail", usuarios.Email);
-        parametros.Add("unfotoPerfil", usuarios.FotoPerfil);
+        parametros.Add("unafotoPerfil", usuarios.FotoPerfil);
         parametros.Add("unhabilitado", usuarios.Habilitado);
-        parametros.Add("unfechaBaja", usuarios.FechaBaja);
+        parametros.Add("unafechaBaja", usuarios.FechaBaja);
 
         try
         {
             Conexion.Execute("UpdateUsuario", parametros, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw new Exception("Hubo un error al Actualizar a un Usuario");
+            throw new Exception("Hubo un error al Actualizar a un Usuario" + ex);
         }
     }
     #endregion
@@ -127,7 +127,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     #region Obtener por ID
     public Usuarios? GetById(int idUsuario)
     {
-        string query = "select * from Usuarios where idUsuario = @idUsuario";
+        string query = "select idUsuario, usuario, pass AS 'Password', nombre, apellido, idRol, email, fotoPerfil, habilitado, fechaBaja from Usuarios where idUsuario = @idUsuario";
 
         DynamicParameters parametros = new DynamicParameters();
         try

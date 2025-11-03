@@ -248,11 +248,6 @@ public class UsuariosCN
         {
             throw new Exception("Formato de email invalido");
         }
-
-        if (repoUsuarios.GetByEmail(usuariosNEW.Email) != null)
-        {
-            throw new Exception("Ya existe un usuario con ese email");
-        }
     }
     #endregion
 

@@ -3,7 +3,7 @@
 -- ======================
 INSERT INTO Rol (rol) VALUES
 ('Administrador'),
-('Usuario'),
+('Encargado'),
 ('Invitado');
 
 -- ======================
