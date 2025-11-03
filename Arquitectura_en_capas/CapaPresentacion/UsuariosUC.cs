@@ -17,8 +17,17 @@ namespace CapaPresentacion
     {
         private readonly UsuariosCN usuariosCN = null!;
         private bool mostrarPassword = false;
+        private string RutaFoto;
+        private string _Password;
         private int _IdUserActual = 0;
         private int IdUser = 0;
+
+        #region Datos para comprobar que hubo cambios al seleccionar usuario
+        private string _usuario;
+        private string _Nombre;
+        private string _apellido;
+        private string _email;
+        #endregion
 
         public UsuariosUC(UsuariosCN usuariosCN)
         {
@@ -61,6 +70,13 @@ namespace CapaPresentacion
             }
         }
 
+        private void HabilitarBotones(bool actu, bool rest)
+        {
+            btnActualizar.Enabled = actu;
+            btnRestablecerCambios.Enabled = rest;
+        }
+
+        #region Obteniendo datos de un usuario seleccionado
         private void dtgUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -76,38 +92,57 @@ namespace CapaPresentacion
 
             Usuarios? usuarios = usuariosCN.ObtenerID(_IdUserActual);
 
+            #region Datos modificables de un usuario
             txtUsuario.Text = usuarios?.Usuario;
             txtNombre.Text = usuarios?.Nombre;
             txtApellido.Text = usuarios?.Apellido;
             txtEmail.Text = usuarios?.Email;
+            #endregion
 
             if (usuarios is not null)
             {
+                #region Guardando datos en variables
+                _usuario = usuarios.Usuario;
+                _Nombre = usuarios.Nombre;
+                _apellido = usuarios.Apellido;
+                _email = usuarios.Email;
+                #endregion
+
                 Roles? roles = usuariosCN.ObtenerRolPorID(usuarios.IdRol);
                 lblRol.Text = roles?.Rol;
+                lblRol.Tag = roles?.IdRol;
+
+                _Password = usuarios.Password;
+            }
+
+            if (usuarios?.FotoPerfil is not null)
+            {
+                RutaFoto = usuarios.FotoPerfil;
             }
 
             if (usuarios?.Habilitado == true)
             {
                 lblHabilitado.Text = "Usuario habilitado";
                 ptbEstado.Image = Properties.Resources.disponibleIcon;
-            } 
+            }
             else
             {
                 lblHabilitado.Text = "Usuario inhabilitado";
                 ptbEstado.Image = Properties.Resources.prestadoIcon;
             }
 
-            string UltimaAportacion = usuariosCN.ObtenerUltimaAportacion(_IdUserActual);
+            string? UltimaAportacion = usuariosCN.ObtenerUltimaAportacion(_IdUserActual);
 
             if (UltimaAportacion != null)
             {
-                lblUltimoAporte.Text += historialCambios?.FechaCambio;
+                lblUltimoAporte.Text += UltimaAportacion;
             }
             else
             {
                 lblUltimoAporte.Text += "Sin aportaciones";
             }
+
+            HabilitarBotones(false, false);
 
             //Usuarios? user = repoUsuarios.GetByUser(txtUsuario.Text);
             //cmbRoles.SelectedIndex = user.IdRol - 1;
@@ -131,6 +166,8 @@ namespace CapaPresentacion
 
             //ptbPerfil.Tag = nombreFoto;
         }
+        #endregion
+
         private void cbxMostraPassword_CheckedChanged(object sender, EventArgs e)
         {
             mostrarPassword = cbxMostraPassword.Checked;
@@ -169,114 +206,122 @@ namespace CapaPresentacion
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            string fotoPerfil = null;
+            //string fotoPerfil = null;
 
-            if (ptbPerfil.Tag != null && ptbPerfil.Tag.ToString() != "__ELIMINAR__")
-            {
-                string carpetaDestino = Path.Combine(Application.StartupPath, "FotosUsuarios");
-                Directory.CreateDirectory(carpetaDestino);
+            //if (ptbPerfil.Tag != null && ptbPerfil.Tag.ToString() != "__ELIMINAR__")
+            //{
+            //    string carpetaDestino = Path.Combine(Application.StartupPath, "FotosUsuarios");
+            //    Directory.CreateDirectory(carpetaDestino);
 
-                string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(ptbPerfil.Tag.ToString());
-                string destino = Path.Combine(carpetaDestino, nombreArchivo);
+            //    string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(ptbPerfil.Tag.ToString());
+            //    string destino = Path.Combine(carpetaDestino, nombreArchivo);
 
-                File.Copy(ptbPerfil.Tag.ToString(), destino, true);
-                fotoPerfil = nombreArchivo;
-            }
+            //    File.Copy(ptbPerfil.Tag.ToString(), destino, true);
+            //    fotoPerfil = nombreArchivo;
+            //}
 
-            Usuarios usuario = new Usuarios()
-            {
-                IdUsuario = IdUser,
-                Usuario = txtUsuario.Text,
-                Password = txtApellido.Text,
-                Nombre = txtNombre.Text,
-                Apellido = txtApellido.Text,
-                Email = txtEmail.Text,
-                IdRol = 1,
-                FotoPerfil = fotoPerfil
-            };
+            //Usuarios usuario = new Usuarios()
+            //{
+            //    IdUsuario = IdUser,
+            //    Usuario = txtUsuario.Text,
+            //    Password = txtApellido.Text,
+            //    Nombre = txtNombre.Text,
+            //    Apellido = txtApellido.Text,
+            //    Email = txtEmail.Text,
+            //    IdRol = Convert.ToInt32(lblRol),
+            //    FotoPerfil = fotoPerfil
+            //};
 
-            usuariosCN.CrearDocente(usuario);
+            //usuariosCN.CrearDocente(usuario);
 
-            ptbPerfil.Tag = null;
-            ptbPerfil.Image = null;
-            MostrarUsuarios();
+            //ptbPerfil.Tag = null;
+            //ptbPerfil.Image = null;
+            //MostrarUsuarios();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (dtgUsuarios.CurrentRow == null) return;
+            //if (dtgUsuarios.CurrentRow == null) return;
 
-            DataGridViewRow fila = dtgUsuarios.CurrentRow;
+            //DataGridViewRow fila = dtgUsuarios.CurrentRow;
 
-            string fotoAnterior = fila.Cells["FotoPerfil"].Value?.ToString();
-            string fotoPerfil = fotoAnterior;
+            //string fotoAnterior = fila.Cells["FotoPerfil"].Value?.ToString();
+            //string fotoPerfil = fotoAnterior;
 
-            if (ptbPerfil.Tag != null)
-            {
-                if (ptbPerfil.Tag.ToString() == "__ELIMINAR__")
-                {
-                    if (!string.IsNullOrEmpty(fotoAnterior))
-                    {
-                        string rutaVieja = Path.Combine(Application.StartupPath, "FotosUsuarios", fotoAnterior);
-                        if (File.Exists(rutaVieja)) File.Delete(rutaVieja);
-                    }
-                    fotoPerfil = null;
-                }
-                else
-                {
-                    string carpetaDestino = Path.Combine(Application.StartupPath, "FotosUsuarios");
-                    Directory.CreateDirectory(carpetaDestino);
+            //if (ptbPerfil.Tag != null)
+            //{
+            //    if (ptbPerfil.Tag.ToString() == "__ELIMINAR__")
+            //    {
+            //        if (!string.IsNullOrEmpty(fotoAnterior))
+            //        {
+            //            string rutaVieja = Path.Combine(Application.StartupPath, "FotosUsuarios", fotoAnterior);
+            //            if (File.Exists(rutaVieja)) File.Delete(rutaVieja);
+            //        }
+            //        fotoPerfil = null;
+            //    }
+            //    else
+            //    {
+            //        string carpetaDestino = Path.Combine(Application.StartupPath, "FotosUsuarios");
+            //        Directory.CreateDirectory(carpetaDestino);
 
-                    string extension = Path.GetExtension(ptbPerfil.Tag.ToString());
-                    string nombreUnico = Guid.NewGuid().ToString() + extension;
-                    string destino = Path.Combine(carpetaDestino, nombreUnico);
+            //        string extension = Path.GetExtension(ptbPerfil.Tag.ToString());
+            //        string nombreUnico = Guid.NewGuid().ToString() + extension;
+            //        string destino = Path.Combine(carpetaDestino, nombreUnico);
 
-                    File.Copy(ptbPerfil.Tag.ToString(), destino, true);
+            //        File.Copy(ptbPerfil.Tag.ToString(), destino, true);
 
-                    if (!string.IsNullOrEmpty(fotoAnterior))
-                    {
-                        string rutaVieja = Path.Combine(Application.StartupPath, "FotosUsuarios", fotoAnterior);
-                        if (File.Exists(rutaVieja)) File.Delete(rutaVieja);
-                    }
+            //        if (!string.IsNullOrEmpty(fotoAnterior))
+            //        {
+            //            string rutaVieja = Path.Combine(Application.StartupPath, "FotosUsuarios", fotoAnterior);
+            //            if (File.Exists(rutaVieja)) File.Delete(rutaVieja);
+            //        }
 
-                    fotoPerfil = nombreUnico;
-                }
-            }
+            //        fotoPerfil = nombreUnico;
+            //    }
+            //}
 
             Usuarios usuario = new Usuarios()
             {
-                IdUsuario = Convert.ToInt32(fila.Cells["IdUsuario"].Value),
+                IdUsuario = _IdUserActual,
                 Usuario = txtUsuario.Text,
-                Password = "pe",
+                Password = _Password,
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
-                IdRol = 1,
-                FotoPerfil = fotoPerfil
+                IdRol = Convert.ToInt32(lblRol.Tag),
+                FotoPerfil = RutaFoto
             };
 
             usuariosCN.ActualizarUsuario(usuario);
-
-            ptbPerfil.Tag = null;
             MostrarUsuarios();
-        }
-
-        private void btnDeseleccion_Click(object sender, EventArgs e)
-        {
-            txtUsuario.Text = "";
-            //txtContraseña.Text = "";
-            txtNombre.Text = "";
-            txtApellido.Text = "";
-            txtEmail.Text = "";
-            //cmbRoles.SelectedIndex = 0;
-            dtgUsuarios.ClearSelection();
-            ptbPerfil.Image = Properties.Resources.Perfil_default;
-            ptbPerfil.Tag = null;
+            HabilitarBotones(false, false);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void VerificarCambios(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text != _usuario || txtNombre.Text != _Nombre || txtApellido.Text != _apellido || txtEmail.Text != _email)
+            {
+                HabilitarBotones(true, true);
+            }
+            else
+            {
+                HabilitarBotones(false, false);
+            }
+        }
+
+        private void btnRestablecerCambios_Click(object sender, EventArgs e)
+        {
+            txtUsuario.Text = _usuario;
+            txtNombre.Text = _Nombre;
+            txtApellido.Text = _apellido;
+            txtEmail.Text = _email;
+
+            HabilitarBotones(false, false);
         }
     }
 }

@@ -118,7 +118,7 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
     #endregion
 
     #region Obtener fecha de ultima aportacion de un Uusario
-    public void GetLastDateByUser(int idUsuario)
+    public string? GetLastDateByUser(int idUsuario)
     {
         string query = @"select max(fechaCambio) as 'FechaCambio'
                         from historialcambio h 
@@ -129,7 +129,7 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
 
         try
         {
-            return Conexion.QueryFirstOrDefault<HistorialCambios>(query, parameters, transaction: Transaction);
+            return Conexion.QueryFirstOrDefault<string>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {

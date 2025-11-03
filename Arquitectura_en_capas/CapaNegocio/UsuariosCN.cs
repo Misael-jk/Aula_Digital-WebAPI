@@ -166,7 +166,7 @@ public class UsuariosCN
     #endregion
 
     #region Obtener ultima aportacion de usuario
-    public HistorialCambios? ObtenerUltimaAportacion(int idUsuario)
+    public string? ObtenerUltimaAportacion(int idUsuario)
     {
         return repoHistorialCambio.GetLastDateByUser(idUsuario);
     }
@@ -247,11 +247,6 @@ public class UsuariosCN
         catch
         {
             throw new Exception("Formato de email invalido");
-        }
-
-        if (repoUsuarios.GetByEmail(usuariosNEW.Email) != null)
-        {
-            throw new Exception("Ya existe un usuario con ese email");
         }
     }
     #endregion
