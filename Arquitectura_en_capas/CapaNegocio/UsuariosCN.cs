@@ -42,7 +42,7 @@ public class UsuariosCN
     #endregion
 
     #region INSERT USUARIO
-    public void CrearDocente(Usuarios usuariosNEW)
+    public void CrearUsuario(Usuarios usuariosNEW)
     {
 
         ValidarDatos(usuariosNEW);
@@ -102,6 +102,30 @@ public class UsuariosCN
 
         repoUsuarios.Update(usuariosNEW);
 
+    }
+    #endregion
+
+    #region DESHABILITAR USUARIO
+    public void DeshabilitarUsuario(int idUsuario)
+    {
+        Usuarios? usuariosOLD = repoUsuarios.GetById(idUsuario);
+
+        Roles? roles = repoRoles.GetById(usuariosOLD.IdRol);
+
+        if (usuariosOLD == null)
+        {
+            throw new Exception("El usuario no existe");
+        }
+
+        if (roles?.Rol == "Administrador")
+        {
+            throw new Exception("No se puede eliminar un usuario con rol de administrador");
+        }
+
+        usuariosOLD.Habilitado = false;
+        usuariosOLD.FechaBaja = DateTime.Now;
+
+        repoUsuarios.Update(usuariosOLD);
     }
     #endregion
 

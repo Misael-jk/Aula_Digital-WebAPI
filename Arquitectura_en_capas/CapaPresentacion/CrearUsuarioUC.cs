@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,40 @@ namespace CapaPresentacion
 {
     public partial class CrearUsuarioUC : UserControl
     {
-        public CrearUsuarioUC()
+        private readonly UsuariosCN usuariosCN;
+        private Action MostrarUsuarios;
+        public CrearUsuarioUC(UsuariosCN usuariosCN, Action mostrarUsuarios)
         {
             InitializeComponent();
+            this.usuariosCN = usuariosCN;
+            MostrarUsuarios = mostrarUsuarios;
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            var usuario = new Usuarios
+            {
+                Usuario = txtUsuario.Text,
+                Nombre = txtNombre.Text,
+                Apellido = txtApellido.Text,
+                Password = txtContraseña.Text,
+                Email = txtEmail.Text,
+                Habilitado = true,
+                FechaBaja = null,
+                FotoPerfil = null,
+                IdRol = (int)cmbRol.SelectedValue
+            };
+
+            usuariosCN.CrearUsuario(usuario);
+            MostrarUsuarios.Invoke();
+        }
+
+        private void CrearUsuarioUC_Load(object sender, EventArgs e)
+        {
+            var roles = usuariosCN.ObtenerRoles();
+            cmbRol.DataSource = roles.ToList();
+            cmbRol.DisplayMember = "Rol";
+            cmbRol.ValueMember = "IdRol";
         }
     }
 }

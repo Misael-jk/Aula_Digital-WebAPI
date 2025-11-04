@@ -9,6 +9,5 @@ public class UsuariosBajasDTO
     public required string Apellido { get; set; }
     public required string Rol { get; set; }
     public required string Email { get; set; }
-    public bool Habilitado { get; set; }
     public DateTime? FechaBaja { get; set; }
 }

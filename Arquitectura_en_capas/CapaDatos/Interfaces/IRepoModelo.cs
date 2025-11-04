@@ -11,5 +11,6 @@ public interface IRepoModelo
     public Modelos? GetById(int idModelo);
     public IEnumerable<Modelos> GetByTipo(int idTipoElemento);
     public Modelos? GetByNombre(string nombreModelo);
+    public Modelos? GetByTipoYNombre(int idTipoElemento, string nombreModelo);
     public void SetTransaction(IDbTransaction? transaction);
 }

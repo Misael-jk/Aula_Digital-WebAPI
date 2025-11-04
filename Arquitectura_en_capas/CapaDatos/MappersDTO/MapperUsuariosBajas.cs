@@ -16,7 +16,7 @@ public class MapperUsuariosBajas : RepoBase, IMapperUsuariosBajas
     public IEnumerable<UsuariosBajasDTO> GetAllDTO()
     {
         return Conexion.Query<Usuarios, Roles, UsuariosBajasDTO>(
-            "GetUsuariosBajasDTO",
+            "select * from View_GetUsuarioBajasDTO",
             (usuario, rol) => new UsuariosBajasDTO
             {
                 IdUsuario = usuario.IdUsuario,
@@ -25,12 +25,10 @@ public class MapperUsuariosBajas : RepoBase, IMapperUsuariosBajas
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
                 Email = usuario.Email,
-                Rol = rol.Rol,
-                Habilitado = usuario.Habilitado,
-                FechaBaja = usuario.FechaBaja
+                FechaBaja = usuario.FechaBaja,
+                Rol = rol.Rol
             },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "NombreUsuario,RolNombre"
+            splitOn: "Rol"
         ).ToList();
     }
 }

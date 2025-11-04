@@ -18,18 +18,22 @@ namespace CapaPresentacion
 {
     public partial class ElementosUC : UserControl
     {
-        private readonly ElementosCN elementosCN = null!;
-        private readonly TiposElementoCN tiposElementoCN = null!;
+        private readonly ElementosCN elementosCN;
+        private readonly TiposElementoCN tiposElementoCN;
+        private readonly Usuarios userVerificado;
         private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
         private readonly IRepoElemento repoElemento;
         private int idElemento = 0;
-        public ElementosUC(ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN)
+
+        private int idVariante = 0;
+        public ElementosUC(ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, Usuarios userVerificado)
         {
             InitializeComponent();
             this.elementosCN = elementosCN;
             this.tiposElementoCN = tiposElementoCN;
             this.repoEstadosMantenimiento = repoEstadosMantenimiento;
             this.repoElemento = repoElemento;
+            this.userVerificado = userVerificado;
         }
 
         public void CargarElementos()
@@ -51,27 +55,22 @@ namespace CapaPresentacion
             this.AutoScrollMinSize = new Size(0, 1100);
 
             //IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll(); ya es el Listar Estado Mantenimiento de ElementosCN
-            IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
+            //IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
 
-            cmbEstados.DataSource = estados; 
-            cmbEstados.ValueMember = "IdEstadoMantenimiento";
-            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+            //cmbEstados.DataSource = estados; 
+            //cmbEstados.ValueMember = "IdEstadoMantenimiento";
+            //cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
 
-            cmbModelos.DataSource = elementosCN.ListarModelos();
-            cmbModelos.ValueMember = "IdModelo";
-            cmbModelos.DisplayMember = "ModeloNombre";
+            //var estadosBusqueda = estados
+            //    .Where(e => e.IdEstadoMantenimiento != 2) 
+            //    .ToList();
 
-    
-            var estadosBusqueda = estados
-                .Where(e => e.IdEstadoMantenimiento != 2) 
-                .ToList();
 
-     
-            estadosBusqueda.Insert(0, new EstadosMantenimiento
-            {
-                IdEstadoMantenimiento = 0,
-                EstadoMantenimientoNombre = "Ningún estado"
-            });
+            //estadosBusqueda.Insert(0, new EstadosMantenimiento
+            //{
+            //    IdEstadoMantenimiento = 0,
+            //    EstadoMantenimientoNombre = "Ningún estado"
+            //});
 
             //cmbBuscarEstado.DataSource = estadosBusqueda;
             //cmbBuscarEstado.ValueMember = "IdEstadoMantenimiento";
@@ -79,11 +78,15 @@ namespace CapaPresentacion
 
 
             // -------------------- TIPOS --------------------
-            var tipos = elementosCN.ListarTiposElemento();
+            var tipos = tiposElementoCN.GetTiposByElemento();
 
             cmbTipoElemento.DataSource = tipos.ToList();
             cmbTipoElemento.ValueMember = "IdTipoElemento";
             cmbTipoElemento.DisplayMember = "ElementoTipo";
+
+            cmbUbicaciones.DataSource = elementosCN.ObtenerUbicaciones();
+            cmbUbicaciones.ValueMember = "IdUbicacion";
+            cmbUbicaciones.DisplayMember = "NombreUbicacion";
 
             //var tiposBusqueda = tipos.ToList();
             //tiposBusqueda.Insert(0, new TipoElemento { IdTipoElemento = 0, ElementoTipo = "Ningún tipo" });
@@ -97,14 +100,18 @@ namespace CapaPresentacion
         {
             if (e.RowIndex < 0) return;
 
-            DataGridViewRow fila = dgvElementos.Rows[e.RowIndex];
+            var fila = dgvElementos.Rows[e.RowIndex];
 
-            txtCodBarra.Text = fila.Cells["codigoBarra"].Value?.ToString();
-            txtNroSerie.Text = fila.Cells["numeroSerie"].Value?.ToString();
+            idElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
+            var elemento = repoElemento.GetById(idElemento);
 
-            Elemento? elemento = repoElemento.GetByNumeroSerie(txtNroSerie.Text);
-            cmbEstados.SelectedIndex = elemento.IdEstadoMantenimiento - 1;
-            cmbTipoElemento.SelectedIndex = elemento.IdTipoElemento - 1;
+            txtNroSerie.Text = elemento?.NumeroSerie;
+            txtCodBarra.Text = elemento?.CodigoBarra;
+            txtPatrimonio.Text = elemento?.Patrimonio;
+            cmbTipoElemento.SelectedValue = elemento.IdTipoElemento;
+            cmbVarianteElementos.SelectedValue = elemento.IdVarianteElemento.HasValue ? elemento.IdVarianteElemento.Value : -1;
+
+            cmbUbicaciones.SelectedIndex = elemento.IdUbicacion;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -125,31 +132,66 @@ namespace CapaPresentacion
 
         private void btnCrearElemento_Click(object sender, EventArgs e)
         {
-            //Elemento elemento = new Elemento()
-            //{
-            //    IdElemento = idElemento,
-            //    IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
-            //    IdCarrito = null,
-            //    PosicionCarrito = null,
-            //    IdEstadoElemento = (int)cmbEstados.SelectedValue,
-            //    numeroSerie = txtNroSerie.Text,
-            //    codigoBarra = txtCodBarra.Text,
-            //    Disponible = true,
-            //};
+            VariantesElemento? variante = elementosCN.ObtenerVariantePorID(idVariante);
 
-            //elementosCN.CrearElemento(elemento);
+            Elemento elemento = new Elemento()
+            {
+                IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
+                NumeroSerie = txtNroSerie.Text,
+                CodigoBarra = txtCodBarra.Text,
+                Patrimonio = txtPatrimonio.Text,
+                IdVarianteElemento = idVariante,
+                IdUbicacion = (int)cmbUbicaciones.SelectedValue,
+                IdModelo = variante.IdModelo,
+                IdEstadoMantenimiento = 1,
+                Habilitado = true,
+                FechaBaja = null
+            };
+
+            elementosCN.CrearElemento(elemento, userVerificado.IdUsuario);
             CargarElementos();
         }
 
         private void btnActualizarElemento_Click(object sender, EventArgs e)
         {
+            VariantesElemento? variante = elementosCN.ObtenerVariantePorID(idVariante);
+            Elemento? elementoOLD = elementosCN.ObtenerPorId(idElemento);
 
+            var elemento = new Elemento
+            {
+                IdElemento = idElemento,
+                IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
+                NumeroSerie = txtNroSerie.Text,
+                CodigoBarra = txtCodBarra.Text,
+                Patrimonio = txtPatrimonio.Text,
+                IdVarianteElemento = idVariante,
+                IdUbicacion = (int)cmbUbicaciones.SelectedValue,
+                IdModelo = variante.IdModelo,
+                IdEstadoMantenimiento = 1,
+                Habilitado = true,
+                FechaBaja = null
+            };
+
+            elementosCN.ActualizarElemento(elemento, userVerificado.IdUsuario);
+            CargarElementos();
         }
 
         private void btnDeshabilitar_Click(object sender, EventArgs e)
         {
             //elementosCN.DeshabilitarElemento(txtNroSerie.Text);
             CargarElementos();
+        }
+
+        private void cmbTipoElemento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbTipoElemento.SelectedValue is int selectedValue)
+            {
+                idVariante = selectedValue - 1;
+
+                cmbVarianteElementos.DataSource = elementosCN.ObtenerVariantesPorTipo(selectedValue);
+                cmbVarianteElementos.ValueMember = "IdVarianteElemento";
+                cmbVarianteElementos.DisplayMember = "Variante";
+            }
         }
     }
 }

@@ -26,6 +26,7 @@ namespace CapaPresentacion
         private int posicion;
         private readonly Usuarios userVerificado;
         private DateTime? fechaBaja;
+        private System.Windows.Forms.Timer _searchTimer;
 
         public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado, CarritosBajasCN carritosBajas)
         {
@@ -61,7 +62,9 @@ namespace CapaPresentacion
 
             dtgCarrito.DataSource = carritosCN.MostrarCarritos();
 
-
+            _searchTimer = new System.Windows.Forms.Timer();
+            _searchTimer.Interval = 700;
+            _searchTimer.Tick += _searchTimer_Tick; ;
 
             CambiarDisponibilidadDatos(false, false, false);
 
@@ -78,16 +81,55 @@ namespace CapaPresentacion
             cmbUbicacion.DisplayMember = "NombreUbicacion";
         }
 
-        private void RenovarDatos()
+        private void txtNroSerie_TextChanged(object sender, EventArgs e)
+        {
+            if (!txtNroSerie.Focused)
+            {
+                return;
+            }
+
+            _searchTimer.Stop();
+            _searchTimer.Start();
+        }
+
+        private void _searchTimer_Tick(object? sender, EventArgs e)
+        {
+            _searchTimer.Stop();
+
+            if (string.IsNullOrWhiteSpace(txtNroSerie.Text))
+            {
+                return;
+            }
+
+            if (_idCarritoActual > 0)
+            {
+                var datos = carritosCN.ObtenerPorSerieOCodBarra(txtNroSerie.Text, null);
+
+
+                if (datos != null)
+                {
+                    txtCodBarra.Text = datos.CodigoBarra;
+                    cmbEstados.SelectedValue = datos.IdEstadoMantenimiento;
+                    CambiarDisponibilidadDatos(true, false, false);
+
+                }
+                else
+                {
+                    txtCodBarra.Clear();
+                    //cmbEstados.SelectedIndex = 0;
+                    CambiarDisponibilidadDatos(true, true, true);
+                }
+            }
+        }
+
+        public void RenovarDatos()
         {
             var numSeriesBD = carritosCN.ObtenerSeriePorNotebook();
 
             string[] numSeries = numSeriesBD.Select(p => p.NumeroSerie).ToArray();
 
             var lista = new AutoCompleteStringCollection();
-
             lista.AddRange(numSeries);
-
             txtNroSerie.AutoCompleteCustomSource = lista;
 
             var codBarraBD = carritosCN.ObtenerCodBarraPorNotebook();
@@ -95,9 +137,7 @@ namespace CapaPresentacion
             string[] codBarras = codBarraBD.Select(p => p.CodigoBarra).ToArray();
 
             var lista2 = new AutoCompleteStringCollection();
-
             lista2.AddRange(codBarras);
-
             txtCodBarra.AutoCompleteCustomSource = lista2;
         }
 
@@ -228,35 +268,6 @@ namespace CapaPresentacion
             CambiarDisponibilidadDatos(false, false, false);
 
             RenovarDatos();
-        }
-
-        private void txtNroSerie_TextChanged(object sender, EventArgs e)
-        {
-            if (!txtNroSerie.Focused)
-            {
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtNroSerie.Text))
-            {
-                return;
-            }
-
-            var datos = carritosCN.ObtenerPorSerieOCodBarra(txtNroSerie.Text, null);
-
-            if (datos != null)
-            {
-                txtCodBarra.Text = datos.CodigoBarra;
-                cmbEstados.SelectedValue = datos.IdEstadoMantenimiento;
-                CambiarDisponibilidadDatos(true, false, false);
-
-            }
-            else
-            {
-                txtCodBarra.Clear();
-                //cmbEstados.SelectedIndex = 0;
-                CambiarDisponibilidadDatos(true, true, true);
-            }
         }
 
         private void CambiarDisponibilidadDatos(bool Estado1, bool Estado2, bool Estado3)
@@ -433,7 +444,14 @@ namespace CapaPresentacion
 
             carritosCN.ActualizarCarrito(carritos, userVerificado.IdRol);
 
-            cmbHabilitado.SelectedIndex = 0; ;
+            if (cmbHabilitado.SelectedIndex != 0)
+            {
+                cmbHabilitado.SelectedIndex = 0;
+            }
+            else
+            {
+                ActualizarDatagrid();
+            }
         }
 
         private void btnDeshabiliarCarrito_Click(object sender, EventArgs e)

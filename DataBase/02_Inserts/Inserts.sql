@@ -46,8 +46,8 @@ INSERT INTO Modelo (idTipoElemento, modelo) VALUES
 (1, 'Dell Latitude 3410'),
 (1, 'HP ProBook 450'),
 (2, 'ENOVA'),
-(3, 'Samsung Tab A'),
-(4, 'Epson X10');
+(4, 'Samsung Tab A'),
+(3, 'Epson X10');
 
 -- ======================
 -- VARIANTES ELEMENTO
@@ -85,9 +85,9 @@ VALUES
 (1, null, 1, 3, 3, 'NB004', 'CB004', 'PAT004', false, now()),
 
 -- Proyectores (Epson X200)
-(3, 1, 3, 2, 1, 'PR001', 'CB011', 'PAT011', TRUE, null),
-(3, 1, 3, 2, 1, 'PR002', 'CB012', 'PAT012', TRUE, null),
-(3, 1, 3, 2, 3, 'PR003', 'CB013', 'PAT013', false, now()),
+(3, 1, 5, 2, 1, 'PR001', 'CB011', 'PAT011', TRUE, null),
+(3, 1, 5, 2, 1, 'PR002', 'CB012', 'PAT012', TRUE, null),
+(3, 1, 5, 2, 3, 'PR003', 'CB013', 'PAT013', false, now()),
 
 -- Tablets (Samsung Tab A)
 (4, 2, 4, 1, 1, 'TB001', 'CB014', 'PAT014', TRUE, null),

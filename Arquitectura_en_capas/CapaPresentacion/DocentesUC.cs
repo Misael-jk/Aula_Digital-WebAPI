@@ -99,7 +99,6 @@ namespace CapaPresentacion
                     break;
                 case "Deshabilitados":
                     dgvDocentes.DataSource = docentesBajasCN.GetAllDTO();
-                    MessageBox.Show("Funca");
                     break;
                 default:
                     break;

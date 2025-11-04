@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearUsuarioUC));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearUsuarioUC));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -46,7 +46,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
+            cmbRol = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             ptbPerfil = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             txtUsuario = new Guna.UI2.WinForms.Guna2TextBox();
@@ -63,6 +66,7 @@
             // guna2GroupBox2
             // 
             guna2GroupBox2.BorderColor = Color.Firebrick;
+            guna2GroupBox2.Controls.Add(cmbRol);
             guna2GroupBox2.Controls.Add(guna2Panel1);
             guna2GroupBox2.Controls.Add(txtUsuario);
             guna2GroupBox2.Controls.Add(btnCrear);
@@ -71,16 +75,34 @@
             guna2GroupBox2.Controls.Add(txtEmail);
             guna2GroupBox2.Controls.Add(txtContraseña);
             guna2GroupBox2.CustomBorderColor = Color.Firebrick;
-            guna2GroupBox2.CustomizableEdges = customizableEdges16;
+            guna2GroupBox2.CustomizableEdges = customizableEdges18;
             guna2GroupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox2.ForeColor = Color.GhostWhite;
-            guna2GroupBox2.Location = new Point(347, 16);
+            guna2GroupBox2.Location = new Point(347, 0);
             guna2GroupBox2.Name = "guna2GroupBox2";
-            guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges17;
-            guna2GroupBox2.Size = new Size(357, 639);
+            guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2GroupBox2.Size = new Size(357, 659);
             guna2GroupBox2.TabIndex = 46;
             guna2GroupBox2.Text = "- Crear un usuario -";
             guna2GroupBox2.TextAlign = HorizontalAlignment.Center;
+            // 
+            // cmbRol
+            // 
+            cmbRol.AllowDrop = true;
+            cmbRol.BackColor = Color.Transparent;
+            cmbRol.CustomizableEdges = customizableEdges1;
+            cmbRol.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRol.FocusedColor = Color.FromArgb(94, 148, 255);
+            cmbRol.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cmbRol.Font = new Font("Segoe UI", 10F);
+            cmbRol.ForeColor = Color.FromArgb(68, 88, 112);
+            cmbRol.ItemHeight = 30;
+            cmbRol.Location = new Point(24, 556);
+            cmbRol.Name = "cmbRol";
+            cmbRol.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            cmbRol.Size = new Size(311, 36);
+            cmbRol.TabIndex = 47;
             // 
             // guna2Panel1
             // 
@@ -89,10 +111,10 @@
             guna2Panel1.BorderRadius = 93;
             guna2Panel1.BorderThickness = 1;
             guna2Panel1.Controls.Add(ptbPerfil);
-            guna2Panel1.CustomizableEdges = customizableEdges2;
+            guna2Panel1.CustomizableEdges = customizableEdges4;
             guna2Panel1.Location = new Point(79, 55);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges5;
             guna2Panel1.Size = new Size(190, 190);
             guna2Panel1.TabIndex = 23;
             // 
@@ -104,7 +126,7 @@
             ptbPerfil.ImageRotate = 0F;
             ptbPerfil.Location = new Point(0, 0);
             ptbPerfil.Name = "ptbPerfil";
-            ptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            ptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges3;
             ptbPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             ptbPerfil.Size = new Size(190, 190);
             ptbPerfil.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -114,7 +136,7 @@
             // txtUsuario
             // 
             txtUsuario.BorderRadius = 7;
-            txtUsuario.CustomizableEdges = customizableEdges4;
+            txtUsuario.CustomizableEdges = customizableEdges6;
             txtUsuario.DefaultText = "";
             txtUsuario.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtUsuario.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -131,30 +153,31 @@
             txtUsuario.PlaceholderForeColor = Color.DarkGray;
             txtUsuario.PlaceholderText = "Ingresar usuario";
             txtUsuario.SelectedText = "";
-            txtUsuario.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            txtUsuario.ShadowDecoration.CustomizableEdges = customizableEdges7;
             txtUsuario.Size = new Size(311, 36);
             txtUsuario.TabIndex = 16;
             // 
             // btnCrear
             // 
-            btnCrear.CustomizableEdges = customizableEdges6;
+            btnCrear.CustomizableEdges = customizableEdges8;
             btnCrear.DisabledState.BorderColor = Color.DarkGray;
             btnCrear.DisabledState.CustomBorderColor = Color.DarkGray;
             btnCrear.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnCrear.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnCrear.Font = new Font("Segoe UI", 9F);
             btnCrear.ForeColor = Color.White;
-            btnCrear.Location = new Point(136, 600);
+            btnCrear.Location = new Point(123, 618);
             btnCrear.Name = "btnCrear";
-            btnCrear.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            btnCrear.ShadowDecoration.CustomizableEdges = customizableEdges9;
             btnCrear.Size = new Size(80, 25);
             btnCrear.TabIndex = 24;
             btnCrear.Text = "Crear";
+            btnCrear.Click += btnCrear_Click;
             // 
             // txtApellido
             // 
             txtApellido.BorderRadius = 7;
-            txtApellido.CustomizableEdges = customizableEdges8;
+            txtApellido.CustomizableEdges = customizableEdges10;
             txtApellido.DefaultText = "";
             txtApellido.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtApellido.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -166,19 +189,19 @@
             txtApellido.HoverState.BorderColor = Color.DodgerBlue;
             txtApellido.IconLeft = (Image)resources.GetObject("txtApellido.IconLeft");
             txtApellido.IconLeftSize = new Size(25, 25);
-            txtApellido.Location = new Point(24, 402);
+            txtApellido.Location = new Point(24, 386);
             txtApellido.Name = "txtApellido";
             txtApellido.PlaceholderForeColor = Color.DarkGray;
             txtApellido.PlaceholderText = "Ingresar apellido";
             txtApellido.SelectedText = "";
-            txtApellido.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            txtApellido.ShadowDecoration.CustomizableEdges = customizableEdges11;
             txtApellido.Size = new Size(311, 36);
             txtApellido.TabIndex = 18;
             // 
             // txtNombre
             // 
             txtNombre.BorderRadius = 7;
-            txtNombre.CustomizableEdges = customizableEdges10;
+            txtNombre.CustomizableEdges = customizableEdges12;
             txtNombre.DefaultText = "";
             txtNombre.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNombre.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -190,12 +213,12 @@
             txtNombre.HoverState.BorderColor = Color.DodgerBlue;
             txtNombre.IconLeft = (Image)resources.GetObject("txtNombre.IconLeft");
             txtNombre.IconLeftSize = new Size(25, 25);
-            txtNombre.Location = new Point(24, 338);
+            txtNombre.Location = new Point(24, 327);
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderForeColor = Color.DarkGray;
             txtNombre.PlaceholderText = "Ingresar nombre";
             txtNombre.SelectedText = "";
-            txtNombre.ShadowDecoration.CustomizableEdges = customizableEdges11;
+            txtNombre.ShadowDecoration.CustomizableEdges = customizableEdges13;
             txtNombre.Size = new Size(311, 36);
             txtNombre.TabIndex = 17;
             // 
@@ -204,7 +227,7 @@
             txtEmail.AllowDrop = true;
             txtEmail.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtEmail.BorderRadius = 7;
-            txtEmail.CustomizableEdges = customizableEdges12;
+            txtEmail.CustomizableEdges = customizableEdges14;
             txtEmail.DefaultText = "";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -216,19 +239,19 @@
             txtEmail.HoverState.BorderColor = Color.DodgerBlue;
             txtEmail.IconLeft = (Image)resources.GetObject("txtEmail.IconLeft");
             txtEmail.IconLeftSize = new Size(25, 25);
-            txtEmail.Location = new Point(24, 526);
+            txtEmail.Location = new Point(24, 498);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderForeColor = Color.DarkGray;
             txtEmail.PlaceholderText = "Ingresar Email";
             txtEmail.SelectedText = "";
-            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges15;
             txtEmail.Size = new Size(311, 36);
             txtEmail.TabIndex = 20;
             // 
             // txtContraseña
             // 
             txtContraseña.BorderRadius = 7;
-            txtContraseña.CustomizableEdges = customizableEdges14;
+            txtContraseña.CustomizableEdges = customizableEdges16;
             txtContraseña.DefaultText = "";
             txtContraseña.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtContraseña.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -240,12 +263,12 @@
             txtContraseña.HoverState.BorderColor = Color.DodgerBlue;
             txtContraseña.IconLeft = Properties.Resources.PasswordIcon;
             txtContraseña.IconLeftSize = new Size(25, 25);
-            txtContraseña.Location = new Point(24, 466);
+            txtContraseña.Location = new Point(24, 443);
             txtContraseña.Name = "txtContraseña";
             txtContraseña.PlaceholderForeColor = Color.DarkGray;
             txtContraseña.PlaceholderText = "Ingresar contraseña";
             txtContraseña.SelectedText = "";
-            txtContraseña.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            txtContraseña.ShadowDecoration.CustomizableEdges = customizableEdges17;
             txtContraseña.Size = new Size(311, 36);
             txtContraseña.TabIndex = 19;
             // 
@@ -256,6 +279,7 @@
             Controls.Add(guna2GroupBox2);
             Name = "CrearUsuarioUC";
             Size = new Size(1050, 670);
+            Load += CrearUsuarioUC_Load;
             guna2GroupBox2.ResumeLayout(false);
             guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
@@ -273,5 +297,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtNombre;
         private Guna.UI2.WinForms.Guna2TextBox txtEmail;
         private Guna.UI2.WinForms.Guna2TextBox txtContraseña;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbRol;
     }
 }

@@ -81,9 +81,11 @@ namespace CapaNegocio
                 throw new Exception("No existe el TipoElemento con el Id proporcionado");
             }
 
-            if (modeloOld.NombreModelo == modeloNEW.NombreModelo && modeloOld != null)
+            var modelo = repoModelo.GetByTipoYNombre(modeloNEW.IdTipoElemento, modeloNEW.NombreModelo);
+
+            if (modelo != null && modeloOld.IdModelo != modeloNEW.IdModelo)
             {
-                throw new Exception("Ya existe otro modelo con la misma descripcion");
+                throw new Exception("Ya existe otro modelo con la misma descripción para ese tipo.");
             }
 
             repoModelo.Update(modeloNEW);

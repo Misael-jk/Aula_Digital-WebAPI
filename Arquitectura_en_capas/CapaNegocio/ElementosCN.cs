@@ -246,6 +246,11 @@ namespace CapaNegocio
         {
             return uow.RepoVarianteElemento.GetByTipo(idTipoElemento);
         }
+
+        public VariantesElemento? ObtenerVariantePorID(int idVariante)
+        {
+            return uow.RepoVarianteElemento.GetById(idVariante);
+        }
         #endregion
 
         #region UBICACIONES

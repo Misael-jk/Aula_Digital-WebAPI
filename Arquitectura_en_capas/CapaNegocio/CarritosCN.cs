@@ -323,10 +323,10 @@ public class CarritosCN
                 throw new Exception("El carrito esta en prestamo");
             }
 
-            if (!uow.RepoCarritos.GetDisponible(idCarrito))
-            {
-                throw new Exception("El carrito no esta disponible para agregar notebooks");
-            }
+            //if (!uow.RepoCarritos.GetDisponible(idCarrito))
+            //{
+            //    throw new Exception("El carrito no esta disponible para agregar notebooks");
+            //}
 
             if (carrito.IdUbicacion <= 0)
             {
