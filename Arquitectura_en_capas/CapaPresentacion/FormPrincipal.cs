@@ -338,7 +338,7 @@ namespace CapaPresentacion
         private void BtnElementos_Click(object sender, EventArgs e)
         {
             if (elementosUC == null)
-                elementosUC = new ElementosUC(elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN);
+                elementosUC = new ElementosUC(elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, userVerificado);
 
             CambiarNombrePort(BtnElementos.Text);
 

@@ -112,4 +112,23 @@ public class RepoModelo : RepoBase, IRepoModelo
         }
     }
     #endregion
+
+    #region Obtener por tipo y nombre
+    public Modelos? GetByTipoYNombre(int idTipoElemento, string nombreModelo)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidTipoElemento", idTipoElemento);
+        parameters.Add("unnombre", nombreModelo);
+
+        string query = "select idModelo, idTipoElemento, modelo as 'NombreModelo' from Modelo where idTipoElemento = @unidTipoElemento and modelo = @unnombre";
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Modelos>(query, parameters);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener un modelo por tipo y nombre");
+        }
+    }
+    #endregion
 }
