@@ -104,6 +104,7 @@ namespace CapaPresentacion
         private readonly IMapperCarritosBajas mapperCarritosBajas;
         private readonly IMapperVarianteElemento mapperVarianteElemento;
         private readonly IMapperDocentesBajas mapperDocentesBajas;
+        private readonly IMapperUsuariosBajas mapperUsuariosBajas;
         #endregion
 
         #region Variables Capa Negocio
@@ -122,6 +123,7 @@ namespace CapaPresentacion
         private readonly VarianteElementoCN varianteElementoCN;
         private readonly UbicacionCN ubicacionCN;
         private readonly DocentesBajasCN docentesBajasCN;
+        private readonly UsuariosBajasCN usuariosBajasCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -131,6 +133,7 @@ namespace CapaPresentacion
         public FormPrincipal(IDbConnection conexion, Usuarios userVerificado, Roles rolUserVerificado)
         {
             InitializeComponent();
+
 
             this.userVerificado = userVerificado;
             this.rolUserVerficado = rolUserVerificado;
@@ -198,6 +201,7 @@ namespace CapaPresentacion
             mapperCarritosBajas = new MapperCarritosBajas(conexion);
             mapperVarianteElemento = new MapperVarianteElemento(conexion);
             mapperDocentesBajas = new MapperDocentesBajas(conexion);
+            mapperUsuariosBajas = new MapperUsuariosBajas(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -214,7 +218,9 @@ namespace CapaPresentacion
             varianteElementoCN = new VarianteElementoCN(repoVarianteElemento, repoTipoElemento, repoModelo, mapperVarianteElemento);
             ubicacionCN = new UbicacionCN(repoUbicacion);
             docentesBajasCN = new DocentesBajasCN(mapperDocentesBajas, repoDocentes);
+            usuariosBajasCN = new UsuariosBajasCN(mapperUsuariosBajas, repoUsuarios);
 
+            Dashboard();
         }
 
 
@@ -305,7 +311,7 @@ namespace CapaPresentacion
 
         #region Botones Principales
 
-        private void BtnDashboard_Click(object sender, EventArgs e)
+        public void Dashboard()
         {
             if (historialUC == null)
                 historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
@@ -322,6 +328,11 @@ namespace CapaPresentacion
             }
 
             MostrarSolo(historialUC);
+        }
+
+        private void BtnDashboard_Click(object sender, EventArgs e)
+        {
+            Dashboard();
         }
 
         private void BtnElementos_Click(object sender, EventArgs e)
@@ -358,6 +369,8 @@ namespace CapaPresentacion
 
             pnlContenedor.Controls.Clear();
 
+            carritoUC.ActualizarDatagrid();
+            carritoUC.RenovarDatos();
             if (!pnlContenedor.Controls.Contains(carritoUC))
             {
                 pnlContenedor.Controls.Add(carritoUC);
@@ -411,7 +424,7 @@ namespace CapaPresentacion
         private void BtnUsuario_Click(object sender, EventArgs e)
         {
             if (usuariosUC == null)
-                usuariosUC = new UsuariosUC(usuariosCN);
+                usuariosUC = new UsuariosUC(usuariosCN, usuariosBajasCN);
 
             CambiarNombrePort(BtnUsuario.Text);
 
@@ -497,6 +510,8 @@ namespace CapaPresentacion
                 pnlContenedor.Controls.Add(notebooksUC);
                 notebooksUC.Dock = DockStyle.Fill;
             }
+
+            notebooksUC.ActualizarDataGrid();
 
             MostrarSolo(notebooksUC);
 

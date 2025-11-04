@@ -51,27 +51,27 @@ namespace CapaPresentacion
             this.AutoScrollMinSize = new Size(0, 1100);
 
             //IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll(); ya es el Listar Estado Mantenimiento de ElementosCN
-            IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
+            //IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
 
-            cmbEstados.DataSource = estados; 
-            cmbEstados.ValueMember = "IdEstadoMantenimiento";
-            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+            //cmbEstados.DataSource = estados; 
+            //cmbEstados.ValueMember = "IdEstadoMantenimiento";
+            //cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
 
             cmbModelos.DataSource = elementosCN.ListarModelos();
             cmbModelos.ValueMember = "IdModelo";
             cmbModelos.DisplayMember = "ModeloNombre";
 
     
-            var estadosBusqueda = estados
-                .Where(e => e.IdEstadoMantenimiento != 2) 
-                .ToList();
+            //var estadosBusqueda = estados
+            //    .Where(e => e.IdEstadoMantenimiento != 2) 
+            //    .ToList();
 
      
-            estadosBusqueda.Insert(0, new EstadosMantenimiento
-            {
-                IdEstadoMantenimiento = 0,
-                EstadoMantenimientoNombre = "Ningún estado"
-            });
+            //estadosBusqueda.Insert(0, new EstadosMantenimiento
+            //{
+            //    IdEstadoMantenimiento = 0,
+            //    EstadoMantenimientoNombre = "Ningún estado"
+            //});
 
             //cmbBuscarEstado.DataSource = estadosBusqueda;
             //cmbBuscarEstado.ValueMember = "IdEstadoMantenimiento";
@@ -103,7 +103,8 @@ namespace CapaPresentacion
             txtNroSerie.Text = fila.Cells["numeroSerie"].Value?.ToString();
 
             Elemento? elemento = repoElemento.GetByNumeroSerie(txtNroSerie.Text);
-            cmbEstados.SelectedIndex = elemento.IdEstadoMantenimiento - 1;
+            //cmbEstados.SelectedIndex = elemento.IdEstadoMantenimiento - 1;
+
             cmbTipoElemento.SelectedIndex = elemento.IdTipoElemento - 1;
         }
 

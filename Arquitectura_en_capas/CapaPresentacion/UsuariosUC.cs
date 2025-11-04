@@ -15,7 +15,8 @@ namespace CapaPresentacion
 {
     public partial class UsuariosUC : UserControl
     {
-        private readonly UsuariosCN usuariosCN = null!;
+        private readonly UsuariosCN usuariosCN;
+        private readonly UsuariosBajasCN usuariosBajasCN;
         private bool mostrarPassword = false;
         private string RutaFoto;
         private string _Password;
@@ -29,19 +30,24 @@ namespace CapaPresentacion
         private string _email;
         #endregion
 
-        public UsuariosUC(UsuariosCN usuariosCN)
+        public UsuariosUC(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN)
         {
             InitializeComponent();
             this.usuariosCN = usuariosCN;
+            this.usuariosBajasCN = usuariosBajasCN;
         }
         private void UsuariosUC_Load_1(object sender, EventArgs e)
         {
+            cmbHabilitado.Items.Add("Habilitados");
+            cmbHabilitado.Items.Add("Deshabilitados");
+            cmbHabilitado.SelectedIndex = 0;
+
             MostrarUsuarios();
         }
 
         public void MostrarUsuarios()
         {
-            dtgUsuarios.DataSource = usuariosCN.ObtenerElementos();
+            cmbHabilitado.SelectedIndex = 0;
 
             dtgUsuarios.Columns["IdUsuario"].HeaderText = "ID";
             dtgUsuarios.Columns[0].Width = 35;
@@ -322,6 +328,56 @@ namespace CapaPresentacion
             txtEmail.Text = _email;
 
             HabilitarBotones(false, false);
+        }
+
+        private void cmbHabilitado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbHabilitado.SelectedItem?.ToString())
+            {
+                case "Habilitados":
+                    dtgUsuarios.DataSource = usuariosCN.ObtenerElementos();
+                    btnDeshabilitar.Text = "Deshabilitar Usuario";
+                    break;
+                case "Deshabilitados":
+                    dtgUsuarios.DataSource = usuariosBajasCN.GetAllDTO();
+                    btnDeshabilitar.Text = "Habilitar Usuario";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void btnDeshabilitar_Click(object sender, EventArgs e)
+        {
+            if (dtgUsuarios.CurrentRow == null) return;
+
+            int idUsuario = Convert.ToInt32(dtgUsuarios.CurrentRow.Cells["IdUsuario"].Value);
+            try
+            {
+                if (cmbHabilitado.SelectedItem?.ToString() == "Habilitados")
+                {
+                    usuariosCN.DeshabilitarUsuario(idUsuario);
+                    MessageBox.Show("Usuario deshabilitado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cmbHabilitado.SelectedIndex = 1;
+                }
+                else
+                {
+                    usuariosBajasCN.HabilitarUsuario(idUsuario);
+                    MessageBox.Show("Usuario habilitado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cmbHabilitado.SelectedIndex = 0;
+                }
+                MostrarUsuarios();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAgregarUsuario_Click(object sender, EventArgs e)
+        {
+            CrearUsuarioUC? formAgregarUsuario = new CrearUsuarioUC(usuariosCN, MostrarUsuarios);
+            formAgregarUsuario.Show();
         }
     }
 }
