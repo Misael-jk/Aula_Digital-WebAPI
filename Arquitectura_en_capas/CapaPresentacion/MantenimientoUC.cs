@@ -32,7 +32,7 @@ namespace CapaPresentacion
         public void MostrarDatos()
         {
             dtgMantenimientoCarrito.DataSource = carritosBajasCN.GetAllDTO();
-            dtgMantenimientoElemento.DataSource = elementosBajasCN.GetAllElementos(); 
+            h.DataSource = elementosBajasCN.GetAllElementos(); 
         }
 
         private void btnHabilitar_Click(object sender, EventArgs e)
