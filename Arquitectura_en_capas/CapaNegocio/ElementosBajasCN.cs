@@ -31,6 +31,20 @@ public class ElementosBajasCN
     //{
     //    return mapperElementosBajas.GetByEstado(idEstadoElemento);
     //}
+    public Elemento? ObtenerElementoPorID(int idElemento)
+    {
+        return uow.RepoElemento.GetById(idElemento);
+    }
+
+    public TipoElemento? ObtenerTipoElementoPorID(int idTipoElemento)
+    {
+        return uow.RepoTipoElemento.GetById(idTipoElemento);
+    }
+
+    public VariantesElemento? ObtenerVariantePorID(int idVariante)
+    {
+        return uow.RepoVarianteElemento.GetById(idVariante);
+    }
 
     public void HabilitarElemento(int idElemento, int idUsuario)
     {

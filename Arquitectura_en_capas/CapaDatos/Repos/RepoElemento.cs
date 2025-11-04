@@ -126,7 +126,7 @@ public class RepoElemento : RepoBase, IRepoElemento
     #region Obtener por Id elemento
     public Elemento? GetById(int idElemento)
     {
-        string query = "select * from Elementos where idElemento = @idElemento";
+        string query = "select idElemento, idTipoElemento, idVariante AS 'idVarianteElemento', idEstadoMantenimiento, idUbicacion, idModelo, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja from Elementos where idElemento = @idElemento";
 
         DynamicParameters parametros = new DynamicParameters();
         try

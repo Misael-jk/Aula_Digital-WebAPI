@@ -67,7 +67,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidVariante", idVariante);
 
-        string query = "select IdVariante, IdTipoElemento, IdModelo, subtipo as 'Variante' from VariantesElemento where idVariante = @unidVariante";
+        string query = "select IdVariante as 'idVarianteElemento', IdTipoElemento, IdModelo, subtipo as 'Variante' from VariantesElemento where idVariante = @unidVariante";
 
         try
         {

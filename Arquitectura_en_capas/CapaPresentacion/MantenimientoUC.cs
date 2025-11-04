@@ -3,6 +3,7 @@ using CapaDatos.InterfacesDTO;
 using CapaDatos.Repos;
 using CapaEntidad;
 using CapaNegocio;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,36 +20,88 @@ namespace CapaPresentacion
     public partial class MantenimientoUC : UserControl
     {
         //private readonly MantenimientoCN mantenimientoCN;
-        private readonly CarritosBajasCN carritosBajasCN;
+        private readonly NotebookBajasCN notebookBajasCN;
         private readonly ElementosBajasCN elementosBajasCN;
-        public MantenimientoUC(CarritosBajasCN carritosBajasCN, ElementosBajasCN elementosBajasCN)
+        private Usuarios usuarioActual;
+        private int _idActualElemento;
+
+        public MantenimientoUC(NotebookBajasCN notebookBajasCN, ElementosBajasCN elementosBajasCN, Usuarios user)
         {
             InitializeComponent();
-            //this.mantenimientoCN = mantenimientoCN;
-            this.carritosBajasCN = carritosBajasCN;
+            this.notebookBajasCN = notebookBajasCN;
             this.elementosBajasCN = elementosBajasCN;
+            this.usuarioActual = user;
+        }
+
+        private void MantenimientoUC_Load(object sender, EventArgs e)
+        {
+            MostrarDatos();
+            seleccionarPrimeraFila(dgvMantenimientoElemento);
+            if (dgvMantenimientoElemento.Rows.Count > 0)
+            {
+                MostrarDatosDeFilaSeleccionada(0);
+            }
         }
 
         public void MostrarDatos()
         {
-            dtgMantenimientoCarrito.DataSource = carritosBajasCN.GetAllDTO();
-            h.DataSource = elementosBajasCN.GetAllElementos(); 
+            dgvMantenimientoElemento.DataSource = elementosBajasCN.GetAllElementos();
+            //dgvMatenimientoNotebook.DataSource = notebookBajasCN.(); 
         }
 
         private void btnHabilitar_Click(object sender, EventArgs e)
         {
-            //mantenimientoCN.HabilitarElemento(txtNroSerie.Text);
+            elementosBajasCN.HabilitarElemento(_idActualElemento, usuarioActual.IdUsuario);
             MostrarDatos();
         }
 
         private void dgvMantenimiento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.RowIndex < 0) return;
+            MostrarDatosDeFilaSeleccionada(e.RowIndex);
         }
 
-        private void MantenimientoUC_Load(object sender, EventArgs e)
+        private void MostrarDatosDeFilaSeleccionada(int rowIndex)
         {
+            lblIDElemento.Text = "ID: ";
+            txtTipoElemento.Text = "Tipo: ";
+            txtVarianteElemento.Text = "Variante: ";
+            txtSerieElemento.Text = "Nro. de serie: ";
+            txtBarraElemento.Text = "Cod. de barra: ";
 
+            var fila = dgvMantenimientoElemento.Rows[rowIndex];
+
+            _idActualElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
+
+            Elemento? elementoBaja = elementosBajasCN.ObtenerElementoPorID(_idActualElemento);
+
+            lblIDElemento.Text += _idActualElemento;
+            txtSerieElemento.Text += elementoBaja?.NumeroSerie;
+            txtBarraElemento.Text += elementoBaja?.CodigoBarra;
+
+            if (elementoBaja?.IdTipoElemento is not null)
+            {
+                TipoElemento? tipoElemento = elementosBajasCN.ObtenerTipoElementoPorID(elementoBaja.IdTipoElemento);
+
+                txtTipoElemento.Text += tipoElemento?.IdTipoElemento;
+            }
+
+            if (elementoBaja?.IdVarianteElemento is not null)
+            {
+                VariantesElemento? variantesElemento = elementosBajasCN.ObtenerVariantePorID(elementoBaja.IdVarianteElemento.Value);
+
+                txtVarianteElemento.Text += variantesElemento?.Variante;
+            }
+        }
+
+        private void seleccionarPrimeraFila(DataGridView dgv)
+        {
+            if (dgv.Rows.Count >= 1)
+            {
+                dgv.ClearSelection();
+                dgv.Rows[0].Selected = true;
+                dgv.CurrentCell = dgv.Rows[0].Cells[0];
+            }
         }
     }
 }

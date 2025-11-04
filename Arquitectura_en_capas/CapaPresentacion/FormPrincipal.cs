@@ -122,6 +122,7 @@ namespace CapaPresentacion
         private readonly VarianteElementoCN varianteElementoCN;
         private readonly UbicacionCN ubicacionCN;
         private readonly DocentesBajasCN docentesBajasCN;
+        private readonly NotebookBajasCN notebookBajasCN;
         #endregion
 
         private Usuarios userVerificado;
@@ -214,9 +215,9 @@ namespace CapaPresentacion
             varianteElementoCN = new VarianteElementoCN(repoVarianteElemento, repoTipoElemento, repoModelo, mapperVarianteElemento);
             ubicacionCN = new UbicacionCN(repoUbicacion);
             docentesBajasCN = new DocentesBajasCN(mapperDocentesBajas, repoDocentes);
+            notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
 
         }
-
 
         #region Eventos del Formulario
 
@@ -436,7 +437,7 @@ namespace CapaPresentacion
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
             if (mantenimientoUC == null)
-                mantenimientoUC = new MantenimientoUC(carritosBajasCN, elementosBajasCN);
+                mantenimientoUC = new MantenimientoUC(notebookBajasCN, elementosBajasCN, userVerificado);
 
             cmsMantenimiento.Show(btnMantenimiento, new Point(0, btnMantenimiento.Height));
 
