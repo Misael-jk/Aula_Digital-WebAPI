@@ -161,7 +161,7 @@
             dataGridViewCellStyle1.BackColor = Color.White;
             dgvElementos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvElementos.BackgroundColor = Color.Silver;
-            dgvElementos.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvElementos.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvElementos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.Indigo;
@@ -202,7 +202,7 @@
             dgvElementos.ThemeStyle.HeaderStyle.Height = 30;
             dgvElementos.ThemeStyle.ReadOnly = false;
             dgvElementos.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgvElementos.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvElementos.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.None;
             dgvElementos.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
             dgvElementos.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
             dgvElementos.ThemeStyle.RowsStyle.Height = 25;

@@ -33,6 +33,7 @@ create view View_GetNotebookBajasDTO as
         e.numeroSerie,
         e.codigoBarra,
         e.patrimonio,
+        e.fechaBaja,
         c.equipo as "EquipoCarrito",
         ee.estadoMantenimiento as 'Estado',
         m.modelo,

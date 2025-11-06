@@ -16,10 +16,9 @@ namespace CapaPresentacion
     public partial class Dashboard : UserControl
     {
         private readonly MapperHistorialElemento mapperHistorialElemento;
-        public Dashboard(MapperHistorialElemento mapperHistorialElemento)
+        public Dashboard()
         {
             InitializeComponent();
-            this.mapperHistorialElemento = mapperHistorialElemento;
 
         }
 
@@ -27,6 +26,10 @@ namespace CapaPresentacion
         {
             //var elemento = mapperHistorialElemento.GetAllDTO();
             //dataGridView1.DataSource = elemento.ToList();
+        }
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -130,6 +130,7 @@
             BtnCerrar1.TabIndex = 3;
             BtnCerrar1.TabStop = false;
             BtnCerrar1.UseVisualStyleBackColor = false;
+            BtnCerrar1.Click += BtnCerrar1_Click_1;
             // 
             // iconButton1
             // 

@@ -67,9 +67,9 @@
             dgvMantenimientoElemento = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtCodBarraNotebook = new Guna.UI2.WinForms.Guna2TextBox();
+            txtNumSerieNotebook = new Guna.UI2.WinForms.Guna2TextBox();
+            txtEquipoNotebook = new Guna.UI2.WinForms.Guna2TextBox();
             lblIDNotebook = new Label();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             txtVarianteElemento = new Guna.UI2.WinForms.Guna2TextBox();
@@ -155,6 +155,7 @@
             dgvMatenimientoNotebook.ThemeStyle.RowsStyle.Height = 25;
             dgvMatenimientoNotebook.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvMatenimientoNotebook.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dgvMatenimientoNotebook.CellClick += dgvMatenimientoNotebook_CellClick;
             // 
             // guna2GroupBox2
             // 
@@ -234,9 +235,9 @@
             guna2Panel1.BorderRadius = 14;
             guna2Panel1.BorderThickness = 1;
             guna2Panel1.Controls.Add(guna2Button1);
-            guna2Panel1.Controls.Add(guna2TextBox3);
-            guna2Panel1.Controls.Add(guna2TextBox2);
-            guna2Panel1.Controls.Add(guna2TextBox1);
+            guna2Panel1.Controls.Add(txtCodBarraNotebook);
+            guna2Panel1.Controls.Add(txtNumSerieNotebook);
+            guna2Panel1.Controls.Add(txtEquipoNotebook);
             guna2Panel1.Controls.Add(lblIDNotebook);
             guna2Panel1.Controls.Add(guna2GroupBox1);
             guna2Panel1.CustomizableEdges = customizableEdges13;
@@ -271,72 +272,73 @@
             guna2Button1.Size = new Size(242, 21);
             guna2Button1.TabIndex = 56;
             guna2Button1.Text = "Habilitar Elemento";
+            guna2Button1.Click += guna2Button1_Click;
             // 
-            // guna2TextBox3
+            // txtCodBarraNotebook
             // 
-            guna2TextBox3.BorderRadius = 9;
-            guna2TextBox3.CustomizableEdges = customizableEdges7;
-            guna2TextBox3.DefaultText = "Cod. de barra: ";
-            guna2TextBox3.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox3.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox3.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox3.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox3.Enabled = false;
-            guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Font = new Font("Segoe UI", 9F);
-            guna2TextBox3.ForeColor = Color.Black;
-            guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(20, 144);
-            guna2TextBox3.Name = "guna2TextBox3";
-            guna2TextBox3.PlaceholderText = "";
-            guna2TextBox3.SelectedText = "";
-            guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2TextBox3.Size = new Size(242, 31);
-            guna2TextBox3.TabIndex = 48;
+            txtCodBarraNotebook.BorderRadius = 9;
+            txtCodBarraNotebook.CustomizableEdges = customizableEdges7;
+            txtCodBarraNotebook.DefaultText = "Cod. de barra: ";
+            txtCodBarraNotebook.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtCodBarraNotebook.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtCodBarraNotebook.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtCodBarraNotebook.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtCodBarraNotebook.Enabled = false;
+            txtCodBarraNotebook.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtCodBarraNotebook.Font = new Font("Segoe UI", 9F);
+            txtCodBarraNotebook.ForeColor = Color.Black;
+            txtCodBarraNotebook.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtCodBarraNotebook.Location = new Point(20, 144);
+            txtCodBarraNotebook.Name = "txtCodBarraNotebook";
+            txtCodBarraNotebook.PlaceholderText = "";
+            txtCodBarraNotebook.SelectedText = "";
+            txtCodBarraNotebook.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtCodBarraNotebook.Size = new Size(242, 31);
+            txtCodBarraNotebook.TabIndex = 48;
             // 
-            // guna2TextBox2
+            // txtNumSerieNotebook
             // 
-            guna2TextBox2.BorderRadius = 9;
-            guna2TextBox2.CustomizableEdges = customizableEdges9;
-            guna2TextBox2.DefaultText = "Nro. de serie: ";
-            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.Enabled = false;
-            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Font = new Font("Segoe UI", 9F);
-            guna2TextBox2.ForeColor = Color.Black;
-            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(20, 98);
-            guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "";
-            guna2TextBox2.SelectedText = "";
-            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2TextBox2.Size = new Size(242, 31);
-            guna2TextBox2.TabIndex = 47;
+            txtNumSerieNotebook.BorderRadius = 9;
+            txtNumSerieNotebook.CustomizableEdges = customizableEdges9;
+            txtNumSerieNotebook.DefaultText = "Nro. de serie: ";
+            txtNumSerieNotebook.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtNumSerieNotebook.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtNumSerieNotebook.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtNumSerieNotebook.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtNumSerieNotebook.Enabled = false;
+            txtNumSerieNotebook.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtNumSerieNotebook.Font = new Font("Segoe UI", 9F);
+            txtNumSerieNotebook.ForeColor = Color.Black;
+            txtNumSerieNotebook.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtNumSerieNotebook.Location = new Point(20, 98);
+            txtNumSerieNotebook.Name = "txtNumSerieNotebook";
+            txtNumSerieNotebook.PlaceholderText = "";
+            txtNumSerieNotebook.SelectedText = "";
+            txtNumSerieNotebook.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtNumSerieNotebook.Size = new Size(242, 31);
+            txtNumSerieNotebook.TabIndex = 47;
             // 
-            // guna2TextBox1
+            // txtEquipoNotebook
             // 
-            guna2TextBox1.BorderRadius = 9;
-            guna2TextBox1.CustomizableEdges = customizableEdges11;
-            guna2TextBox1.DefaultText = "Equipo: ";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.Enabled = false;
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.ForeColor = Color.Black;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(20, 53);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2TextBox1.Size = new Size(242, 31);
-            guna2TextBox1.TabIndex = 46;
+            txtEquipoNotebook.BorderRadius = 9;
+            txtEquipoNotebook.CustomizableEdges = customizableEdges11;
+            txtEquipoNotebook.DefaultText = "Equipo: ";
+            txtEquipoNotebook.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtEquipoNotebook.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtEquipoNotebook.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtEquipoNotebook.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtEquipoNotebook.Enabled = false;
+            txtEquipoNotebook.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEquipoNotebook.Font = new Font("Segoe UI", 9F);
+            txtEquipoNotebook.ForeColor = Color.Black;
+            txtEquipoNotebook.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEquipoNotebook.Location = new Point(20, 53);
+            txtEquipoNotebook.Name = "txtEquipoNotebook";
+            txtEquipoNotebook.PlaceholderText = "";
+            txtEquipoNotebook.SelectedText = "";
+            txtEquipoNotebook.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtEquipoNotebook.Size = new Size(242, 31);
+            txtEquipoNotebook.TabIndex = 46;
             // 
             // lblIDNotebook
             // 
@@ -524,10 +526,10 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Label lblIDNotebook;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtEquipoNotebook;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox4;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox3;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
+        private Guna.UI2.WinForms.Guna2TextBox txtCodBarraNotebook;
+        private Guna.UI2.WinForms.Guna2TextBox txtNumSerieNotebook;
         private Guna.UI2.WinForms.Guna2TextBox txtMotivoElemento;
         private Guna.UI2.WinForms.Guna2TextBox txtBarraElemento;
         private Guna.UI2.WinForms.Guna2TextBox txtSerieElemento;

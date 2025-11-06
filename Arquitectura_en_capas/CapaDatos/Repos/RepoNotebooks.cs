@@ -440,4 +440,51 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
+    
+    #region ESTADISTICAS DE CANTIDAD DE NOTEBOOKS POR ESTADO
+    public List<(string Estado, int Cantidad)> GetCantidadEstado()
+    {
+        string query = @"
+        SELECT em.estadoMantenimiento AS Estado, COUNT(*) AS Cantidad
+        FROM Notebooks n
+        JOIN Elementos e ON n.idElemento = e.idElemento
+        JOIN estadosmantenimiento em ON e.idEstadoMantenimiento = em.idEstadoMantenimiento
+        GROUP BY em.estadoMantenimiento 
+        ORDER BY Cantidad DESC;";
+
+        try
+        {
+            var resultado = Conexion.Query<(string Estado, int Cantidad)>(query, transaction: Transaction);
+            return resultado.ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la cantidad de notebooks por estado");
+        }
+    }
+    #endregion
+
+    #region ESTADISTICAS DE CANTIDAD DE NOTEBOOKS EN CARRITOS
+    public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos()
+    {
+        string query = @"
+        SELECT c.equipo AS Equipo, COUNT(*) AS Cantidad
+        FROM Carritos c
+        LEFT JOIN Notebooks n ON c.IdCarrito = n.IdCarrito
+        WHERE c.idCarrito IS NOT NULL
+        GROUP BY c.equipo 
+        ORDER BY Equipo desc;";
+
+        try
+        {
+            var resultado = Conexion.Query<(string Equipo, int Cantidad)>(query, transaction: Transaction);
+            return resultado.ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener la cantidad de notebooks en carritos");
+        }
+    }
+    #endregion
 }
+
