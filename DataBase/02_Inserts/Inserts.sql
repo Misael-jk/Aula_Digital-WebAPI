@@ -46,8 +46,8 @@ INSERT INTO Modelo (idTipoElemento, modelo) VALUES
 (1, 'Dell Latitude 3410'),
 (1, 'HP ProBook 450'),
 (2, 'ENOVA'),
-(4, 'Samsung Tab A'),
-(3, 'Epson X10');
+(3, 'Samsung Tab A'),
+(4, 'Epson X10');
 
 -- ======================
 -- VARIANTES ELEMENTO

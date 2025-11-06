@@ -1,5 +1,6 @@
 ﻿using CapaDatos.InterfacesDTO;
 using CapaDatos.InterfaceUoW;
+using CapaDatos.Repos;
 using CapaDTOs;
 using CapaEntidad;
 using System.ComponentModel.DataAnnotations;
@@ -232,12 +233,22 @@ namespace CapaNegocio
         {
             return uow.RepoTipoElemento.GetAll();
         }
+
+        public IEnumerable<TipoElemento> GetTiposByElemento()
+        {
+            return uow.RepoTipoElemento.GetTiposByElemento();
+        }
         #endregion
 
         #region MODELOS
         public IEnumerable<Modelos> ObtenerModelosPorTipo(int idTipoElemento)
         {
             return uow.RepoModelo.GetByTipo(idTipoElemento);
+        }
+
+        public Modelos? ObtenerModeloPorID(int idModelo)
+        {
+            return uow.RepoModelo.GetById(idModelo);
         }
         #endregion
 
@@ -277,7 +288,7 @@ namespace CapaNegocio
                 throw new ValidationException("El número de serie no puede superar los 40 caracteres.");
             }
 
-            if (!Regex.IsMatch(elemento.NumeroSerie, @"^[A-Z0-9\-]+$"))
+            if (!Regex.IsMatch(elemento.NumeroSerie, @"^[Aa-zZ0-9\-]+$"))
             {
                 throw new ValidationException("El número de serie contiene caracteres inválidos.");
             }

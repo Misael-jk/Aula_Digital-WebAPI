@@ -155,7 +155,6 @@
             cmbTipoElemento.ShadowDecoration.CustomizableEdges = customizableEdges6;
             cmbTipoElemento.Size = new Size(278, 36);
             cmbTipoElemento.TabIndex = 28;
-            cmbTipoElemento.SelectedIndexChanged += cmbTipoElemento_SelectedIndexChanged;
             // 
             // dgvElementos
             // 
@@ -267,6 +266,7 @@
             btnAgregarNotebook.Size = new Size(183, 21);
             btnAgregarNotebook.TabIndex = 14;
             btnAgregarNotebook.Text = "Agregar notebook";
+            btnAgregarNotebook.Click += btnCrearElemento_Click;
             // 
             // guna2Panel2
             // 
