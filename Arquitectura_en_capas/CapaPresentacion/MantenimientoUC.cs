@@ -24,6 +24,7 @@ namespace CapaPresentacion
         private readonly ElementosBajasCN elementosBajasCN;
         private Usuarios usuarioActual;
         private int _idActualElemento;
+        private int _idActualNotebook;
 
         public MantenimientoUC(NotebookBajasCN notebookBajasCN, ElementosBajasCN elementosBajasCN, Usuarios user)
         {
@@ -36,6 +37,13 @@ namespace CapaPresentacion
         private void MantenimientoUC_Load(object sender, EventArgs e)
         {
             MostrarDatos();
+
+            seleccionarPrimeraFila(dgvMatenimientoNotebook);
+            if (dgvMatenimientoNotebook.Rows.Count > 0)
+            {
+                MostrarDatosDeLaFilaNotebooks(0);
+            }
+
             seleccionarPrimeraFila(dgvMantenimientoElemento);
             if (dgvMantenimientoElemento.Rows.Count > 0)
             {
@@ -46,7 +54,7 @@ namespace CapaPresentacion
         public void MostrarDatos()
         {
             dgvMantenimientoElemento.DataSource = elementosBajasCN.GetAllElementos();
-            //dgvMatenimientoNotebook.DataSource = notebookBajasCN.(); 
+            dgvMatenimientoNotebook.DataSource = notebookBajasCN.GetAllNotebooks();
         }
 
         private void btnHabilitar_Click(object sender, EventArgs e)
@@ -102,6 +110,36 @@ namespace CapaPresentacion
                 dgv.Rows[0].Selected = true;
                 dgv.CurrentCell = dgv.Rows[0].Cells[0];
             }
+        }
+
+        private void MostrarDatosDeLaFilaNotebooks(int rowIndex)
+        {
+            lblIDNotebook.Text = "ID: ";
+            txtEquipoNotebook.Text = "Equipo: ";
+            txtSerieElemento.Text = "Nro. de serie: ";
+            txtCodBarraNotebook.Text = "Cod. de barra: ";
+
+            var fila = dgvMatenimientoNotebook.Rows[rowIndex];
+            _idActualNotebook = Convert.ToInt32(fila.Cells["IdNotebook"].Value);
+            Notebooks? notebookBaja = notebookBajasCN.ObtenerNotebookPorID(_idActualNotebook);
+
+            lblIDNotebook.Text += _idActualNotebook;
+            txtEquipoNotebook.Text += notebookBaja?.Equipo;
+            txtNumSerieNotebook.Text += notebookBaja?.NumeroSerie;
+            txtCodBarraNotebook.Text += notebookBaja?.CodigoBarra;
+        }
+
+        private void dgvMatenimientoNotebook_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            MostrarDatosDeLaFilaNotebooks(e.RowIndex);
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            notebookBajasCN.HabilitarNotebook(_idActualNotebook, usuarioActual.IdUsuario);
+            MostrarDatos();
         }
     }
 }

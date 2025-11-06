@@ -105,6 +105,7 @@ namespace CapaPresentacion
         private readonly IMapperVarianteElemento mapperVarianteElemento;
         private readonly IMapperDocentesBajas mapperDocentesBajas;
         private readonly IMapperUsuariosBajas mapperUsuariosBajas;
+        private readonly IMapperNotebookBajas mapperNotebookBajas;
         #endregion
 
         #region Variables Capa Negocio
@@ -203,6 +204,7 @@ namespace CapaPresentacion
             mapperVarianteElemento = new MapperVarianteElemento(conexion);
             mapperDocentesBajas = new MapperDocentesBajas(conexion);
             mapperUsuariosBajas = new MapperUsuariosBajas(conexion);
+            mapperNotebookBajas = new MapperNotebookBajas(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -220,6 +222,7 @@ namespace CapaPresentacion
             ubicacionCN = new UbicacionCN(repoUbicacion);
             docentesBajasCN = new DocentesBajasCN(mapperDocentesBajas, repoDocentes);
             usuariosBajasCN = new UsuariosBajasCN(mapperUsuariosBajas, repoUsuarios);
+            notebookBajasCN = new NotebookBajasCN(mapperNotebookBajas, uowNotebooks);
 
             Dashboard();
         }
@@ -313,21 +316,36 @@ namespace CapaPresentacion
 
         public void Dashboard()
         {
-            if (historialUC == null)
-                historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
+            //if (historialUC == null)
+            //    historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
 
-            historialUC.RefrescarDatos();
-            pnlContenedor.Controls.Clear();
+            //historialUC.RefrescarDatos();
+            //pnlContenedor.Controls.Clear();
+
+            //CambiarNombrePort(BtnDashboard.Text);
+
+            //if (!pnlContenedor.Controls.Contains(historialUC))
+            //{
+            //    pnlContenedor.Controls.Add(historialUC);
+            //    historialUC.Dock = DockStyle.Fill;
+            //}
+
+            //MostrarSolo(historialUC);
+
+            if(dashboard == null)
+                dashboard = new Dashboard();
 
             CambiarNombrePort(BtnDashboard.Text);
-
-            if (!pnlContenedor.Controls.Contains(historialUC))
+            pnlContenedor.Controls.Clear();
+            if (!pnlContenedor.Controls.Contains(dashboard))
             {
-                pnlContenedor.Controls.Add(historialUC);
-                historialUC.Dock = DockStyle.Fill;
+                pnlContenedor.Controls.Add(dashboard);
+                dashboard.Dock = DockStyle.Fill;
             }
+            MostrarSolo(dashboard);
 
-            MostrarSolo(historialUC);
+
+
         }
 
         private void BtnDashboard_Click(object sender, EventArgs e)

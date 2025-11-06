@@ -204,6 +204,16 @@ public class NotebooksCN
     {
         return uow.RepoNotebooks.GetCantidadPorModelo();
     }
+
+    public List<(string Estado, int Cantidad)> GetCantidadEstado()
+    {
+        return uow.RepoNotebooks.GetCantidadEstado();
+    }
+
+    public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos()
+    {
+        return uow.RepoNotebooks.GetCantidadNotebooksEnCarritos();
+    }
     #endregion
 
 

@@ -28,110 +28,145 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnElementos = new Button();
-            groupBox1 = new GroupBox();
-            btnDocentes = new Button();
-            btnDevoluciones = new Button();
-            btnPrestamos = new Button();
-            btnCarritos = new Button();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             dataGridView1 = new DataGridView();
-            groupBox1.SuspendLayout();
+            guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            guna2GradientPanel3 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            guna2GradientPanel4 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            guna2GradientPanel5 = new Guna.UI2.WinForms.Guna2GradientPanel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // btnElementos
-            // 
-            btnElementos.Location = new Point(18, 34);
-            btnElementos.Name = "btnElementos";
-            btnElementos.Size = new Size(140, 141);
-            btnElementos.TabIndex = 0;
-            btnElementos.Text = "ELEMENTOS";
-            btnElementos.TextAlign = ContentAlignment.BottomCenter;
-            btnElementos.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(btnDocentes);
-            groupBox1.Controls.Add(btnDevoluciones);
-            groupBox1.Controls.Add(btnPrestamos);
-            groupBox1.Controls.Add(btnCarritos);
-            groupBox1.Controls.Add(btnElementos);
-            groupBox1.Location = new Point(17, 14);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(840, 211);
-            groupBox1.TabIndex = 6;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "DESTACADOS";
-            // 
-            // btnDocentes
-            // 
-            btnDocentes.Location = new Point(683, 34);
-            btnDocentes.Name = "btnDocentes";
-            btnDocentes.Size = new Size(140, 141);
-            btnDocentes.TabIndex = 4;
-            btnDocentes.Text = "DOCENTES";
-            btnDocentes.TextAlign = ContentAlignment.BottomCenter;
-            btnDocentes.UseVisualStyleBackColor = true;
-            // 
-            // btnDevoluciones
-            // 
-            btnDevoluciones.Location = new Point(519, 34);
-            btnDevoluciones.Name = "btnDevoluciones";
-            btnDevoluciones.Size = new Size(140, 141);
-            btnDevoluciones.TabIndex = 3;
-            btnDevoluciones.Text = "DEVOLUCIONES";
-            btnDevoluciones.TextAlign = ContentAlignment.BottomCenter;
-            btnDevoluciones.UseVisualStyleBackColor = true;
-            // 
-            // btnPrestamos
-            // 
-            btnPrestamos.Location = new Point(352, 34);
-            btnPrestamos.Name = "btnPrestamos";
-            btnPrestamos.Size = new Size(140, 141);
-            btnPrestamos.TabIndex = 2;
-            btnPrestamos.Text = "PRESTAMOS";
-            btnPrestamos.TextAlign = ContentAlignment.BottomCenter;
-            btnPrestamos.UseVisualStyleBackColor = true;
-            // 
-            // btnCarritos
-            // 
-            btnCarritos.Location = new Point(183, 34);
-            btnCarritos.Name = "btnCarritos";
-            btnCarritos.Size = new Size(140, 141);
-            btnCarritos.TabIndex = 1;
-            btnCarritos.Text = "CARRITOS";
-            btnCarritos.TextAlign = ContentAlignment.BottomCenter;
-            btnCarritos.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(129, 379);
+            dataGridView1.Location = new Point(15, 405);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(621, 197);
+            dataGridView1.Size = new Size(747, 254);
             dataGridView1.TabIndex = 7;
+            // 
+            // guna2GradientPanel1
+            // 
+            guna2GradientPanel1.BackColor = Color.Transparent;
+            guna2GradientPanel1.BorderRadius = 15;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges1;
+            guna2GradientPanel1.FillColor = SystemColors.ControlLightLight;
+            guna2GradientPanel1.FillColor2 = SystemColors.ControlLightLight;
+            guna2GradientPanel1.Location = new Point(15, 21);
+            guna2GradientPanel1.Name = "guna2GradientPanel1";
+            guna2GradientPanel1.ShadowDecoration.BorderRadius = 15;
+            guna2GradientPanel1.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2GradientPanel1.ShadowDecoration.Depth = 33;
+            guna2GradientPanel1.ShadowDecoration.Enabled = true;
+            guna2GradientPanel1.ShadowDecoration.Shadow = new Padding(0, 0, 0, 5);
+            guna2GradientPanel1.Size = new Size(183, 105);
+            guna2GradientPanel1.TabIndex = 8;
+            // 
+            // guna2GradientPanel2
+            // 
+            guna2GradientPanel2.BackColor = Color.Transparent;
+            guna2GradientPanel2.BorderRadius = 15;
+            guna2GradientPanel2.CustomizableEdges = customizableEdges3;
+            guna2GradientPanel2.FillColor = SystemColors.ControlLightLight;
+            guna2GradientPanel2.FillColor2 = SystemColors.ControlLightLight;
+            guna2GradientPanel2.Location = new Point(239, 21);
+            guna2GradientPanel2.Name = "guna2GradientPanel2";
+            guna2GradientPanel2.ShadowDecoration.BorderRadius = 15;
+            guna2GradientPanel2.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2GradientPanel2.ShadowDecoration.Depth = 33;
+            guna2GradientPanel2.ShadowDecoration.Enabled = true;
+            guna2GradientPanel2.ShadowDecoration.Shadow = new Padding(0, 0, 0, 5);
+            guna2GradientPanel2.Size = new Size(183, 105);
+            guna2GradientPanel2.TabIndex = 9;
+            // 
+            // guna2GradientPanel3
+            // 
+            guna2GradientPanel3.BackColor = Color.Transparent;
+            guna2GradientPanel3.BorderRadius = 15;
+            guna2GradientPanel3.CustomizableEdges = customizableEdges5;
+            guna2GradientPanel3.FillColor = SystemColors.ControlLightLight;
+            guna2GradientPanel3.FillColor2 = SystemColors.ControlLightLight;
+            guna2GradientPanel3.Location = new Point(463, 21);
+            guna2GradientPanel3.Name = "guna2GradientPanel3";
+            guna2GradientPanel3.ShadowDecoration.BorderRadius = 15;
+            guna2GradientPanel3.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2GradientPanel3.ShadowDecoration.Depth = 33;
+            guna2GradientPanel3.ShadowDecoration.Enabled = true;
+            guna2GradientPanel3.ShadowDecoration.Shadow = new Padding(0, 0, 0, 5);
+            guna2GradientPanel3.Size = new Size(183, 105);
+            guna2GradientPanel3.TabIndex = 10;
+            // 
+            // guna2GradientPanel4
+            // 
+            guna2GradientPanel4.BackColor = Color.Transparent;
+            guna2GradientPanel4.BorderRadius = 15;
+            guna2GradientPanel4.CustomizableEdges = customizableEdges7;
+            guna2GradientPanel4.FillColor = SystemColors.ControlLightLight;
+            guna2GradientPanel4.FillColor2 = SystemColors.ControlLightLight;
+            guna2GradientPanel4.Location = new Point(800, 143);
+            guna2GradientPanel4.Name = "guna2GradientPanel4";
+            guna2GradientPanel4.ShadowDecoration.BorderRadius = 15;
+            guna2GradientPanel4.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            guna2GradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2GradientPanel4.ShadowDecoration.Depth = 33;
+            guna2GradientPanel4.ShadowDecoration.Enabled = true;
+            guna2GradientPanel4.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
+            guna2GradientPanel4.Size = new Size(235, 267);
+            guna2GradientPanel4.TabIndex = 11;
+            // 
+            // guna2GradientPanel5
+            // 
+            guna2GradientPanel5.BackColor = Color.Transparent;
+            guna2GradientPanel5.BorderRadius = 15;
+            guna2GradientPanel5.CustomizableEdges = customizableEdges9;
+            guna2GradientPanel5.FillColor = SystemColors.ControlLightLight;
+            guna2GradientPanel5.FillColor2 = SystemColors.ControlLightLight;
+            guna2GradientPanel5.Location = new Point(688, 21);
+            guna2GradientPanel5.Name = "guna2GradientPanel5";
+            guna2GradientPanel5.ShadowDecoration.BorderRadius = 15;
+            guna2GradientPanel5.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            guna2GradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2GradientPanel5.ShadowDecoration.Depth = 33;
+            guna2GradientPanel5.ShadowDecoration.Enabled = true;
+            guna2GradientPanel5.ShadowDecoration.Shadow = new Padding(0, 0, 0, 5);
+            guna2GradientPanel5.Size = new Size(184, 105);
+            guna2GradientPanel5.TabIndex = 12;
             // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(guna2GradientPanel5);
+            Controls.Add(guna2GradientPanel4);
+            Controls.Add(guna2GradientPanel3);
+            Controls.Add(guna2GradientPanel2);
+            Controls.Add(guna2GradientPanel1);
             Controls.Add(dataGridView1);
-            Controls.Add(groupBox1);
             Name = "Dashboard";
-            Size = new Size(1054, 671);
-            groupBox1.ResumeLayout(false);
+            Size = new Size(1050, 670);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Button btnElementos;
-        private GroupBox groupBox1;
         private DataGridView dataGridView1;
-        private Button btnDocentes;
-        private Button btnDevoluciones;
-        private Button btnPrestamos;
-        private Button btnCarritos;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel2;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel3;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel4;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel5;
     }
 }

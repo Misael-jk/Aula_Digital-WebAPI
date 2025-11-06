@@ -24,5 +24,7 @@ public interface IRepoNotebooks
     public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra);
     public Carritos? GetCarritoByNotebook(int idNotebook);
     public List<(string Modelo, int Cantidad)> GetCantidadPorModelo();
+    public List<(string Estado, int Cantidad)> GetCantidadEstado();
+    public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos();
     public void SetTransaction(IDbTransaction? transaction);
 }

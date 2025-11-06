@@ -2,16 +2,10 @@
 using CapaDatos.Repos;
 using CapaEntidad;
 using CapaNegocio;
-using Microsoft.VisualBasic.ApplicationServices;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace CapaPresentacion
@@ -53,6 +47,9 @@ namespace CapaPresentacion
         {
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1100);
+
+            ApplyModernStyleCompact(dgvElementos);
+            //Guna2DataGridViewStyler.SetupPrestamosColumns(dgvElementos, addActionButton: true);
 
             //IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll(); ya es el Listar Estado Mantenimiento de ElementosCN
             //IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
@@ -191,6 +188,63 @@ namespace CapaPresentacion
                 cmbVarianteElementos.DataSource = elementosCN.ObtenerVariantesPorTipo(selectedValue);
                 cmbVarianteElementos.ValueMember = "IdVarianteElemento";
                 cmbVarianteElementos.DisplayMember = "Variante";
+            }
+        }
+
+        private void ApplyModernStyleCompact(Guna2DataGridView dgv)
+        {
+            // Tamaño y comportamiento general
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ReadOnly = true;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.RowHeadersVisible = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.BackgroundColor = Color.White;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.GridColor = Color.FromArgb(215, 230, 215);
+            dgv.EnableHeadersVisualStyles = false;
+
+            dgv.ColumnHeadersHeight = 38;
+            dgv.RowTemplate.Height = 34;
+
+            // Header verde brillante
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(67, 160, 71);
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dgv.ColumnHeadersDefaultCellStyle.Padding = new Padding(8, 4, 8, 4);
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            // Celdas base
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 45);
+            dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f);
+            dgv.DefaultCellStyle.Padding = new Padding(6, 3, 6, 3);
+
+            // Alternancia
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 240);
+
+            // Selección verde suave
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.FromArgb(30, 30, 35);
+            dgv.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
+
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            EnableDoubleBuffering(dgv);
+
+        }
+
+        private void EnableDoubleBuffering(DataGridView dgv)
+        {
+            Type dgvType = dgv.GetType();
+            System.Reflection.PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (pi != null)
+            {
+                pi.SetValue(dgv, true, null);
             }
         }
     }

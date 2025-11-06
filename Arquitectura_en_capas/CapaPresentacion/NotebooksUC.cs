@@ -10,9 +10,12 @@ using System.Windows.Forms;
 using CapaNegocio;
 using CapaDatos.InterfacesDTO;
 using CapaEntidad;
-using LiveCharts;
-using LiveCharts.WinForms;
-using LiveCharts.Wpf;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
+using Guna.UI2.WinForms;
 
 namespace CapaPresentacion
 {
@@ -33,6 +36,8 @@ namespace CapaPresentacion
         }
         public void ActualizarDataGrid()
         {
+            ApplyModernStyleCompact(dtgNotebook);
+
             dtgNotebook.DataSource = notebooksCN.GetAll();
 
             cmbModelo.DataSource = notebooksCN.ListarModelosPorTipo(1);
@@ -55,13 +60,15 @@ namespace CapaPresentacion
             cmbUbicacion_RemoveCarrito.DisplayMember = "NombreUbicacion";
 
             CargarGrafico();
+            CargarGraficoEstados();
+            CargarGraficoCarritos();
         }
 
         private void btnAgregarNotebook_Click(object sender, EventArgs e)
         {
             //Action ActualizarGrid = ActualizarDataGrid; No es necesario crear esta variable temporal, ya que puedo pasar el metodo directamente
 
-            var Notebook = new FormCRUDNotebook(notebooksCN, ActualizarDataGrid);
+            var Notebook = new FormCRUDNotebook(notebooksCN, ActualizarDataGrid, CargarGrafico, usuarioActual);
             Notebook.ShowDialog();
         }
 
@@ -166,13 +173,18 @@ namespace CapaPresentacion
             notebooksCN.ActualizarNotebook(notebook, usuarioActual.IdUsuario);
             ActualizarDataGrid();
             CargarGrafico();
+            CargarGraficoEstados();
+            CargarGraficoCarritos();
         }
 
         private void btnDeshabiliar_Click(object sender, EventArgs e)
         {
-            //notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, (int)cmbEstados.SelectedValue);
+            notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, 3);
 
             ActualizarDataGrid();
+            CargarGrafico();
+            CargarGraficoEstados();
+            CargarGraficoCarritos();
         }
 
         private void btnAgragarAlCarrito_Click(object sender, EventArgs e)
@@ -212,27 +224,164 @@ namespace CapaPresentacion
 
             if (datos == null || datos.Count == 0) return;
 
-            // Crear la colección de series para el PieCharts
-            var series = new SeriesCollection();
+            var series = new List<PieSeries<int>>();
             foreach (var d in datos)
             {
-                series.Add(new PieSeries
+                series.Add(new PieSeries<int>
                 {
-                    Title = d.Modelo,
-                    Values = new ChartValues<int> { d.Cantidad },
-                    DataLabels = true
+                    Values = new int[] { d.Cantidad },
+                    Name = d.Modelo,
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsSize = 14
                 });
             }
 
-            // Crear PieChart clásico para WinForms
-            var pieChart = new LiveCharts.WinForms.PieChart
+            var pieChart = new PieChart
             {
                 Dock = DockStyle.Fill,
-                Series = series
+                Series = series.ToArray()
             };
 
             pnlGrafico.Controls.Clear();
             pnlGrafico.Controls.Add(pieChart);
+        }
+
+        private void CargarGraficoEstados()
+        {
+            var datos = notebooksCN.GetCantidadEstado();
+
+            if (datos == null || datos.Count == 0) return;
+
+            var series = new List<PieSeries<int>>();
+
+            foreach (var d in datos)
+            {
+                SKColor color = d.Estado switch
+                {
+                    "Disponible" => SKColors.GreenYellow,
+                    "Prestado" => SKColors.Red,
+                    "En mantenimiento" => SKColors.Yellow,
+                    _ => SKColors.Gray
+                };
+
+                series.Add(new PieSeries<int>
+                {
+                    Values = new int[] { d.Cantidad },
+                    Name = d.Estado,
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsSize = 14,
+                    Fill = new SolidColorPaint(color),
+                });
+            }
+
+            var pieChart = new PieChart
+            {
+                Dock = DockStyle.Fill,
+                Series = series.ToArray(),
+            };
+
+            pnlGraficoEstados.Controls.Clear();
+            pnlGraficoEstados.Controls.Add(pieChart);
+        }
+
+        private void CargarGraficoCarritos()
+        {
+            var datos = notebooksCN.GetCantidadNotebooksEnCarritos();
+
+            if (datos == null || datos.Count == 0) return;
+
+            var labels = datos.Select(d => d.Equipo).ToArray();
+            var values = datos.Select(d => (double)d.Cantidad).ToArray();
+
+            var series = new ColumnSeries<double>
+            {
+                Values = values,
+                DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                DataLabelsSize = 9
+            };
+
+            var cartChart = new CartesianChart
+            {
+                Dock = DockStyle.Fill,
+
+                Series = new ISeries[] { series },
+
+                XAxes = new Axis[]
+                {
+                    new Axis
+                    {
+                        Labels = labels,
+                    }
+                },
+
+                YAxes = new Axis[]
+                {
+                    new Axis
+                    {
+                        Labeler = value => value.ToString("N0")
+                    }
+                }
+            };
+
+            pnlGraficoCarritos.Controls.Clear();
+            pnlGraficoCarritos.Controls.Add(cartChart);
+        }
+
+        private void ApplyModernStyleCompact(Guna2DataGridView dgv)
+        {
+            // Tamaño y comportamiento general
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ReadOnly = true;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.RowHeadersVisible = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.BackgroundColor = Color.White;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.GridColor = Color.FromArgb(215, 230, 215);
+            dgv.EnableHeadersVisualStyles = false;
+
+            dgv.ColumnHeadersHeight = 38;
+            dgv.RowTemplate.Height = 34;
+
+            // Header verde brillante
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(67, 160, 71);
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dgv.ColumnHeadersDefaultCellStyle.Padding = new Padding(8, 4, 8, 4);
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            // Celdas base
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 45);
+            dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f);
+            dgv.DefaultCellStyle.Padding = new Padding(6, 3, 6, 3);
+
+            // Alternancia
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 240);
+
+            // Selección verde suave
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.FromArgb(30, 30, 35);
+            dgv.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
+
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            EnableDoubleBuffering(dgv);
+
+        }
+
+        private void EnableDoubleBuffering(DataGridView dgv)
+        {
+            Type dgvType = dgv.GetType();
+            System.Reflection.PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (pi != null)
+            {
+                pi.SetValue(dgv, true, null);
+            }
         }
     }
 }

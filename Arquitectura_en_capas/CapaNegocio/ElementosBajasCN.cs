@@ -48,21 +48,47 @@ public class ElementosBajasCN
 
     public void HabilitarElemento(int idElemento, int idUsuario)
     {
+        try
+        {
+            uow.BeginTransaction();
 
-        Elemento? elemento = uow.RepoElemento.GetById(idElemento);
+            Elemento? elemento = uow.RepoElemento.GetById(idElemento);
 
-        if (elemento == null)
-            throw new Exception("El elemento no existe.");
+            if (elemento == null)
+                throw new Exception("El elemento no existe.");
 
-        if (elemento.Habilitado)
-            throw new Exception("El elemento ya esta habilitado.");
+            if (elemento.Habilitado)
+                throw new Exception("El elemento ya esta habilitado.");
 
-        elemento.Habilitado = true;
-        elemento.IdEstadoMantenimiento = 1;
-        elemento.FechaBaja = null;
+            elemento.Habilitado = true;
+            elemento.IdEstadoMantenimiento = 1;
+            elemento.FechaBaja = null;
 
-        uow.RepoElemento.Update(elemento);
+            uow.RepoElemento.Update(elemento);
 
+            HistorialCambios historialCambios = new HistorialCambios
+            {
+                IdUsuario = idUsuario,
+                IdTipoAccion = 2,
+                Descripcion = $"Se habilito el elemento con numero de serie {elemento.NumeroSerie}",
+                FechaCambio = DateTime.Now,
+                Motivo = null
+            };
+            uow.RepoHistorialCambio.Insert(historialCambios);
+
+            uow.RepoHistorialElementos.Insert(new HistorialElementos
+            {
+                IdHistorialCambio = historialCambios.IdHistorialCambio,
+                IdElementos = idElemento
+            });
+
+            uow.Commit();
+        }
+        catch(Exception ex)
+        {
+            uow.Rollback();
+            throw new Exception($"Error al habilitar el elemento: {ex.Message}");
+        }
     }
 
     #region DELETE ELEMENTO 
