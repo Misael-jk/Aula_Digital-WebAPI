@@ -80,7 +80,7 @@ namespace CapaPresentacion
             // -------------------- TIPOS --------------------
             var tipos = tiposElementoCN.GetTiposByElemento();
 
-            cmbTipoElemento.DataSource = tipos.ToList();
+            cmbTipoElemento.DataSource = tipos;
             cmbTipoElemento.ValueMember = "IdTipoElemento";
             cmbTipoElemento.DisplayMember = "ElementoTipo";
 
@@ -132,24 +132,8 @@ namespace CapaPresentacion
 
         private void btnCrearElemento_Click(object sender, EventArgs e)
         {
-            VariantesElemento? variante = elementosCN.ObtenerVariantePorID(idVariante);
-
-            Elemento elemento = new Elemento()
-            {
-                IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
-                NumeroSerie = txtNroSerie.Text,
-                CodigoBarra = txtCodBarra.Text,
-                Patrimonio = txtPatrimonio.Text,
-                IdVarianteElemento = idVariante,
-                IdUbicacion = (int)cmbUbicaciones.SelectedValue,
-                IdModelo = variante.IdModelo,
-                IdEstadoMantenimiento = 1,
-                Habilitado = true,
-                FechaBaja = null
-            };
-
-            elementosCN.CrearElemento(elemento, userVerificado.IdUsuario);
-            CargarElementos();
+            var CrearElemento = new FormCRUDElementos(elementosCN, userVerificado, CargarElementos);
+            CrearElemento.ShowDialog();
         }
 
         private void btnActualizarElemento_Click(object sender, EventArgs e)
@@ -180,18 +164,6 @@ namespace CapaPresentacion
         {
             //elementosCN.DeshabilitarElemento(txtNroSerie.Text);
             CargarElementos();
-        }
-
-        private void cmbTipoElemento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cmbTipoElemento.SelectedValue is int selectedValue)
-            {
-                idVariante = selectedValue - 1;
-
-                cmbVarianteElementos.DataSource = elementosCN.ObtenerVariantesPorTipo(selectedValue);
-                cmbVarianteElementos.ValueMember = "IdVarianteElemento";
-                cmbVarianteElementos.DisplayMember = "Variante";
-            }
         }
     }
 }
