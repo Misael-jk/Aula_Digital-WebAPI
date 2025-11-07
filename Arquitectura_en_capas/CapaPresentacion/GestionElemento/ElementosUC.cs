@@ -13,20 +13,14 @@ namespace CapaPresentacion
     public partial class ElementosUC : UserControl
     {
         private readonly ElementosCN elementosCN;
-        private readonly TiposElementoCN tiposElementoCN;
         private readonly Usuarios userVerificado;
-        private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
-        private readonly IRepoElemento repoElemento;
-        private int idElemento = 0;
+        private int idElementoActual = 0;
 
         private int idVariante = 0;
-        public ElementosUC(ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, Usuarios userVerificado)
+        public ElementosUC(ElementosCN elementosCN, Usuarios userVerificado)
         {
             InitializeComponent();
             this.elementosCN = elementosCN;
-            this.tiposElementoCN = tiposElementoCN;
-            this.repoEstadosMantenimiento = repoEstadosMantenimiento;
-            this.repoElemento = repoElemento;
             this.userVerificado = userVerificado;
         }
 
@@ -35,7 +29,6 @@ namespace CapaPresentacion
             try
             {
                 var elementos = elementosCN.ObtenerElementos();
-                //dgvElementos.DataSource = elementos;
                 dgvElementos_M.DataSource = elementos;
             }
             catch (Exception ex)
@@ -49,7 +42,6 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1100);
 
-            ApplyModernStyleCompact(dgvElementos);
             //Guna2DataGridViewStyler.SetupPrestamosColumns(dgvElementos, addActionButton: true);
 
             //IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll(); ya es el Listar Estado Mantenimiento de ElementosCN
@@ -76,15 +68,15 @@ namespace CapaPresentacion
 
 
             // -------------------- TIPOS --------------------
-            var tipos = tiposElementoCN.GetTiposByElemento();
+            //var tipos = tiposElementoCN.GetTiposByElemento();
 
-            cmbTipoElemento.DataSource = tipos;
-            cmbTipoElemento.ValueMember = "IdTipoElemento";
-            cmbTipoElemento.DisplayMember = "ElementoTipo";
+            //cmbTipoElemento.DataSource = tipos;
+            //cmbTipoElemento.ValueMember = "IdTipoElemento";
+            //cmbTipoElemento.DisplayMember = "ElementoTipo";
 
-            cmbUbicaciones.DataSource = elementosCN.ObtenerUbicaciones();
-            cmbUbicaciones.ValueMember = "IdUbicacion";
-            cmbUbicaciones.DisplayMember = "NombreUbicacion";
+            //cmbUbicaciones.DataSource = elementosCN.ObtenerUbicaciones();
+            //cmbUbicaciones.ValueMember = "IdUbicacion";
+            //cmbUbicaciones.DisplayMember = "NombreUbicacion";
 
             //var tiposBusqueda = tipos.ToList();
             //tiposBusqueda.Insert(0, new TipoElemento { IdTipoElemento = 0, ElementoTipo = "Ningún tipo" });
@@ -98,18 +90,19 @@ namespace CapaPresentacion
         {
             if (e.RowIndex < 0) return;
 
-            var fila = dgvElementos.Rows[e.RowIndex];
+            var fila = dgvElementos_M.Rows[e.RowIndex];
 
-            idElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
-            var elemento = repoElemento.GetById(idElemento);
+            idElementoActual = Convert.ToInt32(fila.Cells["IdElemento"].Value);
 
-            txtNroSerie.Text = elemento?.NumeroSerie;
-            txtCodBarra.Text = elemento?.CodigoBarra;
-            txtPatrimonio.Text = elemento?.Patrimonio;
-            cmbTipoElemento.SelectedValue = elemento.IdTipoElemento;
-            cmbVarianteElementos.SelectedValue = elemento.IdVarianteElemento.HasValue ? elemento.IdVarianteElemento.Value : -1;
+            //var elemento = repoElemento.GetById(idElemento);
 
-            cmbUbicaciones.SelectedIndex = elemento.IdUbicacion;
+            //txtNroSerie.Text = elemento?.NumeroSerie;
+            //txtCodBarra.Text = elemento?.CodigoBarra;
+            //txtPatrimonio.Text = elemento?.Patrimonio;
+            //cmbTipoElemento.SelectedValue = elemento.IdTipoElemento;
+            //cmbVarianteElementos.SelectedValue = elemento.IdVarianteElemento.HasValue ? elemento.IdVarianteElemento.Value : -1;
+
+            //cmbUbicaciones.SelectedIndex = elemento.IdUbicacion;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -130,95 +123,37 @@ namespace CapaPresentacion
 
         private void btnCrearElemento_Click(object sender, EventArgs e)
         {
-            var CrearElemento = new FormCRUDElementos(elementosCN, userVerificado, CargarElementos);
-            CrearElemento.ShowDialog();
+            
         }
 
         private void btnActualizarElemento_Click(object sender, EventArgs e)
         {
-            VariantesElemento? variante = elementosCN.ObtenerVariantePorID(idVariante);
-            Elemento? elementoOLD = elementosCN.ObtenerPorId(idElemento);
+            //VariantesElemento? variante = elementosCN.ObtenerVariantePorID(idVariante);
+            //Elemento? elementoOLD = elementosCN.ObtenerPorId(idElemento);
 
-            var elemento = new Elemento
-            {
-                IdElemento = idElemento,
-                IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
-                NumeroSerie = txtNroSerie.Text,
-                CodigoBarra = txtCodBarra.Text,
-                Patrimonio = txtPatrimonio.Text,
-                IdVarianteElemento = idVariante,
-                IdUbicacion = (int)cmbUbicaciones.SelectedValue,
-                IdModelo = variante.IdModelo,
-                IdEstadoMantenimiento = 1,
-                Habilitado = true,
-                FechaBaja = null
-            };
+            //var elemento = new Elemento
+            //{
+            //    IdElemento = idElemento,
+            //    IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
+            //    NumeroSerie = txtNroSerie.Text,
+            //    CodigoBarra = txtCodBarra.Text,
+            //    Patrimonio = txtPatrimonio.Text,
+            //    IdVarianteElemento = idVariante,
+            //    IdUbicacion = (int)cmbUbicaciones.SelectedValue,
+            //    IdModelo = variante.IdModelo,
+            //    IdEstadoMantenimiento = 1,
+            //    Habilitado = true,
+            //    FechaBaja = null
+            //};
 
-            elementosCN.ActualizarElemento(elemento, userVerificado.IdUsuario);
-            CargarElementos();
+            //elementosCN.ActualizarElemento(elemento, userVerificado.IdUsuario);
+            //CargarElementos();
         }
 
         private void btnDeshabilitar_Click(object sender, EventArgs e)
         {
             //elementosCN.DeshabilitarElemento(txtNroSerie.Text);
             CargarElementos();
-        }
-
-        private void ApplyModernStyleCompact(Guna2DataGridView dgv)
-        {
-            // Tamaño y comportamiento general
-            dgv.AllowUserToAddRows = false;
-            dgv.AllowUserToDeleteRows = false;
-            dgv.AllowUserToResizeRows = false;
-            dgv.ReadOnly = true;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            dgv.RowHeadersVisible = false;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.BackgroundColor = Color.White;
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.GridColor = Color.FromArgb(215, 230, 215);
-            dgv.EnableHeadersVisualStyles = false;
-
-            dgv.ColumnHeadersHeight = 38;
-            dgv.RowTemplate.Height = 34;
-
-            // Header verde brillante
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(67, 160, 71);
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f, FontStyle.Bold);
-            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //dgv.ColumnHeadersDefaultCellStyle.Padding = new Padding(8, 4, 8, 4);
-            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-
-            // Celdas base
-            dgv.DefaultCellStyle.BackColor = Color.White;
-            dgv.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 45);
-            dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f);
-            dgv.DefaultCellStyle.Padding = new Padding(6, 3, 6, 3);
-
-            // Alternancia
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 240);
-
-            // Selección verde suave
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
-            dgv.DefaultCellStyle.SelectionForeColor = Color.FromArgb(30, 30, 35);
-            dgv.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
-
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            EnableDoubleBuffering(dgv);
-
-        }
-
-        private void EnableDoubleBuffering(DataGridView dgv)
-        {
-            Type dgvType = dgv.GetType();
-            System.Reflection.PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            if (pi != null)
-            {
-                pi.SetValue(dgv, true, null);
-            }
         }
 
         private void dgvElementos_M_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -245,6 +180,12 @@ namespace CapaPresentacion
                 e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
                 e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
             }
+        }
+
+        private void btnCrearElemento_M_Click(object sender, EventArgs e)
+        {
+            var CrearElemento = new FormCRUDElementos(elementosCN, userVerificado, CargarElementos);
+            CrearElemento.ShowDialog();
         }
     }
 }
