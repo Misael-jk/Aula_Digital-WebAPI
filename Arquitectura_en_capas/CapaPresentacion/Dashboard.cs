@@ -1,4 +1,5 @@
-﻿using CapaDatos.MappersDTO;
+﻿using CapaDatos.InterfacesDTO;
+using CapaDatos.MappersDTO;
 using CapaEntidad;
 using CapaNegocio;
 using System;
@@ -16,20 +17,23 @@ namespace CapaPresentacion
     public partial class Dashboard : UserControl
     {
         private readonly MapperHistorialElemento mapperHistorialElemento;
-        public Dashboard()
+        private readonly IMapperPrestamosActivos mapperPrestamosActivos; 
+        public Dashboard(IMapperPrestamosActivos mapperPrestamosActivos)
         {
             InitializeComponent();
-
+            this.mapperPrestamosActivos = mapperPrestamosActivos;
         }
 
         public void MostrarDatos()
         {
             //var elemento = mapperHistorialElemento.GetAllDTO();
             //dataGridView1.DataSource = elemento.ToList();
+            dgvPrestamosActivos.DataSource = mapperPrestamosActivos.GetAllDTO().ToList();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            MostrarDatos();
         }
     }
 }

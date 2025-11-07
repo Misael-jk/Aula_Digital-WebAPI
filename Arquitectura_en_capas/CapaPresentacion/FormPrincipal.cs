@@ -106,6 +106,7 @@ namespace CapaPresentacion
         private readonly IMapperDocentesBajas mapperDocentesBajas;
         private readonly IMapperUsuariosBajas mapperUsuariosBajas;
         private readonly IMapperNotebookBajas mapperNotebookBajas;
+        private readonly IMapperPrestamosActivos mapperPrestamosActivos;
         #endregion
 
         #region Variables Capa Negocio
@@ -205,6 +206,7 @@ namespace CapaPresentacion
             mapperDocentesBajas = new MapperDocentesBajas(conexion);
             mapperUsuariosBajas = new MapperUsuariosBajas(conexion);
             mapperNotebookBajas = new MapperNotebookBajas(conexion);
+            mapperPrestamosActivos = new MapperPrestamosActivos(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -333,7 +335,7 @@ namespace CapaPresentacion
             //MostrarSolo(historialUC);
 
             if(dashboard == null)
-                dashboard = new Dashboard();
+                dashboard = new Dashboard(mapperPrestamosActivos);
 
             CambiarNombrePort(BtnDashboard.Text);
             pnlContenedor.Controls.Clear();
@@ -342,7 +344,10 @@ namespace CapaPresentacion
                 pnlContenedor.Controls.Add(dashboard);
                 dashboard.Dock = DockStyle.Fill;
             }
+
             MostrarSolo(dashboard);
+
+            dashboard.MostrarDatos();
 
 
 

@@ -288,7 +288,7 @@ namespace CapaNegocio
                 throw new ValidationException("El número de serie no puede superar los 40 caracteres.");
             }
 
-            if (!Regex.IsMatch(elemento.NumeroSerie, @"^[Aa-zZ0-9\-]+$"))
+            if (!Regex.IsMatch(elemento.NumeroSerie, @"^[A-Za-z0-9\s\-]+$"))
             {
                 throw new ValidationException("El número de serie contiene caracteres inválidos.");
             }
@@ -303,7 +303,7 @@ namespace CapaNegocio
                 throw new ValidationException("El codigo de barra no puede superar los 40 caracteres.");
             }
 
-            if (!Regex.IsMatch(elemento.CodigoBarra, @"^[A-Z0-9\-]+$"))
+            if (!Regex.IsMatch(elemento.CodigoBarra, @"^[A-Za-z0-9\s\-]+$"))
             {
                 throw new ValidationException("El codigo de barra contiene caracteres inválidos.");
             }
@@ -318,7 +318,7 @@ namespace CapaNegocio
                 throw new ValidationException("El patrimonio no puede superar los 40 caracteres.");
             }
 
-            if (!Regex.IsMatch(elemento.Patrimonio, @"^[A-Z0-9\-]+$"))
+            if (!Regex.IsMatch(elemento.Patrimonio, @"^[A-Za-z0-9\s\-]+$"))
             {
                 throw new ValidationException("El patrimonio contiene caracteres inválidos.");
             }
