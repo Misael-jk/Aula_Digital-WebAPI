@@ -35,7 +35,8 @@ namespace CapaPresentacion
             try
             {
                 var elementos = elementosCN.ObtenerElementos();
-                dgvElementos.DataSource = elementos;
+                //dgvElementos.DataSource = elementos;
+                dgvElementos_M.DataSource = elementos;
             }
             catch (Exception ex)
             {
@@ -162,7 +163,7 @@ namespace CapaPresentacion
             //elementosCN.DeshabilitarElemento(txtNroSerie.Text);
             CargarElementos();
         }
-        
+
         private void ApplyModernStyleCompact(Guna2DataGridView dgv)
         {
             // Tamaño y comportamiento general
@@ -217,6 +218,32 @@ namespace CapaPresentacion
             if (pi != null)
             {
                 pi.SetValue(dgv, true, null);
+            }
+        }
+
+        private void dgvElementos_M_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvElementos_M.Columns[e.ColumnIndex].Name == "Estado" && e.Value != null)
+            {
+                string? estado = e.Value.ToString();
+
+                if (estado == "En mantenimiento")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Prestamo")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    return;
+                }
+
+                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
+                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
             }
         }
     }
