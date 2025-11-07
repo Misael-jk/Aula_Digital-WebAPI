@@ -226,6 +226,11 @@ namespace CapaNegocio
         {
             return uow.RepoEstadosMantenimiento.GetAll();
         }
+
+        public EstadosMantenimiento? ObtenerEstadoMantenimientoPorID(int idEstado)
+        {
+            return uow.RepoEstadosMantenimiento.GetById(idEstado);
+        }
         #endregion
 
         #region TIPOS ELEMENTO

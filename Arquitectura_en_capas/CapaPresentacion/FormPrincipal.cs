@@ -536,6 +536,7 @@ namespace CapaPresentacion
 
             notebooksUC.ActualizarDataGrid();
 
+
             MostrarSolo(notebooksUC);
 
             try

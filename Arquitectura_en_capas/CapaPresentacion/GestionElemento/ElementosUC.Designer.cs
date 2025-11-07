@@ -114,7 +114,7 @@
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             btnBuscar = new Guna.UI2.WinForms.Guna2Button();
             panel2 = new Panel();
-            guna2ComboBox3 = new Guna.UI2.WinForms.Guna2ComboBox();
+            cmbEstados = new Guna.UI2.WinForms.Guna2ComboBox();
             txtSerieBarraPatrimonio = new Guna.UI2.WinForms.Guna2TextBox();
             panel1 = new Panel();
             lblNotebookTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -545,7 +545,7 @@
             pnlDataGridElementos.Controls.Add(guna2TextBox1);
             pnlDataGridElementos.Controls.Add(btnBuscar);
             pnlDataGridElementos.Controls.Add(panel2);
-            pnlDataGridElementos.Controls.Add(guna2ComboBox3);
+            pnlDataGridElementos.Controls.Add(cmbEstados);
             pnlDataGridElementos.Controls.Add(txtSerieBarraPatrimonio);
             pnlDataGridElementos.Controls.Add(panel1);
             pnlDataGridElementos.Controls.Add(dgvElementos_M);
@@ -771,35 +771,36 @@
             panel2.Size = new Size(977, 1);
             panel2.TabIndex = 2;
             // 
-            // guna2ComboBox3
+            // cmbEstados
             // 
-            guna2ComboBox3.Animated = true;
-            guna2ComboBox3.BackColor = Color.Transparent;
-            guna2ComboBox3.BorderColor = Color.FromArgb(125, 100, 180);
-            guna2ComboBox3.BorderRadius = 10;
+            cmbEstados.Animated = true;
+            cmbEstados.BackColor = Color.Transparent;
+            cmbEstados.BorderColor = Color.FromArgb(125, 100, 180);
+            cmbEstados.BorderRadius = 10;
             customizableEdges39.BottomLeft = false;
             customizableEdges39.BottomRight = false;
-            guna2ComboBox3.CustomizableEdges = customizableEdges39;
-            guna2ComboBox3.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox3.FocusedColor = Color.FromArgb(105, 80, 165);
-            guna2ComboBox3.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
-            guna2ComboBox3.FocusedState.FillColor = Color.White;
-            guna2ComboBox3.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox3.ForeColor = Color.Black;
-            guna2ComboBox3.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
-            guna2ComboBox3.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            guna2ComboBox3.ItemHeight = 30;
-            guna2ComboBox3.ItemsAppearance.BackColor = Color.White;
-            guna2ComboBox3.ItemsAppearance.ForeColor = Color.Black;
-            guna2ComboBox3.ItemsAppearance.SelectedBackColor = Color.FromArgb(105, 80, 165);
-            guna2ComboBox3.ItemsAppearance.SelectedForeColor = Color.White;
-            guna2ComboBox3.Location = new Point(679, 35);
-            guna2ComboBox3.Name = "guna2ComboBox3";
-            guna2ComboBox3.ShadowDecoration.BorderRadius = 10;
-            guna2ComboBox3.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            guna2ComboBox3.Size = new Size(158, 36);
-            guna2ComboBox3.TabIndex = 5;
+            cmbEstados.CustomizableEdges = customizableEdges39;
+            cmbEstados.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbEstados.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstados.FocusedColor = Color.FromArgb(105, 80, 165);
+            cmbEstados.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            cmbEstados.FocusedState.FillColor = Color.White;
+            cmbEstados.Font = new Font("Segoe UI", 10F);
+            cmbEstados.ForeColor = Color.Black;
+            cmbEstados.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            cmbEstados.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            cmbEstados.ItemHeight = 30;
+            cmbEstados.ItemsAppearance.BackColor = Color.White;
+            cmbEstados.ItemsAppearance.ForeColor = Color.Black;
+            cmbEstados.ItemsAppearance.SelectedBackColor = Color.FromArgb(105, 80, 165);
+            cmbEstados.ItemsAppearance.SelectedForeColor = Color.White;
+            cmbEstados.Location = new Point(679, 35);
+            cmbEstados.Name = "cmbEstados";
+            cmbEstados.ShadowDecoration.BorderRadius = 10;
+            cmbEstados.ShadowDecoration.CustomizableEdges = customizableEdges40;
+            cmbEstados.Size = new Size(158, 36);
+            cmbEstados.TabIndex = 5;
+            cmbEstados.SelectedIndexChanged += cmbEstados_SelectedIndexChanged;
             // 
             // txtSerieBarraPatrimonio
             // 
@@ -956,7 +957,7 @@
         private Guna.UI2.WinForms.Guna2Panel pnlPresentacionNotebook;
         private Guna.UI2.WinForms.Guna2TextBox txtSerieBarraPatrimonio;
         private Panel panel2;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox3;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbEstados;
         private Guna.UI2.WinForms.Guna2Button btnBuscar;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;

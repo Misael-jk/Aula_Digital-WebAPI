@@ -44,6 +44,29 @@ namespace CapaPresentacion
             }
         }
 
+        public void ActualizarDataGrid()
+        { 
+            int es = (int)cmbEstados.SelectedValue;
+
+            var estado = elementosCN.ObtenerEstadoMantenimientoPorID(es);
+
+            switch(estado?.EstadoMantenimientoNombre)
+            {
+                case "Disponible":
+                    dgvElementos_M.DataSource = elementosCN.ObtenerEstadoMantenimientoPorID(1);
+                    break;
+                case "En mantenimiento":
+                    dgvElementos_M.DataSource = elementosCN.ObtenerEstadoMantenimientoPorID(3);
+                    break;
+                case "Prestado":
+                    dgvElementos_M.DataSource = elementosCN.ObtenerEstadoMantenimientoPorID(2);
+                    break;
+                default:
+                    dgvElementos_M.DataSource = elementosCN.ObtenerElementos();
+                    break;
+            }
+        }
+
         private void ElementosUC_Load(object sender, EventArgs e)
         {
             this.AutoScroll = true;
@@ -52,12 +75,12 @@ namespace CapaPresentacion
             ApplyModernStyleCompact(dgvElementos);
             //Guna2DataGridViewStyler.SetupPrestamosColumns(dgvElementos, addActionButton: true);
 
-            //IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll(); ya es el Listar Estado Mantenimiento de ElementosCN
+            IEnumerable<EstadosMantenimiento> estados = repoEstadosMantenimiento.GetAll();
             //IEnumerable<EstadosMantenimiento> estados = elementosCN.ListarEstadoMantenimiento();
 
-            //cmbEstados.DataSource = estados; 
-            //cmbEstados.ValueMember = "IdEstadoMantenimiento";
-            //cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+            cmbEstados.DataSource = estados;
+            cmbEstados.ValueMember = "IdEstadoMantenimiento";
+            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
 
             //var estadosBusqueda = estados
             //    .Where(e => e.IdEstadoMantenimiento != 2) 
@@ -244,6 +267,18 @@ namespace CapaPresentacion
 
                 e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
                 e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
+            }
+        }
+
+        private void cmbEstados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbEstados.SelectedValue is int es)
+            {
+                ActualizarDataGrid();
+            }
+            else
+            {
+                MessageBox.Show("El valor seleccionado no es válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
