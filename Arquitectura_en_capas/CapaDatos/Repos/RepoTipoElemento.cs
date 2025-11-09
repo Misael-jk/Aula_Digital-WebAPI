@@ -149,4 +149,34 @@ public class RepoTipoElemento : RepoBase, IRepoTipoElemento
             throw new Exception("Error al obtener los tipos de elementos");
         }
     }
+
+    public IEnumerable<string> GetNombreTipos()
+    {
+        string query = "SELECT elemento AS 'ElementoTipo' FROM TipoElemento";
+        try
+        {
+            return Conexion.Query<String>(query, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener los nombres de los tipos de elementos");
+        }
+    }
+
+    public string? GetNombreTipoById(int idTipoElemento)
+    {
+        string query = "SELECT elemento AS 'ElementoTipo' FROM TipoElemento WHERE idTipoElemento = @unidTipoElemento";
+
+        DynamicParameters parametros = new DynamicParameters();
+
+        parametros.Add("unidTipoElemento", idTipoElemento);
+        try
+        {
+            return Conexion.QueryFirstOrDefault<string>(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener el nombre del tipo de elemento por ID");
+        }
+    }
 }

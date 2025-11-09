@@ -63,4 +63,29 @@ public class MapperModelo : RepoBase, IMapperModelo
             },
             splitOn: "IdModelo,ElementoTipo");
     }
+
+    public ModeloDTO? GetByNombre(string modelo)
+    {
+        string query = @"select 
+                       m.idModelo,
+                       m.modelo as 'NombreModelo',
+                       t.elemento as 'ElementoTipo'
+                       from modelo m
+                       join tipoelemento t using (idTipoElemento)
+                       where m.modelo = @unModelo";
+
+        var parametros = new DynamicParameters();
+        parametros.Add("unModelo", modelo);
+
+        return Conexion.Query<Modelos, TipoElemento, ModeloDTO>(
+            query,
+            (mod, tipoElemento) => new ModeloDTO
+            {
+                IdModelo = mod.IdModelo,
+                Modelo = mod.NombreModelo,
+                Tipo = tipoElemento.ElementoTipo
+            },
+            parametros,
+            splitOn: "IdModelo,ElementoTipo").FirstOrDefault();
+    }
 }

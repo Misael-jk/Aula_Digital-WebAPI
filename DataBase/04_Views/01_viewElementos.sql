@@ -24,6 +24,45 @@ create view View_GetElementosDTO as
     and t.elemento not in ('Notebook');
 
 
+DROP PROCEDURE IF EXISTS SP_GetElementosDTO;
+DELIMITER $$
+
+CREATE PROCEDURE SP_GetElementosDTO(
+    IN untext VARCHAR(40),          
+    IN unidTipo TINYINT,          
+    IN unidModelo TINYINT          
+)
+BEGIN
+    SELECT 
+        e.idElemento AS IdElemento,
+        v.subtipo AS Equipo,
+        e.numeroSerie AS NumeroSerie,
+        e.codigoBarra AS CodigoBarra,
+        u.ubicacion AS Ubicacion,
+        ee.estadoMantenimiento AS Estado,
+        t.elemento AS TipoElemento,
+        e.patrimonio AS Patrimonio,
+        m.modelo AS Modelo
+    FROM Elementos e
+    JOIN Modelo m USING (idModelo)
+    JOIN VariantesElemento v USING (idVariante)
+    JOIN TipoElemento t ON t.idTipoElemento = m.idTipoElemento
+    JOIN EstadosMantenimiento ee USING (idEstadoMantenimiento)
+    JOIN Ubicacion u USING (idUbicacion)
+    WHERE e.habilitado = 1
+      AND t.elemento NOT IN ('Notebook')
+      AND (
+            untext IS NULL OR untext = ''
+          OR e.numeroSerie LIKE CONCAT(untext, '%')
+          OR e.codigoBarra LIKE CONCAT(untext, '%')
+          OR e.patrimonio LIKE CONCAT(untext, '%')
+      )
+      AND (unidTipo IS NULL OR unidTipo = 0 OR m.idTipoElemento = unidTipo)
+      AND (unidModelo IS NULL OR unidModelo = 0 OR m.idModelo = unidModelo)
+    ;
+END$$
+
+DELIMITER ;
 
 
 drop view if exists View_GetElementosBajasDTO;

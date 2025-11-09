@@ -13,5 +13,7 @@ public interface IRepoTipoElemento
     public TipoElemento? GetByNombreTipo(string elementoTipo);
     public IEnumerable<TipoElemento> GetByIdTipo(int idTipo);
     public IEnumerable<TipoElemento> GetTiposByElemento();
+    public IEnumerable<string> GetNombreTipos();
+    public string? GetNombreTipoById(int idTipoElemento);
     public void SetTransaction(IDbTransaction? transaction);
 }

@@ -35,31 +35,69 @@ public class MapperElementos : RepoBase, IMapperElementos
     }
     #endregion
 
-    //#region Obtener por Id Elemetos
-    //public ElementosDTO? GetByIdDTO(int idElemento)
-    //{
-    //    DynamicParameters parametros = new DynamicParameters();
-    //    parametros.Add("@idElemento", idElemento, DbType.Int32, ParameterDirection.Input);
+    #region Obtener por Id Elemetos
+    public IEnumerable<ElementosDTO> GetByEstado(int idEstado)
+    {
+        DynamicParameters parametros = new DynamicParameters();
+        parametros.Add("@unidEstadoMantenimiento", idEstado, DbType.Int32, ParameterDirection.Input);
 
-    //    return Conexion.Query<Elemento, TipoElemento, EstadosMantenimiento, Carritos, ElementosDTO>(
-    //        "GetElementoByIdDTO",
-    //        (elemento, tipo, estado, carrito) => new ElementosDTO
-    //        {
-    //            IdElemento = elemento.IdElemento,
-    //            NumeroSerie = elemento.NumeroSerie,
-    //            CodigoBarra = elemento.CodigoBarra,
-    //            TipoElemento = tipo.ElementoTipo,
-    //            Estado = estado.EstadoMantenimientoNombre,
-    //            Carrito = carrito?.NumeroSerieCarrito ?? "Sin carrito",
-    //            PosicionCarrito = elemento?.PosicionCarrito
-    //        },
-    //        parametros,
-    //        commandType: CommandType.StoredProcedure,
-    //        splitOn: "ElementoTipo,EstadoMantenimientoNombre,NumeroSerieCarrito"
-    //    ).FirstOrDefault();
+        return Conexion.Query<Elemento, VariantesElemento, TipoElemento, EstadosMantenimiento, Modelos, Ubicacion, ElementosDTO>(
+            @"select 
+        e.idElemento as 'IdElemento',
+        e.numeroSerie as 'NumeroSerie',
+        e.codigoBarra as 'CodigoBarra',
+        e.patrimonio as 'Patrimonio',
+        v.subtipo as 'Variante',
+        t.elemento as 'ElementoTipo',
+        ee.estadoMantenimiento as 'EstadoMantenimientoNombre',
+        m.modelo as 'NombreModelo',
+        u.ubicacion as 'NombreUbicacion'
+    from Elementos e
+    join modelo m using (idModelo)
+    join varianteselemento v using (idVariante)
+    join tipoElemento t on t.idTipoElemento = m.idTipoElemento
+    join EstadosMantenimiento ee using(idEstadoMantenimiento)
+    join Ubicacion u using (idUbicacion)
+    where e.habilitado = 1
+    and ee.idEstadoMantenimiento = @unidEstadoMantenimiento
+    and t.elemento not in ('Notebook');",
+            (elemento, variante, tipo, estado, modelo, ubicacion) => new ElementosDTO
+            {
+                IdElemento = elemento.IdElemento,
+                NumeroSerie = elemento.NumeroSerie,
+                CodigoBarra = elemento.CodigoBarra,
+                Patrimonio = elemento.Patrimonio,
+                Equipo = variante.Variante,
+                TipoElemento = tipo.ElementoTipo,
+                Estado = estado.EstadoMantenimientoNombre,
+                Modelo = modelo.NombreModelo,
+                Ubicacion = ubicacion.NombreUbicacion
+            },
+            parametros,
+            splitOn: "IdElemento,Variante,ElementoTipo,EstadoMantenimientoNombre,NombreModelo,NombreUbicacion"
+        ).ToList();
 
-    //}
-    //#endregion
+    }
+
+    #endregion
+
+    public IEnumerable<ElementosDTO> GetFiltrosDTO(string? text, int? tipo, int? modelo)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("untext", text);
+        parameters.Add("unidTipo", tipo);
+        parameters.Add("unidModelo", modelo);
+
+        try
+        {
+            return Conexion.Query<ElementosDTO>("SP_GetElementosDTO", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al filtrar los elementos");
+        }
+    }
 
     //#region mostrar datos por carrito
     //public IEnumerable<ElementosDTO> GetByCarritoDTO(int idCarrito)
@@ -137,3 +175,4 @@ public class MapperElementos : RepoBase, IMapperElementos
     //}
     //#endregion
 }
+

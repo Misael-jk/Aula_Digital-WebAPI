@@ -553,8 +553,6 @@ public class CarritosCN
 
 
     // VALIDACIONES
-    #region VALIDACIONES
-
     #region VALIDACIONES DE CARACTERES
     /// <summary>
     /// Validar Datos del carrito (String, Cadena): <br/>
@@ -606,7 +604,6 @@ public class CarritosCN
     }
     #endregion
 
-    #endregion
 
     #region Validar Insert
     private void ValidarReposInsert(Carritos carritoNEW)

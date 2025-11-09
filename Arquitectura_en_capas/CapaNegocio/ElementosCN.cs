@@ -27,6 +27,16 @@ namespace CapaNegocio
         {
             return _mapperElementos.GetAllDTO();
         }
+
+        public IEnumerable<ElementosDTO> GetAllByEstado(int idEstado)
+        {
+            return _mapperElementos.GetByEstado(idEstado);
+        }
+
+        public IEnumerable<ElementosDTO> BuscarElementos(string? text, int? idTipo, int? idModelo)
+        {
+            return _mapperElementos.GetFiltrosDTO(text, idTipo, idModelo);
+        }
         #endregion
 
         //#region mostrar por carrito 
@@ -219,6 +229,11 @@ namespace CapaNegocio
         {
             return uow.RepoElemento.GetByNumeroSerie(numeroSerie);
         }
+
+        public IEnumerable<string> ObtenerSerieBarrasPatrimonio(string texto, int limite)
+        {
+            return uow.RepoElemento.GetSerieBarraPatrimonio(texto, limite);
+        }
         #endregion
 
         #region ESTADOS MANTENIMIENTO
@@ -254,6 +269,21 @@ namespace CapaNegocio
         public Modelos? ObtenerModeloPorID(int idModelo)
         {
             return uow.RepoModelo.GetById(idModelo);
+        }
+
+        public Modelos? ObtenerModelosPorNombre(string modelo)
+        {
+            return uow.RepoModelo.GetByNombre(modelo);
+        }
+
+        public IEnumerable<string> ObtenerModelosPorNombreTipo(string tipo)
+        {
+            return uow.RepoModelo.GetNombresModelosByNombreTipo(tipo);
+        }
+
+        public IEnumerable<string> ObtenerModelo()
+        {
+            return uow.RepoModelo.ObtenerModelo();
         }
         #endregion
 

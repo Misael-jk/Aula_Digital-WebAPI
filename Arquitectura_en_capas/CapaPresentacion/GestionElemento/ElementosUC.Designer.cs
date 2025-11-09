@@ -110,8 +110,8 @@
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtTipoElemento = new Guna.UI2.WinForms.Guna2TextBox();
+            txtModelo = new Guna.UI2.WinForms.Guna2TextBox();
             btnBuscar = new Guna.UI2.WinForms.Guna2Button();
             panel2 = new Panel();
             cmbEstados = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -541,8 +541,8 @@
             pnlDataGridElementos.Controls.Add(guna2HtmlLabel3);
             pnlDataGridElementos.Controls.Add(guna2HtmlLabel2);
             pnlDataGridElementos.Controls.Add(guna2HtmlLabel1);
-            pnlDataGridElementos.Controls.Add(guna2TextBox2);
-            pnlDataGridElementos.Controls.Add(guna2TextBox1);
+            pnlDataGridElementos.Controls.Add(txtTipoElemento);
+            pnlDataGridElementos.Controls.Add(txtModelo);
             pnlDataGridElementos.Controls.Add(btnBuscar);
             pnlDataGridElementos.Controls.Add(panel2);
             pnlDataGridElementos.Controls.Add(cmbEstados);
@@ -634,6 +634,7 @@
             btnBorrarFiltros.Size = new Size(134, 26);
             btnBorrarFiltros.TabIndex = 7;
             btnBorrarFiltros.Text = "\U0001f9f9 Borrar filtros";
+            btnBorrarFiltros.Click += btnBorrarFiltros_Click;
             // 
             // guna2HtmlLabel4
             // 
@@ -675,67 +676,71 @@
             guna2HtmlLabel1.TabIndex = 9;
             guna2HtmlLabel1.Text = "Nro. de serie, Cod. de barra y patrimonio:";
             // 
-            // guna2TextBox2
+            // txtTipoElemento
             // 
-            guna2TextBox2.Animated = true;
-            guna2TextBox2.BorderRadius = 10;
-            guna2TextBox2.Cursor = Cursors.IBeam;
-            guna2TextBox2.CustomizableEdges = customizableEdges33;
-            guna2TextBox2.DefaultText = "";
-            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
-            guna2TextBox2.FocusedState.FillColor = Color.White;
-            guna2TextBox2.FocusedState.ForeColor = Color.Black;
-            guna2TextBox2.Font = new Font("Segoe UI", 10F);
-            guna2TextBox2.ForeColor = Color.Black;
-            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
-            guna2TextBox2.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            guna2TextBox2.Location = new Point(336, 35);
-            guna2TextBox2.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderForeColor = Color.Gray;
-            guna2TextBox2.PlaceholderText = "Tipo de elemento";
-            guna2TextBox2.SelectedText = "";
-            guna2TextBox2.ShadowDecoration.BorderRadius = 10;
-            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            guna2TextBox2.ShadowDecoration.Depth = 5;
-            guna2TextBox2.Size = new Size(162, 36);
-            guna2TextBox2.TabIndex = 8;
-            guna2TextBox2.TextOffset = new Point(5, 0);
+            txtTipoElemento.Animated = true;
+            txtTipoElemento.BorderRadius = 10;
+            txtTipoElemento.Cursor = Cursors.IBeam;
+            txtTipoElemento.CustomizableEdges = customizableEdges33;
+            txtTipoElemento.DefaultText = "";
+            txtTipoElemento.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtTipoElemento.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtTipoElemento.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtTipoElemento.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtTipoElemento.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtTipoElemento.FocusedState.FillColor = Color.White;
+            txtTipoElemento.FocusedState.ForeColor = Color.Black;
+            txtTipoElemento.Font = new Font("Segoe UI", 10F);
+            txtTipoElemento.ForeColor = Color.Black;
+            txtTipoElemento.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtTipoElemento.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtTipoElemento.Location = new Point(336, 35);
+            txtTipoElemento.Margin = new Padding(4, 5, 4, 5);
+            txtTipoElemento.Name = "txtTipoElemento";
+            txtTipoElemento.PlaceholderForeColor = Color.Gray;
+            txtTipoElemento.PlaceholderText = "Tipo de elemento";
+            txtTipoElemento.SelectedText = "";
+            txtTipoElemento.ShadowDecoration.BorderRadius = 10;
+            txtTipoElemento.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            txtTipoElemento.ShadowDecoration.Depth = 5;
+            txtTipoElemento.Size = new Size(162, 36);
+            txtTipoElemento.TabIndex = 8;
+            txtTipoElemento.TextOffset = new Point(5, 0);
+            txtTipoElemento.TextChanged += txtTipoElemento_TextChanged;
+            txtTipoElemento.Leave += txtTipoElemento_Leave;
             // 
-            // guna2TextBox1
+            // txtModelo
             // 
-            guna2TextBox1.Animated = true;
-            guna2TextBox1.BorderRadius = 10;
-            guna2TextBox1.Cursor = Cursors.IBeam;
-            guna2TextBox1.CustomizableEdges = customizableEdges35;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
-            guna2TextBox1.FocusedState.FillColor = Color.White;
-            guna2TextBox1.FocusedState.ForeColor = Color.Black;
-            guna2TextBox1.Font = new Font("Segoe UI", 10F);
-            guna2TextBox1.ForeColor = Color.Black;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
-            guna2TextBox1.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            guna2TextBox1.Location = new Point(507, 35);
-            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderForeColor = Color.Gray;
-            guna2TextBox1.PlaceholderText = "Modelo";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.BorderRadius = 10;
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            guna2TextBox1.ShadowDecoration.Depth = 5;
-            guna2TextBox1.Size = new Size(162, 36);
-            guna2TextBox1.TabIndex = 7;
-            guna2TextBox1.TextOffset = new Point(5, 0);
+            txtModelo.Animated = true;
+            txtModelo.BorderRadius = 10;
+            txtModelo.Cursor = Cursors.IBeam;
+            txtModelo.CustomizableEdges = customizableEdges35;
+            txtModelo.DefaultText = "";
+            txtModelo.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtModelo.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtModelo.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtModelo.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtModelo.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtModelo.FocusedState.FillColor = Color.White;
+            txtModelo.FocusedState.ForeColor = Color.Black;
+            txtModelo.Font = new Font("Segoe UI", 10F);
+            txtModelo.ForeColor = Color.Black;
+            txtModelo.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtModelo.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtModelo.Location = new Point(507, 35);
+            txtModelo.Margin = new Padding(4, 5, 4, 5);
+            txtModelo.Name = "txtModelo";
+            txtModelo.PlaceholderForeColor = Color.Gray;
+            txtModelo.PlaceholderText = "Modelo";
+            txtModelo.SelectedText = "";
+            txtModelo.ShadowDecoration.BorderRadius = 10;
+            txtModelo.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            txtModelo.ShadowDecoration.Depth = 5;
+            txtModelo.Size = new Size(162, 36);
+            txtModelo.TabIndex = 7;
+            txtModelo.TextOffset = new Point(5, 0);
+            txtModelo.TextChanged += txtModelo_TextChanged;
+            txtModelo.Validated += txtModelo_Validated;
             // 
             // btnBuscar
             // 
@@ -762,6 +767,7 @@
             btnBuscar.Size = new Size(134, 26);
             btnBuscar.TabIndex = 6;
             btnBuscar.Text = "Buscar";
+            btnBuscar.Click += btnBuscar_Click_1;
             // 
             // panel2
             // 
@@ -832,6 +838,8 @@
             txtSerieBarraPatrimonio.Size = new Size(315, 36);
             txtSerieBarraPatrimonio.TabIndex = 1;
             txtSerieBarraPatrimonio.TextOffset = new Point(5, 0);
+            txtSerieBarraPatrimonio.TextChanged += txtSerieBarraPatrimonio_TextChanged_1;
+            txtSerieBarraPatrimonio.KeyDown += txtSerieBarraPatrimonio_KeyDown;
             // 
             // panel1
             // 
@@ -959,8 +967,8 @@
         private Panel panel2;
         private Guna.UI2.WinForms.Guna2ComboBox cmbEstados;
         private Guna.UI2.WinForms.Guna2Button btnBuscar;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtTipoElemento;
+        private Guna.UI2.WinForms.Guna2TextBox txtModelo;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;

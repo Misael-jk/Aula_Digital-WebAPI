@@ -218,4 +218,27 @@ public class RepoElemento : RepoBase, IRepoElemento
     }
     #endregion
 
+    public IEnumerable<string> GetSerieBarraPatrimonio(string text, int limit)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("p", text);
+        parameters.Add("limit", limit);
+
+        string query = @"SELECT numeroSerie as value FROM Elementos WHERE numeroSerie LIKE CONCAT(@p, '%')
+                        UNION
+                        SELECT codigoBarra FROM Elementos WHERE codigoBarra LIKE CONCAT(@p, '%')
+                        UNION
+                        SELECT patrimonio FROM Elementos WHERE patrimonio LIKE CONCAT(@p, '%')
+                        LIMIT @limit;";
+
+        try
+        {
+            return Conexion.Query<string>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener las sugerencias de serie, barra o patrimonio");
+        }
+
+    }
 }
