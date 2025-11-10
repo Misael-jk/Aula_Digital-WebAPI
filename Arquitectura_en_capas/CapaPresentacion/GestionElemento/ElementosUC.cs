@@ -24,13 +24,13 @@ namespace CapaPresentacion
         private int idVariante = 0;
 
         private readonly System.Windows.Forms.Timer Timer;
+        private readonly System.Windows.Forms.Timer TimerNavegacion;
 
         private AutoCompleteStringCollection _acTipos;
         private AutoCompleteStringCollection _acModelos;
-        private AutoCompleteStringCollection _acIdentificadores;
-        private string ultimaQuery = string.Empty;
-        private readonly int minima = 1;
-        private bool navegandoSugerencias = false;
+        private bool navegandoLista = false;
+
+        private readonly int minima = 2;
         private List<string> _cacheIdentificadores = new List<string>();
 
         public ElementosUC(ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado)
@@ -44,12 +44,11 @@ namespace CapaPresentacion
             this.userVerificado = userVerificado;
 
             Timer = new System.Windows.Forms.Timer();
-            Timer.Interval = 1000;
+            Timer.Interval = 300;
             Timer.Tick += Timer_Tick;
 
             _acTipos = new AutoCompleteStringCollection();
             _acModelos = new AutoCompleteStringCollection();
-            _acIdentificadores = new AutoCompleteStringCollection();
         }
 
         public void CargarElementos()
@@ -96,22 +95,25 @@ namespace CapaPresentacion
             this.AutoScrollMinSize = new Size(0, 1100);
 
             ApplyModernStyleCompact(dgvElementos);
-            /*            txtTipoElemento.Leave += TxTTipoElemento_Leave; */// actualizar modelos al salir del txtTipo
-                                                                            //txtModelo.TextChanged += TxtModelo_TextChanged;
-
-            //btnBuscar.Click += BtnBuscar_Click;
-            //btnBorrarFiltros.Click += btnBorrarFiltros_Click;
 
             //dgvElementos_M.CellFormatting += dgvElementos_M_CellFormatting;
             //dgvElementos_M.CellClick += dgvElementos_M_CellClick;
 
+            lstSugerencias.BringToFront();
+            lstSugerencias.Height = 120;
 
-            txtSerieBarraPatrimonio.AutoCompleteMode = AutoCompleteMode.Suggest;
-            txtSerieBarraPatrimonio.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtSerieBarraPatrimonio.AutoCompleteCustomSource = _acIdentificadores;
-            txtSerieBarraPatrimonio.Leave += (s, e) => Timer.Stop();
-            txtSerieBarraPatrimonio.Leave += (s, e) => navegandoSugerencias = false;
-            txtSerieBarraPatrimonio.LostFocus += (s, e) => navegandoSugerencias = false;
+            lstSugerencias.Location = new Point(
+            txtSerieBarraPatrimonio.Left,
+            txtSerieBarraPatrimonio.Bottom + 3 
+            );
+
+            lstSugerencias.Click += LstSugerencias_Click;
+            lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
+
+            txtSerieBarraPatrimonio.LostFocus += (s, e) => {
+                if (!lstSugerencias.Focused)
+                    lstSugerencias.Visible = false;
+            };
 
             txtTipoElemento.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtTipoElemento.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -232,10 +234,6 @@ namespace CapaPresentacion
             {
                 var desdeBD = elementosCN.ObtenerSerieBarrasPatrimonio("", 5000) ?? Enumerable.Empty<string>();
                 _cacheIdentificadores = desdeBD.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-
-                _acIdentificadores.Clear();
-                _acIdentificadores.AddRange(_cacheIdentificadores.Take(0).ToArray());
-                txtSerieBarraPatrimonio.AutoCompleteCustomSource = _acIdentificadores;
             }
             catch (Exception ex)
             {
@@ -252,19 +250,14 @@ namespace CapaPresentacion
             if (!txtSerieBarraPatrimonio.Focused) return;
 
             string texto = txtSerieBarraPatrimonio.Text ?? string.Empty;
-
             bool hayTexto = !string.IsNullOrWhiteSpace(texto);
+
             SetModoBusquedaPorTexto(hayTexto);
 
             if (!hayTexto || texto.Length < minima)
             {
                 Timer.Stop();
-
-                if (!hayTexto)
-                {
-                    ultimaQuery = string.Empty;
-                    _acIdentificadores.Clear();
-                }
+                lstSugerencias.Visible = false;
                 return;
             }
 
@@ -274,59 +267,145 @@ namespace CapaPresentacion
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (navegandoSugerencias) return;
             Timer.Stop();
 
+            if (navegandoLista) return;
+
             string q = txtSerieBarraPatrimonio.Text?.Trim() ?? string.Empty;
+
             if (q.Length < minima)
             {
-                _acIdentificadores.Clear();
-                txtSerieBarraPatrimonio.AutoCompleteCustomSource = _acIdentificadores;
+                lstSugerencias.Visible = false;
                 return;
             }
-            if (string.Equals(q, ultimaQuery, StringComparison.OrdinalIgnoreCase)) return;
 
             try
             {
                 var sugerencias = _cacheIdentificadores
-                    .Where(s => s != null && s.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Where(s => !string.IsNullOrEmpty(s) && s.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
                     .Take(15)
                     .ToArray();
 
-                var actuales = _acIdentificadores.Cast<string>().ToArray();
-                bool iguales = actuales.Length == sugerencias.Length &&
-                               actuales.Zip(sugerencias, (a, b) => string.Equals(a?.Trim(), b?.Trim(), StringComparison.OrdinalIgnoreCase)).All(x => x);
-
-                if (!iguales)
+                if (sugerencias.Length == 0)
                 {
-                    _acIdentificadores.Clear();
-                    _acIdentificadores.AddRange(sugerencias);
-                    txtSerieBarraPatrimonio.AutoCompleteCustomSource = _acIdentificadores;
+                    lstSugerencias.Visible = false;
+                    return;
                 }
 
-                ultimaQuery = q;
+
+                navegandoLista = false;
+                lstSugerencias.BeginUpdate();
+                lstSugerencias.Items.Clear();
+                lstSugerencias.Items.AddRange(sugerencias);
+                lstSugerencias.EndUpdate();
+
+                lstSugerencias.Width = txtSerieBarraPatrimonio.Width;
+                lstSugerencias.Location = new Point(txtSerieBarraPatrimonio.Left, txtSerieBarraPatrimonio.Bottom);
+
+                lstSugerencias.Visible = true;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error Timer_Tick (filtrar cache): " + ex);
+                Debug.WriteLine("Error Timer_Tick (llenar listbox): " + ex);
             }
         }
 
-
         private void txtSerieBarraPatrimonio_KeyDown(object sender, KeyEventArgs e)
         {
+
+            if (!lstSugerencias.Visible) return;
+
+            // Manejo navegación
+            if (e.KeyCode == Keys.Down)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                int count = lstSugerencias.Items.Count;
+                if (count == 0) return;
+
+                if (lstSugerencias.SelectedIndex == -1)
+                {
+                    lstSugerencias.SelectedIndex = 0;
+                }
+                else
+                {
+                    int next = lstSugerencias.SelectedIndex + 1;
+                    if (next >= count) next = 0;
+                    lstSugerencias.SelectedIndex = next;
+                }
+
+                // mantener item visible
+                lstSugerencias.TopIndex = Math.Max(0, lstSugerencias.SelectedIndex - (lstSugerencias.ClientSize.Height / Math.Max(1, lstSugerencias.ItemHeight)) + 1);
+
+                navegandoLista = true;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Up)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                int count = lstSugerencias.Items.Count;
+                if (count == 0) return;
+
+                if (lstSugerencias.SelectedIndex == -1)
+                {
+                    lstSugerencias.SelectedIndex = count - 1;
+                }
+                else
+                {
+                    int prev = lstSugerencias.SelectedIndex - 1;
+                    if (prev < 0) prev = count - 1;
+                    lstSugerencias.SelectedIndex = prev;
+                }
+
+                // mantener item visible
+                lstSugerencias.TopIndex = Math.Max(0, lstSugerencias.SelectedIndex - (lstSugerencias.ClientSize.Height / Math.Max(1, lstSugerencias.ItemHeight)) + 1);
+
+                navegandoLista = true;
+                return;
+            }
+
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                EjecutarBusqueda();
+
+                if (lstSugerencias.SelectedItem != null)
+                    SeleccionarSugerencia(lstSugerencias.SelectedItem.ToString());
+                else
+                    EjecutarBusqueda();
+
+                navegandoLista = false;
+                return;
             }
 
-            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
-            {
-                navegandoSugerencias = true;
-                Timer.Stop();
-            }
+            // otra tecla -> filtrar
+            navegandoLista = false;
+            Timer.Stop();
+            Timer.Start();
+        }
+
+        private void LstSugerencias_Click(object sender, EventArgs e)
+        {
+            if (lstSugerencias.SelectedItem != null)
+                SeleccionarSugerencia(lstSugerencias.SelectedItem.ToString());
+        }
+
+        private void SeleccionarSugerencia(string valor)
+        {
+            if (valor == null) return;
+
+            txtSerieBarraPatrimonio.Text = valor;
+            txtSerieBarraPatrimonio.SelectionStart = txtSerieBarraPatrimonio.Text.Length;
+
+            lstSugerencias.Items.Clear();
+            lstSugerencias.Visible = false;
+
+            EjecutarBusqueda();
+
         }
 
         private void txtTipoElemento_TextChanged(object sender, EventArgs e)
@@ -407,7 +486,7 @@ namespace CapaPresentacion
                 }
 
                 var modelo = elementosCN.ObtenerModelosPorNombre(modeloNombre);
-                
+
                 if (modelo != null)
                 {
                     string tipoNombre = tiposElementoCN.ObtenerTipoPorNombre(modelo.IdTipoElemento);
@@ -432,6 +511,7 @@ namespace CapaPresentacion
         private void btnBuscar_Click_1(object sender, EventArgs e)
         {
             EjecutarBusqueda();
+            navegandoLista = false;
         }
 
         private void btnBorrarFiltros_Click(object sender, EventArgs e)
@@ -440,10 +520,12 @@ namespace CapaPresentacion
             txtTipoElemento.Clear();
             txtModelo.Clear();
 
-            _acIdentificadores.Clear();
+            _cacheIdentificadores.Clear();
+            lstSugerencias.Items.Clear();
+            lstSugerencias.Visible = false;
+            RenovarIdentificadores();
+
             _acModelos.Clear();
-            ultimaQuery = string.Empty;
-            txtSerieBarraPatrimonio.AutoCompleteCustomSource = _acIdentificadores;
             txtModelo.AutoCompleteCustomSource = _acModelos;
 
             SetModoInicial();
@@ -452,7 +534,6 @@ namespace CapaPresentacion
         #endregion
 
 
-        // ----------------- LÓGICA DE BÚSQUEDA -----------------
         private void EjecutarBusqueda()
         {
             string q = string.IsNullOrWhiteSpace(txtSerieBarraPatrimonio.Text) ? null : txtSerieBarraPatrimonio.Text.Trim();

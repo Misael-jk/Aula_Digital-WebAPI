@@ -103,6 +103,7 @@
             guna2GroupBox4 = new Guna.UI2.WinForms.Guna2GroupBox();
             dgvElementos_M = new Guna.UI2.WinForms.Guna2DataGridView();
             pnlDataGridElementos = new Guna.UI2.WinForms.Guna2Panel();
+            lstSugerencias = new ListBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             btnBorrarFiltros = new Guna.UI2.WinForms.Guna2Button();
@@ -534,6 +535,7 @@
             // 
             pnlDataGridElementos.BackColor = Color.Transparent;
             pnlDataGridElementos.BorderRadius = 15;
+            pnlDataGridElementos.Controls.Add(lstSugerencias);
             pnlDataGridElementos.Controls.Add(guna2Button2);
             pnlDataGridElementos.Controls.Add(guna2Button1);
             pnlDataGridElementos.Controls.Add(btnBorrarFiltros);
@@ -556,6 +558,19 @@
             pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges44;
             pnlDataGridElementos.Size = new Size(1001, 534);
             pnlDataGridElementos.TabIndex = 47;
+            // 
+            // lstSugerencias
+            // 
+            lstSugerencias.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lstSugerencias.FormattingEnabled = true;
+            lstSugerencias.IntegralHeight = false;
+            lstSugerencias.ItemHeight = 17;
+            lstSugerencias.Location = new Point(11, 70);
+            lstSugerencias.Name = "lstSugerencias";
+            lstSugerencias.Size = new Size(315, 79);
+            lstSugerencias.TabIndex = 15;
+            lstSugerencias.TabStop = false;
+            lstSugerencias.Visible = false;
             // 
             // guna2Button2
             // 
@@ -813,6 +828,8 @@
             txtSerieBarraPatrimonio.Animated = true;
             txtSerieBarraPatrimonio.BorderRadius = 10;
             txtSerieBarraPatrimonio.Cursor = Cursors.IBeam;
+            customizableEdges41.BottomLeft = false;
+            customizableEdges41.BottomRight = false;
             txtSerieBarraPatrimonio.CustomizableEdges = customizableEdges41;
             txtSerieBarraPatrimonio.DefaultText = "";
             txtSerieBarraPatrimonio.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -978,5 +995,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private ListBox lstSugerencias;
     }
 }

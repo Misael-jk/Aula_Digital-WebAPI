@@ -224,11 +224,11 @@ public class RepoElemento : RepoBase, IRepoElemento
         parameters.Add("p", text);
         parameters.Add("limit", limit);
 
-        string query = @"SELECT numeroSerie as value FROM Elementos WHERE numeroSerie LIKE CONCAT(@p, '%')
+        string query = @"SELECT numeroSerie as value FROM Elementos e join TipoElemento t WHERE e.habilitado = 1 AND t.elemento NOT IN ('Notebook') and numeroSerie LIKE CONCAT(@p, '%')
                         UNION
-                        SELECT codigoBarra FROM Elementos WHERE codigoBarra LIKE CONCAT(@p, '%')
+                        SELECT codigoBarra FROM Elementos e join TipoElemento t WHERE e.habilitado = 1 AND t.elemento NOT IN ('Notebook') and codigoBarra LIKE CONCAT(@p, '%')
                         UNION
-                        SELECT patrimonio FROM Elementos WHERE patrimonio LIKE CONCAT(@p, '%')
+                        SELECT patrimonio FROM Elementos e join TipoElemento t WHERE e.habilitado = 1 AND t.elemento NOT IN ('Notebook') and patrimonio LIKE CONCAT(@p, '%')
                         LIMIT @limit;";
 
         try
