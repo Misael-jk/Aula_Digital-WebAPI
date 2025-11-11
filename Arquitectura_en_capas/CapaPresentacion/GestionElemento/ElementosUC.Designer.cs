@@ -112,7 +112,6 @@
             lblCantParaReparar = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel9 = new Guna.UI2.WinForms.Guna2Panel();
-            lblCantEnPrestamo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel10 = new Guna.UI2.WinForms.Guna2Panel();
             lblCantEnReparacion = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -131,6 +130,7 @@
             guna2Panel15 = new Guna.UI2.WinForms.Guna2Panel();
             ptbEstado = new PictureBox();
             guna2HtmlLabel20 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblCantEnPrestamo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)dgvElementos_M).BeginInit();
             pnlDataGridElementos.SuspendLayout();
             pnlPresentacionNotebook.SuspendLayout();
@@ -551,7 +551,7 @@
             pnlPresentacionNotebook.Location = new Point(20, 9);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            pnlPresentacionNotebook.Size = new Size(604, 65);
+            pnlPresentacionNotebook.Size = new Size(616, 65);
             pnlPresentacionNotebook.TabIndex = 49;
             // 
             // guna2Panel3
@@ -563,7 +563,7 @@
             guna2Panel3.Location = new Point(20, 56);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2Panel3.Size = new Size(604, 51);
+            guna2Panel3.Size = new Size(616, 51);
             guna2Panel3.TabIndex = 50;
             // 
             // lblPresentacion
@@ -684,7 +684,7 @@
             guna2Panel8.Controls.Add(lblCantParaReparar);
             guna2Panel8.Controls.Add(guna2HtmlLabel9);
             guna2Panel8.CustomizableEdges = customizableEdges33;
-            guna2Panel8.FillColor = Color.DarkOrange;
+            guna2Panel8.FillColor = Color.FromArgb(252, 160, 30);
             guna2Panel8.Location = new Point(430, 788);
             guna2Panel8.Name = "guna2Panel8";
             guna2Panel8.ShadowDecoration.CustomizableEdges = customizableEdges34;
@@ -722,24 +722,12 @@
             guna2Panel9.Controls.Add(lblCantEnPrestamo);
             guna2Panel9.Controls.Add(guna2HtmlLabel8);
             guna2Panel9.CustomizableEdges = customizableEdges35;
-            guna2Panel9.FillColor = Color.Gold;
+            guna2Panel9.FillColor = Color.FromArgb(252, 201, 52);
             guna2Panel9.Location = new Point(225, 788);
             guna2Panel9.Name = "guna2Panel9";
             guna2Panel9.ShadowDecoration.CustomizableEdges = customizableEdges36;
             guna2Panel9.Size = new Size(194, 152);
             guna2Panel9.TabIndex = 55;
-            // 
-            // lblCantEnPrestamo
-            // 
-            lblCantEnPrestamo.BackColor = Color.Transparent;
-            lblCantEnPrestamo.Font = new Font("Segoe UI", 25.25F, FontStyle.Bold);
-            lblCantEnPrestamo.ForeColor = SystemColors.ActiveCaptionText;
-            lblCantEnPrestamo.Location = new Point(66, 62);
-            lblCantEnPrestamo.Name = "lblCantEnPrestamo";
-            lblCantEnPrestamo.Size = new Size(63, 48);
-            lblCantEnPrestamo.TabIndex = 4;
-            lblCantEnPrestamo.Text = "<b>000</b>";
-            lblCantEnPrestamo.TextAlignment = ContentAlignment.MiddleLeft;
             // 
             // guna2HtmlLabel8
             // 
@@ -960,6 +948,18 @@
             guna2HtmlLabel20.Text = "Aclaración: Los conteos no incluyen a dichos elementos que <br>fueron deshabilitados previamente y tampoco a las notebooks.";
             guna2HtmlLabel20.TextAlignment = ContentAlignment.MiddleLeft;
             // 
+            // lblCantEnPrestamo
+            // 
+            lblCantEnPrestamo.BackColor = Color.Transparent;
+            lblCantEnPrestamo.Font = new Font("Segoe UI", 25.25F, FontStyle.Bold);
+            lblCantEnPrestamo.ForeColor = SystemColors.ActiveCaptionText;
+            lblCantEnPrestamo.Location = new Point(66, 62);
+            lblCantEnPrestamo.Name = "lblCantEnPrestamo";
+            lblCantEnPrestamo.Size = new Size(63, 48);
+            lblCantEnPrestamo.TabIndex = 4;
+            lblCantEnPrestamo.Text = "<b>000</b>";
+            lblCantEnPrestamo.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
             // ElementosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1057,7 +1057,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel11;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblCantParaReparar;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblCantEnPrestamo;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblCantEnReparacion;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblCantFaltantes;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblCantTotal;
@@ -1069,5 +1068,6 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel15;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel20;
         private PictureBox ptbEstado;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblCantEnPrestamo;
     }
 }

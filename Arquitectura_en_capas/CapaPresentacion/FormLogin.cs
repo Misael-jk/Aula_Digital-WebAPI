@@ -62,31 +62,31 @@ namespace CapaPresentacion
             {
                 Usuarios? userVerificado = usuariosCN.Login(usuario, password);
 
-                Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
+            Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
 
-                FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
-                principal.Show();
-                this.Hide();
-            }
+            FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
+            principal.Show();
+            this.Hide();
+        }
             catch
             {
                 TxtError.Visible = true;
             }
 
 
-            //if (userVerificado != null)
-            //{
-            //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
+    //if (userVerificado != null)
+    //{
+    //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
 
-            //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
-            //    principal.Show();
-            //    this.Hide();
-            //}
-            //else
-            //{
-            //    TxtError.Visible = true;
-            //}
-        }
+    //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
+    //    principal.Show();
+    //    this.Hide();
+    //}
+    //else
+    //{
+    //    TxtError.Visible = true;
+    //}
+}
 
         private void TxtUser_KeyDown(object sender, KeyEventArgs e)
         {

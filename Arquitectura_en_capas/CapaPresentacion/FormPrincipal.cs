@@ -34,6 +34,7 @@ namespace CapaPresentacion
         private HistorialUC historialUC;
         private InventarioUC inventarioUC;
         private NotebooksUC notebooksUC;
+        private UsuarioGestionuc usuarioGestion;
         #endregion
 
         #region Variables UoW(UnitOfWork) - Repositorios
@@ -260,16 +261,21 @@ namespace CapaPresentacion
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnInfoadminadminUser_Click(object sender, EventArgs e)
-        {
-            var entrar = new InfoUsuario();
-            entrar.Show();
-        }
-
         private void btnInfoUser_Click(object sender, EventArgs e)
         {
-            var abrirInfo = new InfoUsuario();
-            abrirInfo.Show();
+            pnlGestionUsuario.Visible = true;
+
+            if (usuarioGestion == null)
+                usuarioGestion = new UsuarioGestionuc(usuariosCN, usuariosBajasCN, userVerificado.IdUsuario);
+
+
+            if (!pnlGestionUsuario.Controls.Contains(usuarioGestion))
+            {
+                pnlGestionUsuario.Controls.Add(usuarioGestion);
+                usuarioGestion.Dock = DockStyle.Fill;
+            }
+
+            usuarioGestion.ActualizarUC(userVerificado.IdUsuario);
         }
 
         #endregion
@@ -318,6 +324,8 @@ namespace CapaPresentacion
 
         public void Dashboard()
         {
+            CerrarGestionUsuario();
+
             //if (historialUC == null)
             //    historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
 
@@ -334,7 +342,7 @@ namespace CapaPresentacion
 
             //MostrarSolo(historialUC);
 
-            if(dashboard == null)
+            if (dashboard == null)
                 dashboard = new Dashboard(mapperPrestamosActivos);
 
             CambiarNombrePort(BtnDashboard.Text);
@@ -349,8 +357,6 @@ namespace CapaPresentacion
 
             dashboard.MostrarDatos();
 
-
-
         }
 
         private void BtnDashboard_Click(object sender, EventArgs e)
@@ -360,8 +366,10 @@ namespace CapaPresentacion
 
         private void BtnElementos_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (elementosUC == null)
-                elementosUC = new ElementosUC(elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, userVerificado);
+                elementosUC = new ElementosUC(elementoCN, userVerificado);
 
             CambiarNombrePort(BtnElementos.Text);
 
@@ -385,6 +393,8 @@ namespace CapaPresentacion
 
         private void BtnCarritos_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (carritoUC == null)
                 carritoUC = new CarritoUC(carritosCN, userVerificado, carritosBajasCN);
 
@@ -405,6 +415,8 @@ namespace CapaPresentacion
 
         private void BtnDocentes_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (docentesUC == null)
                 docentesUC = new DocentesUC(docentesCN, docentesBajasCN);
 
@@ -421,6 +433,8 @@ namespace CapaPresentacion
 
         private void BtnCategoria_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (categoriasUC == null)
                 categoriasUC = new CategoriasUC(tiposElementoCN, ubicacionCN, modeloCN, varianteElementoCN);
 
@@ -446,6 +460,8 @@ namespace CapaPresentacion
 
         private void BtnUsuario_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (usuariosUC == null)
                 usuariosUC = new UsuariosUC(usuariosCN, usuariosBajasCN);
 
@@ -471,6 +487,8 @@ namespace CapaPresentacion
 
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (mantenimientoUC == null)
                 mantenimientoUC = new MantenimientoUC(notebookBajasCN, elementosBajasCN, userVerificado);
 
@@ -498,6 +516,8 @@ namespace CapaPresentacion
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (inventarioUC == null)
                 inventarioUC = new InventarioUC(mapperInventario);
 
@@ -523,6 +543,8 @@ namespace CapaPresentacion
 
         private void btnNotebooks_Click(object sender, EventArgs e)
         {
+            CerrarGestionUsuario();
+
             if (notebooksUC == null)
                 notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN);
 
@@ -548,5 +570,10 @@ namespace CapaPresentacion
             }
         }
         #endregion
+
+        public void CerrarGestionUsuario()
+        {
+            pnlGestionUsuario.Visible = false;
+        }
     }
 }
