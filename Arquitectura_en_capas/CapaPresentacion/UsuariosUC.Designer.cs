@@ -47,18 +47,16 @@ namespace CapaPresentacion
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             dtgUsuarios = new Guna2DataGridView();
             cbxMostraPassword = new Guna2CheckBox();
             btnActualizar = new Guna2Button();
@@ -68,7 +66,7 @@ namespace CapaPresentacion
             txtApellido = new Guna2TextBox();
             txtNombre = new Guna2TextBox();
             txtUsuario = new Guna2TextBox();
-            guna2GroupBox1 = new Guna2GroupBox();
+            btnAgregarUsuario = new Guna2Button();
             cmbHabilitado = new Guna2ComboBox();
             guna2GroupBox2 = new Guna2GroupBox();
             btnDeshabilitar = new Guna2Button();
@@ -82,11 +80,9 @@ namespace CapaPresentacion
             lblUsuario = new Label();
             lblRol = new Label();
             lblIDEncargado = new Label();
-            btnAgregarUsuario = new Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).BeginInit();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
-            guna2GroupBox1.SuspendLayout();
             guna2GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).BeginInit();
             SuspendLayout();
@@ -111,13 +107,13 @@ namespace CapaPresentacion
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dtgUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
             dtgUsuarios.GridColor = Color.LightGray;
-            dtgUsuarios.Location = new Point(1, 40);
+            dtgUsuarios.Location = new Point(390, 15);
             dtgUsuarios.Name = "dtgUsuarios";
             dtgUsuarios.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dtgUsuarios.RowHeadersVisible = false;
@@ -314,23 +310,31 @@ namespace CapaPresentacion
             txtUsuario.TabIndex = 16;
             txtUsuario.TextChanged += VerificarCambios;
             // 
-            // guna2GroupBox1
+            // btnAgregarUsuario
             // 
-            guna2GroupBox1.BorderColor = Color.Orange;
-            guna2GroupBox1.Controls.Add(btnAgregarUsuario);
-            guna2GroupBox1.Controls.Add(cmbHabilitado);
-            guna2GroupBox1.Controls.Add(dtgUsuarios);
-            guna2GroupBox1.CustomBorderColor = Color.Orange;
-            guna2GroupBox1.CustomizableEdges = customizableEdges18;
-            guna2GroupBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2GroupBox1.ForeColor = Color.GhostWhite;
-            guna2GroupBox1.Location = new Point(389, 15);
-            guna2GroupBox1.Name = "guna2GroupBox1";
-            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges19;
-            guna2GroupBox1.Size = new Size(648, 334);
-            guna2GroupBox1.TabIndex = 44;
-            guna2GroupBox1.Text = "- Usuarios -";
-            guna2GroupBox1.TextAlign = HorizontalAlignment.Center;
+            btnAgregarUsuario.BackColor = Color.Transparent;
+            btnAgregarUsuario.BorderColor = Color.DarkGreen;
+            btnAgregarUsuario.BorderRadius = 5;
+            btnAgregarUsuario.BorderThickness = 1;
+            btnAgregarUsuario.CustomizableEdges = customizableEdges14;
+            btnAgregarUsuario.DisabledState.BorderColor = Color.DarkGray;
+            btnAgregarUsuario.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAgregarUsuario.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAgregarUsuario.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAgregarUsuario.FillColor = Color.YellowGreen;
+            btnAgregarUsuario.Font = new Font("Segoe UI", 7F);
+            btnAgregarUsuario.ForeColor = Color.White;
+            btnAgregarUsuario.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
+            btnAgregarUsuario.Image = (Image)resources.GetObject("btnAgregarUsuario.Image");
+            btnAgregarUsuario.ImageAlign = HorizontalAlignment.Left;
+            btnAgregarUsuario.ImageSize = new Size(16, 16);
+            btnAgregarUsuario.Location = new Point(390, 363);
+            btnAgregarUsuario.Name = "btnAgregarUsuario";
+            btnAgregarUsuario.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            btnAgregarUsuario.Size = new Size(189, 26);
+            btnAgregarUsuario.TabIndex = 47;
+            btnAgregarUsuario.Text = "Agregar Nuevo Usuario";
+            btnAgregarUsuario.Click += btnAgregarUsuario_Click;
             // 
             // cmbHabilitado
             // 
@@ -344,7 +348,7 @@ namespace CapaPresentacion
             cmbHabilitado.Font = new Font("Segoe UI", 10F);
             cmbHabilitado.ForeColor = Color.FromArgb(68, 88, 112);
             cmbHabilitado.ItemHeight = 30;
-            cmbHabilitado.Location = new Point(431, 2);
+            cmbHabilitado.Location = new Point(652, 408);
             cmbHabilitado.Name = "cmbHabilitado";
             cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges17;
             cmbHabilitado.Size = new Size(214, 36);
@@ -372,12 +376,12 @@ namespace CapaPresentacion
             guna2GroupBox2.Controls.Add(txtNombre);
             guna2GroupBox2.Controls.Add(txtEmail);
             guna2GroupBox2.CustomBorderColor = Color.Orange;
-            guna2GroupBox2.CustomizableEdges = customizableEdges24;
+            guna2GroupBox2.CustomizableEdges = customizableEdges22;
             guna2GroupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox2.ForeColor = Color.GhostWhite;
             guna2GroupBox2.Location = new Point(13, 15);
             guna2GroupBox2.Name = "guna2GroupBox2";
-            guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges25;
+            guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges23;
             guna2GroupBox2.Size = new Size(357, 639);
             guna2GroupBox2.TabIndex = 45;
             guna2GroupBox2.Text = "- Datos del Usuario seleccionado -";
@@ -385,7 +389,7 @@ namespace CapaPresentacion
             // 
             // btnDeshabilitar
             // 
-            btnDeshabilitar.CustomizableEdges = customizableEdges20;
+            btnDeshabilitar.CustomizableEdges = customizableEdges18;
             btnDeshabilitar.DisabledState.BorderColor = Color.DarkGray;
             btnDeshabilitar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDeshabilitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -394,7 +398,7 @@ namespace CapaPresentacion
             btnDeshabilitar.ForeColor = Color.White;
             btnDeshabilitar.Location = new Point(24, 599);
             btnDeshabilitar.Name = "btnDeshabilitar";
-            btnDeshabilitar.ShadowDecoration.CustomizableEdges = customizableEdges21;
+            btnDeshabilitar.ShadowDecoration.CustomizableEdges = customizableEdges19;
             btnDeshabilitar.Size = new Size(311, 25);
             btnDeshabilitar.TabIndex = 46;
             btnDeshabilitar.Text = "Inhabilitar Usuario";
@@ -414,7 +418,7 @@ namespace CapaPresentacion
             // 
             // btnRestablecerCambios
             // 
-            btnRestablecerCambios.CustomizableEdges = customizableEdges22;
+            btnRestablecerCambios.CustomizableEdges = customizableEdges20;
             btnRestablecerCambios.DisabledState.BorderColor = Color.DarkGray;
             btnRestablecerCambios.DisabledState.CustomBorderColor = Color.DarkGray;
             btnRestablecerCambios.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -424,7 +428,7 @@ namespace CapaPresentacion
             btnRestablecerCambios.ForeColor = Color.White;
             btnRestablecerCambios.Location = new Point(24, 564);
             btnRestablecerCambios.Name = "btnRestablecerCambios";
-            btnRestablecerCambios.ShadowDecoration.CustomizableEdges = customizableEdges23;
+            btnRestablecerCambios.ShadowDecoration.CustomizableEdges = customizableEdges21;
             btnRestablecerCambios.Size = new Size(144, 25);
             btnRestablecerCambios.TabIndex = 56;
             btnRestablecerCambios.Text = "Restablecer cambios";
@@ -525,39 +529,15 @@ namespace CapaPresentacion
             lblIDEncargado.TabIndex = 43;
             lblIDEncargado.Text = "ID: ";
             // 
-            // btnAgregarUsuario
-            // 
-            btnAgregarUsuario.BackColor = Color.Transparent;
-            btnAgregarUsuario.BorderColor = Color.DarkGreen;
-            btnAgregarUsuario.BorderRadius = 5;
-            btnAgregarUsuario.BorderThickness = 1;
-            btnAgregarUsuario.CustomizableEdges = customizableEdges14;
-            btnAgregarUsuario.DisabledState.BorderColor = Color.DarkGray;
-            btnAgregarUsuario.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAgregarUsuario.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAgregarUsuario.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAgregarUsuario.FillColor = Color.YellowGreen;
-            btnAgregarUsuario.Font = new Font("Segoe UI", 7F);
-            btnAgregarUsuario.ForeColor = Color.White;
-            btnAgregarUsuario.HoverState.FillColor = Color.FromArgb(150, 30, 30, 30);
-            btnAgregarUsuario.Image = (Image)resources.GetObject("btnAgregarUsuario.Image");
-            btnAgregarUsuario.ImageAlign = HorizontalAlignment.Left;
-            btnAgregarUsuario.ImageSize = new Size(16, 16);
-            btnAgregarUsuario.Location = new Point(6, 6);
-            btnAgregarUsuario.Name = "btnAgregarUsuario";
-            btnAgregarUsuario.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            btnAgregarUsuario.Size = new Size(189, 26);
-            btnAgregarUsuario.TabIndex = 47;
-            btnAgregarUsuario.Text = "Agregar Nuevo Usuario";
-            btnAgregarUsuario.Click += btnAgregarUsuario_Click;
-            // 
             // UsuariosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(dtgUsuarios);
+            Controls.Add(cmbHabilitado);
+            Controls.Add(btnAgregarUsuario);
             Controls.Add(guna2GroupBox2);
-            Controls.Add(guna2GroupBox1);
             Controls.Add(cbxMostraPassword);
             Name = "UsuariosUC";
             Size = new Size(1050, 670);
@@ -565,7 +545,6 @@ namespace CapaPresentacion
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).EndInit();
             guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
-            guna2GroupBox1.ResumeLayout(false);
             guna2GroupBox2.ResumeLayout(false);
             guna2GroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).EndInit();
@@ -583,7 +562,6 @@ namespace CapaPresentacion
         private Guna2Panel guna2Panel1;
         private Guna2Button btnActualizar;
         private Guna2CirclePictureBox ptbPerfil;
-        private Guna2GroupBox guna2GroupBox1;
         private Guna2GroupBox guna2GroupBox2;
         private Label lblIDEncargado;
         private Label lblRol;

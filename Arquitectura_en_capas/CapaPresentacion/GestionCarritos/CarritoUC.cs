@@ -60,7 +60,7 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1100);
 
-            dtgCarrito.DataSource = carritosCN.MostrarCarritos();
+            dgvCarritos_M.DataSource = carritosCN.MostrarCarritos();
 
             _searchTimer = new System.Windows.Forms.Timer();
             _searchTimer.Interval = 700;
