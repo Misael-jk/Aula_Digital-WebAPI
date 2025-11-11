@@ -218,18 +218,34 @@ public class RepoElemento : RepoBase, IRepoElemento
     }
     #endregion
 
+    #region FILTROS POR SERIE, BARRA, PATRIMONIO
     public IEnumerable<string> GetSerieBarraPatrimonio(string text, int limit)
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("p", text);
         parameters.Add("limit", limit);
 
-        string query = @"SELECT numeroSerie as value FROM Elementos e join TipoElemento t WHERE e.habilitado = 1 AND t.elemento NOT IN ('Notebook') and numeroSerie LIKE CONCAT(@p, '%')
+        string query = @"(SELECT e.numeroSerie AS valor
+                          FROM Elementos e
+                          JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                          WHERE e.habilitado = 1
+                            AND t.elemento not in ('Notebook', 'Carritos')
+                            AND e.numeroSerie LIKE CONCAT('PAT', '%'))
                         UNION
-                        SELECT codigoBarra FROM Elementos e join TipoElemento t WHERE e.habilitado = 1 AND t.elemento NOT IN ('Notebook') and codigoBarra LIKE CONCAT(@p, '%')
-                        UNION
-                        SELECT patrimonio FROM Elementos e join TipoElemento t WHERE e.habilitado = 1 AND t.elemento NOT IN ('Notebook') and patrimonio LIKE CONCAT(@p, '%')
-                        LIMIT @limit;";
+                         (SELECT e.codigoBarra AS valor
+                          FROM Elementos e
+                          JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                          WHERE e.habilitado = 1
+                            AND t.elemento not in ('Notebook', 'Carritos')
+                            AND e.codigoBarra LIKE CONCAT('PAT', '%'))
+                       UNION
+                        (SELECT e.patrimonio AS valor
+                         FROM Elementos e
+                         JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                         WHERE e.habilitado = 1
+                           AND t.elemento not in ('Notebook', 'Carritos')
+                           AND e.patrimonio LIKE CONCAT('PAT', '%'))
+                      LIMIT 15;";
 
         try
         {
@@ -239,6 +255,6 @@ public class RepoElemento : RepoBase, IRepoElemento
         {
             throw new Exception("Error al obtener las sugerencias de serie, barra o patrimonio");
         }
-
     }
+    #endregion
 }

@@ -24,7 +24,6 @@ namespace CapaPresentacion
         private int idVariante = 0;
 
         private readonly System.Windows.Forms.Timer Timer;
-        private readonly System.Windows.Forms.Timer TimerNavegacion;
 
         private AutoCompleteStringCollection _acTipos;
         private AutoCompleteStringCollection _acModelos;
@@ -379,10 +378,10 @@ namespace CapaPresentacion
                     EjecutarBusqueda();
 
                 navegandoLista = false;
+                lstSugerencias.Visible = false;
                 return;
             }
 
-            // otra tecla -> filtrar
             navegandoLista = false;
             Timer.Stop();
             Timer.Start();
@@ -402,9 +401,9 @@ namespace CapaPresentacion
             txtSerieBarraPatrimonio.SelectionStart = txtSerieBarraPatrimonio.Text.Length;
 
             lstSugerencias.Items.Clear();
-            lstSugerencias.Visible = false;
 
             EjecutarBusqueda();
+            lstSugerencias.Visible = false;
 
         }
 

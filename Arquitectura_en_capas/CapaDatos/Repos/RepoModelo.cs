@@ -155,7 +155,8 @@ public class RepoModelo : RepoBase, IRepoModelo
     {
         string query = @"SELECT m.modelo AS 'NombreModelo'
                          FROM Modelo m
-                         JOIN TipoElemento t ON m.idTipoElemento = t.idTipoElemento";
+                         JOIN TipoElemento t ON m.idTipoElemento = t.idTipoElemento
+                         where t.elemento not in ('Notebook', 'Carritos');";
         try
         {
             return Conexion.Query<string>(query);
