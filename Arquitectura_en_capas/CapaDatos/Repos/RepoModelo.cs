@@ -131,4 +131,39 @@ public class RepoModelo : RepoBase, IRepoModelo
         }
     }
     #endregion
+
+    public IEnumerable<string> GetNombresModelosByNombreTipo(string Tipo)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("untipo", Tipo);
+
+        string query = @"SELECT m.modelo AS 'NombreModelo'
+                         FROM Modelo m
+                         JOIN TipoElemento t ON m.idTipoElemento = t.idTipoElemento
+                         WHERE t.elemento = @untipo";
+        try
+        {
+            return Conexion.Query<string>(query, parameters);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener los nombres de los modelos por tipo");
+        }
+    }
+
+    public IEnumerable<string> ObtenerModelo()
+    {
+        string query = @"SELECT m.modelo AS 'NombreModelo'
+                         FROM Modelo m
+                         JOIN TipoElemento t ON m.idTipoElemento = t.idTipoElemento
+                         where t.elemento not in ('Notebook', 'Carritos');";
+        try
+        {
+            return Conexion.Query<string>(query);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener los nombres de los modelos por tipo");
+        }
+    }
 }

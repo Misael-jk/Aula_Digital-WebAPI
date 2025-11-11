@@ -25,3 +25,49 @@ JOIN Ubicacion u2 ON e.idUbicacion = u2.idUbicacion
 left join notebooks n on n.idElemento = e.idElemento
 where n.idElemento is null
 ORDER BY hc.fechaCambio DESC;
+
+
+
+-- _______________________________________________________________________________________
+	SELECT 
+    he.idHistorialCambio as 'IdHistorialElemento',
+    hc.fechaCambio,
+    ta.accion AS AccionRealizada,
+    concat(u.nombre, ' ', u.apellido) AS Usuario
+FROM HistorialElemento he
+JOIN HistorialCambio hc ON he.idHistorialCambio = hc.idHistorialCambio
+JOIN TipoAccion ta ON hc.idTipoAccion = ta.idTipoAccion
+JOIN Usuarios u ON hc.idUsuario = u.idUsuario
+JOIN Elementos e ON he.idElemento = e.idElemento
+left join notebooks n on n.idElemento = e.idElemento
+where n.idElemento is null
+and e.idElemento = 11
+ORDER BY hc.fechaCambio DESC;
+
+
+
+-- _______________________________________________________________________________________
+	SELECT 
+	hc.descripcion as Descripcion
+FROM HistorialElemento he
+JOIN HistorialCambio hc ON he.idHistorialCambio = hc.idHistorialCambio
+JOIN Elementos e ON he.idElemento = e.idElemento
+left join notebooks n on n.idElemento = e.idElemento
+where n.idElemento is null
+and e.idElemento = 2
+and he.idHistorialCambio = 2
+ORDER BY hc.fechaCambio DESC;
+
+
+
+-- _______________________________________________________________________________________
+	SELECT 
+	hc.motivo as Motivo
+FROM HistorialElemento he
+JOIN HistorialCambio hc ON he.idHistorialCambio = hc.idHistorialCambio
+JOIN Elementos e ON he.idElemento = e.idElemento
+left join notebooks n on n.idElemento = e.idElemento
+where n.idElemento is null
+and e.idElemento = 2
+and he.idHistorialCambio = 2
+ORDER BY hc.fechaCambio DESC;

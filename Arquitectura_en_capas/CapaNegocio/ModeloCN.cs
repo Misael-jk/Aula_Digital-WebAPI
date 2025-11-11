@@ -36,6 +36,11 @@ namespace CapaNegocio
         {
             return mapperModelo.GetByElementos();
         }
+
+        public ModeloDTO? ObtenerPorNombre(string modelo)
+        {
+            return mapperModelo.GetByNombre(modelo);
+        }
         #endregion
 
         #region INSERT MODELO

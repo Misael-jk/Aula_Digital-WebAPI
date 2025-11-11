@@ -468,12 +468,11 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos()
     {
         string query = @"
-        SELECT c.equipo AS Equipo, COUNT(*) AS Cantidad
+        SELECT c.equipo AS Equipo, COUNT(n.idElemento) AS Cantidad
         FROM Carritos c
         LEFT JOIN Notebooks n ON c.IdCarrito = n.IdCarrito
-        WHERE c.idCarrito IS NOT NULL
-        GROUP BY c.equipo 
-        ORDER BY Equipo desc;";
+        GROUP BY c.idCarrito, c.equipo
+        order by c.equipo;";
 
         try
         {

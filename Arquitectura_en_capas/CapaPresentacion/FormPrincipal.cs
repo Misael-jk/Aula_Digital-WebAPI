@@ -369,7 +369,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (elementosUC == null)
-                elementosUC = new ElementosUC(elementoCN, userVerificado);
+                elementosUC = new ElementosUC(elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, modeloCN, userVerificado);
 
             CambiarNombrePort(BtnElementos.Text);
 
@@ -557,6 +557,7 @@ namespace CapaPresentacion
             }
 
             notebooksUC.ActualizarDataGrid();
+
 
             MostrarSolo(notebooksUC);
 

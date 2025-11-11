@@ -3,7 +3,9 @@ namespace CapaDatos.InterfacesDTO;
 
 public interface IMapperElementos
 {
-    IEnumerable<ElementosDTO> GetAllDTO();
+    public IEnumerable<ElementosDTO> GetAllDTO();
+    public IEnumerable<ElementosDTO> GetByEstado(int idEstado);
+    public IEnumerable<ElementosDTO> GetFiltrosDTO(string? text, int? tipo, int? modelo);
     //ElementosDTO? GetByIdDTO(int idElemento);
     //IEnumerable<ElementosDTO> GetByCarritoDTO(int idCarrito);
     //IEnumerable<ElementosDTO> GetByTipoDTO(int idTipoElemento);

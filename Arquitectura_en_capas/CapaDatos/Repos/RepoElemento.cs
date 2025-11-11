@@ -218,4 +218,43 @@ public class RepoElemento : RepoBase, IRepoElemento
     }
     #endregion
 
+    #region FILTROS POR SERIE, BARRA, PATRIMONIO
+    public IEnumerable<string> GetSerieBarraPatrimonio(string text, int limit)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("p", text);
+        parameters.Add("limit", limit);
+
+        string query = @"(SELECT e.numeroSerie AS valor
+                          FROM Elementos e
+                          JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                          WHERE e.habilitado = 1
+                            AND t.elemento not in ('Notebook', 'Carritos')
+                            AND e.numeroSerie LIKE CONCAT('PAT', '%'))
+                        UNION
+                         (SELECT e.codigoBarra AS valor
+                          FROM Elementos e
+                          JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                          WHERE e.habilitado = 1
+                            AND t.elemento not in ('Notebook', 'Carritos')
+                            AND e.codigoBarra LIKE CONCAT('PAT', '%'))
+                       UNION
+                        (SELECT e.patrimonio AS valor
+                         FROM Elementos e
+                         JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                         WHERE e.habilitado = 1
+                           AND t.elemento not in ('Notebook', 'Carritos')
+                           AND e.patrimonio LIKE CONCAT('PAT', '%'))
+                      LIMIT 15;";
+
+        try
+        {
+            return Conexion.Query<string>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener las sugerencias de serie, barra o patrimonio");
+        }
+    }
+    #endregion
 }

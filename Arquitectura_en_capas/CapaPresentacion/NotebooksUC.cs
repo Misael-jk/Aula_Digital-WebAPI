@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using CapaNegocio;
 using CapaDatos.InterfacesDTO;
 using CapaEntidad;
@@ -47,6 +43,8 @@ namespace CapaPresentacion
             cmbUbicacion.DataSource = notebooksCN.ListarUbicaciones();
             cmbUbicacion.ValueMember = "IdUbicacion";
             cmbUbicacion.DisplayMember = "NombreUbicacion";
+
+            CargarGraficoCarritos();
         }
 
         private void NotebooksUC_Load(object sender, EventArgs e)
@@ -284,50 +282,65 @@ namespace CapaPresentacion
             pnlGraficoEstados.Controls.Add(pieChart);
         }
 
-        private void CargarGraficoCarritos()
+
+
+    private void CargarGraficoCarritos()
+    {
+        var datos = notebooksCN.GetCantidadNotebooksEnCarritos();
+
+        if (datos == null || datos.Count == 0) return;
+
+        var labels = datos.Select(d => d.Equipo).ToArray();
+        var values = datos.Select(d => (double)d.Cantidad).ToArray();
+
+        var series = new ColumnSeries<double>
         {
-            var datos = notebooksCN.GetCantidadNotebooksEnCarritos();
+            Values = values,
+            DataLabelsPaint = new SolidColorPaint(new SKColor(60, 60, 60)),
+            DataLabelsSize = 11,
+            MaxBarWidth = 45,     // ✅ barras más parejas
+            Padding = 5,          // ✅ espacio entre barras
+            Stroke = null,        // ✅ quita bordes de barras
+            Fill = new SolidColorPaint(new SKColor(70, 130, 180)) // ✅ color suave estilo dashboard
+        };
 
-            if (datos == null || datos.Count == 0) return;
+        var chart = new CartesianChart
+        {
+            Dock = DockStyle.Fill,
+            Series = new ISeries[] { series },
 
-            var labels = datos.Select(d => d.Equipo).ToArray();
-            var values = datos.Select(d => (double)d.Cantidad).ToArray();
-
-            var series = new ColumnSeries<double>
+            XAxes = new Axis[]
             {
-                Values = values,
-                DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-                DataLabelsSize = 9
-            };
-
-            var cartChart = new CartesianChart
+            new Axis
             {
-                Dock = DockStyle.Fill,
+                Labels = labels,
+                TextSize = 12,
+                Padding = new LiveChartsCore.Drawing.Padding { Left = 5, Right = 5, Top = 5, Bottom = 5 },
+                NameTextSize = 13,
+                NamePaint = new SolidColorPaint(new SKColor(80, 80, 80))
+            }
+            },
 
-                Series = new ISeries[] { series },
+            YAxes = new Axis[]
+            {
+            new Axis
+            {
+                Labeler = value => value.ToString("N0"),
+                NameTextSize = 13,
+                NamePaint = new SolidColorPaint(new SKColor(80, 80, 80)),
+                TextSize = 12
+            }
+            },
 
-                XAxes = new Axis[]
-                {
-                    new Axis
-                    {
-                        Labels = labels,
-                    }
-                },
+            LegendPosition = LiveChartsCore.Measure.LegendPosition.Hidden 
+        };
 
-                YAxes = new Axis[]
-                {
-                    new Axis
-                    {
-                        Labeler = value => value.ToString("N0")
-                    }
-                }
-            };
+        pnlGraficoCarritos.Controls.Clear();
+        pnlGraficoCarritos.Controls.Add(chart);
+    }
 
-            pnlGraficoCarritos.Controls.Clear();
-            pnlGraficoCarritos.Controls.Add(cartChart);
-        }
 
-        private void ApplyModernStyleCompact(Guna2DataGridView dgv)
+    private void ApplyModernStyleCompact(Guna2DataGridView dgv)
         {
             // Tamaño y comportamiento general
             dgv.AllowUserToAddRows = false;

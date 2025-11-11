@@ -56,6 +56,20 @@ public class TiposElementoCN
         return _repoTipoElemento.GetTiposByElemento();
     }
 
+    public IEnumerable<string> GetNombreTipos()
+    {
+        return _repoTipoElemento.GetNombreTipos();
+    }
+
+    public string? ObtenerTipoPorNombre(int idTipo)
+    {
+        return _repoTipoElemento.GetNombreTipoById(idTipo);
+    }
+
+    public TipoElemento? ObtenerPorNombre(string nombreTipo)
+    {
+        return _repoTipoElemento.GetByNombreTipo(nombreTipo);
+    }
     #endregion
 
     #region UPDATE TIPO ELEMENTO
