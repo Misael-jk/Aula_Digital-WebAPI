@@ -39,6 +39,8 @@ namespace CapaPresentacion
 
         public void ActualizarDatagrid()
         {
+            dgvCarritos_M.DataSource = carritosCN.MostrarCarritos();
+
             switch (cmbHabilitado.SelectedItem?.ToString())
             {
                 case "Habilitados":
@@ -60,7 +62,7 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1100);
 
-            dgvCarritos_M.DataSource = carritosCN.MostrarCarritos();
+            ActualizarDatagrid();
 
             _searchTimer = new System.Windows.Forms.Timer();
             _searchTimer.Interval = 700;
@@ -72,13 +74,6 @@ namespace CapaPresentacion
 
             RenovarDatos();
 
-            cmbModelo.DataSource = carritosCN.ListarModelosPorTipo(2); // Cambiar luego al modelo segun su tipo (ListarModelosPorTipo)
-            cmbModelo.ValueMember = "IdModelo";
-            cmbModelo.DisplayMember = "NombreModelo";
-
-            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
-            cmbUbicacion.ValueMember = "IdUbicacion";
-            cmbUbicacion.DisplayMember = "NombreUbicacion";
         }
 
         private void txtNroSerie_TextChanged(object sender, EventArgs e)
@@ -124,6 +119,7 @@ namespace CapaPresentacion
 
         public void RenovarDatos()
         {
+
             var numSeriesBD = carritosCN.ObtenerSeriePorNotebook();
 
             string[] numSeries = numSeriesBD.Select(p => p.NumeroSerie).ToArray();
@@ -139,6 +135,14 @@ namespace CapaPresentacion
             var lista2 = new AutoCompleteStringCollection();
             lista2.AddRange(codBarras);
             txtCodBarra.AutoCompleteCustomSource = lista2;
+
+            cmbModelo.DataSource = carritosCN.ListarModelosPorTipo(2);
+            cmbModelo.ValueMember = "IdModelo";
+            cmbModelo.DisplayMember = "NombreModelo";
+
+            cmbUbicacion.DataSource = carritosCN.ListarUbicaciones();
+            cmbUbicacion.ValueMember = "IdUbicacion";
+            cmbUbicacion.DisplayMember = "NombreUbicacion";
         }
 
         private void dtgCarrito_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -307,9 +311,7 @@ namespace CapaPresentacion
 
         private void btnAddCarrito_Click(object sender, EventArgs e)
         {
-            var CrearCarrito = new FormCRUDCarritos(carritosCN, ActualizarDatagrid);
 
-            CrearCarrito.Show();
         }
 
         private void GenerarBotonesCarrito(int capacidad)
@@ -463,6 +465,13 @@ namespace CapaPresentacion
         private void cmbHabilitado_SelectedIndexChanged(object sender, EventArgs e)
         {
             ActualizarDatagrid();
+        }
+
+        private void btnCrearElemento_M_Click(object sender, EventArgs e)
+        {
+            var CrearCarrito = new FormCRUDCarritos(carritosCN, ActualizarDatagrid);
+
+            CrearCarrito.Show();
         }
     }
 }

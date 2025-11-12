@@ -62,7 +62,9 @@ INSERT INTO VariantesElemento (idTipoElemento, subtipo, idModelo) VALUES
 INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 ('Disponible'),
 ('Prestado'),
-('En mantenimiento');
+('En reparacion'),
+('Roto'),
+('Faltantes');
 
 -- ======================
 -- CARRITOS

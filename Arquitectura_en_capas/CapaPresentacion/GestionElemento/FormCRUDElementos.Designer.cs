@@ -290,7 +290,7 @@
             lblTipoElemento.ForeColor = Color.Black;
             lblTipoElemento.Location = new Point(12, 256);
             lblTipoElemento.Name = "lblTipoElemento";
-            lblTipoElemento.Size = new Size(103, 15);
+            lblTipoElemento.Size = new Size(102, 15);
             lblTipoElemento.TabIndex = 51;
             lblTipoElemento.Text = "Tipo de elemento:";
             // 
@@ -327,6 +327,7 @@
             txtModelo.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             txtModelo.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             txtModelo.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtModelo.Enabled = false;
             txtModelo.FocusedState.BorderColor = Color.DodgerBlue;
             txtModelo.Font = new Font("Segoe UI", 9F);
             txtModelo.ForeColor = Color.Black;

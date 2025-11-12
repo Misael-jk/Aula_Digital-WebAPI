@@ -42,15 +42,13 @@ namespace CapaPresentacion
             if (cmbTipoElemento.Items.Count > 0 && cmbTipoElemento.SelectedValue != null)
             {
                 int idTipo = (int)cmbTipoElemento.SelectedValue;
-                CargarVariantes(idTipo);
                 cmbTipoElemento.Tag = idTipo;
+            }
 
-                if (cmbTipoElemento.Items.Count > 0 && cmbTipoElemento.SelectedValue != null)
-                {
-                    int idVariante = (int)cmbTipoElemento.SelectedValue;
-                    CargarModelo(idVariante);
-                    cmbVariante.Tag = idVariante;
-                }
+            if (cmbTipoElemento.Items.Count > 0 && cmbTipoElemento.SelectedValue != null)
+            {
+                int idVariante = (int)cmbTipoElemento.SelectedValue;
+                cmbVariante.Tag = idVariante;
             }
         }
 
@@ -98,7 +96,7 @@ namespace CapaPresentacion
         {
             VariantesElemento? variantes = elementosCN.ObtenerVariantePorID(idVariante);
 
-            if (variantes?.IdModelo is not null)
+            if (variantes?.IdModelo != null)
             {
                 Modelos? modelos = elementosCN.ObtenerModeloPorID(variantes.IdModelo);
                 txtModelo.Text = modelos?.NombreModelo;
@@ -134,6 +132,7 @@ namespace CapaPresentacion
 
             elementosCN.CrearElemento(elemento, usuarioActual.IdUsuario);
             cargarDatos.Invoke();
+            this.Close();
         }
     }
 }

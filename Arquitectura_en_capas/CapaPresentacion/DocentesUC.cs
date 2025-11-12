@@ -33,12 +33,12 @@ namespace CapaPresentacion
             cmbHabilitado.SelectedIndex = 0;
         }
 
-        //public void MostrarDocentes()
-        //{
-        //    dgvDocentes.DataSource = docentesCN.MostrarDocente();
-        //}
+        public void MostrarDocentes()
+        {
+            dgvDocentes.DataSource = docentesCN.MostrarDocente();
+        }
 
-        private void dgvDocentes_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDocentes_M_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -92,7 +92,7 @@ namespace CapaPresentacion
 
         private void cmbHabilitado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(cmbHabilitado.SelectedItem?.ToString())
+            switch (cmbHabilitado.SelectedItem?.ToString())
             {
                 case "Habilitados":
                     dgvDocentes.DataSource = docentesCN.MostrarDocente();

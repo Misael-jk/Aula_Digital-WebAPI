@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaDatos.Interfaces;
 using CapaEntidad;
 using CapaNegocio;
 
@@ -17,6 +18,7 @@ namespace CapaPresentacion
         private readonly UsuariosCN usuarioCN;
         private readonly UsuariosBajasCN usuarioBajas;
         private int _idActual = 0;
+        private readonly IRepoHistorialCambio repoHistorialCambio;
 
         #region Datos actuales del usuario
         private string? _usuario = "";
@@ -28,12 +30,13 @@ namespace CapaPresentacion
         private string? _contraseña = "";
         #endregion
 
-        public UsuarioGestionuc(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN, int usuarioSeleccionado)
+        public UsuarioGestionuc(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN, int usuarioSeleccionado, IRepoHistorialCambio repoHistorialCambio)
         {
             InitializeComponent();
             this.usuarioCN = usuariosCN;
             this.usuarioBajas = usuariosBajasCN;
             this._idActual = usuarioSeleccionado;
+            this.repoHistorialCambio = repoHistorialCambio;
         }
 
         private void UsuarioGestion_Load(object sender, EventArgs e)
@@ -58,6 +61,8 @@ namespace CapaPresentacion
             txtNombre.Text = _Nombre;
             txtEmail.Text = _email;
             txtContraseña.Text = _contraseña;
+
+            RenovarCantidadAcciones();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -131,6 +136,13 @@ namespace CapaPresentacion
         {
             var form = (FormPrincipal)this.FindForm();
             form.CerrarGestionUsuario();
+        }
+
+        private void RenovarCantidadAcciones()
+        {
+            lblCantImplemento.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 1).ToString();
+            lblCantModifico.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 2).ToString();
+            lblCantInhabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 3).ToString();
         }
     }
 }

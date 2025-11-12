@@ -267,7 +267,7 @@ namespace CapaPresentacion
             pnlGestionUsuario.Visible = true;
 
             if (usuarioGestion == null)
-                usuarioGestion = new UsuarioGestionuc(usuariosCN, usuariosBajasCN, userVerificado.IdUsuario);
+                usuarioGestion = new UsuarioGestionuc(usuariosCN, usuariosBajasCN, userVerificado.IdUsuario, repoHistorialCambio);
 
 
             if (!pnlGestionUsuario.Controls.Contains(usuarioGestion))
@@ -438,6 +438,8 @@ namespace CapaPresentacion
                 pnlContenedor.Controls.Add(docentesUC);
                 docentesUC.Dock = DockStyle.Fill;
             }
+
+            docentesUC.MostrarDocentes();
 
             MostrarSolo(docentesUC);
         }

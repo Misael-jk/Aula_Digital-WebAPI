@@ -973,10 +973,10 @@
             pnlGraficoPie.BorderRadius = 15;
             pnlGraficoPie.CustomizableEdges = customizableEdges36;
             pnlGraficoPie.FillColor = Color.Transparent;
-            pnlGraficoPie.Location = new Point(69, 80);
+            pnlGraficoPie.Location = new Point(56, 69);
             pnlGraficoPie.Name = "pnlGraficoPie";
             pnlGraficoPie.ShadowDecoration.CustomizableEdges = customizableEdges37;
-            pnlGraficoPie.Size = new Size(245, 239);
+            pnlGraficoPie.Size = new Size(270, 257);
             pnlGraficoPie.TabIndex = 49;
             // 
             // lblGraficoElementos

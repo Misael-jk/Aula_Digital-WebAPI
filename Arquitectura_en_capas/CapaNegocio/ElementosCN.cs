@@ -250,6 +250,16 @@ namespace CapaNegocio
         {
             return uow.RepoEstadosMantenimiento.GetById(idEstado);
         }
+
+        public int? SumarElementosPorEstado(int idEstado)
+        {
+            return uow.RepoElemento.CantidadEstados(idEstado);
+        }
+
+        public int TotalElementos()
+        {
+            return uow.RepoElemento.CantidadTotal();
+        }
         #endregion
 
         #region TIPOS ELEMENTO
@@ -266,6 +276,9 @@ namespace CapaNegocio
         public TipoElemento? ObtenerTipoElementoPorID(int idTipo)
         {
             return uow.RepoTipoElemento.GetById(idTipo);
+        public List<(string Nombre, int Cantidad)> ObtenerElementosPorTipo()
+        {
+            return uow.RepoElemento.GetElementosPorTipo();
         }
         #endregion
 

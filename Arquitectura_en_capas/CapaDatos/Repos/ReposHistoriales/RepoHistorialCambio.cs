@@ -138,4 +138,30 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
         }
     }
     #endregion
+
+    #region Cantidad de Acciones por usuario y tipo accion
+    public int CantidadAccionByUser(int idUsuario, int idTipoAccion)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("unidUsuario", idUsuario);
+        parameters.Add("unidTipoAccion", idTipoAccion);
+
+        string query = @"SELECT COUNT(*) AS CantidadCambios
+                         FROM HistorialCambio hc
+                         JOIN Usuarios u ON hc.idUsuario = u.idUsuario
+                         JOIN TipoAccion ta ON hc.idTipoAccion = ta.idTipoAccion
+                         where u.idUsuario = @unidUsuario
+                         and ta.idTipoAccion = @unidTipoAccion;";
+
+        try
+        {
+            return Conexion.ExecuteScalar<int>(query, parameters, Transaction);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("No se pudo obtener la cantidad de dicha accion"+ ex);
+        }
+    }
+    #endregion
 }
