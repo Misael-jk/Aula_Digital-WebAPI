@@ -276,6 +276,7 @@ namespace CapaNegocio
         public TipoElemento? ObtenerTipoElementoPorID(int idTipo)
         {
             return uow.RepoTipoElemento.GetById(idTipo);
+        }
         public List<(string Nombre, int Cantidad)> ObtenerElementosPorTipo()
         {
             return uow.RepoElemento.GetElementosPorTipo();
