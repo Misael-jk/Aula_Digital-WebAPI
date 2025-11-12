@@ -21,6 +21,7 @@ namespace CapaPresentacion
         private readonly ElementosCN elementosCN;
         private readonly TiposElementoCN tiposElementoCN;
         private readonly ModeloCN modeloCN;
+        private readonly ElementosBajasCN elementosBajasCN;
         private readonly Usuarios userVerificado;
         private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
         private readonly IRepoElemento repoElemento;
@@ -39,12 +40,13 @@ namespace CapaPresentacion
         private FormPrincipal formPrincipal;
 
 
-        public ElementosUC(FormPrincipal formPrincipal, ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado)
+        public ElementosUC(FormPrincipal formPrincipal, ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado, ElementosBajasCN elementosBajasCN)
         {
             InitializeComponent();
             this.elementosCN = elementosCN;
             this.tiposElementoCN = tiposElementoCN;
             this.modeloCN = modeloCN;
+            this.elementosBajasCN = elementosBajasCN;
             this.repoEstadosMantenimiento = repoEstadosMantenimiento;
             this.repoElemento = repoElemento;
             this.userVerificado = userVerificado;
@@ -673,10 +675,10 @@ namespace CapaPresentacion
 
         private void btnGestionarElemento_M_Click(object sender, EventArgs e)
         {
-            var detalleUC = new ElementoGestionUC(formPrincipal, this, elementosCN, idElemento, userVerificado);
+            var detalleUC = new ElementoGestionUC(formPrincipal, this, elementosCN, elementosBajasCN, idElemento, userVerificado);
             formPrincipal.MostrarUserControl(detalleUC);
         }
-
+        
         private void CargarGrafico()
         {
             var datos = elementosCN.ObtenerElementosPorTipo();

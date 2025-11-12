@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -54,25 +54,26 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ElementoGestionUC));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            btnBorrarFiltros = new Guna.UI2.WinForms.Guna2Button();
-            guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            btnRestablecerCambios = new Guna.UI2.WinForms.Guna2Button();
-            btnActualizar = new Guna.UI2.WinForms.Guna2Button();
-            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblNoPuedeActualizar = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblNoPuedeActualizarEnPrestamo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTipoElemento = new Guna.UI2.WinForms.Guna2HtmlLabel();
             panel3 = new Panel();
             txtExplicarMotivo = new Guna.UI2.WinForms.Guna2TextBox();
@@ -92,7 +93,12 @@
             lblPatrimonio = new Label();
             lblCodBarra = new Label();
             lblNroSerie = new Label();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            btnCancelar = new Guna.UI2.WinForms.Guna2Button();
+            btnConfirmar = new Guna.UI2.WinForms.Guna2Button();
+            btnInhabilitar = new Guna.UI2.WinForms.Guna2Button();
+            btnHabilitar = new Guna.UI2.WinForms.Guna2Button();
+            btnActualizar = new Guna.UI2.WinForms.Guna2Button();
+            btnRestablecerCambios = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             txtMotivo = new Guna.UI2.WinForms.Guna2TextBox();
             label5 = new Label();
@@ -114,11 +120,8 @@
             // guna2Panel1
             // 
             guna2Panel1.BackColor = Color.Transparent;
-            guna2Panel1.Controls.Add(btnBorrarFiltros);
-            guna2Panel1.Controls.Add(guna2HtmlLabel3);
-            guna2Panel1.Controls.Add(btnRestablecerCambios);
-            guna2Panel1.Controls.Add(btnActualizar);
-            guna2Panel1.Controls.Add(guna2HtmlLabel2);
+            guna2Panel1.Controls.Add(lblNoPuedeActualizar);
+            guna2Panel1.Controls.Add(lblNoPuedeActualizarEnPrestamo);
             guna2Panel1.Controls.Add(lblTipoElemento);
             guna2Panel1.Controls.Add(panel3);
             guna2Panel1.Controls.Add(txtExplicarMotivo);
@@ -138,122 +141,45 @@
             guna2Panel1.Controls.Add(lblPatrimonio);
             guna2Panel1.Controls.Add(lblCodBarra);
             guna2Panel1.Controls.Add(lblNroSerie);
-            guna2Panel1.Controls.Add(guna2Button2);
-            guna2Panel1.CustomizableEdges = customizableEdges25;
+            guna2Panel1.Controls.Add(btnCancelar);
+            guna2Panel1.Controls.Add(btnConfirmar);
+            guna2Panel1.Controls.Add(btnInhabilitar);
+            guna2Panel1.Controls.Add(btnHabilitar);
+            guna2Panel1.Controls.Add(btnActualizar);
+            guna2Panel1.Controls.Add(btnRestablecerCambios);
+            guna2Panel1.CustomizableEdges = customizableEdges29;
             guna2Panel1.FillColor = SystemColors.ButtonHighlight;
             guna2Panel1.Location = new Point(17, 58);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges30;
             guna2Panel1.Size = new Size(534, 597);
             guna2Panel1.TabIndex = 49;
             // 
-            // btnBorrarFiltros
+            // lblNoPuedeActualizar
             // 
-            btnBorrarFiltros.BackColor = Color.Transparent;
-            btnBorrarFiltros.BorderRadius = 8;
-            btnBorrarFiltros.Cursor = Cursors.Hand;
-            btnBorrarFiltros.CustomizableEdges = customizableEdges1;
-            btnBorrarFiltros.DisabledState.BorderColor = Color.DarkGray;
-            btnBorrarFiltros.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnBorrarFiltros.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnBorrarFiltros.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnBorrarFiltros.FillColor = Color.IndianRed;
-            btnBorrarFiltros.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnBorrarFiltros.ForeColor = Color.White;
-            btnBorrarFiltros.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btnBorrarFiltros.HoverState.ForeColor = Color.White;
-            btnBorrarFiltros.Location = new Point(14, 12);
-            btnBorrarFiltros.Name = "btnBorrarFiltros";
-            btnBorrarFiltros.PressedColor = Color.Brown;
-            btnBorrarFiltros.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnBorrarFiltros.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnBorrarFiltros.ShadowDecoration.Enabled = true;
-            btnBorrarFiltros.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnBorrarFiltros.Size = new Size(150, 26);
-            btnBorrarFiltros.TabIndex = 90;
-            btnBorrarFiltros.Text = "Desahabilitar";
+            lblNoPuedeActualizar.BackColor = Color.Transparent;
+            lblNoPuedeActualizar.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNoPuedeActualizar.ForeColor = Color.Red;
+            lblNoPuedeActualizar.Location = new Point(14, 418);
+            lblNoPuedeActualizar.Name = "lblNoPuedeActualizar";
+            lblNoPuedeActualizar.Size = new Size(378, 17);
+            lblNoPuedeActualizar.TabIndex = 92;
+            lblNoPuedeActualizar.Text = "No puedes actualizar ningun dato si el elemento esta o sera deshabilitado";
+            lblNoPuedeActualizar.TextAlignment = ContentAlignment.MiddleLeft;
+            lblNoPuedeActualizar.Visible = false;
             // 
-            // guna2HtmlLabel3
+            // lblNoPuedeActualizarEnPrestamo
             // 
-            guna2HtmlLabel3.BackColor = Color.Transparent;
-            guna2HtmlLabel3.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel3.ForeColor = Color.Red;
-            guna2HtmlLabel3.Location = new Point(14, 418);
-            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(344, 17);
-            guna2HtmlLabel3.TabIndex = 92;
-            guna2HtmlLabel3.Text = "No puedes actualizar ningun dato si el elemento sera deshabilitado";
-            guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleLeft;
-            guna2HtmlLabel3.Visible = false;
-            // 
-            // btnRestablecerCambios
-            // 
-            btnRestablecerCambios.BackColor = Color.Transparent;
-            btnRestablecerCambios.BorderRadius = 8;
-            btnRestablecerCambios.Cursor = Cursors.Hand;
-            btnRestablecerCambios.CustomizableEdges = customizableEdges3;
-            btnRestablecerCambios.DisabledState.BorderColor = Color.DarkGray;
-            btnRestablecerCambios.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnRestablecerCambios.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnRestablecerCambios.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnRestablecerCambios.Enabled = false;
-            btnRestablecerCambios.FillColor = Color.FromArgb(252, 201, 52);
-            btnRestablecerCambios.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnRestablecerCambios.ForeColor = Color.Firebrick;
-            btnRestablecerCambios.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btnRestablecerCambios.HoverState.ForeColor = Color.White;
-            btnRestablecerCambios.Location = new Point(273, 557);
-            btnRestablecerCambios.Name = "btnRestablecerCambios";
-            btnRestablecerCambios.PressedColor = Color.FromArgb(255, 170, 20);
-            btnRestablecerCambios.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnRestablecerCambios.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnRestablecerCambios.ShadowDecoration.Enabled = true;
-            btnRestablecerCambios.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnRestablecerCambios.Size = new Size(243, 26);
-            btnRestablecerCambios.TabIndex = 89;
-            btnRestablecerCambios.Text = "Restablecer cambios";
-            btnRestablecerCambios.Click += btnRestablecerCambios_Click;
-            // 
-            // btnActualizar
-            // 
-            btnActualizar.BackColor = Color.Transparent;
-            btnActualizar.BorderRadius = 8;
-            btnActualizar.Cursor = Cursors.Hand;
-            btnActualizar.CustomizableEdges = customizableEdges5;
-            btnActualizar.DisabledState.BorderColor = Color.DarkGray;
-            btnActualizar.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnActualizar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnActualizar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnActualizar.Enabled = false;
-            btnActualizar.FillColor = Color.FromArgb(252, 201, 52);
-            btnActualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnActualizar.ForeColor = Color.Firebrick;
-            btnActualizar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btnActualizar.HoverState.ForeColor = Color.White;
-            btnActualizar.Location = new Point(15, 557);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.PressedColor = Color.FromArgb(255, 170, 20);
-            btnActualizar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnActualizar.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnActualizar.ShadowDecoration.Enabled = true;
-            btnActualizar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnActualizar.Size = new Size(243, 26);
-            btnActualizar.TabIndex = 88;
-            btnActualizar.Text = "Actualizar datos";
-            btnActualizar.Click += btnGestionarElemento_M_Click;
-            // 
-            // guna2HtmlLabel2
-            // 
-            guna2HtmlLabel2.BackColor = Color.Transparent;
-            guna2HtmlLabel2.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel2.ForeColor = Color.Red;
-            guna2HtmlLabel2.Location = new Point(293, 355);
-            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(222, 32);
-            guna2HtmlLabel2.TabIndex = 3;
-            guna2HtmlLabel2.Text = "El elemento esta en prestamo, no se puede <br> actualizar datos.";
-            guna2HtmlLabel2.TextAlignment = ContentAlignment.MiddleLeft;
-            guna2HtmlLabel2.Visible = false;
+            lblNoPuedeActualizarEnPrestamo.BackColor = Color.Transparent;
+            lblNoPuedeActualizarEnPrestamo.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNoPuedeActualizarEnPrestamo.ForeColor = Color.Red;
+            lblNoPuedeActualizarEnPrestamo.Location = new Point(293, 355);
+            lblNoPuedeActualizarEnPrestamo.Name = "lblNoPuedeActualizarEnPrestamo";
+            lblNoPuedeActualizarEnPrestamo.Size = new Size(222, 32);
+            lblNoPuedeActualizarEnPrestamo.TabIndex = 3;
+            lblNoPuedeActualizarEnPrestamo.Text = "El elemento esta en prestamo, no se puede <br> actualizar datos.";
+            lblNoPuedeActualizarEnPrestamo.TextAlignment = ContentAlignment.MiddleLeft;
+            lblNoPuedeActualizarEnPrestamo.Visible = false;
             // 
             // lblTipoElemento
             // 
@@ -280,7 +206,7 @@
             txtExplicarMotivo.Animated = true;
             txtExplicarMotivo.BorderRadius = 10;
             txtExplicarMotivo.Cursor = Cursors.IBeam;
-            txtExplicarMotivo.CustomizableEdges = customizableEdges7;
+            txtExplicarMotivo.CustomizableEdges = customizableEdges1;
             txtExplicarMotivo.DefaultText = "";
             txtExplicarMotivo.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtExplicarMotivo.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -301,7 +227,7 @@
             txtExplicarMotivo.PlaceholderText = "Motivo *";
             txtExplicarMotivo.SelectedText = "";
             txtExplicarMotivo.ShadowDecoration.BorderRadius = 10;
-            txtExplicarMotivo.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtExplicarMotivo.ShadowDecoration.CustomizableEdges = customizableEdges2;
             txtExplicarMotivo.ShadowDecoration.Depth = 5;
             txtExplicarMotivo.Size = new Size(500, 82);
             txtExplicarMotivo.TabIndex = 86;
@@ -312,7 +238,7 @@
             txtModelo.Animated = true;
             txtModelo.BorderRadius = 10;
             txtModelo.Cursor = Cursors.IBeam;
-            txtModelo.CustomizableEdges = customizableEdges9;
+            txtModelo.CustomizableEdges = customizableEdges3;
             txtModelo.DefaultText = "";
             txtModelo.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtModelo.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -333,7 +259,7 @@
             txtModelo.PlaceholderText = "Tipo de elemento";
             txtModelo.SelectedText = "";
             txtModelo.ShadowDecoration.BorderRadius = 10;
-            txtModelo.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtModelo.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtModelo.ShadowDecoration.Depth = 5;
             txtModelo.Size = new Size(242, 36);
             txtModelo.TabIndex = 85;
@@ -370,9 +296,9 @@
             cmbVarianteElemento.BackColor = Color.Transparent;
             cmbVarianteElemento.BorderColor = Color.FromArgb(125, 100, 180);
             cmbVarianteElemento.BorderRadius = 10;
-            customizableEdges11.BottomLeft = false;
-            customizableEdges11.BottomRight = false;
-            cmbVarianteElemento.CustomizableEdges = customizableEdges11;
+            customizableEdges5.BottomLeft = false;
+            customizableEdges5.BottomRight = false;
+            cmbVarianteElemento.CustomizableEdges = customizableEdges5;
             cmbVarianteElemento.DrawMode = DrawMode.OwnerDrawFixed;
             cmbVarianteElemento.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbVarianteElemento.FocusedColor = Color.FromArgb(105, 80, 165);
@@ -390,7 +316,7 @@
             cmbVarianteElemento.Location = new Point(15, 122);
             cmbVarianteElemento.Name = "cmbVarianteElemento";
             cmbVarianteElemento.ShadowDecoration.BorderRadius = 10;
-            cmbVarianteElemento.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            cmbVarianteElemento.ShadowDecoration.CustomizableEdges = customizableEdges6;
             cmbVarianteElemento.Size = new Size(242, 36);
             cmbVarianteElemento.TabIndex = 83;
             cmbVarianteElemento.SelectedIndexChanged += cmbVarianteElemento_SelectedIndexChanged;
@@ -414,9 +340,9 @@
             cmbEstado.BackColor = Color.Transparent;
             cmbEstado.BorderColor = Color.FromArgb(125, 100, 180);
             cmbEstado.BorderRadius = 10;
-            customizableEdges13.BottomLeft = false;
-            customizableEdges13.BottomRight = false;
-            cmbEstado.CustomizableEdges = customizableEdges13;
+            customizableEdges7.BottomLeft = false;
+            customizableEdges7.BottomRight = false;
+            cmbEstado.CustomizableEdges = customizableEdges7;
             cmbEstado.DrawMode = DrawMode.OwnerDrawFixed;
             cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.FocusedColor = Color.FromArgb(105, 80, 165);
@@ -434,7 +360,7 @@
             cmbEstado.Location = new Point(15, 352);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.ShadowDecoration.BorderRadius = 10;
-            cmbEstado.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            cmbEstado.ShadowDecoration.CustomizableEdges = customizableEdges8;
             cmbEstado.Size = new Size(242, 36);
             cmbEstado.TabIndex = 81;
             cmbEstado.SelectedIndexChanged += cmbEstado_SelectedIndexChanged;
@@ -466,9 +392,9 @@
             cmbUbicacion.BackColor = Color.Transparent;
             cmbUbicacion.BorderColor = Color.FromArgb(125, 100, 180);
             cmbUbicacion.BorderRadius = 10;
-            customizableEdges15.BottomLeft = false;
-            customizableEdges15.BottomRight = false;
-            cmbUbicacion.CustomizableEdges = customizableEdges15;
+            customizableEdges9.BottomLeft = false;
+            customizableEdges9.BottomRight = false;
+            cmbUbicacion.CustomizableEdges = customizableEdges9;
             cmbUbicacion.DrawMode = DrawMode.OwnerDrawFixed;
             cmbUbicacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbUbicacion.FocusedColor = Color.FromArgb(105, 80, 165);
@@ -486,7 +412,7 @@
             cmbUbicacion.Location = new Point(273, 282);
             cmbUbicacion.Name = "cmbUbicacion";
             cmbUbicacion.ShadowDecoration.BorderRadius = 10;
-            cmbUbicacion.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            cmbUbicacion.ShadowDecoration.CustomizableEdges = customizableEdges10;
             cmbUbicacion.Size = new Size(242, 36);
             cmbUbicacion.TabIndex = 79;
             cmbUbicacion.SelectedIndexChanged += cmbUbicacion_SelectedIndexChanged;
@@ -497,7 +423,7 @@
             txtPatrimonio.Animated = true;
             txtPatrimonio.BorderRadius = 10;
             txtPatrimonio.Cursor = Cursors.IBeam;
-            txtPatrimonio.CustomizableEdges = customizableEdges17;
+            txtPatrimonio.CustomizableEdges = customizableEdges11;
             txtPatrimonio.DefaultText = "";
             txtPatrimonio.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPatrimonio.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -517,7 +443,7 @@
             txtPatrimonio.PlaceholderText = "Tipo de elemento";
             txtPatrimonio.SelectedText = "";
             txtPatrimonio.ShadowDecoration.BorderRadius = 10;
-            txtPatrimonio.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            txtPatrimonio.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtPatrimonio.ShadowDecoration.Depth = 5;
             txtPatrimonio.Size = new Size(242, 36);
             txtPatrimonio.TabIndex = 78;
@@ -529,7 +455,7 @@
             txtCodBarra.Animated = true;
             txtCodBarra.BorderRadius = 10;
             txtCodBarra.Cursor = Cursors.IBeam;
-            txtCodBarra.CustomizableEdges = customizableEdges19;
+            txtCodBarra.CustomizableEdges = customizableEdges13;
             txtCodBarra.DefaultText = "";
             txtCodBarra.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtCodBarra.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -549,7 +475,7 @@
             txtCodBarra.PlaceholderText = "Tipo de elemento";
             txtCodBarra.SelectedText = "";
             txtCodBarra.ShadowDecoration.BorderRadius = 10;
-            txtCodBarra.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            txtCodBarra.ShadowDecoration.CustomizableEdges = customizableEdges14;
             txtCodBarra.ShadowDecoration.Depth = 5;
             txtCodBarra.Size = new Size(242, 36);
             txtCodBarra.TabIndex = 77;
@@ -561,7 +487,7 @@
             txtNroSerie.Animated = true;
             txtNroSerie.BorderRadius = 10;
             txtNroSerie.Cursor = Cursors.IBeam;
-            txtNroSerie.CustomizableEdges = customizableEdges21;
+            txtNroSerie.CustomizableEdges = customizableEdges15;
             txtNroSerie.DefaultText = "";
             txtNroSerie.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNroSerie.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -581,7 +507,7 @@
             txtNroSerie.PlaceholderText = "Tipo de elemento";
             txtNroSerie.SelectedText = "";
             txtNroSerie.ShadowDecoration.BorderRadius = 10;
-            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            txtNroSerie.ShadowDecoration.CustomizableEdges = customizableEdges16;
             txtNroSerie.ShadowDecoration.Depth = 5;
             txtNroSerie.Size = new Size(242, 36);
             txtNroSerie.TabIndex = 76;
@@ -636,32 +562,172 @@
             lblNroSerie.TabIndex = 71;
             lblNroSerie.Text = "Nro de serie:";
             // 
-            // guna2Button2
+            // btnCancelar
             // 
-            guna2Button2.BackColor = Color.Transparent;
-            guna2Button2.BorderRadius = 8;
-            guna2Button2.Cursor = Cursors.Hand;
-            guna2Button2.CustomizableEdges = customizableEdges23;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.IndianRed;
-            guna2Button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            guna2Button2.HoverState.ForeColor = Color.White;
-            guna2Button2.Location = new Point(15, 557);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.PressedColor = Color.Brown;
-            guna2Button2.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2Button2.ShadowDecoration.Enabled = true;
-            guna2Button2.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            guna2Button2.Size = new Size(502, 26);
-            guna2Button2.TabIndex = 91;
-            guna2Button2.Text = "Confirmar deshabilitar";
-            guna2Button2.Visible = false;
+            btnCancelar.BackColor = Color.Transparent;
+            btnCancelar.BorderRadius = 8;
+            btnCancelar.Cursor = Cursors.Hand;
+            btnCancelar.CustomizableEdges = customizableEdges17;
+            btnCancelar.DisabledState.BorderColor = Color.DarkGray;
+            btnCancelar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnCancelar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnCancelar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnCancelar.FillColor = Color.IndianRed;
+            btnCancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnCancelar.HoverState.ForeColor = Color.White;
+            btnCancelar.Location = new Point(274, 557);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.PressedColor = Color.Brown;
+            btnCancelar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnCancelar.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            btnCancelar.ShadowDecoration.Enabled = true;
+            btnCancelar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnCancelar.Size = new Size(243, 26);
+            btnCancelar.TabIndex = 93;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.Visible = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnConfirmar
+            // 
+            btnConfirmar.BackColor = Color.Transparent;
+            btnConfirmar.BorderRadius = 8;
+            btnConfirmar.Cursor = Cursors.Hand;
+            btnConfirmar.CustomizableEdges = customizableEdges19;
+            btnConfirmar.DisabledState.BorderColor = Color.DarkGray;
+            btnConfirmar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnConfirmar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnConfirmar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnConfirmar.FillColor = Color.IndianRed;
+            btnConfirmar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnConfirmar.ForeColor = Color.White;
+            btnConfirmar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnConfirmar.HoverState.ForeColor = Color.White;
+            btnConfirmar.Location = new Point(15, 557);
+            btnConfirmar.Name = "btnConfirmar";
+            btnConfirmar.PressedColor = Color.Brown;
+            btnConfirmar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnConfirmar.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btnConfirmar.ShadowDecoration.Enabled = true;
+            btnConfirmar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnConfirmar.Size = new Size(243, 26);
+            btnConfirmar.TabIndex = 91;
+            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.Visible = false;
+            btnConfirmar.Click += btnConfirmar_Click;
+            // 
+            // btnInhabilitar
+            // 
+            btnInhabilitar.BackColor = Color.Transparent;
+            btnInhabilitar.BorderRadius = 8;
+            btnInhabilitar.Cursor = Cursors.Hand;
+            btnInhabilitar.CustomizableEdges = customizableEdges21;
+            btnInhabilitar.DisabledState.BorderColor = Color.DarkGray;
+            btnInhabilitar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnInhabilitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnInhabilitar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnInhabilitar.FillColor = Color.IndianRed;
+            btnInhabilitar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnInhabilitar.ForeColor = Color.White;
+            btnInhabilitar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnInhabilitar.HoverState.ForeColor = Color.White;
+            btnInhabilitar.Location = new Point(14, 12);
+            btnInhabilitar.Name = "btnInhabilitar";
+            btnInhabilitar.PressedColor = Color.Brown;
+            btnInhabilitar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnInhabilitar.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            btnInhabilitar.ShadowDecoration.Enabled = true;
+            btnInhabilitar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnInhabilitar.Size = new Size(152, 26);
+            btnInhabilitar.TabIndex = 90;
+            btnInhabilitar.Text = "Desahabilitar";
+            btnInhabilitar.Click += btnInhabilitar_Click;
+            // 
+            // btnHabilitar
+            // 
+            btnHabilitar.BackColor = Color.Transparent;
+            btnHabilitar.BorderRadius = 8;
+            btnHabilitar.Cursor = Cursors.Hand;
+            btnHabilitar.CustomizableEdges = customizableEdges23;
+            btnHabilitar.DisabledState.BorderColor = Color.DarkGray;
+            btnHabilitar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnHabilitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnHabilitar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnHabilitar.FillColor = Color.YellowGreen;
+            btnHabilitar.FocusedColor = Color.SeaGreen;
+            btnHabilitar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnHabilitar.ForeColor = Color.White;
+            btnHabilitar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnHabilitar.HoverState.ForeColor = Color.White;
+            btnHabilitar.Location = new Point(13, 12);
+            btnHabilitar.Name = "btnHabilitar";
+            btnHabilitar.PressedColor = Color.DarkOliveGreen;
+            btnHabilitar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnHabilitar.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            btnHabilitar.ShadowDecoration.Enabled = true;
+            btnHabilitar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnHabilitar.Size = new Size(153, 26);
+            btnHabilitar.TabIndex = 94;
+            btnHabilitar.Text = "Habilitar";
+            btnHabilitar.Click += btnHabilitar_Click;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.BackColor = Color.Transparent;
+            btnActualizar.BorderRadius = 8;
+            btnActualizar.Cursor = Cursors.Hand;
+            btnActualizar.CustomizableEdges = customizableEdges25;
+            btnActualizar.DisabledState.BorderColor = Color.DarkGray;
+            btnActualizar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnActualizar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnActualizar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnActualizar.Enabled = false;
+            btnActualizar.FillColor = Color.FromArgb(252, 201, 52);
+            btnActualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnActualizar.ForeColor = Color.Firebrick;
+            btnActualizar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnActualizar.HoverState.ForeColor = Color.White;
+            btnActualizar.Location = new Point(15, 557);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.PressedColor = Color.FromArgb(255, 170, 20);
+            btnActualizar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnActualizar.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            btnActualizar.ShadowDecoration.Enabled = true;
+            btnActualizar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnActualizar.Size = new Size(243, 26);
+            btnActualizar.TabIndex = 88;
+            btnActualizar.Text = "Actualizar datos";
+            btnActualizar.Click += btnGestionarElemento_M_Click;
+            // 
+            // btnRestablecerCambios
+            // 
+            btnRestablecerCambios.BackColor = Color.Transparent;
+            btnRestablecerCambios.BorderRadius = 8;
+            btnRestablecerCambios.Cursor = Cursors.Hand;
+            btnRestablecerCambios.CustomizableEdges = customizableEdges27;
+            btnRestablecerCambios.DisabledState.BorderColor = Color.DarkGray;
+            btnRestablecerCambios.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRestablecerCambios.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRestablecerCambios.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRestablecerCambios.Enabled = false;
+            btnRestablecerCambios.FillColor = Color.FromArgb(252, 201, 52);
+            btnRestablecerCambios.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnRestablecerCambios.ForeColor = Color.Firebrick;
+            btnRestablecerCambios.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnRestablecerCambios.HoverState.ForeColor = Color.White;
+            btnRestablecerCambios.Location = new Point(273, 557);
+            btnRestablecerCambios.Name = "btnRestablecerCambios";
+            btnRestablecerCambios.PressedColor = Color.FromArgb(255, 170, 20);
+            btnRestablecerCambios.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnRestablecerCambios.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            btnRestablecerCambios.ShadowDecoration.Enabled = true;
+            btnRestablecerCambios.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnRestablecerCambios.Size = new Size(243, 26);
+            btnRestablecerCambios.TabIndex = 89;
+            btnRestablecerCambios.Text = "Restablecer cambios";
+            btnRestablecerCambios.Click += btnRestablecerCambios_Click;
             // 
             // guna2Panel2
             // 
@@ -675,11 +741,11 @@
             guna2Panel2.Controls.Add(panel4);
             guna2Panel2.Controls.Add(dgvHistorial);
             guna2Panel2.Controls.Add(panel1);
-            guna2Panel2.CustomizableEdges = customizableEdges31;
+            guna2Panel2.CustomizableEdges = customizableEdges35;
             guna2Panel2.FillColor = SystemColors.ButtonHighlight;
             guna2Panel2.Location = new Point(567, 13);
             guna2Panel2.Name = "guna2Panel2";
-            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges36;
             guna2Panel2.Size = new Size(467, 642);
             guna2Panel2.TabIndex = 50;
             // 
@@ -689,7 +755,7 @@
             txtMotivo.AutoScroll = true;
             txtMotivo.BorderRadius = 10;
             txtMotivo.Cursor = Cursors.IBeam;
-            txtMotivo.CustomizableEdges = customizableEdges27;
+            txtMotivo.CustomizableEdges = customizableEdges31;
             txtMotivo.DefaultText = "";
             txtMotivo.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtMotivo.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -712,7 +778,7 @@
             txtMotivo.ScrollBars = ScrollBars.Vertical;
             txtMotivo.SelectedText = "";
             txtMotivo.ShadowDecoration.BorderRadius = 10;
-            txtMotivo.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            txtMotivo.ShadowDecoration.CustomizableEdges = customizableEdges32;
             txtMotivo.ShadowDecoration.Depth = 5;
             txtMotivo.Size = new Size(209, 254);
             txtMotivo.TabIndex = 100;
@@ -736,7 +802,7 @@
             txtDescripcion.AutoScroll = true;
             txtDescripcion.BorderRadius = 10;
             txtDescripcion.Cursor = Cursors.IBeam;
-            txtDescripcion.CustomizableEdges = customizableEdges29;
+            txtDescripcion.CustomizableEdges = customizableEdges33;
             txtDescripcion.DefaultText = "";
             txtDescripcion.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtDescripcion.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -759,7 +825,7 @@
             txtDescripcion.ScrollBars = ScrollBars.Vertical;
             txtDescripcion.SelectedText = "";
             txtDescripcion.ShadowDecoration.BorderRadius = 10;
-            txtDescripcion.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            txtDescripcion.ShadowDecoration.CustomizableEdges = customizableEdges34;
             txtDescripcion.ShadowDecoration.Depth = 5;
             txtDescripcion.Size = new Size(209, 254);
             txtDescripcion.TabIndex = 98;
@@ -868,11 +934,11 @@
             pnlPresentacionNotebook.BorderRadius = 15;
             pnlPresentacionNotebook.Controls.Add(btnVolver);
             pnlPresentacionNotebook.Controls.Add(lblElementosTitulo);
-            pnlPresentacionNotebook.CustomizableEdges = customizableEdges34;
+            pnlPresentacionNotebook.CustomizableEdges = customizableEdges38;
             pnlPresentacionNotebook.FillColor = Color.FromArgb(105, 80, 165);
             pnlPresentacionNotebook.Location = new Point(17, 13);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
-            pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges39;
             pnlPresentacionNotebook.Size = new Size(534, 65);
             pnlPresentacionNotebook.TabIndex = 51;
             // 
@@ -889,7 +955,7 @@
             btnVolver.Location = new Point(13, 7);
             btnVolver.Name = "btnVolver";
             btnVolver.PressedColor = Color.Indigo;
-            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges37;
             btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnVolver.Size = new Size(32, 32);
             btnVolver.TabIndex = 5;
@@ -953,12 +1019,12 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTipoElemento;
         private Guna.UI2.WinForms.Guna2TextBox txtExplicarMotivo;
         private Label label4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNoPuedeActualizarEnPrestamo;
         private Guna.UI2.WinForms.Guna2Button btnRestablecerCambios;
         private Guna.UI2.WinForms.Guna2Button btnActualizar;
-        private Guna.UI2.WinForms.Guna2Button btnBorrarFiltros;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private Guna.UI2.WinForms.Guna2Button btnInhabilitar;
+        private Guna.UI2.WinForms.Guna2Button btnConfirmar;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNoPuedeActualizar;
         private Panel panel1;
         private Panel panel4;
         private Guna.UI2.WinForms.Guna2DataGridView dgvHistorial;
@@ -968,5 +1034,7 @@
         private Label label5;
         private Guna.UI2.WinForms.Guna2TextBox txtDescripcion;
         private Label lblDescripcion;
+        private Guna.UI2.WinForms.Guna2Button btnCancelar;
+        private Guna.UI2.WinForms.Guna2Button btnHabilitar;
     }
 }

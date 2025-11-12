@@ -380,7 +380,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (elementosUC == null)
-                elementosUC = new ElementosUC(this, elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, modeloCN, userVerificado);
+                elementosUC = new ElementosUC(this, elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, modeloCN, userVerificado, elementosBajasCN);
 
             CambiarNombrePort(BtnElementos.Text);
 

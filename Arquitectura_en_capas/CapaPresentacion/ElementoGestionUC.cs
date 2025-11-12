@@ -21,6 +21,7 @@ namespace CapaPresentacion
         private FormPrincipal formPrincipal;
         private ElementosUC elementosUC;
         private readonly ElementosCN elementosCN;
+        private readonly ElementosBajasCN elementosBajasCN;
         private int _idElementoSeleccionado;
         private int _idHistorialSeleccionado;
         private Usuarios usuarios;
@@ -41,13 +42,14 @@ namespace CapaPresentacion
         private string? _NombreEstado = "";
         #endregion
 
-        public ElementoGestionUC(FormPrincipal formPrincipal, ElementosUC elementosUC, ElementosCN elementosCN, int idElementoSeleccionado, Usuarios user)
+        public ElementoGestionUC(FormPrincipal formPrincipal, ElementosUC elementosUC, ElementosCN elementosCN, ElementosBajasCN elementosBajasCN,  int idElementoSeleccionado, Usuarios user)
         {
             InitializeComponent();
 
             this.formPrincipal = formPrincipal;
             this.elementosUC = elementosUC;
             this.elementosCN = elementosCN;
+            this.elementosBajasCN = elementosBajasCN;
             this._idElementoSeleccionado = idElementoSeleccionado;
             this.usuarios = user;
 
@@ -84,16 +86,25 @@ namespace CapaPresentacion
             lblTipoElemento.Text = tipoElemento?.ElementoTipo;
             lblTipoElemento.Tag = tipoElemento?.IdTipoElemento;
 
+            _NombreVariante = cmbVarianteElemento.Text;
+            _NombreUbicacion = cmbUbicacion.Text;
+            _NombreEstado = cmbEstado.Text;
+
+            CargarDatos();
+
+            HabilitarModificado(Convert.ToBoolean(_habilitado));
+
+            HabilitarBotones(false, false);
+        }
+
+        private void CargarDatos()
+        {
             txtNroSerie.Text = _NroSerie;
             txtCodBarra.Text = _CodBarra;
             txtPatrimonio.Text = _Patrimonio;
             cmbVarianteElemento.SelectedValue = _idVariante;
             cmbUbicacion.SelectedValue = _idUbicacion;
             cmbEstado.SelectedValue = _idEstado;
-
-            _NombreVariante = cmbVarianteElemento.Text;
-            _NombreUbicacion = cmbUbicacion.Text;
-            _NombreEstado = cmbEstado.Text;
 
             if (_idModelo != null)
             {
@@ -102,8 +113,6 @@ namespace CapaPresentacion
                 txtModelo.Tag = modelos?.IdModelo;
                 _NombreModelo = modelos?.NombreModelo;
             }
-
-            HabilitarBotones(false, false);
         }
 
         private void CargarComboboxes(int idTipo)
@@ -131,46 +140,9 @@ namespace CapaPresentacion
 
             HistorialCambios? historialCambios = elementosCN.ObtenerHistorialPorIDHistorial(_idHistorialSeleccionado);
 
-            if (historialCambios?.Motivo is not null) 
-            { 
-                txtMotivo.Text = historialCambios.Motivo; 
-            } 
-            else 
-            { 
-                txtMotivo.Text = "Sin motivo definido"; 
-            }
+            txtMotivo.Text = historialCambios?.Motivo;
 
             txtDescripcion.Text = historialCambios?.Descripcion;
-
-            //if (historialCambios is not null)
-            //{
-            //    string motivo = string.IsNullOrWhiteSpace(historialCambios.Motivo) ? "Sin motivo especificado." : historialCambios.Motivo;
-            //    string descripcion = string.IsNullOrWhiteSpace(historialCambios.Descripcion) ? "Sin descripción registrada." : historialCambios.Descripcion;
-
-            //    string mensaje = $" Descripción del cambio:\n\n{descripcion}\n\n" +
-            //                     $" Motivo:\n\n{motivo}";
-
-            //    MessageBox.Show(mensaje, "Detalle del historial", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-
-            //if (historialCambios is not null)
-            //{
-            //    string motivo = string.IsNullOrWhiteSpace(historialCambios.Motivo) ? "Sin motivo especificado." : historialCambios.Motivo;
-            //    string descripcion = string.IsNullOrWhiteSpace(historialCambios.Descripcion) ? "Sin descripción registrada." : historialCambios.Descripcion;
-
-            //    string mensaje = $"Descripción del cambio:\n\n{descripcion}\n\nMotivo:\n\n{motivo}";
-
-            //    var dialogo = new Guna2MessageDialog
-            //    {
-            //        Text = mensaje,
-            //        Caption = "Detalle del historial",
-            //        Buttons = MessageDialogButtons.OK,
-            //        Icon = MessageDialogIcon.Information,
-            //        Style = MessageDialogStyle.Light
-            //    };
-
-            //    dialogo.Show();
-            //}
         }
 
         private void cmbVarianteElemento_SelectedIndexChanged(object sender, EventArgs e)
@@ -217,6 +189,11 @@ namespace CapaPresentacion
                 Habilitado = Convert.ToBoolean(_habilitado),
                 FechaBaja = null
             };
+
+            if (string.IsNullOrEmpty(txtExplicarMotivo.Text))
+            {
+                txtExplicarMotivo.Text = "No especifico motivo";
+            }
 
             string descripcionCambios = GenerarDescripcionDeCambios();
             MessageBox.Show(descripcionCambios, "Cambios detectados", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -327,6 +304,79 @@ namespace CapaPresentacion
             }
 
             return descripcion.ToString();
+        }
+
+        private void HabilitarModificado(bool Habilitar)
+        {
+            cmbVarianteElemento.Enabled = Habilitar;
+            cmbUbicacion.Enabled = Habilitar;
+            cmbEstado.Enabled = Habilitar;
+            txtCodBarra.Enabled = Habilitar;
+            txtNroSerie.Enabled = Habilitar;
+            txtPatrimonio.Enabled = Habilitar;
+            txtModelo.Enabled = Habilitar;
+            txtExplicarMotivo.Text = "";
+
+            btnActualizar.Visible = Habilitar;
+            btnRestablecerCambios.Visible = Habilitar;
+            btnInhabilitar.Visible = Habilitar;
+
+            btnHabilitar.Visible = !Habilitar;
+            btnConfirmar.Visible = !Habilitar;
+            btnCancelar.Visible = !Habilitar;
+        }
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            btnConfirmar.Enabled = true;
+            btnCancelar.Enabled = true;
+        }
+
+        private void btnInhabilitar_Click(object sender, EventArgs e)
+        {
+            btnConfirmar.Enabled = true;
+            btnCancelar.Enabled = true;
+
+            btnConfirmar.Visible = true;
+            btnCancelar.Visible = true;
+            btnActualizar.Visible = false;
+            btnRestablecerCambios.Visible = false;
+
+            cmbVarianteElemento.Enabled = false;
+            cmbUbicacion.Enabled = false;
+            cmbEstado.Enabled = false;
+            txtCodBarra.Enabled = false;
+            txtNroSerie.Enabled = false;
+            txtPatrimonio.Enabled = false;
+            txtModelo.Enabled = false;
+
+            CargarDatos();
+
+            lblNoPuedeActualizar.Visible = true;
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            if(_habilitado == true)
+            {
+                elementosCN.DeshabilitarElemento(_idElementoSeleccionado, 3, usuarios.IdUsuario);
+                CargarTodaLaGestion(_idElementoSeleccionado);
+            }
+            else
+            {
+                elementosBajasCN.HabilitarElemento(_idElementoSeleccionado, usuarios.IdUsuario);
+                CargarTodaLaGestion(_idElementoSeleccionado);
+            }
+
+            btnConfirmar.Enabled = false;
+            btnCancelar.Enabled = false;
+
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            CargarTodaLaGestion(_idElementoSeleccionado);
         }
     }
 }
