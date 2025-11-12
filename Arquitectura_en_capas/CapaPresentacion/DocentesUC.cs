@@ -18,12 +18,14 @@ namespace CapaPresentacion
         private readonly DocentesCN docentesCN;
         private readonly DocentesBajasCN docentesBajasCN;
         private int IdActual = 0;
+        private AutoCompleteStringCollection AcDocente;
 
         public DocentesUC(DocentesCN docentesCN, DocentesBajasCN docentesBajasCN)
         {
             InitializeComponent();
             this.docentesCN = docentesCN;
             this.docentesBajasCN = docentesBajasCN;
+            AcDocente = new AutoCompleteStringCollection();
         }
 
         private void DocentesUC_Load(object sender, EventArgs e)
@@ -31,6 +33,21 @@ namespace CapaPresentacion
             cmbHabilitado.Items.Add("Habilitados");
             cmbHabilitado.Items.Add("Deshabilitados");
             cmbHabilitado.SelectedIndex = 0;
+
+            txtBuscarDocente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBuscarDocente.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            CargarAutoComplete();
+        }
+
+        private void CargarAutoComplete()
+        {
+            AcDocente.Clear();
+            var nombresDocentes = docentesCN.MostrarDocente().Select(d => d.Nombre).Distinct();
+            foreach (var nombre in nombresDocentes)
+            {
+                AcDocente.Add(nombre);
+            }
+            txtBuscarDocente.AutoCompleteCustomSource = AcDocente;
         }
 
         public void MostrarDocentes()
@@ -102,6 +119,44 @@ namespace CapaPresentacion
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void dgvDocentes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvDocentes.Columns[e.ColumnIndex].Name == "EstadoPrestamo" && e.Value != null)
+            {
+                string? estado = e.Value.ToString();
+
+                if (estado == "En Prestamo")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                //else if (estado == "Prestado")
+                //{
+                //    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
+                //    e.CellStyle.ForeColor = Color.Black;
+                //}
+                else
+                {
+                    return;
+                }
+
+                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
+                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
+            }
+        }
+
+        private void txtBuscarDocente_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string nombreBusqueda = txtBuscarDocente.Text.Trim();
+                var resultados = docentesCN.MostrarDocente()
+                    .Where(d => d.Nombre.Contains(nombreBusqueda, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                dgvDocentes.DataSource = resultados;
             }
         }
     }

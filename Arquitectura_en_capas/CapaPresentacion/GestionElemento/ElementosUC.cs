@@ -675,6 +675,8 @@ namespace CapaPresentacion
         {
             var detalleUC = new ElementoGestionUC(formPrincipal, this, elementosCN, idElemento, userVerificado);
             formPrincipal.MostrarUserControl(detalleUC);
+        }
+
         private void CargarGrafico()
         {
             var datos = elementosCN.ObtenerElementosPorTipo();

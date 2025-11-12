@@ -30,6 +30,16 @@ public class DocentesCN
     {
         return _repoDocente.GetById(idDocente);
     }
+
+    public Docentes? ObtenerPorNombre(string nombre)
+    {
+        return _repoDocente.GetByNombre(nombre);
+    }
+
+    public IEnumerable<string> FiltroNombre(string nombre, int limit)
+    {
+        return _repoDocente.GetFiltroNombre(nombre, limit);
+    }
     #endregion
 
     #region INSERT DOCENTE

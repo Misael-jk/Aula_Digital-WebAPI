@@ -156,6 +156,23 @@ public class RepoDocentes : RepoBase, IRepoDocentes
     }
     #endregion
 
+    #region Obtener por Nombre
+    public Docentes? GetByNombre(string nombre)
+    {
+        string query = "select * from Docentes where nombre = @nombre";
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("@nombre", nombre);
+            return Conexion.QueryFirstOrDefault<Docentes>(query, parametros);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener el nombre del docente");
+        }
+    }
+    #endregion
+
     #region Obtener Todos
     public IEnumerable<Docentes> GetAll()
     {
@@ -197,4 +214,25 @@ public class RepoDocentes : RepoBase, IRepoDocentes
         }
     }
     #endregion
+
+    public IEnumerable<string> GetFiltroNombre(string nombre, int limit)
+    {
+        string query = @"
+        SELECT *
+        from docentes d 
+        where d.nombre LIKE CONCAT(@filtroNombre, '%')
+        LIMIT @limite";
+
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("filtroNombre", nombre);
+            parametros.Add("limite", limit);
+            return Conexion.Query<string>(query, parametros);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener los nombres de los docentes");
+        }
+    }
 }
