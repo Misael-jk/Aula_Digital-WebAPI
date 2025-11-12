@@ -27,9 +27,9 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
 
             historialCambio.IdHistorialCambio = parameters.Get<int>("unidHistorialCambio");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw new Exception("Hubo un error al insertar un historial de cambio");
+            throw new Exception("Hubo un error al insertar un historial de cambio: " + ex.Message, ex);
         }
     }
 
@@ -44,7 +44,8 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
     {
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("unidHistorialCambio", idHistorialCambio);
-        string query = "select * from HistorialCambios where idHistorialCambio = @unidHistorialCambio";
+
+        string query = "select * from HistorialCambio where idHistorialCambio = @unidHistorialCambio";
 
         try
         {

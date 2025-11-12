@@ -284,6 +284,7 @@
             btnGestionarElemento_M.Size = new Size(296, 26);
             btnGestionarElemento_M.TabIndex = 13;
             btnGestionarElemento_M.Text = "Gestionar elemento seleccionado";
+            btnGestionarElemento_M.Click += btnGestionarElemento_M_Click;
             // 
             // lstSugerencias
             // 

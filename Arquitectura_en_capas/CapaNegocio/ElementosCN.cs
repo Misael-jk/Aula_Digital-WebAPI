@@ -2,6 +2,7 @@
 using CapaDatos.InterfaceUoW;
 using CapaDatos.Repos;
 using CapaDTOs;
+using CapaDTOs.AuditoriaDTO;
 using CapaEntidad;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
@@ -11,11 +12,13 @@ namespace CapaNegocio
     public class ElementosCN
     {
         private readonly IMapperElementos _mapperElementos;
+        private readonly IMapperHistorialElementoG _mapperHistorialElementoG;
         private readonly IUowElementos uow;
 
-        public ElementosCN(IMapperElementos mapperElementos, IUowElementos uow)
+        public ElementosCN(IMapperElementos mapperElementos, IUowElementos uow, IMapperHistorialElementoG mapperHistorialElementoG)
         {
             _mapperElementos = mapperElementos;
+            _mapperHistorialElementoG = mapperHistorialElementoG;
             this.uow = uow;
         }
 
@@ -103,7 +106,7 @@ namespace CapaNegocio
         #endregion
 
         #region UPDATE ELEMENTO
-        public void ActualizarElemento(Elemento elementoNEW, int idUsuario)
+        public void ActualizarElemento(Elemento elementoNEW, int idUsuario, string motivo, string descripcion)
         {
             ValidarDatos(elementoNEW);
 
@@ -118,7 +121,8 @@ namespace CapaNegocio
                 {
                     IdTipoAccion = 2,
                     FechaCambio = DateTime.Now,
-                    Descripcion = $"Se modifico el elemento con número de serie {elementoNEW.NumeroSerie}.",
+                    Descripcion = descripcion,
+                    Motivo = motivo,
                     IdUsuario = idUsuario
                 };
 
@@ -269,6 +273,9 @@ namespace CapaNegocio
             return uow.RepoTipoElemento.GetTiposByElemento();
         }
 
+        public TipoElemento? ObtenerTipoElementoPorID(int idTipo)
+        {
+            return uow.RepoTipoElemento.GetById(idTipo);
         public List<(string Nombre, int Cantidad)> ObtenerElementosPorTipo()
         {
             return uow.RepoElemento.GetElementosPorTipo();
@@ -318,6 +325,18 @@ namespace CapaNegocio
         public IEnumerable<Ubicacion> ObtenerUbicaciones()
         {
             return uow.RepoUbicacion.GetAll();
+        }
+        #endregion
+
+        #region HISTORIAL COMPLETO DE DICHO ELEMENTO
+        public IEnumerable<HistorialElementoGestionDTO> ObtenerHistorialPorID(int idElemento)
+        {
+            return _mapperHistorialElementoG.GetAllDTO(idElemento);
+        }
+
+        public HistorialCambios? ObtenerHistorialPorIDHistorial(int idHistorial)
+        {
+            return uow.RepoHistorialCambio.GetById(idHistorial);
         }
         #endregion
 

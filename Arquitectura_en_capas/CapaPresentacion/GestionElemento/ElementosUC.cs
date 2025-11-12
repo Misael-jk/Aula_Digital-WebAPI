@@ -36,7 +36,10 @@ namespace CapaPresentacion
         private readonly int minima = 2;
         private List<string> _cacheIdentificadores = new List<string>();
 
-        public ElementosUC(ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado)
+        private FormPrincipal formPrincipal;
+
+
+        public ElementosUC(FormPrincipal formPrincipal, ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado)
         {
             InitializeComponent();
             this.elementosCN = elementosCN;
@@ -52,6 +55,8 @@ namespace CapaPresentacion
 
             _acTipos = new AutoCompleteStringCollection();
             _acModelos = new AutoCompleteStringCollection();
+
+            this.formPrincipal = formPrincipal;
         }
 
         public void CargarElementos()
@@ -109,13 +114,14 @@ namespace CapaPresentacion
 
             lstSugerencias.Location = new Point(
             txtSerieBarraPatrimonio.Left,
-            txtSerieBarraPatrimonio.Bottom + 3 
+            txtSerieBarraPatrimonio.Bottom + 3
             );
 
             lstSugerencias.Click += LstSugerencias_Click;
             lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
 
-            txtSerieBarraPatrimonio.LostFocus += (s, e) => {
+            txtSerieBarraPatrimonio.LostFocus += (s, e) =>
+            {
                 if (!lstSugerencias.Focused)
                     lstSugerencias.Visible = false;
             };
@@ -498,7 +504,6 @@ namespace CapaPresentacion
         }
         #endregion
 
-
         #region BOTONES FILTRO
 
         private void btnBuscar_Click_1(object sender, EventArgs e)
@@ -587,7 +592,7 @@ namespace CapaPresentacion
 
         private void btnCrearElemento_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnActualizarElemento_Click(object sender, EventArgs e)
@@ -651,6 +656,7 @@ namespace CapaPresentacion
             var CrearElemento = new FormCRUDElementos(elementosCN, userVerificado, CargarElementos);
             CrearElemento.ShowDialog();
         }
+
         private void cmbEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbEstados.SelectedValue == null) return;
@@ -665,6 +671,10 @@ namespace CapaPresentacion
             }
         }
 
+        private void btnGestionarElemento_M_Click(object sender, EventArgs e)
+        {
+            var detalleUC = new ElementoGestionUC(formPrincipal, this, elementosCN, idElemento, userVerificado);
+            formPrincipal.MostrarUserControl(detalleUC);
         private void CargarGrafico()
         {
             var datos = elementosCN.ObtenerElementosPorTipo();

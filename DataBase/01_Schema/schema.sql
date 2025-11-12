@@ -264,7 +264,7 @@ idHistorialCambio int not null auto_increment,
 idTipoAccion tinyint not null,
 idUsuario tinyint not null,
 fechaCambio datetime not null,
-descripcion varchar(200) not null,
+descripcion varchar(600) not null,
 motivo varchar(200),
 constraint PK_HistorialCambio primary key (idHistorialCambio),
 constraint FK_HistorialCambio_Accion foreign key (idTipoAccion) 
