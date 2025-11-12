@@ -108,6 +108,7 @@ namespace CapaPresentacion
         private readonly IMapperUsuariosBajas mapperUsuariosBajas;
         private readonly IMapperNotebookBajas mapperNotebookBajas;
         private readonly IMapperPrestamosActivos mapperPrestamosActivos;
+        private readonly IMapperHistorialElementoG mapperHistorialElementoG;
         #endregion
 
         #region Variables Capa Negocio
@@ -208,8 +209,9 @@ namespace CapaPresentacion
             mapperUsuariosBajas = new MapperUsuariosBajas(conexion);
             mapperNotebookBajas = new MapperNotebookBajas(conexion);
             mapperPrestamosActivos = new MapperPrestamosActivos(conexion);
+            mapperHistorialElementoG = new MapperHistorialElementoG(conexion);
 
-            elementoCN = new ElementosCN(mapperElementos, uowElementos);
+            elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
             prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos);
@@ -217,7 +219,6 @@ namespace CapaPresentacion
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
             modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
             devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
-            //mantenimientoCN = new MantenimientoCN(repoElementoMantenimiento, mapperElementoMantenimiento, repoHistorialElemento);
             notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
             carritosBajasCN = new CarritosBajasCN(mapperCarritosBajas, uowCarritos);
             elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);
@@ -281,6 +282,16 @@ namespace CapaPresentacion
         #endregion
 
         #region Métodos Auxiliares
+
+        public void MostrarUserControl(System.Windows.Forms.UserControl uc)
+        {
+            if (!pnlContenedor.Controls.Contains(uc))
+            {
+                pnlContenedor.Controls.Add(uc);
+                uc.Dock = DockStyle.Fill;
+            }
+            MostrarSolo(uc);
+        }
 
         private void CambiarNombrePort(string nombre)
         {
@@ -369,7 +380,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (elementosUC == null)
-                elementosUC = new ElementosUC(elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, modeloCN, userVerificado);
+                elementosUC = new ElementosUC(this, elementoCN, repoEstadosMantenimiento, repoElementos, tiposElementoCN, modeloCN, userVerificado);
 
             CambiarNombrePort(BtnElementos.Text);
 

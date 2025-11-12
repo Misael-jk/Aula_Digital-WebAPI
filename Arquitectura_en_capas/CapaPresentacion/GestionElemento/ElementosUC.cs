@@ -32,7 +32,10 @@ namespace CapaPresentacion
         private readonly int minima = 2;
         private List<string> _cacheIdentificadores = new List<string>();
 
-        public ElementosUC(ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado)
+        private FormPrincipal formPrincipal;
+
+
+        public ElementosUC(FormPrincipal formPrincipal, ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado)
         {
             InitializeComponent();
             this.elementosCN = elementosCN;
@@ -48,6 +51,8 @@ namespace CapaPresentacion
 
             _acTipos = new AutoCompleteStringCollection();
             _acModelos = new AutoCompleteStringCollection();
+
+            this.formPrincipal = formPrincipal;
         }
 
         public void CargarElementos()
@@ -92,24 +97,19 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1100);
 
-            //Guna2DataGridViewStyler.SetupPrestamosColumns(dgvElementos, addActionButton: true);
-            ApplyModernStyleCompact(dgvElementos);
-
-            //dgvElementos_M.CellFormatting += dgvElementos_M_CellFormatting;
-            //dgvElementos_M.CellClick += dgvElementos_M_CellClick;
-
             lstSugerencias.BringToFront();
             lstSugerencias.Height = 120;
 
             lstSugerencias.Location = new Point(
             txtSerieBarraPatrimonio.Left,
-            txtSerieBarraPatrimonio.Bottom + 3 
+            txtSerieBarraPatrimonio.Bottom + 3
             );
 
             lstSugerencias.Click += LstSugerencias_Click;
             lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
 
-            txtSerieBarraPatrimonio.LostFocus += (s, e) => {
+            txtSerieBarraPatrimonio.LostFocus += (s, e) =>
+            {
                 if (!lstSugerencias.Focused)
                     lstSugerencias.Visible = false;
             };
@@ -129,7 +129,6 @@ namespace CapaPresentacion
                     CargarTodosModelos();
             };
 
-
             cmbEstados.SelectedIndexChanged -= cmbEstados_SelectedIndexChanged;
 
             var estados = repoEstadosMantenimiento.GetAll().ToList();
@@ -143,18 +142,6 @@ namespace CapaPresentacion
             cmbEstados.SelectedIndex = 0;
 
             cmbEstados.SelectedIndexChanged += cmbEstados_SelectedIndexChanged;
-
-
-            // -------------------- TIPOS --------------------
-            //var tipos = tiposElementoCN.GetTiposByElemento();
-
-            //cmbTipoElemento.DataSource = tipos;
-            //cmbTipoElemento.ValueMember = "IdTipoElemento";
-            //cmbTipoElemento.DisplayMember = "ElementoTipo";
-
-            //cmbUbicaciones.DataSource = elementosCN.ObtenerUbicaciones();
-            //cmbUbicaciones.ValueMember = "IdUbicacion";
-            //cmbUbicaciones.DisplayMember = "NombreUbicacion";
 
             CargarAutoCompleteTipos();
             RenovarIdentificadores();
@@ -504,7 +491,6 @@ namespace CapaPresentacion
         }
         #endregion
 
-
         #region BOTONES FILTRO
 
         private void btnBuscar_Click_1(object sender, EventArgs e)
@@ -578,7 +564,7 @@ namespace CapaPresentacion
 
             var fila = dgvElementos_M.Rows[e.RowIndex];
 
-            idElementoActual = Convert.ToInt32(fila.Cells["IdElemento"].Value);
+            idElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
 
             //var elemento = repoElemento.GetById(idElemento);
 
@@ -593,7 +579,7 @@ namespace CapaPresentacion
 
         private void btnCrearElemento_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnActualizarElemento_Click(object sender, EventArgs e)
@@ -657,6 +643,7 @@ namespace CapaPresentacion
             var CrearElemento = new FormCRUDElementos(elementosCN, userVerificado, CargarElementos);
             CrearElemento.ShowDialog();
         }
+
         private void cmbEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbEstados.SelectedValue == null) return;
@@ -671,5 +658,10 @@ namespace CapaPresentacion
             }
         }
 
+        private void btnGestionarElemento_M_Click(object sender, EventArgs e)
+        {
+            var detalleUC = new ElementoGestionUC(formPrincipal, this, elementosCN, idElemento, userVerificado);
+            formPrincipal.MostrarUserControl(detalleUC);
+        }
     }
 }

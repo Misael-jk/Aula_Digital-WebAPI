@@ -34,6 +34,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -53,12 +55,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -67,10 +63,15 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
             btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
             lblElementosTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            txtContraseña = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblRol = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ptbPerfil = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -89,9 +90,6 @@
             panel2 = new Panel();
             btnDeshabilitar = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            txtContraseña = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             guna2Panel11 = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblCantFaltantes = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -111,6 +109,8 @@
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             panel4 = new Panel();
             panel1 = new Panel();
+            guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             pnlPresentacionNotebook.SuspendLayout();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
@@ -141,11 +141,13 @@
             btnVolver.DisabledState.CustomBorderColor = Color.DarkGray;
             btnVolver.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnVolver.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVolver.FillColor = Color.Transparent;
             btnVolver.Font = new Font("Segoe UI", 9F);
             btnVolver.ForeColor = Color.White;
             btnVolver.Image = (Image)resources.GetObject("btnVolver.Image");
-            btnVolver.Location = new Point(8, 6);
+            btnVolver.Location = new Point(9, 6);
             btnVolver.Name = "btnVolver";
+            btnVolver.PressedColor = Color.Indigo;
             btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges1;
             btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnVolver.Size = new Size(32, 32);
@@ -192,6 +194,37 @@
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges24;
             guna2Panel1.Size = new Size(423, 528);
             guna2Panel1.TabIndex = 54;
+            // 
+            // txtContraseña
+            // 
+            txtContraseña.Animated = true;
+            txtContraseña.BorderRadius = 10;
+            txtContraseña.Cursor = Cursors.IBeam;
+            txtContraseña.CustomizableEdges = customizableEdges4;
+            txtContraseña.DefaultText = "";
+            txtContraseña.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtContraseña.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtContraseña.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtContraseña.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtContraseña.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtContraseña.FocusedState.FillColor = Color.White;
+            txtContraseña.FocusedState.ForeColor = Color.Black;
+            txtContraseña.Font = new Font("Segoe UI", 10F);
+            txtContraseña.ForeColor = Color.Black;
+            txtContraseña.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtContraseña.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtContraseña.Location = new Point(180, 437);
+            txtContraseña.Margin = new Padding(4, 5, 4, 5);
+            txtContraseña.Name = "txtContraseña";
+            txtContraseña.PlaceholderForeColor = Color.Gray;
+            txtContraseña.PlaceholderText = "Ingrese nombre";
+            txtContraseña.SelectedText = "";
+            txtContraseña.ShadowDecoration.BorderRadius = 10;
+            txtContraseña.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            txtContraseña.ShadowDecoration.Depth = 5;
+            txtContraseña.Size = new Size(207, 36);
+            txtContraseña.TabIndex = 103;
+            txtContraseña.TextOffset = new Point(5, 0);
             // 
             // guna2HtmlLabel12
             // 
@@ -549,68 +582,6 @@
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges34;
             guna2Panel2.Size = new Size(566, 431);
             guna2Panel2.TabIndex = 55;
-            guna2Panel2.Paint += this.guna2Panel2_Paint;
-            // 
-            // txtContraseña
-            // 
-            txtContraseña.Animated = true;
-            txtContraseña.BorderRadius = 10;
-            txtContraseña.Cursor = Cursors.IBeam;
-            txtContraseña.CustomizableEdges = customizableEdges4;
-            txtContraseña.DefaultText = "";
-            txtContraseña.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtContraseña.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtContraseña.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtContraseña.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtContraseña.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
-            txtContraseña.FocusedState.FillColor = Color.White;
-            txtContraseña.FocusedState.ForeColor = Color.Black;
-            txtContraseña.Font = new Font("Segoe UI", 10F);
-            txtContraseña.ForeColor = Color.Black;
-            txtContraseña.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
-            txtContraseña.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            txtContraseña.Location = new Point(180, 437);
-            txtContraseña.Margin = new Padding(4, 5, 4, 5);
-            txtContraseña.Name = "txtContraseña";
-            txtContraseña.PlaceholderForeColor = Color.Gray;
-            txtContraseña.PlaceholderText = "Ingrese nombre";
-            txtContraseña.SelectedText = "";
-            txtContraseña.ShadowDecoration.BorderRadius = 10;
-            txtContraseña.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            txtContraseña.ShadowDecoration.Depth = 5;
-            txtContraseña.Size = new Size(207, 36);
-            txtContraseña.TabIndex = 103;
-            txtContraseña.TextOffset = new Point(5, 0);
-            // 
-            // guna2DateTimePicker2
-            // 
-            guna2DateTimePicker2.Checked = true;
-            guna2DateTimePicker2.CustomizableEdges = customizableEdges35;
-            guna2DateTimePicker2.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker2.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker2.Location = new Point(232, 592);
-            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
-            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            guna2DateTimePicker2.Size = new Size(244, 39);
-            guna2DateTimePicker2.TabIndex = 113;
-            guna2DateTimePicker2.Value = new DateTime(2025, 11, 10, 10, 4, 50, 100);
-            // 
-            // guna2DateTimePicker1
-            // 
-            guna2DateTimePicker1.Checked = true;
-            guna2DateTimePicker1.CustomizableEdges = customizableEdges37;
-            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker1.Location = new Point(-15, 592);
-            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges38;
-            guna2DateTimePicker1.Size = new Size(244, 39);
-            guna2DateTimePicker1.TabIndex = 112;
-            guna2DateTimePicker1.Value = new DateTime(2025, 11, 10, 10, 4, 50, 100);
             // 
             // guna2Panel11
             // 
@@ -843,6 +814,36 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(526, 1);
             panel1.TabIndex = 73;
+            // 
+            // guna2DateTimePicker2
+            // 
+            guna2DateTimePicker2.Checked = true;
+            guna2DateTimePicker2.CustomizableEdges = customizableEdges35;
+            guna2DateTimePicker2.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker2.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker2.Location = new Point(232, 592);
+            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
+            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            guna2DateTimePicker2.Size = new Size(244, 39);
+            guna2DateTimePicker2.TabIndex = 113;
+            guna2DateTimePicker2.Value = new DateTime(2025, 11, 10, 10, 4, 50, 100);
+            // 
+            // guna2DateTimePicker1
+            // 
+            guna2DateTimePicker1.Checked = true;
+            guna2DateTimePicker1.CustomizableEdges = customizableEdges37;
+            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker1.Location = new Point(-15, 592);
+            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
+            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges38;
+            guna2DateTimePicker1.Size = new Size(244, 39);
+            guna2DateTimePicker1.TabIndex = 112;
+            guna2DateTimePicker1.Value = new DateTime(2025, 11, 10, 10, 4, 50, 100);
             // 
             // UsuarioGestionuc
             // 
