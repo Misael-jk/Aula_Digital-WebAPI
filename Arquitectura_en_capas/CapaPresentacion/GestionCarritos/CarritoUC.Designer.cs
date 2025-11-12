@@ -868,6 +868,7 @@
             btnCrearElemento_M.Size = new Size(296, 26);
             btnCrearElemento_M.TabIndex = 14;
             btnCrearElemento_M.Text = "Crear nuevo elemento";
+            btnCrearElemento_M.Click += btnCrearElemento_M_Click;
             // 
             // btnGestionarElemento_M
             // 

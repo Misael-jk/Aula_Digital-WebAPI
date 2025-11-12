@@ -8,6 +8,10 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using CapaDTOs;
 using System.Diagnostics;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using LiveChartsCore.SkiaSharpView;
+using SkiaSharp;
 
 
 namespace CapaPresentacion
@@ -56,6 +60,10 @@ namespace CapaPresentacion
             {
                 var elementos = elementosCN.ObtenerElementos();
                 dgvElementos_M.DataSource = elementos;
+                CargarGrafico();
+                ResumenDeLosEstados();
+
+
             }
             catch (Exception ex)
             {
@@ -90,11 +98,9 @@ namespace CapaPresentacion
         private void ElementosUC_Load(object sender, EventArgs e)
         {
             this.AutoScroll = true;
-            this.AutoScrollMinSize = new Size(0, 1100);
+            this.AutoScrollMinSize = new Size(0, 1120);
 
             //Guna2DataGridViewStyler.SetupPrestamosColumns(dgvElementos, addActionButton: true);
-            ApplyModernStyleCompact(dgvElementos);
-
             //dgvElementos_M.CellFormatting += dgvElementos_M_CellFormatting;
             //dgvElementos_M.CellClick += dgvElementos_M_CellClick;
 
@@ -130,7 +136,7 @@ namespace CapaPresentacion
             };
 
 
-            cmbEstados.SelectedIndexChanged -= cmbEstados_SelectedIndexChanged;
+            //cmbEstados.SelectedIndexChanged -= cmbEstados_SelectedIndexChanged;
 
             var estados = repoEstadosMantenimiento.GetAll().ToList();
 
@@ -143,18 +149,6 @@ namespace CapaPresentacion
             cmbEstados.SelectedIndex = 0;
 
             cmbEstados.SelectedIndexChanged += cmbEstados_SelectedIndexChanged;
-
-
-            // -------------------- TIPOS --------------------
-            //var tipos = tiposElementoCN.GetTiposByElemento();
-
-            //cmbTipoElemento.DataSource = tipos;
-            //cmbTipoElemento.ValueMember = "IdTipoElemento";
-            //cmbTipoElemento.DisplayMember = "ElementoTipo";
-
-            //cmbUbicaciones.DataSource = elementosCN.ObtenerUbicaciones();
-            //cmbUbicaciones.ValueMember = "IdUbicacion";
-            //cmbUbicaciones.DisplayMember = "NombreUbicacion";
 
             CargarAutoCompleteTipos();
             RenovarIdentificadores();
@@ -578,7 +572,7 @@ namespace CapaPresentacion
 
             var fila = dgvElementos_M.Rows[e.RowIndex];
 
-            idElementoActual = Convert.ToInt32(fila.Cells["IdElemento"].Value);
+            idElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
 
             //var elemento = repoElemento.GetById(idElemento);
 
@@ -632,12 +626,12 @@ namespace CapaPresentacion
             {
                 string? estado = e.Value.ToString();
 
-                if (estado == "En mantenimiento")
+                if (estado == "En reparacion")
                 {
                     e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
                     e.CellStyle.ForeColor = Color.Black;
                 }
-                else if (estado == "Prestamo")
+                else if (estado == "Prestado")
                 {
                     e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
                     e.CellStyle.ForeColor = Color.Black;
@@ -671,5 +665,42 @@ namespace CapaPresentacion
             }
         }
 
+        private void CargarGrafico()
+        {
+            var datos = elementosCN.ObtenerElementosPorTipo();
+
+            if (datos == null || datos.Count == 0) return;
+
+            var series = new List<PieSeries<int>>();
+            foreach (var d in datos)
+            {
+                series.Add(new PieSeries<int>
+                {
+                    Values = new int[] { d.Cantidad },
+                    Name = d.Nombre,
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsSize = 14
+                });
+            }
+
+            var pieChart = new PieChart
+            {
+                Dock = DockStyle.Fill,
+                Series = series.ToArray()
+            };
+
+            pnlGraficoPie.Controls.Clear();
+            pnlGraficoPie.Controls.Add(pieChart);
+        }
+
+        private void ResumenDeLosEstados()
+        {
+            lblCantDisponibles.Text = elementosCN.SumarElementosPorEstado(1).ToString();
+            lblCantEnPrestamo.Text = elementosCN.SumarElementosPorEstado(2).ToString();
+            lblCantEnReparacion.Text = elementosCN.SumarElementosPorEstado(3).ToString();
+            lblCantParaReparar.Text = elementosCN.SumarElementosPorEstado(4).ToString();
+            lblCantFaltantes.Text = elementosCN.SumarElementosPorEstado(5).ToString();
+            lblCantTotal.Text = elementosCN.TotalElementos().ToString();
+        }
     }
 }

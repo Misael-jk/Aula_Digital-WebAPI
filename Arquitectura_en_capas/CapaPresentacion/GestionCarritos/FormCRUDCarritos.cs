@@ -47,7 +47,7 @@ namespace CapaPresentacion
             {
                 EquipoCarrito = txtEquipo.Text,
                 NumeroSerieCarrito = txtNroSerie.Text,
-                Capacidad = 32,
+                Capacidad = Convert.ToInt32(Capacidad.Text),
                 IdModelo = (int)cmbModelo.SelectedValue,
                 IdUbicacion = (int)cmbUbicacion.SelectedValue,
                 IdEstadoMantenimiento = 1,

@@ -16,5 +16,8 @@ public interface IRepoElemento
     public bool GetDisponible(int idElemento);
     public Elemento? GetNotebookBySerieOrCodigo(string nroSerie, string codigoBarra);
     public IEnumerable<string> GetSerieBarraPatrimonio(string texto, int limite);
+    public List<(string Nombre, int Cantidad)> GetElementosPorTipo();
+    public int? CantidadEstados(int idEstado);
+    public int CantidadTotal();
     public void SetTransaction(IDbTransaction? transaction);
 }
