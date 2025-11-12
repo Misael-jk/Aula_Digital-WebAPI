@@ -11,6 +11,8 @@ public interface IRepoDocentes
     public Docentes? GetById(int idDocente);
     public Docentes? GetByDni(string Dni);
     public Docentes? GetByEmail(string Email);
+    public Docentes? GetByNombre(string nombre);
     public bool ExistsPrestamo(int idDocente);
+    public IEnumerable<string> GetFiltroNombre(string nombre, int limit);
     public IEnumerable<Docentes> GetAll();
 }

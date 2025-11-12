@@ -47,4 +47,19 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     }
     #endregion
 
+    #region Mostrar todos los estados para actualizaciones
+    public IEnumerable<EstadosMantenimiento> GetAllForUpdates()
+    {
+        string query = "select idEstadoMantenimiento, estadoMantenimiento as 'EstadoMantenimientoNombre' from EstadosMantenimiento where idEstadoMantenimiento not in (2)";
+        try
+        {
+            return Conexion.Query<EstadosMantenimiento>(query);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener los estados de los Elementos para actualizaciones");
+        }
+    }
+    #endregion
+
 }

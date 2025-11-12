@@ -125,7 +125,7 @@ namespace CapaPresentacion
             cmbVarianteElemento.ValueMember = "IdVarianteElemento";
             cmbVarianteElemento.DisplayMember = "Variante";
 
-            cmbEstado.DataSource = elementosCN.ObtenerEstadosMantenimiento();
+            cmbEstado.DataSource = elementosCN.ObtenerEstadoMantenimientoParaActualizar();
             cmbEstado.ValueMember = "IdEstadoMantenimiento";
             cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
         }

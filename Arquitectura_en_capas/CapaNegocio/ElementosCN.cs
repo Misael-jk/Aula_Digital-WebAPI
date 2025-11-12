@@ -179,7 +179,7 @@ namespace CapaNegocio
                     IdTipoAccion = 3,
                     FechaCambio = DateTime.Now,
                     Descripcion = $"Se dio de baja el elemento con número de serie {elemento.NumeroSerie}.",
-                    IdUsuario = idUsuario
+                    IdUsuario = idUsuario,
                 };
 
                 uow.RepoHistorialCambio.Insert(historial);
@@ -244,6 +244,11 @@ namespace CapaNegocio
         public IEnumerable<EstadosMantenimiento> ObtenerEstadosMantenimiento()
         {
             return uow.RepoEstadosMantenimiento.GetAll();
+        }
+
+        public IEnumerable<EstadosMantenimiento> ObtenerEstadoMantenimientoParaActualizar()
+        {
+            return uow.RepoEstadosMantenimiento.GetAllForUpdates();
         }
 
         public EstadosMantenimiento? ObtenerEstadoMantenimientoPorID(int idEstado)
