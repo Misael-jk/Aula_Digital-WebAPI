@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using CapaNegocio;
-using CapaDatos.InterfacesDTO;
+﻿using CapaDatos.InterfacesDTO;
 using CapaEntidad;
+using CapaNegocio;
+using Guna.UI2.WinForms;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.WinForms;
 using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
 using SkiaSharp;
-using Guna.UI2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
 
 namespace CapaPresentacion
 {
@@ -19,22 +20,22 @@ namespace CapaPresentacion
     {
         private readonly NotebooksCN notebooksCN;
         private readonly CarritosCN carritosCN;
+        private FormPrincipal _formPrincipal;
         private Usuarios usuarioActual;
         private int IdActual = 0;
 
-        public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN)
+        public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN, FormPrincipal formPrincipal)
         {
             InitializeComponent();
 
             this.notebooksCN = notebooksCN;
+            this._formPrincipal = formPrincipal;
             this.usuarioActual = user;
             this.carritosCN = carritosCN;
         }
         public void ActualizarDataGrid()
         {
-            ApplyModernStyleCompact(dtgNotebook);
-
-            dtgNotebook.DataSource = notebooksCN.GetAll();
+            dgvNotebooks_M.DataSource = notebooksCN.GetAll();
 
             cmbModelo.DataSource = notebooksCN.ListarModelosPorTipo(1);
             cmbModelo.ValueMember = "IdModelo";
@@ -72,69 +73,12 @@ namespace CapaPresentacion
 
         private void dtgNotebook_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            lblCarroAsignado.Text = "Carrito Asignado: ";
-            lblCasillero.Text = "Casillero: ";
-            lblIDNotebook.Text = "ID: ";
-            lblFechaModificacion.Text = "Fecha de modificacion: ";
 
             if (e.RowIndex < 0) return;
 
-            IdActual = Convert.ToInt32(dtgNotebook.Rows[e.RowIndex].Cells["IdNotebook"].Value);
+            IdActual = Convert.ToInt32(dgvNotebooks_M.Rows[e.RowIndex].Cells["IdNotebook"].Value);
 
             Notebooks? notebook = notebooksCN.ObtenerNotebookPorID(IdActual);
-
-            lblIDNotebook.Text += notebook?.IdElemento.ToString();
-            txtEquipo.Text = notebook?.Equipo;
-            txtNroSerie.Text = notebook?.NumeroSerie;
-            txtCodBarra.Text = notebook?.CodigoBarra;
-            txtPatrimonio.Text = notebook?.Patrimonio;
-            cmbModelo.SelectedValue = notebook?.IdModelo;
-            cmbUbicacion.SelectedValue = notebook?.IdUbicacion;
-
-            EstadosMantenimiento? estadosMantenimiento = notebooksCN.ObtenerEstadoMantenimientoPorID(notebook.IdEstadoMantenimiento);
-
-            lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
-            lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
-
-            if (estadosMantenimiento?.IdEstadoMantenimiento == 1)
-            {
-                ptbEstado.Image = Properties.Resources.disponibleIcon;
-            }
-            else
-            {
-                ptbEstado.Image = Properties.Resources.prestadoIcon;
-            }
-
-            HistorialCambios? historialCambios = notebooksCN.ObtenerUltimaFechaDeModiciacionPorID(IdActual);
-
-            lblFechaModificacion.Text += historialCambios?.FechaCambio;
-            /* 
-             * Corregi el problema del metodo ObtenerCarritoPorID ya que esta propiedad no admite null por eso debemos usar
-             * el .HasValue para identificar si tiene o no carrito antes de invocar el metodo, si ves arriba de este sms tambien
-             * hay otro metodo ObtenerEstadoMantenimientoPorID y seguro pienses que tambien necesita esto, pero a diferencia de esto
-             * el metodo de arriba si apuntas el cursor ahi veras que dice "puede ser NULL aqui" lo que no pasa nada si no hacemos 
-             * validaciones lo de abajo decia que un tipo que acepta valores nullos recibe un valor null, por eso ahi que verificar eso.
-             */
-            if (notebook?.IdCarrito.HasValue == true)
-            {
-                Carritos? carritos = notebooksCN.ObtenerCarritoPorID(notebook.IdCarrito.Value);
-
-                if (carritos != null)
-                {
-                    lblCarroAsignado.Text += carritos.EquipoCarrito;
-                    lblCasillero.Text += notebook.PosicionCarrito.ToString();
-                }
-                else
-                {
-                    lblCarroAsignado.Text += "Sin Carrito";
-                    lblCasillero.Text += "-";
-                }
-            }
-            else
-            {
-                lblCarroAsignado.Text += "Sin Carrito";
-                lblCasillero.Text += "-";
-            }
 
             #region Agregar cellClick para agregar al carrito
             txtEquipo_AddCarrito.Text = notebook?.Equipo;
@@ -148,27 +92,27 @@ namespace CapaPresentacion
 
         private void btnActualizarNotebook_Click(object sender, EventArgs e)
         {
-            Notebooks? notebooks = notebooksCN.ObtenerNotebookPorID(IdActual);
+            //Notebooks? notebooks = notebooksCN.ObtenerNotebookPorID(IdActual);
 
-            Notebooks? notebook = new Notebooks
-            {
-                IdElemento = IdActual,
-                Equipo = txtEquipo.Text,
-                NumeroSerie = txtNroSerie.Text,
-                CodigoBarra = txtCodBarra.Text,
-                Patrimonio = txtPatrimonio.Text,
-                IdModelo = (int)cmbModelo.SelectedValue,
-                IdUbicacion = (int)cmbUbicacion.SelectedValue,
-                IdEstadoMantenimiento = Convert.ToInt32(lblEstado.Tag),  
-                IdTipoElemento = 1,
-                IdVarianteElemento = null,
-                IdCarrito = notebooks?.IdCarrito,
-                PosicionCarrito = notebooks?.PosicionCarrito,
-                Habilitado = true,
-                FechaBaja = null
-            };
+            //Notebooks? notebook = new Notebooks
+            //{
+            //    IdElemento = IdActual,
+            //    Equipo = txtEquipo.Text,
+            //    NumeroSerie = txtNroSerie.Text,
+            //    CodigoBarra = txtCodBarra.Text,
+            //    Patrimonio = txtPatrimonio.Text,
+            //    IdModelo = (int)cmbModelo.SelectedValue,
+            //    IdUbicacion = (int)cmbUbicacion.SelectedValue,
+            //    IdEstadoMantenimiento = Convert.ToInt32(lblEstado.Tag),
+            //    IdTipoElemento = 1,
+            //    IdVarianteElemento = null,
+            //    IdCarrito = notebooks?.IdCarrito,
+            //    PosicionCarrito = notebooks?.PosicionCarrito,
+            //    Habilitado = true,
+            //    FechaBaja = null
+            //};
 
-            notebooksCN.ActualizarNotebook(notebook, usuarioActual.IdUsuario);
+            //notebooksCN.ActualizarNotebook(notebook, usuarioActual.IdUsuario);
             ActualizarDataGrid();
             CargarGrafico();
             CargarGraficoEstados();
@@ -284,33 +228,33 @@ namespace CapaPresentacion
 
 
 
-    private void CargarGraficoCarritos()
-    {
-        var datos = notebooksCN.GetCantidadNotebooksEnCarritos();
-
-        if (datos == null || datos.Count == 0) return;
-
-        var labels = datos.Select(d => d.Equipo).ToArray();
-        var values = datos.Select(d => (double)d.Cantidad).ToArray();
-
-        var series = new ColumnSeries<double>
+        private void CargarGraficoCarritos()
         {
-            Values = values,
-            DataLabelsPaint = new SolidColorPaint(new SKColor(60, 60, 60)),
-            DataLabelsSize = 11,
-            MaxBarWidth = 45,     // ✅ barras más parejas
-            Padding = 5,          // ✅ espacio entre barras
-            Stroke = null,        // ✅ quita bordes de barras
-            Fill = new SolidColorPaint(new SKColor(70, 130, 180)) // ✅ color suave estilo dashboard
-        };
+            var datos = notebooksCN.GetCantidadNotebooksEnCarritos();
 
-        var chart = new CartesianChart
-        {
-            Dock = DockStyle.Fill,
-            Series = new ISeries[] { series },
+            if (datos == null || datos.Count == 0) return;
 
-            XAxes = new Axis[]
+            var labels = datos.Select(d => d.Equipo).ToArray();
+            var values = datos.Select(d => (double)d.Cantidad).ToArray();
+
+            var series = new ColumnSeries<double>
             {
+                Values = values,
+                DataLabelsPaint = new SolidColorPaint(new SKColor(60, 60, 60)),
+                DataLabelsSize = 11,
+                MaxBarWidth = 45,     // ✅ barras más parejas
+                Padding = 5,          // ✅ espacio entre barras
+                Stroke = null,        // ✅ quita bordes de barras
+                Fill = new SolidColorPaint(new SKColor(70, 130, 180)) // ✅ color suave estilo dashboard
+            };
+
+            var chart = new CartesianChart
+            {
+                Dock = DockStyle.Fill,
+                Series = new ISeries[] { series },
+
+                XAxes = new Axis[]
+                {
             new Axis
             {
                 Labels = labels,
@@ -319,10 +263,10 @@ namespace CapaPresentacion
                 NameTextSize = 13,
                 NamePaint = new SolidColorPaint(new SKColor(80, 80, 80))
             }
-            },
+                },
 
-            YAxes = new Axis[]
-            {
+                YAxes = new Axis[]
+                {
             new Axis
             {
                 Labeler = value => value.ToString("N0"),
@@ -330,71 +274,19 @@ namespace CapaPresentacion
                 NamePaint = new SolidColorPaint(new SKColor(80, 80, 80)),
                 TextSize = 12
             }
-            },
+                },
 
-            LegendPosition = LiveChartsCore.Measure.LegendPosition.Hidden 
-        };
+                LegendPosition = LiveChartsCore.Measure.LegendPosition.Hidden
+            };
 
-        pnlGraficoCarritos.Controls.Clear();
-        pnlGraficoCarritos.Controls.Add(chart);
-    }
-
-
-    private void ApplyModernStyleCompact(Guna2DataGridView dgv)
-        {
-            // Tamaño y comportamiento general
-            dgv.AllowUserToAddRows = false;
-            dgv.AllowUserToDeleteRows = false;
-            dgv.AllowUserToResizeRows = false;
-            dgv.ReadOnly = true;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            dgv.RowHeadersVisible = false;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.BackgroundColor = Color.White;
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.GridColor = Color.FromArgb(215, 230, 215);
-            dgv.EnableHeadersVisualStyles = false;
-
-            dgv.ColumnHeadersHeight = 38;
-            dgv.RowTemplate.Height = 34;
-
-            // Header verde brillante
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(67, 160, 71);
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f, FontStyle.Bold);
-            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //dgv.ColumnHeadersDefaultCellStyle.Padding = new Padding(8, 4, 8, 4);
-            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-
-            // Celdas base
-            dgv.DefaultCellStyle.BackColor = Color.White;
-            dgv.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 45);
-            dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f);
-            dgv.DefaultCellStyle.Padding = new Padding(6, 3, 6, 3);
-
-            // Alternancia
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 240);
-
-            // Selección verde suave
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
-            dgv.DefaultCellStyle.SelectionForeColor = Color.FromArgb(30, 30, 35);
-            dgv.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 200);
-
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            EnableDoubleBuffering(dgv);
-
+            pnlGraficoCarritos.Controls.Clear();
+            pnlGraficoCarritos.Controls.Add(chart);
         }
 
-        private void EnableDoubleBuffering(DataGridView dgv)
+        private void btnGestionarNotebook_M_Click(object sender, EventArgs e)
         {
-            Type dgvType = dgv.GetType();
-            System.Reflection.PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            if (pi != null)
-            {
-                pi.SetValue(dgv, true, null);
-            }
+            var detalleUC = new NotebookGestionUC(_formPrincipal, this, notebooksCN, IdActual, usuarioActual);
+            _formPrincipal.MostrarUserControl(detalleUC);
         }
     }
 }

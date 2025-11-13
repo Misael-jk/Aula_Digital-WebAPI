@@ -107,10 +107,6 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1120);
 
-            //Guna2DataGridViewStyler.SetupPrestamosColumns(dgvElementos, addActionButton: true);
-            //dgvElementos_M.CellFormatting += dgvElementos_M_CellFormatting;
-            //dgvElementos_M.CellClick += dgvElementos_M_CellClick;
-
             lstSugerencias.BringToFront();
             lstSugerencias.Height = 120;
 
@@ -143,8 +139,6 @@ namespace CapaPresentacion
                     CargarTodosModelos();
             };
 
-
-            //cmbEstados.SelectedIndexChanged -= cmbEstados_SelectedIndexChanged;
 
             var estados = repoEstadosMantenimiento.GetAll().ToList();
 
@@ -580,51 +574,6 @@ namespace CapaPresentacion
             var fila = dgvElementos_M.Rows[e.RowIndex];
 
             idElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
-
-            //var elemento = repoElemento.GetById(idElemento);
-
-            //txtNroSerie.Text = elemento?.NumeroSerie;
-            //txtCodBarra.Text = elemento?.CodigoBarra;
-            //txtPatrimonio.Text = elemento?.Patrimonio;
-            //cmbTipoElemento.SelectedValue = elemento.IdTipoElemento;
-            //cmbVarianteElementos.SelectedValue = elemento.IdVarianteElemento.HasValue ? elemento.IdVarianteElemento.Value : -1;
-
-            //cmbUbicaciones.SelectedIndex = elemento.IdUbicacion;
-        }
-
-        private void btnCrearElemento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnActualizarElemento_Click(object sender, EventArgs e)
-        {
-            //VariantesElemento? variante = elementosCN.ObtenerVariantePorID(idVariante);
-            //Elemento? elementoOLD = elementosCN.ObtenerPorId(idElemento);
-
-            //var elemento = new Elemento
-            //{
-            //    IdElemento = idElemento,
-            //    IdTipoElemento = (int)cmbTipoElemento.SelectedValue,
-            //    NumeroSerie = txtNroSerie.Text,
-            //    CodigoBarra = txtCodBarra.Text,
-            //    Patrimonio = txtPatrimonio.Text,
-            //    IdVarianteElemento = idVariante,
-            //    IdUbicacion = (int)cmbUbicaciones.SelectedValue,
-            //    IdModelo = variante.IdModelo,
-            //    IdEstadoMantenimiento = 1,
-            //    Habilitado = true,
-            //    FechaBaja = null
-            //};
-
-            //elementosCN.ActualizarElemento(elemento, userVerificado.IdUsuario);
-            //CargarElementos();
-        }
-
-        private void btnDeshabilitar_Click(object sender, EventArgs e)
-        {
-            //elementosCN.DeshabilitarElemento(txtNroSerie.Text);
-            CargarElementos();
         }
 
         private void dgvElementos_M_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -633,7 +582,7 @@ namespace CapaPresentacion
             {
                 string? estado = e.Value.ToString();
 
-                if (estado == "En reparacion")
+                if (estado == "En Mantenimiento")
                 {
                     e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
                     e.CellStyle.ForeColor = Color.Black;
