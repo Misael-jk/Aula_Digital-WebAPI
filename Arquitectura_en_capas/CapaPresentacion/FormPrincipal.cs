@@ -559,7 +559,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (notebooksUC == null)
-                notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN);
+                notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN, this);
 
             CambiarNombrePort(btnNotebooks.Text);
 

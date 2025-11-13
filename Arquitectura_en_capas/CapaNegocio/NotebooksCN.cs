@@ -65,7 +65,7 @@ public class NotebooksCN
     #endregion
 
     #region Actualización
-    public void ActualizarNotebook(Notebooks notebookNEW, int idUsuario)
+    public void ActualizarNotebook(Notebooks notebookNEW, int idUsuario, string motivo, string descripcion)
     {
         ValidarDatos(notebookNEW);
 
@@ -81,8 +81,8 @@ public class NotebooksCN
             {
                 IdTipoAccion = 2,
                 FechaCambio = DateTime.Now,
-                Descripcion = $"Se Modeifico la notebook con número de serie {notebookNEW.NumeroSerie}.",
-                Motivo = null,
+                Descripcion = descripcion,
+                Motivo = motivo,
                 IdUsuario = idUsuario
             };
 
