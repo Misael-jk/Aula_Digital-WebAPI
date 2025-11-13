@@ -69,7 +69,7 @@ public class DevolucionCN
 
                     HistorialCambios? historial = new HistorialCambios
                     {
-                        IdTipoAccion = 2,
+                        IdTipoAccion = 6,
                         IdUsuario = devolucionNEW.IdUsuario,
                         FechaCambio = DateTime.Now,
                         Descripcion = $"El carrito {prestamo.IdCarrito.Value} fue liberado.",
@@ -134,7 +134,7 @@ public class DevolucionCN
 
                     HistorialCambios? historial = new HistorialCambios
                     {
-                        IdTipoAccion = 2,
+                        IdTipoAccion = 6,
                         IdUsuario = devolucion.IdUsuario,
                         FechaCambio = DateTime.Now,
                         Descripcion = $"El carrito {prestamo.IdCarrito.Value} fue liberado.",
@@ -222,11 +222,11 @@ public class DevolucionCN
 
             HistorialCambios Historial = new HistorialCambios
             {
-                IdTipoAccion = 3,
+                IdTipoAccion = 6,
                 FechaCambio = DateTime.Now,
                 IdUsuario = devolucionNEW.IdUsuario,
                 Descripcion = elemento?.IdTipoElemento == 1 ?
-                    $"El Elemento {idElemento} fue Devuelto" :
+                    $"El Elemento con el numero de serie {elemento.NumeroSerie} fue Devuelto" :
                     $"La notebook {idElemento} fue devuelta",
                 Motivo = obs
             };

@@ -162,14 +162,14 @@ INSERT INTO PrestamoDetalle (idPrestamo, idElemento) VALUES
 -- ======================
 INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observaciones) VALUES
 (1, 1, '2025-08-05 15:00:00', 'Sin daños'),
-(2, 2, '2025-08-06 16:00:00', 'Con problemas en batería');
+(2, 2, '2025-08-06 16:00:00', 'Con problemas en bateria');
 
 -- ======================
 -- DEVOLUCION DETALLE
 -- ======================
 INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
 (1, 1, NULL),
-(2, 5, 'Devuelto con anomalías');
+(2, 5, 'Devuelto con anomalias');
 
 
 -- ======================
@@ -188,9 +188,10 @@ INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
 -- ======================
 INSERT INTO TipoAccion (accion) VALUES
 ('Alta'),
-('Modificación'),
+('Modificacion'),
 ('Baja'),
-('Préstamo'),
+('Habilitar'),
+('Prestamo'),
 ('Devolución');
 
 -- ======================

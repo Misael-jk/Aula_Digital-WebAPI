@@ -145,7 +145,7 @@ namespace CapaNegocio
         #endregion
 
         #region DESHABILITAR ELEMENTO
-        public void DeshabilitarElemento(int idElemento, int idEstadoMantenimiento, int idUsuario)
+        public void DeshabilitarElemento(int idElemento, int idEstadoMantenimiento, int idUsuario, string motivo)
         {
             try
             {
@@ -180,6 +180,7 @@ namespace CapaNegocio
                     FechaCambio = DateTime.Now,
                     Descripcion = $"Se dio de baja el elemento con número de serie {elemento.NumeroSerie}.",
                     IdUsuario = idUsuario,
+                    Motivo = motivo
                 };
 
                 uow.RepoHistorialCambio.Insert(historial);

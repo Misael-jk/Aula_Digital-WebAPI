@@ -49,7 +49,7 @@ public class NotebookBajasCN
             HistorialCambios historialCambios = new HistorialCambios
             {
                 IdUsuario = idUsuario,
-                IdTipoAccion = 2,
+                IdTipoAccion = 4,
                 Descripcion = $"Se habilito la notebook con numero de serie {notebook.NumeroSerie}",
                 FechaCambio = DateTime.Now,
                 Motivo = null

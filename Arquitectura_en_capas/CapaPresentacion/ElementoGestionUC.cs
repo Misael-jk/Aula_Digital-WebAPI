@@ -359,12 +359,12 @@ namespace CapaPresentacion
         {
             if(_habilitado == true)
             {
-                elementosCN.DeshabilitarElemento(_idElementoSeleccionado, 3, usuarios.IdUsuario);
+                elementosCN.DeshabilitarElemento(_idElementoSeleccionado, 3, usuarios.IdUsuario, txtExplicarMotivo.Text);
                 CargarTodaLaGestion(_idElementoSeleccionado);
             }
             else
             {
-                elementosBajasCN.HabilitarElemento(_idElementoSeleccionado, usuarios.IdUsuario);
+                elementosBajasCN.HabilitarElemento(_idElementoSeleccionado, usuarios.IdUsuario, txtExplicarMotivo.Text);
                 CargarTodaLaGestion(_idElementoSeleccionado);
             }
 

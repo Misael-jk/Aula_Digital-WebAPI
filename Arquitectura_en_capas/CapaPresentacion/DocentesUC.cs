@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,19 @@ namespace CapaPresentacion
             txtBuscarDocente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBuscarDocente.AutoCompleteSource = AutoCompleteSource.CustomSource;
             CargarAutoComplete();
+
+            dgvDocentes.DataSource = docentesCN.MostrarDocente();
+            dgvDocentes.Columns["IdDocente"].HeaderText = "ID";
+            dgvDocentes.Columns["IdDocente"].Width = 30;
+            dgvDocentes.Columns["Nombre"].HeaderText = "Nombre";
+            dgvDocentes.Columns["Nombre"].Width = 75;
+            dgvDocentes.Columns["Apellido"].HeaderText = "Apellido";
+            dgvDocentes.Columns["Apellido"].Width = 75;
+            dgvDocentes.Columns["Dni"].HeaderText = "DNI";
+            dgvDocentes.Columns["Dni"].Width = 80;
+            dgvDocentes.Columns["Email"].HeaderText = "Email";
+            dgvDocentes.Columns["EstadoPrestamo"].HeaderText = "Actividad";
+            dgvDocentes.Columns["EstadoPrestamo"].Width = 100;
         }
 
         private void CargarAutoComplete()
@@ -48,6 +62,11 @@ namespace CapaPresentacion
                 AcDocente.Add(nombre);
             }
             txtBuscarDocente.AutoCompleteCustomSource = AcDocente;
+
+            if (txtBuscarDocente.AutoCompleteCustomSource.Count > 0)
+            {
+                txtBuscarDocente.AutoCompleteCustomSource = AcDocente;
+            }
         }
 
         public void MostrarDocentes()
@@ -70,27 +89,38 @@ namespace CapaPresentacion
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
+            string nombre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtNombreCrear.Text.Trim().ToLower());
+            string apellido = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtApellidoCrear.Text.Trim().ToLower());
+
             var docente = new Docentes
             {
-                Nombre = txtNombreCrear.Text,
-                Apellido = txtApellidoCrear.Text,
-                Dni = txtDNICrear.Text,
-                Email = txtMailCrear.Text,
+                Nombre = nombre,
+                Apellido = apellido,
+                Dni = txtDNICrear.Text.Trim(),
+                Email = txtMailCrear.Text.Trim().ToLower(),
                 Habilitado = true,
                 FechaBaja = null
             };
 
             docentesCN.CrearDocente(docente);
-            cmbHabilitado.SelectedIndex = 0;
+            MostrarDocentes();
+
+            txtNombreCrear.Clear();
+            txtApellido.Clear();
+            txtDNICrear.Clear();
+            txtMailCrear.Clear();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+            string nombre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtNombre.Text.Trim().ToLower());
+            string apellido = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtApellido.Text.Trim().ToLower());
+
             var docente = new Docentes
             {
                 IdDocente = IdActual,
-                Nombre = txtNombre.Text,
-                Apellido = txtApellido.Text,
+                Nombre = nombre,
+                Apellido = apellido,
                 Dni = txtDNI.Text,
                 Email = txtMail.Text,
                 Habilitado = true,
@@ -98,7 +128,7 @@ namespace CapaPresentacion
             };
 
             docentesCN.ActualizarDocente(docente);
-            cmbHabilitado.SelectedIndex = 0;
+            MostrarDocentes();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -133,11 +163,6 @@ namespace CapaPresentacion
                     e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
                     e.CellStyle.ForeColor = Color.Black;
                 }
-                //else if (estado == "Prestado")
-                //{
-                //    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
-                //    e.CellStyle.ForeColor = Color.Black;
-                //}
                 else
                 {
                     return;
@@ -158,6 +183,12 @@ namespace CapaPresentacion
                     .ToList();
                 dgvDocentes.DataSource = resultados;
             }
+        }
+
+        private void btnBorrarFiltros_Click(object sender, EventArgs e)
+        {
+            txtBuscarDocente.Clear();
+            MostrarDocentes();
         }
     }
 }

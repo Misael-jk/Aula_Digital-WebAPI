@@ -53,30 +53,25 @@ namespace CapaPresentacion
             cmbTipoElementoVariante.ValueMember = "IdTipoElemento";
             cmbTipoElementoVariante.DisplayMember = "ElementoTipo";
 
+            cmbModeloVariante.DataSource = modeloCN.ObtenerModeloPorElementos();
+            cmbModeloVariante.ValueMember = "IdModelo";
+            cmbModeloVariante.DisplayMember = "Modelo";
+
+            cmbTipoElementoVarianteActu.DataSource = tiposElementoCN.GetTiposByElemento();
+            cmbTipoElementoVarianteActu.ValueMember = "IdTipoElemento";
+            cmbTipoElementoVarianteActu.DisplayMember = "ElementoTipo";
+
+            cmbModeloVarianteActu.DataSource = modeloCN.ObtenerModeloPorElementos();
+            cmbModeloVarianteActu.ValueMember = "IdModelo";
+            cmbModeloVarianteActu.DisplayMember = "Modelo";
+
         }
 
         private void CategoriasUC_Load(object sender, EventArgs e)
         {
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 2070);
-
             MostrarCategoria();
-
-            #region Variante Elemento
-            cmbModeloVarianteActu.DataSource = modeloCN.ObtenerModeloPorElementos();
-            cmbModeloVarianteActu.ValueMember = "IdModelo";
-            cmbModeloVarianteActu.DisplayMember = "Modelo";
-
-            cmbTipoElementoVarianteActu.DataSource = tiposElementoCN.GetTiposByElemento();
-            cmbTipoElementoVarianteActu.ValueMember = "IdTipoElemento";
-            cmbTipoElementoVarianteActu.DisplayMember = "ElementoTipo";
-
-
-
-            cmbTipoElementoVariante.DataSource = tiposElementoCN.GetTiposByElemento();
-            cmbTipoElementoVariante.ValueMember = "IdTipoElemento";
-            cmbTipoElementoVariante.DisplayMember = "ElementoTipo";
-            #endregion
         }
 
         // ELEMENTOS
@@ -183,9 +178,12 @@ namespace CapaPresentacion
             IdVarianteElemento = Convert.ToInt32(dgvVarianteElemento.Rows[e.RowIndex].Cells["IdVarianteElemento"].Value);
             VariantesElemento? variante = varianteElementoCN.GetById(IdVarianteElemento);
 
-            txtNombreVarianteActu.Text = variante?.Variante;
-            cmbModeloVarianteActu.SelectedValue = (int)cmbModeloVarianteActu.SelectedValue;
-            cmbTipoElementoVarianteActu.SelectedValue = (int)cmbTipoElementoVarianteActu.SelectedValue;
+            if (variante != null)
+            {
+                txtNombreVarianteActu.Text = variante.Variante;
+                cmbModeloVarianteActu.SelectedValue = variante.IdModelo;
+                cmbTipoElementoVarianteActu.SelectedValue = variante.IdTipoElemento;
+            }
         }
 
         private void btnCrearVariante_Click(object sender, EventArgs e)
@@ -301,16 +299,11 @@ namespace CapaPresentacion
 
         private void cmbTipoElementoVariante_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbTipoElementoVariante.SelectedValue is int selectedValue)
+            if (cmbTipoElementoVariante.SelectedValue is int selectedValue && selectedValue > 0)
             {
-
                 cmbModeloVariante.DataSource = modeloCN.ObtenerModelosPorTipoElemento(selectedValue);
                 cmbModeloVariante.ValueMember = "IdModelo";
                 cmbModeloVariante.DisplayMember = "Modelo";
-            }
-            else
-            {
-                selectedValue = 0;
             }
         }
 

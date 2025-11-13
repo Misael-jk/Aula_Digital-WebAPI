@@ -173,6 +173,7 @@
             dgvElementos_M.Location = new Point(11, 94);
             dgvElementos_M.MultiSelect = false;
             dgvElementos_M.Name = "dgvElementos_M";
+            dgvElementos_M.ReadOnly = true;
             dgvElementos_M.RowHeadersVisible = false;
             dgvElementos_M.RowTemplate.Height = 35;
             dgvElementos_M.ScrollBars = ScrollBars.Vertical;
@@ -191,7 +192,7 @@
             dgvElementos_M.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgvElementos_M.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvElementos_M.ThemeStyle.HeaderStyle.Height = 35;
-            dgvElementos_M.ThemeStyle.ReadOnly = false;
+            dgvElementos_M.ThemeStyle.ReadOnly = true;
             dgvElementos_M.ThemeStyle.RowsStyle.BackColor = Color.White;
             dgvElementos_M.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvElementos_M.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);

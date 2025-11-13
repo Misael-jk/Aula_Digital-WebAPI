@@ -293,7 +293,7 @@ public class RepoElemento : RepoBase, IRepoElemento
 
         try
         {
-            return Conexion.ExecuteScalar<int>(query, parameters, transaction: Transaction);
+            return Conexion.ExecuteScalar<int?>(query, parameters, transaction: Transaction);
         }
         catch (Exception)
         {

@@ -46,7 +46,7 @@ public class ElementosBajasCN
         return uow.RepoVarianteElemento.GetById(idVariante);
     }
 
-    public void HabilitarElemento(int idElemento, int idUsuario)
+    public void HabilitarElemento(int idElemento, int idUsuario, string motivo)
     {
         try
         {
@@ -69,10 +69,10 @@ public class ElementosBajasCN
             HistorialCambios historialCambios = new HistorialCambios
             {
                 IdUsuario = idUsuario,
-                IdTipoAccion = 2,
+                IdTipoAccion = 4,
                 Descripcion = $"Se habilito el elemento con numero de serie {elemento.NumeroSerie}",
                 FechaCambio = DateTime.Now,
-                Motivo = null
+                Motivo = motivo
             };
             uow.RepoHistorialCambio.Insert(historialCambios);
 

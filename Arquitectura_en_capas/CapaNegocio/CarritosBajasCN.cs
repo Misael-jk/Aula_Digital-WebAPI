@@ -55,7 +55,7 @@ public class CarritosBajasCN
 
             HistorialCambios historial = new HistorialCambios()
             {
-                IdTipoAccion = 2,
+                IdTipoAccion = 4,
                 IdUsuario = idUsuario,
                 Descripcion = $"Se habilito el carrito con numero de serie {carritos.EquipoCarrito}",
                 Motivo = null,

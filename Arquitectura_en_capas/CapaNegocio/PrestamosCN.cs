@@ -49,12 +49,12 @@ public class PrestamosCN
 
                 HistorialCambios? historial = new HistorialCambios
                 {
-                    IdTipoAccion = 2, 
+                    IdTipoAccion = 5, 
                     FechaCambio = DateTime.Now,
                     IdUsuario = prestamo.IdUsuario,
                     Descripcion = elemento.IdTipoElemento == 1
                         ? $"La notebook {idElemento} fue prestada."
-                        : $"El elemento {idElemento} fue prestado.",
+                        : $"El elemento con numero de serie: {elemento.NumeroSerie} fue prestado.",
                     Motivo = null
                 };
 
@@ -85,7 +85,7 @@ public class PrestamosCN
 
                 HistorialCambios historial = new HistorialCambios
                 {
-                    IdTipoAccion = 2,
+                    IdTipoAccion = 5,
                     FechaCambio = DateTime.Now,
                     IdUsuario = prestamo.IdUsuario,
                     Descripcion = $"Carrito {idCarrito} fue Prestamo",

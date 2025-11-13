@@ -59,7 +59,7 @@ namespace CapaPresentacion
 
         private void btnHabilitar_Click(object sender, EventArgs e)
         {
-            elementosBajasCN.HabilitarElemento(_idActualElemento, usuarioActual.IdUsuario);
+            elementosBajasCN.HabilitarElemento(_idActualElemento, usuarioActual.IdUsuario, null);
             MostrarDatos();
         }
 
