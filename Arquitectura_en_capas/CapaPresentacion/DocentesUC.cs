@@ -47,7 +47,7 @@ namespace CapaPresentacion
             dgvDocentes.Columns["Apellido"].HeaderText = "Apellido";
             dgvDocentes.Columns["Apellido"].Width = 75;
             dgvDocentes.Columns["Dni"].HeaderText = "DNI";
-            dgvDocentes.Columns["Dni"].Width = 80;
+            dgvDocentes.Columns["Dni"].Width = 70;
             dgvDocentes.Columns["Email"].HeaderText = "Email";
             dgvDocentes.Columns["EstadoPrestamo"].HeaderText = "Actividad";
             dgvDocentes.Columns["EstadoPrestamo"].Width = 100;

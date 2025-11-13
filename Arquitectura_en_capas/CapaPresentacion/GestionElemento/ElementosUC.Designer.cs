@@ -623,12 +623,18 @@
             pnlPresentacionNotebook.BackColor = Color.Transparent;
             pnlPresentacionNotebook.BorderRadius = 15;
             pnlPresentacionNotebook.Controls.Add(lblElementosTitulo);
+            customizableEdges25.BottomLeft = false;
+            customizableEdges25.BottomRight = false;
             pnlPresentacionNotebook.CustomizableEdges = customizableEdges25;
             pnlPresentacionNotebook.FillColor = Color.FromArgb(105, 80, 165);
             pnlPresentacionNotebook.Location = new Point(20, 9);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
+            customizableEdges26.BottomLeft = false;
+            customizableEdges26.BottomRight = false;
+            customizableEdges26.TopLeft = false;
+            customizableEdges26.TopRight = false;
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            pnlPresentacionNotebook.Size = new Size(616, 65);
+            pnlPresentacionNotebook.Size = new Size(616, 49);
             pnlPresentacionNotebook.TabIndex = 49;
             // 
             // guna2Panel3

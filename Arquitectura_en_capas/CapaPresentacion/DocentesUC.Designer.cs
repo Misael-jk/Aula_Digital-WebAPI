@@ -66,6 +66,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             btnEliminar = new Guna.UI2.WinForms.Guna2Button();
             btnActualizar = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
@@ -89,11 +93,17 @@
             txtBuscarDocente = new Guna.UI2.WinForms.Guna2TextBox();
             panel1 = new Panel();
             guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
+            guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            lblPresentacion = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
+            lblElementosTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDocentes).BeginInit();
             pnlDataGridElementos.SuspendLayout();
             guna2GroupBox2.SuspendLayout();
+            guna2Panel3.SuspendLayout();
+            pnlPresentacionNotebook.SuspendLayout();
             SuspendLayout();
             // 
             // btnEliminar
@@ -407,7 +417,7 @@
             dgvDocentes.RowHeadersVisible = false;
             dgvDocentes.RowTemplate.Height = 35;
             dgvDocentes.ScrollBars = ScrollBars.Vertical;
-            dgvDocentes.Size = new Size(608, 517);
+            dgvDocentes.Size = new Size(608, 430);
             dgvDocentes.TabIndex = 59;
             dgvDocentes.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvDocentes.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -447,10 +457,10 @@
             pnlDataGridElementos.Controls.Add(panel1);
             pnlDataGridElementos.CustomizableEdges = customizableEdges31;
             pnlDataGridElementos.FillColor = SystemColors.ButtonHighlight;
-            pnlDataGridElementos.Location = new Point(396, 12);
+            pnlDataGridElementos.Location = new Point(396, 99);
             pnlDataGridElementos.Name = "pnlDataGridElementos";
             pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            pnlDataGridElementos.Size = new Size(636, 639);
+            pnlDataGridElementos.Size = new Size(636, 552);
             pnlDataGridElementos.TabIndex = 60;
             // 
             // btnBorrarFiltros
@@ -576,7 +586,7 @@
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
-            panel1.Location = new Point(15, 622);
+            panel1.Location = new Point(18, 534);
             panel1.Name = "panel1";
             panel1.Size = new Size(600, 1);
             panel1.TabIndex = 1;
@@ -609,11 +619,68 @@
             guna2GroupBox2.Text = "- Docentes Seleccionado -";
             guna2GroupBox2.TextAlign = HorizontalAlignment.Center;
             // 
+            // guna2Panel3
+            // 
+            guna2Panel3.BackColor = Color.Transparent;
+            guna2Panel3.Controls.Add(lblPresentacion);
+            guna2Panel3.CustomizableEdges = customizableEdges35;
+            guna2Panel3.FillColor = SystemColors.ButtonHighlight;
+            guna2Panel3.Location = new Point(396, 51);
+            guna2Panel3.Name = "guna2Panel3";
+            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            guna2Panel3.Size = new Size(636, 36);
+            guna2Panel3.TabIndex = 63;
+            // 
+            // lblPresentacion
+            // 
+            lblPresentacion.BackColor = Color.Transparent;
+            lblPresentacion.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPresentacion.ForeColor = Color.FromArgb(45, 45, 48);
+            lblPresentacion.Location = new Point(9, 8);
+            lblPresentacion.Name = "lblPresentacion";
+            lblPresentacion.Size = new Size(609, 17);
+            lblPresentacion.TabIndex = 2;
+            lblPresentacion.Text = "- En esta sección se muestran <b>a todos los docentes registrados en el sistema</b>, permitiendo visualizarlos y <b>gestionarlos.";
+            lblPresentacion.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // pnlPresentacionNotebook
+            // 
+            pnlPresentacionNotebook.BackColor = Color.Transparent;
+            pnlPresentacionNotebook.BorderRadius = 15;
+            pnlPresentacionNotebook.Controls.Add(lblElementosTitulo);
+            customizableEdges37.BottomLeft = false;
+            customizableEdges37.BottomRight = false;
+            pnlPresentacionNotebook.CustomizableEdges = customizableEdges37;
+            pnlPresentacionNotebook.FillColor = Color.FromArgb(105, 80, 165);
+            pnlPresentacionNotebook.Location = new Point(396, 12);
+            pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
+            customizableEdges38.BottomLeft = false;
+            customizableEdges38.BottomRight = false;
+            customizableEdges38.TopLeft = false;
+            customizableEdges38.TopRight = false;
+            pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges38;
+            pnlPresentacionNotebook.Size = new Size(636, 41);
+            pnlPresentacionNotebook.TabIndex = 62;
+            // 
+            // lblElementosTitulo
+            // 
+            lblElementosTitulo.BackColor = Color.Transparent;
+            lblElementosTitulo.Font = new Font("Segoe UI Semibold", 19F);
+            lblElementosTitulo.ForeColor = SystemColors.ButtonFace;
+            lblElementosTitulo.Location = new Point(10, 1);
+            lblElementosTitulo.Name = "lblElementosTitulo";
+            lblElementosTitulo.Size = new Size(109, 37);
+            lblElementosTitulo.TabIndex = 2;
+            lblElementosTitulo.Text = "<b>Docentes</b>";
+            lblElementosTitulo.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
             // DocentesUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
+            Controls.Add(guna2Panel3);
+            Controls.Add(pnlPresentacionNotebook);
             Controls.Add(guna2GroupBox2);
             Controls.Add(pnlDataGridElementos);
             Controls.Add(guna2GroupBox1);
@@ -626,6 +693,10 @@
             pnlDataGridElementos.ResumeLayout(false);
             pnlDataGridElementos.PerformLayout();
             guna2GroupBox2.ResumeLayout(false);
+            guna2Panel3.ResumeLayout(false);
+            guna2Panel3.PerformLayout();
+            pnlPresentacionNotebook.ResumeLayout(false);
+            pnlPresentacionNotebook.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -655,5 +726,9 @@
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
         private Guna.UI2.WinForms.Guna2Button btnBorrarFiltros;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblPresentacion;
+        private Guna.UI2.WinForms.Guna2Panel pnlPresentacionNotebook;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblElementosTitulo;
     }
 }
