@@ -31,10 +31,10 @@ namespace CapaPresentacion
         private CategoriasUC categoriasUC;
         private UsuariosUC usuariosUC;
         private MantenimientoUC mantenimientoUC;
-        private HistorialUC historialUC;
         private InventarioUC inventarioUC;
         private NotebooksUC notebooksUC;
         private UsuarioGestionuc usuarioGestion;
+        private PrestamosYDevolucionesUC prestamosYDevolucionesUC;
         #endregion
 
         #region Variables UoW(UnitOfWork) - Repositorios
@@ -109,6 +109,7 @@ namespace CapaPresentacion
         private readonly IMapperNotebookBajas mapperNotebookBajas;
         private readonly IMapperPrestamosActivos mapperPrestamosActivos;
         private readonly IMapperHistorialElementoG mapperHistorialElementoG;
+        private readonly IMapperTransaccion mapperTransaccion;
         #endregion
 
         #region Variables Capa Negocio
@@ -210,6 +211,7 @@ namespace CapaPresentacion
             mapperNotebookBajas = new MapperNotebookBajas(conexion);
             mapperPrestamosActivos = new MapperPrestamosActivos(conexion);
             mapperHistorialElementoG = new MapperHistorialElementoG(conexion);
+            mapperTransaccion = new MapperTransaccion(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -577,6 +579,33 @@ namespace CapaPresentacion
             try
             {
                 notebooksUC.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar datos en NotebooksUC: " + ex.Message);
+            }
+        }
+
+        private void btnPrestAndDevo_Click(object sender, EventArgs e)
+        {
+            CerrarGestionUsuario();
+
+            if (prestamosYDevolucionesUC == null)
+                prestamosYDevolucionesUC = new PrestamosYDevolucionesUC(mapperTransaccion);
+
+            CambiarNombrePort(btnPrestAndDevo.Text);
+
+            if (!pnlContenedor.Controls.Contains(prestamosYDevolucionesUC))
+            {
+                pnlContenedor.Controls.Add(prestamosYDevolucionesUC);
+                prestamosYDevolucionesUC.Dock = DockStyle.Fill;
+            }
+
+            MostrarSolo(prestamosYDevolucionesUC);
+
+            try
+            {
+                prestamosYDevolucionesUC.BringToFront();
             }
             catch (Exception ex)
             {

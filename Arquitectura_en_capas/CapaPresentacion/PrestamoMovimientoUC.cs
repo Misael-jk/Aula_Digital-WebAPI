@@ -7,14 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaDatos.InterfacesDTO;
 
 namespace CapaPresentacion
 {
-    public partial class PrestamoMovimientoUC: UserControl
+    public partial class PrestamosYDevolucionesUC : UserControl
     {
-        public PrestamoMovimientoUC()
+        private readonly IMapperTransaccion mapperTransaccion;
+        public PrestamosYDevolucionesUC(IMapperTransaccion mapperTransaccion)
         {
             InitializeComponent();
+            this.mapperTransaccion = mapperTransaccion;
+        }
+
+        private void PrestamosYDevolucionesUC_Load(object sender, EventArgs e)
+        {
+            dvgPrestamosYDevoluciones.DataSource = mapperTransaccion.GetAllDTO();
         }
     }
 }
