@@ -109,6 +109,7 @@ namespace CapaPresentacion
         private readonly IMapperNotebookBajas mapperNotebookBajas;
         private readonly IMapperPrestamosActivos mapperPrestamosActivos;
         private readonly IMapperHistorialElementoG mapperHistorialElementoG;
+        private readonly IMapperHistorialNotebookG mapperHistorialNotebookG;
         #endregion
 
         #region Variables Capa Negocio
@@ -210,6 +211,7 @@ namespace CapaPresentacion
             mapperNotebookBajas = new MapperNotebookBajas(conexion);
             mapperPrestamosActivos = new MapperPrestamosActivos(conexion);
             mapperHistorialElementoG = new MapperHistorialElementoG(conexion);
+            mapperHistorialNotebookG = new MapperHistorialNotebookG(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
@@ -219,7 +221,7 @@ namespace CapaPresentacion
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
             modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
             devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
-            notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
+            notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks, mapperHistorialNotebookG);
             carritosBajasCN = new CarritosBajasCN(mapperCarritosBajas, uowCarritos);
             elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);
             varianteElementoCN = new VarianteElementoCN(repoVarianteElemento, repoTipoElemento, repoModelo, mapperVarianteElemento);
@@ -559,7 +561,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (notebooksUC == null)
-                notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN, this);
+                notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN, this, notebookBajasCN);
 
             CambiarNombrePort(btnNotebooks.Text);
 

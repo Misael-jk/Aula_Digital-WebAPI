@@ -1,14 +1,8 @@
 ﻿using CapaDatos.InterfacesDTO;
-using CapaDTOs;
 using CapaDTOs.AuditoriaDTO;
 using CapaEntidad;
 using Dapper;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CapaDatos.MappersDTO
 {

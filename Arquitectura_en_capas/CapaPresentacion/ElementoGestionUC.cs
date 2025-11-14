@@ -63,6 +63,11 @@ namespace CapaPresentacion
         private void ElementoGestionUC_Load(object sender, EventArgs e)
         {
             CargarTodaLaGestion(_idElementoSeleccionado);
+
+            if(_idEstado == 2)
+            {
+                cmbEstado.Enabled = false;
+            }
         }
 
         private void CargarTodaLaGestion(int idElemento)
@@ -125,9 +130,18 @@ namespace CapaPresentacion
             cmbVarianteElemento.ValueMember = "IdVarianteElemento";
             cmbVarianteElemento.DisplayMember = "Variante";
 
-            cmbEstado.DataSource = elementosCN.ObtenerEstadoMantenimientoParaActualizar();
-            cmbEstado.ValueMember = "IdEstadoMantenimiento";
-            cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
+            if (_idEstado == 2)
+            {
+                cmbEstado.DataSource = elementosCN.ListarEstadoMantenimiento();
+                cmbEstado.ValueMember = "IdEstadoMantenimiento";
+                cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
+            }
+            else
+            {
+                cmbEstado.DataSource = elementosCN.ObtenerEstadoMantenimientoParaActualizar();
+                cmbEstado.ValueMember = "IdEstadoMantenimiento";
+                cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
+            }
         }
 
         private void dgvHistorial_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -53,20 +53,20 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotebookGestionUC));
@@ -84,7 +84,6 @@
             cmbModelo = new Guna.UI2.WinForms.Guna2ComboBox();
             lblModelo = new Label();
             lblNoPuedeActualizar = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblNoPuedeActualizarEnPrestamo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTipoElemento = new Guna.UI2.WinForms.Guna2HtmlLabel();
             panel3 = new Panel();
             txtExplicarMotivo = new Guna.UI2.WinForms.Guna2TextBox();
@@ -100,17 +99,19 @@
             lblPatrimonio = new Label();
             lblCodBarra = new Label();
             lblNroSerie = new Label();
-            btnInhabilitar = new Guna.UI2.WinForms.Guna2Button();
             btnHabilitar = new Guna.UI2.WinForms.Guna2Button();
             txtEquipo = new Guna.UI2.WinForms.Guna2TextBox();
             lblEquipo = new Label();
-            btnActualizar = new Guna.UI2.WinForms.Guna2Button();
-            btnRestablecerCambios = new Guna.UI2.WinForms.Guna2Button();
             btnConfirmar = new Guna.UI2.WinForms.Guna2Button();
             btnCancelar = new Guna.UI2.WinForms.Guna2Button();
+            btnInhabilitar = new Guna.UI2.WinForms.Guna2Button();
+            btnActualizar = new Guna.UI2.WinForms.Guna2Button();
+            btnRestablecerCambios = new Guna.UI2.WinForms.Guna2Button();
             pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
             btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
             lblNotebooksTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblCasillero = new Label();
+            lblCarroAsignado = new Label();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvHistorial).BeginInit();
             guna2Panel1.SuspendLayout();
@@ -306,6 +307,7 @@
             dgvHistorial.ThemeStyle.RowsStyle.Height = 35;
             dgvHistorial.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dgvHistorial.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dgvHistorial.CellClick += dgvHistorial_CellClick_1;
             // 
             // panel1
             // 
@@ -318,10 +320,11 @@
             // guna2Panel1
             // 
             guna2Panel1.BackColor = Color.Transparent;
+            guna2Panel1.Controls.Add(lblCasillero);
+            guna2Panel1.Controls.Add(lblCarroAsignado);
             guna2Panel1.Controls.Add(cmbModelo);
             guna2Panel1.Controls.Add(lblModelo);
             guna2Panel1.Controls.Add(lblNoPuedeActualizar);
-            guna2Panel1.Controls.Add(lblNoPuedeActualizarEnPrestamo);
             guna2Panel1.Controls.Add(lblTipoElemento);
             guna2Panel1.Controls.Add(panel3);
             guna2Panel1.Controls.Add(txtExplicarMotivo);
@@ -409,19 +412,6 @@
             lblNoPuedeActualizar.Text = "No puedes actualizar ningun dato si la notebook esta o sera deshabilitada";
             lblNoPuedeActualizar.TextAlignment = ContentAlignment.MiddleLeft;
             lblNoPuedeActualizar.Visible = false;
-            // 
-            // lblNoPuedeActualizarEnPrestamo
-            // 
-            lblNoPuedeActualizarEnPrestamo.BackColor = Color.Transparent;
-            lblNoPuedeActualizarEnPrestamo.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNoPuedeActualizarEnPrestamo.ForeColor = Color.Red;
-            lblNoPuedeActualizarEnPrestamo.Location = new Point(293, 355);
-            lblNoPuedeActualizarEnPrestamo.Name = "lblNoPuedeActualizarEnPrestamo";
-            lblNoPuedeActualizarEnPrestamo.Size = new Size(226, 32);
-            lblNoPuedeActualizarEnPrestamo.TabIndex = 3;
-            lblNoPuedeActualizarEnPrestamo.Text = "La notebook esta en prestamo, no se puede <br> actualizar datos.";
-            lblNoPuedeActualizarEnPrestamo.TextAlignment = ContentAlignment.MiddleLeft;
-            lblNoPuedeActualizarEnPrestamo.Visible = false;
             // 
             // lblTipoElemento
             // 
@@ -715,33 +705,6 @@
             lblNroSerie.TabIndex = 71;
             lblNroSerie.Text = "Nro de serie:";
             // 
-            // btnInhabilitar
-            // 
-            btnInhabilitar.BackColor = Color.Transparent;
-            btnInhabilitar.BorderRadius = 8;
-            btnInhabilitar.Cursor = Cursors.Hand;
-            btnInhabilitar.CustomizableEdges = customizableEdges29;
-            btnInhabilitar.DisabledState.BorderColor = Color.DarkGray;
-            btnInhabilitar.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnInhabilitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnInhabilitar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnInhabilitar.FillColor = Color.IndianRed;
-            btnInhabilitar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnInhabilitar.ForeColor = Color.White;
-            btnInhabilitar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btnInhabilitar.HoverState.ForeColor = Color.White;
-            btnInhabilitar.Location = new Point(14, 12);
-            btnInhabilitar.Name = "btnInhabilitar";
-            btnInhabilitar.PressedColor = Color.Brown;
-            btnInhabilitar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnInhabilitar.ShadowDecoration.CustomizableEdges = customizableEdges30;
-            btnInhabilitar.ShadowDecoration.Enabled = true;
-            btnInhabilitar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnInhabilitar.Size = new Size(152, 26);
-            btnInhabilitar.TabIndex = 90;
-            btnInhabilitar.Text = "Desahabilitar";
-            btnInhabilitar.Click += btnInhabilitar_Click;
-            // 
             // btnHabilitar
             // 
             btnHabilitar.BackColor = Color.Transparent;
@@ -815,62 +778,6 @@
             lblEquipo.TabIndex = 84;
             lblEquipo.Text = "Equipo:";
             // 
-            // btnActualizar
-            // 
-            btnActualizar.BackColor = Color.Transparent;
-            btnActualizar.BorderRadius = 8;
-            btnActualizar.Cursor = Cursors.Hand;
-            btnActualizar.CustomizableEdges = customizableEdges31;
-            btnActualizar.DisabledState.BorderColor = Color.DarkGray;
-            btnActualizar.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnActualizar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnActualizar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnActualizar.Enabled = false;
-            btnActualizar.FillColor = Color.FromArgb(252, 201, 52);
-            btnActualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnActualizar.ForeColor = Color.Firebrick;
-            btnActualizar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btnActualizar.HoverState.ForeColor = Color.White;
-            btnActualizar.Location = new Point(15, 557);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.PressedColor = Color.FromArgb(255, 170, 20);
-            btnActualizar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnActualizar.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            btnActualizar.ShadowDecoration.Enabled = true;
-            btnActualizar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnActualizar.Size = new Size(243, 26);
-            btnActualizar.TabIndex = 88;
-            btnActualizar.Text = "Actualizar datos";
-            btnActualizar.Click += btnGestionarElemento_M_Click;
-            // 
-            // btnRestablecerCambios
-            // 
-            btnRestablecerCambios.BackColor = Color.Transparent;
-            btnRestablecerCambios.BorderRadius = 8;
-            btnRestablecerCambios.Cursor = Cursors.Hand;
-            btnRestablecerCambios.CustomizableEdges = customizableEdges33;
-            btnRestablecerCambios.DisabledState.BorderColor = Color.DarkGray;
-            btnRestablecerCambios.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnRestablecerCambios.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnRestablecerCambios.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnRestablecerCambios.Enabled = false;
-            btnRestablecerCambios.FillColor = Color.FromArgb(252, 201, 52);
-            btnRestablecerCambios.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnRestablecerCambios.ForeColor = Color.Firebrick;
-            btnRestablecerCambios.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btnRestablecerCambios.HoverState.ForeColor = Color.White;
-            btnRestablecerCambios.Location = new Point(273, 557);
-            btnRestablecerCambios.Name = "btnRestablecerCambios";
-            btnRestablecerCambios.PressedColor = Color.FromArgb(255, 170, 20);
-            btnRestablecerCambios.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnRestablecerCambios.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            btnRestablecerCambios.ShadowDecoration.Enabled = true;
-            btnRestablecerCambios.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnRestablecerCambios.Size = new Size(243, 26);
-            btnRestablecerCambios.TabIndex = 89;
-            btnRestablecerCambios.Text = "Restablecer cambios";
-            btnRestablecerCambios.Click += btnRestablecerCambios_Click;
-            // 
             // btnConfirmar
             // 
             btnConfirmar.BackColor = Color.Transparent;
@@ -927,6 +834,89 @@
             btnCancelar.Visible = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // btnInhabilitar
+            // 
+            btnInhabilitar.BackColor = Color.Transparent;
+            btnInhabilitar.BorderRadius = 8;
+            btnInhabilitar.Cursor = Cursors.Hand;
+            btnInhabilitar.CustomizableEdges = customizableEdges29;
+            btnInhabilitar.DisabledState.BorderColor = Color.DarkGray;
+            btnInhabilitar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnInhabilitar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnInhabilitar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnInhabilitar.FillColor = Color.IndianRed;
+            btnInhabilitar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnInhabilitar.ForeColor = Color.White;
+            btnInhabilitar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnInhabilitar.HoverState.ForeColor = Color.White;
+            btnInhabilitar.Location = new Point(14, 12);
+            btnInhabilitar.Name = "btnInhabilitar";
+            btnInhabilitar.PressedColor = Color.Brown;
+            btnInhabilitar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnInhabilitar.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            btnInhabilitar.ShadowDecoration.Enabled = true;
+            btnInhabilitar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnInhabilitar.Size = new Size(152, 26);
+            btnInhabilitar.TabIndex = 90;
+            btnInhabilitar.Text = "Desahabilitar";
+            btnInhabilitar.Click += btnInhabilitar_Click;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.BackColor = Color.Transparent;
+            btnActualizar.BorderRadius = 8;
+            btnActualizar.Cursor = Cursors.Hand;
+            btnActualizar.CustomizableEdges = customizableEdges31;
+            btnActualizar.DisabledState.BorderColor = Color.DarkGray;
+            btnActualizar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnActualizar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnActualizar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnActualizar.Enabled = false;
+            btnActualizar.FillColor = Color.FromArgb(252, 201, 52);
+            btnActualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnActualizar.ForeColor = Color.Firebrick;
+            btnActualizar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnActualizar.HoverState.ForeColor = Color.White;
+            btnActualizar.Location = new Point(15, 557);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.PressedColor = Color.FromArgb(255, 170, 20);
+            btnActualizar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnActualizar.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            btnActualizar.ShadowDecoration.Enabled = true;
+            btnActualizar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnActualizar.Size = new Size(243, 26);
+            btnActualizar.TabIndex = 88;
+            btnActualizar.Text = "Actualizar datos";
+            btnActualizar.Click += btnGestionarElemento_M_Click;
+            // 
+            // btnRestablecerCambios
+            // 
+            btnRestablecerCambios.BackColor = Color.Transparent;
+            btnRestablecerCambios.BorderRadius = 8;
+            btnRestablecerCambios.Cursor = Cursors.Hand;
+            btnRestablecerCambios.CustomizableEdges = customizableEdges33;
+            btnRestablecerCambios.DisabledState.BorderColor = Color.DarkGray;
+            btnRestablecerCambios.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRestablecerCambios.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRestablecerCambios.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRestablecerCambios.Enabled = false;
+            btnRestablecerCambios.FillColor = Color.FromArgb(252, 201, 52);
+            btnRestablecerCambios.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnRestablecerCambios.ForeColor = Color.Firebrick;
+            btnRestablecerCambios.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnRestablecerCambios.HoverState.ForeColor = Color.White;
+            btnRestablecerCambios.Location = new Point(273, 557);
+            btnRestablecerCambios.Name = "btnRestablecerCambios";
+            btnRestablecerCambios.PressedColor = Color.FromArgb(255, 170, 20);
+            btnRestablecerCambios.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnRestablecerCambios.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            btnRestablecerCambios.ShadowDecoration.Enabled = true;
+            btnRestablecerCambios.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnRestablecerCambios.Size = new Size(243, 26);
+            btnRestablecerCambios.TabIndex = 89;
+            btnRestablecerCambios.Text = "Restablecer cambios";
+            btnRestablecerCambios.Click += btnRestablecerCambios_Click;
+            // 
             // pnlPresentacionNotebook
             // 
             pnlPresentacionNotebook.BackColor = Color.Transparent;
@@ -972,6 +962,30 @@
             lblNotebooksTitulo.Text = "<b>Notebook seleccionada</b>";
             lblNotebooksTitulo.TextAlignment = ContentAlignment.MiddleLeft;
             // 
+            // lblCasillero
+            // 
+            lblCasillero.AutoSize = true;
+            lblCasillero.BackColor = SystemColors.ButtonHighlight;
+            lblCasillero.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblCasillero.ForeColor = Color.Black;
+            lblCasillero.Location = new Point(274, 368);
+            lblCasillero.Name = "lblCasillero";
+            lblCasillero.Size = new Size(58, 15);
+            lblCasillero.TabIndex = 98;
+            lblCasillero.Text = "Casillero: ";
+            // 
+            // lblCarroAsignado
+            // 
+            lblCarroAsignado.AutoSize = true;
+            lblCarroAsignado.BackColor = SystemColors.ButtonHighlight;
+            lblCarroAsignado.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblCarroAsignado.ForeColor = Color.Black;
+            lblCarroAsignado.Location = new Point(274, 341);
+            lblCarroAsignado.Name = "lblCarroAsignado";
+            lblCarroAsignado.Size = new Size(94, 15);
+            lblCarroAsignado.TabIndex = 97;
+            lblCarroAsignado.Text = "Carro asignado: ";
+            // 
             // NotebookGestionUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1006,7 +1020,6 @@
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNoPuedeActualizar;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblNoPuedeActualizarEnPrestamo;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTipoElemento;
         private Panel panel3;
         private Guna.UI2.WinForms.Guna2TextBox txtExplicarMotivo;
@@ -1035,5 +1048,7 @@
         private Guna.UI2.WinForms.Guna2ComboBox cmbModelo;
         private Label lblModelo;
         private Label lblCodBarra;
+        private Label lblCasillero;
+        private Label lblCarroAsignado;
     }
 }

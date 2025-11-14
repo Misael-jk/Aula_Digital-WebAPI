@@ -1287,7 +1287,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvNotebooks_M.DefaultCellStyle = dataGridViewCellStyle3;
             dgvNotebooks_M.GridColor = Color.Gainsboro;
-            dgvNotebooks_M.Location = new Point(11, 94);
+            dgvNotebooks_M.Location = new Point(12, 94);
             dgvNotebooks_M.MultiSelect = false;
             dgvNotebooks_M.Name = "dgvNotebooks_M";
             dgvNotebooks_M.RowHeadersVisible = false;

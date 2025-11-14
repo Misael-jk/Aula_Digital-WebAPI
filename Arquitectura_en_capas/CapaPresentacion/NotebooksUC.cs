@@ -20,11 +20,12 @@ namespace CapaPresentacion
     {
         private readonly NotebooksCN notebooksCN;
         private readonly CarritosCN carritosCN;
+        private readonly NotebookBajasCN notebookBajasCN;
         private FormPrincipal _formPrincipal;
         private Usuarios usuarioActual;
         private int IdActual = 0;
 
-        public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN, FormPrincipal formPrincipal)
+        public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN, FormPrincipal formPrincipal, NotebookBajasCN notebookBajasCN)
         {
             InitializeComponent();
 
@@ -32,6 +33,7 @@ namespace CapaPresentacion
             this._formPrincipal = formPrincipal;
             this.usuarioActual = user;
             this.carritosCN = carritosCN;
+            this.notebookBajasCN = notebookBajasCN;
         }
         public void ActualizarDataGrid()
         {
@@ -121,12 +123,12 @@ namespace CapaPresentacion
 
         private void btnDeshabiliar_Click(object sender, EventArgs e)
         {
-            notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, 3);
+            //notebooksCN.DeshabilitarNotebook(IdActual, usuarioActual.IdUsuario, 3);
 
-            ActualizarDataGrid();
-            CargarGrafico();
-            CargarGraficoEstados();
-            CargarGraficoCarritos();
+            //ActualizarDataGrid();
+            //CargarGrafico();
+            //CargarGraficoEstados();
+            //CargarGraficoCarritos();
         }
 
         private void btnAgragarAlCarrito_Click(object sender, EventArgs e)
@@ -162,7 +164,7 @@ namespace CapaPresentacion
 
         private void CargarGrafico()
         {
-            var datos = notebooksCN.GetCantidadPorModelo();
+            List<(string Modelo, int Cantidad)> datos = notebooksCN.GetCantidadPorModelo();
 
             if (datos == null || datos.Count == 0) return;
 
@@ -178,7 +180,7 @@ namespace CapaPresentacion
                 });
             }
 
-            var pieChart = new PieChart
+            PieChart pieChart = new PieChart
             {
                 Dock = DockStyle.Fill,
                 Series = series.ToArray()
@@ -242,10 +244,10 @@ namespace CapaPresentacion
                 Values = values,
                 DataLabelsPaint = new SolidColorPaint(new SKColor(60, 60, 60)),
                 DataLabelsSize = 11,
-                MaxBarWidth = 45,     // ✅ barras más parejas
-                Padding = 5,          // ✅ espacio entre barras
-                Stroke = null,        // ✅ quita bordes de barras
-                Fill = new SolidColorPaint(new SKColor(70, 130, 180)) // ✅ color suave estilo dashboard
+                MaxBarWidth = 45,     
+                Padding = 5,          
+                Stroke = null,     
+                Fill = new SolidColorPaint(new SKColor(70, 130, 180)) 
             };
 
             var chart = new CartesianChart
@@ -285,7 +287,7 @@ namespace CapaPresentacion
 
         private void btnGestionarNotebook_M_Click(object sender, EventArgs e)
         {
-            var detalleUC = new NotebookGestionUC(_formPrincipal, this, notebooksCN, IdActual, usuarioActual);
+            var detalleUC = new NotebookGestionUC(_formPrincipal, this, notebooksCN, IdActual, usuarioActual, notebookBajasCN);
             _formPrincipal.MostrarUserControl(detalleUC);
         }
     }

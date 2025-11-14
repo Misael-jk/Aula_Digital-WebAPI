@@ -49,6 +49,10 @@ namespace CapaPresentacion
             cmbTipoElementoModelo.ValueMember = "IdTipoElemento";
             cmbTipoElementoModelo.DisplayMember = "ElementoTipo";
 
+            cmbTipoElementoModeloActu.DataSource = tiposElementoCN.GetTiposByElemento();
+            cmbTipoElementoModeloActu.ValueMember = "IdTipoElemento";
+            cmbTipoElementoModeloActu.DisplayMember = "ElementoTipo";
+
             cmbTipoElementoVariante.DataSource = tiposElementoCN.GetTiposByElemento();
             cmbTipoElementoVariante.ValueMember = "IdTipoElemento";
             cmbTipoElementoVariante.DisplayMember = "ElementoTipo";
@@ -76,7 +80,7 @@ namespace CapaPresentacion
 
         // ELEMENTOS
         #region TIPO ELEMENTO
-        private void dgvTipoElemento_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvTipoElemento_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -105,7 +109,7 @@ namespace CapaPresentacion
         #endregion
 
         #region MODELOS
-        private void dgvModelo_Elementos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvModelo_Elementos_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -114,6 +118,8 @@ namespace CapaPresentacion
             Modelos? modelo = modeloCN.ObtenerPorId(IdModelo_Elementos);
 
             txtNombreModeloActu.Text = modelo?.NombreModelo;
+            cmbTipoElementoModeloActu.SelectedValue = modelo?.IdTipoElemento;
+
         }
 
         private void btnCrearModelo_Click(object sender, EventArgs e)
@@ -143,7 +149,7 @@ namespace CapaPresentacion
         #endregion
 
         #region UBICACIONES
-        private void dgvUbicaciones_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvUbicaciones_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -171,7 +177,7 @@ namespace CapaPresentacion
         #endregion
 
         #region VARIANTE ELEMENTO
-        private void dgvVarianteElemento_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvVarianteElemento_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -219,7 +225,7 @@ namespace CapaPresentacion
 
         // NOTEBOOK
         #region MODELOS
-        private void dgvModelo_Notebook_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvModelo_Notebook_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
             IdModelo_Notebook = Convert.ToInt32(dgvModelo_Notebook.Rows[e.RowIndex].Cells["IdModelo"].Value);
@@ -260,7 +266,7 @@ namespace CapaPresentacion
 
         // CARRITOS
         #region MODELOS
-        private void dgvModelo_Carritos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvModelo_Carritos_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -309,12 +315,13 @@ namespace CapaPresentacion
 
         private void cmbTipoElementoVarianteActu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbTipoElementoVarianteActu.SelectedValue is int selectedValue)
+            if (cmbTipoElementoVarianteActu.SelectedValue is int selectedValue)
             {
                 cmbModeloVarianteActu.DataSource = modeloCN.ObtenerModelosPorTipoElemento(selectedValue);
                 cmbModeloVarianteActu.ValueMember = "IdModelo";
                 cmbModeloVarianteActu.DisplayMember = "Modelo";
             }
         }
+
     }
 }

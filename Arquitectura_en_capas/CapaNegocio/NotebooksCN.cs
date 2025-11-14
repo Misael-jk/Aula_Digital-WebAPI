@@ -1,6 +1,7 @@
 ﻿using CapaDatos.InterfacesDTO;
 using CapaDatos.InterfaceUoW;
 using CapaDTOs;
+using CapaDTOs.AuditoriaDTO;
 using CapaEntidad;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
@@ -11,11 +12,13 @@ public class NotebooksCN
 {
     private readonly IUowNotebooks uow;
     private readonly IMapperNotebooks mapperNotebook;
+    private readonly IMapperHistorialNotebookG mapperHistorialNotebookG;
 
-    public NotebooksCN(IMapperNotebooks mapperNotebooks, IUowNotebooks uow)
+    public NotebooksCN(IMapperNotebooks mapperNotebooks, IUowNotebooks uow, IMapperHistorialNotebookG mapperHistorialNotebookG)
     {
         this.uow = uow;
         this.mapperNotebook = mapperNotebooks;
+        this.mapperHistorialNotebookG = mapperHistorialNotebookG;
     }
 
     #region READ
@@ -104,7 +107,7 @@ public class NotebooksCN
     #endregion
 
     #region Deshabilitar Notebook
-    public void DeshabilitarNotebook(int idNotebook,/* string motivo, */ int idUsuario, int idEstadoMantenimiento)
+    public void DeshabilitarNotebook(int idNotebook, string motivo, int idUsuario)
     {
         try
         {
@@ -126,7 +129,7 @@ public class NotebooksCN
                 throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
             }
 
-            notebook.IdEstadoMantenimiento = idEstadoMantenimiento;
+            notebook.IdEstadoMantenimiento = 7;
             notebook.Habilitado = false;
             notebook.FechaBaja = DateTime.Now;
 
@@ -136,7 +139,7 @@ public class NotebooksCN
                 IdTipoAccion = 3,
                 FechaCambio = DateTime.Now,
                 Descripcion = $"Se deshabilitó la notebook con número de serie {notebook.NumeroSerie}.",
-                Motivo = null /* motivo */,
+                Motivo = motivo,
                 IdUsuario = idUsuario
             };
 
@@ -173,6 +176,11 @@ public class NotebooksCN
     public IEnumerable<EstadosMantenimiento> ListarEstadoMantenimiento()
     {
         return uow.RepoEstadosMantenimiento.GetAll();
+    }
+
+    public IEnumerable<EstadosMantenimiento> ListarEstadoParaActualizar()
+    {
+        return uow.RepoEstadosMantenimiento.GetAllForUpdates();
     }
 
     public Notebooks? ObtenerNotebookPorID(int idNotebook)
@@ -213,6 +221,18 @@ public class NotebooksCN
     public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos()
     {
         return uow.RepoNotebooks.GetCantidadNotebooksEnCarritos();
+    }
+    #endregion
+
+    #region HISTORIAL COMPLETO DE DICHO ELEMENTO
+    public IEnumerable<HistorialNotebookGestionDTO> ObtenerHistorialPorID(int idNotebook)
+    {
+        return mapperHistorialNotebookG.GetAllDTO(idNotebook);
+    }
+
+    public HistorialCambios? ObtenerHistorialPorIDHistorial(int idHistorial)
+    {
+        return uow.RepoHistorialCambio.GetById(idHistorial);
     }
     #endregion
 

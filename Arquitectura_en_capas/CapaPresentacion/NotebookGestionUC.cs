@@ -17,6 +17,7 @@ namespace CapaPresentacion
         private FormPrincipal formPrincipal;
         private NotebooksUC notebooksUC;
         private NotebooksCN notebooksCN;
+        private readonly NotebookBajasCN notebookBajasCN;
         private int _idNotebookSeleccionado;
         private int _idHistorialSeleccionado;
         private Usuarios usuarios;
@@ -35,9 +36,11 @@ namespace CapaPresentacion
         private string? _NombreModelo = "";
         private string? _NombreUbicacion = "";
         private string? _NombreEstado = "";
+        private string? _Carrito = "";
+        private int? _Casillero = 0;
         #endregion
 
-        public NotebookGestionUC(FormPrincipal formPrincipal, NotebooksUC notebooksUC, NotebooksCN notebooksCN, int idNotebookSeleccionado, Usuarios user)
+        public NotebookGestionUC(FormPrincipal formPrincipal, NotebooksUC notebooksUC, NotebooksCN notebooksCN, int idNotebookSeleccionado, Usuarios user, NotebookBajasCN notebookBajasCN)
         {
             InitializeComponent();
 
@@ -46,6 +49,7 @@ namespace CapaPresentacion
             this.notebooksCN = notebooksCN;
             this._idNotebookSeleccionado = idNotebookSeleccionado;
             this.usuarios = user;
+            this.notebookBajasCN = notebookBajasCN;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -57,12 +61,24 @@ namespace CapaPresentacion
         private void NotebookGestionUC_Load(object sender, EventArgs e)
         {
             CargarTodaLaGestion(_idNotebookSeleccionado);
+
+            if(_Carrito is not null && _Casillero is not null)
+            {
+                cmbUbicacion.Enabled = false;
+            }
+
+            if (_idEstado == 2)
+            {
+                cmbEstado.Enabled = false;
+            }
         }
 
         private void CargarTodaLaGestion(int idElemento)
         {
-            //dgvHistorial.DataSource = notebooksCN.ObtenerHistorialPorID(_idElementoSeleccionado);
+            dgvHistorial.DataSource = notebooksCN.ObtenerHistorialPorID(_idNotebookSeleccionado);
+
             Notebooks? notebooks = notebooksCN.ObtenerNotebookPorID(_idNotebookSeleccionado);
+            var carrito = notebooksCN.ObtenerCarritoPorNotebook(_idNotebookSeleccionado);
 
             _Equipo = notebooks?.Equipo;
             _idTipo = notebooks?.IdTipoElemento;
@@ -73,6 +89,8 @@ namespace CapaPresentacion
             _idUbicacion = notebooks?.IdUbicacion;
             _idEstado = notebooks?.IdEstadoMantenimiento;
             _idModelo = notebooks?.IdModelo;
+            _Carrito = carrito?.EquipoCarrito;
+            _Casillero = notebooks?.PosicionCarrito;
 
             CargarComboboxes(Convert.ToInt32(_idTipo));
 
@@ -96,6 +114,8 @@ namespace CapaPresentacion
             cmbUbicacion.SelectedValue = _idUbicacion;
             cmbEstado.SelectedValue = _idEstado;
             cmbModelo.SelectedValue = _idModelo;
+            lblCarroAsignado.Text += _Carrito ?? "Sin Carrito";
+            lblCasillero.Text += _Casillero.ToString() ?? " - ";
         }
 
         private void CargarComboboxes(int idTipo)
@@ -108,28 +128,38 @@ namespace CapaPresentacion
             cmbModelo.ValueMember = "IdModelo";
             cmbModelo.DisplayMember = "NombreModelo";
 
-            cmbEstado.DataSource = notebooksCN.ListarEstadoMantenimiento();
-            cmbEstado.ValueMember = "IdEstadoMantenimiento";
-            cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
+            if (_idEstado == 2)
+            {
+                cmbEstado.DataSource = notebooksCN.ListarEstadoMantenimiento();
+                cmbEstado.ValueMember = "IdEstadoMantenimiento";
+                cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
+            }
+            else
+            {
+                cmbEstado.DataSource = notebooksCN.ListarEstadoParaActualizar();
+                cmbEstado.ValueMember = "IdEstadoMantenimiento";
+                cmbEstado.DisplayMember = "EstadoMantenimientoNombre";
+            }
         }
 
-        private void dgvHistorial_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvHistorial_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
             var fila = dgvHistorial.Rows[e.RowIndex];
 
-            _idHistorialSeleccionado = Convert.ToInt32(fila.Cells["IdHistorialElemento"].Value);
+            _idHistorialSeleccionado = Convert.ToInt32(fila.Cells["IdHistorialNotebook"].Value);
 
-            //HistorialCambios? historialCambios = elementosCN.ObtenerHistorialPorIDHistorial(_idHistorialSeleccionado);
+            HistorialCambios? historialCambios = notebooksCN.ObtenerHistorialPorIDHistorial(_idHistorialSeleccionado);
 
-            //txtMotivo.Text = historialCambios?.Motivo;
-
-            //txtDescripcion.Text = historialCambios?.Descripcion;
+            txtMotivo.Text = historialCambios?.Motivo;
+            txtDescripcion.Text = historialCambios?.Descripcion;
         }
 
         private void btnGestionarElemento_M_Click(object sender, EventArgs e)
         {
+            var notebooks = notebooksCN.ObtenerNotebookPorID(_idNotebookSeleccionado);
+
             var notebook = new Notebooks
             {
                 IdElemento = _idNotebookSeleccionado,
@@ -142,8 +172,8 @@ namespace CapaPresentacion
                 IdVarianteElemento = null,
                 IdUbicacion = Convert.ToInt32(cmbUbicacion.SelectedValue),
                 IdEstadoMantenimiento = Convert.ToInt32(cmbEstado.SelectedValue),
-                //IdCarrito = notebooks?.IdCarrito,
-                //PosicionCarrito = notebooks?.PosicionCarrito,
+                IdCarrito = notebooks?.IdCarrito,
+                PosicionCarrito = notebooks?.PosicionCarrito,
                 Habilitado = Convert.ToBoolean(_habilitado),
                 FechaBaja = null
             };
@@ -162,21 +192,16 @@ namespace CapaPresentacion
 
         private void VerificarCambios(object sender, EventArgs e)
         {
-            if (txtEquipo.Text != _Equipo ||
-                txtNroSerie.Text != _NroSerie ||
-                txtCodBarra.Text != _CodBarra ||
-                txtPatrimonio.Text != _Patrimonio ||
-                Convert.ToInt32(txtEquipo.Tag) != _idModelo ||
-                Convert.ToInt32(cmbModelo.SelectedValue) != _idModelo ||
-                Convert.ToInt32(cmbUbicacion.SelectedValue) != _idUbicacion ||
-                Convert.ToInt32(cmbEstado.SelectedValue) != _idEstado)
-            {
-                HabilitarBotones(true, true);
-            }
-            else
-            {
-                HabilitarBotones(false, false);
-            }
+            bool huboCambios =
+            txtEquipo.Text != (_Equipo ?? "") ||
+            txtNroSerie.Text != (_NroSerie ?? "") ||
+            txtCodBarra.Text != (_CodBarra ?? "") ||
+            txtPatrimonio.Text != (_Patrimonio ?? "") ||
+            (cmbModelo.SelectedValue != null && Convert.ToInt32(cmbModelo.SelectedValue) != _idModelo) ||
+            (cmbUbicacion.SelectedValue != null && Convert.ToInt32(cmbUbicacion.SelectedValue) != _idUbicacion) ||
+            (cmbEstado.SelectedValue != null && Convert.ToInt32(cmbEstado.SelectedValue) != _idEstado);
+
+            HabilitarBotones(huboCambios, huboCambios);
         }
 
 
@@ -330,13 +355,13 @@ namespace CapaPresentacion
         {
             if (_habilitado == true)
             {
-                notebooksCN.DeshabilitarNotebook(_idNotebookSeleccionado, 3, usuarios.IdUsuario);
+                notebooksCN.DeshabilitarNotebook(_idNotebookSeleccionado, txtExplicarMotivo.Text, usuarios.IdUsuario);
                 CargarTodaLaGestion(_idNotebookSeleccionado);
             }
             else
             {
-                //notebooksCN.HabilitarNotebook(_idNotebookSeleccionado, usuarios.IdUsuario);
-                //CargarTodaLaGestion(_idNotebookSeleccionado);
+                notebookBajasCN.HabilitarNotebook(_idNotebookSeleccionado, usuarios.IdUsuario, txtExplicarMotivo.Text);
+                CargarTodaLaGestion(_idNotebookSeleccionado);
             }
 
             btnConfirmar.Enabled = false;
