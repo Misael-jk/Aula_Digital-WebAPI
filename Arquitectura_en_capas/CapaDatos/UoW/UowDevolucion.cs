@@ -40,8 +40,8 @@ public class UowDevolucion : UowBase, IUowDevolucion
 
 
         // REPO AUXILIARES / DE LECTURA
-        RepoUsuarios = new RepoUsuarios(conexion);
-        RepoDocentes = new RepoDocentes(conexion);
+        RepoUsuarios = new RepoUsuarios(conexion, Transaction);
+        RepoDocentes = new RepoDocentes(conexion, Transaction);
         RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion);
         RepoPrestamoDetalle = new RepoPrestamoDetalle(conexion);
         RepoTipoElemento = new RepoTipoElemento(conexion);

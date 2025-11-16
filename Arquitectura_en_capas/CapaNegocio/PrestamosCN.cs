@@ -253,6 +253,10 @@ public class PrestamosCN
     {
         return uow.RepoCursos.GetAll();
     }
+    public Curso? ObtenerCursoPorID(int idCurso)
+    {
+        return uow.RepoCursos.GetById(idCurso);
+    }
     #endregion
 
     #region Elementos
@@ -330,7 +334,7 @@ public class PrestamosCN
 
         foreach (int idElementos in idsElemento)
         {
-            if(uow.RepoElemento.GetById(idElementos) == null)
+            if (uow.RepoElemento.GetById(idElementos) == null)
             {
                 throw new Exception($"El elemento {idElementos} no existe.");
             }
@@ -340,10 +344,10 @@ public class PrestamosCN
                 throw new Exception($"El elemento {idElementos} no esta disponible.");
             }
 
-            if(uow.RepoPrestamoDetalle.GetByElemento(idElementos) != null)
-            {
-                throw new Exception($"El elemento {idElementos} ya esta en un prestamo activo.");
-            }
+            //if (uow.RepoPrestamoDetalle.GetByElemento(idElementos) != null)
+            //{
+            //    throw new Exception($"El elemento {idElementos} ya esta en un prestamo activo.");
+            //}
 
             if (idsElemento.Count(x => x == idElementos) > 1)
             {

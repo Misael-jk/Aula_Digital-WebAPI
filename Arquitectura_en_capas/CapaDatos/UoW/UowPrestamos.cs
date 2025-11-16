@@ -24,7 +24,8 @@ public class UowPrestamos : UowBase, IUowPrestamos
     public IRepoVarianteElemento RepoVarianteElemento { get; }
 
     public UowPrestamos(IDbConnection conexion) : base(conexion)
-    {
+{
+        // CON TRANSACCIÓN
         RepoPrestamos = new RepoPrestamos(conexion, Transaction);
         RepoCarritos = new RepoCarritos(conexion, Transaction);
         RepoElemento = new RepoElemento(conexion, Transaction);
@@ -34,16 +35,16 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoHistorialCarrito = new RepoHistorialCarrito(conexion, Transaction);
         RepoHistorialNotebook = new RepoHistorialNotebook(conexion, Transaction);
         RepoNotebooks = new RepoNotebooks(conexion, Transaction);
+
+        // SOLO LECTURA
+        RepoDocentes = new RepoDocentes(conexion, Transaction);
+        RepoUsuarios = new RepoUsuarios(conexion, Transaction);
+        RepoCursos = new RepoCursos(conexion, Transaction);
         RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
         RepoModelo = new RepoModelo(conexion, Transaction);
         RepoVarianteElemento = new RepoVarianteElemento(conexion, Transaction);
-
-
-        // REPO DE LECTURA
-        RepoDocentes = new RepoDocentes(conexion);
-        RepoUsuarios = new RepoUsuarios(conexion);
-        RepoCursos = new RepoCursos(conexion);
     }
+
 
     protected override void CambiarTransacion(IDbTransaction? transaction)
     {
@@ -54,5 +55,13 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoHistorialCambio.SetTransaction(transaction);
         RepoHistorialElementos.SetTransaction(transaction);
         RepoHistorialCarrito.SetTransaction(transaction);
+        RepoHistorialNotebook.SetTransaction(transaction);
+        RepoNotebooks.SetTransaction(transaction);
+        RepoTipoElemento.SetTransaction(transaction);
+        RepoModelo.SetTransaction(transaction);
+        RepoVarianteElemento.SetTransaction(transaction);
+        RepoDocentes.SetTransaction(transaction);
+        RepoUsuarios.SetTransaction(transaction);
+        RepoCursos.SetTransaction(transaction);
     }
 }

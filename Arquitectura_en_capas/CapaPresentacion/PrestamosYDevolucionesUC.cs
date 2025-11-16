@@ -32,6 +32,11 @@ namespace CapaPresentacion
 
         private void PrestamosYDevolucionesUC_Load(object sender, EventArgs e)
         {
+            ActualizarDataGrid();
+        }
+
+        public void ActualizarDataGrid()
+        {
             dvgPrestamosYDevoluciones.DataSource = mapperTransaccion.GetAllDTO();
         }
 

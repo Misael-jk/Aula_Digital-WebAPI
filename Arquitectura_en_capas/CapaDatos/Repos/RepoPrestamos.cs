@@ -19,10 +19,10 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
 
         parametros.Add("unidPrestamo", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
+        parametros.Add("unidUsuario", prestamos.IdUsuario);
         parametros.Add("unidCurso", prestamos.IdCurso);
         parametros.Add("unidDocente", prestamos.IdDocente);
         parametros.Add("unidCarrito", prestamos.IdCarrito);
-        parametros.Add("unidEncargado", prestamos.IdUsuario);
         parametros.Add("unidEstadoPrestamo", prestamos.IdEstadoPrestamo);
         parametros.Add("unafechaPrestamo", prestamos.FechaPrestamo);
 
@@ -99,7 +99,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
     #region obtener por Id
     public Prestamos? GetById(int idPrestamo)
     {
-        string query = "select * from Prestamos where idPrestamo = unidPrestamo";
+        string query = "select * from Prestamos where idPrestamo = @unidPrestamo";
 
         DynamicParameters parametros = new DynamicParameters();
         try
