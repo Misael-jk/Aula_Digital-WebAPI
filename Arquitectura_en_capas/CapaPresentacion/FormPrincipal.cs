@@ -47,6 +47,7 @@ namespace CapaPresentacion
         private readonly IRepoModelo repoModelo;
         private readonly IRepoNotebooks repoNotebooks;
         private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
+        private readonly IRepoRoles repoRoles;
         #endregion
 
         #region Elementos
@@ -79,13 +80,6 @@ namespace CapaPresentacion
         private readonly IUowNotebooks uowNotebooks;
         private readonly IUowPrestamos uowPrestamos;
         private readonly IUowDevolucion uowDevolucion;
-
-        private readonly IRepoRoles repoRoles;
-        //private readonly IRepoDocentes repoDocentes;
-        //private readonly IRepoModelo repoModelo;
-        //private readonly IRepoUbicacion repoUbicacion;
-        //private readonly IRepoTipoElemento repoTipoElemento;
-        //private readonly IRepoUsuarios repoUsuarios;
         #endregion
 
         #region Variables Mapper Interfaces
@@ -110,6 +104,7 @@ namespace CapaPresentacion
         private readonly IMapperPrestamosActivos mapperPrestamosActivos;
         private readonly IMapperHistorialElementoG mapperHistorialElementoG;
         private readonly IMapperTransaccion mapperTransaccion;
+        private readonly IMapperNotebooksCarro mapperNotebooksCarro;
         #endregion
 
         #region Variables Capa Negocio
@@ -212,11 +207,12 @@ namespace CapaPresentacion
             mapperPrestamosActivos = new MapperPrestamosActivos(conexion);
             mapperHistorialElementoG = new MapperHistorialElementoG(conexion);
             mapperTransaccion = new MapperTransaccion(conexion);
+            mapperNotebooksCarro = new MapperNotebooksCarro(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
-            prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos);
+            prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos, mapperNotebooksCarro);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
             modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
@@ -591,7 +587,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (prestamosYDevolucionesUC == null)
-                prestamosYDevolucionesUC = new PrestamosYDevolucionesUC(mapperTransaccion);
+                prestamosYDevolucionesUC = new PrestamosYDevolucionesUC(mapperTransaccion, this, prestamosCN, devolucionCN, userVerificado);
 
             CambiarNombrePort(btnPrestAndDevo.Text);
 

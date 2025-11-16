@@ -9,6 +9,7 @@ public interface IRepoCarritos
     public void Update(Carritos carrito);
     public void Delete(int idCarrito);
     public IEnumerable<Carritos> GetAll();
+    public IEnumerable<Carritos> GetAllDisponibles();
     public Carritos? GetById(int idCarrito);
     public Carritos? GetByNumeroSerie(string numeroSerieCarrito);
     public Carritos? GetByEquipo(string equipo);

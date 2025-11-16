@@ -485,5 +485,27 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
-}
 
+    #region OBTENER IDs DE NOTEBOOKS POR EL ID DEL CARRITO
+    public IEnumerable<int> GetIdNotebooksByCarrito(int idCarrito)
+    {
+        string query = @"select e.idElemento
+                        from elementos e
+                        join Notebooks n using (idElemento)
+                        where n.idCarrito = @unIdCarrito
+                        Order by posicionCarrito ASC;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("@unIdCarrito", idCarrito);
+
+        try
+        {
+            return Conexion.Query<int>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al obtener IDs de notebooks del carrito: " + ex.Message);
+        }
+    }
+    #endregion
+}
