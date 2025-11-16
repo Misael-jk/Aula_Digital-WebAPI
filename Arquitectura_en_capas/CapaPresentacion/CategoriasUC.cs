@@ -76,6 +76,49 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 2070);
             MostrarCategoria();
+
+            #region Tipo Elemento
+            dgvTipoElemento.Columns["IdTipoElemento"].HeaderText = "ID";
+            dgvTipoElemento.Columns["IdTipoElemento"].Width = 50;
+            dgvTipoElemento.Columns["ElementoTipo"].HeaderText = "Tipos de Elementos";
+            dgvTipoElemento.ReadOnly = true;
+            #endregion
+
+            #region Modelo Elemento
+            dgvModelo_Elementos.Columns["IdModelo"].HeaderText = "ID";
+            dgvModelo_Elementos.Columns["IdModelo"].Width = 50;
+            dgvModelo_Elementos.ReadOnly = true;
+            #endregion
+
+            #region Variante Elemento
+            dgvVarianteElemento.Columns["IdVarianteElemento"].HeaderText = "Id";
+            dgvVarianteElemento.Columns["IdVarianteElemento"].Width = 50;
+            dgvVarianteElemento.ReadOnly = true;
+            #endregion
+
+            #region Ubicacion
+            dgvUbicaciones.Columns["IdUbicacion"].HeaderText = "ID";
+            dgvUbicaciones.Columns["IdUbicacion"].Width = 50;
+            dgvUbicaciones.Columns["NombreUbicacion"].HeaderText = "Ubicaciones";
+            dgvModelo_Notebook.ReadOnly = true;
+            #endregion
+
+            #region Modelo de Notebooks
+            dgvModelo_Notebook.Columns["IdModelo"].HeaderText = "ID";
+            dgvModelo_Notebook.Columns["IdModelo"].Width = 50;
+            dgvModelo_Notebook.Columns["Modelo"].HeaderText = "Modelos de Notebooks";
+            dgvModelo_Notebook.Columns["Modelo"].Width = 220;
+            dgvModelo_Notebook.Columns["Tipo"].HeaderText = "Tipo Notebook";
+            dgvModelo_Carritos.ReadOnly = true;
+            #endregion
+
+            #region Modelo de Carritos
+            dgvModelo_Carritos.Columns["IdModelo"].HeaderText = "ID";
+            dgvModelo_Carritos.Columns["IdModelo"].Width = 50;
+            dgvModelo_Carritos.Columns["Modelo"].HeaderText = "Modelos de Carritos";
+            dgvModelo_Carritos.Columns["Modelo"].Width = 200;
+            dgvModelo_Carritos.Columns["Tipo"].HeaderText = "Tipo Carrito";
+            #endregion
         }
 
         // ELEMENTOS

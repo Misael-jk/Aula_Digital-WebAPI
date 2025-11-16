@@ -562,7 +562,6 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
-}
 
     #region OBTENER IDs DE NOTEBOOKS POR EL ID DEL CARRITO
     public IEnumerable<int> GetIdNotebooksByCarrito(int idCarrito)

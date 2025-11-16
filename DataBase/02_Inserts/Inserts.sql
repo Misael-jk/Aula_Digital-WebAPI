@@ -148,8 +148,8 @@ INSERT INTO EstadosPrestamo (estadoPrestamo) VALUES
 -- PRESTAMOS
 -- ======================
 INSERT INTO Prestamos (idUsuarioRecibio, idCurso, idDocente, idCarrito, idEstadoPrestamo, fechaPrestamo) VALUES
-(1, 1, 1, 1, 1, '2025-08-01 10:00:00'),
-(2, 2, 2, 2, 1, '2025-08-02 11:00:00');
+(1, 1, 1, 1, 2, '2025-08-01 10:00:00'),
+(2, 2, 2, 2, 2, '2025-08-02 11:00:00');
 
 -- ======================
 -- PRESTAMO DETALLE

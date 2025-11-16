@@ -295,7 +295,9 @@ namespace CapaPresentacion
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
                 IdRol = Convert.ToInt32(lblRol.Tag),
-                FotoPerfil = RutaFoto
+                FotoPerfil = RutaFoto,
+                Habilitado = true,
+                FechaBaja = null
             };
 
             usuariosCN.ActualizarUsuario(usuario);
