@@ -499,6 +499,7 @@
             btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnVolver.Size = new Size(32, 32);
             btnVolver.TabIndex = 5;
+            btnVolver.Click += btnVolver_Click;
             // 
             // lblPrestamoTitulo
             // 

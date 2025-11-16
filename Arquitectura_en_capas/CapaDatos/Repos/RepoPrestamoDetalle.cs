@@ -107,7 +107,7 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
     #region Obtener Detalle por elemento
     public Elemento? GetByElemento(int idElemento)
     {
-        string query = "select idElemento from Elementos where idElemento = @idElemento";
+        string query = "select idElemento from Elementos where idElemento = @unidElemento";
 
         DynamicParameters parametros = new DynamicParameters();
 

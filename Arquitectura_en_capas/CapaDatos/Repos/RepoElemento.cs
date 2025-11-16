@@ -161,13 +161,13 @@ public class RepoElemento : RepoBase, IRepoElemento
     public void UpdateEstado(int idElemento, int idEstadoElemento)
     {
         string sql = @"update Elementos
-                       set idEstadoElemento = @idEstadoElemento
+                       set idEstadoMantenimiento = @IdEstadoElemento
                        where idElemento = @IdElemento";
 
         DynamicParameters parameters = new DynamicParameters();
 
-        parameters.Add("@IdElemento", idElemento);
-        parameters.Add("@IdEstadoElemento", idEstadoElemento);
+        parameters.Add("IdElemento", idElemento);
+        parameters.Add("IdEstadoElemento", idEstadoElemento);
 
         Conexion.Execute(sql, parameters, transaction: Transaction);
     }

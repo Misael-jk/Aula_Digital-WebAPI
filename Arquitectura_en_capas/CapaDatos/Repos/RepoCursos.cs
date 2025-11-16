@@ -31,14 +31,14 @@ public class RepoCursos : RepoBase, IRepoCursos
     #region Mostrar por id los cursos
     public Curso? GetById(int idCurso)
     {
-        string query = "select * from Cursos where idCurso = @unidCurso";
+        string query = "select idCurso AS IdCurso, curso AS NombreCurso from Cursos where idCurso = @unidCurso";
 
         DynamicParameters parameters = new DynamicParameters();
         try
         {
             parameters.Add("unidCurso", idCurso);
 
-            return Conexion.QueryFirstOrDefault<Curso>(query, parameters);
+            return Conexion.QueryFirstOrDefault<Curso>(query, parameters, transaction: Transaction);
         }
         catch (Exception ex)
         {
@@ -46,5 +46,4 @@ public class RepoCursos : RepoBase, IRepoCursos
         }
     }
     #endregion
-
 }

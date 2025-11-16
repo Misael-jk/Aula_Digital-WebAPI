@@ -50,6 +50,10 @@ namespace CapaPresentacion
         private void CrearPrestamosUC_Load(object sender, EventArgs e)
         {
             CargarDatos();
+
+            Curso? curso = prestamosCN.ObtenerCursoPorID(1);
+
+            txtDNI.Text = curso?.NombreCurso;
         }
 
         private void CargarDatos()
@@ -81,12 +85,9 @@ namespace CapaPresentacion
             else
             {
                 LlevarCarro(false);
-
-                if (!ElementosSeleccionados.Any())
-                {
-                    btnConfirmarPrestamo.Enabled = false;
-                }
             }
+
+            ActualizarEstadoBotonConfirmar();
         }
 
         private void LlevarCarro(bool Lleva)
@@ -111,6 +112,7 @@ namespace CapaPresentacion
             {
                 txtDocente.Text = "";
                 _idDocenteDelPrestamo = null;
+                ActualizarEstadoBotonConfirmar();
                 return;
             }
 
@@ -126,6 +128,8 @@ namespace CapaPresentacion
                 txtDocente.Text = "";
                 _idDocenteDelPrestamo = null;
             }
+
+            ActualizarEstadoBotonConfirmar();
         }
 
         private void cmbCarros_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,14 +323,7 @@ namespace CapaPresentacion
             txtCodBarra.Enabled = true;
             txtPatrimonio.Enabled = true;
 
-            if (_idDocenteDelPrestamo != null)
-            {
-                btnConfirmarPrestamo.Enabled = false;
-            }
-            else
-            {
-                btnConfirmarPrestamo.Enabled = true;
-            }
+            ActualizarEstadoBotonConfirmar();
         }
 
         private void dgvElementosDetalle_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -348,10 +345,7 @@ namespace CapaPresentacion
 
             btnEliminarElemento.Enabled = false;
 
-            if (!ElementosSeleccionados.Any())
-            {
-                btnConfirmarPrestamo.Enabled = false;
-            }
+            ActualizarEstadoBotonConfirmar();
         }
 
         private void cmbListadoDetalle_SelectedIndexChanged(object sender, EventArgs e)
@@ -407,8 +401,43 @@ namespace CapaPresentacion
                     IdDocente = Convert.ToInt32(_idDocenteDelPrestamo),
                     IdEstadoPrestamo = 1,
                     IdCarrito = null,
+                    FechaPrestamo = DateTime.Now
                 };
+
+                prestamosCN.CrearPrestamo(prestamos, ElementosSeleccionados, null);
             }
+
+            MessageBox.Show("Prestamo realizado correctamente");
+
+            prestamosYDevolucionesUC.ActualizarDataGrid();
+            formPrincipal.MostrarUserControl(prestamosYDevolucionesUC);
+        }
+
+        private void ActualizarEstadoBotonConfirmar()
+        {
+            bool hayDocente = _idDocenteDelPrestamo != null;
+            bool hayElementos = ElementosSeleccionados.Any();
+            bool llevaCarrito = LlevaCarrito;
+
+            if (!hayDocente)
+            {
+                btnConfirmarPrestamo.Enabled = false;
+                return;
+            }
+
+            if (!llevaCarrito && !hayElementos)
+            {
+                btnConfirmarPrestamo.Enabled = false;
+                return;
+            }
+
+            btnConfirmarPrestamo.Enabled = true;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            prestamosYDevolucionesUC.ActualizarDataGrid();
+            formPrincipal.MostrarUserControl(prestamosYDevolucionesUC);
         }
     }
 }

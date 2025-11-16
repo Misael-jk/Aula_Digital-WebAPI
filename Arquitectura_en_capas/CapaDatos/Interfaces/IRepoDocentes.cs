@@ -1,4 +1,5 @@
 ﻿using CapaEntidad;
+using System.Data;
 
 namespace CapaDatos.Interfaces;
 
@@ -16,4 +17,5 @@ public interface IRepoDocentes
     public IEnumerable<string> GetFiltroNombre(string nombre, int limit);
     public Docentes? FiltroGetDocenteByID(string dni);
     public IEnumerable<Docentes> GetAll();
+    public void SetTransaction(IDbTransaction? transaction);
 }

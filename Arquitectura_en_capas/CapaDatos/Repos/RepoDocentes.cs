@@ -106,13 +106,13 @@ public class RepoDocentes : RepoBase, IRepoDocentes
     #region Obtener por Id
     public Docentes? GetById(int idDocente)
     {
-        string query = "select * from Docentes where idDocente = @unidDocente";
+        string query = "select idDocente, dni AS Dni, nombre AS Nombre, apellido AS Apellido, email, habilitado, fechaBaja from Docentes where idDocente = @unidDocente";
 
         DynamicParameters parametros = new DynamicParameters();
         try
         {
             parametros.Add("unidDocente", idDocente);
-            return Conexion.QueryFirstOrDefault<Docentes>(query, parametros);
+            return Conexion.QueryFirstOrDefault<Docentes>(query, parametros, transaction: Transaction);
         }
         catch (Exception)
         {

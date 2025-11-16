@@ -9,6 +9,7 @@ public class TransaccionDTO
     public string? EquipoCarrito { get; set; }
     public required string EstadoPrestamo { get; set; }
     public DateTime FechaPrestamo { get; set; }
+
     //Parte de devolucion
     public int? IdDevolucion { get; set; }
     public string? ApellidoEncargado { get; set; }

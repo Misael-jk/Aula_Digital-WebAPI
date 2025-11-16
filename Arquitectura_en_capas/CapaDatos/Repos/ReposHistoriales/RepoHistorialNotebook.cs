@@ -20,9 +20,9 @@ public class RepoHistorialNotebook : RepoBase, IRepoHistorialNotebook
         {
             Conexion.Execute("InsertHistorialNotebook", parameters, transaction: Transaction, commandType: CommandType.StoredProcedure);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw new Exception("Hubo un error al insertar un historial de notebook");
+            throw new Exception("Hubo un error al insertar un historial de notebook" + ex.Message);
         }
     }
 

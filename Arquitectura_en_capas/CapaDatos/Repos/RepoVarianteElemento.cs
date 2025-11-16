@@ -135,7 +135,7 @@ public class RepoVarianteElemento : RepoBase, IRepoVarianteElemento
         }
         catch (Exception ex)
         {
-            throw new Exception("Error al obtener el nombre de la variante");
+            throw new Exception("Error al obtener el nombre de la variante" + ex.Message);
         }
     }
     #endregion
