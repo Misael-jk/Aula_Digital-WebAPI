@@ -110,6 +110,7 @@ namespace CapaPresentacion
         private readonly IMapperPrestamosActivos mapperPrestamosActivos;
         private readonly IMapperHistorialElementoG mapperHistorialElementoG;
         private readonly IMapperHistorialNotebookG mapperHistorialNotebookG;
+        private readonly IMapperHistorialCarritosG mapperHistorialCarritosG;
         #endregion
 
         #region Variables Capa Negocio
@@ -212,9 +213,10 @@ namespace CapaPresentacion
             mapperPrestamosActivos = new MapperPrestamosActivos(conexion);
             mapperHistorialElementoG = new MapperHistorialElementoG(conexion);
             mapperHistorialNotebookG = new MapperHistorialNotebookG(conexion);
+            mapperHistorialCarritosG = new MapperHistorialCarritoG(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
-            carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
+            carritosCN = new CarritosCN(mapperCarritos, uowCarritos, mapperHistorialCarritosG);
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
             prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
@@ -409,7 +411,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (carritoUC == null)
-                carritoUC = new CarritoUC(carritosCN, userVerificado, carritosBajasCN);
+                carritoUC = new CarritoUC(carritosCN, userVerificado, carritosBajasCN, this);
 
             CambiarNombrePort(BtnCarritos.Text);
 
@@ -571,7 +573,7 @@ namespace CapaPresentacion
                 notebooksUC.Dock = DockStyle.Fill;
             }
 
-            notebooksUC.ActualizarDataGrid();
+            notebooksUC.ActualizarDataGrid(0);
 
 
             MostrarSolo(notebooksUC);

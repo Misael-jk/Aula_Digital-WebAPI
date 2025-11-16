@@ -123,14 +123,15 @@ namespace CapaPresentacion
                 if (!lstSugerencias.Focused)
                     lstSugerencias.Visible = false;
             };
+            lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
+            lstSugerencias.MouseLeave += (s, ev) => navegandoLista = false;
 
             txtTipoElemento.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtTipoElemento.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtTipoElemento.AutoCompleteCustomSource = _acTipos;
 
             txtModelo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtModelo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtModelo.AutoCompleteCustomSource = _acModelos;
+
             txtModelo.Leave -= (s, e) => { InferirTipoDesdeModelo(txtModelo.Text, lockIfFound: true); };
             txtModelo.Leave += (s, e) => { InferirTipoDesdeModelo(txtModelo.Text, lockIfFound: true); };
             txtModelo.Enter += (s, e) =>
@@ -149,8 +150,6 @@ namespace CapaPresentacion
             cmbEstados.ValueMember = "IdEstadoMantenimiento";
             cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
             cmbEstados.SelectedIndex = 0;
-
-            cmbEstados.SelectedIndexChanged += cmbEstados_SelectedIndexChanged;
 
             CargarAutoCompleteTipos();
             RenovarIdentificadores();
@@ -209,7 +208,6 @@ namespace CapaPresentacion
 
         private void SetModoBusquedaPorTexto(bool activo)
         {
-            // Si el usuario escribe en txtBuscar, deshabilitar txtTipo y txtModelo
             txtSerieBarraPatrimonio.Enabled = true;
             txtTipoElemento.Enabled = !activo;
             txtModelo.Enabled = !activo;
@@ -217,7 +215,6 @@ namespace CapaPresentacion
 
         private void SetModoBusquedaPorTipoModelo(bool activo)
         {
-            // Si el usuario usa tipo/modelo, deshabilitar txtBuscar
             txtTipoElemento.Enabled = true;
             txtModelo.Enabled = true;
             txtSerieBarraPatrimonio.Enabled = !activo;
@@ -232,7 +229,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error RenovarIdentificadores: " + ex);
+                throw new Exception("Error RenovarIdentificadores: " + ex);
             }
         }
 
@@ -555,7 +552,7 @@ namespace CapaPresentacion
             {
                 var modelo = elementosCN.ObtenerModelosPorNombre(modeloTexto);
                 if (modelo != null) idModelo = modelo.IdModelo;
-                // si modelo tiene idTipo, setear idTipo si no lo tenías
+
                 if (idModelo.HasValue && !idTipo.HasValue)
                 {
                     var mod = elementosCN.ObtenerModeloPorID(idModelo.Value);
@@ -582,7 +579,7 @@ namespace CapaPresentacion
             {
                 string? estado = e.Value.ToString();
 
-                if (estado == "En Mantenimiento")
+                if (estado == "En Reparacion")
                 {
                     e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
                     e.CellStyle.ForeColor = Color.Black;

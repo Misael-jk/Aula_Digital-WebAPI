@@ -25,6 +25,7 @@ namespace CapaPresentacion
         private int _idElementoSeleccionado;
         private int _idHistorialSeleccionado;
         private Usuarios usuarios;
+        private bool Cargando = false;
 
         #region GUARDANDO DATOS EN VARIABLES
         private string? _NroSerie = "";
@@ -72,34 +73,43 @@ namespace CapaPresentacion
 
         private void CargarTodaLaGestion(int idElemento)
         {
-            dgvHistorial.DataSource = elementosCN.ObtenerHistorialPorID(_idElementoSeleccionado);
-            var elementos = elementosCN.ObtenerPorId(_idElementoSeleccionado);
+            Cargando = true;
 
-            _idTipo = elementos?.IdTipoElemento;
-            _NroSerie = elementos?.NumeroSerie;
-            _CodBarra = elementos?.CodigoBarra;
-            _Patrimonio = elementos?.Patrimonio;
-            _idVariante = elementos?.IdVarianteElemento;
-            _habilitado = elementos?.Habilitado;
-            _idUbicacion = elementos?.IdUbicacion;
-            _idEstado = elementos?.IdEstadoMantenimiento;
-            _idModelo = elementos?.IdModelo;
+            try
+            {
+                dgvHistorial.DataSource = elementosCN.ObtenerHistorialPorID(_idElementoSeleccionado);
+                var elementos = elementosCN.ObtenerPorId(_idElementoSeleccionado);
 
-            CargarComboboxes(Convert.ToInt32(_idTipo));
+                _idTipo = elementos?.IdTipoElemento;
+                _NroSerie = elementos?.NumeroSerie;
+                _CodBarra = elementos?.CodigoBarra;
+                _Patrimonio = elementos?.Patrimonio;
+                _idVariante = elementos?.IdVarianteElemento;
+                _habilitado = elementos?.Habilitado;
+                _idUbicacion = elementos?.IdUbicacion;
+                _idEstado = elementos?.IdEstadoMantenimiento;
+                _idModelo = elementos?.IdModelo;
 
-            TipoElemento? tipoElemento = elementosCN.ObtenerTipoElementoPorID(Convert.ToInt32(elementos?.IdTipoElemento));
-            lblTipoElemento.Text = tipoElemento?.ElementoTipo;
-            lblTipoElemento.Tag = tipoElemento?.IdTipoElemento;
+                CargarComboboxes(Convert.ToInt32(_idTipo));
 
-            _NombreVariante = cmbVarianteElemento.Text;
-            _NombreUbicacion = cmbUbicacion.Text;
-            _NombreEstado = cmbEstado.Text;
+                TipoElemento? tipoElemento = elementosCN.ObtenerTipoElementoPorID(Convert.ToInt32(elementos?.IdTipoElemento));
+                lblTipoElemento.Text = tipoElemento?.ElementoTipo;
+                lblTipoElemento.Tag = tipoElemento?.IdTipoElemento;
 
-            CargarDatos();
+                _NombreVariante = cmbVarianteElemento.Text;
+                _NombreUbicacion = cmbUbicacion.Text;
+                _NombreEstado = cmbEstado.Text;
 
-            HabilitarModificado(Convert.ToBoolean(_habilitado));
+                CargarDatos();
 
-            HabilitarBotones(false, false);
+                HabilitarModificado(Convert.ToBoolean(_habilitado));
+
+                HabilitarBotones(false, false);
+            }
+            finally
+            {
+                Cargando = false;
+            }
         }
 
         private void CargarDatos()
@@ -218,6 +228,8 @@ namespace CapaPresentacion
 
         private void VerificarCambios(object sender, EventArgs e)
         {
+            if (Cargando) return;
+
             if (txtNroSerie.Text != _NroSerie ||
                 txtCodBarra.Text != _CodBarra ||
                 txtPatrimonio.Text != _Patrimonio ||
@@ -373,7 +385,7 @@ namespace CapaPresentacion
         {
             if(_habilitado == true)
             {
-                elementosCN.DeshabilitarElemento(_idElementoSeleccionado, 3, usuarios.IdUsuario, txtExplicarMotivo.Text);
+                elementosCN.DeshabilitarElemento(_idElementoSeleccionado, usuarios.IdUsuario, txtExplicarMotivo.Text);
                 CargarTodaLaGestion(_idElementoSeleccionado);
             }
             else

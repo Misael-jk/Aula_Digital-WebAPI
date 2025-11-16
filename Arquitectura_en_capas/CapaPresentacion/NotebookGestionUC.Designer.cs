@@ -81,6 +81,8 @@
             dgvHistorial = new Guna.UI2.WinForms.Guna2DataGridView();
             panel1 = new Panel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            lblCasillero = new Label();
+            lblCarroAsignado = new Label();
             cmbModelo = new Guna.UI2.WinForms.Guna2ComboBox();
             lblModelo = new Label();
             lblNoPuedeActualizar = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -110,8 +112,6 @@
             pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
             btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
             lblNotebooksTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblCasillero = new Label();
-            lblCarroAsignado = new Label();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvHistorial).BeginInit();
             guna2Panel1.SuspendLayout();
@@ -355,6 +355,30 @@
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges36;
             guna2Panel1.Size = new Size(534, 597);
             guna2Panel1.TabIndex = 52;
+            // 
+            // lblCasillero
+            // 
+            lblCasillero.AutoSize = true;
+            lblCasillero.BackColor = SystemColors.ButtonHighlight;
+            lblCasillero.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblCasillero.ForeColor = Color.Black;
+            lblCasillero.Location = new Point(274, 368);
+            lblCasillero.Name = "lblCasillero";
+            lblCasillero.Size = new Size(58, 15);
+            lblCasillero.TabIndex = 98;
+            lblCasillero.Text = "Casillero: ";
+            // 
+            // lblCarroAsignado
+            // 
+            lblCarroAsignado.AutoSize = true;
+            lblCarroAsignado.BackColor = SystemColors.ButtonHighlight;
+            lblCarroAsignado.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblCarroAsignado.ForeColor = Color.Black;
+            lblCarroAsignado.Location = new Point(274, 341);
+            lblCarroAsignado.Name = "lblCarroAsignado";
+            lblCarroAsignado.Size = new Size(94, 15);
+            lblCarroAsignado.TabIndex = 97;
+            lblCarroAsignado.Text = "Carro asignado: ";
             // 
             // cmbModelo
             // 
@@ -721,7 +745,7 @@
             btnHabilitar.ForeColor = Color.White;
             btnHabilitar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnHabilitar.HoverState.ForeColor = Color.White;
-            btnHabilitar.Location = new Point(13, 12);
+            btnHabilitar.Location = new Point(14, 12);
             btnHabilitar.Name = "btnHabilitar";
             btnHabilitar.PressedColor = Color.DarkOliveGreen;
             btnHabilitar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -961,30 +985,6 @@
             lblNotebooksTitulo.TabIndex = 2;
             lblNotebooksTitulo.Text = "<b>Notebook seleccionada</b>";
             lblNotebooksTitulo.TextAlignment = ContentAlignment.MiddleLeft;
-            // 
-            // lblCasillero
-            // 
-            lblCasillero.AutoSize = true;
-            lblCasillero.BackColor = SystemColors.ButtonHighlight;
-            lblCasillero.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblCasillero.ForeColor = Color.Black;
-            lblCasillero.Location = new Point(274, 368);
-            lblCasillero.Name = "lblCasillero";
-            lblCasillero.Size = new Size(58, 15);
-            lblCasillero.TabIndex = 98;
-            lblCasillero.Text = "Casillero: ";
-            // 
-            // lblCarroAsignado
-            // 
-            lblCarroAsignado.AutoSize = true;
-            lblCarroAsignado.BackColor = SystemColors.ButtonHighlight;
-            lblCarroAsignado.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblCarroAsignado.ForeColor = Color.Black;
-            lblCarroAsignado.Location = new Point(274, 341);
-            lblCarroAsignado.Name = "lblCarroAsignado";
-            lblCarroAsignado.Size = new Size(94, 15);
-            lblCarroAsignado.TabIndex = 97;
-            lblCarroAsignado.Text = "Carro asignado: ";
             // 
             // NotebookGestionUC
             // 

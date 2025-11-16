@@ -290,5 +290,19 @@ public class RepoCarritos : RepoBase, IRepoCarritos
 
         return disponible > 0;
     }
+
+    public IEnumerable<string> GetEquipos()
+    {
+        string query = @"select c.equipo as 'EquipoCarrito' from Carritos c where c.habilitado = 1;";
+
+        try
+        {
+            return Conexion.Query<string>(query, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("No se pudo Obtener los nombres de los equipos de los carritos");   
+        }
+    }
 }
  

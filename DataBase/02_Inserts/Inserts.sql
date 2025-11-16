@@ -64,7 +64,8 @@ INSERT INTO EstadosMantenimiento (estadoMantenimiento) VALUES
 ('Prestado'),
 ('En reparacion'),
 ('Roto'),
-('Faltantes');
+('Faltantes'),
+('Dado de Baja');
 
 -- ======================
 -- CARRITOS

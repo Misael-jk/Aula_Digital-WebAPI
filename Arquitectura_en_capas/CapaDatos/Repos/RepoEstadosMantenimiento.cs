@@ -50,7 +50,7 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     #region Mostrar todos los estados para actualizaciones
     public IEnumerable<EstadosMantenimiento> GetAllForUpdates()
     {
-        string query = "select idEstadoMantenimiento, estadoMantenimiento as 'EstadoMantenimientoNombre' from EstadosMantenimiento where idEstadoMantenimiento not in (2)";
+        string query = "select idEstadoMantenimiento, estadoMantenimiento as 'EstadoMantenimientoNombre' from EstadosMantenimiento where idEstadoMantenimiento not in (2, 6)";
         try
         {
             return Conexion.Query<EstadosMantenimiento>(query);
@@ -62,4 +62,18 @@ public class RepoEstadosMantenimiento : RepoBase, IRepoEstadosMantenimiento
     }
     #endregion
 
+    public EstadosMantenimiento? GetByNombreEstado(string estado)
+    {
+        string query = "select idEstadoMantenimiento, estadoMantenimiento as 'EstadoMantenimientoNombre' from EstadosMantenimiento where estadoMantenimiento = @unEstadoMantenimiento";
+        DynamicParameters parameters = new DynamicParameters();
+        try
+        {
+            parameters.Add("unEstadoMantenimiento", estado);
+            return Conexion.QueryFirstOrDefault<EstadosMantenimiento>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al mostrar ese estado del Elemento" + ex.Message);
+        }
+    }
 }

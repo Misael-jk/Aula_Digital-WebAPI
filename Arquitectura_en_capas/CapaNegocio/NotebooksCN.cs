@@ -26,6 +26,21 @@ public class NotebooksCN
     {
         return mapperNotebook.GetAllDTO();
     }
+
+    public IEnumerable<NotebooksDTO> ObtenerPorEstados(string estado)
+    {
+        return mapperNotebook.GetAllByEstado(estado);
+    }
+
+    public IEnumerable<NotebooksDTO> ObtenerPorCarrito(string carrito)
+    {
+        return mapperNotebook.GetNotebooksByCarritoDTO(carrito);
+    }
+
+    public IEnumerable<NotebooksDTO> ObtenerPorFiltros(string? text, int? idCarrito, string? equipo)
+    {
+        return mapperNotebook.GetByFiltros(text, idCarrito, equipo);
+    }
     #endregion
 
     #region Alta
@@ -129,7 +144,7 @@ public class NotebooksCN
                 throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
             }
 
-            notebook.IdEstadoMantenimiento = 7;
+            notebook.IdEstadoMantenimiento = 6; // Dado de baja
             notebook.Habilitado = false;
             notebook.FechaBaja = DateTime.Now;
 
@@ -188,6 +203,11 @@ public class NotebooksCN
         return uow.RepoNotebooks.GetById(idNotebook);
     }
 
+    public IEnumerable<string> ObtenerEquiposDeNotebooks()
+    {
+        return uow.RepoNotebooks.GetEquiposNotebooks();
+    }
+
     public EstadosMantenimiento? ObtenerEstadoMantenimientoPorID(int idEatadoMantenimiento)
     {
         return uow.RepoEstadosMantenimiento.GetById(idEatadoMantenimiento);
@@ -196,6 +216,16 @@ public class NotebooksCN
     public Carritos? ObtenerCarritoPorID(int idCarrito)
     {
         return uow.RepoCarritos.GetById(idCarrito);
+    }
+
+    public Carritos? ObtenerCarritoPorEquipo(string equipo)
+    {
+        return uow.RepoCarritos.GetByEquipo(equipo);
+    }
+
+    public IEnumerable<string> ObtenerEquiposDeCarritos()
+    {
+        return uow.RepoCarritos.GetEquipos();
     }
 
     public Carritos? ObtenerCarritoPorNotebook(int idNotebook)
@@ -221,6 +251,11 @@ public class NotebooksCN
     public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos()
     {
         return uow.RepoNotebooks.GetCantidadNotebooksEnCarritos();
+    }
+
+    public IEnumerable<string> ObtenerSerieBarrasPatrimonio(string texto, int limite)
+    {
+        return uow.RepoNotebooks.GetSerieBarraPatrimonio(texto, limite);
     }
     #endregion
 

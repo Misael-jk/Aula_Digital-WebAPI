@@ -895,6 +895,7 @@
             btnGestionarElemento_M.Size = new Size(296, 26);
             btnGestionarElemento_M.TabIndex = 13;
             btnGestionarElemento_M.Text = "Gestionar elemento seleccionado";
+            btnGestionarElemento_M.Click += btnGestionarElemento_M_Click;
             // 
             // btnBorrarFiltros
             // 
@@ -1182,6 +1183,7 @@
             dgvCarritos_M.ThemeStyle.RowsStyle.Height = 35;
             dgvCarritos_M.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dgvCarritos_M.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dgvCarritos_M.CellClick += dgvCarritos_M_CellClick;
             // 
             // pnlPresentacionNotebook
             // 

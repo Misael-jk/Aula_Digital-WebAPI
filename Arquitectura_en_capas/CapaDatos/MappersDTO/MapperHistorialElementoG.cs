@@ -33,7 +33,6 @@ namespace CapaDatos.MappersDTO
             where n.idElemento is null
             and e.idElemento = @unIdElemento
             ORDER BY hc.fechaCambio DESC;",
-
             (HistorialElemento, Usuarios, TipoAccion, HistorialCambios) => new HistorialElementoGestionDTO
             {
                 IdHistorialElemento = HistorialElemento.IdHistorialCambio,

@@ -14,13 +14,14 @@ namespace CapaPresentacion
 {
     public partial class NotebookGestionUC : UserControl
     {
-        private FormPrincipal formPrincipal;
-        private NotebooksUC notebooksUC;
-        private NotebooksCN notebooksCN;
+        private readonly FormPrincipal formPrincipal;
+        private readonly NotebooksUC notebooksUC;
+        private readonly NotebooksCN notebooksCN;
         private readonly NotebookBajasCN notebookBajasCN;
         private int _idNotebookSeleccionado;
         private int _idHistorialSeleccionado;
         private Usuarios usuarios;
+        private bool _cargando = false;
 
         #region GUARDANDO DATOS EN VARIABLES
 
@@ -54,7 +55,7 @@ namespace CapaPresentacion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            notebooksUC.ActualizarDataGrid();
+            notebooksUC.ActualizarDataGrid(0);
             formPrincipal.MostrarUserControl(notebooksUC);
         }
 
@@ -75,38 +76,50 @@ namespace CapaPresentacion
 
         private void CargarTodaLaGestion(int idElemento)
         {
-            dgvHistorial.DataSource = notebooksCN.ObtenerHistorialPorID(_idNotebookSeleccionado);
+            _cargando = true;
 
-            Notebooks? notebooks = notebooksCN.ObtenerNotebookPorID(_idNotebookSeleccionado);
-            var carrito = notebooksCN.ObtenerCarritoPorNotebook(_idNotebookSeleccionado);
+            try
+            {
+                dgvHistorial.DataSource = notebooksCN.ObtenerHistorialPorID(_idNotebookSeleccionado);
 
-            _Equipo = notebooks?.Equipo;
-            _idTipo = notebooks?.IdTipoElemento;
-            _NroSerie = notebooks?.NumeroSerie;
-            _CodBarra = notebooks?.CodigoBarra;
-            _Patrimonio = notebooks?.Patrimonio;
-            _habilitado = notebooks?.Habilitado;
-            _idUbicacion = notebooks?.IdUbicacion;
-            _idEstado = notebooks?.IdEstadoMantenimiento;
-            _idModelo = notebooks?.IdModelo;
-            _Carrito = carrito?.EquipoCarrito;
-            _Casillero = notebooks?.PosicionCarrito;
+                Notebooks? notebooks = notebooksCN.ObtenerNotebookPorID(_idNotebookSeleccionado);
+                var carrito = notebooksCN.ObtenerCarritoPorNotebook(_idNotebookSeleccionado);
 
-            CargarComboboxes(Convert.ToInt32(_idTipo));
+                _Equipo = notebooks?.Equipo;
+                _idTipo = notebooks?.IdTipoElemento;
+                _NroSerie = notebooks?.NumeroSerie;
+                _CodBarra = notebooks?.CodigoBarra;
+                _Patrimonio = notebooks?.Patrimonio;
+                _habilitado = notebooks?.Habilitado;
+                _idUbicacion = notebooks?.IdUbicacion;
+                _idEstado = notebooks?.IdEstadoMantenimiento;
+                _idModelo = notebooks?.IdModelo;
+                _Carrito = carrito?.EquipoCarrito;
+                _Casillero = notebooks?.PosicionCarrito;
 
-            CargarDatos();
+                CargarComboboxes(Convert.ToInt32(_idTipo));
 
-            _NombreModelo = cmbModelo.Text;
-            _NombreUbicacion = cmbUbicacion.Text;
-            _NombreEstado = cmbEstado.Text;
+                CargarDatos();
 
-            HabilitarModificado(Convert.ToBoolean(_habilitado));
+                _NombreModelo = cmbModelo.Text;
+                _NombreUbicacion = cmbUbicacion.Text;
+                _NombreEstado = cmbEstado.Text;
 
-            HabilitarBotones(false, false);
+                HabilitarModificado(Convert.ToBoolean(_habilitado));
+
+                HabilitarBotones(false, false);
+            }
+            finally
+            {
+                _cargando = false;
+            }
         }
 
         private void CargarDatos()
         {
+            lblCarroAsignado.Text = "Carro asignado: ";
+            lblCasillero.Text = "Casillero: ";
+
             txtEquipo.Text = _Equipo;
             txtNroSerie.Text = _NroSerie;
             txtCodBarra.Text = _CodBarra;
@@ -115,7 +128,7 @@ namespace CapaPresentacion
             cmbEstado.SelectedValue = _idEstado;
             cmbModelo.SelectedValue = _idModelo;
             lblCarroAsignado.Text += _Carrito ?? "Sin Carrito";
-            lblCasillero.Text += _Casillero.ToString() ?? " - ";
+            lblCasillero.Text += _Casillero.ToString() ?? "0";
         }
 
         private void CargarComboboxes(int idTipo)
@@ -192,6 +205,8 @@ namespace CapaPresentacion
 
         private void VerificarCambios(object sender, EventArgs e)
         {
+            if (_cargando) return;
+
             bool huboCambios =
             txtEquipo.Text != (_Equipo ?? "") ||
             txtNroSerie.Text != (_NroSerie ?? "") ||

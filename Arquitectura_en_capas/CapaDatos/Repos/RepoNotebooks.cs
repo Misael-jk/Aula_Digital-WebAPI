@@ -209,7 +209,7 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region Obtener por carrito
     public IEnumerable<Notebooks> GetByCarrito(int idCarrito)
     {
-        string query = @"select e.idElemento, e.idModelo, n.idCarrito, n.posicionCarrito, e.idEstadoMantenimiento, e.numeroSerie, e.codigoBarra, e.patrimonio, e.habilitado, e.fechaBaja
+        string query = @"select e.idElemento, e.idModelo, n.idCarrito, e.idTipoElemento, n.posicionCarrito, e.idEstadoMantenimiento, e.idUbicacion, e.numeroSerie, e.codigoBarra, e.patrimonio, n.equipo, e.habilitado, e.fechaBaja
                          from Elementos e
                          join Notebooks n using (idElemento)
                          where n.idCarrito = @unidCarrito;";
@@ -302,6 +302,24 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
 
         Conexion.Execute(sql, parameters, transaction: Transaction);
     }
+
+    #region SABER SI UNA NOTEBOOK ESTA EN UN PRESTAMO
+    public bool EstaEnPrestamo(int idNotebook)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidNotebook", idNotebook);
+
+        string query = @"select e.idElemento
+                         from Elementos e
+                         join Notebooks n using (idElemento)
+                         where e.idElemento = @unidNotebook
+                         and e.idEstadoMantenimiento = 2 
+                         and e.habilitado = 1;";
+
+        int count = Conexion.ExecuteScalar<int>(query, parameters, transaction: Transaction);
+        return count > 0;
+    }
+    #endregion
 
     #region OBTENER LOS NROS DE SERIE DE TODAS LAS NOTEBOOKS
     public IEnumerable<Notebooks> GetNroSerieByNotebook()
@@ -482,6 +500,65 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         catch (Exception)
         {
             throw new Exception("Hubo un error al obtener la cantidad de notebooks en carritos");
+        }
+    }
+    #endregion
+
+    #region Obtener por Numero de Serie, Codigo Barra y Patrimonio
+    public IEnumerable<string> GetSerieBarraPatrimonio(string text, int limit)
+    {
+        string query = @"(SELECT e.numeroSerie AS valor
+                          FROM Elementos e
+                          JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                          WHERE e.habilitado = 1
+                            AND t.elemento in ('Notebook')
+                            AND e.numeroSerie LIKE CONCAT(@text, '%'))
+                        UNION
+                         (SELECT e.codigoBarra AS valor
+                          FROM Elementos e
+                          JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                          WHERE e.habilitado = 1
+                            AND t.elemento in ('Notebook')
+                            AND e.codigoBarra LIKE CONCAT(@text, '%'))
+                       UNION
+                        (SELECT e.patrimonio AS valor
+                         FROM Elementos e
+                         JOIN tipoElemento t ON e.idTipoElemento = t.idTipoElemento
+                         WHERE e.habilitado = 1
+                           AND t.elemento in ('Notebook')
+                           AND e.patrimonio LIKE CONCAT(@text, '%'))
+                      LIMIT @limit;";
+
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("text", text);
+        parameters.Add("limit", limit);
+
+        try
+        {
+            return Conexion.Query<string>(query, parameters, transaction: Transaction);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("Error al obtener las sugerencias de serie, barra o patrimonio" + ex);
+        }
+    }
+    #endregion
+
+    #region OBTENER POR EQUIPOS DE NOTEBOOKS
+    public IEnumerable<string> GetEquiposNotebooks()
+    {
+        string query = @"select n.equipo
+                         from Notebooks n
+                         join Elementos e using (idElemento)
+                         where e.habilitado = 1;";
+        try
+        {
+            return Conexion.Query<string>(query, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al obtener los equipos de las notebooks");
         }
     }
     #endregion
