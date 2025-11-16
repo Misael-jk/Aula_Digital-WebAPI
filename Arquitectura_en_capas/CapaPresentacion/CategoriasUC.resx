@@ -198,6 +198,9 @@
         9eV/NpBGUdwAEoKTNV4gOFwAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="lblPresentacion.Text" xml:space="preserve">
+    <value>- En esta sección se muestran a todos los &lt;b&gt;catalogos de gestion &lt;/b&gt;que estan relacionados con los elementos, como &lt;b&gt;los tipos de&lt;br&gt; cada elemento&lt;/b&gt;, los &lt;b&gt;modelos&lt;/b&gt; que le corresponden,  asi mismo como la &lt;b&gt;variante del elemento&lt;/b&gt; que es una subclasificacion &lt;br/&gt;</value>
+  </data>
   <data name="btnActuModeloCarr.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAABGdBTUEAALGPC/xhBQAAAQBJREFUSEvt
@@ -237,5 +240,11 @@
         /R7xbII8XuZAX5O1gf7/ZGM3ioJwD6ZCkUc56ZS9C/fYdWHZ0VbZOUlRR2VWtPpH4AH4hfU6UvXz+ppI
         9eV/NpBGUdwAEoKTNV4gOFwAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="guna2HtmlLabel20.Text" xml:space="preserve">
+    <value>Aclaración: Estas secciones estan ligadas a los elemento, excluyendo a &lt;br&gt;&lt;b&gt;Ubicaciones&lt;/b&gt; que es general para todos. A continuacion debajo se podra&lt;br&gt;visualizar y gestionar los modelos de  Carritos y de Notebooks &lt;/br&gt;</value>
+  </data>
+  <data name="guna2HtmlLabel4.Text" xml:space="preserve">
+    <value>- En esta sección se muestran a todos los &lt;b&gt;catalogos de gestion &lt;/b&gt;que estan relacionados con &lt;b&gt;Carritos y Notebooks&lt;/b&gt;, esta seccion&lt;br&gt;, nos permite visualizar y gestionar a los &lt;b&gt;modelos&lt;/b&gt; que le corresponden si es para carritos o para las notebooks.&lt;br/&gt;</value>
   </data>
 </root>

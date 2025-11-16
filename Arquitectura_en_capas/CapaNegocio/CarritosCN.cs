@@ -6,18 +6,21 @@ using System.Text.RegularExpressions;
 using System.ComponentModel.DataAnnotations;
 using CapaDatos.InterfaceUoW;
 using System.Globalization;
+using CapaDTOs.AuditoriaDTO;
 
 namespace CapaNegocio;
 
 public class CarritosCN
 {
     private readonly IMapperCarritos mapperCarritos;
+    private readonly IMapperHistorialCarritosG mapperHistorialCarritosG;
     private readonly IUowCarritos uow;
 
-    public CarritosCN(IMapperCarritos mapperCarritos, IUowCarritos uowCarritos)
+    public CarritosCN(IMapperCarritos mapperCarritos, IUowCarritos uowCarritos, IMapperHistorialCarritosG mapperHistorialCarritosG)
     {
         this.mapperCarritos = mapperCarritos;
         uow = uowCarritos;
+        this.mapperHistorialCarritosG = mapperHistorialCarritosG;
     }
 
     // CRUD
@@ -77,7 +80,7 @@ public class CarritosCN
     /// </summary>
     /// <param name="carritoNEW"></param>
     /// <param name="idUsuario"></param>
-    public void ActualizarCarrito(Carritos carritoNEW, int idUsuario)
+    public void ActualizarCarrito(Carritos carritoNEW, int idUsuario, string Motivo, string Descripcion)
     {
         ValidarDatos(carritoNEW);
 
@@ -93,8 +96,9 @@ public class CarritosCN
             {
                 IdTipoAccion = 2,
                 FechaCambio = DateTime.Now,
-                Descripcion = $"Se actualizó el carrito con número de serie {carritoNEW.NumeroSerieCarrito}.",
-                IdUsuario = idUsuario
+                Descripcion = Descripcion,
+                IdUsuario = idUsuario,
+                Motivo = Motivo
             };
 
             uow.RepoHistorialCambio.Insert(historial);
@@ -116,7 +120,7 @@ public class CarritosCN
     #endregion
 
     #region DESHABILITAR UN CARRITO
-    public void DeshabilitarCarrito(int idCarritos, int idEstadoMantenimiento, int idUsuario)
+    public void DeshabilitarCarrito(int idCarritos, string motivo, int idUsuario)
     {
         try
         {
@@ -158,7 +162,7 @@ public class CarritosCN
                 throw new Exception("No se puede deshabilitar un carrito que aún contiene notebooks.");
             }
 
-            carritoOLD.IdEstadoMantenimiento = idEstadoMantenimiento;
+            carritoOLD.IdEstadoMantenimiento = 6; // Dado de baja
             carritoOLD.FechaBaja = DateTime.Now;
             carritoOLD.Habilitado = false;
 
@@ -169,7 +173,7 @@ public class CarritosCN
                 IdTipoAccion = 3,
                 IdUsuario = idUsuario,
                 Descripcion = $"Se deshabilito el carrito con numero de serie {carritoOLD.NumeroSerieCarrito}",
-                Motivo = null,
+                Motivo = motivo,
                 FechaCambio = DateTime.Now
             };
 
@@ -246,6 +250,11 @@ public class CarritosCN
     {
         return uow.RepoEstadosMantenimiento.GetById(idEatadoMantenimiento);
     }
+
+    public IEnumerable<EstadosMantenimiento> ListarEstadoParaActualizar()
+    {
+        return uow.RepoEstadosMantenimiento.GetAllForUpdates();
+    }
     #endregion
 
     #region UBICACION
@@ -296,6 +305,18 @@ public class CarritosCN
     public Notebooks? ObtenerPorSerieOCodBarra(string numSerie, string CodBarra)
     {
         return uow.RepoNotebooks.GetNotebookBySerieOrCodigo(numSerie, CodBarra);
+    }
+    #endregion
+
+    #region Historiales 
+    public IEnumerable<HistorialCarritoGestionDTO> ObtenerHistorialPorID(int idCarrito)
+    {
+        return mapperHistorialCarritosG.GetAllDTO(idCarrito);
+    }
+
+    public HistorialCambios? ObtenerHistorialPorIDHistorial(int idHistorial)
+    {
+        return uow.RepoHistorialCambio.GetById(idHistorial);
     }
     #endregion
 
@@ -726,7 +747,7 @@ public class CarritosCN
         {
             IEnumerable<Notebooks> notebooksEnCarrito = uow.RepoNotebooks.GetByCarrito(carritoNEW.IdCarrito);
 
-            if (notebooksEnCarrito.Any(nb => !uow.RepoNotebooks.GetDisponible(nb.IdElemento)))
+            if (notebooksEnCarrito.Any(nb => uow.RepoNotebooks.EstaEnPrestamo(nb.IdElemento)))
             {
                 throw new Exception("No se puede cambiar la ubicacion: existen notebooks en prestamo dentro del carrito.");
             }

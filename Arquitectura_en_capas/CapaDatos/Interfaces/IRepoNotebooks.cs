@@ -22,10 +22,13 @@ public interface IRepoNotebooks
     public IEnumerable<Notebooks> GetCodBarraByNotebook();
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito);
     public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra);
+    public IEnumerable<string> GetSerieBarraPatrimonio(string text, int limit);
+    public IEnumerable<string> GetEquiposNotebooks();
     public Carritos? GetCarritoByNotebook(int idNotebook);
     public List<(string Modelo, int Cantidad)> GetCantidadPorModelo();
     public List<(string Estado, int Cantidad)> GetCantidadEstado();
     public List<(string Equipo, int Cantidad)> GetCantidadNotebooksEnCarritos();
     public IEnumerable<int> GetIdNotebooksByCarrito(int idCarrito);
+    public bool EstaEnPrestamo(int idPrestamo);
     public void SetTransaction(IDbTransaction? transaction);
 }

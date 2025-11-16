@@ -1,14 +1,8 @@
 ﻿using CapaDatos.InterfacesDTO;
-using CapaDTOs;
 using CapaDTOs.AuditoriaDTO;
 using CapaEntidad;
 using Dapper;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CapaDatos.MappersDTO
 {
@@ -39,7 +33,6 @@ namespace CapaDatos.MappersDTO
             where n.idElemento is null
             and e.idElemento = @unIdElemento
             ORDER BY hc.fechaCambio DESC;",
-
             (HistorialElemento, Usuarios, TipoAccion, HistorialCambios) => new HistorialElementoGestionDTO
             {
                 IdHistorialElemento = HistorialElemento.IdHistorialCambio,

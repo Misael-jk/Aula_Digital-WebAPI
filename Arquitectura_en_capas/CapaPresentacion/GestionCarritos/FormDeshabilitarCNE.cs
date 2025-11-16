@@ -37,11 +37,11 @@ namespace CapaPresentacion
 
         private void btnDeshabiliar_Click(object sender, EventArgs e)
         {
-            Carritos? carrito = _carritosCN.ObtenerCarritoPorID(_id);
+            //Carritos? carrito = _carritosCN.ObtenerCarritoPorID(_id);
 
-            _carritosCN.DeshabilitarCarrito(_id, (int)cmbEstadoMantenimiento.SelectedValue, idUsuario);
-            ActualizarDataGrid.Invoke();
-            this.Close();
+            //_carritosCN.DeshabilitarCarrito(_id, (int)cmbEstadoMantenimiento.SelectedValue, idUsuario);
+            //ActualizarDataGrid.Invoke();
+            //this.Close();
         }
     }
 }

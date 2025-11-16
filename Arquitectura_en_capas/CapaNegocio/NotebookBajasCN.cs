@@ -27,7 +27,7 @@ public class NotebookBajasCN
         return uow.RepoNotebooks.GetById(idNotebook);
     }
 
-    public void HabilitarNotebook(int idNotebook, int idUsuario)
+    public void HabilitarNotebook(int idNotebook, int idUsuario, string motivo)
     {
         try
         {
@@ -52,7 +52,7 @@ public class NotebookBajasCN
                 IdTipoAccion = 4,
                 Descripcion = $"Se habilito la notebook con numero de serie {notebook.NumeroSerie}",
                 FechaCambio = DateTime.Now,
-                Motivo = null
+                Motivo = motivo
             };
 
             uow.RepoHistorialCambio.Insert(historialCambios);

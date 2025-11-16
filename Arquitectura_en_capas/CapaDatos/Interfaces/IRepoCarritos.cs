@@ -17,5 +17,6 @@ public interface IRepoCarritos
     public void UpdateDisponible(int idCarrito, int idEstadoMantenimiento);
     public bool GetDisponible(int idCarrito);
     public bool GetEstadoEnPrestamo(int idCarrito);
+    public IEnumerable<string> GetEquipos();
     public void SetTransaction(IDbTransaction? transaction);
 }

@@ -145,7 +145,7 @@ namespace CapaNegocio
         #endregion
 
         #region DESHABILITAR ELEMENTO
-        public void DeshabilitarElemento(int idElemento, int idEstadoMantenimiento, int idUsuario, string motivo)
+        public void DeshabilitarElemento(int idElemento, int idUsuario, string motivo)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace CapaNegocio
                 }
 
                 elemento.Habilitado = false;
-                elemento.IdEstadoMantenimiento = idEstadoMantenimiento;
+                elemento.IdEstadoMantenimiento = 6; // Dado de baja
                 elemento.FechaBaja = DateTime.Now;
 
                 uow.RepoElemento.Update(elemento);

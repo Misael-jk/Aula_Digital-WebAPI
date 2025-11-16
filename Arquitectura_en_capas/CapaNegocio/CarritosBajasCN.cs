@@ -24,7 +24,7 @@ public class CarritosBajasCN
         return _mapperCarritosBajas.GetAllDTO();
     }
 
-    public void HabilitarCarrito(int idCarrito, int idUsuario)
+    public void HabilitarCarrito(int idCarrito, int idUsuario, string motivo)
     {
         try
         {
@@ -58,7 +58,7 @@ public class CarritosBajasCN
                 IdTipoAccion = 4,
                 IdUsuario = idUsuario,
                 Descripcion = $"Se habilito el carrito con numero de serie {carritos.EquipoCarrito}",
-                Motivo = null,
+                Motivo = motivo,
                 FechaCambio = DateTime.Now
             };
 

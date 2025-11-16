@@ -19,6 +19,7 @@ namespace CapaPresentacion
 {
     public partial class CarritoUC : UserControl
     {
+        private readonly FormPrincipal formPrincipal;
         private readonly CarritosCN carritosCN;
         private readonly CarritosBajasCN carritosBajas;
         private List<Button> botonesCarrito;
@@ -28,13 +29,14 @@ namespace CapaPresentacion
         private DateTime? fechaBaja;
         private System.Windows.Forms.Timer _searchTimer;
 
-        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado, CarritosBajasCN carritosBajas)
+        public CarritoUC(CarritosCN carritosCN, Usuarios userVerificado, CarritosBajasCN carritosBajas, FormPrincipal formPrincipal)
         {
             InitializeComponent();
 
             this.carritosCN = carritosCN;
             this.userVerificado = userVerificado;
             this.carritosBajas = carritosBajas;
+            this.formPrincipal = formPrincipal;
         }
 
         public void ActualizarDatagrid()
@@ -147,50 +149,6 @@ namespace CapaPresentacion
 
         private void dtgCarrito_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            lblIDCarrito.Text = "ID: ";
-            lblFechaModificacion.Text = "Fecha de modificacion: ";
-            lblCapacidad.Text = "Capacidad: ";
-            lblOcupados.Text = "Notebooks: ";
-
-            if (e.RowIndex < 0) return;
-
-            var fila = dtgCarrito.Rows[e.RowIndex];
-            _idCarritoActual = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
-
-            Carritos? carrito = carritosCN.ObtenerCarritoPorID(_idCarritoActual);
-
-            lblIDCarrito.Text += carrito?.IdCarrito;
-            txtEquipoCarrito.Text = carrito?.EquipoCarrito;
-            txtNroSerieCarrito.Text = carrito?.NumeroSerieCarrito;
-            cmbModelo.SelectedValue = carrito?.IdModelo;
-            cmbUbicacion.SelectedValue = carrito?.IdUbicacion;
-            lblCapacidad.Text += carrito?.Capacidad;
-            fechaBaja = carrito?.FechaBaja;
-
-            EstadosMantenimiento? estadosMantenimiento = carritosCN.ObtenerEstadoMantenimientoPorID(carrito.IdEstadoMantenimiento);
-
-            lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
-            lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
-
-            if (estadosMantenimiento?.IdEstadoMantenimiento == 1)
-            {
-                ptbEstado.Image = Properties.Resources.disponibleIcon;
-            }
-            else
-            {
-                ptbEstado.Image = Properties.Resources.prestadoIcon;
-            }
-
-            int CantidadNotebooks = carritosCN.ObtenerCantidadPorCarrito(_idCarritoActual);
-
-            lblOcupados.Text += CantidadNotebooks + "/" + carrito?.Capacidad;
-
-            HistorialCambios? historialCambios = carritosCN.ObtenerUltimaFechaDeModiciacionPorID(_idCarritoActual);
-
-            lblFechaModificacion.Text += historialCambios?.FechaCambio;
-
-            // Genera dinámicamente los botones según la capacidad del carrito
-            GenerarBotonesCarrito(carrito.Capacidad);
         }
 
 
@@ -314,6 +272,53 @@ namespace CapaPresentacion
 
         }
 
+        private void dgvCarritos_M_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            lblIDCarrito.Text = "ID: ";
+            lblFechaModificacion.Text = "Fecha de modificacion: ";
+            lblCapacidad.Text = "Capacidad: ";
+            lblOcupados.Text = "Notebooks: ";
+
+            if (e.RowIndex < 0) return;
+
+            var fila = dtgCarrito.Rows[e.RowIndex];
+            _idCarritoActual = Convert.ToInt32(fila.Cells["IdCarrito"].Value);
+
+            Carritos? carrito = carritosCN.ObtenerCarritoPorID(_idCarritoActual);
+
+            lblIDCarrito.Text += carrito?.IdCarrito;
+            txtEquipoCarrito.Text = carrito?.EquipoCarrito;
+            txtNroSerieCarrito.Text = carrito?.NumeroSerieCarrito;
+            cmbModelo.SelectedValue = carrito?.IdModelo;
+            cmbUbicacion.SelectedValue = carrito?.IdUbicacion;
+            lblCapacidad.Text += carrito?.Capacidad;
+            fechaBaja = carrito?.FechaBaja;
+
+            EstadosMantenimiento? estadosMantenimiento = carritosCN.ObtenerEstadoMantenimientoPorID(carrito.IdEstadoMantenimiento);
+
+            lblEstado.Text = estadosMantenimiento?.EstadoMantenimientoNombre;
+            lblEstado.Tag = estadosMantenimiento?.IdEstadoMantenimiento;
+
+            if (estadosMantenimiento?.IdEstadoMantenimiento == 1)
+            {
+                ptbEstado.Image = Properties.Resources.disponibleIcon;
+            }
+            else
+            {
+                ptbEstado.Image = Properties.Resources.prestadoIcon;
+            }
+
+            int CantidadNotebooks = carritosCN.ObtenerCantidadPorCarrito(_idCarritoActual);
+
+            lblOcupados.Text += CantidadNotebooks + "/" + carrito?.Capacidad;
+
+            HistorialCambios? historialCambios = carritosCN.ObtenerUltimaFechaDeModiciacionPorID(_idCarritoActual);
+
+            lblFechaModificacion.Text += historialCambios?.FechaCambio;
+
+            // Genera dinámicamente los botones según la capacidad del carrito
+            GenerarBotonesCarrito(carrito.Capacidad);
+        }
         private void GenerarBotonesCarrito(int capacidad)
         {
             pnlContenedorCasilleros1.Controls.Clear();
@@ -429,31 +434,31 @@ namespace CapaPresentacion
 
         private void btnActualizarCarrito_Click(object sender, EventArgs e)
         {
-            int idEstado = Convert.ToInt32(lblEstado.Tag);
+            //int idEstado = Convert.ToInt32(lblEstado.Tag);
 
-            Carritos carritos = new Carritos()
-            {
-                IdCarrito = _idCarritoActual,
-                EquipoCarrito = txtEquipoCarrito.Text,
-                NumeroSerieCarrito = txtNroSerieCarrito.Text,
-                Capacidad = 32,
-                IdModelo = (int)cmbModelo.SelectedValue,
-                IdUbicacion = (int)cmbUbicacion.SelectedValue,
-                IdEstadoMantenimiento = idEstado,
-                Habilitado = idEstado != 1 && idEstado != 2 ? false : true,
-                FechaBaja = idEstado != 1 && idEstado != 2 ? fechaBaja : null,
-            };
+            //Carritos carritos = new Carritos()
+            //{
+            //    IdCarrito = _idCarritoActual,
+            //    EquipoCarrito = txtEquipoCarrito.Text,
+            //    NumeroSerieCarrito = txtNroSerieCarrito.Text,
+            //    Capacidad = 32,
+            //    IdModelo = (int)cmbModelo.SelectedValue,
+            //    IdUbicacion = (int)cmbUbicacion.SelectedValue,
+            //    IdEstadoMantenimiento = idEstado,
+            //    Habilitado = idEstado != 1 && idEstado != 2 ? false : true,
+            //    FechaBaja = idEstado != 1 && idEstado != 2 ? fechaBaja : null,
+            //};
 
-            carritosCN.ActualizarCarrito(carritos, userVerificado.IdRol);
+            //carritosCN.ActualizarCarrito(carritos, userVerificado.IdRol);
 
-            if (cmbHabilitado.SelectedIndex != 0)
-            {
-                cmbHabilitado.SelectedIndex = 0;
-            }
-            else
-            {
-                ActualizarDatagrid();
-            }
+            //if (cmbHabilitado.SelectedIndex != 0)
+            //{
+            //    cmbHabilitado.SelectedIndex = 0;
+            //}
+            //else
+            //{
+            //    ActualizarDatagrid();
+            //}
         }
 
         private void btnDeshabiliarCarrito_Click(object sender, EventArgs e)
@@ -473,5 +478,13 @@ namespace CapaPresentacion
 
             CrearCarrito.Show();
         }
+
+        private void btnGestionarElemento_M_Click(object sender, EventArgs e)
+        {
+            var formGestionarCarrito = new CarritoGestionUC(formPrincipal, this, carritosCN, _idCarritoActual, userVerificado, carritosBajas);
+            formPrincipal.MostrarUserControl(formGestionarCarrito);
+        }
+
+
     }
 }

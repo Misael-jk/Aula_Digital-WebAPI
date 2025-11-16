@@ -105,6 +105,8 @@ namespace CapaPresentacion
         private readonly IMapperHistorialElementoG mapperHistorialElementoG;
         private readonly IMapperTransaccion mapperTransaccion;
         private readonly IMapperNotebooksCarro mapperNotebooksCarro;
+        private readonly IMapperHistorialNotebookG mapperHistorialNotebookG;
+        private readonly IMapperHistorialCarritosG mapperHistorialCarritosG;
         #endregion
 
         #region Variables Capa Negocio
@@ -208,16 +210,18 @@ namespace CapaPresentacion
             mapperHistorialElementoG = new MapperHistorialElementoG(conexion);
             mapperTransaccion = new MapperTransaccion(conexion);
             mapperNotebooksCarro = new MapperNotebooksCarro(conexion);
+            mapperHistorialNotebookG = new MapperHistorialNotebookG(conexion);
+            mapperHistorialCarritosG = new MapperHistorialCarritoG(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
-            carritosCN = new CarritosCN(mapperCarritos, uowCarritos);
+            carritosCN = new CarritosCN(mapperCarritos, uowCarritos, mapperHistorialCarritosG);
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
             prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos, mapperNotebooksCarro);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
             modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
             devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
-            notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks);
+            notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks, mapperHistorialNotebookG);
             carritosBajasCN = new CarritosBajasCN(mapperCarritosBajas, uowCarritos);
             elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);
             varianteElementoCN = new VarianteElementoCN(repoVarianteElemento, repoTipoElemento, repoModelo, mapperVarianteElemento);
@@ -405,7 +409,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (carritoUC == null)
-                carritoUC = new CarritoUC(carritosCN, userVerificado, carritosBajasCN);
+                carritoUC = new CarritoUC(carritosCN, userVerificado, carritosBajasCN, this);
 
             CambiarNombrePort(BtnCarritos.Text);
 
@@ -557,7 +561,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (notebooksUC == null)
-                notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN, this);
+                notebooksUC = new NotebooksUC(notebooksCN, userVerificado, carritosCN, this, notebookBajasCN);
 
             CambiarNombrePort(btnNotebooks.Text);
 
@@ -567,7 +571,7 @@ namespace CapaPresentacion
                 notebooksUC.Dock = DockStyle.Fill;
             }
 
-            notebooksUC.ActualizarDataGrid();
+            notebooksUC.ActualizarDataGrid(0);
 
 
             MostrarSolo(notebooksUC);
