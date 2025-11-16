@@ -1,7 +1,8 @@
-﻿using Dapper;
-using CapaDatos.Interfaces;
+﻿using CapaDatos.Interfaces;
 using CapaEntidad;
+using Dapper;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CapaDatos.Repos;
 
@@ -215,6 +216,7 @@ public class RepoDocentes : RepoBase, IRepoDocentes
     }
     #endregion
 
+    #region Filtrar por nombre
     public IEnumerable<string> GetFiltroNombre(string nombre, int limit)
     {
         string query = @"
@@ -235,4 +237,26 @@ public class RepoDocentes : RepoBase, IRepoDocentes
             throw new Exception("Error al obtener los nombres de los docentes");
         }
     }
+    #endregion
+
+    #region Filtrar por DNI
+    public Docentes? FiltroGetDocenteByID(string dni)
+    {
+        string query = @"SELECT *
+                         FROM Docentes
+                         WHERE (@dni IS NULL OR @dni = '' OR dni = @dni)
+                         ";
+        DynamicParameters parametros = new DynamicParameters();
+        parametros.Add("dni", dni);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Docentes>(query, parametros);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al buscar el docente por DNI" + ex);
+        }
+    }
+    #endregion
 }

@@ -135,6 +135,20 @@ public class RepoCarritos : RepoBase, IRepoCarritos
             throw new Exception("No se pudo Obtener los datos de los carritos");
         }
     }
+
+    public IEnumerable<Carritos> GetAllDisponibles()
+    {
+        string query = "select idCarrito AS IdCarrito, equipo AS EquipoCarrito, capacidad, idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, Habilitado, fechaBaja from Carritos where idEstadoMantenimiento = 1";
+        try
+        {
+
+            return Conexion.Query<Carritos>(query);
+        }
+        catch (Exception)
+        {
+            throw new Exception("No se pudo Obtener los datos de los carritos");
+        }
+    }
     #endregion
 
     #region Obtener por Id

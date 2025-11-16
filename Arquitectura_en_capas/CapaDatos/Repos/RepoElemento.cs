@@ -176,7 +176,7 @@ public class RepoElemento : RepoBase, IRepoElemento
     #region OBTENER NOTEBOOK POR NRO SERIE O COD BARRA
     public Elemento? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
     {
-        string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
+        string query = @"select *
                          from Elementos
                          where (numeroSerie = @numeroSerie or codigoBarra = @codigoBarra)
                          and idCarrito is null
@@ -317,6 +317,35 @@ public class RepoElemento : RepoBase, IRepoElemento
         catch (Exception)
         {
             throw new Exception("Error al obtener la cantidad total de elementos");
+        }
+    }
+    #endregion
+
+    #region FILTRAR POR NRO. SERIE, COD. BARRA O PATRIMONIO
+    public Elemento? GetElementoByNSCBP(string? numeroSerie, string? codigoBarra, string? patrimonio)
+    {
+        string query = @"
+        SELECT idElemento, idTipoElemento, idVariante AS 'idVarianteElemento', idEstadoMantenimiento, idUbicacion, idModelo, numeroSerie, codigoBarra, patrimonio, habilitado, fechaBaja
+        FROM Elementos
+        WHERE (@numeroSerie IS NULL OR numeroSerie = @numeroSerie)
+        AND (@codigoBarra IS NULL OR codigoBarra = @codigoBarra)
+        AND (@patrimonio IS NULL OR patrimonio = @patrimonio)
+        AND idEstadoMantenimiento = 1
+        AND habilitado = 1;";
+
+        DynamicParameters parameters = new DynamicParameters();
+
+        parameters.Add("numeroSerie", numeroSerie);
+        parameters.Add("codigoBarra", codigoBarra);
+        parameters.Add("patrimonio", patrimonio);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<Elemento>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en el filtro" + ex);
         }
     }
     #endregion

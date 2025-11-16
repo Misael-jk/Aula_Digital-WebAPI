@@ -13,27 +13,43 @@ public class MapperTransaccion : RepoBase, IMapperTransaccion
 
     public IEnumerable<TransaccionDTO> GetAllDTO()
     {
-        return Conexion.Query<PrestamosDTO, DevolucionesDTO?, TransaccionDTO>(
-            "GetPrestamoDevolucionDTO",
-            (prestamo, devolucion) => new TransaccionDTO
+        var sql = @"
+        SELECT 
+            p.idPrestamo,
+            p.fechaPrestamo,
+            c.curso AS NombreCurso,
+            CONCAT(d.nombre, ' ', d.apellido) AS Nombre,
+            ep.estadoPrestamo AS EstadoPrestamo,
+            ca.equipo AS EquipoCarrito,
+            CONCAT(uu.nombre, ' ', uu.apellido) AS Nombre,
+            dv.idDevolucion,
+            dv.fechaDevolucion,
+            dv.observaciones AS Observaciones
+            FROM Prestamos p
+            INNER JOIN Docentes d ON p.idDocente = d.idDocente
+            INNER JOIN Cursos c ON p.idCurso = c.idCurso
+            INNER JOIN EstadosPrestamo ep ON p.idEstadoPrestamo = ep.idEstadoPrestamo
+            LEFT JOIN Carritos ca ON p.idCarrito = ca.idCarrito
+            LEFT JOIN Devoluciones dv ON p.idPrestamo = dv.idPrestamo
+            LEFT JOIN Usuarios uu ON dv.idUsuarioDevolvio = uu.idUsuario
+            ORDER BY p.idPrestamo ASC;";
+
+        return Conexion.Query<Prestamos, Curso, Docentes, EstadosPrestamo, Carritos, Usuarios, Devolucion, TransaccionDTO>(
+            sql,
+            (prestamo, curso, docente, estadoPrestamo, carrito, usuario, devolucion) => new TransaccionDTO
             {
                 IdPrestamo = prestamo.IdPrestamo,
                 FechaPrestamo = prestamo.FechaPrestamo,
-                NombreCurso = prestamo.NombreCurso ?? " - ",
-                //ApellidoEncargados = prestamo.ApellidoEncargado ?? "Error",
-                ApellidoDocentes = prestamo.ApellidoDocentes ?? " ERROR ",
-                NumeroSerieCarrito = prestamo.NumeroSerieCarrito ?? "Sin Carrito",
-                EstadoPrestamo = prestamo.EstadoPrestamo,
-                IdDevolucion = prestamo.IdPrestamo,
+                NombreCurso = curso.NombreCurso ?? " - ",
+                ApellidoDocentes = docente.Nombre ?? " ERROR ",
+                EstadoPrestamo = estadoPrestamo.EstadoPrestamo,
+                EquipoCarrito = carrito.EquipoCarrito ?? "Sin Carrito",
+                ApellidoEncargado = usuario?.Nombre,
+                IdDevolucion = devolucion?.IdDevolucion,
                 FechaDevolucion = devolucion?.FechaDevolucion,
-                Observaciones = devolucion?.Observaciones ?? " ",
-                EstadoDevolucion = devolucion?.EstadoPrestamo ?? " ",
-                ApellidoDocente = devolucion?.ApellidoDocente,
-                ApellidoEncargado = devolucion?.ApellidoEncargado
+                Observaciones = devolucion?.Observaciones ?? " "
             },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "IdDevolucion"
+            splitOn: "idPrestamo,NombreCurso,Nombre,EstadoPrestamo,EquipoCarrito,Nombre,idDevolucion"
         ).ToList();
-
     }
 }

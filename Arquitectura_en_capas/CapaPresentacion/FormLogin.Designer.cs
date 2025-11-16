@@ -43,6 +43,8 @@
             iconButton1 = new FontAwesome.Sharp.IconButton();
             BtnCerrar1 = new FontAwesome.Sharp.IconButton();
             PanelWelcome = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            label2 = new Label();
+            label1 = new Label();
             BarraTopLogin2 = new Panel();
             TxtWelcome = new Label();
             PictED = new PictureBox();
@@ -56,8 +58,6 @@
             TxtError = new Label();
             lblUsuario = new Label();
             lblContraseña = new Label();
-            label1 = new Label();
-            label2 = new Label();
             BarraTopLogin1.SuspendLayout();
             PanelWelcome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PictED).BeginInit();
@@ -135,6 +135,30 @@
             PanelWelcome.ShadowDecoration.CustomizableEdges = customizableEdges2;
             PanelWelcome.Size = new Size(339, 466);
             PanelWelcome.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Emoji", 9.75F);
+            label2.ForeColor = SystemColors.ButtonHighlight;
+            label2.Location = new Point(134, 440);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 17);
+            label2.TabIndex = 4;
+            label2.Text = "Año: 2025";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Emoji", 9.75F);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(45, 418);
+            label1.Name = "label1";
+            label1.Size = new Size(250, 17);
+            label1.TabIndex = 3;
+            label1.Text = "Por: Misael Piuca y Andres Torrico de 5°8";
             // 
             // BarraTopLogin2
             // 
@@ -312,30 +336,6 @@
             lblContraseña.Size = new Size(113, 15);
             lblContraseña.TabIndex = 52;
             lblContraseña.Text = "Ingresar contraseña:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Emoji", 9.75F);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(45, 418);
-            label1.Name = "label1";
-            label1.Size = new Size(250, 17);
-            label1.TabIndex = 3;
-            label1.Text = "Por: Misael Piuca y Andres Torrico de 5°8";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI Emoji", 9.75F);
-            label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(134, 440);
-            label2.Name = "label2";
-            label2.Size = new Size(66, 17);
-            label2.TabIndex = 4;
-            label2.Text = "Año: 2025";
             // 
             // LoginState
             // 

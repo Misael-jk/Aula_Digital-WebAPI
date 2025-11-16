@@ -10,11 +10,13 @@ public class PrestamosCN
 {
     private readonly IUowPrestamos uow;
     private readonly IMapperPrestamos mapperPrestamos;
+    private readonly IMapperNotebooksCarro mapperNotebooksCarro;
 
-    public PrestamosCN(IMapperPrestamos mapperPrestamos, IUowPrestamos uow)
+    public PrestamosCN(IMapperPrestamos mapperPrestamos, IUowPrestamos uow, IMapperNotebooksCarro mapperNotebooksCarro)
     {
         this.uow = uow;
         this.mapperPrestamos = mapperPrestamos;
+        this.mapperNotebooksCarro = mapperNotebooksCarro;
     }
 
     #region READ PRESTAMO
@@ -49,18 +51,18 @@ public class PrestamosCN
 
                 HistorialCambios? historial = new HistorialCambios
                 {
-                    IdTipoAccion = 5, 
+                    IdTipoAccion = 5,
                     FechaCambio = DateTime.Now,
                     IdUsuario = prestamo.IdUsuario,
-                    Descripcion = elemento.IdTipoElemento == 1
+                    Descripcion = elemento?.IdTipoElemento == 1
                         ? $"La notebook {idElemento} fue prestada."
-                        : $"El elemento con numero de serie: {elemento.NumeroSerie} fue prestado.",
+                        : $"El elemento con numero de serie: {elemento?.NumeroSerie} fue prestado.",
                     Motivo = null
                 };
 
                 uow.RepoHistorialCambio.Insert(historial);
 
-                if (elemento.IdTipoElemento == 1)
+                if (elemento?.IdTipoElemento == 1)
                 {
                     uow.RepoHistorialNotebook.Insert(new HistorialNotebooks
                     {
@@ -220,6 +222,76 @@ public class PrestamosCN
     }
     #endregion
 
+    #region FILTROS
+
+    #region Docentes
+    public Docentes? ObtenerDocentePorDNI(string DNI)
+    {
+        return uow.RepoDocentes.FiltroGetDocenteByID(DNI);
+    }
+    #endregion
+
+    #region NotebooksCarroDTO
+    public IEnumerable<NotebooksCarroDTO> ObtenerNotebooksPorCarrito(int idCarrito)
+    {
+        return mapperNotebooksCarro.GetAll(idCarrito);
+    }
+
+    public IEnumerable<Carritos> ObtenerTodosLosCarritosDiponibles()
+    {
+        return uow.RepoCarritos.GetAllDisponibles();
+    }
+
+    public IEnumerable<int> ObtenerIDsPorCarrito(int idCarrito)
+    {
+        return uow.RepoNotebooks.GetIdNotebooksByCarrito(idCarrito);
+    }
+    #endregion
+
+    #region Cursos
+    public IEnumerable<Curso> ObtenerTodosLosCursos()
+    {
+        return uow.RepoCursos.GetAll();
+    }
+    #endregion
+
+    #region Elementos
+    public Elemento? ObtenerElementoPorFiltro(string? NroSerie, string? CodBarra, string? Patrimonio)
+    {
+        return uow.RepoElemento.GetElementoByNSCBP(NroSerie, CodBarra, Patrimonio);
+    }
+    #endregion
+
+    #region Modelos
+    public Modelos? ObtenerModeloPorID(int idModelo)
+    {
+        return uow.RepoModelo.GetById(idModelo);
+    }
+    #endregion
+
+    #region Variantes
+    public VariantesElemento? ObtenerVariantePorID(int idVariante)
+    {
+        return uow.RepoVarianteElemento.GetById(idVariante);
+    }
+    #endregion
+
+    #region TipoElemento
+    public TipoElemento? ObtenerTipoElementoPorID(int idTipoElemento)
+    {
+        return uow.RepoTipoElemento.GetById(idTipoElemento);
+    }
+
+    #endregion
+
+    #region Equipo
+    public Notebooks? ObtenerNotebookPorID(int idNotebook)
+    {
+        return uow.RepoNotebooks.GetById(idNotebook);
+    }
+    #endregion
+
+    #endregion
 
     #region Validaciones INsert
     public void ValidarPrestamos(Prestamos prestamos, IEnumerable<int> idsElemento, int? idCarrito)
@@ -305,4 +377,3 @@ public class PrestamosCN
     #endregion
 
 }
-

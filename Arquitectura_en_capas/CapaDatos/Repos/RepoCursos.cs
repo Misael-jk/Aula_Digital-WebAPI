@@ -15,7 +15,7 @@ public class RepoCursos : RepoBase, IRepoCursos
     #region Mostrar todos los cursos
     public IEnumerable<Curso> GetAll()
     {
-        string query = "select * from Cursos";
+        string query = "select idCurso AS IdCurso, curso AS NombreCurso from Cursos";
 
         try
         {

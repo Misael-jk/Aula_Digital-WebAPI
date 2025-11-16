@@ -15,6 +15,10 @@ public interface IUowPrestamos
     public IRepoHistorialElementos RepoHistorialElementos { get; }
     public IRepoHistorialCarrito RepoHistorialCarrito { get; }
     public IRepoHistorialNotebook RepoHistorialNotebook { get; }
+    public IRepoNotebooks RepoNotebooks { get; }
+    public IRepoModelo RepoModelo { get; }
+    public IRepoTipoElemento RepoTipoElemento { get; }
+    public IRepoVarianteElemento RepoVarianteElemento { get; }
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

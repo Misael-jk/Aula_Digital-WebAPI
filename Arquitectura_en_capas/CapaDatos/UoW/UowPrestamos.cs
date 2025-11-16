@@ -18,6 +18,10 @@ public class UowPrestamos : UowBase, IUowPrestamos
     public IRepoHistorialElementos RepoHistorialElementos { get; }
     public IRepoHistorialCarrito RepoHistorialCarrito { get; }
     public IRepoHistorialNotebook RepoHistorialNotebook { get; }
+    public IRepoNotebooks RepoNotebooks { get; }
+    public IRepoModelo RepoModelo { get; }
+    public IRepoTipoElemento RepoTipoElemento { get; }
+    public IRepoVarianteElemento RepoVarianteElemento { get; }
 
     public UowPrestamos(IDbConnection conexion) : base(conexion)
     {
@@ -29,6 +33,10 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoHistorialElementos = new RepoHistorialElemento(conexion, Transaction);
         RepoHistorialCarrito = new RepoHistorialCarrito(conexion, Transaction);
         RepoHistorialNotebook = new RepoHistorialNotebook(conexion, Transaction);
+        RepoNotebooks = new RepoNotebooks(conexion, Transaction);
+        RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
+        RepoModelo = new RepoModelo(conexion, Transaction);
+        RepoVarianteElemento = new RepoVarianteElemento(conexion, Transaction);
 
 
         // REPO DE LECTURA

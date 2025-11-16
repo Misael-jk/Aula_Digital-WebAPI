@@ -19,5 +19,6 @@ public interface IRepoElemento
     public List<(string Nombre, int Cantidad)> GetElementosPorTipo();
     public int? CantidadEstados(int idEstado);
     public int CantidadTotal();
+    public Elemento? GetElementoByNSCBP(string? numeroSerie, string? codigoBarra, string? patrimonio);
     public void SetTransaction(IDbTransaction? transaction);
 }
