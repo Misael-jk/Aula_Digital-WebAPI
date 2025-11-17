@@ -80,6 +80,7 @@ namespace CapaPresentacion
             #region Tipo Elemento
             dgvTipoElemento.Columns["IdTipoElemento"].HeaderText = "ID";
             dgvTipoElemento.Columns["IdTipoElemento"].Width = 50;
+            dgvTipoElemento.Columns["IdTipoElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvTipoElemento.Columns["ElementoTipo"].HeaderText = "Tipos de Elementos";
             dgvTipoElemento.ReadOnly = true;
             #endregion
@@ -87,18 +88,21 @@ namespace CapaPresentacion
             #region Modelo Elemento
             dgvModelo_Elementos.Columns["IdModelo"].HeaderText = "ID";
             dgvModelo_Elementos.Columns["IdModelo"].Width = 50;
+            dgvModelo_Elementos.Columns["IdModelo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvModelo_Elementos.ReadOnly = true;
             #endregion
 
             #region Variante Elemento
             dgvVarianteElemento.Columns["IdVarianteElemento"].HeaderText = "Id";
             dgvVarianteElemento.Columns["IdVarianteElemento"].Width = 50;
+            dgvVarianteElemento.Columns["IdVarianteElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvVarianteElemento.ReadOnly = true;
             #endregion
 
             #region Ubicacion
             dgvUbicaciones.Columns["IdUbicacion"].HeaderText = "ID";
             dgvUbicaciones.Columns["IdUbicacion"].Width = 50;
+            dgvUbicaciones.Columns["IdUbicacion"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvUbicaciones.Columns["NombreUbicacion"].HeaderText = "Ubicaciones";
             dgvModelo_Notebook.ReadOnly = true;
             #endregion
@@ -106,6 +110,7 @@ namespace CapaPresentacion
             #region Modelo de Notebooks
             dgvModelo_Notebook.Columns["IdModelo"].HeaderText = "ID";
             dgvModelo_Notebook.Columns["IdModelo"].Width = 50;
+            dgvModelo_Notebook.Columns["IdModelo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvModelo_Notebook.Columns["Modelo"].HeaderText = "Modelos de Notebooks";
             dgvModelo_Notebook.Columns["Modelo"].Width = 220;
             dgvModelo_Notebook.Columns["Tipo"].HeaderText = "Tipo Notebook";
@@ -115,6 +120,7 @@ namespace CapaPresentacion
             #region Modelo de Carritos
             dgvModelo_Carritos.Columns["IdModelo"].HeaderText = "ID";
             dgvModelo_Carritos.Columns["IdModelo"].Width = 50;
+            dgvModelo_Carritos.Columns["IdModelo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvModelo_Carritos.Columns["Modelo"].HeaderText = "Modelos de Carritos";
             dgvModelo_Carritos.Columns["Modelo"].Width = 200;
             dgvModelo_Carritos.Columns["Tipo"].HeaderText = "Tipo Carrito";

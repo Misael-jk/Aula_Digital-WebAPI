@@ -89,7 +89,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     #region Obtener por usuario y contraseña
     public Usuarios? GetByUserPass(string usuario, string pass)
     {
-        string query = "select * from Usuarios where usuario = @usuario and pass = @pass";
+        string query = "select idUsuario, usuario, pass AS 'Password', nombre, apellido, idRol, email, fotoPerfil, habilitado, fechaBaja from Usuarios where usuario = @usuario and pass = @pass";
 
         DynamicParameters parametros = new DynamicParameters();
 

@@ -33,6 +33,7 @@ namespace CapaPresentacion
             repoUsuarios = new RepoUsuarios(conexion);
             repoRoles = new RepoRoles(conexion);
             mapperUsuarios = new MapperUsuarios(conexion);
+            repoHistorialCambio = new RepoHistorialCambio(conexion);
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
         }
 
@@ -58,20 +59,20 @@ namespace CapaPresentacion
             string usuario = TxtUser.Text.Trim();
             string password = TxtPass.Text.Trim();
 
-            try
+            Usuarios? userVerificado = usuariosCN.Login(usuario, password);
+
+            if (userVerificado != null)
             {
-                Usuarios? userVerificado = usuariosCN.Login(usuario, password);
-
-            Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
-
-            FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
-            principal.Show();
-            this.Hide();
-        }
-            catch
+                Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
+                FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
+                principal.Show();
+                this.Hide();
+            }
+            else
             {
                 TxtError.Visible = true;
             }
+        }
 
 
     //if (userVerificado != null)
@@ -86,7 +87,7 @@ namespace CapaPresentacion
     //{
     //    TxtError.Visible = true;
     //}
-}
+
 
         private void TxtUser_KeyDown(object sender, KeyEventArgs e)
         {

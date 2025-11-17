@@ -585,4 +585,42 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
         }
     }
     #endregion
+
+    public int? CantidadEstados(int idEstado)
+    {
+        string query = @"SELECT SUM(idEstadoMantenimiento = @idEstado) 
+                         FROM Elementos 
+                         join TipoElemento t using (idTipoElemento)
+                         where habilitado = 1
+                           and t.elemento in ('Notebook')";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("idEstado", idEstado);
+
+        try
+        {
+            return Conexion.ExecuteScalar<int?>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener la cantidad de nootebook por estado");
+        }
+    }
+
+    public int CantidadTotal()
+    {
+        string query = @"SELECT COUNT(*) 
+                         FROM Elementos 
+                         join TipoElemento t using (idTipoElemento)
+                         WHERE habilitado = 1
+                         and t.elemento in ('Notebook');";
+        try
+        {
+            return Conexion.ExecuteScalar<int>(query, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener la cantidad total de elementos");
+        }
+    }
 }

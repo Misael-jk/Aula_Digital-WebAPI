@@ -69,6 +69,10 @@ namespace CapaPresentacion
             {
                 cmbEstado.Enabled = false;
             }
+
+            dgvHistorial.Columns["IdHistorialElemento"].HeaderText = "ID";
+            dgvHistorial.Columns["IdHistorialElemento"].Width = 40;
+            dgvHistorial.Columns["IdHistorialElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void CargarTodaLaGestion(int idElemento)

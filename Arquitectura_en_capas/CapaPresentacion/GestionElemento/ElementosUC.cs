@@ -94,6 +94,7 @@ namespace CapaPresentacion
                 }
 
                 dgvElementos_M.DataSource = elementosFiltrados.ToList();
+
             }
             catch (Exception ex)
             {
@@ -154,6 +155,11 @@ namespace CapaPresentacion
             CargarAutoCompleteTipos();
             RenovarIdentificadores();
             SetModoInicial();
+
+            dgvElementos_M.Columns["IdElemento"].HeaderText = "ID";
+            dgvElementos_M.Columns["IdElemento"].Width = 40;
+            dgvElementos_M.Columns["IdElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvElementos_M.Columns["Equipo"].Width = 165;
         }
         #endregion
 
