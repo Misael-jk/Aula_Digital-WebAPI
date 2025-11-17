@@ -1157,6 +1157,7 @@
             dgvCarritos_M.Location = new Point(11, 94);
             dgvCarritos_M.MultiSelect = false;
             dgvCarritos_M.Name = "dgvCarritos_M";
+            dgvCarritos_M.ReadOnly = true;
             dgvCarritos_M.RowHeadersVisible = false;
             dgvCarritos_M.RowTemplate.Height = 35;
             dgvCarritos_M.ScrollBars = ScrollBars.Vertical;
@@ -1175,7 +1176,7 @@
             dgvCarritos_M.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgvCarritos_M.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvCarritos_M.ThemeStyle.HeaderStyle.Height = 35;
-            dgvCarritos_M.ThemeStyle.ReadOnly = false;
+            dgvCarritos_M.ThemeStyle.ReadOnly = true;
             dgvCarritos_M.ThemeStyle.RowsStyle.BackColor = Color.White;
             dgvCarritos_M.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvCarritos_M.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);

@@ -1,14 +1,25 @@
-drop view if exists View_GetDocenteDTO;
+DROP VIEW IF EXISTS View_GetDocenteDTO;
 
-create view View_GetDocenteDTO as
-	select 
-		d.idDocente,
-		d.nombre,
-		d.apellido,
-		d.dni,
-		d.email,
-		ifnull(e.estadoPrestamo, 'Sin Prestamos') as 'EstadoPrestamo'
-	from docentes d
-	left join prestamos p using (idDocente)
-	left join estadosprestamo e on e.idEstadoPrestamo = p.idEstadoPrestamo
-	where d.habilitado = 1;
+CREATE VIEW View_GetDocenteDTO AS
+SELECT 
+    d.idDocente,
+    d.nombre,
+    d.apellido,
+    d.dni,
+    d.email,
+    IFNULL(e.estadoPrestamo, 'Sin Prestamos') AS EstadoPrestamo
+FROM Docentes d
+LEFT JOIN (
+    SELECT 
+        p1.idDocente,
+        p1.idEstadoPrestamo
+    FROM Prestamos p1
+    INNER JOIN (
+        SELECT idDocente, MAX(fechaPrestamo) AS fechaMax
+        FROM Prestamos
+        GROUP BY idDocente
+    ) p2 ON p1.idDocente = p2.idDocente 
+        AND p1.fechaPrestamo = p2.fechaMax
+) ult ON d.idDocente = ult.idDocente
+LEFT JOIN EstadosPrestamo e ON e.idEstadoPrestamo = ult.idEstadoPrestamo
+WHERE d.habilitado = 1;

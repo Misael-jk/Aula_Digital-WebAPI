@@ -115,6 +115,15 @@ namespace CapaPresentacion
 
             CargarAutoCompleteEquipoNotebook();
             CargarAutoCompleteEquipoCarrito();
+
+            dgvNotebooks_M.Columns["IdNotebook"].HeaderText = "ID";
+            dgvNotebooks_M.Columns["IdNotebook"].Width = 40;
+            dgvNotebooks_M.Columns["IdNotebook"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvNotebooks_M.Columns["PosicionCarrito"].HeaderText = "Posicion";
+            dgvNotebooks_M.Columns["PosicionCarrito"].Width = 60;
+            dgvNotebooks_M.Columns["PosicionCarrito"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvNotebooks_M.Columns["NumeroSerieNotebook"].HeaderText = "Serie";
+
         }
         #endregion
 

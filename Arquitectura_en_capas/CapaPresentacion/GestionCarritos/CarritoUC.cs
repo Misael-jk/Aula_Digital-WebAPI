@@ -76,6 +76,13 @@ namespace CapaPresentacion
 
             RenovarDatos();
 
+            dgvCarritos_M.Columns["IdCarrito"].HeaderText = "ID";
+            dgvCarritos_M.Columns["IdCarrito"].Width = 40;
+            dgvCarritos_M.Columns["IdCarrito"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCarritos_M.Columns["NumeroSerieCarrito"].HeaderText = "Serie";
+            dgvCarritos_M.Columns["Capacidad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCarritos_M.Columns["Capacidad"].Width = 80;
+            dgvCarritos_M.Columns["EstadoMantenimiento"].HeaderText = "Estado";
         }
 
         private void txtNroSerie_TextChanged(object sender, EventArgs e)

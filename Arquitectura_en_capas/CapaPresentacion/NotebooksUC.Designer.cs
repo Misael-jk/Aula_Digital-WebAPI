@@ -280,7 +280,6 @@
             txtEquipo_AddCarrito.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtEquipo_AddCarrito.Size = new Size(195, 32);
             txtEquipo_AddCarrito.TabIndex = 34;
-            txtEquipo.TextChanged += txtEquipo_TextChanged;
             // 
             // txtCarrito_RemoveCarrito
             // 
@@ -304,7 +303,6 @@
             txtCarrito_RemoveCarrito.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtCarrito_RemoveCarrito.Size = new Size(194, 32);
             txtCarrito_RemoveCarrito.TabIndex = 42;
-            txtCarrito.TextChanged += txtModelo_TextChanged;
             // 
             // txtPosicion
             // 
@@ -681,6 +679,7 @@
             txtEquipo.Size = new Size(162, 36);
             txtEquipo.TabIndex = 8;
             txtEquipo.TextOffset = new Point(5, 0);
+            txtEquipo.TextChanged += txtEquipo_TextChanged;
             // 
             // txtCarrito
             // 
@@ -712,6 +711,7 @@
             txtCarrito.Size = new Size(162, 36);
             txtCarrito.TabIndex = 7;
             txtCarrito.TextOffset = new Point(5, 0);
+            txtCarrito.TextChanged += txtModelo_TextChanged;
             // 
             // btnBuscar
             // 
@@ -811,8 +811,8 @@
             txtSerieBarraPatrimonio.Size = new Size(315, 36);
             txtSerieBarraPatrimonio.TabIndex = 1;
             txtSerieBarraPatrimonio.TextOffset = new Point(5, 0);
-            txtSerieBarraPatrimonio.KeyDown += txtSerieBarraPatrimonio_KeyDown;
             txtSerieBarraPatrimonio.TextChanged += txtSerieBarraPatrimonio_TextChanged;
+            txtSerieBarraPatrimonio.KeyDown += txtSerieBarraPatrimonio_KeyDown;
             // 
             // panel1
             // 
@@ -851,6 +851,7 @@
             dgvNotebooks_M.Location = new Point(12, 94);
             dgvNotebooks_M.MultiSelect = false;
             dgvNotebooks_M.Name = "dgvNotebooks_M";
+            dgvNotebooks_M.ReadOnly = true;
             dgvNotebooks_M.RowHeadersVisible = false;
             dgvNotebooks_M.RowTemplate.Height = 35;
             dgvNotebooks_M.ScrollBars = ScrollBars.Vertical;
@@ -869,7 +870,7 @@
             dgvNotebooks_M.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgvNotebooks_M.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvNotebooks_M.ThemeStyle.HeaderStyle.Height = 35;
-            dgvNotebooks_M.ThemeStyle.ReadOnly = false;
+            dgvNotebooks_M.ThemeStyle.ReadOnly = true;
             dgvNotebooks_M.ThemeStyle.RowsStyle.BackColor = Color.White;
             dgvNotebooks_M.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvNotebooks_M.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);

@@ -109,6 +109,8 @@ namespace CapaPresentacion
         private readonly IMapperHistorialCarritosG mapperHistorialCarritosG;
         private readonly IMapperPrestamoDetalle mapperPrestamoDetalle;
         private readonly IMapperDevolucionDetalle mapperDevolucionDetalle;
+        private readonly IMapperNotebooksPrestadas mapperNotebooksPrestadas;
+        private readonly IMapperRankingDocente mapperRankingDocente;
         #endregion
 
         #region Variables Capa Negocio
@@ -216,6 +218,8 @@ namespace CapaPresentacion
             mapperHistorialCarritosG = new MapperHistorialCarritoG(conexion);
             mapperPrestamoDetalle = new MapperPrestamoDetalle(conexion);
             mapperDevolucionDetalle = new MapperDevolucionDetalle(conexion);
+            mapperNotebooksPrestadas = new MapperNotebooksPrestadas(conexion);
+            mapperRankingDocente = new MapperRankingDocentes(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos, mapperHistorialCarritosG);
@@ -360,7 +364,7 @@ namespace CapaPresentacion
             //MostrarSolo(historialUC);
 
             if (dashboard == null)
-                dashboard = new Dashboard(mapperPrestamosActivos);
+                dashboard = new Dashboard(mapperPrestamosActivos, mapperNotebooksPrestadas, mapperRankingDocente, notebooksCN);
 
             CambiarNombrePort(BtnDashboard.Text);
             pnlContenedor.Controls.Clear();

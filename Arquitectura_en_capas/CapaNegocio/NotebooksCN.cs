@@ -198,6 +198,16 @@ public class NotebooksCN
         return uow.RepoEstadosMantenimiento.GetAllForUpdates();
     }
 
+    public int? ObtenerCantidadPorEstados(int idEstado)
+    {
+        return uow.RepoNotebooks.CantidadEstados(idEstado);
+    }
+
+    public int CantidadTotalNotebooks()
+    {
+        return uow.RepoNotebooks.CantidadTotal();
+    }
+
     public Notebooks? ObtenerNotebookPorID(int idNotebook)
     {
         return uow.RepoNotebooks.GetById(idNotebook);

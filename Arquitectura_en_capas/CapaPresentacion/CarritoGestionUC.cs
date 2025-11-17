@@ -66,6 +66,10 @@ namespace CapaPresentacion
             circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             circleButton1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             CargarTodaLaGestion(_idCarritoSeleccionado);
+
+            dgvHistorial.Columns["IdHistorialCarrito"].HeaderText = "ID";
+            dgvHistorial.Columns["IdHistorialCarrito"].Width = 40;
+            dgvHistorial.Columns["IdHistorialCarrito"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void CargarTodaLaGestion(int idCarrito)
