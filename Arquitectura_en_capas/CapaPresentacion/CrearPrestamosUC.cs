@@ -383,6 +383,7 @@ namespace CapaPresentacion
                     IdDocente = Convert.ToInt32(_idDocenteDelPrestamo),
                     IdEstadoPrestamo = 1,
                     IdCarrito = Convert.ToInt32(cmbCarros.SelectedValue),
+                    FechaPrestamo = DateTime.Now
                 };
 
                 IEnumerable<int> notebooks = prestamosCN.ObtenerIDsPorCarrito(Convert.ToInt32(cmbCarros.SelectedValue));
