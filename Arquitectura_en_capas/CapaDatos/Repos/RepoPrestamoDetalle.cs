@@ -189,4 +189,22 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
         }
     }
     #endregion
+
+    public List<int> GetIdsElementosByIdPrestamo(int idPrestamo)
+    {
+        string query = @"SELECT idElemento
+                         FROM PrestamoDetalle
+                         WHERE idPrestamo = @idPrestamo;";
+
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("idPrestamo", idPrestamo);
+            return Conexion.Query<int>(query, parametros, transaction: Transaction).ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al contar los detalles del prestamo");
+        }
+    }
 }

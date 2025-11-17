@@ -10,11 +10,13 @@ public class DevolucionCN
 {
     private readonly IUowDevolucion uow;
     private readonly IMapperDevoluciones mapperDevolucion;
+    private readonly IMapperDevolucionDetalle mapperDevolucionDetalle;
 
-    public DevolucionCN(IMapperDevoluciones mapperDevolucion, IUowDevolucion uow)
+    public DevolucionCN(IMapperDevoluciones mapperDevolucion, IUowDevolucion uow, IMapperDevolucionDetalle mapperDevolucionDetalle)
     {
         this.mapperDevolucion = mapperDevolucion;
         this.uow = uow;
+        this.mapperDevolucionDetalle = mapperDevolucionDetalle;
     }
 
     public IEnumerable<DevolucionesDTO> ObtenerElementos()
@@ -31,21 +33,23 @@ public class DevolucionCN
 
             ValidarDevolucion(devolucionNEW, idsElementos, idsEstadosElemento);
 
-            if (uow.RepoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
-            {
-                throw new Exception("Ya existe una devolución asociada a este prestamo.");
-            }
+            //if (uow.RepoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
+            //{
+            //    throw new Exception("Ya existe una devolución asociada a este prestamo.");
+            //}
 
             Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucionNEW.IdPrestamo);
 
             uow.RepoDevolucion.Insert(devolucionNEW);
 
-            /*bool tuvoAnomalias = */InsertDevolucionDetalle(devolucionNEW, idsElementos, idsEstadosElemento, Observaciones /*,anomaliasPorElemento*/);
+            /*bool tuvoAnomalias = */
+            
+            InsertDevolucionDetalle(devolucionNEW, idsElementos, idsEstadosElemento, Observaciones /*,anomaliasPorElemento*/);
 
             //ActualizarEstadoPrestamoYDevolucion(prestamo.IdPrestamo, devolucionNEW.IdDevolucion, tuvoAnomalias);
 
             // ___________________
-            int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(prestamo.IdPrestamo);
+            int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(Convert.ToInt32(prestamo?.IdPrestamo));
             int totalDevueltos = uow.RepoDevolucionDetalle.CountByDevolucion(devolucionNEW.IdDevolucion);
 
             if (totalPrestados == totalDevueltos)
@@ -358,5 +362,26 @@ public class DevolucionCN
 
         #endregion
     }
+    #endregion
+
+    #region OBTENER DEVOLUCION POR ID
+    public Devolucion? ObtenerDevolucionPorIdPrestamo(int idPrestamo)
+    {
+        return uow.RepoDevolucion.GetByPrestamo(idPrestamo);
+    }
+    #endregion
+
+    #region OBTENER DEVOLUCION DETALLE
+    public IEnumerable<DevolucionDetalleDTO> ObtenerDevolucionDetallePorID(int idDevolucion, int? idCarrito)
+    {
+        return mapperDevolucionDetalle.GetByIdDTO(idDevolucion, idCarrito);
+    }
+
+    #region OBTENER LISTADO DE IDs DE ELEMENTOS EN DEV. DETALLE
+    public List<int> ObtenerIDsElementosEnDev(int idDevolucion)
+    {
+        return uow.RepoDevolucionDetalle.GetIdsElementosByIdDevolucion(idDevolucion);
+    }
+    #endregion
     #endregion
 }

@@ -130,5 +130,25 @@ public class RepoDevolucionDetalle : RepoBase, IRepoDevolucionDetalle
             throw new Exception("Error al contar los detalles de la devolucion");
         }
     }
+
+    public List<int> GetIdsElementosByIdDevolucion(int idDevolucion)
+    {
+        string query = @"SELECT idElemento
+                        FROM DevolucionDetalle
+                        WHERE idDevolucion = @idDevolucion;";
+
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("idDevolucion", idDevolucion);
+            return Conexion.Query<int>(query, parametros, transaction: Transaction).ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al contar los detalles de la devolucion");
+        }
+    }
     #endregion
+
+
 }

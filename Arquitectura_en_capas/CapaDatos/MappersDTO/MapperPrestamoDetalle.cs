@@ -13,54 +13,100 @@ public class MapperPrestamoDetalle : RepoBase, IMapperPrestamoDetalle
     {
     }
 
-    public IEnumerable<PrestamosDetalleDTO> GetAllDTO()
+    public IEnumerable<PrestamosDetalleDTO> GetByIdDTO(int idPrestamo, int? idCarrito)
     {
-        return Conexion.Query<Elemento, TipoElemento, Carritos, PrestamosDetalleDTO>(
-            "GetPrestamoDetalleDTO",
-            (elemento, tipo, carrito) => new PrestamosDetalleDTO
+        var parameters = new DynamicParameters();
+        parameters.Add("@idPrestamo", idPrestamo);
+        parameters.Add("@idCarrito", idCarrito);
+
+        var sql = @"SELECT
+                    e.idElemento,
+                    e.numeroSerie,
+                    e.patrimonio,
+                    te.elemento AS ElementoTipo,
+                    CASE 
+                        WHEN e.idTipoElemento = 1 THEN nb.equipo
+                        ELSE ve.subtipo
+                    END AS Equipo,
+                    CASE 
+                        WHEN e.idTipoElemento = 1 
+                             AND nb.idCarrito = @idCarrito THEN 
+                                CONCAT(ca.equipo, ' - Posición ', nb.posicionCarrito)
+                        ELSE '-'
+                    END AS EquipoCarrito
+                    FROM PrestamoDetalle pd
+                    INNER JOIN Elementos e 
+                    ON pd.idElemento = e.idElemento
+                    INNER JOIN TipoElemento te 
+                    ON e.idTipoElemento = te.idTipoElemento
+                    LEFT JOIN VariantesElemento ve 
+                    ON e.idVariante = ve.idVariante
+                    LEFT JOIN Notebooks nb 
+                    ON e.idElemento = nb.idElemento
+                    LEFT JOIN Carritos ca
+                    ON nb.idCarrito = ca.idCarrito
+                    WHERE pd.idPrestamo = @idPrestamo
+                    ORDER BY e.idElemento;";
+
+        return Conexion.Query<Elemento, TipoElemento, Notebooks, Carritos, PrestamosDetalleDTO>(
+            sql,
+            (elemento, tipo, notebook, carrito) => new PrestamosDetalleDTO
             {
+                idElemento = elemento.IdElemento,
                 NumeroSerieElemento = elemento.NumeroSerie,
+                Patrimonio = elemento.Patrimonio,
                 TipoElemento = tipo.ElementoTipo,
-                NumeroSerieCarrito = carrito?.NumeroSerieCarrito ?? "Sin Carrito"
-            },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "numeroSerie,ElementoTipo, NumeroSerieCarrito"
-        ).ToList();
-    }
-
-    //public PrestamosDetalleDTO? GetByIdDTO(int idPrestamo)
-    //{
-    //    DynamicParameters parameters = new DynamicParameters();
-    //    parameters.Add("@idPrestamo", idPrestamo, dbType: DbType.Int32, ParameterDirection.Input);
-
-    //    return Conexion.Query<Elemento, TipoElemento, Carritos, PrestamosDetalleDTO>(
-    //        "GetPrestamosDetalleById",
-    //        (elemento, tipo, carrito) => new PrestamosDetalleDTO
-    //        {
-    //            NumeroSerieElemento = elemento.numeroSerie,
-    //            TipoElemento = tipo.ElementoTipo,
-    //            NumeroSerieCarrito = carrito?.NumeroSerieCarrito
-    //        },
-    //        parameters,
-    //        splitOn: "numeroSerie, ElementoTipo, NumeroSerieCarrito"
-    //    ).FirstOrDefault();
-    //}
-
-    public IEnumerable<PrestamosDetalleDTO> GetByPrestamoDTO(int idPrestamo)
-    {
-        DynamicParameters parameters = new DynamicParameters();
-        parameters.Add("@idPrestamo", idPrestamo, dbType: DbType.Int32, ParameterDirection.Input);
-
-        return Conexion.Query<Elemento, TipoElemento, Carritos, PrestamosDetalleDTO>(
-            "GetPrestamosDetalleByPrestamos",
-            (elemento, tipo, carrito) => new PrestamosDetalleDTO
-            {
-                NumeroSerieElemento = elemento.NumeroSerie,
-                TipoElemento = tipo.ElementoTipo,
-                NumeroSerieCarrito = carrito?.NumeroSerieCarrito ?? "Sin Carrito"
+                Equipo = notebook.Equipo,
+                PosicionCarrito = carrito.EquipoCarrito,
             },
             parameters,
-            splitOn: "numeroSerie, ElementoTipo, NumeroSerieCarrito"
+            splitOn: "IdElemento,ElementoTipo,Equipo,EquipoCarrito"
         ).ToList();
     }
+
+    public PrestamosDetalleDTO? GetElementoById(int idElemento, int? idCarrito)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@idElemento", idElemento);
+        parameters.Add("@idCarrito", idCarrito);
+
+        var sql = @"SELECT
+                e.idElemento,
+                e.numeroSerie,
+                e.patrimonio,
+                te.elemento AS ElementoTipo,
+                CASE 
+                    WHEN e.idTipoElemento = 1 THEN nb.equipo
+                    ELSE ve.subtipo
+                END AS Equipo,
+                CASE 
+                    WHEN e.idTipoElemento = 1 
+                         AND nb.idCarrito = @idCarrito THEN 
+                            CONCAT(ca.equipo, ' - Posición ', nb.posicionCarrito)
+                    ELSE '-'
+                END AS EquipoCarrito
+                FROM Elementos e
+                INNER JOIN TipoElemento te ON e.idTipoElemento = te.idTipoElemento
+                LEFT JOIN VariantesElemento ve ON e.idVariante = ve.idVariante
+                LEFT JOIN Notebooks nb ON e.idElemento = nb.idElemento
+                LEFT JOIN Carritos ca ON nb.idCarrito = ca.idCarrito
+                WHERE e.idElemento = @idElemento
+                ORDER BY e.idElemento;";
+
+        return Conexion.Query<Elemento, TipoElemento, Notebooks, Carritos, PrestamosDetalleDTO>(
+            sql,
+            (elemento, tipo, notebook, carrito) => new PrestamosDetalleDTO
+            {
+                idElemento = elemento.IdElemento,
+                NumeroSerieElemento = elemento.NumeroSerie,
+                Patrimonio = elemento.Patrimonio,
+                TipoElemento = tipo.ElementoTipo,
+                Equipo = notebook?.Equipo ?? "-",
+                PosicionCarrito = carrito?.EquipoCarrito ?? "-"
+            },
+            parameters,
+            splitOn: "IdElemento,ElementoTipo,Equipo,EquipoCarrito"
+        ).FirstOrDefault();
+    }
+
 }

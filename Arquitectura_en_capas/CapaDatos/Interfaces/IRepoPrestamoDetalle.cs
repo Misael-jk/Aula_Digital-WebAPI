@@ -14,6 +14,7 @@ public interface IRepoPrestamoDetalle
     public bool PerteneceAlPrestamo(int idPrestamo, int idElemento);
     public int GetCountByPrestamo(int idPrestamo);
     public IEnumerable<Elemento> GetElementosPendientes(int idPrestamo);
+    public List<int> GetIdsElementosByIdPrestamo(int idPrestamo);
     public void SetTransaction(IDbTransaction? transaction);
 
 }

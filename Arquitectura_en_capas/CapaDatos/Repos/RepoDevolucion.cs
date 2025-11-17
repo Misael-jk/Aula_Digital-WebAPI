@@ -73,7 +73,7 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
     #region obtener por Prestamo
     public Devolucion? GetByPrestamo(int idPrestamo)
     {
-        string query = "select * from Devoluciones where idPrestamo = unidPrestamo";
+        string query = "select * from Devoluciones where idPrestamo = @unidPrestamo";
 
         DynamicParameters parametros = new DynamicParameters();
         try

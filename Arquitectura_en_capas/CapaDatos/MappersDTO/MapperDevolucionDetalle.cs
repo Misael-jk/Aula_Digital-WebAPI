@@ -13,43 +13,52 @@ public class MapperDevolucionDetalle : RepoBase, IMapperDevolucionDetalle
     {
     }
 
-    public IEnumerable<DevolucionDetalleDTO> GetAllDTO()
+    public IEnumerable<DevolucionDetalleDTO> GetByIdDTO(int idDevolucion, int? idCarrito)
     {
-        return Conexion.Query<Devolucion, Elemento, TipoElemento, Carritos, EstadosMantenimiento, DevolucionDetalleDTO>(
-            "GetDevolucionDetalleDTO",
-            (devolucion, elemento, tipo, carrito, estado) => new DevolucionDetalleDTO
+        var parameters = new DynamicParameters();
+        parameters.Add("idDevolucion", idDevolucion);
+        parameters.Add("idCarrito", idCarrito);
+
+        var sql = @"SELECT
+                    dd.idElemento,
+                        e.numeroSerie,
+                        e.patrimonio,
+                        te.elemento AS ElementoTipo,
+                        CASE 
+                            WHEN e.idTipoElemento = 1 THEN nb.equipo
+                            ELSE ve.subtipo
+                        END AS Equipo,
+                        CASE 
+                            WHEN e.idTipoElemento = 1 
+                                 AND nb.idCarrito = @idCarrito THEN 
+                                CONCAT(ca.equipo, ' - Posición ', nb.posicionCarrito)
+                            ELSE '-'
+                        END AS EquipoCarrito,
+                    d.fechaDevolucion
+                    FROM DevolucionDetalle dd
+                    INNER JOIN Elementos e ON dd.idElemento = e.idElemento
+                    INNER JOIN TipoElemento te ON e.idTipoElemento = te.idTipoElemento
+                    LEFT JOIN VariantesElemento ve ON e.idVariante = ve.idVariante
+                    LEFT JOIN Notebooks nb ON e.idElemento = nb.idElemento
+                    LEFT JOIN Carritos ca ON nb.idCarrito = ca.idCarrito
+                    INNER JOIN Devoluciones d ON dd.idDevolucion = d.idDevolucion
+                    WHERE dd.idDevolucion = @idDevolucion
+                    ORDER BY dd.idElemento;";
+
+        return Conexion.Query<Elemento, TipoElemento, Notebooks, Carritos, Devolucion, DevolucionDetalleDTO>(
+            sql,
+            (elemento, tipo, notebook, carrito, devolucion) => new DevolucionDetalleDTO
             {
-                TipoElemento = tipo.ElementoTipo,
+                idElemento = elemento.IdElemento,
                 NumeroSerieElemento = elemento.NumeroSerie,
-                NumeroSerieCarrito = carrito.NumeroSerieCarrito,
-                EstadoMantenimiento = estado.EstadoMantenimientoNombre,
+                Patrimonio = elemento.Patrimonio,
+                TipoElemento = tipo.ElementoTipo,
+                Equipo = notebook?.Equipo ?? "",
+                PosicionCarrito = carrito?.EquipoCarrito ?? "Sin carrito",
                 FechaDevolucion = devolucion.FechaDevolucion,
-                Observacion = devolucion?.Observaciones ?? "Sin observaciones"
             },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "FechaDevolucion,numeroSerie,ElementoTipo, NumeroSerieCarrito,EstadoMantenimientoNombre"
+            parameters,
+            splitOn: "IdElemento,ElementoTipo,Equipo,EquipoCarrito,fechaDevolucion"
         ).ToList();
     }
-
-    public DevolucionDetalleDTO? GetByIdDTO(int idDevolucion)
-    {
-        DynamicParameters parameters = new DynamicParameters();
-        parameters.Add("@idDevolucion", idDevolucion, dbType: DbType.Int32, ParameterDirection.Input);
-
-        return Conexion.Query<Devolucion, Elemento, TipoElemento, Carritos, EstadosMantenimiento, DevolucionDetalleDTO>(
-            "GetDevolucionDetalleDTO",
-            (devolucion, elemento, tipo, carrito, estado) => new DevolucionDetalleDTO
-            {
-                TipoElemento = tipo.ElementoTipo,
-                NumeroSerieElemento = elemento.NumeroSerie,
-                NumeroSerieCarrito = carrito?.NumeroSerieCarrito ?? "Sin carrito",
-                EstadoMantenimiento = estado.EstadoMantenimientoNombre,
-                FechaDevolucion = devolucion.FechaDevolucion,
-                Observacion = devolucion.Observaciones ?? "Sin observaciones"
-            },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "ElementoTipo, numeroSerie, NumeroSerieCarrito, FechaDevolucion, EstadoMantenimientoNombre"
-        ).FirstOrDefault();
-    }
-
 }

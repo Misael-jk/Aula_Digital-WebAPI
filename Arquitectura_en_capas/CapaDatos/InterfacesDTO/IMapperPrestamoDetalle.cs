@@ -4,7 +4,7 @@ namespace CapaDatos.InterfacesDTO;
 
 public interface IMapperPrestamoDetalle
 {
-    IEnumerable<PrestamosDetalleDTO> GetAllDTO();
-    //PrestamosDetalleDTO? GetByIdDTO(int idPrestamoDetalle);
-    IEnumerable<PrestamosDetalleDTO> GetByPrestamoDTO(int idPrestamo);
+    public IEnumerable<PrestamosDetalleDTO> GetByIdDTO(int idPrestamo, int? idCarrito);
+    public PrestamosDetalleDTO? GetElementoById(int idElemento, int? idCarrito);
+
 }

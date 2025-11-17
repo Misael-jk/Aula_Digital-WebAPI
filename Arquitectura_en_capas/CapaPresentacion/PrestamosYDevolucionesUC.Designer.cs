@@ -42,7 +42,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlDataGridElementos = new Guna.UI2.WinForms.Guna2Panel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnDevoluciones = new Guna.UI2.WinForms.Guna2Button();
             btnCrearNotebook_M = new Guna.UI2.WinForms.Guna2Button();
             panel2 = new Panel();
             panel1 = new Panel();
@@ -61,7 +61,7 @@
             // 
             pnlDataGridElementos.BackColor = Color.Transparent;
             pnlDataGridElementos.BorderRadius = 15;
-            pnlDataGridElementos.Controls.Add(guna2Button1);
+            pnlDataGridElementos.Controls.Add(btnDevoluciones);
             pnlDataGridElementos.Controls.Add(btnCrearNotebook_M);
             pnlDataGridElementos.Controls.Add(panel2);
             pnlDataGridElementos.Controls.Add(panel1);
@@ -74,31 +74,32 @@
             pnlDataGridElementos.Size = new Size(1009, 533);
             pnlDataGridElementos.TabIndex = 52;
             // 
-            // guna2Button1
+            // btnDevoluciones
             // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderRadius = 8;
-            guna2Button1.Cursor = Cursors.Hand;
-            guna2Button1.CustomizableEdges = customizableEdges1;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.FromArgb(252, 201, 52);
-            guna2Button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            guna2Button1.ForeColor = Color.Firebrick;
-            guna2Button1.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            guna2Button1.HoverState.ForeColor = Color.White;
-            guna2Button1.Location = new Point(658, 497);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.PressedColor = Color.FromArgb(255, 170, 20);
-            guna2Button1.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.ShadowDecoration.Enabled = true;
-            guna2Button1.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            guna2Button1.Size = new Size(332, 26);
-            guna2Button1.TabIndex = 15;
-            guna2Button1.Text = "Devolver elementos en prestamo parcial seleccionado";
+            btnDevoluciones.BackColor = Color.Transparent;
+            btnDevoluciones.BorderRadius = 8;
+            btnDevoluciones.Cursor = Cursors.Hand;
+            btnDevoluciones.CustomizableEdges = customizableEdges1;
+            btnDevoluciones.DisabledState.BorderColor = Color.DarkGray;
+            btnDevoluciones.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnDevoluciones.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnDevoluciones.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnDevoluciones.FillColor = Color.FromArgb(252, 201, 52);
+            btnDevoluciones.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnDevoluciones.ForeColor = Color.Firebrick;
+            btnDevoluciones.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnDevoluciones.HoverState.ForeColor = Color.White;
+            btnDevoluciones.Location = new Point(658, 497);
+            btnDevoluciones.Name = "btnDevoluciones";
+            btnDevoluciones.PressedColor = Color.FromArgb(255, 170, 20);
+            btnDevoluciones.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btnDevoluciones.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnDevoluciones.ShadowDecoration.Enabled = true;
+            btnDevoluciones.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnDevoluciones.Size = new Size(332, 26);
+            btnDevoluciones.TabIndex = 15;
+            btnDevoluciones.Text = "Devolver elementos en prestamo parcial seleccionado";
+            btnDevoluciones.Click += btnDevoluciones_Click;
             // 
             // btnCrearNotebook_M
             // 
@@ -198,6 +199,7 @@
             dvgPrestamosYDevoluciones.ThemeStyle.RowsStyle.Height = 35;
             dvgPrestamosYDevoluciones.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dvgPrestamosYDevoluciones.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dvgPrestamosYDevoluciones.CellClick += dvgPrestamosYDevoluciones_CellClick;
             // 
             // guna2Panel3
             // 
@@ -279,6 +281,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPresentacion;
         private Guna.UI2.WinForms.Guna2Panel pnlPresentacionNotebook;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNotebooksTitulo;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnDevoluciones;
     }
 }

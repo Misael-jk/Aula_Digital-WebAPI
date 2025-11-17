@@ -10,5 +10,6 @@ public interface IRepoDevolucionDetalle
     public IEnumerable<DevolucionDetalle> GetAll();
     public bool Exists(int idDevolucion, int idElemento);
     public int CountByDevolucion(int idDevolucion);
+    public List<int> GetIdsElementosByIdDevolucion(int idDevolucion);
     public void SetTransaction(IDbTransaction? transaction);
 }
