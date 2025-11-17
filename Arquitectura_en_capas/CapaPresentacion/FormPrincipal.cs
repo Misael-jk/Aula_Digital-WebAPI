@@ -107,6 +107,8 @@ namespace CapaPresentacion
         private readonly IMapperNotebooksCarro mapperNotebooksCarro;
         private readonly IMapperHistorialNotebookG mapperHistorialNotebookG;
         private readonly IMapperHistorialCarritosG mapperHistorialCarritosG;
+        private readonly IMapperPrestamoDetalle mapperPrestamoDetalle;
+        private readonly IMapperDevolucionDetalle mapperDevolucionDetalle;
         private readonly IMapperNotebooksPrestadas mapperNotebooksPrestadas;
         private readonly IMapperRankingDocente mapperRankingDocente;
         #endregion
@@ -214,17 +216,19 @@ namespace CapaPresentacion
             mapperNotebooksCarro = new MapperNotebooksCarro(conexion);
             mapperHistorialNotebookG = new MapperHistorialNotebookG(conexion);
             mapperHistorialCarritosG = new MapperHistorialCarritoG(conexion);
+            mapperPrestamoDetalle = new MapperPrestamoDetalle(conexion);
+            mapperDevolucionDetalle = new MapperDevolucionDetalle(conexion);
             mapperNotebooksPrestadas = new MapperNotebooksPrestadas(conexion);
             mapperRankingDocente = new MapperRankingDocentes(conexion);
 
             elementoCN = new ElementosCN(mapperElementos, uowElementos, mapperHistorialElementoG);
             carritosCN = new CarritosCN(mapperCarritos, uowCarritos, mapperHistorialCarritosG);
             docentesCN = new DocentesCN(repoDocentes, mapperDocentes);
-            prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos, mapperNotebooksCarro);
+            prestamosCN = new PrestamosCN(mapperPrestamos, uowPrestamos, mapperNotebooksCarro, mapperPrestamoDetalle);
             tiposElementoCN = new TiposElementoCN(repoTipoElemento);
             usuariosCN = new UsuariosCN(repoUsuarios, repoRoles, mapperUsuarios, repoHistorialCambio);
             modeloCN = new ModeloCN(repoModelo, mapperModelos, repoTipoElemento);
-            devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion);
+            devolucionCN = new DevolucionCN(mapperDevoluciones, uowDevolucion, mapperDevolucionDetalle);
             notebooksCN = new NotebooksCN(mapperNotebooks, uowNotebooks, mapperHistorialNotebookG);
             carritosBajasCN = new CarritosBajasCN(mapperCarritosBajas, uowCarritos);
             elementosBajasCN = new ElementosBajasCN(mapperElementosBajas, uowElementos);

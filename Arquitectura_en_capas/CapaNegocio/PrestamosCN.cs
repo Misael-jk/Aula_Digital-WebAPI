@@ -3,6 +3,7 @@ using CapaDatos.InterfacesDTO;
 using CapaDTOs;
 using System.Transactions;
 using CapaDatos.InterfaceUoW;
+using System.Collections;
 
 namespace CapaNegocio;
 
@@ -11,18 +12,25 @@ public class PrestamosCN
     private readonly IUowPrestamos uow;
     private readonly IMapperPrestamos mapperPrestamos;
     private readonly IMapperNotebooksCarro mapperNotebooksCarro;
+    private readonly IMapperPrestamoDetalle mapperPrestamoDetalle;
 
-    public PrestamosCN(IMapperPrestamos mapperPrestamos, IUowPrestamos uow, IMapperNotebooksCarro mapperNotebooksCarro)
+    public PrestamosCN(IMapperPrestamos mapperPrestamos, IUowPrestamos uow, IMapperNotebooksCarro mapperNotebooksCarro, IMapperPrestamoDetalle mapperPrestamoDetalle)
     {
         this.uow = uow;
         this.mapperPrestamos = mapperPrestamos;
         this.mapperNotebooksCarro = mapperNotebooksCarro;
+        this.mapperPrestamoDetalle = mapperPrestamoDetalle;
     }
 
     #region READ PRESTAMO
     public IEnumerable<PrestamosDTO> ObtenerTodo()
     {
         return mapperPrestamos.GetAllDTO();
+    }
+
+    public Prestamos? ObtenerPrestamoPorID(int idPrestamo)
+    {
+        return uow.RepoPrestamos.GetById(idPrestamo);
     }
     #endregion
 
@@ -222,6 +230,13 @@ public class PrestamosCN
     }
     #endregion
 
+    #region READ PRESTAMO DETALLE
+    public IEnumerable<PrestamosDetalleDTO> ObtenerPrestamoDetallePorId(int idPrestamo, int? idCarrito)
+    {
+        return mapperPrestamoDetalle.GetByIdDTO(idPrestamo, idCarrito);
+    }
+    #endregion
+
     #region FILTROS
 
     #region Docentes
@@ -245,6 +260,21 @@ public class PrestamosCN
     public IEnumerable<int> ObtenerIDsPorCarrito(int idCarrito)
     {
         return uow.RepoNotebooks.GetIdNotebooksByCarrito(idCarrito);
+    }
+
+    public Elemento? ObtenerElementoPorID(int idElemento)
+    {
+        return uow.RepoElemento.GetById(idElemento);
+    }
+
+    public PrestamosDetalleDTO? ObtenerElementoMapeadoPorID(int idElemento, int? idCarrito)
+    {
+        return mapperPrestamoDetalle.GetElementoById(idElemento, idCarrito);
+    }
+
+    public List<int> ObtenerIDsElementosPorIdPrestamo(int idPrestamo)
+    {
+        return uow.RepoPrestamoDetalle.GetIdsElementosByIdPrestamo(idPrestamo);
     }
     #endregion
 
@@ -364,10 +394,10 @@ public class PrestamosCN
                 throw new Exception("El carrito no existe.");
             }
 
-            if (uow.RepoCarritos.GetCountByCarrito(idCarrito.Value) < 25)
-            {
-                throw new Exception("El carrito debe tener al menos 25 elementos para ser prestado.");
-            }
+            //if (uow.RepoCarritos.GetCountByCarrito(idCarrito.Value) < 25)
+            //{
+            //    throw new Exception("El carrito debe tener al menos 25 elementos para ser prestado.");
+            //}
 
             if (!uow.RepoCarritos.GetDisponible(idCarrito.Value))
             {

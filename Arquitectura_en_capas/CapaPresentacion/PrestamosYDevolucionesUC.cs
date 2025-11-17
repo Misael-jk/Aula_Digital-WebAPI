@@ -20,6 +20,7 @@ namespace CapaPresentacion
         private readonly PrestamosCN prestamosCN;
         private readonly DevolucionCN devolucionCN;
         private Usuarios userActual;
+        private int _idPrestamoSeleccionado = 0;
         public PrestamosYDevolucionesUC(IMapperTransaccion mapperTransaccion, FormPrincipal formPrincipal, PrestamosCN prestamosCN, DevolucionCN devolucionCN, Usuarios usuarios)
         {
             InitializeComponent();
@@ -42,8 +43,21 @@ namespace CapaPresentacion
 
         private void btnCrearNotebook_M_Click(object sender, EventArgs e)
         {
-            var detalleUC = new CrearPrestamosUC(this, _formPrincipal, prestamosCN, userActual);
-            _formPrincipal.MostrarUserControl(detalleUC);
+            var prestamosUC = new CrearPrestamosUC(this, _formPrincipal, prestamosCN, userActual);
+            _formPrincipal.MostrarUserControl(prestamosUC);
+        }
+
+        private void dvgPrestamosYDevoluciones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            _idPrestamoSeleccionado = Convert.ToInt32(dvgPrestamosYDevoluciones.Rows[e.RowIndex].Cells["IdPrestamo"].Value);
+        }
+
+        private void btnDevoluciones_Click(object sender, EventArgs e)
+        {
+            var devolucionesUC = new DevolucionesUC(this, _formPrincipal, prestamosCN, userActual, devolucionCN, _idPrestamoSeleccionado);
+            _formPrincipal.MostrarUserControl(devolucionesUC);
         }
     }
 }
