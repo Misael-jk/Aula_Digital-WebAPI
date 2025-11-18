@@ -354,6 +354,11 @@ public class PrestamosCN
         {
             throw new Exception("El docente no existe");
         }
+
+        if(uow.RepoDocentes.ExistsPrestamo(prestamos.IdDocente))
+        {
+            throw new Exception("El docente ya tiene un prestamo previo, solo se permite un prestamo por docente");
+        }
         #endregion
 
         #region ELEMENTO
@@ -383,6 +388,11 @@ public class PrestamosCN
             {
                 throw new Exception($"El elemento {idElementos} está repetido en la lista de prestamos.");
             }
+
+            //if (!uow.RepoNotebooks.EstaEnPrestamo(idElementos))
+            //{
+            //    throw new Exception($"El elemento {idElementos} ya está en un prestamo activo.");
+            //}
         }
         #endregion
 
@@ -403,7 +413,6 @@ public class PrestamosCN
             {
                 throw new Exception("El carrito no esta disponible.");
             }
-
         }
 
         #endregion

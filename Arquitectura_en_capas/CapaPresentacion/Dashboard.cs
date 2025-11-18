@@ -1,12 +1,13 @@
 ﻿using CapaDatos.InterfacesDTO;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.WinForms; // <- importante para CartesianChart en WinForms
+using LiveChartsCore.SkiaSharpView.WinForms; 
 using LiveChartsCore.Measure;
-using SkiaSharp; // para colores (SKColor)
+using SkiaSharp; 
 using System.Data;
 using LiveChartsCore.SkiaSharpView.Painting;
 using CapaNegocio;
+using CapaEntidad;
 
 namespace CapaPresentacion
 {
@@ -18,13 +19,30 @@ namespace CapaPresentacion
         private readonly IMapperRankingDocente mapperRankingDocente;
         private readonly NotebooksCN notebooksCN;
 
-        public Dashboard(IMapperPrestamosActivos mapperPrestamosActivos, IMapperNotebooksPrestadas mapperNotebooksPrestadas, IMapperRankingDocente mapperRankingDocente, NotebooksCN notebooksCN)
+        #region DEVOLUCION
+        private readonly PrestamosYDevolucionesUC prestamosYDevolucionesUC;
+        private readonly FormPrincipal _formPrincipal;
+        private readonly PrestamosCN prestamosCN;
+        private Usuarios userActual;
+        private readonly DevolucionCN devolucionCN;
+        private int idPrestamoSeleccionado;
+        #endregion
+
+        public Dashboard(IMapperPrestamosActivos mapperPrestamosActivos, IMapperNotebooksPrestadas mapperNotebooksPrestadas, IMapperRankingDocente mapperRankingDocente, NotebooksCN notebooksCN, FormPrincipal formPrincipal, Usuarios userVerificado, PrestamosYDevolucionesUC prestamosYDevolucionesUC, PrestamosCN prestamosCN, DevolucionCN devolucionCN)
         {
             InitializeComponent();
             this.mapperPrestamosActivos = mapperPrestamosActivos;
             this.mapperNotebooksPrestadas = mapperNotebooksPrestadas;
             this.mapperRankingDocente = mapperRankingDocente;
             this.notebooksCN = notebooksCN;
+
+            #region Devolucion
+            this._formPrincipal = formPrincipal;
+            this.userActual = userVerificado;
+            this.prestamosYDevolucionesUC = prestamosYDevolucionesUC;
+            this.prestamosCN = prestamosCN;
+            this.devolucionCN = devolucionCN;
+            #endregion
 
             if (mapperPrestamosActivos == null) throw new Exception("mapperPrestamosActivos es NULL");
             if (mapperNotebooksPrestadas == null) throw new Exception("mapperNotebooksPrestadas es NULL");
@@ -58,6 +76,17 @@ namespace CapaPresentacion
             dgvPrestamosActivos.Columns["Prestadas"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPrestamosActivos.Columns["Devueltas"].Width = 70;
             dgvPrestamosActivos.Columns["Devueltas"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            if (dgvPrestamosActivos.RowCount > 0)
+            {
+                pnlDevolucionesPendientes.Visible = true;
+                pnlDevolucionesPendientes.BringToFront();
+            }
+            else
+            {
+                PnlSinPrestamos.Visible = true;
+                PnlSinPrestamos.BringToFront();
+            }
         }
 
         #region Grafico Lineal
@@ -84,7 +113,7 @@ namespace CapaPresentacion
                 cartesianChartNotebooks.BringToFront();
             }
 
-            cartesianChartNotebooks.BackgroundImage = null; 
+            cartesianChartNotebooks.BackgroundImage = null;
         }
 
         private void CargarGraficoNotebooksPorMes()
@@ -147,9 +176,17 @@ namespace CapaPresentacion
 
             dgvRanking.DataSource = ranking;
 
-            dgvRanking.Columns["IdDocente"].HeaderText = "ID";
-            dgvRanking.Columns["IdDocente"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvRanking.Columns["PrestamosRecibidos"].HeaderText = "Total";
+            try
+            {
+                dgvRanking.Columns["IdDocente"].HeaderText = " N°";
+                //dgvRanking.Columns["IdDocente"].Width = 34;
+                //dgvRanking.Columns["Nombre"].Width = 120;
+                dgvRanking.Columns["IdDocente"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvRanking.Columns["PrestamosRecibidos"].HeaderText = "Total";
+                //dgvRanking.Columns["PrestamosRecibidos"].Width = 60;
+                dgvRanking.Columns["PrestamosRecibidos"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+            catch { }
 
         }
 
@@ -160,6 +197,17 @@ namespace CapaPresentacion
             lblCantMantenimiento.Text = notebooksCN.ObtenerCantidadPorEstados(3).ToString();
             lblCantRotas.Text = notebooksCN.ObtenerCantidadPorEstados(4).ToString();
             lblCantTotal.Text = notebooksCN.CantidadTotalNotebooks().ToString();
+        }
+
+        private void dgvPrestamosActivos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            idPrestamoSeleccionado = Convert.ToInt32(dgvPrestamosActivos.Rows[e.RowIndex].Cells["IdPrestamo"].Value);
+        }
+
+        private void btnDevolucion_Click(object sender, EventArgs e)
+        {
+            var devolucion = new DevolucionesUC(prestamosYDevolucionesUC, _formPrincipal, prestamosCN, userActual, devolucionCN, idPrestamoSeleccionado);
+           _formPrincipal.MostrarUserControl(devolucion);
         }
     }
 }

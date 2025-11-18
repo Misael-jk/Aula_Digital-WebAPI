@@ -15,7 +15,7 @@ namespace CapaPresentacion
     public partial class NotebookGestionUC : UserControl
     {
         private readonly FormPrincipal formPrincipal;
-        private readonly NotebooksUC notebooksUC;
+        private readonly UserControl ucAnterior;
         private readonly NotebooksCN notebooksCN;
         private readonly NotebookBajasCN notebookBajasCN;
         private int _idNotebookSeleccionado;
@@ -41,12 +41,12 @@ namespace CapaPresentacion
         private int? _Casillero = 0;
         #endregion
 
-        public NotebookGestionUC(FormPrincipal formPrincipal, NotebooksUC notebooksUC, NotebooksCN notebooksCN, int idNotebookSeleccionado, Usuarios user, NotebookBajasCN notebookBajasCN)
+        public NotebookGestionUC(FormPrincipal formPrincipal, UserControl ucAnterior, NotebooksCN notebooksCN, int idNotebookSeleccionado, Usuarios user, NotebookBajasCN notebookBajasCN)
         {
             InitializeComponent();
 
             this.formPrincipal = formPrincipal;
-            this.notebooksUC = notebooksUC;
+            this.ucAnterior = ucAnterior;
             this.notebooksCN = notebooksCN;
             this._idNotebookSeleccionado = idNotebookSeleccionado;
             this.usuarios = user;
@@ -55,8 +55,12 @@ namespace CapaPresentacion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            notebooksUC.ActualizarDataGrid(0);
-            formPrincipal.MostrarUserControl(notebooksUC);
+            if (ucAnterior is NotebooksUC notebooksUC)
+            {
+                notebooksUC.ActualizarDataGrid(0);
+            }
+
+            formPrincipal.MostrarUserControl(ucAnterior);
         }
 
         private void NotebookGestionUC_Load(object sender, EventArgs e)

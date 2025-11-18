@@ -17,6 +17,7 @@ namespace CapaPresentacion
     {
         private readonly UsuariosCN usuariosCN;
         private readonly UsuariosBajasCN usuariosBajasCN;
+        private readonly FormPrincipal formPrincipal;
         private bool mostrarPassword = false;
         private string RutaFoto;
         private string _Password;
@@ -30,11 +31,12 @@ namespace CapaPresentacion
         private string _email;
         #endregion
 
-        public UsuariosUC(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN)
+        public UsuariosUC(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN, FormPrincipal formPrincipal)
         {
             InitializeComponent();
             this.usuariosCN = usuariosCN;
             this.usuariosBajasCN = usuariosBajasCN;
+            this.formPrincipal = formPrincipal;
         }
         private void UsuariosUC_Load_1(object sender, EventArgs e)
         {
@@ -47,7 +49,7 @@ namespace CapaPresentacion
 
         public void MostrarUsuarios()
         {
-            cmbHabilitado.SelectedIndex = 0;
+            dtgUsuarios.DataSource = usuariosCN.ObtenerElementos();
 
             dtgUsuarios.Columns["IdUsuario"].HeaderText = "ID";
             dtgUsuarios.Columns[0].Width = 35;
@@ -64,7 +66,8 @@ namespace CapaPresentacion
             dtgUsuarios.Columns["Email"].HeaderText = "Email";
             dtgUsuarios.Columns[6].Width = 140;
         }
-        private void dtgUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+
+        private void dtgUsuarios_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dtgUsuarios.Columns[e.ColumnIndex].Name == "Password" && e.Value != null)
             {
@@ -83,7 +86,7 @@ namespace CapaPresentacion
         }
 
         #region Obteniendo datos de un usuario seleccionado
-        private void dtgUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dtgUsuarios_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -179,6 +182,7 @@ namespace CapaPresentacion
             mostrarPassword = cbxMostraPassword.Checked;
             dtgUsuarios.Refresh();
         }
+
         private void btnSeleccionarImagen_Click(object sender, EventArgs e)
         {
             //Codigo en proceso
@@ -378,8 +382,9 @@ namespace CapaPresentacion
 
         private void btnAgregarUsuario_Click(object sender, EventArgs e)
         {
-            CrearUsuarioUC? formAgregarUsuario = new CrearUsuarioUC(usuariosCN, MostrarUsuarios);
-            formAgregarUsuario.Show();
+            CrearUsuarioUC? formAgregarUsuario = new CrearUsuarioUC(usuariosCN, MostrarUsuarios, formPrincipal, this);
+            formPrincipal.MostrarUserControl(formAgregarUsuario);
         }
+
     }
 }

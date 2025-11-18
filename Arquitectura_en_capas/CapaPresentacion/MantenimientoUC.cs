@@ -19,127 +19,186 @@ namespace CapaPresentacion
 {
     public partial class MantenimientoUC : UserControl
     {
-        //private readonly MantenimientoCN mantenimientoCN;
         private readonly NotebookBajasCN notebookBajasCN;
         private readonly ElementosBajasCN elementosBajasCN;
+        private readonly CarritosBajasCN carritosBajasCN;
         private Usuarios usuarioActual;
+        private readonly CarritoUC carritoUC;
+        private readonly NotebooksUC notebooksUC;
+        private readonly ElementosUC elementosUC;
+        private readonly CarritosCN carritosCN;
+        private readonly NotebooksCN notebooksCN;
+        private readonly ElementosCN elementosCN;
+        private readonly FormPrincipal formPrincipal;
+
         private int _idActualElemento;
         private int _idActualNotebook;
+        private int _idActualCarrito;
+        private enum RecursoActual { Ninguno, Notebook, Carrito, Elemento }
+        private RecursoActual recursoActual = RecursoActual.Ninguno;
 
-        public MantenimientoUC(NotebookBajasCN notebookBajasCN, ElementosBajasCN elementosBajasCN, Usuarios user)
+        public MantenimientoUC(NotebookBajasCN notebookBajasCN, ElementosBajasCN elementosBajasCN, CarritosBajasCN carritosBajasCN, Usuarios user, FormPrincipal formPrincipal, CarritoUC carritoUC, NotebooksUC notebooksUC, ElementosUC elementosUC, CarritosCN carritosCN, NotebooksCN notebooksCN, ElementosCN elementosCN)
         {
             InitializeComponent();
             this.notebookBajasCN = notebookBajasCN;
             this.elementosBajasCN = elementosBajasCN;
-            this.usuarioActual = user;
+            this.carritosBajasCN = carritosBajasCN;
+            usuarioActual = user;
+            this.formPrincipal = formPrincipal;
+            this.carritoUC = carritoUC;
+            this.notebooksUC = notebooksUC;
+            this.elementosUC = elementosUC;
+            this.carritosCN = carritosCN;
+            this.notebooksCN = notebooksCN;
+            this.elementosCN = elementosCN;
         }
 
         private void MantenimientoUC_Load(object sender, EventArgs e)
         {
             MostrarDatos();
 
-            seleccionarPrimeraFila(dgvMatenimientoNotebook);
-            if (dgvMatenimientoNotebook.Rows.Count > 0)
-            {
-                MostrarDatosDeLaFilaNotebooks(0);
-            }
 
-            seleccionarPrimeraFila(dgvMantenimientoElemento);
-            if (dgvMantenimientoElemento.Rows.Count > 0)
-            {
-                MostrarDatosDeFilaSeleccionada(0);
-            }
         }
 
         public void MostrarDatos()
         {
-            dgvMantenimientoElemento.DataSource = elementosBajasCN.GetAllElementos();
-            dgvMatenimientoNotebook.DataSource = notebookBajasCN.GetAllNotebooks();
+            try
+            {
+                switch (recursoActual)
+                {
+                    case RecursoActual.Elemento:
+                        dgvMantenimiento.DataSource = elementosBajasCN.GetAllElementos();
+                        lblRecursoElegido.Text = "Elementos Deshabilitados";
+
+                        #region DGV
+                        dgvMantenimiento.Columns["IdElemento"].HeaderText = "ID";
+                        dgvMantenimiento.Columns["IdElemento"].Width = 40;
+                        dgvMantenimiento.Columns["IdElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        #endregion
+                        break;
+                    case RecursoActual.Carrito:
+                        dgvMantenimiento.DataSource = carritosBajasCN.GetAllDTO();
+                        lblRecursoElegido.Text = "Carritos Deshabilitados";
+
+                        #region DGV
+                        dgvMantenimiento.Columns["IdCarrito"].HeaderText = "ID";
+                        dgvMantenimiento.Columns["IdCarrito"].Width = 40;
+                        dgvMantenimiento.Columns["IdCarrito"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        dgvMantenimiento.Columns["NumeroSerieCarrito"].HeaderText = "Serie";
+                        dgvMantenimiento.Columns["Capacidad"].Width = 70;
+                        dgvMantenimiento.Columns["Capacidad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        #endregion
+                        break;
+                    case RecursoActual.Notebook:
+                        dgvMantenimiento.DataSource = notebookBajasCN.GetAllNotebooks();
+                        lblRecursoElegido.Text = "Notebooks Deshabilitados";
+
+                        #region DGV
+                        dgvMantenimiento.Columns["IdNotebook"].HeaderText = "ID";
+                        dgvMantenimiento.Columns["IdNotebook"].Width = 40;
+                        dgvMantenimiento.Columns["IdNotebook"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        dgvMantenimiento.Columns["PosicionCarrito"].HeaderText = "Posicion";
+                        dgvMantenimiento.Columns["PosicionCarrito"].Width = 56;
+                        dgvMantenimiento.Columns["PosicionCarrito"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        #endregion
+                        break;
+                    default:
+                        dgvMantenimiento.DataSource = null;
+                        lblRecursoElegido.Text = "Seleccione un recurso";
+                        break;
+                }
+
+                ResetIdsSeleccion();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void btnHabilitar_Click(object sender, EventArgs e)
+        private void btnSetElemento_Click(object sender, EventArgs e)
         {
-            elementosBajasCN.HabilitarElemento(_idActualElemento, usuarioActual.IdUsuario, null);
+            recursoActual = RecursoActual.Elemento;
+            MostrarDatos();
+        }
+
+        private void btnSetCarrito_Click(object sender, EventArgs e)
+        {
+            recursoActual = RecursoActual.Carrito;
+            MostrarDatos();
+        }
+
+        private void btnSetNotebook_Click(object sender, EventArgs e)
+        {
+            recursoActual = RecursoActual.Notebook;
             MostrarDatos();
         }
 
         private void dgvMantenimiento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            MostrarDatosDeFilaSeleccionada(e.RowIndex);
-        }
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (dgvMantenimiento.Rows.Count == 0) return;
 
-        private void MostrarDatosDeFilaSeleccionada(int rowIndex)
-        {
-            lblIDElemento.Text = "ID: ";
-            txtTipoElemento.Text = "Tipo: ";
-            txtVarianteElemento.Text = "Variante: ";
-            txtSerieElemento.Text = "Nro. de serie: ";
-            txtBarraElemento.Text = "Cod. de barra: ";
-
-            var fila = dgvMantenimientoElemento.Rows[rowIndex];
-
-            _idActualElemento = Convert.ToInt32(fila.Cells["IdElemento"].Value);
-
-            Elemento? elementoBaja = elementosBajasCN.ObtenerElementoPorID(_idActualElemento);
-
-            lblIDElemento.Text += _idActualElemento;
-            txtSerieElemento.Text += elementoBaja?.NumeroSerie;
-            txtBarraElemento.Text += elementoBaja?.CodigoBarra;
-
-            if (elementoBaja?.IdTipoElemento is not null)
+            switch (recursoActual)
             {
-                TipoElemento? tipoElemento = elementosBajasCN.ObtenerTipoElementoPorID(elementoBaja.IdTipoElemento);
-
-                txtTipoElemento.Text += tipoElemento?.IdTipoElemento;
-            }
-
-            if (elementoBaja?.IdVarianteElemento is not null)
-            {
-                VariantesElemento? variantesElemento = elementosBajasCN.ObtenerVariantePorID(elementoBaja.IdVarianteElemento.Value);
-
-                txtVarianteElemento.Text += variantesElemento?.Variante;
+                case RecursoActual.Elemento:
+                    _idActualElemento = Convert.ToInt32(dgvMantenimiento.Rows[e.RowIndex].Cells["IdElemento"].Value);
+                    break;
+                case RecursoActual.Carrito:
+                    _idActualCarrito = Convert.ToInt32(dgvMantenimiento.Rows[e.RowIndex].Cells["IdCarrito"].Value);
+                    break;
+                case RecursoActual.Notebook:
+                    _idActualNotebook = Convert.ToInt32(dgvMantenimiento.Rows[e.RowIndex].Cells["IdNotebook"].Value);
+                    break;
             }
         }
 
-        private void seleccionarPrimeraFila(DataGridView dgv)
+        private void ResetIdsSeleccion()
         {
-            if (dgv.Rows.Count >= 1)
+            _idActualElemento = 0;
+            _idActualNotebook = 0;
+            _idActualCarrito = 0;
+        }
+
+        private void btnHabilitacion_Click_1(object sender, EventArgs e)
+        {
+            switch (recursoActual)
             {
-                dgv.ClearSelection();
-                dgv.Rows[0].Selected = true;
-                dgv.CurrentCell = dgv.Rows[0].Cells[0];
+                case RecursoActual.Elemento:
+                    if (_idActualElemento <= 0)
+                    {
+                        MessageBox.Show("Seleccione un elemento primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    var GestionElemento = new ElementoGestionUC(formPrincipal, this, elementosCN, elementosBajasCN, _idActualElemento, usuarioActual);
+                    formPrincipal.MostrarUserControl(GestionElemento);
+                    break;
+
+                case RecursoActual.Carrito:
+                    if (_idActualCarrito <= 0)
+                    {
+                        MessageBox.Show("Seleccione un carrito primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    var GestionCarrito = new CarritoGestionUC(formPrincipal, this, carritosCN, _idActualCarrito, usuarioActual, carritosBajasCN);
+                    formPrincipal.MostrarUserControl(GestionCarrito);
+                    break;
+
+                case RecursoActual.Notebook:
+                    if (_idActualNotebook <= 0)
+                    {
+                        MessageBox.Show("Seleccione una notebook primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    var GestionNotebook = new NotebookGestionUC(formPrincipal, this, notebooksCN, _idActualNotebook, usuarioActual, notebookBajasCN);
+                    formPrincipal.MostrarUserControl(GestionNotebook);
+                    break;
+
+                default:
+                    MessageBox.Show("Seleccione un recurso para gestionar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
             }
-        }
-
-        private void MostrarDatosDeLaFilaNotebooks(int rowIndex)
-        {
-            lblIDNotebook.Text = "ID: ";
-            txtEquipoNotebook.Text = "Equipo: ";
-            txtSerieElemento.Text = "Nro. de serie: ";
-            txtCodBarraNotebook.Text = "Cod. de barra: ";
-
-            var fila = dgvMatenimientoNotebook.Rows[rowIndex];
-            _idActualNotebook = Convert.ToInt32(fila.Cells["IdNotebook"].Value);
-            Notebooks? notebookBaja = notebookBajasCN.ObtenerNotebookPorID(_idActualNotebook);
-
-            lblIDNotebook.Text += _idActualNotebook;
-            txtEquipoNotebook.Text += notebookBaja?.Equipo;
-            txtNumSerieNotebook.Text += notebookBaja?.NumeroSerie;
-            txtCodBarraNotebook.Text += notebookBaja?.CodigoBarra;
-        }
-
-        private void dgvMatenimientoNotebook_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            MostrarDatosDeLaFilaNotebooks(e.RowIndex);
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            //notebookBajasCN.HabilitarNotebook(_idActualNotebook, usuarioActual.IdUsuario);
-            //MostrarDatos();
         }
     }
 }

@@ -46,6 +46,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -75,8 +77,6 @@
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             txtElementosTotal = new Guna.UI2.WinForms.Guna2TextBox();
             label4 = new Label();
@@ -93,6 +93,8 @@
             lblPrestamoTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            label1 = new Label();
             btnDevolverCarro = new Guna.UI2.WinForms.Guna2Button();
             btnConfirmarDevolucion = new Guna.UI2.WinForms.Guna2Button();
             btnCancelar = new Guna.UI2.WinForms.Guna2Button();
@@ -101,6 +103,7 @@
             btnDevolverTodos = new Guna.UI2.WinForms.Guna2Button();
             btnMarcarDevuelto = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dgvElementosPorConfirmacion = new Guna.UI2.WinForms.Guna2DataGridView();
             IdElemento = new DataGridViewTextBoxColumn();
             TipoElemento = new DataGridViewTextBoxColumn();
@@ -110,14 +113,11 @@
             Patrimonio = new DataGridViewTextBoxColumn();
             dgvDevolucionDetalle = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dgvPrestamoDetalle = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            label1 = new Label();
             guna2Panel1.SuspendLayout();
             pnlPresentacionNotebook.SuspendLayout();
             guna2Panel2.SuspendLayout();
@@ -447,6 +447,50 @@
             guna2Panel2.Size = new Size(1018, 432);
             guna2Panel2.TabIndex = 111;
             // 
+            // guna2TextBox1
+            // 
+            guna2TextBox1.Animated = true;
+            guna2TextBox1.BorderRadius = 10;
+            guna2TextBox1.Cursor = Cursors.IBeam;
+            guna2TextBox1.CustomizableEdges = customizableEdges16;
+            guna2TextBox1.DefaultText = "";
+            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.Enabled = false;
+            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            guna2TextBox1.FocusedState.FillColor = Color.White;
+            guna2TextBox1.FocusedState.ForeColor = Color.Black;
+            guna2TextBox1.Font = new Font("Segoe UI", 10F);
+            guna2TextBox1.ForeColor = Color.Black;
+            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            guna2TextBox1.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            guna2TextBox1.Location = new Point(14, 366);
+            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
+            guna2TextBox1.Name = "guna2TextBox1";
+            guna2TextBox1.PlaceholderForeColor = Color.Gray;
+            guna2TextBox1.PlaceholderText = "Encargado";
+            guna2TextBox1.SelectedText = "";
+            guna2TextBox1.ShadowDecoration.BorderRadius = 10;
+            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2TextBox1.ShadowDecoration.Depth = 5;
+            guna2TextBox1.Size = new Size(447, 53);
+            guna2TextBox1.TabIndex = 119;
+            guna2TextBox1.TextOffset = new Point(5, 0);
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = SystemColors.ButtonHighlight;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(14, 346);
+            label1.Name = "label1";
+            label1.Size = new Size(98, 15);
+            label1.TabIndex = 118;
+            label1.Text = "Llevo un total de:";
+            // 
             // btnDevolverCarro
             // 
             btnDevolverCarro.BackColor = Color.Transparent;
@@ -653,6 +697,18 @@
             guna2Panel5.Size = new Size(440, 316);
             guna2Panel5.TabIndex = 77;
             // 
+            // guna2HtmlLabel5
+            // 
+            guna2HtmlLabel5.BackColor = Color.Transparent;
+            guna2HtmlLabel5.Font = new Font("Segoe UI Semibold", 16F);
+            guna2HtmlLabel5.ForeColor = SystemColors.ActiveCaptionText;
+            guna2HtmlLabel5.Location = new Point(120, -2);
+            guna2HtmlLabel5.Name = "guna2HtmlLabel5";
+            guna2HtmlLabel5.Size = new Size(201, 32);
+            guna2HtmlLabel5.TabIndex = 118;
+            guna2HtmlLabel5.Text = "<b>Elementos devueltos</b>";
+            guna2HtmlLabel5.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
             // dgvElementosPorConfirmacion
             // 
             dgvElementosPorConfirmacion.AllowUserToAddRows = false;
@@ -812,6 +868,18 @@
             guna2Panel4.Size = new Size(447, 316);
             guna2Panel4.TabIndex = 76;
             // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI Semibold", 16F);
+            guna2HtmlLabel4.ForeColor = SystemColors.ActiveCaptionText;
+            guna2HtmlLabel4.Location = new Point(120, -2);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(203, 32);
+            guna2HtmlLabel4.TabIndex = 78;
+            guna2HtmlLabel4.Text = "<b>Elementos prestados</b>";
+            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
             // dgvPrestamoDetalle
             // 
             dgvPrestamoDetalle.AllowUserToAddRows = false;
@@ -905,74 +973,6 @@
             guna2HtmlLabel3.TabIndex = 77;
             guna2HtmlLabel3.Text = "<b>Llevo</b>";
             guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleLeft;
-            // 
-            // guna2HtmlLabel5
-            // 
-            guna2HtmlLabel5.BackColor = Color.Transparent;
-            guna2HtmlLabel5.Font = new Font("Segoe UI Semibold", 16F);
-            guna2HtmlLabel5.ForeColor = SystemColors.ActiveCaptionText;
-            guna2HtmlLabel5.Location = new Point(120, -2);
-            guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(201, 32);
-            guna2HtmlLabel5.TabIndex = 118;
-            guna2HtmlLabel5.Text = "<b>Elementos devueltos</b>";
-            guna2HtmlLabel5.TextAlignment = ContentAlignment.MiddleLeft;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Segoe UI Semibold", 16F);
-            guna2HtmlLabel4.ForeColor = SystemColors.ActiveCaptionText;
-            guna2HtmlLabel4.Location = new Point(120, -2);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(203, 32);
-            guna2HtmlLabel4.TabIndex = 78;
-            guna2HtmlLabel4.Text = "<b>Elementos prestados</b>";
-            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleLeft;
-            // 
-            // guna2TextBox1
-            // 
-            guna2TextBox1.Animated = true;
-            guna2TextBox1.BorderRadius = 10;
-            guna2TextBox1.Cursor = Cursors.IBeam;
-            guna2TextBox1.CustomizableEdges = customizableEdges16;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.Enabled = false;
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
-            guna2TextBox1.FocusedState.FillColor = Color.White;
-            guna2TextBox1.FocusedState.ForeColor = Color.Black;
-            guna2TextBox1.Font = new Font("Segoe UI", 10F);
-            guna2TextBox1.ForeColor = Color.Black;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
-            guna2TextBox1.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            guna2TextBox1.Location = new Point(14, 366);
-            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderForeColor = Color.Gray;
-            guna2TextBox1.PlaceholderText = "Encargado";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.BorderRadius = 10;
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges17;
-            guna2TextBox1.ShadowDecoration.Depth = 5;
-            guna2TextBox1.Size = new Size(447, 53);
-            guna2TextBox1.TabIndex = 119;
-            guna2TextBox1.TextOffset = new Point(5, 0);
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = SystemColors.ButtonHighlight;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(14, 346);
-            label1.Name = "label1";
-            label1.Size = new Size(98, 15);
-            label1.TabIndex = 118;
-            label1.Text = "Llevo un total de:";
             // 
             // DevolucionesUC
             // 

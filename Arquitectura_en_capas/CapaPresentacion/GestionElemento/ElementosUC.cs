@@ -105,6 +105,7 @@ namespace CapaPresentacion
         #region LOAD
         private void ElementosUC_Load(object sender, EventArgs e)
         {
+            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1120);
 

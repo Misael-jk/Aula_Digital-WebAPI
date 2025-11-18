@@ -193,21 +193,20 @@ public class RepoDocentes : RepoBase, IRepoDocentes
     public bool ExistsPrestamo(int idDocente)
     {
         string query = @"
-        SELECT EXISTS(
             SELECT 1
-            FROM Prestamos p
-            JOIN EstadosPrestamo e ON e.idEstadoPrestamo = p.idEstadoPrestamo
-            WHERE p.idDocente = @unidDocente
-              AND e.estadoPrestamo IN ('En Prestamo', 'En Parcial')
-        )";
+    FROM Prestamos p
+    JOIN EstadosPrestamo e ON e.idEstadoPrestamo = p.idEstadoPrestamo
+    WHERE p.idDocente = @unidDocente
+      AND e.estadoPrestamo IN ('En Prestamo', 'En Parcial')
+    LIMIT 1;";
 
         DynamicParameters parametros = new DynamicParameters();
 
         try
         {
             parametros.Add("unidDocente", idDocente);
-            int count = Conexion.ExecuteScalar<int>(query, parametros);
-            return count == 1;
+            int? count = Conexion.ExecuteScalar<int>(query, parametros);
+            return count > 0;
         }
         catch (Exception)
         {
@@ -259,4 +258,7 @@ public class RepoDocentes : RepoBase, IRepoDocentes
         }
     }
     #endregion
+
+    //this report explain the problems with space digital in its current system of technological resource management and the process of the loans and return.
+
 }

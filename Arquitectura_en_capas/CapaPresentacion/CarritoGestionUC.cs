@@ -15,7 +15,7 @@ namespace CapaPresentacion
     public partial class CarritoGestionUC : UserControl
     {
         private readonly FormPrincipal formPrincipal;
-        private readonly CarritoUC carritoUC;
+        private readonly UserControl acAnterior;
         private readonly CarritosCN carritosCN;
         private readonly CarritosBajasCN carritosBajasCN;
         private int _idCarritoSeleccionado;
@@ -35,12 +35,12 @@ namespace CapaPresentacion
         private string? _NombreUbicacion = "";
         private string? _NombreEstado = "";
         #endregion
-        public CarritoGestionUC(FormPrincipal formPrincipal, CarritoUC carritoUC, CarritosCN carritosCN, int idCarritoSeleccionado, Usuarios user, CarritosBajasCN carritosBajasCN)
+        public CarritoGestionUC(FormPrincipal formPrincipal, UserControl acAnterior, CarritosCN carritosCN, int idCarritoSeleccionado, Usuarios user, CarritosBajasCN carritosBajasCN)
         {
             InitializeComponent();
 
             this.formPrincipal = formPrincipal;
-            this.carritoUC = carritoUC;
+            this.acAnterior = acAnterior;
             this.carritosCN = carritosCN;
             _idCarritoSeleccionado = idCarritoSeleccionado;
             usuarios = user;
@@ -53,8 +53,12 @@ namespace CapaPresentacion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            carritoUC.ActualizarDatagrid();
-            formPrincipal.MostrarUserControl(carritoUC);
+            if (acAnterior is CarritoUC carritoUC)
+            {
+                carritoUC.ActualizarDatagrid();
+            }
+
+            formPrincipal.MostrarUserControl(acAnterior);
         }
 
         private void CarritoGestionUC_Load(object sender, EventArgs e)

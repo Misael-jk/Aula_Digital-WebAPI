@@ -30,9 +30,6 @@ namespace CapaPresentacion
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -57,7 +54,11 @@ namespace CapaPresentacion
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            dtgUsuarios = new Guna2DataGridView();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             cbxMostraPassword = new Guna2CheckBox();
             btnActualizar = new Guna2Button();
             guna2Panel1 = new Guna2Panel();
@@ -80,68 +81,18 @@ namespace CapaPresentacion
             lblUsuario = new Label();
             lblRol = new Label();
             lblIDEncargado = new Label();
-            ((System.ComponentModel.ISupportInitialize)dtgUsuarios).BeginInit();
+            pnlDataGridElementos = new Guna2Panel();
+            dtgUsuarios = new Guna2DataGridView();
+            lblRecursoElegido = new Guna2HtmlLabel();
+            panel2 = new Panel();
+            panel1 = new Panel();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
             guna2GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).BeginInit();
+            pnlDataGridElementos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dtgUsuarios).BeginInit();
             SuspendLayout();
-            // 
-            // dtgUsuarios
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dtgUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dtgUsuarios.BackgroundColor = Color.Silver;
-            dtgUsuarios.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dtgUsuarios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Indigo;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dtgUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dtgUsuarios.ColumnHeadersHeight = 30;
-            dtgUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dtgUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
-            dtgUsuarios.GridColor = Color.LightGray;
-            dtgUsuarios.Location = new Point(390, 15);
-            dtgUsuarios.Name = "dtgUsuarios";
-            dtgUsuarios.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dtgUsuarios.RowHeadersVisible = false;
-            dtgUsuarios.Size = new Size(646, 292);
-            dtgUsuarios.TabIndex = 2;
-            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dtgUsuarios.ThemeStyle.BackColor = Color.Silver;
-            dtgUsuarios.ThemeStyle.GridColor = Color.LightGray;
-            dtgUsuarios.ThemeStyle.HeaderStyle.BackColor = Color.Indigo;
-            dtgUsuarios.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dtgUsuarios.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dtgUsuarios.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dtgUsuarios.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dtgUsuarios.ThemeStyle.HeaderStyle.Height = 30;
-            dtgUsuarios.ThemeStyle.ReadOnly = false;
-            dtgUsuarios.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dtgUsuarios.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.Single;
-            dtgUsuarios.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dtgUsuarios.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            dtgUsuarios.ThemeStyle.RowsStyle.Height = 25;
-            dtgUsuarios.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dtgUsuarios.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dtgUsuarios.CellClick += dtgUsuarios_CellClick;
-            dtgUsuarios.CellFormatting += dtgUsuarios_CellFormatting;
             // 
             // cbxMostraPassword
             // 
@@ -150,7 +101,7 @@ namespace CapaPresentacion
             cbxMostraPassword.CheckedState.BorderRadius = 0;
             cbxMostraPassword.CheckedState.BorderThickness = 0;
             cbxMostraPassword.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            cbxMostraPassword.Location = new Point(902, 363);
+            cbxMostraPassword.Location = new Point(477, 22);
             cbxMostraPassword.Name = "cbxMostraPassword";
             cbxMostraPassword.Size = new Size(135, 19);
             cbxMostraPassword.TabIndex = 2;
@@ -328,10 +279,10 @@ namespace CapaPresentacion
             btnAgregarUsuario.Image = (Image)resources.GetObject("btnAgregarUsuario.Image");
             btnAgregarUsuario.ImageAlign = HorizontalAlignment.Left;
             btnAgregarUsuario.ImageSize = new Size(16, 16);
-            btnAgregarUsuario.Location = new Point(390, 363);
+            btnAgregarUsuario.Location = new Point(389, 578);
             btnAgregarUsuario.Name = "btnAgregarUsuario";
             btnAgregarUsuario.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            btnAgregarUsuario.Size = new Size(189, 26);
+            btnAgregarUsuario.Size = new Size(185, 36);
             btnAgregarUsuario.TabIndex = 47;
             btnAgregarUsuario.Text = "Agregar Nuevo Usuario";
             btnAgregarUsuario.Click += btnAgregarUsuario_Click;
@@ -348,7 +299,7 @@ namespace CapaPresentacion
             cmbHabilitado.Font = new Font("Segoe UI", 10F);
             cmbHabilitado.ForeColor = Color.FromArgb(68, 88, 112);
             cmbHabilitado.ItemHeight = 30;
-            cmbHabilitado.Location = new Point(652, 408);
+            cmbHabilitado.Location = new Point(663, 579);
             cmbHabilitado.Name = "cmbHabilitado";
             cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges17;
             cmbHabilitado.Size = new Size(214, 36);
@@ -529,31 +480,134 @@ namespace CapaPresentacion
             lblIDEncargado.TabIndex = 43;
             lblIDEncargado.Text = "ID: ";
             // 
+            // pnlDataGridElementos
+            // 
+            pnlDataGridElementos.BackColor = Color.Transparent;
+            pnlDataGridElementos.BorderRadius = 15;
+            pnlDataGridElementos.Controls.Add(dtgUsuarios);
+            pnlDataGridElementos.Controls.Add(lblRecursoElegido);
+            pnlDataGridElementos.Controls.Add(panel2);
+            pnlDataGridElementos.Controls.Add(cbxMostraPassword);
+            pnlDataGridElementos.Controls.Add(panel1);
+            pnlDataGridElementos.CustomizableEdges = customizableEdges24;
+            pnlDataGridElementos.FillColor = SystemColors.ControlLightLight;
+            pnlDataGridElementos.Location = new Point(389, 15);
+            pnlDataGridElementos.Name = "pnlDataGridElementos";
+            pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges25;
+            pnlDataGridElementos.Size = new Size(640, 534);
+            pnlDataGridElementos.TabIndex = 63;
+            // 
+            // dtgUsuarios
+            // 
+            dtgUsuarios.AllowUserToAddRows = false;
+            dtgUsuarios.AllowUserToDeleteRows = false;
+            dtgUsuarios.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(248, 248, 248);
+            dtgUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dtgUsuarios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(105, 80, 165);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(125, 95, 190);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dtgUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dtgUsuarios.ColumnHeadersHeight = 35;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(230, 225, 250);
+            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dtgUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
+            dtgUsuarios.GridColor = Color.Gainsboro;
+            dtgUsuarios.Location = new Point(21, 82);
+            dtgUsuarios.MultiSelect = false;
+            dtgUsuarios.Name = "dtgUsuarios";
+            dtgUsuarios.ReadOnly = true;
+            dtgUsuarios.RowHeadersVisible = false;
+            dtgUsuarios.RowTemplate.Height = 35;
+            dtgUsuarios.ScrollBars = ScrollBars.Vertical;
+            dtgUsuarios.Size = new Size(619, 416);
+            dtgUsuarios.TabIndex = 64;
+            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
+            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
+            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Black;
+            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
+            dtgUsuarios.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Black;
+            dtgUsuarios.ThemeStyle.BackColor = Color.White;
+            dtgUsuarios.ThemeStyle.GridColor = Color.Gainsboro;
+            dtgUsuarios.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(105, 80, 165);
+            dtgUsuarios.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dtgUsuarios.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dtgUsuarios.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dtgUsuarios.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dtgUsuarios.ThemeStyle.HeaderStyle.Height = 35;
+            dtgUsuarios.ThemeStyle.ReadOnly = true;
+            dtgUsuarios.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dtgUsuarios.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dtgUsuarios.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dtgUsuarios.ThemeStyle.RowsStyle.ForeColor = Color.Black;
+            dtgUsuarios.ThemeStyle.RowsStyle.Height = 35;
+            dtgUsuarios.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
+            dtgUsuarios.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dtgUsuarios.CellClick += dtgUsuarios_CellClick_1;
+            dtgUsuarios.CellFormatting += dtgUsuarios_CellFormatting_1;
+            // 
+            // lblRecursoElegido
+            // 
+            lblRecursoElegido.BackColor = Color.Transparent;
+            lblRecursoElegido.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRecursoElegido.ForeColor = Color.PaleVioletRed;
+            lblRecursoElegido.Location = new Point(21, 12);
+            lblRecursoElegido.Name = "lblRecursoElegido";
+            lblRecursoElegido.Size = new Size(302, 39);
+            lblRecursoElegido.TabIndex = 61;
+            lblRecursoElegido.Text = "<b>Gestion de los Usuarios</b>";
+            lblRecursoElegido.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.LightGray;
+            panel2.Location = new Point(21, 57);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(595, 1);
+            panel2.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.LightGray;
+            panel1.Location = new Point(21, 514);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(595, 1);
+            panel1.TabIndex = 1;
+            // 
             // UsuariosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            Controls.Add(dtgUsuarios);
+            Controls.Add(pnlDataGridElementos);
             Controls.Add(cmbHabilitado);
-            Controls.Add(btnAgregarUsuario);
             Controls.Add(guna2GroupBox2);
-            Controls.Add(cbxMostraPassword);
+            Controls.Add(btnAgregarUsuario);
             Name = "UsuariosUC";
             Size = new Size(1050, 670);
             Load += UsuariosUC_Load_1;
-            ((System.ComponentModel.ISupportInitialize)dtgUsuarios).EndInit();
             guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).EndInit();
             guna2GroupBox2.ResumeLayout(false);
             guna2GroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).EndInit();
+            pnlDataGridElementos.ResumeLayout(false);
+            pnlDataGridElementos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dtgUsuarios).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2DataGridView dtgUsuarios;
         private Guna2CheckBox cbxMostraPassword;
         private Guna2TextBox txtApellido;
         private Guna2TextBox txtNombre;
@@ -576,5 +630,10 @@ namespace CapaPresentacion
         private Guna2Button btnDeshabilitar;
         private Guna2ComboBox cmbHabilitado;
         private Guna2Button btnAgregarUsuario;
+        private Guna2Panel pnlDataGridElementos;
+        private Guna2HtmlLabel lblRecursoElegido;
+        private Panel panel2;
+        private Panel panel1;
+        private Guna2DataGridView dtgUsuarios;
     }
 }

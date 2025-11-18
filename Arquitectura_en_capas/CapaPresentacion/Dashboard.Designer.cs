@@ -52,10 +52,19 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlRanking = new Guna.UI2.WinForms.Guna2GradientPanel();
+            panel1 = new Panel();
+            panel2 = new Panel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dgvRanking = new Guna.UI2.WinForms.Guna2DataGridView();
             pnlGrafico = new Guna.UI2.WinForms.Guna2Panel();
+            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2GradientPanel7 = new Guna.UI2.WinForms.Guna2GradientPanel();
             dgvPrestamosActivos = new Guna.UI2.WinForms.Guna2DataGridView();
             lblPrestamosActivos = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -74,11 +83,18 @@
             guna2GroupBox4 = new Guna.UI2.WinForms.Guna2GroupBox();
             guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblCantTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            pnlDevolucionesPendientes = new Guna.UI2.WinForms.Guna2GradientPanel();
             guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ptbEstado = new PictureBox();
+            guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            btnDevolucion = new Guna.UI2.WinForms.Guna2Button();
+            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            PnlSinPrestamos = new Guna.UI2.WinForms.Guna2GradientPanel();
+            guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            pictureBox1 = new PictureBox();
             pnlRanking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRanking).BeginInit();
+            pnlGrafico.SuspendLayout();
             guna2GradientPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPrestamosActivos).BeginInit();
             grbDisponibles.SuspendLayout();
@@ -86,20 +102,25 @@
             guna2GroupBox2.SuspendLayout();
             guna2GroupBox3.SuspendLayout();
             guna2GroupBox4.SuspendLayout();
-            guna2GradientPanel1.SuspendLayout();
+            pnlDevolucionesPendientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).BeginInit();
+            guna2GradientPanel2.SuspendLayout();
+            PnlSinPrestamos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlRanking
             // 
             pnlRanking.BackColor = Color.Transparent;
             pnlRanking.BorderRadius = 15;
+            pnlRanking.Controls.Add(panel1);
+            pnlRanking.Controls.Add(panel2);
             pnlRanking.Controls.Add(guna2HtmlLabel1);
             pnlRanking.Controls.Add(dgvRanking);
             pnlRanking.CustomizableEdges = customizableEdges1;
             pnlRanking.FillColor = SystemColors.ControlLightLight;
             pnlRanking.FillColor2 = SystemColors.ControlLightLight;
-            pnlRanking.Location = new Point(770, 239);
+            pnlRanking.Location = new Point(770, 211);
             pnlRanking.Name = "pnlRanking";
             pnlRanking.ShadowDecoration.BorderRadius = 15;
             pnlRanking.ShadowDecoration.Color = SystemColors.ButtonShadow;
@@ -107,15 +128,31 @@
             pnlRanking.ShadowDecoration.Depth = 33;
             pnlRanking.ShadowDecoration.Enabled = true;
             pnlRanking.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
-            pnlRanking.Size = new Size(265, 420);
+            pnlRanking.Size = new Size(265, 354);
             pnlRanking.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.LightGray;
+            panel1.Location = new Point(15, 337);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(239, 1);
+            panel1.TabIndex = 26;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.LightGray;
+            panel2.Location = new Point(14, 46);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(239, 1);
+            panel2.TabIndex = 25;
             // 
             // guna2HtmlLabel1
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI Symbol", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel1.ForeColor = Color.Black;
-            guna2HtmlLabel1.Location = new Point(14, 13);
+            guna2HtmlLabel1.Location = new Point(36, 12);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(199, 27);
             guna2HtmlLabel1.TabIndex = 24;
@@ -147,14 +184,14 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvRanking.DefaultCellStyle = dataGridViewCellStyle3;
             dgvRanking.GridColor = Color.Gainsboro;
-            dgvRanking.Location = new Point(14, 46);
+            dgvRanking.Location = new Point(15, 56);
             dgvRanking.MultiSelect = false;
             dgvRanking.Name = "dgvRanking";
             dgvRanking.ReadOnly = true;
             dgvRanking.RowHeadersVisible = false;
             dgvRanking.RowTemplate.Height = 35;
             dgvRanking.ScrollBars = ScrollBars.Vertical;
-            dgvRanking.Size = new Size(239, 361);
+            dgvRanking.Size = new Size(239, 275);
             dgvRanking.TabIndex = 11;
             dgvRanking.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvRanking.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -181,12 +218,29 @@
             // pnlGrafico
             // 
             pnlGrafico.BackColor = Color.Transparent;
+            pnlGrafico.BorderRadius = 15;
+            pnlGrafico.Controls.Add(guna2HtmlLabel4);
             pnlGrafico.CustomizableEdges = customizableEdges3;
-            pnlGrafico.Location = new Point(20, 122);
+            pnlGrafico.FillColor = SystemColors.ButtonHighlight;
+            pnlGrafico.Location = new Point(20, 132);
             pnlGrafico.Name = "pnlGrafico";
+            pnlGrafico.ShadowDecoration.Color = SystemColors.ActiveBorder;
             pnlGrafico.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            pnlGrafico.Size = new Size(735, 268);
+            pnlGrafico.ShadowDecoration.Depth = 15;
+            pnlGrafico.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
+            pnlGrafico.Size = new Size(735, 245);
             pnlGrafico.TabIndex = 14;
+            // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI Symbol", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel4.ForeColor = SystemColors.MenuText;
+            guna2HtmlLabel4.Location = new Point(277, 6);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(201, 27);
+            guna2HtmlLabel4.TabIndex = 25;
+            guna2HtmlLabel4.Text = "Prestamos realizados";
             // 
             // guna2GradientPanel7
             // 
@@ -197,7 +251,7 @@
             guna2GradientPanel7.CustomizableEdges = customizableEdges5;
             guna2GradientPanel7.FillColor = SystemColors.ControlLightLight;
             guna2GradientPanel7.FillColor2 = SystemColors.ControlLightLight;
-            guna2GradientPanel7.Location = new Point(20, 396);
+            guna2GradientPanel7.Location = new Point(20, 391);
             guna2GradientPanel7.Name = "guna2GradientPanel7";
             guna2GradientPanel7.ShadowDecoration.BorderRadius = 15;
             guna2GradientPanel7.ShadowDecoration.Color = SystemColors.ButtonShadow;
@@ -205,7 +259,7 @@
             guna2GradientPanel7.ShadowDecoration.Depth = 33;
             guna2GradientPanel7.ShadowDecoration.Enabled = true;
             guna2GradientPanel7.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
-            guna2GradientPanel7.Size = new Size(735, 263);
+            guna2GradientPanel7.Size = new Size(735, 268);
             guna2GradientPanel7.TabIndex = 15;
             // 
             // dgvPrestamosActivos
@@ -234,14 +288,14 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             dgvPrestamosActivos.DefaultCellStyle = dataGridViewCellStyle6;
             dgvPrestamosActivos.GridColor = Color.Gainsboro;
-            dgvPrestamosActivos.Location = new Point(12, 38);
+            dgvPrestamosActivos.Location = new Point(12, 39);
             dgvPrestamosActivos.MultiSelect = false;
             dgvPrestamosActivos.Name = "dgvPrestamosActivos";
             dgvPrestamosActivos.ReadOnly = true;
             dgvPrestamosActivos.RowHeadersVisible = false;
             dgvPrestamosActivos.RowTemplate.Height = 35;
             dgvPrestamosActivos.ScrollBars = ScrollBars.Vertical;
-            dgvPrestamosActivos.Size = new Size(710, 222);
+            dgvPrestamosActivos.Size = new Size(710, 227);
             dgvPrestamosActivos.TabIndex = 10;
             dgvPrestamosActivos.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvPrestamosActivos.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -264,12 +318,13 @@
             dgvPrestamosActivos.ThemeStyle.RowsStyle.Height = 35;
             dgvPrestamosActivos.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dgvPrestamosActivos.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dgvPrestamosActivos.CellClick += dgvPrestamosActivos_CellClick;
             // 
             // lblPrestamosActivos
             // 
             lblPrestamosActivos.BackColor = Color.Transparent;
             lblPrestamosActivos.Font = new Font("Candara", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPrestamosActivos.Location = new Point(12, 4);
+            lblPrestamosActivos.Location = new Point(12, 6);
             lblPrestamosActivos.Name = "lblPrestamosActivos";
             lblPrestamosActivos.Size = new Size(203, 28);
             lblPrestamosActivos.TabIndex = 9;
@@ -495,25 +550,25 @@
             lblCantTotal.Text = "<b>000</b>";
             lblCantTotal.TextAlignment = ContentAlignment.MiddleLeft;
             // 
-            // guna2GradientPanel1
+            // pnlDevolucionesPendientes
             // 
-            guna2GradientPanel1.BackColor = Color.Transparent;
-            guna2GradientPanel1.BorderRadius = 15;
-            guna2GradientPanel1.Controls.Add(guna2HtmlLabel10);
-            guna2GradientPanel1.Controls.Add(ptbEstado);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges17;
-            guna2GradientPanel1.FillColor = Color.FromArgb(245, 158, 11);
-            guna2GradientPanel1.FillColor2 = Color.FromArgb(245, 158, 11);
-            guna2GradientPanel1.Location = new Point(770, 132);
-            guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.BorderRadius = 15;
-            guna2GradientPanel1.ShadowDecoration.Color = SystemColors.ButtonShadow;
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2GradientPanel1.ShadowDecoration.Depth = 33;
-            guna2GradientPanel1.ShadowDecoration.Enabled = true;
-            guna2GradientPanel1.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
-            guna2GradientPanel1.Size = new Size(265, 73);
-            guna2GradientPanel1.TabIndex = 21;
+            pnlDevolucionesPendientes.BackColor = Color.Transparent;
+            pnlDevolucionesPendientes.BorderRadius = 15;
+            pnlDevolucionesPendientes.Controls.Add(guna2HtmlLabel10);
+            pnlDevolucionesPendientes.Controls.Add(ptbEstado);
+            pnlDevolucionesPendientes.CustomizableEdges = customizableEdges17;
+            pnlDevolucionesPendientes.FillColor = Color.Firebrick;
+            pnlDevolucionesPendientes.FillColor2 = Color.Red;
+            pnlDevolucionesPendientes.Location = new Point(770, 132);
+            pnlDevolucionesPendientes.Name = "pnlDevolucionesPendientes";
+            pnlDevolucionesPendientes.ShadowDecoration.BorderRadius = 15;
+            pnlDevolucionesPendientes.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            pnlDevolucionesPendientes.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            pnlDevolucionesPendientes.ShadowDecoration.Depth = 33;
+            pnlDevolucionesPendientes.ShadowDecoration.Enabled = true;
+            pnlDevolucionesPendientes.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
+            pnlDevolucionesPendientes.Size = new Size(265, 73);
+            pnlDevolucionesPendientes.TabIndex = 21;
             // 
             // guna2HtmlLabel10
             // 
@@ -537,18 +592,120 @@
             ptbEstado.TabIndex = 57;
             ptbEstado.TabStop = false;
             // 
+            // guna2GradientPanel2
+            // 
+            guna2GradientPanel2.BackColor = Color.Transparent;
+            guna2GradientPanel2.BorderRadius = 15;
+            guna2GradientPanel2.Controls.Add(btnDevolucion);
+            guna2GradientPanel2.Controls.Add(guna2HtmlLabel2);
+            guna2GradientPanel2.CustomizableEdges = customizableEdges21;
+            guna2GradientPanel2.FillColor = Color.Orange;
+            guna2GradientPanel2.FillColor2 = Color.Orange;
+            guna2GradientPanel2.Location = new Point(770, 571);
+            guna2GradientPanel2.Name = "guna2GradientPanel2";
+            guna2GradientPanel2.ShadowDecoration.BorderRadius = 15;
+            guna2GradientPanel2.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            guna2GradientPanel2.ShadowDecoration.Depth = 33;
+            guna2GradientPanel2.ShadowDecoration.Enabled = true;
+            guna2GradientPanel2.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
+            guna2GradientPanel2.Size = new Size(265, 85);
+            guna2GradientPanel2.TabIndex = 22;
+            // 
+            // btnDevolucion
+            // 
+            btnDevolucion.BackColor = Color.Transparent;
+            btnDevolucion.BorderColor = Color.Transparent;
+            btnDevolucion.BorderRadius = 8;
+            btnDevolucion.Cursor = Cursors.Hand;
+            btnDevolucion.CustomizableEdges = customizableEdges19;
+            btnDevolucion.DisabledState.BorderColor = Color.DarkGray;
+            btnDevolucion.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnDevolucion.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnDevolucion.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnDevolucion.FillColor = Color.FromArgb(247, 201, 72);
+            btnDevolucion.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDevolucion.ForeColor = SystemColors.ButtonHighlight;
+            btnDevolucion.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btnDevolucion.HoverState.ForeColor = Color.White;
+            btnDevolucion.Location = new Point(49, 44);
+            btnDevolucion.Name = "btnDevolucion";
+            btnDevolucion.PressedColor = Color.Transparent;
+            btnDevolucion.ShadowDecoration.Color = Color.Transparent;
+            btnDevolucion.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btnDevolucion.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnDevolucion.Size = new Size(168, 29);
+            btnDevolucion.TabIndex = 61;
+            btnDevolucion.Text = "Realizar Devolucion";
+            btnDevolucion.Click += btnDevolucion_Click;
+            // 
+            // guna2HtmlLabel2
+            // 
+            guna2HtmlLabel2.BackColor = Color.Transparent;
+            guna2HtmlLabel2.Font = new Font("Segoe UI Symbol", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel2.ForeColor = Color.WhiteSmoke;
+            guna2HtmlLabel2.Location = new Point(52, 7);
+            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            guna2HtmlLabel2.Size = new Size(165, 27);
+            guna2HtmlLabel2.TabIndex = 58;
+            guna2HtmlLabel2.Text = "Acciones Rapidas";
+            // 
+            // PnlSinPrestamos
+            // 
+            PnlSinPrestamos.BackColor = Color.Transparent;
+            PnlSinPrestamos.BorderRadius = 15;
+            PnlSinPrestamos.Controls.Add(guna2HtmlLabel3);
+            PnlSinPrestamos.Controls.Add(pictureBox1);
+            PnlSinPrestamos.CustomizableEdges = customizableEdges23;
+            PnlSinPrestamos.FillColor = Color.ForestGreen;
+            PnlSinPrestamos.FillColor2 = Color.FromArgb(16, 185, 129);
+            PnlSinPrestamos.Location = new Point(770, 132);
+            PnlSinPrestamos.Name = "PnlSinPrestamos";
+            PnlSinPrestamos.ShadowDecoration.BorderRadius = 15;
+            PnlSinPrestamos.ShadowDecoration.Color = SystemColors.ButtonShadow;
+            PnlSinPrestamos.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            PnlSinPrestamos.ShadowDecoration.Depth = 33;
+            PnlSinPrestamos.ShadowDecoration.Enabled = true;
+            PnlSinPrestamos.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
+            PnlSinPrestamos.Size = new Size(268, 73);
+            PnlSinPrestamos.TabIndex = 23;
+            // 
+            // guna2HtmlLabel3
+            // 
+            guna2HtmlLabel3.BackColor = Color.Transparent;
+            guna2HtmlLabel3.Font = new Font("Segoe UI Symbol", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel3.ForeColor = Color.WhiteSmoke;
+            guna2HtmlLabel3.Location = new Point(86, 10);
+            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            guna2HtmlLabel3.Size = new Size(134, 52);
+            guna2HtmlLabel3.TabIndex = 58;
+            guna2HtmlLabel3.Text = "Sin Prestamos <br>Activos</br>";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = Properties.Resources.disponibleIcon;
+            pictureBox1.Location = new Point(15, 17);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(50, 41);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 57;
+            pictureBox1.TabStop = false;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(guna2GradientPanel1);
+            Controls.Add(pnlGrafico);
+            Controls.Add(PnlSinPrestamos);
+            Controls.Add(guna2GradientPanel2);
+            Controls.Add(pnlDevolucionesPendientes);
             Controls.Add(guna2GroupBox4);
             Controls.Add(guna2GroupBox3);
             Controls.Add(guna2GroupBox2);
             Controls.Add(guna2GroupBox1);
             Controls.Add(grbDisponibles);
             Controls.Add(guna2GradientPanel7);
-            Controls.Add(pnlGrafico);
             Controls.Add(pnlRanking);
             Name = "Dashboard";
             Size = new Size(1050, 670);
@@ -556,6 +713,8 @@
             pnlRanking.ResumeLayout(false);
             pnlRanking.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRanking).EndInit();
+            pnlGrafico.ResumeLayout(false);
+            pnlGrafico.PerformLayout();
             guna2GradientPanel7.ResumeLayout(false);
             guna2GradientPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPrestamosActivos).EndInit();
@@ -569,9 +728,14 @@
             guna2GroupBox3.PerformLayout();
             guna2GroupBox4.ResumeLayout(false);
             guna2GroupBox4.PerformLayout();
-            guna2GradientPanel1.ResumeLayout(false);
-            guna2GradientPanel1.PerformLayout();
+            pnlDevolucionesPendientes.ResumeLayout(false);
+            pnlDevolucionesPendientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).EndInit();
+            guna2GradientPanel2.ResumeLayout(false);
+            guna2GradientPanel2.PerformLayout();
+            PnlSinPrestamos.ResumeLayout(false);
+            PnlSinPrestamos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -596,10 +760,19 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private Guna.UI2.WinForms.Guna2GradientPanel pnlDevolucionesPendientes;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
         private PictureBox ptbEstado;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvRanking;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Panel panel2;
+        private Panel panel1;
+        private Guna.UI2.WinForms.Guna2GradientPanel PnlSinPrestamos;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
+        private Guna.UI2.WinForms.Guna2Button btnDevolucion;
     }
 }

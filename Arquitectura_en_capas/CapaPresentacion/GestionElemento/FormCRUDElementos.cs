@@ -72,9 +72,9 @@ namespace CapaPresentacion
 
         private void cmbUbicacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbVariante.SelectedValue is int selectedValue)
+            if (cmbUbicacion.SelectedValue is int selectedValue)
             {
-                cmbUbicacion.Tag = selectedValue;
+                cmbUbicacion.Tag = selectedValue;  
             }
         }
 
