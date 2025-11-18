@@ -19,7 +19,7 @@ namespace CapaPresentacion
     public partial class ElementoGestionUC : UserControl
     {
         private FormPrincipal formPrincipal;
-        private ElementosUC elementosUC;
+        private UserControl ucAnterior;
         private readonly ElementosCN elementosCN;
         private readonly ElementosBajasCN elementosBajasCN;
         private int _idElementoSeleccionado;
@@ -43,12 +43,12 @@ namespace CapaPresentacion
         private string? _NombreEstado = "";
         #endregion
 
-        public ElementoGestionUC(FormPrincipal formPrincipal, ElementosUC elementosUC, ElementosCN elementosCN, ElementosBajasCN elementosBajasCN,  int idElementoSeleccionado, Usuarios user)
+        public ElementoGestionUC(FormPrincipal formPrincipal, UserControl ucAnterior, ElementosCN elementosCN, ElementosBajasCN elementosBajasCN,  int idElementoSeleccionado, Usuarios user)
         {
             InitializeComponent();
 
             this.formPrincipal = formPrincipal;
-            this.elementosUC = elementosUC;
+            this.ucAnterior = ucAnterior;
             this.elementosCN = elementosCN;
             this.elementosBajasCN = elementosBajasCN;
             this._idElementoSeleccionado = idElementoSeleccionado;
@@ -57,8 +57,12 @@ namespace CapaPresentacion
         }
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            elementosUC.ActualizarDataGrid(0);
-            formPrincipal.MostrarUserControl(elementosUC);
+            if (ucAnterior is ElementosUC elementosUC)
+            {
+                elementosUC.ActualizarDataGrid(0);
+            }
+
+            formPrincipal.MostrarUserControl(ucAnterior);
         }
 
         private void ElementoGestionUC_Load(object sender, EventArgs e)

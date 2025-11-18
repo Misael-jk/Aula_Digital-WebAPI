@@ -347,24 +347,8 @@ namespace CapaPresentacion
         {
             CerrarGestionUsuario();
 
-            //if (historialUC == null)
-            //    historialUC = new HistorialUC(mapperHistorialElemento, mapperHistorialNotebook, mapperHistorialCarrito);
-
-            //historialUC.RefrescarDatos();
-            //pnlContenedor.Controls.Clear();
-
-            //CambiarNombrePort(BtnDashboard.Text);
-
-            //if (!pnlContenedor.Controls.Contains(historialUC))
-            //{
-            //    pnlContenedor.Controls.Add(historialUC);
-            //    historialUC.Dock = DockStyle.Fill;
-            //}
-
-            //MostrarSolo(historialUC);
-
             if (dashboard == null)
-                dashboard = new Dashboard(mapperPrestamosActivos, mapperNotebooksPrestadas, mapperRankingDocente, notebooksCN);
+                dashboard = new Dashboard(mapperPrestamosActivos, mapperNotebooksPrestadas, mapperRankingDocente, notebooksCN, this, userVerificado, prestamosYDevolucionesUC, prestamosCN, devolucionCN);
 
             CambiarNombrePort(BtnDashboard.Text);
             pnlContenedor.Controls.Clear();
@@ -486,7 +470,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (usuariosUC == null)
-                usuariosUC = new UsuariosUC(usuariosCN, usuariosBajasCN);
+                usuariosUC = new UsuariosUC(usuariosCN, usuariosBajasCN, this);
 
             CambiarNombrePort(BtnUsuario.Text);
 
@@ -513,9 +497,9 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (mantenimientoUC == null)
-                mantenimientoUC = new MantenimientoUC(notebookBajasCN, elementosBajasCN, userVerificado);
+                mantenimientoUC = new MantenimientoUC(notebookBajasCN, elementosBajasCN, carritosBajasCN, userVerificado, this, carritoUC, notebooksUC, elementosUC, carritosCN, notebooksCN, elementoCN);
 
-            cmsMantenimiento.Show(btnMantenimiento, new Point(0, btnMantenimiento.Height));
+            //cmsMantenimiento.Show(btnMantenimiento, new Point(0, btnMantenimiento.Height));
 
             CambiarNombrePort(btnMantenimiento.Text);
 
@@ -556,7 +540,7 @@ namespace CapaPresentacion
 
             try
             {
-                inventarioUC.BringToFront();
+                inventarioUC.MostrarInventario();
             }
             catch (Exception ex)
             {

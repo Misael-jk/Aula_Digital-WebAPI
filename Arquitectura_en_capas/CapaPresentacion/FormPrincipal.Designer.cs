@@ -79,15 +79,10 @@
             BtnDashboard = new Guna.UI2.WinForms.Guna2Button();
             btnInfoUser = new Guna.UI2.WinForms.Guna2Button();
             Mover_Principal = new Guna.UI2.WinForms.Guna2DragControl(components);
-            cmsMantenimiento = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
-            cmsElementos = new ToolStripMenuItem();
-            cmsNotebooks = new ToolStripMenuItem();
-            cmsCarritos = new ToolStripMenuItem();
             pnlGestionUsuario = new Panel();
             pnlBanner.SuspendLayout();
             pnlSeccion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).BeginInit();
-            cmsMantenimiento.SuspendLayout();
             SuspendLayout();
             // 
             // pnlBanner
@@ -533,39 +528,6 @@
             Mover_Principal.TargetControl = pnlBanner;
             Mover_Principal.UseTransparentDrag = true;
             // 
-            // cmsMantenimiento
-            // 
-            cmsMantenimiento.Items.AddRange(new ToolStripItem[] { cmsElementos, cmsNotebooks, cmsCarritos });
-            cmsMantenimiento.Name = "cmsMantenimiento";
-            cmsMantenimiento.RenderStyle.ArrowColor = Color.FromArgb(151, 143, 255);
-            cmsMantenimiento.RenderStyle.BorderColor = Color.Gainsboro;
-            cmsMantenimiento.RenderStyle.ColorTable = null;
-            cmsMantenimiento.RenderStyle.RoundedEdges = true;
-            cmsMantenimiento.RenderStyle.SelectionArrowColor = Color.White;
-            cmsMantenimiento.RenderStyle.SelectionBackColor = Color.FromArgb(100, 88, 255);
-            cmsMantenimiento.RenderStyle.SelectionForeColor = Color.White;
-            cmsMantenimiento.RenderStyle.SeparatorColor = Color.Gainsboro;
-            cmsMantenimiento.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            cmsMantenimiento.Size = new Size(133, 70);
-            // 
-            // cmsElementos
-            // 
-            cmsElementos.Name = "cmsElementos";
-            cmsElementos.Size = new Size(132, 22);
-            cmsElementos.Text = "Elementos";
-            // 
-            // cmsNotebooks
-            // 
-            cmsNotebooks.Name = "cmsNotebooks";
-            cmsNotebooks.Size = new Size(132, 22);
-            cmsNotebooks.Text = "Notebooks";
-            // 
-            // cmsCarritos
-            // 
-            cmsCarritos.Name = "cmsCarritos";
-            cmsCarritos.Size = new Size(132, 22);
-            cmsCarritos.Text = "Carritos";
-            // 
             // pnlGestionUsuario
             // 
             pnlGestionUsuario.AutoScroll = true;
@@ -594,7 +556,6 @@
             pnlSeccion.ResumeLayout(false);
             pnlSeccion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).EndInit();
-            cmsMantenimiento.ResumeLayout(false);
             ResumeLayout(false);
         }
 

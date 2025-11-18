@@ -15,12 +15,16 @@ namespace CapaPresentacion
     public partial class CrearUsuarioUC : UserControl
     {
         private readonly UsuariosCN usuariosCN;
+        private readonly FormPrincipal formPrincipal;
+        private readonly UsuariosUC usuariosUC;
         private Action MostrarUsuarios;
-        public CrearUsuarioUC(UsuariosCN usuariosCN, Action mostrarUsuarios)
+        public CrearUsuarioUC(UsuariosCN usuariosCN, Action mostrarUsuarios, FormPrincipal formPrincipal, UsuariosUC usuariosUC)
         {
             InitializeComponent();
             this.usuariosCN = usuariosCN;
             MostrarUsuarios = mostrarUsuarios;
+            this.formPrincipal = formPrincipal;
+            this.usuariosUC = usuariosUC;
         }
 
         private void btnCrear_Click(object sender, EventArgs e)
@@ -35,11 +39,12 @@ namespace CapaPresentacion
                 Habilitado = true,
                 FechaBaja = null,
                 FotoPerfil = null,
-                IdRol = (int)cmbRol.SelectedValue
+                IdRol = Convert.ToInt32(cmbRol.SelectedValue)
             };
 
             usuariosCN.CrearUsuario(usuario);
             MostrarUsuarios.Invoke();
+            formPrincipal.MostrarUserControl(usuariosUC);
         }
 
         private void CrearUsuarioUC_Load(object sender, EventArgs e)
@@ -48,6 +53,11 @@ namespace CapaPresentacion
             cmbRol.DataSource = roles.ToList();
             cmbRol.DisplayMember = "Rol";
             cmbRol.ValueMember = "IdRol";
+        }
+
+        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
