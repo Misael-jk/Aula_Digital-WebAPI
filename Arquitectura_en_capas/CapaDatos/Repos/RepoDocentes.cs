@@ -259,6 +259,5 @@ public class RepoDocentes : RepoBase, IRepoDocentes
     }
     #endregion
 
-    //this report explain the problems with space digital in its current system of technological resource management and the process of the loans and return.
 
 }
