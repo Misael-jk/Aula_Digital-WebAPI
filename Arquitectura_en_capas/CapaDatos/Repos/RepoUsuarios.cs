@@ -95,7 +95,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
 
         try
         {
-            parametros.Add("@usuario", usuario);
+            parametros.Add("usuario", usuario);
             parametros.Add("@pass", pass);
             return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros);
         }

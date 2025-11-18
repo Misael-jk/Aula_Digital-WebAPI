@@ -147,7 +147,7 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
     #region Obtener cantidad de elementos por prestamo
     public int GetCountByPrestamo(int idPrestamo)
     {
-        string query = "select COUNT(*) from PrestamoDetalle where idPrestamo = @idPrestamo";
+        string query = "select COUNT(*) from PrestamoDetalle where idPrestamo = @unidPrestamo";
         DynamicParameters parametros = new DynamicParameters();
 
         try
@@ -169,12 +169,12 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
             SELECT e.*
             FROM Elementos e
             INNER JOIN PrestamoDetalle pd ON e.idElemento = pd.idElemento
-            WHERE pd.idPrestamo = @idPrestamo
+            WHERE pd.idPrestamo = @unidPrestamo
             AND e.idElemento NOT IN (
                 SELECT dd.idElemento
                 FROM DevolucionDetalle dd
                 INNER JOIN Devoluciones d ON dd.idDevolucion = d.idDevolucion
-                WHERE d.idPrestamo = @idPrestamo
+                WHERE d.idPrestamo = @unidPrestamo
             )";
 
         DynamicParameters parametros = new DynamicParameters();

@@ -919,7 +919,7 @@
             btnConfirmarPrestamo.ForeColor = Color.Firebrick;
             btnConfirmarPrestamo.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnConfirmarPrestamo.HoverState.ForeColor = Color.White;
-            btnConfirmarPrestamo.Location = new Point(168, 598);
+            btnConfirmarPrestamo.Location = new Point(172, 598);
             btnConfirmarPrestamo.Name = "btnConfirmarPrestamo";
             btnConfirmarPrestamo.PressedColor = Color.FromArgb(255, 170, 20);
             btnConfirmarPrestamo.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
