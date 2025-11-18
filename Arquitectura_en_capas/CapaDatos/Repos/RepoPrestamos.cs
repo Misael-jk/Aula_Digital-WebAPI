@@ -153,7 +153,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
     #region Cambiar estado del prestamo
     public void UpdateEstado(int idPrestamo, int idEstadoPrestamo)
     {
-        string query = "Update Prestamos set idEstadoPrestamo = unidEstadoPrestamo where idPrestamo = @unidPrestamo";
+        string query = "Update Prestamos set idEstadoPrestamo = @unidEstadoPrestamo where idPrestamo = @unidPrestamo";
 
         DynamicParameters parametros = new DynamicParameters();
         parametros.Add("unidPrestamo", idPrestamo);

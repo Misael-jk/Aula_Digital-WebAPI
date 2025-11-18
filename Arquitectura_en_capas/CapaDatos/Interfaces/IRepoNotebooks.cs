@@ -33,4 +33,5 @@ public interface IRepoNotebooks
     public void SetTransaction(IDbTransaction? transaction);
     public int? CantidadEstados(int idEstado);
     public int CantidadTotal();
+    public IEnumerable<int> GetIdNotebooksPrestadasByCarrito(int idCarrito);
 }

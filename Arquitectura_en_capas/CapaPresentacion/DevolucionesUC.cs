@@ -21,7 +21,10 @@ namespace CapaPresentacion
         private Usuarios userActual;
         private readonly DevolucionCN devolucionCN;
         private int idPrestamoSeleccionado;
-        private int? idCarrito = 0;
+        private int? idCarrito;
+        private bool CarroYaDevuelto = false;
+        private bool DevolverCarro = false;
+        private int? idDevolcionSeleccionado;
 
         private int _idElementoPorConfirmar = 0;
         private int _idElementoSeleccionado = 0;
@@ -36,6 +39,7 @@ namespace CapaPresentacion
         private List<int> ElementosPrestados = new List<int>();
         private List<int> ElementosFaltantes = new List<int>();
         private List<int> NotebooksCarrito = new List<int>();
+
         public DevolucionesUC(PrestamosYDevolucionesUC prestamosYDevolucionesUC, FormPrincipal _formPrincipal, PrestamosCN prestamosCN, Usuarios userActual, DevolucionCN devolucionCN, int idPrestamoSeleccionado)
         {
             InitializeComponent();
@@ -51,23 +55,46 @@ namespace CapaPresentacion
         private void DevolucionesUC_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            this.AutoScrollMinSize = new Size(0, 1000);
         }
 
         public void CargarDatos()
         {
+
             ElementosPrestados = prestamosCN.ObtenerIDsElementosPorIdPrestamo(idPrestamoSeleccionado);
 
             Prestamos? prestamos = prestamosCN.ObtenerPrestamoPorID(idPrestamoSeleccionado);
 
             idCarrito = prestamos?.IdCarrito;
 
-            if (idCarrito != null)
+            if(prestamos?.IdEstadoPrestamo == 2)
             {
-                btnDevolverCarro.Enabled = true;
+                btnDevolverCarro.Visible = false;
+                btnDevolverTodos.Visible = false;
+                btnMarcarDevuelto.Visible = false;
+
+                pnlElementosADevolver.Enabled = false;
+            }
+
+            if (idCarrito.HasValue)
+            {
+                Carritos? carritos = devolucionCN.ObtenerCarroPorID(idCarrito.Value);
+
+                if (carritos?.IdEstadoMantenimiento == 1)
+                {
+                    btnDevolverCarro.Enabled = false;
+                    CarroYaDevuelto = true;
+                }
+                else
+                {
+                    btnDevolverCarro.Enabled = true;
+                    CarroYaDevuelto = false;
+                }
             }
             else
             {
-                btnDevolverCarro.Enabled = false;
+                btnDevolverCarro.Visible = false;
+                CarroYaDevuelto = false;
             }
 
             dgvPrestamoDetalle.DataSource = prestamosCN.ObtenerPrestamoDetallePorId(idPrestamoSeleccionado, prestamos?.IdCarrito);
@@ -76,17 +103,8 @@ namespace CapaPresentacion
 
             if (devolucion != null)
             {
-                dgvDevolucionDetalle.Visible = true;
-                dgvElementosPorConfirmacion.Visible = false;
-
-                dgvDevolucionDetalle.DataSource = devolucionCN.ObtenerDevolucionDetallePorID(devolucion.IdDevolucion, prestamos?.IdCarrito);
-
-                ElementosDevueltos = devolucionCN.ObtenerIDsElementosEnDev(devolucion.IdDevolucion);
-            }
-            else
-            {
-                dgvDevolucionDetalle.Visible = false;
-                dgvElementosPorConfirmacion.Visible = true;
+                idDevolcionSeleccionado = devolucion?.IdDevolucion;
+                ElementosDevueltos = devolucionCN.ObtenerIDsElementosEnDev(Convert.ToInt32(devolucion?.IdDevolucion));
             }
         }
 
@@ -126,14 +144,14 @@ namespace CapaPresentacion
                 _Patrimonio
             );
 
+            btnQuitarDevuelto.Enabled = true;
             btnMarcarDevuelto.Enabled = false;
             btnQuitarDevuelto.Enabled = false;
         }
 
         private void btnDevolverCarro_Click(object sender, EventArgs e)
         {
-
-            NotebooksCarrito = prestamosCN.ObtenerIDsPorCarrito(Convert.ToInt32(idCarrito)).ToList();
+            NotebooksCarrito = prestamosCN.ObtenerIDsPrestadosPorCarrito(Convert.ToInt32(idCarrito)).ToList();
 
             var faltanDevolver = NotebooksCarrito
                 .Where(id =>
@@ -146,7 +164,6 @@ namespace CapaPresentacion
 
             foreach (var id in faltanDevolver)
             {
-
                 PrestamosDetalleDTO? elemento = prestamosCN.ObtenerElementoMapeadoPorID(id, idCarrito);
 
                 dgvElementosPorConfirmacion.Rows.Add(
@@ -158,6 +175,16 @@ namespace CapaPresentacion
                     elemento?.Patrimonio
                 );
             }
+
+            if (idCarrito.HasValue)
+            {
+                if (CarroYaDevuelto == false)
+                {
+                    DevolverCarro = true;
+                }
+            }
+
+            btnDevolverCarro.Enabled = false;
         }
 
         private void btnDevolverTodos_Click(object sender, EventArgs e)
@@ -168,7 +195,6 @@ namespace CapaPresentacion
 
             foreach (var id in ElementosSeleccionados)
             {
-
                 PrestamosDetalleDTO? elemento = prestamosCN.ObtenerElementoMapeadoPorID(id, idCarrito);
 
                 dgvElementosPorConfirmacion.Rows.Add(
@@ -181,6 +207,13 @@ namespace CapaPresentacion
                 );
             }
 
+            if (idCarrito.HasValue)
+            {
+                if (CarroYaDevuelto == false)
+                {
+                    DevolverCarro = true;
+                }
+            }
         }
 
         private void dgvElementosPorConfirmacion_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -207,16 +240,198 @@ namespace CapaPresentacion
                     break;
                 }
             }
-
-            _idElementoPorConfirmar = 0;
-
-            btnMarcarDevuelto.Enabled = false;
-            btnQuitarDevuelto.Enabled = false;
         }
 
         private void btnConfirmarDevolucion_Click(object sender, EventArgs e)
         {
+            if (ElementosSeleccionados.Count == 0)
+            {
+                MessageBox.Show("No seleccionaste ningun elemento");
+                return;
+            }
 
+            List<string> observaciones = new List<string>();
+
+            foreach (DataGridViewRow row in dgvElementosPorConfirmacion.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string? obs = Convert.ToString(row.Cells["Observacion"].Value);
+
+                    if (string.IsNullOrWhiteSpace(obs))
+                        obs = "Sin observación";
+
+                    observaciones.Add(obs);
+                }
+            }
+
+            Devolucion? devolucionExistente = devolucionCN.ObtenerDevolucionPorIdPrestamo(idPrestamoSeleccionado);
+
+            int totalPrestados = ElementosPrestados.Count;
+
+            int totalDevueltosAhora = ElementosDevueltos.Count + ElementosSeleccionados.Count;
+
+            if (devolucionExistente == null)
+            {
+                Devolucion nueva = new Devolucion
+                {
+                    IdPrestamo = idPrestamoSeleccionado,
+                    IdUsuario = userActual.IdUsuario,
+                    FechaDevolucion = DateTime.Now
+                };
+
+                if (totalDevueltosAhora == totalPrestados)
+                {
+                    devolucionCN.CrearDevolucion(nueva, ElementosSeleccionados, observaciones, userActual.IdUsuario, idCarrito);
+                    CarroYaDevuelto = true;
+                    MessageBox.Show("Devolución COMPLETA registrada correctamente.");
+                }
+                else
+                {
+                    if (idCarrito.HasValue)
+                    {
+                        if (DevolverCarro == true)
+                        {
+                            devolucionCN.CrearDevolucion(nueva, ElementosSeleccionados, observaciones, userActual.IdUsuario, idCarrito);
+                            btnDevolverCarro.Enabled = false;
+                            MessageBox.Show("Primera devolución PARCIAL registrada correctamente.");
+                        }
+                        else
+                        {
+                            devolucionCN.CrearDevolucion(nueva, ElementosSeleccionados, observaciones, userActual.IdUsuario, null);
+                            MessageBox.Show("Primera devolución PARCIAL registrada correctamente.");
+                        }
+                    }
+                    else
+                    {
+                        devolucionCN.CrearDevolucion(nueva, ElementosSeleccionados, observaciones, userActual.IdUsuario, null);
+                        MessageBox.Show("Primera devolución PARCIAL registrada correctamente.");
+                    }
+                }
+            }
+            else
+            {
+                if (totalDevueltosAhora == totalPrestados)
+                {
+                    if (idCarrito.HasValue)
+                    {
+                        if (DevolverCarro == true)
+                        {
+                            devolucionCN.CrearDevolucionParcial(
+                                idPrestamoSeleccionado,
+                                ElementosSeleccionados,
+                                observaciones,
+                                userActual.IdUsuario,
+                                idCarrito
+                            );
+
+                            btnDevolverCarro.Enabled = false;
+
+                            MessageBox.Show("Se completó la devolución. Ahora es una devolución COMPLETA.");
+                        }
+                    }
+                    else
+                    {
+                        devolucionCN.CrearDevolucionParcial(
+                                idPrestamoSeleccionado,
+                                ElementosSeleccionados,
+                                observaciones,
+                                userActual.IdUsuario,
+                                null
+                            );
+
+                        MessageBox.Show("Se completó la devolución. Ahora es una devolución COMPLETA.");
+                    }
+                }
+                else
+                {
+                    if (idCarrito.HasValue)
+                    {
+                        if (DevolverCarro == true)
+                        {
+                            devolucionCN.CrearDevolucionParcial(
+                                idPrestamoSeleccionado,
+                                ElementosSeleccionados,
+                                observaciones,
+                                userActual.IdUsuario,
+                                idCarrito
+                            );
+
+                            MessageBox.Show("Devolución PARCIAL actualizada correctamente.");
+
+                            btnDevolverCarro.Enabled = false;
+                        }
+                        else
+                        {
+                            devolucionCN.CrearDevolucionParcial(
+                                idPrestamoSeleccionado,
+                                ElementosSeleccionados,
+                                observaciones,
+                                userActual.IdUsuario,
+                                null
+                            );
+
+                            MessageBox.Show("Devolución PARCIAL actualizada correctamente.");
+                        }
+                    }
+                    else
+                    {
+                        devolucionCN.CrearDevolucionParcial(
+                                idPrestamoSeleccionado,
+                                ElementosSeleccionados,
+                                observaciones,
+                                userActual.IdUsuario,
+                                null
+                            );
+
+                        MessageBox.Show("Devolución PARCIAL actualizada correctamente.");
+                    }
+                }
+
+                dgvElementosPorConfirmacion.Rows.Clear();
+            }
+
+            CargarDatos();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbListadoDetalle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbListadoDetalle.SelectedIndex)
+            {
+                case 0:
+                    dgvPrestamoDetalle.DataSource = prestamosCN.ObtenerPrestamoDetallePorId(idPrestamoSeleccionado, idCarrito);
+                    dgvPrestamoDetalle.Visible = true;
+                    break;
+
+                case 1:
+                    if (idDevolcionSeleccionado == null)
+                    {
+                        dgvPrestamoDetalle.Visible = false;
+                        break;
+                    }
+                    dgvPrestamoDetalle.DataSource = devolucionCN.ObtenerDevolucionDetallePorID(Convert.ToInt32(idDevolcionSeleccionado), idCarrito);
+                    dgvPrestamoDetalle.Visible = true;
+                    break;
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            dgvElementosPorConfirmacion.Rows.Clear();
+
+            ElementosSeleccionados.Clear();
+
+            if (DevolverCarro == true)
+            {
+                DevolverCarro = false;
+            }
+
+            CargarDatos();
         }
     }
 }

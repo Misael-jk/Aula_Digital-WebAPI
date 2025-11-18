@@ -42,11 +42,10 @@ public class UowDevolucion : UowBase, IUowDevolucion
         // REPO AUXILIARES / DE LECTURA
         RepoUsuarios = new RepoUsuarios(conexion, Transaction);
         RepoDocentes = new RepoDocentes(conexion, Transaction);
-        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion);
-        RepoPrestamoDetalle = new RepoPrestamoDetalle(conexion);
-        RepoTipoElemento = new RepoTipoElemento(conexion);
-        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion);
-        //RepoTipoAnomalias = new RepoTipoAnomalias(conexion);
+        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion, Transaction);
+        RepoPrestamoDetalle = new RepoPrestamoDetalle(conexion, Transaction);
+        RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
+        RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion, Transaction);
     }
 
     protected override void CambiarTransacion(IDbTransaction? transaction)
@@ -56,5 +55,11 @@ public class UowDevolucion : UowBase, IUowDevolucion
         RepoDevolucionDetalle.SetTransaction(transaction);
         RepoElementos.SetTransaction(transaction);
         RepoCarritos.SetTransaction(transaction);
+        RepoHistorialCambio.SetTransaction(transaction);
+        RepoHistorialCarrito.SetTransaction(transaction);
+        RepoHistorialElementos.SetTransaction(transaction);
+        RepoHistorialNotebook.SetTransaction(transaction);
+        RepoPrestamoDetalle.SetTransaction(transaction);
+        RepoDevolucionDetalle.SetTransaction(transaction);
     }
 }

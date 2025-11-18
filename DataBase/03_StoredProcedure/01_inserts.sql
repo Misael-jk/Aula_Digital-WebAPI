@@ -176,10 +176,10 @@ delimiter ;
 delimiter $$
 
 drop procedure if exists InsertDevolucion $$
-create procedure InsertDevolucion (out unidDevolucion int, in unidPrestamo int, in unidDocente smallint, in unidUsuario tinyint, in unidEstadoPrestamo tinyint, in unafechaDevolucion datetime, in unaobservacion varchar(200))
+create procedure InsertDevolucion (out unidDevolucion int, in unidPrestamo int, in unidUsuario tinyint, in unafechaDevolucion datetime, in unaobservacion varchar(200))
 begin
-    insert into Devoluciones (idPrestamo, idDocente, idUsuario, idEstadoPrestamo, fechaDevolucion, observaciones)
-    values (unidPrestamo, unidUsuario, unidEstadoPrestamo, unafechaDevolucion, unaobservacion);
+    insert into Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observaciones)
+    values (unidPrestamo, unidUsuario, unafechaDevolucion, unaobservacion);
 
     set unidDevolucion = last_insert_id();
 end $$

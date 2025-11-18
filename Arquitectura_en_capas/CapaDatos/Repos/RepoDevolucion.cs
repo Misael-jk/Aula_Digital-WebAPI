@@ -20,9 +20,9 @@ public class RepoDevolucion : RepoBase, IRepoDevolucion
         parametros.Add("unidDevolucion", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
         parametros.Add("unidPrestamo", devolucion.IdPrestamo);
-        parametros.Add("unidEncargado", devolucion.IdUsuario);
+        parametros.Add("unidUsuario", devolucion.IdUsuario);
         parametros.Add("unafechaDevolucion", devolucion.FechaDevolucion);
-        parametros.Add("unaobservaciones", devolucion.Observaciones);
+        parametros.Add("unaobservacion", devolucion.Observaciones);
 
         try
         {

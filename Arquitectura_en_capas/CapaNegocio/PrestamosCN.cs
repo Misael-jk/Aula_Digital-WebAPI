@@ -262,6 +262,11 @@ public class PrestamosCN
         return uow.RepoNotebooks.GetIdNotebooksByCarrito(idCarrito);
     }
 
+    public IEnumerable<int> ObtenerIDsPrestadosPorCarrito(int idCarrito)
+    {
+        return uow.RepoNotebooks.GetIdNotebooksPrestadasByCarrito(idCarrito);
+    }
+
     public Elemento? ObtenerElementoPorID(int idElemento)
     {
         return uow.RepoElemento.GetById(idElemento);

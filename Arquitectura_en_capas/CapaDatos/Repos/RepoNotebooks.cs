@@ -623,4 +623,26 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
             throw new Exception("Error al obtener la cantidad total de elementos");
         }
     }
+
+    public IEnumerable<int> GetIdNotebooksPrestadasByCarrito(int idCarrito)
+    {
+        string query = @"select e.idElemento
+                        from elementos e
+                        join Notebooks n using (idElemento)
+                        where n.idCarrito = @unIdCarrito
+                        and e.idEstadoMantenimiento = 2
+                        Order by posicionCarrito ASC;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("@unIdCarrito", idCarrito);
+
+        try
+        {
+            return Conexion.Query<int>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al obtener IDs de notebooks del carrito: " + ex.Message);
+        }
+    }
 }
