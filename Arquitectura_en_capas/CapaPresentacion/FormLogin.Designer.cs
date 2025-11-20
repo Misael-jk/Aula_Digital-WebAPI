@@ -33,10 +33,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginState));
             MoveLogin = new Guna.UI2.WinForms.Guna2DragControl(components);
             BarraTopLogin1 = new Panel();
@@ -50,7 +50,6 @@
             PictED = new PictureBox();
             ChckPass = new Guna.UI2.WinForms.Guna2CheckBox();
             BtnLogin = new Guna.UI2.WinForms.Guna2Button();
-            Entrada = new Guna.UI2.WinForms.Guna2AnimateWindow(components);
             PictET12 = new PictureBox();
             MoveLogin2 = new Guna.UI2.WinForms.Guna2DragControl(components);
             TxtUser = new Guna.UI2.WinForms.Guna2TextBox();
@@ -229,12 +228,6 @@
             BtnLogin.Text = "Iniciar sesion";
             BtnLogin.Click += BtnLogin_Click;
             // 
-            // Entrada
-            // 
-            Entrada.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_BLEND;
-            Entrada.Interval = 700;
-            Entrada.TargetForm = this;
-            // 
             // PictET12
             // 
             PictET12.Image = Properties.Resources.et12;
@@ -254,7 +247,7 @@
             // TxtUser
             // 
             TxtUser.BorderRadius = 7;
-            TxtUser.CustomizableEdges = customizableEdges7;
+            TxtUser.CustomizableEdges = customizableEdges5;
             TxtUser.DefaultText = "";
             TxtUser.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             TxtUser.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -270,7 +263,7 @@
             TxtUser.PlaceholderForeColor = Color.DarkGray;
             TxtUser.PlaceholderText = "Ingresar usuario";
             TxtUser.SelectedText = "";
-            TxtUser.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            TxtUser.ShadowDecoration.CustomizableEdges = customizableEdges6;
             TxtUser.Size = new Size(269, 36);
             TxtUser.TabIndex = 15;
             TxtUser.KeyDown += TxtUser_KeyDown;
@@ -278,7 +271,7 @@
             // TxtPass
             // 
             TxtPass.BorderRadius = 7;
-            TxtPass.CustomizableEdges = customizableEdges5;
+            TxtPass.CustomizableEdges = customizableEdges7;
             TxtPass.DefaultText = "";
             TxtPass.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             TxtPass.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -294,7 +287,7 @@
             TxtPass.PlaceholderForeColor = Color.DarkGray;
             TxtPass.PlaceholderText = "Ingresar contraseña";
             TxtPass.SelectedText = "";
-            TxtPass.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            TxtPass.ShadowDecoration.CustomizableEdges = customizableEdges8;
             TxtPass.Size = new Size(269, 36);
             TxtPass.TabIndex = 16;
             TxtPass.UseSystemPasswordChar = true;
@@ -375,7 +368,6 @@
         private PictureBox PictED;
         private Guna.UI2.WinForms.Guna2CheckBox ChckPass;
         private Guna.UI2.WinForms.Guna2Button BtnLogin;
-        private Guna.UI2.WinForms.Guna2AnimateWindow Entrada;
         private PictureBox PictET12;
         private Panel BarraTopLogin1;
         private FontAwesome.Sharp.IconButton iconButton1;

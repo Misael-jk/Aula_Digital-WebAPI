@@ -54,7 +54,6 @@ namespace CapaPresentacion
             }
         }
 
-
         private void CarritoUC_Load(object sender, EventArgs e)
         {
             cmbHabilitado.Items.Add("Habilitados");

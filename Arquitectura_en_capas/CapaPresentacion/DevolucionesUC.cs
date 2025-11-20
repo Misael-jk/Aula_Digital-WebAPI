@@ -67,7 +67,7 @@ namespace CapaPresentacion
 
             idCarrito = prestamos?.IdCarrito;
 
-            if(prestamos?.IdEstadoPrestamo == 2)
+            if (prestamos?.IdEstadoPrestamo == 2)
             {
                 btnDevolverCarro.Visible = false;
                 btnDevolverTodos.Visible = false;
@@ -401,23 +401,23 @@ namespace CapaPresentacion
 
         private void cmbListadoDetalle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (cmbListadoDetalle.SelectedIndex)
-            {
-                case 0:
-                    dgvPrestamoDetalle.DataSource = prestamosCN.ObtenerPrestamoDetallePorId(idPrestamoSeleccionado, idCarrito);
-                    dgvPrestamoDetalle.Visible = true;
-                    break;
+            //switch (cmbListadoDetalle.SelectedIndex)
+            //{
+            //    case 0:
+            //        dgvPrestamoDetalle.DataSource = prestamosCN.ObtenerPrestamoDetallePorId(idPrestamoSeleccionado, idCarrito);
+            //        dgvPrestamoDetalle.Visible = true;
+            //        break;
 
-                case 1:
-                    if (idDevolcionSeleccionado == null)
-                    {
-                        dgvPrestamoDetalle.Visible = false;
-                        break;
-                    }
-                    dgvPrestamoDetalle.DataSource = devolucionCN.ObtenerDevolucionDetallePorID(Convert.ToInt32(idDevolcionSeleccionado), idCarrito);
-                    dgvPrestamoDetalle.Visible = true;
-                    break;
-            }
+            //    case 1:
+            //        if (idDevolcionSeleccionado == null)
+            //        {
+            //            dgvPrestamoDetalle.Visible = false;
+            //            break;
+            //        }
+            //        dgvPrestamoDetalle.DataSource = devolucionCN.ObtenerDevolucionDetallePorID(Convert.ToInt32(idDevolcionSeleccionado), idCarrito);
+            //        dgvPrestamoDetalle.Visible = true;
+            //        break;
+            //}
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

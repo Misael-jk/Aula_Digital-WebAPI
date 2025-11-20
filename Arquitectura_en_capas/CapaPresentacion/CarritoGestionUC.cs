@@ -1,5 +1,6 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
+using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,6 +101,8 @@ namespace CapaPresentacion
                 HabilitarModificado(Convert.ToBoolean(_habilitado));
 
                 HabilitarBotones(false, false);
+
+                GenerarBotonesCarrito(32);
             }
             finally
             {
@@ -268,7 +271,7 @@ namespace CapaPresentacion
 
             if (Convert.ToInt32(cmbModelo.SelectedValue) != _idModelo)
             {
-                descripcion.AppendLine("Modelo de notebook:");
+                descripcion.AppendLine("Modelo de carrito:");
                 descripcion.AppendLine($"   Antes: {_NombreModelo}");
                 descripcion.AppendLine($"   Ahora: {cmbModelo.Text}");
                 descripcion.AppendLine();
@@ -363,5 +366,128 @@ namespace CapaPresentacion
         {
             CargarTodaLaGestion(_idCarritoSeleccionado);
         }
+
+        private void GenerarBotonesCarrito(int capacidad)
+        {
+            pnlContenedor.Controls.Clear();
+
+            if (capacidad <= 0)
+                return;
+
+            // --- OPCIÓN RECOMENDADA ---
+            // El contenedor debe ser UN FlowLayoutPanel
+            // pnlContenedor.WrapContents = true;
+            // pnlContenedor.FlowDirection = FlowDirection.LeftToRight;
+
+            var notebooks = carritosCN.ObtenerNotebooksPorCarrito(_idCarritoSeleccionado)
+                                      .ToList();
+
+            for (int i = 1; i <= capacidad; i++)
+            {
+                var notebook = notebooks.FirstOrDefault(n => n.PosicionCarrito == i);
+
+                var btn = CrearBotonCasillero(i, notebook);
+
+                pnlContenedor.Controls.Add(btn);
+            }
+        }
+
+        private Guna2Button CrearBotonCasillero(int numero, Notebooks notebook)
+        {
+            var btn = new Guna2Button();
+
+            // ------------------------------
+            // 🔹 Estilo base (TU diseño)
+            // ------------------------------
+            btn.BackColor = Color.Transparent;
+            btn.BorderRadius = 8;
+            btn.Cursor = Cursors.Hand;
+
+            btn.DisabledState.BorderColor = Color.DarkGray;
+            btn.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+
+            btn.FillColor = Color.WhiteSmoke;
+            btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btn.ForeColor = Color.Firebrick;
+
+            btn.HoverState.FillColor = Color.FromArgb(235, 115, 125);
+            btn.HoverState.ForeColor = Color.White;
+
+            btn.PressedColor = Color.FromArgb(255, 170, 20);
+            btn.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
+            btn.ShadowDecoration.Enabled = true;
+            btn.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+
+            btn.Size = new Size(150, 42); // puedes ajustar
+            btn.Margin = new Padding(5);
+            btn.TextAlign = HorizontalAlignment.Left;
+
+            // ------------------------------
+            // 🔹 Texto
+            // ------------------------------
+            btn.Text = $"Casillero {numero}";
+
+            // ------------------------------
+            // 🔹 Icono según estado
+            // ------------------------------
+            if (notebook == null)
+            {
+                btn.FillColor = SystemColors.InactiveCaption;
+                btn.Tag = null;
+                btn.Image = Properties.Resources.iconVacio;  // <-- Pone icono vacío
+            }
+            else
+            {
+                btn.Tag = notebook.IdElemento; // solo ID como pediste
+
+                switch (notebook.IdEstadoMantenimiento)
+                {
+                    case 1: // Disponible
+                        btn.FillColor = Color.FromArgb(128, 255, 128);
+                        btn.Image = Properties.Resources.iconDisponible;
+                        break;
+
+                    case 2: // Prestado
+                        btn.FillColor = Color.FromArgb(252, 201, 52);
+                        btn.Image = Properties.Resources.iconPrestado;
+                        break;
+
+                    default: // Otro estado
+                        btn.FillColor = Color.WhiteSmoke;
+                        break;
+                }
+            }
+
+            // Icono a la izquierda
+            btn.ImageAlign = HorizontalAlignment.Left;
+            btn.ImageSize = new Size(24, 24);
+
+            // Click
+            btn.Click += Casillero_Click;
+
+            return btn;
+        }
+
+        private void Casillero_Click(object sender, EventArgs e)
+        {
+            var btn = (Guna2Button)sender;
+
+            int numeroCasillero = int.Parse(btn.Text.Replace("Casillero ", ""));
+
+            if (btn.Tag == null)
+            {
+                MessageBox.Show($"El casillero {numeroCasillero} está vacío.");
+                // lógica de agregar
+                return;
+            }
+
+            int idNotebook = (int)btn.Tag;
+
+            MessageBox.Show($"Notebook ID: {idNotebook} en casillero {numeroCasillero}");
+            // lógica de editar / quitar
+        }
+
     }
 }
