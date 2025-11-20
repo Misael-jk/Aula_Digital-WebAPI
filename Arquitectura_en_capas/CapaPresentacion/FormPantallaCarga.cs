@@ -35,10 +35,7 @@ namespace CapaPresentacion
 
                 Task.Delay(300).ContinueWith(_ =>
                 {
-                    Invoke(new Action(() =>
-                    {
-                        this.Close();
-                    }));
+                    
                 });
             }
         }
