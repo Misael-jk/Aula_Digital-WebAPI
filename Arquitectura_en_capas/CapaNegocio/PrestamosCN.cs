@@ -360,10 +360,10 @@ public class PrestamosCN
             throw new Exception("El docente no existe");
         }
 
-        if(uow.RepoDocentes.ExistsPrestamo(prestamos.IdDocente))
-        {
-            throw new Exception("El docente ya tiene un prestamo previo, solo se permite un prestamo por docente");
-        }
+        ////if(uow.RepoDocentes.ExistsPrestamo(prestamos.IdDocente))
+        ////{
+        ////    throw new Exception("El docente ya tiene un prestamo previo, solo se permite un prestamo por docente");
+        ////}
         #endregion
 
         #region ELEMENTO

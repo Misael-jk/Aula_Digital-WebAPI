@@ -23,11 +23,11 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
         parametros.Add("unpassword", usuarios.Password);
         parametros.Add("unnombre", usuarios .Nombre);
         parametros.Add("unapellido", usuarios.Apellido);
-        parametros.Add("unrol", usuarios.IdRol);
+        parametros.Add("unidRol", usuarios.IdRol);
         parametros.Add("unemail", usuarios.Email);
-        parametros.Add("unfotoPerfil", usuarios.FotoPerfil);
+        parametros.Add("unafotoPerfil", usuarios.FotoPerfil);
         parametros.Add("unhabilitado", usuarios.Habilitado);
-        parametros.Add("unfechaBaja", usuarios.FechaBaja);
+        parametros.Add("unafechaBaja", usuarios.FechaBaja);
 
         try
         {

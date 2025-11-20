@@ -108,29 +108,6 @@ namespace CapaPresentacion
             }
         }
 
-        private void dgvPrestamoDetalle_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            _idElementoSeleccionado = Convert.ToInt32(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["IdElemento"].Value);
-            _TipoElemento = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["TipoElemento"].Value);
-            _Equipo = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["Equipo"].Value);
-            _Carrito = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["PosicionCarrito"].Value);
-            _NroSerie = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["NumeroSerieElemento"].Value);
-            _Patrimonio = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["Patrimonio"].Value);
-
-            if (ElementosSeleccionados.Contains(_idElementoSeleccionado) || ElementosDevueltos.Contains(_idElementoSeleccionado))
-            {
-                btnMarcarDevuelto.Enabled = false;
-                btnQuitarDevuelto.Enabled = false;
-            }
-            else
-            {
-                btnMarcarDevuelto.Enabled = true;
-                btnQuitarDevuelto.Enabled = true;
-            }
-        }
-
         private void btnMarcarDevuelto_Click(object sender, EventArgs e)
         {
             ElementosSeleccionados.Add(Convert.ToInt32(_idElementoSeleccionado));
@@ -391,6 +368,7 @@ namespace CapaPresentacion
                 dgvElementosPorConfirmacion.Rows.Clear();
             }
 
+            dgvElementosPorConfirmacion.Rows.Clear();
             CargarDatos();
         }
 
@@ -432,6 +410,29 @@ namespace CapaPresentacion
             }
 
             CargarDatos();
+        }
+
+        private void dgvPrestamoDetalle_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            _idElementoSeleccionado = Convert.ToInt32(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["IdElemento"].Value);
+            _TipoElemento = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["TipoElemento"].Value);
+            _Equipo = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["Equipo"].Value);
+            _Carrito = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["PosicionCarrito"].Value);
+            _NroSerie = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["NumeroSerieElemento"].Value);
+            _Patrimonio = Convert.ToString(dgvPrestamoDetalle.Rows[e.RowIndex].Cells["Patrimonio"].Value);
+
+            if (ElementosSeleccionados.Contains(_idElementoSeleccionado) || ElementosDevueltos.Contains(_idElementoSeleccionado))
+            {
+                btnMarcarDevuelto.Enabled = false;
+                btnQuitarDevuelto.Enabled = false;
+            }
+            else
+            {
+                btnMarcarDevuelto.Enabled = true;
+                btnQuitarDevuelto.Enabled = true;
+            }
         }
     }
 }

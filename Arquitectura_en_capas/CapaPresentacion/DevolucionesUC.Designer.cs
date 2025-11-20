@@ -51,6 +51,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -58,6 +61,12 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             dgvPrestamoDetalle = new Guna.UI2.WinForms.Guna2DataGridView();
             pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
@@ -69,14 +78,23 @@
             btnDevolverCarro = new Guna.UI2.WinForms.Guna2Button();
             btnDevolverTodos = new Guna.UI2.WinForms.Guna2Button();
             btnMarcarDevuelto = new Guna.UI2.WinForms.Guna2Button();
+            guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            dgvPrestamoDetalle = new Guna.UI2.WinForms.Guna2DataGridView();
+            cmbListadoDetalle = new Guna.UI2.WinForms.Guna2ComboBox();
+            btnDevolverCarro = new Guna.UI2.WinForms.Guna2Button();
+            btnDevolverTodos = new Guna.UI2.WinForms.Guna2Button();
+            btnMarcarDevuelto = new Guna.UI2.WinForms.Guna2Button();
+            guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            label1 = new Label();
             btnConfirmarDevolucion = new Guna.UI2.WinForms.Guna2Button();
             btnCancelar = new Guna.UI2.WinForms.Guna2Button();
             btnQuitarDevuelto = new Guna.UI2.WinForms.Guna2Button();
             pnlElementosADevolver = new Guna.UI2.WinForms.Guna2Panel();
-            btnDevolverTodos = new Guna.UI2.WinForms.Guna2Button();
-            btnMarcarDevuelto = new Guna.UI2.WinForms.Guna2Button();
-            guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
-            guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dgvElementosPorConfirmacion = new Guna.UI2.WinForms.Guna2DataGridView();
             IdElemento = new DataGridViewTextBoxColumn();
             TipoElemento = new DataGridViewTextBoxColumn();
@@ -85,12 +103,17 @@
             NroSerie = new DataGridViewTextBoxColumn();
             Patrimonio = new DataGridViewTextBoxColumn();
             Observacion = new DataGridViewTextBoxColumn();
+            guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPrestamoDetalle).BeginInit();
             pnlPresentacionNotebook.SuspendLayout();
             pnlElementosADevolver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvElementosPorConfirmacion).BeginInit();
+            guna2Panel4.SuspendLayout();
+            guna2Panel3.SuspendLayout();
             SuspendLayout();
             // 
             // guna2Panel1
@@ -107,6 +130,301 @@
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Panel1.Size = new Size(1018, 628);
             guna2Panel1.TabIndex = 57;
+            // 
+            // txtElementosTotal
+            // 
+            txtElementosTotal.Animated = true;
+            txtElementosTotal.BorderRadius = 10;
+            txtElementosTotal.Cursor = Cursors.IBeam;
+            txtElementosTotal.CustomizableEdges = customizableEdges1;
+            txtElementosTotal.DefaultText = "";
+            txtElementosTotal.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtElementosTotal.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtElementosTotal.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtElementosTotal.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtElementosTotal.Enabled = false;
+            txtElementosTotal.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtElementosTotal.FocusedState.FillColor = Color.White;
+            txtElementosTotal.FocusedState.ForeColor = Color.Black;
+            txtElementosTotal.Font = new Font("Segoe UI", 10F);
+            txtElementosTotal.ForeColor = Color.Black;
+            txtElementosTotal.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtElementosTotal.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtElementosTotal.Location = new Point(417, 35);
+            txtElementosTotal.Margin = new Padding(4, 5, 4, 5);
+            txtElementosTotal.Name = "txtElementosTotal";
+            txtElementosTotal.PlaceholderForeColor = Color.Gray;
+            txtElementosTotal.PlaceholderText = "Encargado";
+            txtElementosTotal.SelectedText = "";
+            txtElementosTotal.ShadowDecoration.BorderRadius = 10;
+            txtElementosTotal.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtElementosTotal.ShadowDecoration.Depth = 5;
+            txtElementosTotal.Size = new Size(194, 36);
+            txtElementosTotal.TabIndex = 113;
+            txtElementosTotal.TextOffset = new Point(5, 0);
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.ButtonHighlight;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Black;
+            label4.Location = new Point(417, 15);
+            label4.Name = "label4";
+            label4.Size = new Size(98, 15);
+            label4.TabIndex = 112;
+            label4.Text = "Llevo un total de:";
+            // 
+            // txtCurso
+            // 
+            txtCurso.Animated = true;
+            txtCurso.BorderRadius = 10;
+            txtCurso.Cursor = Cursors.IBeam;
+            txtCurso.CustomizableEdges = customizableEdges3;
+            txtCurso.DefaultText = "";
+            txtCurso.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtCurso.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtCurso.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtCurso.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtCurso.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtCurso.FocusedState.FillColor = Color.White;
+            txtCurso.FocusedState.ForeColor = Color.Black;
+            txtCurso.Font = new Font("Segoe UI", 10F);
+            txtCurso.ForeColor = Color.Black;
+            txtCurso.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtCurso.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtCurso.Location = new Point(272, 35);
+            txtCurso.Margin = new Padding(4, 5, 4, 5);
+            txtCurso.Name = "txtCurso";
+            txtCurso.PlaceholderForeColor = Color.Gray;
+            txtCurso.PlaceholderText = "Curso";
+            txtCurso.SelectedText = "";
+            txtCurso.ShadowDecoration.BorderRadius = 10;
+            txtCurso.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtCurso.ShadowDecoration.Depth = 5;
+            txtCurso.Size = new Size(130, 36);
+            txtCurso.TabIndex = 111;
+            txtCurso.TextOffset = new Point(5, 0);
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = SystemColors.ButtonHighlight;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(272, 15);
+            label3.Name = "label3";
+            label3.Size = new Size(41, 15);
+            label3.TabIndex = 100;
+            label3.Text = "Curso:";
+            // 
+            // txtEncargado
+            // 
+            txtEncargado.Animated = true;
+            txtEncargado.BorderRadius = 10;
+            txtEncargado.Cursor = Cursors.IBeam;
+            txtEncargado.CustomizableEdges = customizableEdges5;
+            txtEncargado.DefaultText = "";
+            txtEncargado.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtEncargado.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtEncargado.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtEncargado.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtEncargado.Enabled = false;
+            txtEncargado.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtEncargado.FocusedState.FillColor = Color.White;
+            txtEncargado.FocusedState.ForeColor = Color.Black;
+            txtEncargado.Font = new Font("Segoe UI", 10F);
+            txtEncargado.ForeColor = Color.Black;
+            txtEncargado.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtEncargado.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtEncargado.Location = new Point(626, 35);
+            txtEncargado.Margin = new Padding(4, 5, 4, 5);
+            txtEncargado.Name = "txtEncargado";
+            txtEncargado.PlaceholderForeColor = Color.Gray;
+            txtEncargado.PlaceholderText = "Encargado";
+            txtEncargado.SelectedText = "";
+            txtEncargado.ShadowDecoration.BorderRadius = 10;
+            txtEncargado.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtEncargado.ShadowDecoration.Depth = 5;
+            txtEncargado.Size = new Size(194, 36);
+            txtEncargado.TabIndex = 99;
+            txtEncargado.TextOffset = new Point(5, 0);
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = SystemColors.ButtonHighlight;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(626, 15);
+            label2.Name = "label2";
+            label2.Size = new Size(166, 15);
+            label2.TabIndex = 98;
+            label2.Text = "Supervisado por el encargado:";
+            // 
+            // txtFecha
+            // 
+            txtFecha.Animated = true;
+            txtFecha.BorderRadius = 10;
+            txtFecha.Cursor = Cursors.IBeam;
+            txtFecha.CustomizableEdges = customizableEdges7;
+            txtFecha.DefaultText = "";
+            txtFecha.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtFecha.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtFecha.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtFecha.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtFecha.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtFecha.FocusedState.FillColor = Color.White;
+            txtFecha.FocusedState.ForeColor = Color.Black;
+            txtFecha.Font = new Font("Segoe UI", 10F);
+            txtFecha.ForeColor = Color.Black;
+            txtFecha.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtFecha.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtFecha.Location = new Point(839, 35);
+            txtFecha.Margin = new Padding(4, 5, 4, 5);
+            txtFecha.Name = "txtFecha";
+            txtFecha.PlaceholderForeColor = Color.Gray;
+            txtFecha.PlaceholderText = "Fecha";
+            txtFecha.SelectedText = "";
+            txtFecha.ShadowDecoration.BorderRadius = 10;
+            txtFecha.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtFecha.ShadowDecoration.Depth = 5;
+            txtFecha.Size = new Size(163, 36);
+            txtFecha.TabIndex = 76;
+            txtFecha.TextOffset = new Point(5, 0);
+            // 
+            // lblNroSerie
+            // 
+            lblNroSerie.AutoSize = true;
+            lblNroSerie.BackColor = SystemColors.ButtonHighlight;
+            lblNroSerie.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNroSerie.ForeColor = Color.Black;
+            lblNroSerie.Location = new Point(839, 13);
+            lblNroSerie.Name = "lblNroSerie";
+            lblNroSerie.Size = new Size(110, 15);
+            lblNroSerie.TabIndex = 71;
+            lblNroSerie.Text = "Fecha de prestamo:";
+            // 
+            // txtDocente
+            // 
+            txtDocente.Animated = true;
+            txtDocente.BorderRadius = 10;
+            txtDocente.Cursor = Cursors.IBeam;
+            txtDocente.CustomizableEdges = customizableEdges9;
+            txtDocente.DefaultText = "";
+            txtDocente.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtDocente.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtDocente.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtDocente.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtDocente.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            txtDocente.FocusedState.FillColor = Color.White;
+            txtDocente.FocusedState.ForeColor = Color.Black;
+            txtDocente.Font = new Font("Segoe UI", 10F);
+            txtDocente.ForeColor = Color.Black;
+            txtDocente.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            txtDocente.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            txtDocente.Location = new Point(14, 35);
+            txtDocente.Margin = new Padding(4, 5, 4, 5);
+            txtDocente.Name = "txtDocente";
+            txtDocente.PlaceholderForeColor = Color.Gray;
+            txtDocente.PlaceholderText = "Ingresar docente";
+            txtDocente.SelectedText = "";
+            txtDocente.ShadowDecoration.BorderRadius = 10;
+            txtDocente.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtDocente.ShadowDecoration.Depth = 5;
+            txtDocente.Size = new Size(242, 36);
+            txtDocente.TabIndex = 85;
+            txtDocente.TextOffset = new Point(5, 0);
+            // 
+            // lblEquipo
+            // 
+            lblEquipo.AutoSize = true;
+            lblEquipo.BackColor = SystemColors.ButtonHighlight;
+            lblEquipo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEquipo.ForeColor = Color.Black;
+            lblEquipo.Location = new Point(14, 15);
+            lblEquipo.Name = "lblEquipo";
+            lblEquipo.Size = new Size(189, 15);
+            lblEquipo.TabIndex = 84;
+            lblEquipo.Text = "Prestamo realizado por el docente:";
+            // 
+            // pnlPresentacionNotebook
+            // 
+            pnlPresentacionNotebook.BackColor = Color.Transparent;
+            pnlPresentacionNotebook.BorderRadius = 15;
+            pnlPresentacionNotebook.Controls.Add(lblPrestamoTitulo);
+            pnlPresentacionNotebook.Controls.Add(btnVolver);
+            pnlPresentacionNotebook.CustomizableEdges = customizableEdges14;
+            pnlPresentacionNotebook.FillColor = Color.FromArgb(105, 80, 165);
+            pnlPresentacionNotebook.Location = new Point(15, 12);
+            pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
+            pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            pnlPresentacionNotebook.Size = new Size(1018, 65);
+            pnlPresentacionNotebook.TabIndex = 58;
+            // 
+            // lblPrestamoTitulo
+            // 
+            lblPrestamoTitulo.BackColor = Color.Transparent;
+            lblPrestamoTitulo.Font = new Font("Segoe UI Semibold", 19F);
+            lblPrestamoTitulo.ForeColor = SystemColors.ButtonFace;
+            lblPrestamoTitulo.Location = new Point(396, 2);
+            lblPrestamoTitulo.Name = "lblPrestamoTitulo";
+            lblPrestamoTitulo.Size = new Size(226, 37);
+            lblPrestamoTitulo.TabIndex = 8;
+            lblPrestamoTitulo.Text = "<b>Gestionar prestamo</b>";
+            lblPrestamoTitulo.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // btnVolver
+            // 
+            btnVolver.DisabledState.BorderColor = Color.DarkGray;
+            btnVolver.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnVolver.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnVolver.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVolver.FillColor = Color.Transparent;
+            btnVolver.Font = new Font("Segoe UI", 9F);
+            btnVolver.ForeColor = Color.White;
+            btnVolver.Image = (Image)resources.GetObject("btnVolver.Image");
+            btnVolver.Location = new Point(13, 7);
+            btnVolver.Name = "btnVolver";
+            btnVolver.PressedColor = Color.Indigo;
+            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnVolver.Size = new Size(32, 32);
+            btnVolver.TabIndex = 5;
+            btnVolver.Click += btnVolver_Click;
+            // 
+            // guna2Panel2
+            // 
+            guna2Panel2.BackColor = Color.Transparent;
+            guna2Panel2.BorderRadius = 15;
+            guna2Panel2.Controls.Add(guna2HtmlLabel6);
+            guna2Panel2.Controls.Add(dgvPrestamoDetalle);
+            guna2Panel2.Controls.Add(cmbListadoDetalle);
+            guna2Panel2.Controls.Add(btnDevolverCarro);
+            guna2Panel2.Controls.Add(btnDevolverTodos);
+            guna2Panel2.Controls.Add(btnMarcarDevuelto);
+            guna2Panel2.Controls.Add(guna2HtmlLabel7);
+            customizableEdges24.TopLeft = false;
+            customizableEdges24.TopRight = false;
+            guna2Panel2.CustomizableEdges = customizableEdges24;
+            guna2Panel2.FillColor = SystemColors.ButtonHighlight;
+            guna2Panel2.Location = new Point(15, 170);
+            guna2Panel2.Name = "guna2Panel2";
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges25;
+            guna2Panel2.Size = new Size(1018, 359);
+            guna2Panel2.TabIndex = 111;
+            // 
+            // guna2HtmlLabel6
+            // 
+            guna2HtmlLabel6.BackColor = Color.Transparent;
+            guna2HtmlLabel6.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel6.ForeColor = Color.FromArgb(105, 80, 165);
+            guna2HtmlLabel6.Location = new Point(321, 6);
+            guna2HtmlLabel6.Name = "guna2HtmlLabel6";
+            guna2HtmlLabel6.Size = new Size(377, 37);
+            guna2HtmlLabel6.TabIndex = 127;
+            guna2HtmlLabel6.Text = "<b>Elementos prestados y devueltos</b>";
+            guna2HtmlLabel6.TextAlignment = ContentAlignment.MiddleLeft;
             // 
             // dgvPrestamoDetalle
             // 
@@ -135,6 +453,7 @@
             dgvPrestamoDetalle.DefaultCellStyle = dataGridViewCellStyle3;
             dgvPrestamoDetalle.GridColor = Color.Gainsboro;
             dgvPrestamoDetalle.Location = new Point(13, 283);
+            dgvPrestamoDetalle.Location = new Point(13, 60);
             dgvPrestamoDetalle.MultiSelect = false;
             dgvPrestamoDetalle.Name = "dgvPrestamoDetalle";
             dgvPrestamoDetalle.RowHeadersVisible = false;
@@ -142,6 +461,8 @@
             dgvPrestamoDetalle.ScrollBars = ScrollBars.Vertical;
             dgvPrestamoDetalle.Size = new Size(985, 305);
             dgvPrestamoDetalle.TabIndex = 75;
+            dgvPrestamoDetalle.Size = new Size(991, 249);
+            dgvPrestamoDetalle.TabIndex = 123;
             dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 7F);
             dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Black;
@@ -252,18 +573,39 @@
             guna2TextBox1.Size = new Size(447, 53);
             guna2TextBox1.TabIndex = 119;
             guna2TextBox1.TextOffset = new Point(5, 0);
+            dgvPrestamoDetalle.CellClick += dgvPrestamoDetalle_CellClick_1;
             // 
-            // label1
+            // cmbListadoDetalle
             // 
-            label1.AutoSize = true;
-            label1.BackColor = SystemColors.ButtonHighlight;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(14, 346);
-            label1.Name = "label1";
-            label1.Size = new Size(98, 15);
-            label1.TabIndex = 118;
-            label1.Text = "Llevo un total de:";
+            cmbListadoDetalle.Animated = true;
+            cmbListadoDetalle.BackColor = Color.Transparent;
+            cmbListadoDetalle.BorderColor = Color.FromArgb(125, 100, 180);
+            cmbListadoDetalle.BorderRadius = 10;
+            customizableEdges16.BottomLeft = false;
+            customizableEdges16.BottomRight = false;
+            cmbListadoDetalle.CustomizableEdges = customizableEdges16;
+            cmbListadoDetalle.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbListadoDetalle.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbListadoDetalle.FocusedColor = Color.FromArgb(105, 80, 165);
+            cmbListadoDetalle.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            cmbListadoDetalle.FocusedState.FillColor = Color.White;
+            cmbListadoDetalle.Font = new Font("Segoe UI", 10F);
+            cmbListadoDetalle.ForeColor = Color.Black;
+            cmbListadoDetalle.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            cmbListadoDetalle.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            cmbListadoDetalle.ItemHeight = 30;
+            cmbListadoDetalle.Items.AddRange(new object[] { "Elementos prestados", "Elementos devueltos" });
+            cmbListadoDetalle.ItemsAppearance.BackColor = Color.White;
+            cmbListadoDetalle.ItemsAppearance.ForeColor = Color.Black;
+            cmbListadoDetalle.ItemsAppearance.SelectedBackColor = Color.FromArgb(105, 80, 165);
+            cmbListadoDetalle.ItemsAppearance.SelectedForeColor = Color.White;
+            cmbListadoDetalle.Location = new Point(16, 8);
+            cmbListadoDetalle.Name = "cmbListadoDetalle";
+            cmbListadoDetalle.ShadowDecoration.BorderRadius = 10;
+            cmbListadoDetalle.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            cmbListadoDetalle.Size = new Size(278, 36);
+            cmbListadoDetalle.TabIndex = 122;
+            cmbListadoDetalle.SelectedIndexChanged += cmbListadoDetalle_SelectedIndexChanged;
             // 
             // btnDevolverCarro
             // 
@@ -347,6 +689,86 @@
             btnMarcarDevuelto.TabIndex = 90;
             btnMarcarDevuelto.Text = "Devolver elemento";
             btnMarcarDevuelto.Click += btnMarcarDevuelto_Click;
+            // 
+            // guna2HtmlLabel7
+            // 
+            guna2HtmlLabel7.BackColor = Color.Transparent;
+            guna2HtmlLabel7.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel7.ForeColor = Color.FromArgb(105, 80, 165);
+            guna2HtmlLabel7.Location = new Point(316, 161);
+            guna2HtmlLabel7.Name = "guna2HtmlLabel7";
+            guna2HtmlLabel7.Size = new Size(387, 37);
+            guna2HtmlLabel7.TabIndex = 126;
+            guna2HtmlLabel7.Text = "<b>No realizaste ninguna devolucion</b>";
+            guna2HtmlLabel7.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI Semibold", 16F);
+            guna2HtmlLabel4.ForeColor = SystemColors.ActiveCaptionText;
+            guna2HtmlLabel4.Location = new Point(120, -2);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(203, 32);
+            guna2HtmlLabel4.TabIndex = 78;
+            guna2HtmlLabel4.Text = "<b>Elementos prestados</b>";
+            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel1.ForeColor = SystemColors.ButtonFace;
+            guna2HtmlLabel1.Location = new Point(431, 2);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(157, 37);
+            guna2HtmlLabel1.TabIndex = 9;
+            guna2HtmlLabel1.Text = "<b>Devoluciones</b>";
+            guna2HtmlLabel1.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // guna2TextBox1
+            // 
+            guna2TextBox1.Animated = true;
+            guna2TextBox1.BorderRadius = 10;
+            guna2TextBox1.Cursor = Cursors.IBeam;
+            guna2TextBox1.CustomizableEdges = customizableEdges16;
+            guna2TextBox1.DefaultText = "";
+            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.Enabled = false;
+            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            guna2TextBox1.FocusedState.FillColor = Color.White;
+            guna2TextBox1.FocusedState.ForeColor = Color.Black;
+            guna2TextBox1.Font = new Font("Segoe UI", 10F);
+            guna2TextBox1.ForeColor = Color.Black;
+            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            guna2TextBox1.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            guna2TextBox1.Location = new Point(14, 366);
+            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
+            guna2TextBox1.Name = "guna2TextBox1";
+            guna2TextBox1.PlaceholderForeColor = Color.Gray;
+            guna2TextBox1.PlaceholderText = "Encargado";
+            guna2TextBox1.SelectedText = "";
+            guna2TextBox1.ShadowDecoration.BorderRadius = 10;
+            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2TextBox1.ShadowDecoration.Depth = 5;
+            guna2TextBox1.Size = new Size(447, 53);
+            guna2TextBox1.TabIndex = 119;
+            guna2TextBox1.TextOffset = new Point(5, 0);
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = SystemColors.ButtonHighlight;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(14, 346);
+            label1.Name = "label1";
+            label1.Size = new Size(98, 15);
+            label1.TabIndex = 118;
+            label1.Text = "Llevo un total de:";
             // 
             // btnConfirmarDevolucion
             // 
@@ -438,6 +860,7 @@
             pnlElementosADevolver.Controls.Add(guna2HtmlLabel4);
             pnlElementosADevolver.Controls.Add(btnMarcarDevuelto);
             pnlElementosADevolver.Controls.Add(btnDevolverCarro);
+            pnlElementosADevolver.Controls.Add(guna2HtmlLabel2);
             pnlElementosADevolver.Controls.Add(btnConfirmarDevolucion);
             pnlElementosADevolver.Controls.Add(btnDevolverTodos);
             pnlElementosADevolver.Controls.Add(btnCancelar);
@@ -451,29 +874,17 @@
             pnlElementosADevolver.Size = new Size(1018, 429);
             pnlElementosADevolver.TabIndex = 77;
             // 
-            // guna2HtmlLabel5
+            // guna2HtmlLabel2
             // 
-            guna2HtmlLabel5.BackColor = Color.Transparent;
-            guna2HtmlLabel5.Font = new Font("Segoe UI Semibold", 16F);
-            guna2HtmlLabel5.ForeColor = Color.FromArgb(105, 80, 165);
-            guna2HtmlLabel5.Location = new Point(373, 1);
-            guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(287, 32);
-            guna2HtmlLabel5.TabIndex = 118;
-            guna2HtmlLabel5.Text = "<b>Lista de elementos a devolver</b>";
-            guna2HtmlLabel5.TextAlignment = ContentAlignment.MiddleLeft;
-            // 
-            // guna2HtmlLabel5
-            // 
-            guna2HtmlLabel5.BackColor = Color.Transparent;
-            guna2HtmlLabel5.Font = new Font("Segoe UI Semibold", 16F);
-            guna2HtmlLabel5.ForeColor = SystemColors.ActiveCaptionText;
-            guna2HtmlLabel5.Location = new Point(120, -2);
-            guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(201, 32);
-            guna2HtmlLabel5.TabIndex = 118;
-            guna2HtmlLabel5.Text = "<b>Elementos devueltos</b>";
-            guna2HtmlLabel5.TextAlignment = ContentAlignment.MiddleLeft;
+            guna2HtmlLabel2.BackColor = Color.Transparent;
+            guna2HtmlLabel2.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel2.ForeColor = Color.FromArgb(105, 80, 165);
+            guna2HtmlLabel2.Location = new Point(300, 10);
+            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            guna2HtmlLabel2.Size = new Size(419, 37);
+            guna2HtmlLabel2.TabIndex = 129;
+            guna2HtmlLabel2.Text = "<b>Elementos por confirmar devolucion</b>";
+            guna2HtmlLabel2.TextAlignment = ContentAlignment.MiddleLeft;
             // 
             // dgvElementosPorConfirmacion
             // 
@@ -502,13 +913,13 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             dgvElementosPorConfirmacion.DefaultCellStyle = dataGridViewCellStyle6;
             dgvElementosPorConfirmacion.GridColor = Color.Gainsboro;
-            dgvElementosPorConfirmacion.Location = new Point(13, 42);
+            dgvElementosPorConfirmacion.Location = new Point(13, 56);
             dgvElementosPorConfirmacion.MultiSelect = false;
             dgvElementosPorConfirmacion.Name = "dgvElementosPorConfirmacion";
             dgvElementosPorConfirmacion.RowHeadersVisible = false;
             dgvElementosPorConfirmacion.RowTemplate.Height = 35;
             dgvElementosPorConfirmacion.ScrollBars = ScrollBars.Vertical;
-            dgvElementosPorConfirmacion.Size = new Size(989, 340);
+            dgvElementosPorConfirmacion.Size = new Size(989, 326);
             dgvElementosPorConfirmacion.TabIndex = 75;
             dgvElementosPorConfirmacion.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvElementosPorConfirmacion.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 7F);
@@ -575,59 +986,27 @@
             // 
             Observacion.HeaderText = "Observacion";
             Observacion.Name = "Observacion";
-            dgvDevolucionDetalle.AllowUserToAddRows = false;
-            dgvDevolucionDetalle.AllowUserToDeleteRows = false;
-            dgvDevolucionDetalle.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(248, 248, 248);
-            dgvDevolucionDetalle.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dgvDevolucionDetalle.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(105, 80, 165);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(125, 95, 190);
-            dataGridViewCellStyle5.SelectionForeColor = Color.White;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvDevolucionDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dgvDevolucionDetalle.ColumnHeadersHeight = 35;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 7F);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(230, 225, 250);
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgvDevolucionDetalle.DefaultCellStyle = dataGridViewCellStyle6;
-            dgvDevolucionDetalle.GridColor = Color.Gainsboro;
-            dgvDevolucionDetalle.Location = new Point(3, 40);
-            dgvDevolucionDetalle.MultiSelect = false;
-            dgvDevolucionDetalle.Name = "dgvDevolucionDetalle";
-            dgvDevolucionDetalle.RowHeadersVisible = false;
-            dgvDevolucionDetalle.RowTemplate.Height = 35;
-            dgvDevolucionDetalle.ScrollBars = ScrollBars.Vertical;
-            dgvDevolucionDetalle.Size = new Size(434, 274);
-            dgvDevolucionDetalle.TabIndex = 117;
-            dgvDevolucionDetalle.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
-            dgvDevolucionDetalle.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 7F);
-            dgvDevolucionDetalle.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Black;
-            dgvDevolucionDetalle.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
-            dgvDevolucionDetalle.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Black;
-            dgvDevolucionDetalle.ThemeStyle.BackColor = Color.White;
-            dgvDevolucionDetalle.ThemeStyle.GridColor = Color.Gainsboro;
-            dgvDevolucionDetalle.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(105, 80, 165);
-            dgvDevolucionDetalle.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvDevolucionDetalle.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            dgvDevolucionDetalle.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgvDevolucionDetalle.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvDevolucionDetalle.ThemeStyle.HeaderStyle.Height = 35;
-            dgvDevolucionDetalle.ThemeStyle.ReadOnly = false;
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 7F);
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.ForeColor = Color.Black;
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.Height = 35;
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
-            dgvDevolucionDetalle.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            // 
+            // guna2Panel5
+            // 
+            guna2Panel5.CustomizableEdges = customizableEdges34;
+            guna2Panel5.Location = new Point(0, 0);
+            guna2Panel5.Name = "guna2Panel5";
+            guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            guna2Panel5.Size = new Size(200, 100);
+            guna2Panel5.TabIndex = 0;
+            // 
+            // guna2HtmlLabel3
+            // 
+            guna2HtmlLabel3.BackColor = Color.Transparent;
+            guna2HtmlLabel3.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel3.ForeColor = SystemColors.ActiveCaptionText;
+            guna2HtmlLabel3.Location = new Point(163, -1);
+            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            guna2HtmlLabel3.Size = new Size(63, 37);
+            guna2HtmlLabel3.TabIndex = 77;
+            guna2HtmlLabel3.Text = "<b>Llevo</b>";
+            guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleLeft;
             // 
             // guna2Panel4
             // 
@@ -635,82 +1014,12 @@
             guna2Panel4.BorderRadius = 7;
             guna2Panel4.BorderThickness = 1;
             guna2Panel4.Controls.Add(guna2HtmlLabel4);
-            guna2Panel4.Controls.Add(dgvPrestamoDetalle);
-            guna2Panel4.CustomizableEdges = customizableEdges34;
+            guna2Panel4.CustomizableEdges = customizableEdges36;
             guna2Panel4.Location = new Point(14, 21);
             guna2Panel4.Name = "guna2Panel4";
-            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges37;
             guna2Panel4.Size = new Size(447, 316);
             guna2Panel4.TabIndex = 76;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Segoe UI Semibold", 16F);
-            guna2HtmlLabel4.ForeColor = SystemColors.ActiveCaptionText;
-            guna2HtmlLabel4.Location = new Point(120, -2);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(203, 32);
-            guna2HtmlLabel4.TabIndex = 78;
-            guna2HtmlLabel4.Text = "<b>Elementos prestados</b>";
-            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleLeft;
-            // 
-            // dgvPrestamoDetalle
-            // 
-            dgvPrestamoDetalle.AllowUserToAddRows = false;
-            dgvPrestamoDetalle.AllowUserToDeleteRows = false;
-            dgvPrestamoDetalle.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(248, 248, 248);
-            dgvPrestamoDetalle.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dgvPrestamoDetalle.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(105, 80, 165);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(125, 95, 190);
-            dataGridViewCellStyle8.SelectionForeColor = Color.White;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dgvPrestamoDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            dgvPrestamoDetalle.ColumnHeadersHeight = 35;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.White;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 7F);
-            dataGridViewCellStyle9.ForeColor = Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(230, 225, 250);
-            dataGridViewCellStyle9.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            dgvPrestamoDetalle.DefaultCellStyle = dataGridViewCellStyle9;
-            dgvPrestamoDetalle.GridColor = Color.Gainsboro;
-            dgvPrestamoDetalle.Location = new Point(3, 34);
-            dgvPrestamoDetalle.MultiSelect = false;
-            dgvPrestamoDetalle.Name = "dgvPrestamoDetalle";
-            dgvPrestamoDetalle.RowHeadersVisible = false;
-            dgvPrestamoDetalle.RowTemplate.Height = 35;
-            dgvPrestamoDetalle.ScrollBars = ScrollBars.Vertical;
-            dgvPrestamoDetalle.Size = new Size(441, 279);
-            dgvPrestamoDetalle.TabIndex = 75;
-            dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
-            dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 7F);
-            dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Black;
-            dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
-            dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Black;
-            dgvPrestamoDetalle.ThemeStyle.BackColor = Color.White;
-            dgvPrestamoDetalle.ThemeStyle.GridColor = Color.Gainsboro;
-            dgvPrestamoDetalle.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(105, 80, 165);
-            dgvPrestamoDetalle.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvPrestamoDetalle.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            dgvPrestamoDetalle.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgvPrestamoDetalle.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvPrestamoDetalle.ThemeStyle.HeaderStyle.Height = 35;
-            dgvPrestamoDetalle.ThemeStyle.ReadOnly = false;
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 7F);
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.ForeColor = Color.Black;
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.Height = 35;
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
-            dgvPrestamoDetalle.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
-            dgvPrestamoDetalle.CellClick += dgvPrestamoDetalle_CellClick;
             // 
             // guna2Panel3
             // 
@@ -755,6 +1064,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.Gainsboro;
+            Controls.Add(guna2Panel2);
             Controls.Add(guna2Panel1);
             Controls.Add(pnlPresentacionNotebook);
             Controls.Add(pnlElementosADevolver);
@@ -768,6 +1078,10 @@
             pnlElementosADevolver.ResumeLayout(false);
             pnlElementosADevolver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvElementosPorConfirmacion).EndInit();
+            guna2Panel4.ResumeLayout(false);
+            guna2Panel4.PerformLayout();
+            guna2Panel3.ResumeLayout(false);
+            guna2Panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -778,6 +1092,9 @@
         private Guna.UI2.WinForms.Guna2CircleButton btnVolver;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPrestamoTitulo;
         private Guna.UI2.WinForms.Guna2DataGridView dgvPrestamoDetalle;
+        private Guna.UI2.WinForms.Guna2TextBox txtElementosTotal;
+        private Label label4;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2Button btnMarcarDevuelto;
         private Guna.UI2.WinForms.Guna2Panel pnlElementosADevolver;
@@ -786,7 +1103,6 @@
         private Guna.UI2.WinForms.Guna2Button btnCancelar;
         private Guna.UI2.WinForms.Guna2Button btnConfirmarDevolucion;
         private Guna.UI2.WinForms.Guna2Button btnDevolverCarro;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2Button btnDevolverTodos;
         private DataGridViewTextBoxColumn IdElemento;
@@ -796,5 +1112,16 @@
         private DataGridViewTextBoxColumn NroSerie;
         private DataGridViewTextBoxColumn Patrimonio;
         private DataGridViewTextBoxColumn Observacion;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbListadoDetalle;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Label label1;
+        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel5;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvPrestamoDetalle;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
     }
 }

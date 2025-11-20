@@ -57,7 +57,7 @@ public class UsuariosCN
             throw new Exception("Ya existe un usuario con ese nombre de usuario");
         }
 
-        if(repoRoles.GetById(usuariosNEW.IdRol) != null)
+        if(repoRoles.GetById(usuariosNEW.IdRol) == null)
         {
             throw new Exception("El rol que eligio no existe");
         }
