@@ -139,7 +139,7 @@ public class NotebooksCN
                 throw new Exception("El estado de mantenimiento seleccionado no es valido");
             }
 
-            if (!uow.RepoNotebooks.GetDisponible(notebook.IdElemento))
+            if (uow.RepoNotebooks.EstaEnPrestamo(notebook.IdElemento))
             {
                 throw new Exception("No se puede deshabilitar un carrito que está en préstamo");
             }

@@ -117,4 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="circleButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAABGdBTUEAALGPC/xhBQAAAGtJREFUSEvt
+        0TEOgCAQRFEuYaON97+UR8GPGQoqEsOuhfMSmhX4MRSzz9RaN1ZzaBSLUA8+NI5DYwji1KcYBBxci8D/
+        gtfbpSvn2LyMrpxjb/6fNhzIfdOOkMMOxyA0hDWOR6uHd43MspVyA+lt6ZO1w/h/AAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

@@ -22,7 +22,7 @@ public class MapperVarianteElemento : RepoBase, IMapperVarianteElemento
                 IdVarianteElemento = variante.IdVarianteElemento,
                 Equipo = variante.Variante,
                 TipoElemento = tipo.ElementoTipo,
-                Modelo = modelo.NombreModelo
+                Modelo = modelo?.NombreModelo ?? "Sin Modelo"
             },
             splitOn: "IdVarianteElemento, ElementoTipo, NombreModelo");
             

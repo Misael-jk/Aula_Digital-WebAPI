@@ -103,6 +103,7 @@
             cmbRol.ShadowDecoration.CustomizableEdges = customizableEdges2;
             cmbRol.Size = new Size(311, 36);
             cmbRol.TabIndex = 47;
+            cmbRol.SelectedIndexChanged += cmbRol_SelectedIndexChanged;
             // 
             // guna2Panel1
             // 

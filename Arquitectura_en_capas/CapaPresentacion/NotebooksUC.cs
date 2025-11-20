@@ -82,7 +82,7 @@ namespace CapaPresentacion
         #region LOAD
         private void NotebooksUC_Load(object sender, EventArgs e)
         {
-
+            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
             lstSugerencias.MouseLeave += (s, ev) => navegandoLista = false;
 
@@ -99,10 +99,6 @@ namespace CapaPresentacion
             //ActualizarDataGrid(0);
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1157);
-
-            cmbUbicacion_RemoveCarrito.DataSource = notebooksCN.ListarUbicaciones();
-            cmbUbicacion_RemoveCarrito.ValueMember = "IdUbicacion";
-            cmbUbicacion_RemoveCarrito.DisplayMember = "NombreUbicacion";
 
             CargarGraficoEstados();
             CargarGraficoCarritos();
@@ -436,7 +432,7 @@ namespace CapaPresentacion
             if (!string.IsNullOrWhiteSpace(carritoQ))
             {
                 var carrito = notebooksCN.ObtenerCarritoPorEquipo(carritoQ);
-                var resultados = notebooksCN.ObtenerPorFiltros(null ,carrito?.IdCarrito ,null);
+                var resultados = notebooksCN.ObtenerPorFiltros(null, carrito?.IdCarrito, null);
                 dgvNotebooks_M.DataSource = resultados.ToList();
                 return;
             }
@@ -453,17 +449,6 @@ namespace CapaPresentacion
             if (e.RowIndex < 0) return;
 
             IdActual = Convert.ToInt32(dgvNotebooks_M.Rows[e.RowIndex].Cells["IdNotebook"].Value);
-
-            Notebooks? notebook = notebooksCN.ObtenerNotebookPorID(IdActual);
-
-            #region Agregar cellClick para agregar al carrito
-            txtEquipo_AddCarrito.Text = notebook?.Equipo;
-            #endregion
-
-            #region Quitar CellClick para quitar del carrito
-            txtEquipo_RemoveCarrito.Text = notebook?.Equipo;
-            txtCarrito_RemoveCarrito.Text = notebook?.IdCarrito.HasValue == true ? notebooksCN.ObtenerCarritoPorID(notebook.IdCarrito.Value)?.EquipoCarrito : "Sin Carrito";
-            #endregion
         }
 
         //ActualizarDataGrid();
@@ -476,36 +461,7 @@ namespace CapaPresentacion
             var Notebook = new FormCRUDNotebook(notebooksCN, MostrarNotebooks, CargarGrafico, usuarioActual);
             Notebook.ShowDialog();
         }
-        private void btnAgragarAlCarrito_Click(object sender, EventArgs e)
-        {
-            Carritos? carrito = carritosCN.ObtenerCarritoPorEquipo(txtCarrito_AddCarrito.Text);
-            int posicion = Convert.ToInt32(txtPosicion.Text);
 
-            if (carrito == null)
-            {
-                MessageBox.Show("El carrito no existe.");
-                return;
-            }
-
-            carritosCN.AddNotebook(carrito.IdCarrito, posicion, IdActual, usuarioActual.IdUsuario);
-            ActualizarDataGrid(0);
-        }
-
-        private void btnRemoveCarrito_Click(object sender, EventArgs e)
-        {
-            Carritos? carrito = carritosCN.ObtenerCarritoPorEquipo(txtCarrito_RemoveCarrito.Text);
-            if (carrito == null)
-            {
-                MessageBox.Show("El carrito no existe.");
-                return;
-            }
-
-            int idUbicacion = cmbUbicacion_RemoveCarrito.SelectedValue != null ? (int)cmbUbicacion_RemoveCarrito.SelectedValue : 0;
-
-            carritosCN.RemoveNotebook(carrito.IdCarrito, IdActual, usuarioActual.IdUsuario, idUbicacion);
-
-            ActualizarDataGrid(0);
-        }
 
         #region GRAFICOS
         private void CargarGrafico()
@@ -600,7 +556,7 @@ namespace CapaPresentacion
             {
                 Values = values,
                 DataLabelsPaint = new SolidColorPaint(new SKColor(60, 60, 60)),
-                DataLabelsSize = 15,
+                DataLabelsSize = 25,
                 MaxBarWidth = 18,
                 Padding = 3,
                 Stroke = null,
@@ -695,5 +651,6 @@ namespace CapaPresentacion
             }
             catch { }
         }
+
     }
 }

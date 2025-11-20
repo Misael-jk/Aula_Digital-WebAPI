@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS View_InventarioDTO;
 CREATE VIEW View_InventarioDTO AS 
 SELECT 
     v.subtipo as 'Equipo',
-    m.modelo,
+    IFNULL(m.modelo, 'Sin Modelo') as Modelo,
     COUNT(e.idElemento) AS CantidadTotal,
     SUM(CASE WHEN em.estadoMantenimiento = 'Disponible' THEN 1 ELSE 0 END) AS 'CantidadDisponible',
 
@@ -19,7 +19,7 @@ SELECT
     ) AS 'FechaCambio',
 
     -- Última observación del subtipo
-    (SELECT hc2.descripcion
+    (SELECT ifnull(hc2.descripcion, 'Sin Descripcion')
      FROM HistorialElemento he2
      JOIN HistorialCambio hc2 ON he2.idHistorialCambio = hc2.idHistorialCambio
      WHERE he2.idElemento IN (
@@ -32,7 +32,7 @@ SELECT
     ) AS 'Observacion',
 
     -- Ultimo Motivo del usuario
-    (select hc4.motivo
+    (select ifnull(hc4.motivo, 'Sin Motivo')
      from HistorialElemento he4
      join HistorialCambio hc4 ON he4.idHistorialCambio = hc4.idHistorialCambio
      where he4.idElemento in(
@@ -45,7 +45,7 @@ SELECT
      ) as 'Motivo',
 
     -- Último usuario que hizo el cambio
-    (SELECT u.usuario
+    (SELECT concat(u.nombre, ' ', u.apellido)
      FROM HistorialElemento he3
      JOIN HistorialCambio hc3 ON he3.idHistorialCambio = hc3.idHistorialCambio
      JOIN Usuarios u ON hc3.idUsuario = u.idUsuario
@@ -55,6 +55,7 @@ SELECT
          WHERE e3.idVariante = e.idVariante)
      ORDER BY hc3.fechaCambio DESC
      LIMIT 1) AS 'Usuario'
+
 FROM Elementos e
 JOIN Modelo m using (idModelo)
 JOIN VariantesElemento v ON e.idVariante = v.idVariante
