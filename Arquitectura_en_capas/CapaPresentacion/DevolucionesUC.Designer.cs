@@ -28,18 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DevolucionesUC));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DevolucionesUC));
@@ -53,18 +58,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
@@ -75,19 +68,16 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            txtElementosTotal = new Guna.UI2.WinForms.Guna2TextBox();
-            label4 = new Label();
-            txtCurso = new Guna.UI2.WinForms.Guna2TextBox();
-            label3 = new Label();
-            txtEncargado = new Guna.UI2.WinForms.Guna2TextBox();
-            label2 = new Label();
-            txtFecha = new Guna.UI2.WinForms.Guna2TextBox();
-            lblNroSerie = new Label();
-            txtDocente = new Guna.UI2.WinForms.Guna2TextBox();
-            lblEquipo = new Label();
+            dgvPrestamoDetalle = new Guna.UI2.WinForms.Guna2DataGridView();
             pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
             lblPrestamoTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
+            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            label1 = new Label();
+            btnDevolverCarro = new Guna.UI2.WinForms.Guna2Button();
+            btnDevolverTodos = new Guna.UI2.WinForms.Guna2Button();
+            btnMarcarDevuelto = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dgvPrestamoDetalle = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -118,9 +108,8 @@
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel1.SuspendLayout();
-            pnlPresentacionNotebook.SuspendLayout();
-            guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPrestamoDetalle).BeginInit();
+            pnlPresentacionNotebook.SuspendLayout();
             pnlElementosADevolver.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvElementosPorConfirmacion).BeginInit();
             guna2Panel4.SuspendLayout();
@@ -131,24 +120,15 @@
             // 
             guna2Panel1.BackColor = Color.Transparent;
             guna2Panel1.BorderRadius = 15;
-            guna2Panel1.Controls.Add(txtElementosTotal);
-            guna2Panel1.Controls.Add(label4);
-            guna2Panel1.Controls.Add(txtCurso);
-            guna2Panel1.Controls.Add(label3);
-            guna2Panel1.Controls.Add(txtEncargado);
-            guna2Panel1.Controls.Add(label2);
-            guna2Panel1.Controls.Add(txtFecha);
-            guna2Panel1.Controls.Add(lblNroSerie);
-            guna2Panel1.Controls.Add(txtDocente);
-            guna2Panel1.Controls.Add(lblEquipo);
-            customizableEdges11.TopLeft = false;
-            customizableEdges11.TopRight = false;
-            guna2Panel1.CustomizableEdges = customizableEdges11;
+            guna2Panel1.Controls.Add(dgvPrestamoDetalle);
+            customizableEdges1.TopLeft = false;
+            customizableEdges1.TopRight = false;
+            guna2Panel1.CustomizableEdges = customizableEdges1;
             guna2Panel1.FillColor = SystemColors.ButtonHighlight;
             guna2Panel1.Location = new Point(15, 57);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2Panel1.Size = new Size(1018, 92);
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Panel1.Size = new Size(1018, 628);
             guna2Panel1.TabIndex = 57;
             // 
             // txtElementosTotal
@@ -472,12 +452,15 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvPrestamoDetalle.DefaultCellStyle = dataGridViewCellStyle3;
             dgvPrestamoDetalle.GridColor = Color.Gainsboro;
+            dgvPrestamoDetalle.Location = new Point(13, 283);
             dgvPrestamoDetalle.Location = new Point(13, 60);
             dgvPrestamoDetalle.MultiSelect = false;
             dgvPrestamoDetalle.Name = "dgvPrestamoDetalle";
             dgvPrestamoDetalle.RowHeadersVisible = false;
             dgvPrestamoDetalle.RowTemplate.Height = 35;
             dgvPrestamoDetalle.ScrollBars = ScrollBars.Vertical;
+            dgvPrestamoDetalle.Size = new Size(985, 305);
+            dgvPrestamoDetalle.TabIndex = 75;
             dgvPrestamoDetalle.Size = new Size(991, 249);
             dgvPrestamoDetalle.TabIndex = 123;
             dgvPrestamoDetalle.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
@@ -501,6 +484,95 @@
             dgvPrestamoDetalle.ThemeStyle.RowsStyle.Height = 35;
             dgvPrestamoDetalle.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dgvPrestamoDetalle.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dgvPrestamoDetalle.CellClick += dgvPrestamoDetalle_CellClick;
+            // 
+            // pnlPresentacionNotebook
+            // 
+            pnlPresentacionNotebook.BackColor = Color.Transparent;
+            pnlPresentacionNotebook.BorderRadius = 15;
+            pnlPresentacionNotebook.Controls.Add(lblPrestamoTitulo);
+            pnlPresentacionNotebook.Controls.Add(btnVolver);
+            pnlPresentacionNotebook.CustomizableEdges = customizableEdges4;
+            pnlPresentacionNotebook.FillColor = Color.FromArgb(105, 80, 165);
+            pnlPresentacionNotebook.Location = new Point(15, 12);
+            pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
+            pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            pnlPresentacionNotebook.Size = new Size(1018, 65);
+            pnlPresentacionNotebook.TabIndex = 58;
+            // 
+            // lblPrestamoTitulo
+            // 
+            lblPrestamoTitulo.BackColor = Color.Transparent;
+            lblPrestamoTitulo.Font = new Font("Segoe UI Semibold", 19F);
+            lblPrestamoTitulo.ForeColor = SystemColors.ButtonFace;
+            lblPrestamoTitulo.Location = new Point(396, 2);
+            lblPrestamoTitulo.Name = "lblPrestamoTitulo";
+            lblPrestamoTitulo.Size = new Size(226, 37);
+            lblPrestamoTitulo.TabIndex = 8;
+            lblPrestamoTitulo.Text = "<b>Gestionar prestamo</b>";
+            lblPrestamoTitulo.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // btnVolver
+            // 
+            btnVolver.DisabledState.BorderColor = Color.DarkGray;
+            btnVolver.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnVolver.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnVolver.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVolver.FillColor = Color.Transparent;
+            btnVolver.Font = new Font("Segoe UI", 9F);
+            btnVolver.ForeColor = Color.White;
+            btnVolver.Image = (Image)resources.GetObject("btnVolver.Image");
+            btnVolver.Location = new Point(13, 7);
+            btnVolver.Name = "btnVolver";
+            btnVolver.PressedColor = Color.Indigo;
+            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnVolver.Size = new Size(32, 32);
+            btnVolver.TabIndex = 5;
+            btnVolver.Click += btnVolver_Click;
+            // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI Semibold", 16F);
+            guna2HtmlLabel4.ForeColor = Color.FromArgb(105, 80, 165);
+            guna2HtmlLabel4.Location = new Point(176, 70);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(203, 32);
+            guna2HtmlLabel4.TabIndex = 78;
+            guna2HtmlLabel4.Text = "<b>Elementos prestados</b>";
+            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleLeft;
+            // guna2TextBox1
+            // 
+            guna2TextBox1.Animated = true;
+            guna2TextBox1.BorderRadius = 10;
+            guna2TextBox1.Cursor = Cursors.IBeam;
+            guna2TextBox1.CustomizableEdges = customizableEdges16;
+            guna2TextBox1.DefaultText = "";
+            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.Enabled = false;
+            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(105, 80, 165);
+            guna2TextBox1.FocusedState.FillColor = Color.White;
+            guna2TextBox1.FocusedState.ForeColor = Color.Black;
+            guna2TextBox1.Font = new Font("Segoe UI", 10F);
+            guna2TextBox1.ForeColor = Color.Black;
+            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
+            guna2TextBox1.HoverState.FillColor = Color.FromArgb(248, 246, 252);
+            guna2TextBox1.Location = new Point(14, 366);
+            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
+            guna2TextBox1.Name = "guna2TextBox1";
+            guna2TextBox1.PlaceholderForeColor = Color.Gray;
+            guna2TextBox1.PlaceholderText = "Encargado";
+            guna2TextBox1.SelectedText = "";
+            guna2TextBox1.ShadowDecoration.BorderRadius = 10;
+            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2TextBox1.ShadowDecoration.Depth = 5;
+            guna2TextBox1.Size = new Size(447, 53);
+            guna2TextBox1.TabIndex = 119;
+            guna2TextBox1.TextOffset = new Point(5, 0);
             dgvPrestamoDetalle.CellClick += dgvPrestamoDetalle_CellClick_1;
             // 
             // cmbListadoDetalle
@@ -540,7 +612,7 @@
             btnDevolverCarro.BackColor = Color.Transparent;
             btnDevolverCarro.BorderRadius = 8;
             btnDevolverCarro.Cursor = Cursors.Hand;
-            btnDevolverCarro.CustomizableEdges = customizableEdges18;
+            btnDevolverCarro.CustomizableEdges = customizableEdges6;
             btnDevolverCarro.DisabledState.BorderColor = Color.DarkGray;
             btnDevolverCarro.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDevolverCarro.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -551,11 +623,11 @@
             btnDevolverCarro.ForeColor = Color.Firebrick;
             btnDevolverCarro.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnDevolverCarro.HoverState.ForeColor = Color.White;
-            btnDevolverCarro.Location = new Point(417, 324);
+            btnDevolverCarro.Location = new Point(227, 11);
             btnDevolverCarro.Name = "btnDevolverCarro";
             btnDevolverCarro.PressedColor = Color.FromArgb(255, 170, 20);
             btnDevolverCarro.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnDevolverCarro.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            btnDevolverCarro.ShadowDecoration.CustomizableEdges = customizableEdges7;
             btnDevolverCarro.ShadowDecoration.Enabled = true;
             btnDevolverCarro.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnDevolverCarro.Size = new Size(175, 25);
@@ -568,7 +640,7 @@
             btnDevolverTodos.BackColor = Color.Transparent;
             btnDevolverTodos.BorderRadius = 8;
             btnDevolverTodos.Cursor = Cursors.Hand;
-            btnDevolverTodos.CustomizableEdges = customizableEdges20;
+            btnDevolverTodos.CustomizableEdges = customizableEdges8;
             btnDevolverTodos.DisabledState.BorderColor = Color.DarkGray;
             btnDevolverTodos.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDevolverTodos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -578,11 +650,11 @@
             btnDevolverTodos.ForeColor = Color.Firebrick;
             btnDevolverTodos.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnDevolverTodos.HoverState.ForeColor = Color.White;
-            btnDevolverTodos.Location = new Point(14, 324);
+            btnDevolverTodos.Location = new Point(0, 0);
             btnDevolverTodos.Name = "btnDevolverTodos";
             btnDevolverTodos.PressedColor = Color.FromArgb(255, 170, 20);
             btnDevolverTodos.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnDevolverTodos.ShadowDecoration.CustomizableEdges = customizableEdges21;
+            btnDevolverTodos.ShadowDecoration.CustomizableEdges = customizableEdges9;
             btnDevolverTodos.ShadowDecoration.Enabled = true;
             btnDevolverTodos.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnDevolverTodos.Size = new Size(175, 25);
@@ -595,7 +667,7 @@
             btnMarcarDevuelto.BackColor = Color.Transparent;
             btnMarcarDevuelto.BorderRadius = 8;
             btnMarcarDevuelto.Cursor = Cursors.Hand;
-            btnMarcarDevuelto.CustomizableEdges = customizableEdges22;
+            btnMarcarDevuelto.CustomizableEdges = customizableEdges10;
             btnMarcarDevuelto.DisabledState.BorderColor = Color.DarkGray;
             btnMarcarDevuelto.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMarcarDevuelto.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -606,11 +678,11 @@
             btnMarcarDevuelto.ForeColor = Color.Firebrick;
             btnMarcarDevuelto.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnMarcarDevuelto.HoverState.ForeColor = Color.White;
-            btnMarcarDevuelto.Location = new Point(826, 324);
+            btnMarcarDevuelto.Location = new Point(684, 11);
             btnMarcarDevuelto.Name = "btnMarcarDevuelto";
             btnMarcarDevuelto.PressedColor = Color.FromArgb(255, 170, 20);
             btnMarcarDevuelto.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnMarcarDevuelto.ShadowDecoration.CustomizableEdges = customizableEdges23;
+            btnMarcarDevuelto.ShadowDecoration.CustomizableEdges = customizableEdges11;
             btnMarcarDevuelto.ShadowDecoration.Enabled = true;
             btnMarcarDevuelto.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnMarcarDevuelto.Size = new Size(175, 25);
@@ -703,7 +775,7 @@
             btnConfirmarDevolucion.BackColor = Color.Transparent;
             btnConfirmarDevolucion.BorderRadius = 8;
             btnConfirmarDevolucion.Cursor = Cursors.Hand;
-            btnConfirmarDevolucion.CustomizableEdges = customizableEdges26;
+            btnConfirmarDevolucion.CustomizableEdges = customizableEdges12;
             btnConfirmarDevolucion.DisabledState.BorderColor = Color.DarkGray;
             btnConfirmarDevolucion.DisabledState.CustomBorderColor = Color.DarkGray;
             btnConfirmarDevolucion.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -717,7 +789,7 @@
             btnConfirmarDevolucion.Name = "btnConfirmarDevolucion";
             btnConfirmarDevolucion.PressedColor = Color.FromArgb(255, 170, 20);
             btnConfirmarDevolucion.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnConfirmarDevolucion.ShadowDecoration.CustomizableEdges = customizableEdges27;
+            btnConfirmarDevolucion.ShadowDecoration.CustomizableEdges = customizableEdges13;
             btnConfirmarDevolucion.ShadowDecoration.Enabled = true;
             btnConfirmarDevolucion.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnConfirmarDevolucion.Size = new Size(281, 25);
@@ -730,7 +802,7 @@
             btnCancelar.BackColor = Color.Transparent;
             btnCancelar.BorderRadius = 8;
             btnCancelar.Cursor = Cursors.Hand;
-            btnCancelar.CustomizableEdges = customizableEdges28;
+            btnCancelar.CustomizableEdges = customizableEdges14;
             btnCancelar.DisabledState.BorderColor = Color.DarkGray;
             btnCancelar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnCancelar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -744,7 +816,7 @@
             btnCancelar.Name = "btnCancelar";
             btnCancelar.PressedColor = Color.Brown;
             btnCancelar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnCancelar.ShadowDecoration.CustomizableEdges = customizableEdges29;
+            btnCancelar.ShadowDecoration.CustomizableEdges = customizableEdges15;
             btnCancelar.ShadowDecoration.Enabled = true;
             btnCancelar.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnCancelar.Size = new Size(184, 25);
@@ -757,7 +829,7 @@
             btnQuitarDevuelto.BackColor = Color.Transparent;
             btnQuitarDevuelto.BorderRadius = 8;
             btnQuitarDevuelto.Cursor = Cursors.Hand;
-            btnQuitarDevuelto.CustomizableEdges = customizableEdges30;
+            btnQuitarDevuelto.CustomizableEdges = customizableEdges16;
             btnQuitarDevuelto.DisabledState.BorderColor = Color.DarkGray;
             btnQuitarDevuelto.DisabledState.CustomBorderColor = Color.DarkGray;
             btnQuitarDevuelto.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -771,7 +843,7 @@
             btnQuitarDevuelto.Name = "btnQuitarDevuelto";
             btnQuitarDevuelto.PressedColor = Color.Brown;
             btnQuitarDevuelto.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnQuitarDevuelto.ShadowDecoration.CustomizableEdges = customizableEdges31;
+            btnQuitarDevuelto.ShadowDecoration.CustomizableEdges = customizableEdges17;
             btnQuitarDevuelto.ShadowDecoration.Enabled = true;
             btnQuitarDevuelto.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnQuitarDevuelto.Size = new Size(175, 25);
@@ -784,16 +856,21 @@
             pnlElementosADevolver.BorderColor = Color.FromArgb(105, 80, 165);
             pnlElementosADevolver.BorderRadius = 7;
             pnlElementosADevolver.BorderThickness = 1;
+            pnlElementosADevolver.Controls.Add(guna2HtmlLabel5);
+            pnlElementosADevolver.Controls.Add(guna2HtmlLabel4);
+            pnlElementosADevolver.Controls.Add(btnMarcarDevuelto);
+            pnlElementosADevolver.Controls.Add(btnDevolverCarro);
             pnlElementosADevolver.Controls.Add(guna2HtmlLabel2);
             pnlElementosADevolver.Controls.Add(btnConfirmarDevolucion);
+            pnlElementosADevolver.Controls.Add(btnDevolverTodos);
             pnlElementosADevolver.Controls.Add(btnCancelar);
             pnlElementosADevolver.Controls.Add(btnQuitarDevuelto);
             pnlElementosADevolver.Controls.Add(dgvElementosPorConfirmacion);
-            pnlElementosADevolver.CustomizableEdges = customizableEdges32;
+            pnlElementosADevolver.CustomizableEdges = customizableEdges18;
             pnlElementosADevolver.FillColor = SystemColors.ButtonHighlight;
-            pnlElementosADevolver.Location = new Point(15, 552);
+            pnlElementosADevolver.Location = new Point(15, 691);
             pnlElementosADevolver.Name = "pnlElementosADevolver";
-            pnlElementosADevolver.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            pnlElementosADevolver.ShadowDecoration.CustomizableEdges = customizableEdges19;
             pnlElementosADevolver.Size = new Size(1018, 429);
             pnlElementosADevolver.TabIndex = 77;
             // 
@@ -957,6 +1034,30 @@
             guna2Panel3.Size = new Size(1018, 65);
             guna2Panel3.TabIndex = 112;
             // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel1.ForeColor = SystemColors.ButtonFace;
+            guna2HtmlLabel1.Location = new Point(431, 2);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(157, 37);
+            guna2HtmlLabel1.TabIndex = 9;
+            guna2HtmlLabel1.Text = "<b>Devoluciones</b>";
+            guna2HtmlLabel1.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // guna2HtmlLabel3
+            // 
+            guna2HtmlLabel3.BackColor = Color.Transparent;
+            guna2HtmlLabel3.Font = new Font("Segoe UI Semibold", 19F);
+            guna2HtmlLabel3.ForeColor = SystemColors.ActiveCaptionText;
+            guna2HtmlLabel3.Location = new Point(163, -1);
+            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            guna2HtmlLabel3.Size = new Size(63, 37);
+            guna2HtmlLabel3.TabIndex = 77;
+            guna2HtmlLabel3.Text = "<b>Llevo</b>";
+            guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
             // DevolucionesUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -968,15 +1069,12 @@
             Controls.Add(pnlPresentacionNotebook);
             Controls.Add(pnlElementosADevolver);
             Name = "DevolucionesUC";
-            Size = new Size(1033, 1000);
+            Size = new Size(982, 949);
             Load += DevolucionesUC_Load;
             guna2Panel1.ResumeLayout(false);
-            guna2Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPrestamoDetalle).EndInit();
             pnlPresentacionNotebook.ResumeLayout(false);
             pnlPresentacionNotebook.PerformLayout();
-            guna2Panel2.ResumeLayout(false);
-            guna2Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPrestamoDetalle).EndInit();
             pnlElementosADevolver.ResumeLayout(false);
             pnlElementosADevolver.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvElementosPorConfirmacion).EndInit();
@@ -990,17 +1088,10 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Label label3;
-        private Guna.UI2.WinForms.Guna2TextBox txtEncargado;
-        private Label label2;
-        private Guna.UI2.WinForms.Guna2TextBox txtFecha;
-        private Label lblNroSerie;
-        private Guna.UI2.WinForms.Guna2TextBox txtDocente;
-        private Label lblEquipo;
         private Guna.UI2.WinForms.Guna2Panel pnlPresentacionNotebook;
         private Guna.UI2.WinForms.Guna2CircleButton btnVolver;
-        private Guna.UI2.WinForms.Guna2TextBox txtCurso;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPrestamoTitulo;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvPrestamoDetalle;
         private Guna.UI2.WinForms.Guna2TextBox txtElementosTotal;
         private Label label4;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;

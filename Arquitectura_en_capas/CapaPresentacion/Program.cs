@@ -15,23 +15,34 @@ namespace Sistema_de_notebooks
         [STAThread]
         static void Main()
         {
+
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             IConfiguration configuration = builder.Build();
-            string ConnectionString = configuration.GetConnectionString("Conexion");
+            string? ConnectionString = configuration.GetConnectionString("Conexion");
 
             IDbConnection dbConnection = new MySqlConnection(ConnectionString);
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+            FormPantallaCarga splash = new FormPantallaCarga();
+            splash.Show();
+
+            // Mantener el splash visible sin congelar la UI
+            while (splash.Visible)
+            {
+                Application.DoEvents();
+            }
+
             //if (dbConnection.State == ConnectionState.Closed)
             //{
             //    dbConnection.Open();
             //}
-                Application.Run(new LoginState(dbConnection));
+            Application.Run(new LoginState(dbConnection));
         }
     }
 }
