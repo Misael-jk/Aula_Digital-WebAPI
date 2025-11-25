@@ -223,4 +223,7 @@
         YII=
 </value>
   </data>
+  <data name="lblPresentacion.Text" xml:space="preserve">
+    <value>- En este modulo se podra visualizar a &lt;b&gt;todos los usuarios&lt;/b&gt; registrados en el sistema, donde se podra gestionarlos, pero solamente &lt;br&gt;los usuarios con el rol de administrador pueden realizar esta funcion</value>
+  </data>
 </root>
