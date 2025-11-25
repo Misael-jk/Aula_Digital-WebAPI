@@ -247,6 +247,14 @@ namespace CapaPresentacion
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
+            CargarDatosDelUsuarioActual();
+        }
+
+        public void CargarDatosDelUsuarioActual()
+        {
+
+            Usuarios? usuarios = usuariosCN.ObtenerID(userVerificado.IdUsuario);
+
             if (rolUserVerficado.Rol == "Administrador")
             {
                 btnMantenimiento.Visible = true;
@@ -258,11 +266,37 @@ namespace CapaPresentacion
                 BtnUsuario.Visible = false;
             }
 
-            lblUsuario.Text = userVerificado.Nombre + " " + userVerificado.Apellido;
+            if (usuarios?.FotoPerfil == null)
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.Perfil_default;
+            }
+
+            if (usuarios?.FotoPerfil == "fotoperfil1")
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil1;
+            }
+
+            if (usuarios?.FotoPerfil == "fotoperfil2")
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil2;
+            }
+
+            if (usuarios?.FotoPerfil == "fotoperfil3")
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil3;
+            }
+
+            if (usuarios?.FotoPerfil == "fotoperfil4")
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil4;
+            }
+
+            lblUsuario.Text = usuarios?.Nombre + " " + usuarios?.Apellido;
             lblRol.Text = rolUserVerficado.Rol;
 
             pnlContenedor.AutoScroll = true;
         }
+
 
         private void BtnCerrar1_Click(object sender, EventArgs e)
         {

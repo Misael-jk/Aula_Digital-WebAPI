@@ -1874,6 +1874,7 @@
         }
 
         #endregion
+
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button btnDeshabilitar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
