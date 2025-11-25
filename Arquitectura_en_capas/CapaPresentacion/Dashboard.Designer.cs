@@ -217,9 +217,11 @@
             // 
             // pnlGrafico
             // 
-            pnlGrafico.BackColor = Color.Transparent;
+            pnlGrafico.BackColor = SystemColors.ControlLightLight;
+            pnlGrafico.BorderColor = SystemColors.ControlLightLight;
             pnlGrafico.BorderRadius = 15;
             pnlGrafico.Controls.Add(guna2HtmlLabel4);
+            pnlGrafico.CustomBorderColor = SystemColors.ControlLightLight;
             pnlGrafico.CustomizableEdges = customizableEdges3;
             pnlGrafico.FillColor = SystemColors.ButtonHighlight;
             pnlGrafico.Location = new Point(20, 132);
@@ -227,6 +229,7 @@
             pnlGrafico.ShadowDecoration.Color = SystemColors.ActiveBorder;
             pnlGrafico.ShadowDecoration.CustomizableEdges = customizableEdges4;
             pnlGrafico.ShadowDecoration.Depth = 15;
+            pnlGrafico.ShadowDecoration.Enabled = true;
             pnlGrafico.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
             pnlGrafico.Size = new Size(796, 245);
             pnlGrafico.TabIndex = 14;
