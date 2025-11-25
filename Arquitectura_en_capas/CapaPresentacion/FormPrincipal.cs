@@ -310,10 +310,15 @@ namespace CapaPresentacion
 
         private void btnInfoUser_Click(object sender, EventArgs e)
         {
+            AbrirUsuarioGestion(userVerificado.IdUsuario);
+        }
+
+        public void AbrirUsuarioGestion(int idUsuarioSeleccionado)
+        {
             pnlGestionUsuario.Visible = true;
 
             if (usuarioGestion == null)
-                usuarioGestion = new UsuarioGestionuc(usuariosCN, usuariosBajasCN, userVerificado.IdUsuario, repoHistorialCambio);
+                usuarioGestion = new UsuarioGestionuc(usuariosCN, usuariosBajasCN, idUsuarioSeleccionado, repoHistorialCambio, userVerificado);
 
 
             if (!pnlGestionUsuario.Controls.Contains(usuarioGestion))
@@ -322,7 +327,7 @@ namespace CapaPresentacion
                 usuarioGestion.Dock = DockStyle.Fill;
             }
 
-            usuarioGestion.ActualizarUC(userVerificado.IdUsuario);
+            usuarioGestion.ActualizarUC(idUsuarioSeleccionado);
         }
 
         #endregion

@@ -19,6 +19,7 @@ namespace CapaPresentacion
         private readonly UsuariosBajasCN usuarioBajas;
         private int _idActual = 0;
         private readonly IRepoHistorialCambio repoHistorialCambio;
+        private Usuarios UsuarioActual;
 
         #region Datos actuales del usuario
         private string? _usuario = "";
@@ -34,13 +35,14 @@ namespace CapaPresentacion
         private string? PerfilCambio = "";
         private int? numeroFoto = 0;
 
-        public UsuarioGestionuc(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN, int usuarioSeleccionado, IRepoHistorialCambio repoHistorialCambio)
+        public UsuarioGestionuc(UsuariosCN usuariosCN, UsuariosBajasCN usuariosBajasCN, int usuarioSeleccionado, IRepoHistorialCambio repoHistorialCambio, Usuarios userActual)
         {
             InitializeComponent();
             this.usuarioCN = usuariosCN;
             this.usuarioBajas = usuariosBajasCN;
             this._idActual = usuarioSeleccionado;
             this.repoHistorialCambio = repoHistorialCambio;
+            this.UsuarioActual = userActual;
         }
 
         private void UsuarioGestion_Load(object sender, EventArgs e)
@@ -50,6 +52,8 @@ namespace CapaPresentacion
 
         public void ActualizarUC(int idUsuario)
         {
+            _idActual = idUsuario;
+
             Usuarios? usuarios = usuarioCN.ObtenerID(idUsuario);
 
             _usuario = usuarios?.Usuario;
@@ -68,6 +72,8 @@ namespace CapaPresentacion
             txtContraseña.Text = _contraseña;
             lblRol.Tag = _idRol;
 
+            VerificarHabilitado();
+
             if (_rutaFoto == null)
             {
                 PerfilCambio = null;
@@ -81,7 +87,7 @@ namespace CapaPresentacion
                 numeroFoto = 1;
                 ptbPerfil.Image = Properties.Resources.fotoperfil1;
             }
-            
+
             if (_rutaFoto == "fotoperfil2")
             {
                 PerfilCambio = "fotoperfil2";
@@ -106,6 +112,46 @@ namespace CapaPresentacion
             RenovarCantidadAcciones();
         }
 
+        private void VerificarHabilitado()
+        {
+            if (UsuarioActual.IdUsuario != _idActual)
+            {
+                if (_habilitado == true)
+                {
+                    btnDeshabilitar2.Visible = true;
+                    btnActualizar.Visible = true;
+                    btnRestablecerCambios.Visible = true;
+                    btnHabilitar.Visible = false;
+                    btnDeshabilitar.Visible = false;
+                    btnCancelar.Visible = false;
+                }
+                else
+                {
+                    btnDeshabilitar2.Visible = false;
+                    btnActualizar.Visible = false;
+                    btnRestablecerCambios.Visible = false;
+                    btnHabilitar.Visible = true;
+                    btnDeshabilitar.Visible = true;
+                    btnCancelar.Visible = true;
+
+                    txtUsuario.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtApellido.Enabled = false;
+                    txtEmail.Enabled = false;
+                    txtContraseña.Enabled = false;
+                }
+            }
+            else
+            {
+                btnDeshabilitar2.Visible = false;
+                btnActualizar.Visible = true;
+                btnRestablecerCambios.Visible = true;
+                btnHabilitar.Visible = false;
+                btnDeshabilitar.Visible = false;
+                btnCancelar.Visible = false;
+            }
+        }
+
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             Usuarios usuario = new Usuarios()
@@ -117,6 +163,7 @@ namespace CapaPresentacion
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
                 IdRol = Convert.ToInt32(lblRol.Tag),
+                Habilitado = true,
                 FotoPerfil = PerfilCambio,
             };
 
@@ -124,6 +171,8 @@ namespace CapaPresentacion
             HabilitarBotones(false, false);
             var form = (FormPrincipal)this.FindForm();
             form.CargarDatosDelUsuarioActual();
+
+            ActualizarUC(_idActual);
         }
 
         private void btnRestablecerCambios_Click(object sender, EventArgs e)
@@ -160,7 +209,7 @@ namespace CapaPresentacion
 
         private void VerificarCambios(object sender, EventArgs e)
         {
-            if (txtUsuario.Text != _usuario || txtNombre.Text != _Nombre || txtApellido.Text != _apellido || txtEmail.Text != _email || PerfilCambio != _rutaFoto)
+            if (txtUsuario.Text != (_usuario ?? "") || txtNombre.Text != (_Nombre ?? "") || txtApellido.Text != (_apellido ?? "") || txtEmail.Text != (_email ?? "") || PerfilCambio != (_rutaFoto ?? ""))
             {
                 HabilitarBotones(true, true);
             }
@@ -196,7 +245,7 @@ namespace CapaPresentacion
         {
             numeroFoto++;
 
-            if(numeroFoto > 4)
+            if (numeroFoto > 4)
             {
                 numeroFoto = 1;
             }
@@ -223,6 +272,24 @@ namespace CapaPresentacion
             }
 
             VerificarCambios(sender, e);
+        }
+
+        private void btnDeshabilitar2_Click(object sender, EventArgs e)
+        {
+            btnActualizar.Visible = false;
+            btnRestablecerCambios.Visible = false;
+            btnDeshabilitar.Visible = true;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            ActualizarUC(_idActual);
+        }
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            btnCancelar.Enabled = true;
+            btnDeshabilitar.Enabled = true;
         }
     }
 }
