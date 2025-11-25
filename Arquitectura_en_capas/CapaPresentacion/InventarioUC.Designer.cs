@@ -41,6 +41,8 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
@@ -54,10 +56,14 @@
             lblRecursoElegido = new Guna.UI2.WinForms.Guna2HtmlLabel();
             panel2 = new Panel();
             panel1 = new Panel();
+            guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            pictureBox1 = new PictureBox();
             guna2Panel5.SuspendLayout();
             guna2Panel6.SuspendLayout();
             pnlDataGridElementos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInventario).BeginInit();
+            guna2Panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // guna2Panel5
@@ -69,7 +75,7 @@
             guna2Panel5.Location = new Point(16, 54);
             guna2Panel5.Name = "guna2Panel5";
             guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel5.Size = new Size(605, 51);
+            guna2Panel5.Size = new Size(629, 51);
             guna2Panel5.TabIndex = 59;
             // 
             // guna2HtmlLabel5
@@ -96,7 +102,7 @@
             guna2Panel6.Location = new Point(16, 12);
             guna2Panel6.Name = "guna2Panel6";
             guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Panel6.Size = new Size(605, 41);
+            guna2Panel6.Size = new Size(629, 41);
             guna2Panel6.TabIndex = 58;
             // 
             // guna2HtmlLabel6
@@ -311,10 +317,34 @@
             panel1.Size = new Size(1038, 1);
             panel1.TabIndex = 1;
             // 
+            // guna2Panel4
+            // 
+            guna2Panel4.BackColor = Color.Transparent;
+            guna2Panel4.BorderRadius = 15;
+            guna2Panel4.Controls.Add(pictureBox1);
+            guna2Panel4.CustomizableEdges = customizableEdges11;
+            guna2Panel4.FillColor = SystemColors.ControlLightLight;
+            guna2Panel4.Location = new Point(673, 12);
+            guna2Panel4.Name = "guna2Panel4";
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            guna2Panel4.Size = new Size(422, 93);
+            guna2Panel4.TabIndex = 63;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Espacio_Digital_Logo_removebg_preview;
+            pictureBox1.Location = new Point(10, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(400, 86);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
             // InventarioUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(guna2Panel4);
             Controls.Add(pnlDataGridElementos);
             Controls.Add(guna2Panel5);
             Controls.Add(guna2Panel6);
@@ -328,6 +358,8 @@
             pnlDataGridElementos.ResumeLayout(false);
             pnlDataGridElementos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInventario).EndInit();
+            guna2Panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -345,5 +377,7 @@
         private Label label5;
         private Guna.UI2.WinForms.Guna2TextBox txtDescripcion;
         private Label lblDescripcion;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private PictureBox pictureBox1;
     }
 }

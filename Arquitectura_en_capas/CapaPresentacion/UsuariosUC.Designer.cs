@@ -63,6 +63,8 @@ namespace CapaPresentacion
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             cbxMostraPassword = new Guna2CheckBox();
             btnActualizar = new Guna2Button();
             guna2Panel1 = new Guna2Panel();
@@ -94,6 +96,9 @@ namespace CapaPresentacion
             lblPresentacion = new Guna2HtmlLabel();
             pnlPresentacionNotebook = new Guna2Panel();
             lblNotebooksTitulo = new Guna2HtmlLabel();
+            guna2Panel4 = new Guna2Panel();
+            pictureBox1 = new PictureBox();
+            guna2HtmlLabel4 = new Guna2HtmlLabel();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbPerfil).BeginInit();
             guna2GroupBox2.SuspendLayout();
@@ -102,6 +107,8 @@ namespace CapaPresentacion
             ((System.ComponentModel.ISupportInitialize)dtgUsuarios).BeginInit();
             guna2Panel3.SuspendLayout();
             pnlPresentacionNotebook.SuspendLayout();
+            guna2Panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // cbxMostraPassword
@@ -111,7 +118,7 @@ namespace CapaPresentacion
             cbxMostraPassword.CheckedState.BorderRadius = 0;
             cbxMostraPassword.CheckedState.BorderThickness = 0;
             cbxMostraPassword.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            cbxMostraPassword.Location = new Point(397, 23);
+            cbxMostraPassword.Location = new Point(926, 526);
             cbxMostraPassword.Name = "cbxMostraPassword";
             cbxMostraPassword.Size = new Size(135, 19);
             cbxMostraPassword.TabIndex = 2;
@@ -289,10 +296,10 @@ namespace CapaPresentacion
             btnAgregarUsuario.Image = (Image)resources.GetObject("btnAgregarUsuario.Image");
             btnAgregarUsuario.ImageAlign = HorizontalAlignment.Left;
             btnAgregarUsuario.ImageSize = new Size(16, 16);
-            btnAgregarUsuario.Location = new Point(127, 11);
+            btnAgregarUsuario.Location = new Point(455, 520);
             btnAgregarUsuario.Name = "btnAgregarUsuario";
             btnAgregarUsuario.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            btnAgregarUsuario.Size = new Size(185, 36);
+            btnAgregarUsuario.Size = new Size(218, 30);
             btnAgregarUsuario.TabIndex = 47;
             btnAgregarUsuario.Text = "Agregar Nuevo Usuario";
             btnAgregarUsuario.Click += btnAgregarUsuario_Click;
@@ -309,7 +316,7 @@ namespace CapaPresentacion
             cmbHabilitado.Font = new Font("Segoe UI", 10F);
             cmbHabilitado.ForeColor = Color.FromArgb(68, 88, 112);
             cmbHabilitado.ItemHeight = 30;
-            cmbHabilitado.Location = new Point(24, 0);
+            cmbHabilitado.Location = new Point(847, 26);
             cmbHabilitado.Name = "cmbHabilitado";
             cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges17;
             cmbHabilitado.Size = new Size(214, 36);
@@ -320,10 +327,8 @@ namespace CapaPresentacion
             // 
             guna2GroupBox2.BorderColor = Color.Transparent;
             guna2GroupBox2.Controls.Add(btnDeshabilitar);
-            guna2GroupBox2.Controls.Add(cmbHabilitado);
             guna2GroupBox2.Controls.Add(lblUltimoAporte);
             guna2GroupBox2.Controls.Add(btnRestablecerCambios);
-            guna2GroupBox2.Controls.Add(btnAgregarUsuario);
             guna2GroupBox2.Controls.Add(ptbEstado);
             guna2GroupBox2.Controls.Add(lblHabilitado);
             guna2GroupBox2.Controls.Add(lblMail);
@@ -342,10 +347,10 @@ namespace CapaPresentacion
             guna2GroupBox2.CustomizableEdges = customizableEdges22;
             guna2GroupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox2.ForeColor = Color.GhostWhite;
-            guna2GroupBox2.Location = new Point(910, 676);
+            guna2GroupBox2.Location = new Point(34, 687);
             guna2GroupBox2.Name = "guna2GroupBox2";
             guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges23;
-            guna2GroupBox2.Size = new Size(357, 75);
+            guna2GroupBox2.Size = new Size(128, 56);
             guna2GroupBox2.TabIndex = 45;
             guna2GroupBox2.Text = "- Datos del Usuario seleccionado -";
             guna2GroupBox2.TextAlign = HorizontalAlignment.Center;
@@ -496,8 +501,11 @@ namespace CapaPresentacion
             // 
             pnlDataGridElementos.BackColor = Color.Transparent;
             pnlDataGridElementos.BorderRadius = 15;
+            pnlDataGridElementos.Controls.Add(guna2HtmlLabel4);
             pnlDataGridElementos.Controls.Add(dtgUsuarios);
+            pnlDataGridElementos.Controls.Add(cmbHabilitado);
             pnlDataGridElementos.Controls.Add(lblRecursoElegido);
+            pnlDataGridElementos.Controls.Add(btnAgregarUsuario);
             pnlDataGridElementos.Controls.Add(panel2);
             pnlDataGridElementos.Controls.Add(cbxMostraPassword);
             pnlDataGridElementos.Controls.Add(panel1);
@@ -535,14 +543,14 @@ namespace CapaPresentacion
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dtgUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
             dtgUsuarios.GridColor = Color.Gainsboro;
-            dtgUsuarios.Location = new Point(21, 70);
+            dtgUsuarios.Location = new Point(21, 77);
             dtgUsuarios.MultiSelect = false;
             dtgUsuarios.Name = "dtgUsuarios";
             dtgUsuarios.ReadOnly = true;
             dtgUsuarios.RowHeadersVisible = false;
             dtgUsuarios.RowTemplate.Height = 35;
             dtgUsuarios.ScrollBars = ScrollBars.Vertical;
-            dtgUsuarios.Size = new Size(1049, 430);
+            dtgUsuarios.Size = new Size(1049, 423);
             dtgUsuarios.TabIndex = 64;
             dtgUsuarios.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dtgUsuarios.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -571,11 +579,11 @@ namespace CapaPresentacion
             // lblRecursoElegido
             // 
             lblRecursoElegido.BackColor = Color.Transparent;
-            lblRecursoElegido.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRecursoElegido.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRecursoElegido.ForeColor = Color.PaleVioletRed;
             lblRecursoElegido.Location = new Point(21, 12);
             lblRecursoElegido.Name = "lblRecursoElegido";
-            lblRecursoElegido.Size = new Size(302, 39);
+            lblRecursoElegido.Size = new Size(324, 42);
             lblRecursoElegido.TabIndex = 61;
             lblRecursoElegido.Text = "<b>Gestion de los Usuarios</b>";
             lblRecursoElegido.TextAlignment = ContentAlignment.MiddleLeft;
@@ -583,7 +591,7 @@ namespace CapaPresentacion
             // panel2
             // 
             panel2.BackColor = Color.LightGray;
-            panel2.Location = new Point(21, 57);
+            panel2.Location = new Point(21, 68);
             panel2.Name = "panel2";
             panel2.Size = new Size(1040, 1);
             panel2.TabIndex = 2;
@@ -591,7 +599,7 @@ namespace CapaPresentacion
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
-            panel1.Location = new Point(21, 513);
+            panel1.Location = new Point(21, 510);
             panel1.Name = "panel1";
             panel1.Size = new Size(1040, 1);
             panel1.TabIndex = 1;
@@ -605,7 +613,7 @@ namespace CapaPresentacion
             guna2Panel3.Location = new Point(13, 59);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges27;
-            guna2Panel3.Size = new Size(687, 51);
+            guna2Panel3.Size = new Size(624, 51);
             guna2Panel3.TabIndex = 65;
             // 
             // lblPresentacion
@@ -615,7 +623,7 @@ namespace CapaPresentacion
             lblPresentacion.ForeColor = Color.FromArgb(45, 45, 48);
             lblPresentacion.Location = new Point(10, 10);
             lblPresentacion.Name = "lblPresentacion";
-            lblPresentacion.Size = new Size(665, 32);
+            lblPresentacion.Size = new Size(582, 32);
             lblPresentacion.TabIndex = 2;
             lblPresentacion.Text = resources.GetString("lblPresentacion.Text");
             lblPresentacion.TextAlignment = ContentAlignment.MiddleLeft;
@@ -630,7 +638,7 @@ namespace CapaPresentacion
             pnlPresentacionNotebook.Location = new Point(13, 12);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges29;
-            pnlPresentacionNotebook.Size = new Size(687, 65);
+            pnlPresentacionNotebook.Size = new Size(624, 65);
             pnlPresentacionNotebook.TabIndex = 64;
             // 
             // lblNotebooksTitulo
@@ -640,20 +648,54 @@ namespace CapaPresentacion
             lblNotebooksTitulo.ForeColor = SystemColors.ButtonFace;
             lblNotebooksTitulo.Location = new Point(9, 4);
             lblNotebooksTitulo.Name = "lblNotebooksTitulo";
-            lblNotebooksTitulo.Size = new Size(299, 37);
+            lblNotebooksTitulo.Size = new Size(220, 37);
             lblNotebooksTitulo.TabIndex = 2;
-            lblNotebooksTitulo.Text = "<b>Prestamos y devoluciones</b>";
+            lblNotebooksTitulo.Text = "<b>Gestion de Usuario</b>";
             lblNotebooksTitulo.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // guna2Panel4
+            // 
+            guna2Panel4.BackColor = Color.Transparent;
+            guna2Panel4.BorderRadius = 15;
+            guna2Panel4.Controls.Add(pictureBox1);
+            guna2Panel4.CustomizableEdges = customizableEdges30;
+            guna2Panel4.FillColor = SystemColors.ControlLightLight;
+            guna2Panel4.Location = new Point(675, 12);
+            guna2Panel4.Name = "guna2Panel4";
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges31;
+            guna2Panel4.Size = new Size(422, 98);
+            guna2Panel4.TabIndex = 66;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Espacio_Digital_Logo_removebg_preview;
+            pictureBox1.Location = new Point(8, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(400, 92);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI Variable Display Semib", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel4.Location = new Point(849, 5);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(73, 19);
+            guna2HtmlLabel4.TabIndex = 65;
+            guna2HtmlLabel4.Text = "Habilitados:";
             // 
             // UsuariosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
+            Controls.Add(guna2Panel4);
+            Controls.Add(guna2GroupBox2);
             Controls.Add(guna2Panel3);
             Controls.Add(pnlPresentacionNotebook);
             Controls.Add(pnlDataGridElementos);
-            Controls.Add(guna2GroupBox2);
             Name = "UsuariosUC";
             Size = new Size(1113, 698);
             Load += UsuariosUC_Load_1;
@@ -669,6 +711,8 @@ namespace CapaPresentacion
             guna2Panel3.PerformLayout();
             pnlPresentacionNotebook.ResumeLayout(false);
             pnlPresentacionNotebook.PerformLayout();
+            guna2Panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -704,5 +748,8 @@ namespace CapaPresentacion
         private Guna2HtmlLabel lblPresentacion;
         private Guna2Panel pnlPresentacionNotebook;
         private Guna2HtmlLabel lblNotebooksTitulo;
+        private Guna2Panel guna2Panel4;
+        private PictureBox pictureBox1;
+        private Guna2HtmlLabel guna2HtmlLabel4;
     }
 }

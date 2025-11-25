@@ -52,7 +52,7 @@ namespace CapaPresentacion
         private void ElementosUC_Load(object sender, EventArgs e)
         {
             this.AutoScroll = true;
-            this.AutoScrollMinSize = new Size(0, 1120);
+            this.AutoScrollMinSize = new Size(0, 1157);
 
 
             // AutoCompletes

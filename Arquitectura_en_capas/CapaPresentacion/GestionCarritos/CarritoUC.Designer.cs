@@ -55,6 +55,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlDataGridElementos = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -77,10 +79,14 @@
             lblElementosTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             lblPresentacion = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            pictureBox1 = new PictureBox();
             pnlDataGridElementos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCarritos_M).BeginInit();
             pnlPresentacionNotebook.SuspendLayout();
             guna2Panel3.SuspendLayout();
+            guna2Panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlDataGridElementos
@@ -505,7 +511,7 @@
             pnlPresentacionNotebook.Location = new Point(20, 9);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            pnlPresentacionNotebook.Size = new Size(616, 65);
+            pnlPresentacionNotebook.Size = new Size(631, 65);
             pnlPresentacionNotebook.TabIndex = 50;
             // 
             // lblElementosTitulo
@@ -529,7 +535,7 @@
             guna2Panel3.Location = new Point(20, 56);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2Panel3.Size = new Size(616, 51);
+            guna2Panel3.Size = new Size(631, 51);
             guna2Panel3.TabIndex = 51;
             // 
             // lblPresentacion
@@ -544,11 +550,35 @@
             lblPresentacion.Text = "- En esta sección se muestran <b>todos los elementos activos</b>, permitiendo visualizarlos y <b>gestionarlos</b> de manera <br>eficiente. ";
             lblPresentacion.TextAlignment = ContentAlignment.MiddleLeft;
             // 
+            // guna2Panel4
+            // 
+            guna2Panel4.BackColor = Color.Transparent;
+            guna2Panel4.BorderRadius = 15;
+            guna2Panel4.Controls.Add(pictureBox1);
+            guna2Panel4.CustomizableEdges = customizableEdges25;
+            guna2Panel4.FillColor = Color.YellowGreen;
+            guna2Panel4.Location = new Point(677, 9);
+            guna2Panel4.Name = "guna2Panel4";
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2Panel4.Size = new Size(422, 98);
+            guna2Panel4.TabIndex = 52;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Espacio_Digital_Logo_removebg_preview;
+            pictureBox1.Location = new Point(10, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(400, 91);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
             // CarritoUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
+            Controls.Add(guna2Panel4);
             Controls.Add(guna2Panel3);
             Controls.Add(pnlPresentacionNotebook);
             Controls.Add(pnlDataGridElementos);
@@ -562,6 +592,8 @@
             pnlPresentacionNotebook.PerformLayout();
             guna2Panel3.ResumeLayout(false);
             guna2Panel3.PerformLayout();
+            guna2Panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -589,5 +621,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPresentacion;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private PictureBox pictureBox1;
     }
 }

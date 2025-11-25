@@ -18,11 +18,8 @@ INSERT INTO Usuarios (usuario, pass, nombre, apellido, idRol, email, FotoPerfil,
 ('superadmin', 'root1234', 'Roberto', 'Fernandez', 1, 'roberto.fernandez@mail.com', NULL, TRUE),
 ('tecnico1', 'tecno99', 'Sofia', 'Martinez', 2, 'sofia.martinez@mail.com', NULL, TRUE),
 ('soporte', 'helpme2024', 'Pedro', 'Silva', 2, 'pedro.silva@mail.com', NULL, TRUE),
-('auditor', 'auditx1', 'Nicolas', 'Vega', 3, 'nicolas.vega@mail.com', NULL, TRUE),
-('visitante1', 'visit123', 'Julieta', 'Mendez', 3, 'julieta.mendez@mail.com', NULL, TRUE),
-('backupadmin', 'adminBK99', 'Facundo', 'Mollo', 1, 'facundo.ibarra@mail.com', NULL, TRUE),
-('encargado_lab', 'lab2024', 'Lorena', 'Castillo', 2, 'lorena.castillo@mail.com', NULL, TRUE),
-('nuevo_usuario', 'pass2025', 'Agustin', 'Rojas', 2, 'agustin.rojas@mail.com', NULL, TRUE);
+('auditor', 'auditx1', 'Nicolas', 'Vega', 3, 'nicolas.vega@mail.com', NULL, TRUE);
+
 
 -- ======================
 -- DOCENTES
@@ -261,16 +258,16 @@ INSERT INTO EstadosPrestamo (estadoPrestamo) VALUES
 INSERT INTO Prestamos (idUsuarioRecibio, idCurso, idDocente, idCarrito, idEstadoPrestamo, fechaPrestamo) VALUES
 (1, 1, 1, 1, 2, '2025-05-01 10:00:00'),
 (2, 2, 2, 2, 2, '2025-05-02 11:00:00'),
-(3, 3, 4, 1, 1, '2025-07-03 09:15:00'),   -- En Préstamo
+(3, 3, 4, 1, 1, '2025-07-03 09:15:00'),   
 (4, 4, 5, 2, 1, '2025-07-04 08:50:00'),
 (5, 5, 6, 3, 2, '2025-07-05 10:10:00'),   -- Devuelto
-(6, 6, 7, 4, 2, '2025-08-06 14:40:00'),
-(7, 1, 8, 5, 3, '2025-08-07 12:00:00'),   -- Cancelado
-(8, 2, 9, 1, 4, '2025-08-08 11:30:00'),   -- En parcial
-(9, 3, 10, 2, 1, '2025-08-09 09:20:00'),
-(10, 4, 11, 3, 1, '2025-09-10 10:45:00'),
-(11, 5, 12, 4, 2, '2025-01-11 13:10:00'),
-(12, 6, 13, 5, 1, '2025-03-12 15:25:00');
+(1, 6, 7, 4, 2, '2025-08-06 14:40:00'),
+(1, 1, 8, 5, 3, '2025-08-07 12:00:00'),   -- Cancelado
+(1, 2, 9, 1, 4, '2025-08-08 11:30:00'),   -- En parcial
+(1, 3, 10, 2, 1, '2025-08-09 09:20:00'),
+(1, 4, 11, 3, 1, '2025-09-10 10:45:00'),
+(1, 5, 12, 4, 2, '2025-01-11 13:10:00'),
+(1, 6, 13, 5, 1, '2025-03-12 15:25:00');
 
 -- ======================
 -- PRESTAMO DETALLE
@@ -297,7 +294,7 @@ INSERT INTO PrestamoDetalle (idPrestamo, idElemento) VALUES
 (6, 8),
 (6, 9),
 
--- Prestamo 7 (cancelado)
+-- Prestamo 7
 (7, 11),
 
 -- Prestamo 8 (en parcial)
@@ -327,14 +324,29 @@ INSERT INTO Devoluciones (idPrestamo, idUsuarioDevolvio, fechaDevolucion, observ
 (1, 1, '2025-08-05 15:00:00', 'Sin daños'),
 (2, 2, '2025-08-06 16:00:00', 'Con problemas en bateria'),
 
+-- Prestamo 3
+(3, 4, '2025-08-07 17:20:00', 'Notebook revisada y en buen estado'),
+
+-- Prestamo 4
+(4, 1, '2025-08-07 17:20:00', 'Notebook revisada y en buen estado'),
+
 -- Prestamo 5 (Devuelto)
 (5, 4, '2025-08-07 17:20:00', 'Notebook revisada y en buen estado'),
 
 -- Prestamo 6 (Devuelto)
 (6, 3, '2025-08-08 09:40:00', 'Equipo limpiado, sin fallas'),
 
--- Prestamo 8 (En parcial)
-(8, 6, '2025-010-09 14:30:00', 'Devolución parcial — faltan elementos'),
+-- Prestamo 7 
+(7, 1, '2025-10-10 09:23:09', 'Bien'),
+
+-- Prestamo 8 
+(8, 6, '2025-10-09 14:30:00', 'Devolución parcial — faltan elementos'),
+
+-- Prestamo 9
+(9, 1, '2025-10-09 13:34:00', 'Nose'),
+
+-- Prestamo 10
+(10, 1, '2025-11-01 15:03:12', 'Hola'),
 
 -- Prestamo 11 (Devuelto)
 (11, 8, '2025-11-12 11:15:00', 'Devuelto completo y funcional');
@@ -349,20 +361,40 @@ INSERT INTO DevolucionDetalle (idDevolucion, idElemento, observaciones) VALUES
 -- Devolución 2 (prestamo 2)
 (2, 5, 'Devuelto con anomalias'),
 
--- Devolución 3 (prestamo 5)
-(3, 1, NULL),
-(3, 7, 'Correcto'),
+-- Devolución 3 (prestamo 3)
+(3, 2, NULL),
+(3, 3, 'Correcto'),
 
--- Devolución 4 (prestamo 6)
-(4, 8, NULL),
-(4, 9, 'Limpiado y revisado'),
+-- Devolución 4 (prestamo 4)
+(4, 4, NULL),
 
--- Devolución 5 (prestamo 8) - parcial
-(5, 12, 'Devuelto — faltante el segundo elemento'),
--- El elemento 13 queda pendiente
+-- Devolución 5 (prestamo 5)
+(5, 1, 'Devuelto'),
+(5, 7, null),
 
--- Devolución 6 (prestamo 11)
-(6, 10, 'Sin novedades');
+-- Devolución 6 (prestamo 6)
+(6, 8, 'Sin novedades'),
+(6, 9, null),
+
+-- Devolucion 7
+(7, 11, null),
+
+-- Devolucion 8
+(8, 12, null),
+(8, 13, null),
+
+-- Devolucion 9
+(9, 14, null),
+
+-- Devolucion 10
+(10, 5, null),
+(10, 6, null),
+
+-- Devolucion 11
+(11, 10, null);
+
+
+
 
 
 -- ======================

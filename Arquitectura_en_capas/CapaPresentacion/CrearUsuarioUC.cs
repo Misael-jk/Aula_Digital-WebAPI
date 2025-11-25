@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,13 +28,47 @@ namespace CapaPresentacion
             this.usuariosUC = usuariosUC;
         }
 
-        private void btnCrear_Click(object sender, EventArgs e)
+        private void CrearUsuarioUC_Load(object sender, EventArgs e)
         {
+            var roles = usuariosCN.ObtenerRoles();
+            cmbRol.DataSource = roles.ToList();
+            cmbRol.DisplayMember = "Rol";
+            cmbRol.ValueMember = "IdRol";
+
+            lblNoPuedeActualizar.Visible = false;
+            ValidarPassword();
+        }
+
+        private void ValidarPassword()
+        {
+            if (string.IsNullOrWhiteSpace(txtContraseña.Text))
+            {
+                lblNoPuedeActualizar.Text = "Debes poner tu contraseña";
+                lblNoPuedeActualizar.Visible = true;
+                return;
+            }
+
+            if(txtContraseña.Text != txtRepetirContraseña.Text)
+            {
+                lblNoPuedeActualizar.Text = "Las contraseñas no coinciden";
+                lblNoPuedeActualizar.Visible = true;
+                return;
+            }
+        }
+        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btnCrear_Click_1(object sender, EventArgs e)
+        {
+            string nombre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtNombre.Text.Trim().ToLower());
+            string apellido = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtApellido.Text.Trim().ToLower());
+
             var usuario = new Usuarios
             {
                 Usuario = txtUsuario.Text,
-                Nombre = txtNombre.Text,
-                Apellido = txtApellido.Text,
+                Nombre = nombre,
+                Apellido = apellido,
                 Password = txtContraseña.Text,
                 Email = txtEmail.Text,
                 Habilitado = true,
@@ -47,17 +82,23 @@ namespace CapaPresentacion
             formPrincipal.MostrarUserControl(usuariosUC);
         }
 
-        private void CrearUsuarioUC_Load(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
-            var roles = usuariosCN.ObtenerRoles();
-            cmbRol.DataSource = roles.ToList();
-            cmbRol.DisplayMember = "Rol";
-            cmbRol.ValueMember = "IdRol";
+            formPrincipal.MostrarUserControl(usuariosUC);
         }
 
-        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        private void chcPassword_CheckedChanged(object sender, EventArgs e)
         {
-            
+            if (chcPassword.Checked)
+            {
+                txtContraseña.UseSystemPasswordChar = false;
+                txtRepetirContraseña.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtContraseña.UseSystemPasswordChar = true;
+                txtRepetirContraseña.UseSystemPasswordChar = true;
+            }
         }
     }
 }
