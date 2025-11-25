@@ -63,10 +63,7 @@ namespace CapaPresentacion
                 return;
             }
 
-            string usuario = TxtUser.Text;
-            string password = TxtPass.Text;
-
-            Usuarios? userVerificado = usuariosCN.ObtenerPorUsuario(usuario);
+            Usuarios? userVerificado = usuariosCN.ObtenerPorUsuario(TxtUser.Text);
 
             if (userVerificado?.Usuario == TxtUser.Text && userVerificado?.Password == TxtPass.Text)
             {
@@ -80,36 +77,7 @@ namespace CapaPresentacion
                 TxtError.Text = "Usuario o contraseña incorrecto";
                 TxtError.Visible = true;
             }
-
-            //Usuarios? userVerificado = usuariosCN.Login(usuario, password);
-
-            //if (userVerificado != null)
-            //{
-            //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
-            //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
-            //    principal.Show();
-            //    this.Hide();
-            //}
-            //else
-            //{
-            //    TxtError.Visible = true;
-            //}
         }
-
-
-        //if (userVerificado != null)
-        //{
-        //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
-
-        //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
-        //    principal.Show();
-        //    this.Hide();
-        //}
-        //else
-        //{
-        //    TxtError.Visible = true;
-        //}
-
 
         private void TxtUser_KeyDown(object sender, KeyEventArgs e)
         {
