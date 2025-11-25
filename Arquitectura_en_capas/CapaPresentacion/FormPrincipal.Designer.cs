@@ -76,7 +76,7 @@
             btnInventario = new Guna.UI2.WinForms.Guna2GradientButton();
             BtnDashboard = new Guna.UI2.WinForms.Guna2GradientButton();
             guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnVerPerfil = new Guna.UI2.WinForms.Guna2Button();
             lblUsuario = new Label();
             lblRol = new Label();
             Mover_Principal = new Guna.UI2.WinForms.Guna2DragControl(components);
@@ -495,7 +495,7 @@
             // 
             // guna2GradientPanel1
             // 
-            guna2GradientPanel1.Controls.Add(guna2Button1);
+            guna2GradientPanel1.Controls.Add(btnVerPerfil);
             guna2GradientPanel1.Controls.Add(lblUsuario);
             guna2GradientPanel1.Controls.Add(lblRol);
             guna2GradientPanel1.CustomizableEdges = customizableEdges25;
@@ -507,23 +507,25 @@
             guna2GradientPanel1.Size = new Size(253, 78);
             guna2GradientPanel1.TabIndex = 19;
             // 
-            // guna2Button1
+            // btnVerPerfil
             // 
-            guna2Button1.BackgroundImage = (Image)resources.GetObject("guna2Button1.BackgroundImage");
-            guna2Button1.BackgroundImageLayout = ImageLayout.Zoom;
-            guna2Button1.CustomizableEdges = customizableEdges23;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Transparent;
-            guna2Button1.Font = new Font("Segoe UI", 9F);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(12, 14);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2Button1.Size = new Size(50, 50);
-            guna2Button1.TabIndex = 30;
+            btnVerPerfil.BackgroundImage = (Image)resources.GetObject("btnVerPerfil.BackgroundImage");
+            btnVerPerfil.BackgroundImageLayout = ImageLayout.Zoom;
+            btnVerPerfil.BorderThickness = 3;
+            btnVerPerfil.CustomizableEdges = customizableEdges23;
+            btnVerPerfil.DisabledState.BorderColor = Color.DarkGray;
+            btnVerPerfil.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnVerPerfil.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnVerPerfil.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVerPerfil.FillColor = Color.Transparent;
+            btnVerPerfil.Font = new Font("Segoe UI", 9F);
+            btnVerPerfil.ForeColor = Color.White;
+            btnVerPerfil.Location = new Point(12, 14);
+            btnVerPerfil.Name = "btnVerPerfil";
+            btnVerPerfil.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            btnVerPerfil.Size = new Size(50, 50);
+            btnVerPerfil.TabIndex = 30;
+            btnVerPerfil.Click += btnInfoUser_Click;
             // 
             // lblUsuario
             // 
@@ -614,7 +616,7 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnPrestAndDevo;
         private Guna.UI2.WinForms.Guna2GradientButton BtnUsuario;
         private Guna.UI2.WinForms.Guna2GradientButton BtnCategoria;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnVerPerfil;
         private Guna.UI2.WinForms.Guna2GradientButton btnCerrarSesion2;
     }
 }
