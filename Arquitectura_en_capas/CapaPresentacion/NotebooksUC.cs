@@ -24,7 +24,7 @@ namespace CapaPresentacion
         private bool navegandoLista = false;
         private AutoCompleteStringCollection _EquipoNotebook;
         private AutoCompleteStringCollection _EquipoCarrito;
-        private List<string> _listaIdentificadoresCache = new List<string>();
+        private List<string> serieBarraPatrimonio = new List<string>();
         private readonly int minima = 2;
 
         public NotebooksUC(NotebooksCN notebooksCN, Usuarios user, CarritosCN carritosCN, FormPrincipal formPrincipal, NotebookBajasCN notebookBajasCN)
@@ -82,32 +82,33 @@ namespace CapaPresentacion
         #region LOAD
         private void NotebooksUC_Load(object sender, EventArgs e)
         {
+            // Scrollbar
             circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 1157);
+
+            // AutoComplete
+            txtCarrito.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtCarrito.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtEquipo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtEquipo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // Eventos
             lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
             lstSugerencias.MouseLeave += (s, ev) => navegandoLista = false;
-
             txtSerieBarraPatrimonio.LostFocus += (s, e) =>
             {
                 if (!lstSugerencias.Focused)
                     lstSugerencias.Visible = false;
             };
 
+            // Metodos iniciales
             SetModoInicial();
             RenovarIdentificadores();
             CargarEstados();
 
-            //ActualizarDataGrid(0);
-            this.AutoScroll = true;
-            this.AutoScrollMinSize = new Size(0, 1157);
-
             CargarGraficoEstados();
             CargarGraficoCarritos();
-
-            txtCarrito.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtCarrito.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            txtEquipo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtEquipo.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             CargarAutoCompleteEquipoNotebook();
             CargarAutoCompleteEquipoCarrito();
@@ -123,7 +124,7 @@ namespace CapaPresentacion
         }
         #endregion
 
-        #region CARGAR AUTOCOMPLETES + IDENTIFICADORES (CACHE)
+        #region CARGAR AUTOCOMPLETES + IDENTIFICADORES
         private void CargarAutoCompleteEquipoNotebook()
         {
             _EquipoNotebook.Clear();
@@ -166,7 +167,7 @@ namespace CapaPresentacion
             try
             {
                 var desdeBD = notebooksCN.ObtenerSerieBarrasPatrimonio("", 5000);
-                _listaIdentificadoresCache = desdeBD.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                serieBarraPatrimonio = desdeBD.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
             }
             catch (Exception ex)
             {
@@ -218,15 +219,6 @@ namespace CapaPresentacion
             bool hayTexto = !string.IsNullOrWhiteSpace(txt);
 
             SetModoBusquedaPorEquipo(hayTexto);
-
-            //if (!hayTexto || txt.Length < minima)  Se comenta estos 2 metodos ya que no es necesario que el timer se ejecute cuando se navega por las sugerencias
-            //{
-            //    Timer.Stop();
-            //    return;
-            //}
-
-            //Timer.Stop();
-            //Timer.Start();
         }
 
         private void txtModelo_TextChanged(object sender, EventArgs e)
@@ -237,15 +229,6 @@ namespace CapaPresentacion
             bool hayTexto = !string.IsNullOrWhiteSpace(txt);
 
             SetModoBusquedaPorCarrito(hayTexto);
-
-            //if (!hayTexto || txt.Length < minima)
-            //{
-            //    Timer.Stop();
-            //    return;
-            //}
-
-            //Timer.Stop();
-            //Timer.Start();
         }
 
         private void txtSerieBarraPatrimonio_TextChanged(object sender, EventArgs e)
@@ -298,7 +281,7 @@ namespace CapaPresentacion
         {
             try
             {
-                var sugerencias = _listaIdentificadoresCache
+                string[] sugerencias = serieBarraPatrimonio
                     .Where(s => !string.IsNullOrEmpty(s) && s.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
                     .Take(15)
                     .ToArray();
@@ -329,26 +312,27 @@ namespace CapaPresentacion
         {
             if (!lstSugerencias.Visible) return;
 
-            if (e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                if (lstSugerencias.SelectedIndex < lstSugerencias.Items.Count - 1)
-                    lstSugerencias.SelectedIndex++;
-                else
-                    lstSugerencias.SelectedIndex = 0;
-                navegandoLista = true;
-                return;
-            }
 
-            if (e.KeyCode == Keys.Up)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-                if (lstSugerencias.SelectedIndex > 0)
-                    lstSugerencias.SelectedIndex--;
+                int count = lstSugerencias.Items.Count;
+
+                if (count == 0) return;
+
+                if (lstSugerencias.SelectedIndex == -1)
+                {
+                    lstSugerencias.SelectedIndex = e.KeyCode == Keys.Down ? 0 : count - 1;
+                }
                 else
-                    lstSugerencias.SelectedIndex = lstSugerencias.Items.Count - 1;
+                {
+                    int idx = lstSugerencias.SelectedIndex + (e.KeyCode == Keys.Down ? 1 : -1);
+                    if (idx < 0) idx = count - 1;
+                    if (idx >= count) idx = 0;
+                    lstSugerencias.SelectedIndex = idx;
+                }
+
                 navegandoLista = true;
                 return;
             }
@@ -357,15 +341,18 @@ namespace CapaPresentacion
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
+
                 if (lstSugerencias.SelectedItem != null)
+                {
                     SeleccionarSugerencia(lstSugerencias.SelectedItem.ToString());
+                }
                 else
+                {
                     EjecutarBusqueda();
-                lstSugerencias.Visible = false;
-                navegandoLista = false;
-                return;
+                }
             }
 
+            lstSugerencias.Visible = false;
             navegandoLista = false;
             Timer.Stop();
             Timer.Start();
@@ -417,22 +404,22 @@ namespace CapaPresentacion
 
             if (!string.IsNullOrWhiteSpace(equipoQ))
             {
-                var resultados = notebooksCN.ObtenerPorFiltros(null, null, equipoQ);
+                IEnumerable<NotebooksDTO> resultados = notebooksCN.ObtenerPorFiltros(null, null, equipoQ);
                 dgvNotebooks_M.DataSource = resultados.ToList();
                 return;
             }
 
             if (!string.IsNullOrWhiteSpace(identificadorQ))
             {
-                var resultados = notebooksCN.ObtenerPorFiltros(identificadorQ, null, null);
+                IEnumerable<NotebooksDTO> resultados = notebooksCN.ObtenerPorFiltros(identificadorQ, null, null);
                 dgvNotebooks_M.DataSource = resultados.ToList();
                 return;
             }
 
             if (!string.IsNullOrWhiteSpace(carritoQ))
             {
-                var carrito = notebooksCN.ObtenerCarritoPorEquipo(carritoQ);
-                var resultados = notebooksCN.ObtenerPorFiltros(null, carrito?.IdCarrito, null);
+                Carritos? carrito = notebooksCN.ObtenerCarritoPorEquipo(carritoQ);
+                IEnumerable<NotebooksDTO> resultados = notebooksCN.ObtenerPorFiltros(null, carrito?.IdCarrito, null);
                 dgvNotebooks_M.DataSource = resultados.ToList();
                 return;
             }
@@ -451,17 +438,11 @@ namespace CapaPresentacion
             IdActual = Convert.ToInt32(dgvNotebooks_M.Rows[e.RowIndex].Cells["IdNotebook"].Value);
         }
 
-        //ActualizarDataGrid();
-        //CargarGrafico();
-        //CargarGraficoEstados();
-        //CargarGraficoCarritos();
-
         private void btnCrearNotebook_M_Click(object sender, EventArgs e)
         {
             var Notebook = new FormCRUDNotebook(notebooksCN, MostrarNotebooks, CargarGrafico, usuarioActual);
             Notebook.ShowDialog();
         }
-
 
         #region GRAFICOS
         private void CargarGrafico()
@@ -506,7 +487,7 @@ namespace CapaPresentacion
                 {
                     "Disponible" => SKColors.GreenYellow,
                     "Prestado" => SKColors.Red,
-                    "En mantenimiento" => SKColors.Yellow,
+                    "En reparacion" => SKColors.Yellow,
                     _ => SKColors.Gray
                 };
 
@@ -532,7 +513,7 @@ namespace CapaPresentacion
 
         private void CargarGraficoCarritos()
         {
-            var datos = notebooksCN.GetCantidadNotebooksEnCarritos();
+            List<(string Equipo, int Cantidad)> datos = notebooksCN.GetCantidadNotebooksEnCarritos();
 
             if (datos == null || datos.Count == 0) return;
 
@@ -540,7 +521,7 @@ namespace CapaPresentacion
                 .Select(d => new
                 {
                     Original = d,
-                    KeyNumber = ExtractTrailingNumber(d.Equipo),
+                    KeyNumber = ExtraerNumero(d.Equipo),
                     KeyString = d.Equipo
                 })
                 .OrderBy(x => x.KeyNumber.HasValue ? 0 : 1)
@@ -549,53 +530,56 @@ namespace CapaPresentacion
                 .Select(x => x.Original)
                 .ToList();
 
-            var labels = datosOrdenados.Select(d => d.Equipo).ToArray();
-            var values = datosOrdenados.Select(d => d.Cantidad == 0 ? 0.1 : (double)d.Cantidad).ToArray();
+            string[] labels = datosOrdenados.Select(d => d.Equipo).ToArray();
+            double[] values = datosOrdenados.Select(d => d.Cantidad == 0 ? 0.1 : Convert.ToDouble(d.Cantidad)).ToArray();
 
-            var series = new ColumnSeries<double>
+            ColumnSeries<double> series = new ColumnSeries<double>
             {
                 Values = values,
                 DataLabelsPaint = new SolidColorPaint(new SKColor(60, 60, 60)),
                 DataLabelsSize = 25,
-                MaxBarWidth = 18,
+                MaxBarWidth = 20,
                 Padding = 3,
                 Stroke = null,
                 Fill = new SolidColorPaint(new SKColor(70, 130, 180)),
                 DataLabelsFormatter = point =>
                 {
-                    int real = (int)datosOrdenados[point.Index].Cantidad;
+                    int real = Convert.ToInt32(datosOrdenados[point.Index].Cantidad);
                     return real.ToString();
                 }
             };
 
-            var chart = new CartesianChart
+            CartesianChart chart = new CartesianChart
             {
                 Dock = DockStyle.Fill,
-                Series = new ISeries[] { series },
+                Series = new ISeries[] 
+                { 
+                    series 
+                },
 
                 XAxes = new Axis[]
                 {
-            new Axis
-            {
-                Labels = labels,
-                TextSize = 0,
-                //Padding = new LiveChartsCore.Drawing.Padding { Left = 5, Right = 5, Top = 5, Bottom = 5 },
-                //NameTextSize = 13,
-                //NamePaint = new SolidColorPaint(new SKColor(80, 80, 80)),
-                //LabelsRotation = 20,
-                ForceStepToMin = false
-            }
+                    new Axis
+                    {
+                        Labels = labels,
+                        TextSize = 0,
+                        //Padding = new LiveChartsCore.Drawing.Padding { Left = 5, Right = 5, Top = 5, Bottom = 5 },
+                        //NameTextSize = 13,
+                        //NamePaint = new SolidColorPaint(new SKColor(80, 80, 80)),
+                        //LabelsRotation = 20,
+                        ForceStepToMin = false
+                    }
                 },
 
                 YAxes = new Axis[]
                 {
-            new Axis
-            {
-                Labeler = value => value.ToString("N0"),
-                NameTextSize = 0,
-                NamePaint = new SolidColorPaint(new SKColor(80, 80, 80)),
-                TextSize = 12
-            }
+                    new Axis
+                    {
+                        Labeler = value => value.ToString("N0"),
+                        NameTextSize = 0,
+                        NamePaint = new SolidColorPaint(new SKColor(80, 80, 80)),
+                        TextSize = 12
+                    }
                 },
 
                 LegendPosition = LiveChartsCore.Measure.LegendPosition.Hidden,
@@ -610,7 +594,7 @@ namespace CapaPresentacion
         /// Devuelve int? con el número encontrado (primero que aparezca), o null si no hay números.
         /// Maneja "1", "Carrito 1", "Equipo-01", "C-12A", etc.
         /// </summary>
-        private int? ExtractTrailingNumber(string label)
+        private int? ExtraerNumero(string label)
         {
             if (string.IsNullOrWhiteSpace(label)) return null;
 

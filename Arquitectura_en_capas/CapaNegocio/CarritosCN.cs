@@ -747,10 +747,10 @@ public class CarritosCN
         {
             IEnumerable<Notebooks> notebooksEnCarrito = uow.RepoNotebooks.GetByCarrito(carritoNEW.IdCarrito);
 
-            if (notebooksEnCarrito.Any(nb => uow.RepoNotebooks.EstaEnPrestamo(nb.IdElemento)))
-            {
-                throw new Exception("No se puede cambiar la ubicacion: existen notebooks en prestamo dentro del carrito.");
-            }
+            //if (notebooksEnCarrito.Any(nb => uow.RepoNotebooks.EstaEnPrestamo(nb.IdElemento)))
+            //{
+            //    throw new Exception("No se puede cambiar la ubicacion: existen notebooks en prestamo dentro del carrito.");
+            //}
 
             foreach (Notebooks? notebook in notebooksEnCarrito)
             {

@@ -1,11 +1,6 @@
 ﻿using CapaDatos.Interfaces;
-using CapaDatos.Repos;
 using CapaEntidad;
 using CapaNegocio;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Guna.UI2.WinForms;
 using CapaDTOs;
 using System.Diagnostics;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -20,35 +15,27 @@ namespace CapaPresentacion
     {
         private readonly ElementosCN elementosCN;
         private readonly TiposElementoCN tiposElementoCN;
-        private readonly ModeloCN modeloCN;
         private readonly ElementosBajasCN elementosBajasCN;
         private readonly Usuarios userVerificado;
         private readonly IRepoEstadosMantenimiento repoEstadosMantenimiento;
-        private readonly IRepoElemento repoElemento;
+        private FormPrincipal formPrincipal;
         private int idElemento = 0;
-        private int idVariante = 0;
 
         private readonly System.Windows.Forms.Timer Timer;
-
         private AutoCompleteStringCollection _acTipos;
         private AutoCompleteStringCollection _acModelos;
         private bool navegandoLista = false;
-
         private readonly int minima = 2;
-        private List<string> _cacheIdentificadores = new List<string>();
-
-        private FormPrincipal formPrincipal;
+        private List<string> SerieBarraPatrimonio = new List<string>();
 
 
-        public ElementosUC(FormPrincipal formPrincipal, ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, IRepoElemento repoElemento, TiposElementoCN tiposElementoCN, ModeloCN modeloCN, Usuarios userVerificado, ElementosBajasCN elementosBajasCN)
+        public ElementosUC(FormPrincipal formPrincipal, ElementosCN elementosCN, IRepoEstadosMantenimiento repoEstadosMantenimiento, TiposElementoCN tiposElementoCN, Usuarios userVerificado, ElementosBajasCN elementosBajasCN)
         {
             InitializeComponent();
             this.elementosCN = elementosCN;
             this.tiposElementoCN = tiposElementoCN;
-            this.modeloCN = modeloCN;
             this.elementosBajasCN = elementosBajasCN;
             this.repoEstadosMantenimiento = repoEstadosMantenimiento;
-            this.repoElemento = repoElemento;
             this.userVerificado = userVerificado;
 
             Timer = new System.Windows.Forms.Timer();
@@ -61,6 +48,73 @@ namespace CapaPresentacion
             this.formPrincipal = formPrincipal;
         }
 
+        #region LOAD
+        private void ElementosUC_Load(object sender, EventArgs e)
+        {
+            // ScrollBar
+            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 1120);
+
+
+            // AutoCompletes
+            txtTipoElemento.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtTipoElemento.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtModelo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtModelo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // El ListBox
+            lstSugerencias.BringToFront();
+            lstSugerencias.Height = 120;
+            lstSugerencias.Location = new Point(
+            txtSerieBarraPatrimonio.Left,
+            txtSerieBarraPatrimonio.Bottom + 3
+            );
+
+            // Eventos 
+            lstSugerencias.Click += LstSugerencias_Click;
+            lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
+            lstSugerencias.MouseLeave += (s, ev) => navegandoLista = false;
+            txtModelo.Leave += (s, e) => { InferirTipoDesdeModelo(txtModelo.Text, true); };
+            txtModelo.Enter += (s, e) =>
+            {
+                if (_acModelos == null || _acModelos.Count == 0)
+                    CargarTodosModelos();
+            };
+            txtSerieBarraPatrimonio.LostFocus += (s, e) =>
+            {
+                if (!lstSugerencias.Focused)
+                {
+                    lstSugerencias.Visible = false;
+                }
+            };
+
+            // Cargar comboBox Estado
+            var estados = repoEstadosMantenimiento.GetAll().ToList();
+            estados.Insert(0, new EstadosMantenimiento { IdEstadoMantenimiento = 0, EstadoMantenimientoNombre = "Todos" });
+            cmbEstados.DataSource = estados;
+            cmbEstados.ValueMember = "IdEstadoMantenimiento";
+            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
+            cmbEstados.SelectedIndex = 0;
+
+            CargarAutoCompleteTipos();
+            RenovarIdentificadores();
+            SetModoInicial();
+
+            if (dgvElementos_M.Columns.Contains("IdElemento"))
+            {
+                dgvElementos_M.Columns["IdElemento"].HeaderText = "ID";
+                dgvElementos_M.Columns["IdElemento"].Width = 40;
+                dgvElementos_M.Columns["IdElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+            if (dgvElementos_M.Columns.Contains("Equipo"))
+            {
+                dgvElementos_M.Columns["Equipo"].Width = 165;
+            }
+        }
+        #endregion
+
+        #region Cargar Elemento
         public void CargarElementos()
         {
             try
@@ -82,19 +136,7 @@ namespace CapaPresentacion
         {
             try
             {
-                IEnumerable<ElementosDTO> elementosFiltrados;
-
-                if (idEstado == 0)
-                {
-                    elementosFiltrados = elementosCN.ObtenerElementos();
-                }
-                else
-                {
-                    elementosFiltrados = elementosCN.GetAllByEstado(idEstado);
-                }
-
-                dgvElementos_M.DataSource = elementosFiltrados.ToList();
-
+                IEnumerable<ElementosDTO> elementos = idEstado == 0 ? elementosCN.ObtenerElementos() : elementosCN.GetAllByEstado(idEstado);
             }
             catch (Exception ex)
             {
@@ -102,67 +144,8 @@ namespace CapaPresentacion
             }
         }
 
-        #region LOAD
-        private void ElementosUC_Load(object sender, EventArgs e)
-        {
-            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            this.AutoScroll = true;
-            this.AutoScrollMinSize = new Size(0, 1120);
-
-            lstSugerencias.BringToFront();
-            lstSugerencias.Height = 120;
-
-            lstSugerencias.Location = new Point(
-            txtSerieBarraPatrimonio.Left,
-            txtSerieBarraPatrimonio.Bottom + 3
-            );
-
-            lstSugerencias.Click += LstSugerencias_Click;
-            lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
-
-            txtSerieBarraPatrimonio.LostFocus += (s, e) =>
-            {
-                if (!lstSugerencias.Focused)
-                    lstSugerencias.Visible = false;
-            };
-            lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
-            lstSugerencias.MouseLeave += (s, ev) => navegandoLista = false;
-
-            txtTipoElemento.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtTipoElemento.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            txtModelo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtModelo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            txtModelo.Leave -= (s, e) => { InferirTipoDesdeModelo(txtModelo.Text, lockIfFound: true); };
-            txtModelo.Leave += (s, e) => { InferirTipoDesdeModelo(txtModelo.Text, lockIfFound: true); };
-            txtModelo.Enter += (s, e) =>
-            {
-                if (_acModelos == null || _acModelos.Count == 0)
-                    CargarTodosModelos();
-            };
-
-
-            var estados = repoEstadosMantenimiento.GetAll().ToList();
-
-
-            estados.Insert(0, new EstadosMantenimiento { IdEstadoMantenimiento = 0, EstadoMantenimientoNombre = "Todos" });
-
-            cmbEstados.DataSource = estados;
-            cmbEstados.ValueMember = "IdEstadoMantenimiento";
-            cmbEstados.DisplayMember = "EstadoMantenimientoNombre";
-            cmbEstados.SelectedIndex = 0;
-
-            CargarAutoCompleteTipos();
-            RenovarIdentificadores();
-            SetModoInicial();
-
-            dgvElementos_M.Columns["IdElemento"].HeaderText = "ID";
-            dgvElementos_M.Columns["IdElemento"].Width = 40;
-            dgvElementos_M.Columns["IdElemento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvElementos_M.Columns["Equipo"].Width = 165;
-        }
         #endregion
+
 
         #region AUTOCOMPLETES
         private void CargarAutoCompleteTipos()
@@ -170,11 +153,7 @@ namespace CapaPresentacion
             IEnumerable<string> tipos = tiposElementoCN.GetNombreTipos();
             _acTipos.Clear();
             _acTipos.AddRange(tipos.ToArray());
-
-            txtTipoElemento.AutoCompleteMode = AutoCompleteMode.Suggest;
-            txtTipoElemento.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtTipoElemento.AutoCompleteCustomSource = _acTipos;
-
         }
 
         private void CargarModeloParaTipo(string tipo)
@@ -192,8 +171,10 @@ namespace CapaPresentacion
                 modelos = elementosCN.ObtenerModelo();
             }
 
-            foreach (var m in modelos)
-                _acModelos.Add(m);
+            //foreach (var m in modelos)
+            //    _acModelos.Add(m);
+
+            _acModelos.AddRange(modelos.ToArray());
 
             txtModelo.AutoCompleteCustomSource = _acModelos;
         }
@@ -231,8 +212,8 @@ namespace CapaPresentacion
         {
             try
             {
-                var desdeBD = elementosCN.ObtenerSerieBarrasPatrimonio("", 5000) ?? Enumerable.Empty<string>();
-                _cacheIdentificadores = desdeBD.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                var desdeBD = elementosCN.ObtenerSerieBarrasPatrimonio("", 5000);
+                SerieBarraPatrimonio = desdeBD.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
             }
             catch (Exception ex)
             {
@@ -242,13 +223,12 @@ namespace CapaPresentacion
 
         #endregion
 
-        #region EVENTOS TEXT CHANGED
-
+        #region EVENTOS TEXT CHANGED y KEYDOWN
         private void txtSerieBarraPatrimonio_TextChanged_1(object sender, EventArgs e)
         {
             if (!txtSerieBarraPatrimonio.Focused) return;
 
-            string texto = txtSerieBarraPatrimonio.Text ?? string.Empty;
+            string texto = txtSerieBarraPatrimonio.Text;
             bool hayTexto = !string.IsNullOrWhiteSpace(texto);
 
             SetModoBusquedaPorTexto(hayTexto);
@@ -264,15 +244,69 @@ namespace CapaPresentacion
             Timer.Start();
         }
 
+        private void txtSerieBarraPatrimonio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!lstSugerencias.Visible) return;
+
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                int count = lstSugerencias.Items.Count;
+
+                if (count == 0) return;
+
+                if (lstSugerencias.SelectedIndex == -1)
+                {
+                    lstSugerencias.SelectedIndex = e.KeyCode == Keys.Down ? 0 : count - 1;
+                }
+                else
+                {
+                    int idx = lstSugerencias.SelectedIndex + (e.KeyCode == Keys.Down ? 1 : -1);
+                    if (idx < 0) idx = count - 1;
+                    if (idx >= count) idx = 0;
+                    lstSugerencias.SelectedIndex = idx;
+                }
+
+                navegandoLista = true;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                if (lstSugerencias.SelectedItem != null)
+                {
+                    SeleccionarSugerencia(lstSugerencias.SelectedItem.ToString());
+                }
+                else
+                {
+                    EjecutarBusqueda();
+                }
+
+                navegandoLista = false;
+                lstSugerencias.Visible = false;
+            }
+
+            navegandoLista = false;
+            Timer.Stop();
+            Timer.Start();
+        }
+        #endregion
+
+        #region TIMER 
         private void Timer_Tick(object sender, EventArgs e)
         {
             Timer.Stop();
 
             if (navegandoLista) return;
 
-            string q = txtSerieBarraPatrimonio.Text?.Trim() ?? string.Empty;
+            string textoNEW = txtSerieBarraPatrimonio.Text?.Trim() ?? string.Empty;
 
-            if (q.Length < minima)
+            if (textoNEW.Length < minima)
             {
                 lstSugerencias.Visible = false;
                 return;
@@ -280,8 +314,8 @@ namespace CapaPresentacion
 
             try
             {
-                var sugerencias = _cacheIdentificadores
-                    .Where(s => !string.IsNullOrEmpty(s) && s.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
+                string[] sugerencias = SerieBarraPatrimonio
+                    .Where(s => !string.IsNullOrEmpty(s) && s.Contains(textoNEW, StringComparison.OrdinalIgnoreCase))
                     .Take(15)
                     .ToArray();
 
@@ -308,84 +342,7 @@ namespace CapaPresentacion
                 Debug.WriteLine("Error Timer_Tick (llenar listbox): " + ex);
             }
         }
-
-        private void txtSerieBarraPatrimonio_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            if (!lstSugerencias.Visible) return;
-
-            // Manejo navegación
-            if (e.KeyCode == Keys.Down)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-
-                int count = lstSugerencias.Items.Count;
-                if (count == 0) return;
-
-                if (lstSugerencias.SelectedIndex == -1)
-                {
-                    lstSugerencias.SelectedIndex = 0;
-                }
-                else
-                {
-                    int next = lstSugerencias.SelectedIndex + 1;
-                    if (next >= count) next = 0;
-                    lstSugerencias.SelectedIndex = next;
-                }
-
-                // mantener item visible
-                lstSugerencias.TopIndex = Math.Max(0, lstSugerencias.SelectedIndex - (lstSugerencias.ClientSize.Height / Math.Max(1, lstSugerencias.ItemHeight)) + 1);
-
-                navegandoLista = true;
-                return;
-            }
-
-            if (e.KeyCode == Keys.Up)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-
-                int count = lstSugerencias.Items.Count;
-                if (count == 0) return;
-
-                if (lstSugerencias.SelectedIndex == -1)
-                {
-                    lstSugerencias.SelectedIndex = count - 1;
-                }
-                else
-                {
-                    int prev = lstSugerencias.SelectedIndex - 1;
-                    if (prev < 0) prev = count - 1;
-                    lstSugerencias.SelectedIndex = prev;
-                }
-
-                // mantener item visible
-                lstSugerencias.TopIndex = Math.Max(0, lstSugerencias.SelectedIndex - (lstSugerencias.ClientSize.Height / Math.Max(1, lstSugerencias.ItemHeight)) + 1);
-
-                navegandoLista = true;
-                return;
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-
-                if (lstSugerencias.SelectedItem != null)
-                    SeleccionarSugerencia(lstSugerencias.SelectedItem.ToString());
-                else
-                    EjecutarBusqueda();
-
-                navegandoLista = false;
-                lstSugerencias.Visible = false;
-                return;
-            }
-
-            navegandoLista = false;
-            Timer.Stop();
-            Timer.Start();
-        }
+        #endregion
 
         private void LstSugerencias_Click(object sender, EventArgs e)
         {
@@ -415,15 +372,7 @@ namespace CapaPresentacion
             CargarModeloParaTipo(txtTipoElemento.Text);
         }
 
-        private void txtTipoElemento_Leave(object sender, EventArgs e)
-        {
-        }
-
-        private void txtModelo_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void InferirTipoDesdeModelo(string modeloNombre, bool lockIfFound = false)
+        private void InferirTipoDesdeModelo(string modeloNombre, bool BloquearTipo = false)
         {
             if (string.IsNullOrWhiteSpace(modeloNombre))
             {
@@ -447,62 +396,9 @@ namespace CapaPresentacion
 
             txtTipoElemento.Text = tipo.ElementoTipo;
 
-            if (lockIfFound)
+            if (BloquearTipo)
                 txtTipoElemento.Enabled = false;
         }
-
-
-        private void txtModelo_Validated(object sender, EventArgs e)
-        {
-            var texto = txtModelo.Text?.Trim();
-            if (string.IsNullOrEmpty(texto))
-            {
-                txtTipoElemento.Enabled = true;
-                return;
-            }
-
-            bool existe = _acModelos.Cast<string>()
-                         .Any(m => string.Equals(m.Trim(), texto, StringComparison.OrdinalIgnoreCase));
-
-            if (existe)
-            {
-                InferirTipoDesdeModeloExacto(texto, lockIfFound: true);
-            }
-            else
-            {
-                txtTipoElemento.Enabled = true;
-            }
-        }
-
-        private void InferirTipoDesdeModeloExacto(string modeloNombre, bool lockIfFound = false)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(modeloNombre))
-                {
-                    if (lockIfFound) txtTipoElemento.Enabled = true;
-                    return;
-                }
-
-                var modelo = elementosCN.ObtenerModelosPorNombre(modeloNombre);
-
-                if (modelo != null)
-                {
-                    string tipoNombre = tiposElementoCN.ObtenerTipoPorNombre(modelo.IdTipoElemento);
-                    txtTipoElemento.Text = tipoNombre;
-                    if (lockIfFound) txtTipoElemento.Enabled = false;
-                }
-                else
-                {
-                    if (lockIfFound) txtTipoElemento.Enabled = true;
-                }
-            }
-            catch
-            {
-                if (lockIfFound) txtTipoElemento.Enabled = true;
-            }
-        }
-        #endregion
 
         #region BOTONES FILTRO
 
@@ -517,15 +413,12 @@ namespace CapaPresentacion
             txtSerieBarraPatrimonio.Clear();
             txtTipoElemento.Clear();
             txtModelo.Clear();
-
-            _cacheIdentificadores.Clear();
+            SerieBarraPatrimonio.Clear();
             lstSugerencias.Items.Clear();
             lstSugerencias.Visible = false;
             RenovarIdentificadores();
-
             _acModelos.Clear();
             txtModelo.AutoCompleteCustomSource = _acModelos;
-
             SetModoInicial();
             CargarElementos();
         }
@@ -541,8 +434,9 @@ namespace CapaPresentacion
 
             if (!string.IsNullOrWhiteSpace(q))
             {
-                var resultados = elementosCN.BuscarElementos(q, null, null);
+                IEnumerable<ElementosDTO> resultados = elementosCN.BuscarElementos(q, null, null);
                 dgvElementos_M.DataSource = resultados.ToList();
+
                 return;
             }
 
@@ -551,23 +445,32 @@ namespace CapaPresentacion
 
             if (!string.IsNullOrWhiteSpace(tipoTexto))
             {
-                var tipo = tiposElementoCN.ObtenerPorNombre(tipoTexto);
-                if (tipo != null) idTipo = tipo.IdTipoElemento;
+                TipoElemento? tipo = tiposElementoCN.ObtenerPorNombre(tipoTexto);
+                if (tipo != null)
+                {
+                    idTipo = tipo.IdTipoElemento;
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(modeloTexto))
             {
-                var modelo = elementosCN.ObtenerModelosPorNombre(modeloTexto);
-                if (modelo != null) idModelo = modelo.IdModelo;
+                Modelos? modelo = elementosCN.ObtenerModelosPorNombre(modeloTexto);
+                if (modelo != null)
+                {
+                    idModelo = modelo.IdModelo;
+                }
 
                 if (idModelo.HasValue && !idTipo.HasValue)
                 {
-                    var mod = elementosCN.ObtenerModeloPorID(idModelo.Value);
-                    if (mod != null) idTipo = mod.IdTipoElemento;
+                    Modelos? mod = elementosCN.ObtenerModeloPorID(idModelo.Value);
+                    if (mod != null)
+                    {
+                        idTipo = mod.IdTipoElemento;
+                    }
                 }
             }
 
-            var lista = elementosCN.BuscarElementos(null, idTipo, idModelo);
+            IEnumerable<ElementosDTO> lista = elementosCN.BuscarElementos(null, idTipo, idModelo);
             dgvElementos_M.DataSource = lista.ToList();
         }
 
@@ -621,7 +524,7 @@ namespace CapaPresentacion
                 int idEstado = Convert.ToInt32(cmbEstados.SelectedValue);
                 ActualizarDataGrid(idEstado);
             }
-            catch
+            catch (Exception)
             {
             }
         }
@@ -634,11 +537,12 @@ namespace CapaPresentacion
         
         private void CargarGrafico()
         {
-            var datos = elementosCN.ObtenerElementosPorTipo();
+            List<(string Nombre, int Cantidad)> datos = elementosCN.ObtenerElementosPorTipo();
 
             if (datos == null || datos.Count == 0) return;
 
-            var series = new List<PieSeries<int>>();
+            List<PieSeries<int>> series = new List<PieSeries<int>>();
+
             foreach (var d in datos)
             {
                 series.Add(new PieSeries<int>

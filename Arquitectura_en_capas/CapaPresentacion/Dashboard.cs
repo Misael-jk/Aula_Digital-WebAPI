@@ -44,10 +44,6 @@ namespace CapaPresentacion
             this.devolucionCN = devolucionCN;
             #endregion
 
-            if (mapperPrestamosActivos == null) throw new Exception("mapperPrestamosActivos es NULL");
-            if (mapperNotebooksPrestadas == null) throw new Exception("mapperNotebooksPrestadas es NULL");
-            if (mapperRankingDocente == null) throw new Exception("mapperRankingDocente es NULL");
-            if (notebooksCN == null) throw new Exception("notebooksCN es NULL");
             InicializarCartesiano();
         }
 

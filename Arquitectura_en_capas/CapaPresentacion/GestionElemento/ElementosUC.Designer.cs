@@ -431,7 +431,6 @@
             txtTipoElemento.TabIndex = 8;
             txtTipoElemento.TextOffset = new Point(5, 0);
             txtTipoElemento.TextChanged += txtTipoElemento_TextChanged;
-            txtTipoElemento.Leave += txtTipoElemento_Leave;
             // 
             // txtModelo
             // 
@@ -463,8 +462,7 @@
             txtModelo.Size = new Size(162, 36);
             txtModelo.TabIndex = 7;
             txtModelo.TextOffset = new Point(5, 0);
-            txtModelo.TextChanged += txtModelo_TextChanged;
-            txtModelo.Validated += txtModelo_Validated;
+            //txtModelo.Validated += txtModelo_Validated;
             // 
             // btnBuscar
             // 
