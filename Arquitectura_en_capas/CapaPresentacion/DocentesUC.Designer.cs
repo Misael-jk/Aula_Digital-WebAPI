@@ -115,7 +115,7 @@
             btnEliminar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnEliminar.Font = new Font("Segoe UI", 9F);
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(185, 234);
+            btnEliminar.Location = new Point(185, 274);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnEliminar.Size = new Size(145, 25);
@@ -132,7 +132,7 @@
             btnActualizar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnActualizar.Font = new Font("Segoe UI", 9F);
             btnActualizar.ForeColor = Color.White;
-            btnActualizar.Location = new Point(18, 234);
+            btnActualizar.Location = new Point(18, 274);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnActualizar.Size = new Size(145, 25);
@@ -304,7 +304,7 @@
             txtDNI.HoverState.BorderColor = Color.DodgerBlue;
             txtDNI.IconLeft = (Image)resources.GetObject("txtDNI.IconLeft");
             txtDNI.IconLeftSize = new Size(25, 25);
-            txtDNI.Location = new Point(18, 118);
+            txtDNI.Location = new Point(18, 135);
             txtDNI.Name = "txtDNI";
             txtDNI.PlaceholderForeColor = Color.DarkGray;
             txtDNI.PlaceholderText = "Ingresar DNI";
@@ -329,7 +329,7 @@
             txtMail.HoverState.BorderColor = Color.DodgerBlue;
             txtMail.IconLeft = (Image)resources.GetObject("txtMail.IconLeft");
             txtMail.IconLeftSize = new Size(25, 25);
-            txtMail.Location = new Point(18, 172);
+            txtMail.Location = new Point(18, 204);
             txtMail.Name = "txtMail";
             txtMail.PlaceholderForeColor = Color.DarkGray;
             txtMail.PlaceholderText = "Ingresar Email";
@@ -417,7 +417,7 @@
             dgvDocentes.RowHeadersVisible = false;
             dgvDocentes.RowTemplate.Height = 35;
             dgvDocentes.ScrollBars = ScrollBars.Vertical;
-            dgvDocentes.Size = new Size(608, 430);
+            dgvDocentes.Size = new Size(673, 430);
             dgvDocentes.TabIndex = 59;
             dgvDocentes.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvDocentes.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -460,7 +460,7 @@
             pnlDataGridElementos.Location = new Point(396, 99);
             pnlDataGridElementos.Name = "pnlDataGridElementos";
             pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            pnlDataGridElementos.Size = new Size(636, 552);
+            pnlDataGridElementos.Size = new Size(701, 582);
             pnlDataGridElementos.TabIndex = 60;
             // 
             // btnBorrarFiltros
@@ -478,7 +478,7 @@
             btnBorrarFiltros.ForeColor = Color.White;
             btnBorrarFiltros.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnBorrarFiltros.HoverState.ForeColor = Color.White;
-            btnBorrarFiltros.Location = new Point(255, 29);
+            btnBorrarFiltros.Location = new Point(285, 29);
             btnBorrarFiltros.Name = "btnBorrarFiltros";
             btnBorrarFiltros.PressedColor = Color.Brown;
             btnBorrarFiltros.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -494,7 +494,7 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI Variable Display Semib", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(441, 6);
+            guna2HtmlLabel4.Location = new Point(506, 6);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(47, 19);
             guna2HtmlLabel4.TabIndex = 12;
@@ -515,7 +515,7 @@
             panel2.BackColor = Color.LightGray;
             panel2.Location = new Point(18, 75);
             panel2.Name = "panel2";
-            panel2.Size = new Size(600, 1);
+            panel2.Size = new Size(669, 1);
             panel2.TabIndex = 2;
             // 
             // cmbHabilitado
@@ -541,7 +541,7 @@
             cmbHabilitado.ItemsAppearance.ForeColor = Color.Black;
             cmbHabilitado.ItemsAppearance.SelectedBackColor = Color.FromArgb(105, 80, 165);
             cmbHabilitado.ItemsAppearance.SelectedForeColor = Color.White;
-            cmbHabilitado.Location = new Point(441, 29);
+            cmbHabilitado.Location = new Point(506, 29);
             cmbHabilitado.Name = "cmbHabilitado";
             cmbHabilitado.ShadowDecoration.BorderRadius = 10;
             cmbHabilitado.ShadowDecoration.CustomizableEdges = customizableEdges28;
@@ -588,7 +588,7 @@
             panel1.BackColor = Color.LightGray;
             panel1.Location = new Point(18, 534);
             panel1.Name = "panel1";
-            panel1.Size = new Size(600, 1);
+            panel1.Size = new Size(669, 1);
             panel1.TabIndex = 1;
             // 
             // guna2GroupBox2
@@ -614,7 +614,7 @@
             guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges34;
             guna2GroupBox2.ShadowDecoration.Enabled = true;
             guna2GroupBox2.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
-            guna2GroupBox2.Size = new Size(357, 292);
+            guna2GroupBox2.Size = new Size(357, 322);
             guna2GroupBox2.TabIndex = 61;
             guna2GroupBox2.Text = "- Docentes Seleccionado -";
             guna2GroupBox2.TextAlign = HorizontalAlignment.Center;
@@ -628,7 +628,7 @@
             guna2Panel3.Location = new Point(396, 51);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            guna2Panel3.Size = new Size(636, 36);
+            guna2Panel3.Size = new Size(701, 36);
             guna2Panel3.TabIndex = 63;
             // 
             // lblPresentacion
@@ -659,7 +659,7 @@
             customizableEdges38.TopLeft = false;
             customizableEdges38.TopRight = false;
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges38;
-            pnlPresentacionNotebook.Size = new Size(636, 41);
+            pnlPresentacionNotebook.Size = new Size(701, 41);
             pnlPresentacionNotebook.TabIndex = 62;
             // 
             // lblElementosTitulo
@@ -685,7 +685,7 @@
             Controls.Add(pnlDataGridElementos);
             Controls.Add(guna2GroupBox1);
             Name = "DocentesUC";
-            Size = new Size(1050, 670);
+            Size = new Size(1113, 698);
             Load += DocentesUC_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             guna2GroupBox1.ResumeLayout(false);

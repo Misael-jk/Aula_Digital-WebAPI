@@ -12,9 +12,11 @@ namespace CapaPresentacion
 {
     public partial class FormPantallaCarga : Form
     {
-        public FormPantallaCarga()
+        private readonly IDbConnection connection;
+        public FormPantallaCarga(IDbConnection connection)
         {
             InitializeComponent();
+            this.connection = connection;
         }
 
         private void FormPantallaCarga_Load(object sender, EventArgs e)
@@ -35,7 +37,12 @@ namespace CapaPresentacion
 
                 Task.Delay(300).ContinueWith(_ =>
                 {
-                    
+                    this.Invoke(new Action(() =>
+                    {
+                        LoginState formLogin = new LoginState(connection);
+                        formLogin.Show();
+                        this.Hide();
+                    }));
                 });
             }
         }

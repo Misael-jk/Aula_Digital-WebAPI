@@ -239,10 +239,57 @@ public class PrestamosCN
 
     #region FILTROS
 
+    #region Prestamo detalle
+    public List<int> ObtenerIDsElementosPorPrestamo(int idPrestamo)
+    {
+        return uow.RepoPrestamoDetalle.GetIdsElementosByIdPrestamo(idPrestamo);
+    }
+    #endregion
+
+    #region Estado del prestamo
+    public EstadosPrestamo? ObtenerEstadoPrestamoPorID(int idEstadoPrestamo)
+    {
+        return uow.RepoEstadosPrestamo.GetById(idEstadoPrestamo);
+    }
+    #endregion
+
+    #region Carritos
+    public int ObtenerCantidadPorCarrito(int idCarrito)
+    {
+        return uow.RepoCarritos.GetCountByCarrito(idCarrito);
+    }
+
+    public int ObtenerCantidadDisponiblesPorCarrito(int idCarrito)
+    {
+        return uow.RepoCarritos.GetCountDisponiblesByCarrito(idCarrito);
+    }
+    public int ObtenerCantidadPrestadosPorCarrito(int idCarrito)
+    {
+        return uow.RepoCarritos.GetCountPrestadosByCarrito(idCarrito);
+    }
+
+    public Carritos? ObtenerCarritoPorID(int idCarrito)
+    {
+        return uow.RepoCarritos.GetById(idCarrito);
+    }
+    #endregion
+
     #region Docentes
     public Docentes? ObtenerDocentePorDNI(string DNI)
     {
         return uow.RepoDocentes.FiltroGetDocenteByID(DNI);
+    }
+
+    public Docentes? ObtenerDocentePorID(int idDocente)
+    {
+        return uow.RepoDocentes.GetById(idDocente);
+    }
+    #endregion
+
+    #region Usuarios
+    public Usuarios? ObtenerUsuarioPorID(int idUsuario)
+    {
+        return uow.RepoUsuarios.GetById(idUsuario);
     }
     #endregion
 
@@ -280,6 +327,11 @@ public class PrestamosCN
     public List<int> ObtenerIDsElementosPorIdPrestamo(int idPrestamo)
     {
         return uow.RepoPrestamoDetalle.GetIdsElementosByIdPrestamo(idPrestamo);
+    }
+
+    public IEnumerable<int> ObtenerIDsElementosPorIdDisponibles(int idCarrito)
+    {
+        return uow.RepoNotebooks.GetIdNotebooksDisponiblesByCarrito(idCarrito);
     }
     #endregion
 

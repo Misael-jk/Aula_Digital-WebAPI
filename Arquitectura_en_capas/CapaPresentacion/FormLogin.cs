@@ -56,12 +56,19 @@ namespace CapaPresentacion
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string usuario = TxtUser.Text.Trim();
-            string password = TxtPass.Text.Trim();
+            if (string.IsNullOrWhiteSpace(TxtUser.Text) || string.IsNullOrWhiteSpace(TxtPass.Text))
+            {
+                TxtError.Text = "Debes poner tu usuario y contraseña";
+                TxtError.Visible = true;
+                return;
+            }
 
-            Usuarios? userVerificado = usuariosCN.Login(usuario, password);
+            string usuario = TxtUser.Text;
+            string password = TxtPass.Text;
 
-            if (userVerificado != null)
+            Usuarios? userVerificado = usuariosCN.ObtenerPorUsuario(usuario);
+
+            if (userVerificado?.Usuario == TxtUser.Text && userVerificado?.Password == TxtPass.Text)
             {
                 Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
                 FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
@@ -70,23 +77,38 @@ namespace CapaPresentacion
             }
             else
             {
+                TxtError.Text = "Usuario o contraseña incorrecto";
                 TxtError.Visible = true;
             }
+
+            //Usuarios? userVerificado = usuariosCN.Login(usuario, password);
+
+            //if (userVerificado != null)
+            //{
+            //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
+            //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
+            //    principal.Show();
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    TxtError.Visible = true;
+            //}
         }
 
 
-    //if (userVerificado != null)
-    //{
-    //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
+        //if (userVerificado != null)
+        //{
+        //    Roles? rolUserVerificado = repoRoles.GetById(userVerificado.IdRol);
 
-    //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
-    //    principal.Show();
-    //    this.Hide();
-    //}
-    //else
-    //{
-    //    TxtError.Visible = true;
-    //}
+        //    FormPrincipal principal = new FormPrincipal(conexion, userVerificado, rolUserVerificado);
+        //    principal.Show();
+        //    this.Hide();
+        //}
+        //else
+        //{
+        //    TxtError.Visible = true;
+        //}
 
 
         private void TxtUser_KeyDown(object sender, KeyEventArgs e)

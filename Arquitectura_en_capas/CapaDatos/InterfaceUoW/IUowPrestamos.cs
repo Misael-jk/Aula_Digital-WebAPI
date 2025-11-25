@@ -19,6 +19,7 @@ public interface IUowPrestamos
     public IRepoModelo RepoModelo { get; }
     public IRepoTipoElemento RepoTipoElemento { get; }
     public IRepoVarianteElemento RepoVarianteElemento { get; }
+    public IRepoEstadosPrestamo RepoEstadosPrestamo { get; }
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

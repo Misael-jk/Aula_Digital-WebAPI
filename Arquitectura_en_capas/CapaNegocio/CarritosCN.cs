@@ -274,6 +274,11 @@ public class CarritosCN
     {
         return uow.RepoModelo.GetByTipo(idTipo);
     }
+
+    public Modelos? ObtenerModeloPorID(int idModelo)
+    {
+        return uow.RepoModelo.GetById(idModelo);
+    }
     #endregion
 
     #region NOTEBOOK
@@ -302,9 +307,14 @@ public class CarritosCN
         return uow.RepoNotebooks.GetByNumeroSerie(numSerie);
     }
 
-    public Notebooks? ObtenerPorSerieOCodBarra(string numSerie, string CodBarra)
+    public Notebooks? ObtenerPorSerieOCodBarraOPatrimonio(string? numSerie, string? CodBarra, string? patrimonio)
     {
-        return uow.RepoNotebooks.GetNotebookBySerieOrCodigo(numSerie, CodBarra);
+        return uow.RepoNotebooks.GetNotebookBySerieOrCodigoOrPatrimonio(numSerie, CodBarra, patrimonio);
+    }
+
+    public Notebooks? ObtenerNotebookPorID(int idNotebook)
+    {
+        return uow.RepoNotebooks.GetById(idNotebook);
     }
     #endregion
 

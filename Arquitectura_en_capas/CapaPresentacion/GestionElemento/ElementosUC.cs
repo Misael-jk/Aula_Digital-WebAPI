@@ -51,8 +51,6 @@ namespace CapaPresentacion
         #region LOAD
         private void ElementosUC_Load(object sender, EventArgs e)
         {
-            // ScrollBar
-            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1120);
 
@@ -423,7 +421,6 @@ namespace CapaPresentacion
             CargarElementos();
         }
         #endregion
-
 
         private void EjecutarBusqueda()
         {

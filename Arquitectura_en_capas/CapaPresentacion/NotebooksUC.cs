@@ -83,7 +83,6 @@ namespace CapaPresentacion
         private void NotebooksUC_Load(object sender, EventArgs e)
         {
             // Scrollbar
-            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1157);
 

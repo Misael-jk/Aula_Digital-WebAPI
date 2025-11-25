@@ -145,7 +145,7 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     #region Obtener por Usuario
     public Usuarios? GetByUser(string user)
     {
-        string query = "select * from Usuarios where usuario = @usuario";
+        string query = "select idUsuario, usuario, pass AS 'Password', nombre, apellido, idRol, email, fotoPerfil, habilitado, fechaBaja from Usuarios where usuario = @usuario";
 
         DynamicParameters parametros = new DynamicParameters();
         try

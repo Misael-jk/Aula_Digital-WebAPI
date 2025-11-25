@@ -22,6 +22,7 @@ public class UowPrestamos : UowBase, IUowPrestamos
     public IRepoModelo RepoModelo { get; }
     public IRepoTipoElemento RepoTipoElemento { get; }
     public IRepoVarianteElemento RepoVarianteElemento { get; }
+    public IRepoEstadosPrestamo RepoEstadosPrestamo { get; }
 
     public UowPrestamos(IDbConnection conexion) : base(conexion)
 {
@@ -43,6 +44,7 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
         RepoModelo = new RepoModelo(conexion, Transaction);
         RepoVarianteElemento = new RepoVarianteElemento(conexion, Transaction);
+        RepoEstadosPrestamo = new RepoEstadosPrestamo(conexion, Transaction);
     }
 
 
@@ -63,5 +65,6 @@ public class UowPrestamos : UowBase, IUowPrestamos
         RepoDocentes.SetTransaction(transaction);
         RepoUsuarios.SetTransaction(transaction);
         RepoCursos.SetTransaction(transaction);
+        RepoEstadosPrestamo.SetTransaction(transaction);
     }
 }

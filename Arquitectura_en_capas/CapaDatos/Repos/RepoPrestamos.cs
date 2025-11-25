@@ -99,7 +99,7 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
     #region obtener por Id
     public Prestamos? GetById(int idPrestamo)
     {
-        string query = "select * from Prestamos where idPrestamo = @unidPrestamo";
+        string query = "select idPrestamo, idUsuarioRecibio AS IdUsuario, idCurso, idDocente, idCarrito, idEstadoPrestamo, fechaPrestamo from Prestamos where idPrestamo = @unidPrestamo";
 
         DynamicParameters parametros = new DynamicParameters();
         try

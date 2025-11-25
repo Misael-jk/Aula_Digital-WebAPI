@@ -135,7 +135,7 @@
             guna2Panel2.Location = new Point(567, 13);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Panel2.Size = new Size(467, 642);
+            guna2Panel2.Size = new Size(530, 670);
             guna2Panel2.TabIndex = 53;
             // 
             // txtMotivo
@@ -157,7 +157,7 @@
             txtMotivo.ForeColor = Color.Black;
             txtMotivo.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
             txtMotivo.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            txtMotivo.Location = new Point(241, 374);
+            txtMotivo.Location = new Point(278, 404);
             txtMotivo.Margin = new Padding(4, 5, 4, 5);
             txtMotivo.Multiline = true;
             txtMotivo.Name = "txtMotivo";
@@ -169,7 +169,7 @@
             txtMotivo.ShadowDecoration.BorderRadius = 10;
             txtMotivo.ShadowDecoration.CustomizableEdges = customizableEdges2;
             txtMotivo.ShadowDecoration.Depth = 5;
-            txtMotivo.Size = new Size(209, 254);
+            txtMotivo.Size = new Size(238, 254);
             txtMotivo.TabIndex = 100;
             txtMotivo.TextOffset = new Point(5, 0);
             // 
@@ -179,7 +179,7 @@
             label5.BackColor = SystemColors.ButtonHighlight;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(241, 350);
+            label5.Location = new Point(278, 380);
             label5.Name = "label5";
             label5.Size = new Size(48, 15);
             label5.TabIndex = 101;
@@ -204,7 +204,7 @@
             txtDescripcion.ForeColor = Color.Black;
             txtDescripcion.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
             txtDescripcion.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            txtDescripcion.Location = new Point(15, 374);
+            txtDescripcion.Location = new Point(13, 404);
             txtDescripcion.Margin = new Padding(4, 5, 4, 5);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
@@ -216,7 +216,7 @@
             txtDescripcion.ShadowDecoration.BorderRadius = 10;
             txtDescripcion.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtDescripcion.ShadowDecoration.Depth = 5;
-            txtDescripcion.Size = new Size(209, 254);
+            txtDescripcion.Size = new Size(238, 254);
             txtDescripcion.TabIndex = 98;
             txtDescripcion.TextOffset = new Point(5, 0);
             // 
@@ -226,7 +226,7 @@
             lblDescripcion.BackColor = SystemColors.ButtonHighlight;
             lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescripcion.ForeColor = Color.Black;
-            lblDescripcion.Location = new Point(15, 350);
+            lblDescripcion.Location = new Point(13, 380);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(72, 15);
             lblDescripcion.TabIndex = 99;
@@ -237,7 +237,7 @@
             lblHistorialDeNotebook.BackColor = Color.Transparent;
             lblHistorialDeNotebook.Font = new Font("Segoe UI Semibold", 19F);
             lblHistorialDeNotebook.ForeColor = SystemColors.ActiveCaptionText;
-            lblHistorialDeNotebook.Location = new Point(100, 5);
+            lblHistorialDeNotebook.Location = new Point(126, 6);
             lblHistorialDeNotebook.Name = "lblHistorialDeNotebook";
             lblHistorialDeNotebook.Size = new Size(278, 37);
             lblHistorialDeNotebook.TabIndex = 97;
@@ -247,9 +247,9 @@
             // panel4
             // 
             panel4.BackColor = Color.LightGray;
-            panel4.Location = new Point(24, 338);
+            panel4.Location = new Point(15, 362);
             panel4.Name = "panel4";
-            panel4.Size = new Size(415, 1);
+            panel4.Size = new Size(500, 1);
             panel4.TabIndex = 74;
             // 
             // dgvHistorial
@@ -278,13 +278,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvHistorial.DefaultCellStyle = dataGridViewCellStyle3;
             dgvHistorial.GridColor = Color.Gainsboro;
-            dgvHistorial.Location = new Point(15, 57);
+            dgvHistorial.Location = new Point(15, 60);
             dgvHistorial.MultiSelect = false;
             dgvHistorial.Name = "dgvHistorial";
             dgvHistorial.RowHeadersVisible = false;
             dgvHistorial.RowTemplate.Height = 35;
             dgvHistorial.ScrollBars = ScrollBars.Vertical;
-            dgvHistorial.Size = new Size(435, 275);
+            dgvHistorial.Size = new Size(501, 285);
             dgvHistorial.TabIndex = 74;
             dgvHistorial.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvHistorial.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -312,9 +312,9 @@
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
-            panel1.Location = new Point(24, 45);
+            panel1.Location = new Point(15, 45);
             panel1.Name = "panel1";
-            panel1.Size = new Size(415, 1);
+            panel1.Size = new Size(501, 1);
             panel1.TabIndex = 73;
             // 
             // guna2Panel1
@@ -353,7 +353,7 @@
             guna2Panel1.Location = new Point(17, 58);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            guna2Panel1.Size = new Size(534, 597);
+            guna2Panel1.Size = new Size(534, 625);
             guna2Panel1.TabIndex = 52;
             // 
             // lblCasillero
@@ -485,7 +485,7 @@
             txtExplicarMotivo.ShadowDecoration.BorderRadius = 10;
             txtExplicarMotivo.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtExplicarMotivo.ShadowDecoration.Depth = 5;
-            txtExplicarMotivo.Size = new Size(500, 82);
+            txtExplicarMotivo.Size = new Size(500, 112);
             txtExplicarMotivo.TabIndex = 86;
             txtExplicarMotivo.TextOffset = new Point(5, 0);
             // 
@@ -817,7 +817,7 @@
             btnConfirmar.ForeColor = Color.White;
             btnConfirmar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnConfirmar.HoverState.ForeColor = Color.White;
-            btnConfirmar.Location = new Point(16, 557);
+            btnConfirmar.Location = new Point(16, 587);
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.PressedColor = Color.Brown;
             btnConfirmar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -845,7 +845,7 @@
             btnCancelar.ForeColor = Color.White;
             btnCancelar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnCancelar.HoverState.ForeColor = Color.White;
-            btnCancelar.Location = new Point(274, 557);
+            btnCancelar.Location = new Point(274, 587);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.PressedColor = Color.Brown;
             btnCancelar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -901,7 +901,7 @@
             btnActualizar.ForeColor = Color.Firebrick;
             btnActualizar.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnActualizar.HoverState.ForeColor = Color.White;
-            btnActualizar.Location = new Point(15, 557);
+            btnActualizar.Location = new Point(15, 587);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.PressedColor = Color.FromArgb(255, 170, 20);
             btnActualizar.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -929,7 +929,7 @@
             btnRestablecerCambios.ForeColor = Color.Firebrick;
             btnRestablecerCambios.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnRestablecerCambios.HoverState.ForeColor = Color.White;
-            btnRestablecerCambios.Location = new Point(273, 557);
+            btnRestablecerCambios.Location = new Point(273, 587);
             btnRestablecerCambios.Name = "btnRestablecerCambios";
             btnRestablecerCambios.PressedColor = Color.FromArgb(255, 170, 20);
             btnRestablecerCambios.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -995,7 +995,7 @@
             Controls.Add(guna2Panel1);
             Controls.Add(pnlPresentacionNotebook);
             Name = "NotebookGestionUC";
-            Size = new Size(1050, 670);
+            Size = new Size(1113, 698);
             Load += NotebookGestionUC_Load;
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();

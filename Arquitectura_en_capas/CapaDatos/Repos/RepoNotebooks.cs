@@ -364,12 +364,12 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region OBTENER TODAS LAS NOTEBOOKS DE UN CARRITO
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito)
     {
-        string query = @"select posicionCarrito, idEstadoMantenimiento
+        string query = @"select *
                         from elementos e
                         join Notebooks n using (idElemento)
                         where n.idCarrito = @unIdCarrito
                         and (idEstadoMantenimiento = 1
-                        or idEstadoMantenimiento = 3);";
+                        or idEstadoMantenimiento = 2);";
 
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("@unIdCarrito", idCarrito);
@@ -385,22 +385,25 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     }
     #endregion
 
-    #region OBTENER NOTEBOOK POR CODIGO O SERIE
-    public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
+    #region OBTENER NOTEBOOK POR CODIGO O SERIE O PATRIMONIO
+    public Notebooks? GetNotebookBySerieOrCodigoOrPatrimonio(string? numeroSerie, string? codigoBarra, string? patrimonio)
     {
-        string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
+        string query = @"select *
                          from Elementos e
                          LEFT JOIN Notebooks n ON e.idElemento = n.idElemento
-                         where (numeroSerie = @numeroSerie or codigoBarra = @codigoBarra)
-                         and n.idCarrito is null
-                         and idEstadoMantenimiento = 1 
-                         and habilitado = 1
-                         limit 1;";
+                         WHERE (@numeroSerie IS NULL OR e.numeroSerie = @numeroSerie)
+                         AND (@codigoBarra IS NULL OR e.codigoBarra = @codigoBarra)
+                         AND (@patrimonio IS NULL OR e.patrimonio = @patrimonio)
+                         AND e.idTipoElemento = 1
+                         AND e.idEstadoMantenimiento = 1
+                         AND n.idCarrito is null
+                         AND habilitado = 1;";
 
         DynamicParameters parameters = new DynamicParameters();
 
         parameters.Add("numeroSerie", numeroSerie);
         parameters.Add("codigoBarra", codigoBarra);
+        parameters.Add("patrimonio", patrimonio);
 
         try
         {
@@ -570,6 +573,28 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
                         from elementos e
                         join Notebooks n using (idElemento)
                         where n.idCarrito = @unIdCarrito
+                        Order by posicionCarrito ASC;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("@unIdCarrito", idCarrito);
+
+        try
+        {
+            return Conexion.Query<int>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al obtener IDs de notebooks del carrito: " + ex.Message);
+        }
+    }
+
+    public IEnumerable<int> GetIdNotebooksDisponiblesByCarrito(int idCarrito)
+    {
+        string query = @"select e.idElemento
+                        from elementos e
+                        join Notebooks n using (idElemento)
+                        where n.idCarrito = @unIdCarrito
+                        and e.idEstadoMantenimiento = 1
                         Order by posicionCarrito ASC;";
 
         DynamicParameters parameters = new DynamicParameters();

@@ -138,10 +138,9 @@ public class RepoCarritos : RepoBase, IRepoCarritos
 
     public IEnumerable<Carritos> GetAllDisponibles()
     {
-        string query = "select idCarrito AS IdCarrito, equipo AS EquipoCarrito, capacidad, idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, Habilitado, fechaBaja from Carritos where idEstadoMantenimiento = 1";
+        string query = "select idCarrito, equipo AS EquipoCarrito, capacidad, idModelo, numeroSerieCarrito, idEstadoMantenimiento, idUbicacion, Habilitado, fechaBaja from Carritos where idEstadoMantenimiento = 1";
         try
         {
-
             return Conexion.Query<Carritos>(query);
         }
         catch (Exception)
@@ -275,6 +274,54 @@ public class RepoCarritos : RepoBase, IRepoCarritos
     public int GetCountByCarrito(int idCarrito)
     {
         string query = "select COUNT(*) from Notebooks where idCarrito = @idCarrito";
+
+        DynamicParameters parametros = new DynamicParameters();
+
+        try
+        {
+            parametros.Add("idCarrito", idCarrito);
+            int cantidad = Conexion.ExecuteScalar<int>(query, parametros, transaction: Transaction);
+
+            return cantidad;
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener el numero de serie del carrito");
+        }
+    }
+
+    public int GetCountDisponiblesByCarrito(int idCarrito)
+    {
+        string query = @"SELECT COUNT(*) 
+                        FROM Notebooks n
+                        JOIN Elementos e ON n.idElemento = e.idElemento
+                        WHERE n.idCarrito = @idCarrito
+                          AND e.idEstadoMantenimiento = 1;
+                        ";
+
+        DynamicParameters parametros = new DynamicParameters();
+
+        try
+        {
+            parametros.Add("idCarrito", idCarrito);
+            int cantidad = Conexion.ExecuteScalar<int>(query, parametros, transaction: Transaction);
+
+            return cantidad;
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener el numero de serie del carrito");
+        }
+    }
+
+    public int GetCountPrestadosByCarrito(int idCarrito)
+    {
+        string query = @"SELECT COUNT(*) 
+                        FROM Notebooks n
+                        JOIN Elementos e ON n.idElemento = e.idElemento
+                        WHERE n.idCarrito = @idCarrito
+                          AND e.idEstadoMantenimiento = 1;
+                        ";
 
         DynamicParameters parametros = new DynamicParameters();
 

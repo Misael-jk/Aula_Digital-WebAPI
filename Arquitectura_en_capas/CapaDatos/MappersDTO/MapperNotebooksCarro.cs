@@ -33,6 +33,7 @@ namespace CapaDatos.MappersDTO
             INNER JOIN TipoElemento te ON e.idTipoElemento = te.idTipoElemento
             LEFT JOIN Modelo m ON e.idModelo = m.idModelo
             WHERE e.idTipoElemento = 1
+            AND e.idEstadoMantenimiento = 1
             AND n.idCarrito = @unIdCarrito;",
             (Notebooks, modelo) => new NotebooksCarroDTO
             {

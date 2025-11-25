@@ -120,7 +120,7 @@
             pnlRanking.CustomizableEdges = customizableEdges1;
             pnlRanking.FillColor = SystemColors.ControlLightLight;
             pnlRanking.FillColor2 = SystemColors.ControlLightLight;
-            pnlRanking.Location = new Point(770, 211);
+            pnlRanking.Location = new Point(838, 228);
             pnlRanking.Name = "pnlRanking";
             pnlRanking.ShadowDecoration.BorderRadius = 15;
             pnlRanking.ShadowDecoration.Color = SystemColors.ButtonShadow;
@@ -231,7 +231,7 @@
             pnlGrafico.ShadowDecoration.Depth = 15;
             pnlGrafico.ShadowDecoration.Enabled = true;
             pnlGrafico.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
-            pnlGrafico.Size = new Size(735, 245);
+            pnlGrafico.Size = new Size(796, 245);
             pnlGrafico.TabIndex = 14;
             // 
             // guna2HtmlLabel4
@@ -239,7 +239,7 @@
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI Symbol", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel4.ForeColor = SystemColors.MenuText;
-            guna2HtmlLabel4.Location = new Point(277, 6);
+            guna2HtmlLabel4.Location = new Point(334, 10);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(201, 27);
             guna2HtmlLabel4.TabIndex = 25;
@@ -262,7 +262,7 @@
             guna2GradientPanel7.ShadowDecoration.Depth = 33;
             guna2GradientPanel7.ShadowDecoration.Enabled = true;
             guna2GradientPanel7.ShadowDecoration.Shadow = new Padding(2, 2, 2, 5);
-            guna2GradientPanel7.Size = new Size(735, 268);
+            guna2GradientPanel7.Size = new Size(796, 294);
             guna2GradientPanel7.TabIndex = 15;
             // 
             // dgvPrestamosActivos
@@ -298,7 +298,7 @@
             dgvPrestamosActivos.RowHeadersVisible = false;
             dgvPrestamosActivos.RowTemplate.Height = 35;
             dgvPrestamosActivos.ScrollBars = ScrollBars.Vertical;
-            dgvPrestamosActivos.Size = new Size(710, 227);
+            dgvPrestamosActivos.Size = new Size(770, 243);
             dgvPrestamosActivos.TabIndex = 10;
             dgvPrestamosActivos.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvPrestamosActivos.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -342,7 +342,7 @@
             grbDisponibles.CustomBorderColor = Color.Transparent;
             grbDisponibles.CustomizableEdges = customizableEdges7;
             grbDisponibles.FillColor = Color.FromArgb(16, 185, 129);
-            grbDisponibles.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grbDisponibles.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grbDisponibles.ForeColor = Color.FromArgb(64, 0, 0);
             grbDisponibles.Location = new Point(20, 11);
             grbDisponibles.Name = "grbDisponibles";
@@ -351,7 +351,7 @@
             grbDisponibles.ShadowDecoration.Depth = 15;
             grbDisponibles.ShadowDecoration.Enabled = true;
             grbDisponibles.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
-            grbDisponibles.Size = new Size(188, 105);
+            grbDisponibles.Size = new Size(206, 105);
             grbDisponibles.TabIndex = 16;
             // 
             // guna2HtmlLabel5
@@ -386,15 +386,15 @@
             guna2GroupBox1.CustomBorderColor = Color.Transparent;
             guna2GroupBox1.CustomizableEdges = customizableEdges9;
             guna2GroupBox1.FillColor = Color.FromArgb(247, 201, 72);
-            guna2GroupBox1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2GroupBox1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox1.ForeColor = Color.FromArgb(64, 0, 0);
-            guna2GroupBox1.Location = new Point(428, 11);
+            guna2GroupBox1.Location = new Point(462, 11);
             guna2GroupBox1.Name = "guna2GroupBox1";
             guna2GroupBox1.ShadowDecoration.BorderRadius = 15;
             guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2GroupBox1.ShadowDecoration.Enabled = true;
             guna2GroupBox1.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
-            guna2GroupBox1.Size = new Size(188, 105);
+            guna2GroupBox1.Size = new Size(206, 105);
             guna2GroupBox1.TabIndex = 17;
             // 
             // guna2HtmlLabel8
@@ -429,16 +429,16 @@
             guna2GroupBox2.CustomBorderColor = Color.Transparent;
             guna2GroupBox2.CustomizableEdges = customizableEdges11;
             guna2GroupBox2.FillColor = Color.FromArgb(59, 130, 246);
-            guna2GroupBox2.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2GroupBox2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox2.ForeColor = Color.FromArgb(64, 0, 0);
-            guna2GroupBox2.Location = new Point(223, 11);
+            guna2GroupBox2.Location = new Point(241, 11);
             guna2GroupBox2.Name = "guna2GroupBox2";
             guna2GroupBox2.ShadowDecoration.BorderRadius = 15;
             guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2GroupBox2.ShadowDecoration.Depth = 15;
             guna2GroupBox2.ShadowDecoration.Enabled = true;
             guna2GroupBox2.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
-            guna2GroupBox2.Size = new Size(188, 105);
+            guna2GroupBox2.Size = new Size(206, 105);
             guna2GroupBox2.TabIndex = 18;
             // 
             // guna2HtmlLabel6
@@ -474,16 +474,16 @@
             guna2GroupBox3.CustomBorderColor = Color.Transparent;
             guna2GroupBox3.CustomizableEdges = customizableEdges13;
             guna2GroupBox3.FillColor = Color.FromArgb(239, 68, 68);
-            guna2GroupBox3.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2GroupBox3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox3.ForeColor = Color.FromArgb(64, 0, 0);
-            guna2GroupBox3.Location = new Point(633, 11);
+            guna2GroupBox3.Location = new Point(682, 11);
             guna2GroupBox3.Name = "guna2GroupBox3";
             guna2GroupBox3.ShadowDecoration.BorderRadius = 15;
             guna2GroupBox3.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2GroupBox3.ShadowDecoration.Depth = 15;
             guna2GroupBox3.ShadowDecoration.Enabled = true;
             guna2GroupBox3.ShadowDecoration.Shadow = new Padding(1, 1, 1, 5);
-            guna2GroupBox3.Size = new Size(188, 105);
+            guna2GroupBox3.Size = new Size(206, 105);
             guna2GroupBox3.TabIndex = 19;
             // 
             // guna2HtmlLabel7
@@ -518,9 +518,9 @@
             guna2GroupBox4.Controls.Add(lblCantTotal);
             guna2GroupBox4.CustomBorderColor = Color.White;
             guna2GroupBox4.CustomizableEdges = customizableEdges15;
-            guna2GroupBox4.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2GroupBox4.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2GroupBox4.ForeColor = Color.FromArgb(64, 0, 0);
-            guna2GroupBox4.Location = new Point(838, 11);
+            guna2GroupBox4.Location = new Point(906, 11);
             guna2GroupBox4.Name = "guna2GroupBox4";
             guna2GroupBox4.ShadowDecoration.BorderRadius = 15;
             guna2GroupBox4.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -562,7 +562,7 @@
             pnlDevolucionesPendientes.CustomizableEdges = customizableEdges17;
             pnlDevolucionesPendientes.FillColor = Color.Firebrick;
             pnlDevolucionesPendientes.FillColor2 = Color.Red;
-            pnlDevolucionesPendientes.Location = new Point(770, 132);
+            pnlDevolucionesPendientes.Location = new Point(835, 132);
             pnlDevolucionesPendientes.Name = "pnlDevolucionesPendientes";
             pnlDevolucionesPendientes.ShadowDecoration.BorderRadius = 15;
             pnlDevolucionesPendientes.ShadowDecoration.Color = SystemColors.ButtonShadow;
@@ -604,7 +604,7 @@
             guna2GradientPanel2.CustomizableEdges = customizableEdges21;
             guna2GradientPanel2.FillColor = Color.Orange;
             guna2GradientPanel2.FillColor2 = Color.Orange;
-            guna2GradientPanel2.Location = new Point(770, 571);
+            guna2GradientPanel2.Location = new Point(838, 600);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
             guna2GradientPanel2.ShadowDecoration.BorderRadius = 15;
             guna2GradientPanel2.ShadowDecoration.Color = SystemColors.ButtonShadow;
@@ -662,7 +662,7 @@
             PnlSinPrestamos.CustomizableEdges = customizableEdges23;
             PnlSinPrestamos.FillColor = Color.ForestGreen;
             PnlSinPrestamos.FillColor2 = Color.FromArgb(16, 185, 129);
-            PnlSinPrestamos.Location = new Point(770, 132);
+            PnlSinPrestamos.Location = new Point(835, 132);
             PnlSinPrestamos.Name = "PnlSinPrestamos";
             PnlSinPrestamos.ShadowDecoration.BorderRadius = 15;
             PnlSinPrestamos.ShadowDecoration.Color = SystemColors.ButtonShadow;
@@ -711,7 +711,7 @@
             Controls.Add(guna2GradientPanel7);
             Controls.Add(pnlRanking);
             Name = "Dashboard";
-            Size = new Size(1050, 670);
+            Size = new Size(1113, 698);
             Load += Dashboard_Load_1;
             pnlRanking.ResumeLayout(false);
             pnlRanking.PerformLayout();

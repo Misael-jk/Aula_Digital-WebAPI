@@ -207,4 +207,26 @@ public class RepoPrestamoDetalle : RepoBase, IRepoPrestamoDetalle
             throw new Exception("Error al contar los detalles del prestamo");
         }
     }
+    public List<int> GetIdsElementosPorPrestamoFiltrandoCarrito(int idPrestamo, int idCarrito)
+    {
+        string sql = @"
+        SELECT pd.idElemento
+        FROM PrestamoDetalle pd
+        INNER JOIN Notebooks nb ON nb.idElemento = pd.idElemento
+        WHERE pd.idPrestamo = @idPrestamo
+          AND nb.idCarrito = @idCarrito;";
+
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("idPrestamo", idPrestamo);
+            parametros.Add("idCarrito", idCarrito);
+            return Conexion.Query<int>(sql, parametros, transaction: Transaction).ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al contar los detalles del prestamo");
+        }
+    }
+
 }

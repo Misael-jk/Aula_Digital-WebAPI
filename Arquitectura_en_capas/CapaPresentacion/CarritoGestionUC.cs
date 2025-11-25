@@ -22,6 +22,10 @@ namespace CapaPresentacion
         private int _idCarritoSeleccionado;
         private int _idHistorialSeleccionado;
         private Usuarios usuarios;
+        private int _casilleroSeleccionado;
+        private int? _idNotebookSeleccionada;
+        private Guna.UI2.WinForms.Guna2TextBox? txtActivoParaFiltro = null;
+        private int _idElementoEncontrado;
         private bool _cargando = false;
 
         #region GUARDANDO DATOS EN VARIABLES
@@ -46,9 +50,6 @@ namespace CapaPresentacion
             _idCarritoSeleccionado = idCarritoSeleccionado;
             usuarios = user;
             this.carritosBajasCN = carritosBajasCN;
-
-            txtEquipo.TextChanged += VerificarCambios;
-            txtNroSerie.TextChanged += VerificarCambios;
         }
 
 
@@ -68,8 +69,6 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1100);
 
-            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            circleButton1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             CargarTodaLaGestion(_idCarritoSeleccionado);
 
             dgvHistorial.Columns["IdHistorialCarrito"].HeaderText = "ID";
@@ -106,7 +105,7 @@ namespace CapaPresentacion
 
                 HabilitarBotones(false, false);
 
-                GenerarBotonesCarrito(32);
+                GenerarBotonesCarrito(Convert.ToInt32(carrito?.Capacidad));
             }
             finally
             {
@@ -141,7 +140,7 @@ namespace CapaPresentacion
             int CantidadNotebooks = carritosCN.ObtenerCantidadPorCarrito(_idCarritoSeleccionado);
 
             lblOcupados.Text += CantidadNotebooks + "/" + carrito?.Capacidad;
-            lblCapacidad.Text += carrito?.Capacidad.ToString(); 
+            lblCapacidad.Text += carrito?.Capacidad.ToString();
         }
 
         private void CargarComboboxes()
@@ -378,97 +377,66 @@ namespace CapaPresentacion
             if (capacidad <= 0)
                 return;
 
-            // --- OPCIÓN RECOMENDADA ---
-            // El contenedor debe ser UN FlowLayoutPanel
-            // pnlContenedor.WrapContents = true;
-            // pnlContenedor.FlowDirection = FlowDirection.LeftToRight;
-
             var notebooks = carritosCN.ObtenerNotebooksPorCarrito(_idCarritoSeleccionado)
                                       .ToList();
 
+            int posY = 3; // posición inicial en Y
+
             for (int i = 1; i <= capacidad; i++)
             {
-                var notebook = notebooks.FirstOrDefault(n => n.PosicionCarrito == i);
+                Notebooks? notebook = notebooks.FirstOrDefault(n => n.PosicionCarrito == i);
 
-                var btn = CrearBotonCasillero(i, notebook);
+                Button btn = CrearBotonCasillero(i, notebook);
+
+                // Ubicación vertical
+                btn.Location = new Point(3, posY);
+
+                // Siguiente botón  → abajo 46 px
+                posY += 46;
 
                 pnlContenedor.Controls.Add(btn);
             }
         }
 
-        private Guna2Button CrearBotonCasillero(int numero, Notebooks notebook)
+        private Button CrearBotonCasillero(int numero, Notebooks? notebook)
         {
-            var btn = new Guna2Button();
+            Button btn = new Button();
 
-            // ------------------------------
-            // 🔹 Estilo base (TU diseño)
-            // ------------------------------
-            btn.BackColor = Color.Transparent;
-            btn.BorderRadius = 8;
-            btn.Cursor = Cursors.Hand;
-
-            btn.DisabledState.BorderColor = Color.DarkGray;
-            btn.DisabledState.CustomBorderColor = Color.DarkGray;
-            btn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-
-            btn.FillColor = Color.WhiteSmoke;
-            btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btn.ForeColor = Color.Firebrick;
-
-            btn.HoverState.FillColor = Color.FromArgb(235, 115, 125);
-            btn.HoverState.ForeColor = Color.White;
-
-            btn.PressedColor = Color.FromArgb(255, 170, 20);
-            btn.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btn.ShadowDecoration.Enabled = true;
-            btn.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-
-            btn.Size = new Size(150, 42); // puedes ajustar
-            btn.Margin = new Padding(5);
-            btn.TextAlign = HorizontalAlignment.Left;
-
-            // ------------------------------
-            // 🔹 Texto
-            // ------------------------------
+            // Estilo base que pediste
+            btn.Name = $"btnCasillero{numero}";
+            btn.Size = new Size(362, 43);
             btn.Text = $"Casillero {numero}";
+            btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 1;
 
-            // ------------------------------
-            // 🔹 Icono según estado
-            // ------------------------------
+            // Estado y color
             if (notebook == null)
             {
-                btn.FillColor = SystemColors.InactiveCaption;
+                btn.BackColor = SystemColors.InactiveCaption;   // vacío
                 btn.Tag = null;
-                btn.Image = Properties.Resources.iconVacio;  // <-- Pone icono vacío
             }
             else
             {
-                btn.Tag = notebook.IdElemento; // solo ID como pediste
+                btn.Tag = notebook.IdElemento;
 
                 switch (notebook.IdEstadoMantenimiento)
                 {
                     case 1: // Disponible
-                        btn.FillColor = Color.FromArgb(128, 255, 128);
-                        btn.Image = Properties.Resources.iconDisponible;
+                        btn.BackColor = Color.FromArgb(128, 255, 128);
                         break;
 
                     case 2: // Prestado
-                        btn.FillColor = Color.FromArgb(252, 201, 52);
-                        btn.Image = Properties.Resources.iconPrestado;
+                        btn.BackColor = Color.FromArgb(252, 201, 52);
                         break;
 
-                    default: // Otro estado
-                        btn.FillColor = Color.WhiteSmoke;
+                    default:
+                        btn.BackColor = Color.LightGray;
                         break;
                 }
             }
 
-            // Icono a la izquierda
-            btn.ImageAlign = HorizontalAlignment.Left;
-            btn.ImageSize = new Size(24, 24);
-
-            // Click
             btn.Click += Casillero_Click;
 
             return btn;
@@ -476,22 +444,233 @@ namespace CapaPresentacion
 
         private void Casillero_Click(object sender, EventArgs e)
         {
-            var btn = (Guna2Button)sender;
+            var btn = (Button)sender;
 
-            int numeroCasillero = int.Parse(btn.Text.Replace("Casillero ", ""));
+            _casilleroSeleccionado = int.Parse(btn.Text.Replace("Casillero ", ""));
+
+            lblCasillero.Text = "Casillero " + _casilleroSeleccionado;
+            lblCasillero.Visible = true;
 
             if (btn.Tag == null)
             {
-                MessageBox.Show($"El casillero {numeroCasillero} está vacío.");
-                // lógica de agregar
+                _idNotebookSeleccionada = null;
+                MostrarPanelCasilleroVacio();
+            }
+            else
+            {
+                MostrarDatosNotebook(Convert.ToInt32(btn.Tag));
+            }
+        }
+
+        private void MostrarDatosNotebook(int idNotebook)
+        {
+            pnlConNotebook.Visible = true;
+            pnlAgregarNotebook.Visible = false;
+            pnlCasilleroVacio.Visible = false;
+
+            Notebooks? elemento = carritosCN.ObtenerNotebookPorID(idNotebook);
+
+            _idNotebookSeleccionada = idNotebook;
+
+            lblNroSerieNotebook.Text = elemento?.NumeroSerie;
+            AplicarToolTip(lblNroSerieNotebook);
+
+            lblCodBarraNotebook.Text = elemento?.CodigoBarra;
+            AplicarToolTip(lblCodBarraNotebook);
+
+            lblPatrimonioNotebook.Text = elemento?.Patrimonio;
+            AplicarToolTip(lblPatrimonioNotebook);
+
+            Modelos? modelo = carritosCN.ObtenerModeloPorID(Convert.ToInt32(elemento?.IdModelo));
+            lblModeloNotebook.Text = modelo?.NombreModelo ?? "Sin modelo";
+            AplicarToolTip(lblModeloNotebook);
+
+            Notebooks? notebook = carritosCN.ObtenerNotebookPorID(Convert.ToInt32(elemento?.IdElemento));
+            lblEquipoNotebook.Text = notebook?.Equipo ?? "Sin datos";
+            AplicarToolTip(lblEquipoNotebook);
+
+            if(notebook?.IdEstadoMantenimiento == 1)
+            {
+                pnlEstadoNotebook.FillColor = Color.FromArgb(128, 255, 128);
+                lblEstadoNotebook.Text = "Disponible";
+                btnSacarNotebook.Visible = true;
+            }
+            else
+            {
+                pnlEstadoNotebook.FillColor = Color.FromArgb(252, 201, 52);
+                lblEstadoNotebook.Text = "En prestamo";
+                btnSacarNotebook.Visible = false;
+            }
+        }
+
+        private void MostrarPanelCasilleroVacio()
+        {
+            pnlConNotebook.Visible = false;
+            pnlAgregarNotebook.Visible = false;
+            pnlCasilleroVacio.Visible = true;
+
+            lblCasilleroVacio.Text = "Casillero " + _casilleroSeleccionado + " esta vacio...";
+        }
+
+        private void btnAgregarNotebookCasillero_Click(object sender, EventArgs e)
+        {
+            pnlConNotebook.Visible = false;
+            pnlAgregarNotebook.Visible = true;
+            pnlCasilleroVacio.Visible = false;
+        }
+
+        private void btnAgregarNotebook_Click(object sender, EventArgs e)
+        {
+            carritosCN.AddNotebook(_idCarritoSeleccionado, _casilleroSeleccionado, _idElementoEncontrado, usuarios.IdUsuario);
+
+            CargarTodaLaGestion(_idCarritoSeleccionado);
+
+            MostrarDatosNotebook(_idElementoEncontrado);
+
+        }
+
+        private void txtNroSerieNotebook_TextChanged(object sender, EventArgs e)
+        {
+            CambiarDisponibilidadDatos(txtNroSerieNotebook);
+            txtActivoParaFiltro = txtNroSerieNotebook;
+            ReiniciarTimerFiltro();
+        }
+
+        private void txtCodBarraNotebook_TextChanged(object sender, EventArgs e)
+        {
+            CambiarDisponibilidadDatos(txtCodBarraNotebook);
+            txtActivoParaFiltro = txtCodBarraNotebook;
+            ReiniciarTimerFiltro();
+        }
+
+        private void txtPatrimonioNotebook_TextChanged(object sender, EventArgs e)
+        {
+            CambiarDisponibilidadDatos(txtPatrimonioNotebook);
+            txtActivoParaFiltro = txtPatrimonioNotebook;
+            ReiniciarTimerFiltro();
+        }
+
+        private void ReiniciarTimerFiltro()
+        {
+            pnlDatosElemento.Visible = false;
+            grbBusquedaNotebook.Visible = false;
+            lblBuscando.Visible = true;
+            lblNoEncontrado.Visible = false;
+            tmrEsperarPausaTip2.Stop();
+            tmrEsperarPausaTip2.Start();
+        }
+
+        private void ProcesarFiltro(Guna.UI2.WinForms.Guna2TextBox activo)
+        {
+            if (string.IsNullOrWhiteSpace(activo.Text))
+            {
+                CambiarDisponibilidadDatos(null);
+                lblBuscando.Visible = false;
+                lblNoEncontrado.Visible = true;
+                grbBusquedaNotebook.Visible = false;
+                pnlDatosElemento.Visible = false;
                 return;
             }
 
-            int idNotebook = (int)btn.Tag;
+            string? TextoNroSerie = activo == txtNroSerieNotebook ? activo.Text : null;
+            string? TextCodBarra = activo == txtCodBarraNotebook ? activo.Text : null;
+            string? TextPatrimonio = activo == txtPatrimonioNotebook ? activo.Text : null;
 
-            MessageBox.Show($"Notebook ID: {idNotebook} en casillero {numeroCasillero}");
-            // lógica de editar / quitar
+            var elemento = carritosCN.ObtenerPorSerieOCodBarraOPatrimonio(TextoNroSerie, TextCodBarra, TextPatrimonio);
+
+            if (elemento == null)
+            {
+                grbBusquedaNotebook.Visible = false;
+                pnlDatosElemento.Visible = false;
+                lblBuscando.Visible = false;
+                lblNoEncontrado.Visible = true;
+                return;
+            }
+
+            grbBusquedaNotebook.Visible = true;
+
+            _idElementoEncontrado = elemento.IdElemento;
+
+            lblNroSerieE.Text = elemento.NumeroSerie;
+            AplicarToolTip(lblNroSerieE);
+
+            lblCodBarraE.Text = elemento.CodigoBarra;
+            AplicarToolTip(lblCodBarraE);
+
+            lblPatrimonioE.Text = elemento.Patrimonio;
+            AplicarToolTip(lblPatrimonioE);
+
+            Modelos? modelo = carritosCN.ObtenerModeloPorID(elemento.IdModelo);
+            lblModeloE.Text = modelo?.NombreModelo ?? "Sin modelo";
+            AplicarToolTip(lblModeloE);
+
+            Notebooks? notebook = carritosCN.ObtenerNotebookPorID(elemento.IdElemento);
+            lblEquipoE.Text = notebook?.Equipo ?? "Sin datos";
+            AplicarToolTip(lblEquipoE);
         }
 
+        private void CambiarDisponibilidadDatos(Guna.UI2.WinForms.Guna2TextBox? activo)
+        {
+            if (activo != null)
+            {
+                if (activo != txtNroSerieNotebook)
+                {
+                    txtNroSerieNotebook.Enabled = false;
+                }
+                else
+                {
+                    txtNroSerieNotebook.Enabled = true;
+                }
+
+                if (activo != txtCodBarraNotebook)
+                {
+                    txtCodBarraNotebook.Enabled = false;
+                }
+                else
+                {
+                    txtCodBarraNotebook.Enabled = true;
+                }
+
+                if (activo != txtPatrimonioNotebook)
+                {
+                    txtPatrimonioNotebook.Enabled = false;
+                }
+                else
+                {
+                    txtPatrimonioNotebook.Enabled = true;
+                }
+            }
+            else
+            {
+                txtNroSerieNotebook.Enabled = true;
+                txtCodBarraNotebook.Enabled = true;
+                txtPatrimonioNotebook.Enabled = true;
+            }
+        }
+
+        private void AplicarToolTip(Label label)
+        {
+            string texto = string.IsNullOrWhiteSpace(label.Text) ? "" : label.Text;
+            tltDatos.SetToolTip(label, texto);
+        }
+
+        private void tmrEsperarPausaTip2_Tick_1(object sender, EventArgs e)
+        {
+            tmrEsperarPausaTip2.Stop();
+
+            if (txtActivoParaFiltro != null)
+            {
+                ProcesarFiltro(txtActivoParaFiltro);
+            }
+        }
+
+        private void btnSacarNotebook_Click(object sender, EventArgs e)
+        {
+            carritosCN.RemoveNotebook(_idCarritoSeleccionado, Convert.ToInt32(_idNotebookSeleccionada), usuarios.IdUsuario, 1);
+
+            CargarTodaLaGestion(_idCarritoSeleccionado);
+
+            MostrarPanelCasilleroVacio();
+        }
     }
 }
