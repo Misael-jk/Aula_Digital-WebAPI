@@ -23,6 +23,10 @@ namespace CapaPresentacion
 {
     public partial class FormPrincipal : Form
     {
+        #region Conexion
+        private readonly IDbConnection connection;
+        #endregion
+
         #region Variables de User Control
         private Dashboard dashboard;
         private ElementosUC elementosUC;
@@ -145,6 +149,8 @@ namespace CapaPresentacion
             this.userVerificado = userVerificado;
             this.rolUserVerficado = rolUserVerificado;
 
+            this.connection = conexion;
+
             #region Carritos
             repoCarritos = new RepoCarritos(conexion);
             repoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion);
@@ -186,10 +192,6 @@ namespace CapaPresentacion
             uowDevolucion = new UowDevolucion(conexion);
 
             repoRoles = new RepoRoles(conexion);
-            //repoDocentes = new RepoDocentes(conexion);
-            //repoUsuarios = new RepoUsuarios(conexion);
-            //repoTipoElemento = new RepoTipoElemento(conexion);
-            //repoModelo = new RepoModelo(conexion);
 
 
             mapperElementos = new MapperElementos(conexion);
@@ -609,6 +611,13 @@ namespace CapaPresentacion
         public void CerrarGestionUsuario()
         {
             pnlGestionUsuario.Visible = false;
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            LoginState loginState = new LoginState(connection);
+            loginState.Show();
+            this.Close();
         }
     }
 }
