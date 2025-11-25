@@ -32,13 +32,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MantenimientoUC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MantenimientoUC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -91,7 +91,7 @@
             guna2Panel4.Controls.Add(pictureBox1);
             guna2Panel4.CustomizableEdges = customizableEdges3;
             guna2Panel4.FillColor = Color.FromArgb(59, 130, 246);
-            guna2Panel4.Location = new Point(681, 12);
+            guna2Panel4.Location = new Point(732, 12);
             guna2Panel4.Name = "guna2Panel4";
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Panel4.Size = new Size(170, 104);
@@ -126,10 +126,10 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.CarritosED;
-            pictureBox1.Location = new Point(35, 0);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(23, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(91, 64);
+            pictureBox1.Size = new Size(124, 64);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 62;
             pictureBox1.TabStop = false;
@@ -143,7 +143,7 @@
             guna2Panel3.Location = new Point(12, 59);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Panel3.Size = new Size(472, 57);
+            guna2Panel3.Size = new Size(495, 57);
             guna2Panel3.TabIndex = 59;
             // 
             // lblPresentacion
@@ -166,7 +166,7 @@
             guna2Panel5.Controls.Add(ptbElemento);
             guna2Panel5.CustomizableEdges = customizableEdges9;
             guna2Panel5.FillColor = Color.FromArgb(247, 201, 72);
-            guna2Panel5.Location = new Point(499, 12);
+            guna2Panel5.Location = new Point(531, 12);
             guna2Panel5.Name = "guna2Panel5";
             guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2Panel5.Size = new Size(170, 104);
@@ -202,9 +202,9 @@
             // 
             ptbElemento.BackColor = Color.Transparent;
             ptbElemento.Image = (Image)resources.GetObject("ptbElemento.Image");
-            ptbElemento.Location = new Point(47, 4);
+            ptbElemento.Location = new Point(27, 0);
             ptbElemento.Name = "ptbElemento";
-            ptbElemento.Size = new Size(76, 60);
+            ptbElemento.Size = new Size(124, 64);
             ptbElemento.SizeMode = PictureBoxSizeMode.Zoom;
             ptbElemento.TabIndex = 61;
             ptbElemento.TabStop = false;
@@ -221,7 +221,7 @@
             pnlPresentacionNotebook.Location = new Point(12, 12);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            pnlPresentacionNotebook.Size = new Size(472, 50);
+            pnlPresentacionNotebook.Size = new Size(495, 50);
             pnlPresentacionNotebook.TabIndex = 58;
             // 
             // lblNotebooksTitulo
@@ -244,7 +244,7 @@
             guna2Panel6.Controls.Add(ptbNotebook);
             guna2Panel6.CustomizableEdges = customizableEdges15;
             guna2Panel6.FillColor = Color.FromArgb(105, 80, 165);
-            guna2Panel6.Location = new Point(863, 12);
+            guna2Panel6.Location = new Point(927, 12);
             guna2Panel6.Name = "guna2Panel6";
             guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2Panel6.Size = new Size(171, 104);
@@ -280,9 +280,9 @@
             // 
             ptbNotebook.BackColor = Color.Transparent;
             ptbNotebook.Image = (Image)resources.GetObject("ptbNotebook.Image");
-            ptbNotebook.Location = new Point(33, -8);
+            ptbNotebook.Location = new Point(24, 0);
             ptbNotebook.Name = "ptbNotebook";
-            ptbNotebook.Size = new Size(103, 86);
+            ptbNotebook.Size = new Size(124, 64);
             ptbNotebook.SizeMode = PictureBoxSizeMode.Zoom;
             ptbNotebook.TabIndex = 61;
             ptbNotebook.TabStop = false;
@@ -301,7 +301,7 @@
             pnlDataGridElementos.Location = new Point(15, 133);
             pnlDataGridElementos.Name = "pnlDataGridElementos";
             pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            pnlDataGridElementos.Size = new Size(1022, 525);
+            pnlDataGridElementos.Size = new Size(1083, 551);
             pnlDataGridElementos.TabIndex = 61;
             // 
             // lblRecursoElegido
@@ -331,14 +331,14 @@
             btnHabilitacion.ForeColor = Color.WhiteSmoke;
             btnHabilitacion.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnHabilitacion.HoverState.ForeColor = Color.White;
-            btnHabilitacion.Location = new Point(380, 485);
+            btnHabilitacion.Location = new Point(404, 488);
             btnHabilitacion.Name = "btnHabilitacion";
             btnHabilitacion.PressedColor = Color.OliveDrab;
             btnHabilitacion.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
             btnHabilitacion.ShadowDecoration.CustomizableEdges = customizableEdges18;
             btnHabilitacion.ShadowDecoration.Enabled = true;
             btnHabilitacion.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnHabilitacion.Size = new Size(296, 26);
+            btnHabilitacion.Size = new Size(296, 44);
             btnHabilitacion.TabIndex = 14;
             btnHabilitacion.Text = "Habilitacion del recurso";
             btnHabilitacion.Click += btnHabilitacion_Click_1;
@@ -348,7 +348,7 @@
             panel2.BackColor = Color.LightGray;
             panel2.Location = new Point(21, 57);
             panel2.Name = "panel2";
-            panel2.Size = new Size(977, 1);
+            panel2.Size = new Size(1043, 1);
             panel2.TabIndex = 2;
             // 
             // panel1
@@ -356,7 +356,7 @@
             panel1.BackColor = Color.LightGray;
             panel1.Location = new Point(21, 471);
             panel1.Name = "panel1";
-            panel1.Size = new Size(977, 1);
+            panel1.Size = new Size(1043, 1);
             panel1.TabIndex = 1;
             // 
             // dgvMantenimiento
@@ -392,7 +392,7 @@
             dgvMantenimiento.RowHeadersVisible = false;
             dgvMantenimiento.RowTemplate.Height = 35;
             dgvMantenimiento.ScrollBars = ScrollBars.Vertical;
-            dgvMantenimiento.Size = new Size(977, 389);
+            dgvMantenimiento.Size = new Size(1043, 389);
             dgvMantenimiento.TabIndex = 0;
             dgvMantenimiento.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvMantenimiento.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -421,7 +421,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
+            BackColor = Color.Gainsboro;
             Controls.Add(pnlDataGridElementos);
             Controls.Add(guna2Panel6);
             Controls.Add(guna2Panel4);
@@ -429,7 +429,7 @@
             Controls.Add(guna2Panel5);
             Controls.Add(pnlPresentacionNotebook);
             Name = "MantenimientoUC";
-            Size = new Size(1050, 670);
+            Size = new Size(1113, 698);
             Load += MantenimientoUC_Load;
             guna2Panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

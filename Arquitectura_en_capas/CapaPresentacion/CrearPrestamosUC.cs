@@ -22,21 +22,17 @@ namespace CapaPresentacion
         private Usuarios userActual;
         private int _idPrestamo = 0;
 
-        #region Varibales para identificar textbox usados
+        // texto activo para filtro (uno solo)
         private Guna.UI2.WinForms.Guna2TextBox? txtActivoParaFiltro = null;
-        private bool TipeoNroSerie = false;
-        private bool TipeoCodBarra = false;
-        private bool TipeoPatrimonio = false;
-        #endregion
 
-        #region Algunas variables para guardar por si acaso
+        // datos del flujo
         private int? _idDocenteDelPrestamo;
         private List<int> ElementosSeleccionados = new List<int>();
         private int? _idElementoEncontrado;
         private int? fila = 0;
         private int idElementoSeleccionado = 0;
+        private List<int> NotebooksDelCarrito = new List<int>();
         private bool LlevaCarrito = false;
-        #endregion
 
         public CrearPrestamosUC(PrestamosYDevolucionesUC prestamosYDevolucionesUC, FormPrincipal formPrincipal, PrestamosCN prestamosCN, Usuarios usuarios)
         {
@@ -51,51 +47,39 @@ namespace CapaPresentacion
         {
             CargarDatos();
 
-            Curso? curso = prestamosCN.ObtenerCursoPorID(1);
-
-            txtDNI.Text = curso?.NombreCurso;
+            MostrarPanelCarrito(false);
+            pnlDatosElemento.Visible = false;
+            lblNinguno.Visible = false;
+            lblBuscarElemento.Text = "Elemento encontrado:";
+            lblSeleccionados.Text = "Elementos seleccionados: 0";
+            ActualizarEstadoBotonConfirmar();
         }
 
         private void CargarDatos()
         {
-            cmbCurso.DataSource = prestamosCN.ObtenerTodosLosCursos();
-            cmbCurso.ValueMember = "IdCurso";
-            cmbCurso.DisplayMember = "NombreCurso";
-
             cmbCarros.DataSource = prestamosCN.ObtenerTodosLosCarritosDiponibles();
             cmbCarros.ValueMember = "IdCarrito";
             cmbCarros.DisplayMember = "EquipoCarrito";
+
+            cmbCurso.DataSource = prestamosCN.ObtenerTodosLosCursos();
+            cmbCurso.ValueMember = "IdCurso";
+            cmbCurso.DisplayMember = "NombreCurso";
         }
 
+        #region Carrito show/hide y sincronización
         private void chkLlevarCarro_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkLlevarCarro.Checked == true)
-            {
-                LlevarCarro(true);
+            LlevarCarro(chkLlevarCarro.Checked);
+            MostrarPanelCarrito(chkLlevarCarro.Checked);
 
-                if (_idDocenteDelPrestamo != null)
-                {
-                    btnConfirmarPrestamo.Enabled = false;
-                }
-                else
-                {
-                    btnConfirmarPrestamo.Enabled = true;
-                }
-            }
-            else
+            if (!chkLlevarCarro.Checked)
             {
-                LlevarCarro(false);
+                NotebooksDelCarrito.Clear();
+                dgvNotebookDetalle.DataSource = null;
+                QuitarNotebooksDelCarritoDeSeleccion();
             }
 
             ActualizarEstadoBotonConfirmar();
-        }
-
-        private void LlevarCarro(bool Lleva)
-        {
-            txtNroSerieCarro.Enabled = Lleva;
-            cmbCarros.Enabled = Lleva;
-            LlevaCarrito = Lleva;
-            dgvNotebookDetalle.Visible = Lleva;
         }
 
         private void txtDNI_TextChanged(object sender, EventArgs e)
@@ -107,186 +91,176 @@ namespace CapaPresentacion
         private void tmrEsperarPausaTip_Tick(object sender, EventArgs e)
         {
             tmrEsperarPausaTip.Stop();
+            ProcesarBusquedaDocente();
+        }
 
+
+        private void ProcesarBusquedaDocente()
+        {
             if (string.IsNullOrWhiteSpace(txtDNI.Text))
             {
-                txtDocente.Text = "";
                 _idDocenteDelPrestamo = null;
+                lblDocente.Text = "";
+                AplicarToolTip(lblDocente);
                 ActualizarEstadoBotonConfirmar();
                 return;
             }
 
-            Docentes? docentes = prestamosCN.ObtenerDocentePorDNI(txtDNI.Text);
+            var docente = prestamosCN.ObtenerDocentePorDNI(txtDNI.Text);
 
-            if (docentes is not null)
+            if (docente != null)
             {
-                txtDocente.Text = docentes?.Nombre + " " + docentes?.Apellido;
-                _idDocenteDelPrestamo = docentes?.IdDocente;
+                lblDocente.Text = $"{docente.Nombre} {docente.Apellido}";
+                _idDocenteDelPrestamo = docente.IdDocente;
             }
             else
             {
-                txtDocente.Text = "";
+                lblDocente.Text = "";
                 _idDocenteDelPrestamo = null;
             }
 
+            AplicarToolTip(lblDocente);
             ActualizarEstadoBotonConfirmar();
+        }
+
+
+        private void LlevarCarro(bool Lleva)
+        {
+            cmbCarros.Enabled = Lleva;
+            LlevaCarrito = Lleva;
+        }
+
+        private void MostrarPanelCarrito(bool mostrar)
+        {
+            pnlLlevaCarro.Visible = mostrar;
+            dgvNotebookDetalle.Visible = mostrar;
+            lblNollevaCarro.Visible = !mostrar;
         }
 
         private void cmbCarros_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dgvNotebookDetalle.DataSource = prestamosCN.ObtenerNotebooksPorCarrito(Convert.ToInt32(cmbCurso.SelectedValue));
+            if (!chkLlevarCarro.Checked) return;
+
+            dgvNotebookDetalle.DataSource = prestamosCN.ObtenerNotebooksPorCarrito(Convert.ToInt32(cmbCarros.SelectedValue));
+
+            Carritos? carritos = prestamosCN.ObtenerCarritoPorID(Convert.ToInt32(cmbCarros.SelectedValue));
+            lblEquipoCarrito.Text = carritos?.EquipoCarrito;
+            AplicarToolTip(lblEquipoCarrito);
+
+            lblCapacidad.Text = Convert.ToString(carritos?.Capacidad);
+
+            lblNroSerieCarrito.Text = carritos?.NumeroSerieCarrito;
+            AplicarToolTip(lblNroSerieCarrito);
+
+            Modelos? modelos = prestamosCN.ObtenerModeloPorID(Convert.ToInt32(carritos?.IdModelo));
+
+            lblModeloCarrito.Text = modelos?.NombreModelo;
+            AplicarToolTip(lblModelo);
+
+            lblNotebooks.Text = Convert.ToString(prestamosCN.ObtenerCantidadDisponiblesPorCarrito(Convert.ToInt32(cmbCarros.SelectedValue)));
+
+            lblNotebooksPrestadas.Text = Convert.ToString(prestamosCN.ObtenerCantidadPrestadosPorCarrito(Convert.ToInt32(cmbCarros.SelectedValue)));
+
+            NotebooksDelCarrito = prestamosCN.ObtenerIDsElementosPorIdDisponibles (Convert.ToInt32(cmbCarros.SelectedValue)).ToList();
+
+            QuitarNotebooksDelCarritoDeSeleccion();
         }
 
-        private void txtNroSerie_TextChanged(object sender, EventArgs e)
+        private void QuitarNotebooksDelCarritoDeSeleccion()
         {
-            if (!txtNroSerie.Focused)
+            if (NotebooksDelCarrito == null || NotebooksDelCarrito.Count == 0) return;
+
+            var repetidos = ElementosSeleccionados.Intersect(NotebooksDelCarrito).ToList();
+            if (!repetidos.Any()) return;
+
+            foreach (var id in repetidos)
             {
-                return;
+                ElementosSeleccionados.Remove(id);
             }
 
+            for (int i = dgvElementosDetalle.Rows.Count - 1; i >= 0; i--)
+            {
+                var row = dgvElementosDetalle.Rows[i];
+                if (row.Cells["IdElemento"].Value == null) continue;
+                int idElem = Convert.ToInt32(row.Cells["IdElemento"].Value);
+                if (repetidos.Contains(idElem))
+                    dgvElementosDetalle.Rows.RemoveAt(i);
+            }
+
+            lblSeleccionados.Text = "Elementos seleccionados: " + ElementosSeleccionados.Count;
+        }
+        #endregion
+
+        #region Buscar elemento (un solo texto activo)
+        private void txtNroSerie_TextChanged(object sender, EventArgs e)
+        {
+            CambiarDisponibilidadDatos(txtNroSerie);
             txtActivoParaFiltro = txtNroSerie;
-            TipeoNroSerie = true;
-            TipeoCodBarra = false;
-            TipeoPatrimonio = false;
-
-            CambiarDisponibilidadDatos(TipeoNroSerie, TipeoCodBarra, TipeoPatrimonio);
-
             ReiniciarTimerFiltro();
         }
 
         private void txtCodBarra_TextChanged(object sender, EventArgs e)
         {
-            if (!txtCodBarra.Focused)
-            {
-                return;
-            }
-
+            CambiarDisponibilidadDatos(txtCodBarra);
             txtActivoParaFiltro = txtCodBarra;
-            TipeoNroSerie = false;
-            TipeoCodBarra = true;
-            TipeoPatrimonio = false;
-
-            CambiarDisponibilidadDatos(TipeoNroSerie, TipeoCodBarra, TipeoPatrimonio);
-
             ReiniciarTimerFiltro();
         }
 
         private void txtPatrimonio_TextChanged(object sender, EventArgs e)
         {
-            if (!txtPatrimonio.Focused)
-            {
-                return;
-            }
-
+            CambiarDisponibilidadDatos(txtPatrimonio);
             txtActivoParaFiltro = txtPatrimonio;
-            TipeoNroSerie = false;
-            TipeoCodBarra = false;
-            TipeoPatrimonio = true;
-
-            CambiarDisponibilidadDatos(TipeoNroSerie, TipeoCodBarra, TipeoPatrimonio);
-
             ReiniciarTimerFiltro();
         }
 
-        private void ProcesarFiltro(Guna.UI2.WinForms.Guna2TextBox activo)
+
+        private void CambiarDisponibilidadDatos(Guna.UI2.WinForms.Guna2TextBox? activo)
         {
-            if (string.IsNullOrWhiteSpace(activo.Text))
+            if (activo != null)
             {
-                CambiarDisponibilidadDatos(true, true, true);
-                BorrarElementosExcepto(activo);
-                return;
-            }
-
-            string? TextoNroSerie = null;
-            string? TextCodBarra = null;
-            string? TextPatrimonio = null;
-
-            if (activo == txtNroSerie)
-            {
-                TextoNroSerie = activo.Text;
-            }
-            else if (activo == txtCodBarra)
-            {
-                TextCodBarra = activo.Text;
-            }
-            else if (activo == txtPatrimonio)
-            {
-                TextPatrimonio = activo.Text;
-            }
-
-            var elemento = prestamosCN.ObtenerElementoPorFiltro(TextoNroSerie, TextCodBarra, TextPatrimonio);
-
-            if (ElementosSeleccionados.Contains(Convert.ToInt32(elemento?.IdElemento)))
-            {
-                btnAgregarElemento.Enabled = false;
-                return;
-            }
-
-            if (elemento != null)
-            {
-                _idElementoEncontrado = elemento?.IdElemento;
-
-                if (activo != txtNroSerie) txtNroSerie.Text = elemento?.NumeroSerie;
-                if (activo != txtCodBarra) txtCodBarra.Text = elemento?.CodigoBarra;
-                if (activo != txtPatrimonio) txtPatrimonio.Text = elemento?.Patrimonio;
-
-                TipoElemento? tipoElemento = prestamosCN.ObtenerTipoElementoPorID(Convert.ToInt32(elemento?.IdTipoElemento));
-                txtTipoElemento.Text = tipoElemento?.ElementoTipo;
-
-                Modelos? modelo = prestamosCN.ObtenerModeloPorID(Convert.ToInt32(elemento?.IdModelo));
-                txtModelo.Text = modelo?.NombreModelo ?? "Sin modelo";
-
-                if (elemento?.IdTipoElemento == 1)
+                if (activo != txtNroSerie)
                 {
-                    Notebooks? notebook = prestamosCN.ObtenerNotebookPorID(elemento.IdElemento);
-                    txtEquipo.Text = notebook?.Equipo ?? "Sin datos";
+                    txtNroSerie.Enabled = false;
                 }
                 else
                 {
-                    VariantesElemento? variante = prestamosCN.ObtenerVariantePorID(Convert.ToInt32(elemento?.IdVarianteElemento));
-                    txtEquipo.Text = variante?.Variante ?? "Sin datos";
+                    txtNroSerie.Enabled = true;
                 }
 
-                btnAgregarElemento.Enabled = true;
+                if (activo != txtCodBarra)
+                {
+                    txtCodBarra.Enabled = false;
+                }
+                else
+                {
+                    txtCodBarra.Enabled = true;
+                }
+
+                if (activo != txtPatrimonio)
+                {
+                    txtPatrimonio.Enabled = false;
+                }
+                else
+                {
+                    txtPatrimonio.Enabled = true;
+                }
             }
             else
             {
-                BorrarElementosExcepto(activo);
-                btnAgregarElemento.Enabled = false;
+                txtNroSerie.Enabled = true;
+                txtCodBarra.Enabled = true;
+                txtPatrimonio.Enabled = true;
             }
         }
 
-        private void BorrarElementosExcepto(Guna.UI2.WinForms.Guna2TextBox activo)
+        private void ReiniciarTimerFiltro()
         {
-            if (activo != txtNroSerie)
-                txtNroSerie.Text = "";
-
-            if (activo != txtCodBarra)
-                txtCodBarra.Text = "";
-
-            if (activo != txtPatrimonio)
-                txtPatrimonio.Text = "";
-
-            txtTipoElemento.Clear();
-            txtEquipo.Clear();
-            txtModelo.Clear();
-        }
-
-        private void BorrarTodoLosDatos()
-        {
-            txtNroSerie.Text = "";
-            txtCodBarra.Text = "";
-            txtPatrimonio.Text = "";
-            txtTipoElemento.Clear();
-            txtEquipo.Clear();
-            txtModelo.Clear();
-        }
-
-        private void CambiarDisponibilidadDatos(bool nroSerie, bool codBarra, bool patrimonio)
-        {
-            txtNroSerie.Enabled = nroSerie;
-            txtCodBarra.Enabled = codBarra;
-            txtPatrimonio.Enabled = patrimonio;
+            pnlDatosElemento.Visible = false;
+            lblNinguno.Visible = false;
+            lblBuscarElemento.Text = "Buscando elemento...";
+            btnAgregarElemento.Enabled = false;
+            tmrEsperarPausaTip2.Stop();
+            tmrEsperarPausaTip2.Start();
         }
 
         private void tmrEsperarPausaTip2_Tick(object sender, EventArgs e)
@@ -299,29 +273,119 @@ namespace CapaPresentacion
             }
         }
 
-        private void ReiniciarTimerFiltro()
+        private void ProcesarFiltro(Guna.UI2.WinForms.Guna2TextBox activo)
         {
-            tmrEsperarPausaTip2.Stop();
-            tmrEsperarPausaTip2.Start();
-        }
+            if (string.IsNullOrWhiteSpace(activo.Text))
+            {
+                CambiarDisponibilidadDatos(null);
+                lblBuscarElemento.Text = "Elemento encontrado:";
+                lblNinguno.Visible = false;
+                pnlDatosElemento.Visible = false;
+                btnAgregarElemento.Enabled = false;
+                _idElementoEncontrado = null;
+                return;
+            }
 
+            string? TextoNroSerie = activo == txtNroSerie ? activo.Text : null;
+            string? TextCodBarra = activo == txtCodBarra ? activo.Text : null;
+            string? TextPatrimonio = activo == txtPatrimonio ? activo.Text : null;
+
+            var elemento = prestamosCN.ObtenerElementoPorFiltro(TextoNroSerie, TextCodBarra, TextPatrimonio);
+
+            if (elemento == null)
+            {
+                lblBuscarElemento.Text = "Elemento encontrado:";
+                lblNinguno.Visible = true;
+                pnlDatosElemento.Visible = false;
+                btnAgregarElemento.Enabled = false;
+                _idElementoEncontrado = null;
+                return;
+            }
+
+            if (ElementosSeleccionados.Contains(elemento.IdElemento))
+            {
+                lblBuscarElemento.Text = "Elemento encontrado:";
+                lblNinguno.Visible = true;
+                pnlDatosElemento.Visible = false;
+                btnAgregarElemento.Enabled = false;
+                _idElementoEncontrado = null;
+                return;
+            }
+
+            if (NotebooksDelCarrito != null && NotebooksDelCarrito.Contains(elemento.IdElemento))
+            {
+                lblBuscarElemento.Text = "Elemento encontrado:";
+                lblNinguno.Visible = true;
+                pnlDatosElemento.Visible = false;
+                btnAgregarElemento.Enabled = false;
+                _idElementoEncontrado = null;
+                return;
+            }
+
+            lblBuscarElemento.Text = "Elemento encontrado:";
+            pnlDatosElemento.Visible = true;
+            lblNinguno.Visible = false;
+
+            _idElementoEncontrado = elemento.IdElemento;
+
+            lblNroSerie.Text = elemento.NumeroSerie;
+            AplicarToolTip(lblNroSerie);
+
+            lblCodBarra.Text = elemento.CodigoBarra;
+            AplicarToolTip(lblCodBarra);
+
+            lblPatrimonio.Text = elemento.Patrimonio;
+            AplicarToolTip(lblPatrimonio);
+
+            TipoElemento? tipoElemento = prestamosCN.ObtenerTipoElementoPorID(elemento.IdTipoElemento);
+            lblTipoElemento.Text = tipoElemento?.ElementoTipo;
+            AplicarToolTip(lblTipoElemento);
+
+            Modelos? modelo = prestamosCN.ObtenerModeloPorID(elemento.IdModelo);
+            lblModelo.Text = modelo?.NombreModelo ?? "Sin modelo";
+            AplicarToolTip(lblModelo);
+
+            if (elemento.IdTipoElemento == 1)
+            {
+                Notebooks? notebook = prestamosCN.ObtenerNotebookPorID(elemento.IdElemento);
+                lblEquipo.Text = notebook?.Equipo ?? "Sin datos";
+            }
+            else
+            {
+                VariantesElemento? variante = prestamosCN.ObtenerVariantePorID(Convert.ToInt32(elemento.IdVarianteElemento));
+                lblEquipo.Text = variante?.Variante ?? "Sin datos";
+            }
+            AplicarToolTip(lblEquipo);
+
+            btnAgregarElemento.Enabled = true;
+        }
+        #endregion
+
+        #region Agregar / eliminar elementos seleccionados
         private void btnAgregarElemento_Click(object sender, EventArgs e)
         {
+
             ElementosSeleccionados.Add(Convert.ToInt32(_idElementoEncontrado));
 
             dgvElementosDetalle.Rows.Add(
-                txtTipoElemento.Text,
-                txtEquipo.Text,
-                txtNroSerie.Text,
-                txtPatrimonio.Text,
-                _idElementoEncontrado
+                lblTipoElemento.Text,
+                lblEquipo.Text,
+                lblNroSerie.Text,
+                lblPatrimonio.Text,
+                Convert.ToInt32(_idElementoEncontrado)
             );
 
-            BorrarTodoLosDatos();
             btnAgregarElemento.Enabled = false;
-            txtNroSerie.Enabled = true;
-            txtCodBarra.Enabled = true;
-            txtPatrimonio.Enabled = true;
+
+            txtNroSerie.Text = "";
+            txtCodBarra.Text = "";
+            txtPatrimonio.Text = "";
+            pnlDatosElemento.Visible = false;
+            lblNinguno.Visible = false;
+            _idElementoEncontrado = null;
+            
+            CambiarDisponibilidadDatos(null);
+            lblSeleccionados.Text = "Elementos seleccionados: " + ElementosSeleccionados.Count;
 
             ActualizarEstadoBotonConfirmar();
         }
@@ -329,51 +393,24 @@ namespace CapaPresentacion
         private void dgvElementosDetalle_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
             fila = e.RowIndex;
-
             idElementoSeleccionado = Convert.ToInt32(dgvElementosDetalle.Rows[e.RowIndex].Cells["IdElemento"].Value);
-
             btnEliminarElemento.Enabled = true;
         }
 
         private void btnEliminarElemento_Click(object sender, EventArgs e)
         {
             ElementosSeleccionados.Remove(idElementoSeleccionado);
-
             dgvElementosDetalle.Rows.RemoveAt(Convert.ToInt32(fila));
-
             btnEliminarElemento.Enabled = false;
-
+            lblSeleccionados.Text = "Elementos seleccionados: " + ElementosSeleccionados.Count;
             ActualizarEstadoBotonConfirmar();
         }
-
-        private void cmbListadoDetalle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (cmbListadoDetalle.SelectedIndex)
-            {
-                case 0:
-                    if (LlevaCarrito == false)
-                    {
-                        dgvNotebookDetalle.Visible = false;
-                    }
-                    else
-                    {
-                        dgvNotebookDetalle.Visible = true;
-                    }
-                    dgvElementosDetalle.Visible = false;
-                    break;
-
-                case 1:
-                    dgvNotebookDetalle.Visible = false;
-                    dgvElementosDetalle.Visible = true;
-                    break;
-            }
-        }
+        #endregion
 
         private void btnConfirmarPrestamo_Click(object sender, EventArgs e)
         {
-            if (LlevaCarrito == true)
+            if (LlevaCarrito)
             {
                 Prestamos prestamos = new Prestamos
                 {
@@ -386,8 +423,7 @@ namespace CapaPresentacion
                     FechaPrestamo = DateTime.Now
                 };
 
-                IEnumerable<int> notebooks = prestamosCN.ObtenerIDsPorCarrito(Convert.ToInt32(cmbCarros.SelectedValue));
-
+                IEnumerable<int> notebooks = prestamosCN.ObtenerIDsElementosPorIdDisponibles(Convert.ToInt32(cmbCarros.SelectedValue));
                 IEnumerable<int> ElementosQueLleva = notebooks.Concat(ElementosSeleccionados);
 
                 prestamosCN.CrearPrestamo(prestamos, ElementosQueLleva, Convert.ToInt32(cmbCarros.SelectedValue));
@@ -418,7 +454,6 @@ namespace CapaPresentacion
         {
             bool hayDocente = _idDocenteDelPrestamo != null;
             bool hayElementos = ElementosSeleccionados.Any();
-            bool llevaCarrito = LlevaCarrito;
 
             if (!hayDocente)
             {
@@ -426,19 +461,41 @@ namespace CapaPresentacion
                 return;
             }
 
-            if (!llevaCarrito && !hayElementos)
+            if (LlevaCarrito)
             {
-                btnConfirmarPrestamo.Enabled = false;
+                btnConfirmarPrestamo.Enabled = true;
                 return;
             }
 
-            btnConfirmarPrestamo.Enabled = true;
+            btnConfirmarPrestamo.Enabled = hayElementos;
+        }
+
+        private void AplicarToolTip(Label label)
+        {
+            string texto = string.IsNullOrWhiteSpace(label.Text) ? "" : label.Text;
+            tltDatos.SetToolTip(label, texto);
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             prestamosYDevolucionesUC.ActualizarDataGrid();
             formPrincipal.MostrarUserControl(prestamosYDevolucionesUC);
+        }
+
+        private void btnCarrito_Click(object sender, EventArgs e)
+        {
+            MostrarPanelCarrito(chkLlevarCarro.Checked);
+            pnlCarrito.Visible = true;
+            pnlElementos.Visible = false;
+            dgvElementosDetalle.Visible = false;
+        }
+
+        private void btnElementos_Click(object sender, EventArgs e)
+        {
+            pnlCarrito.Visible = false;
+            pnlElementos.Visible = true;
+            dgvElementosDetalle.Visible = true;
+            dgvNotebookDetalle.Visible = false;
         }
     }
 }

@@ -206,7 +206,7 @@ namespace CapaPresentacion
 
         private void btnDevolucion_Click(object sender, EventArgs e)
         {
-            var devolucion = new DevolucionesUC(prestamosYDevolucionesUC, _formPrincipal, prestamosCN, userActual, devolucionCN, idPrestamoSeleccionado);
+            var devolucion = new DevolucionGestionUC(prestamosYDevolucionesUC, _formPrincipal, prestamosCN, userActual, devolucionCN, idPrestamoSeleccionado);
            _formPrincipal.MostrarUserControl(devolucion);
         }
     }

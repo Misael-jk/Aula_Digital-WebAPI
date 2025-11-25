@@ -15,6 +15,7 @@ public interface IRepoPrestamoDetalle
     public int GetCountByPrestamo(int idPrestamo);
     public IEnumerable<Elemento> GetElementosPendientes(int idPrestamo);
     public List<int> GetIdsElementosByIdPrestamo(int idPrestamo);
+    public List<int> GetIdsElementosPorPrestamoFiltrandoCarrito(int idPrestamo, int idCarrito);
     public void SetTransaction(IDbTransaction? transaction);
 
 }

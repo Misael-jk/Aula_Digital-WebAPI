@@ -364,12 +364,12 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     #region OBTENER TODAS LAS NOTEBOOKS DE UN CARRITO
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito)
     {
-        string query = @"select posicionCarrito, idEstadoMantenimiento
+        string query = @"select *
                         from elementos e
                         join Notebooks n using (idElemento)
                         where n.idCarrito = @unIdCarrito
                         and (idEstadoMantenimiento = 1
-                        or idEstadoMantenimiento = 3);";
+                        or idEstadoMantenimiento = 2);";
 
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("@unIdCarrito", idCarrito);
@@ -570,6 +570,28 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
                         from elementos e
                         join Notebooks n using (idElemento)
                         where n.idCarrito = @unIdCarrito
+                        Order by posicionCarrito ASC;";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("@unIdCarrito", idCarrito);
+
+        try
+        {
+            return Conexion.Query<int>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al obtener IDs de notebooks del carrito: " + ex.Message);
+        }
+    }
+
+    public IEnumerable<int> GetIdNotebooksDisponiblesByCarrito(int idCarrito)
+    {
+        string query = @"select e.idElemento
+                        from elementos e
+                        join Notebooks n using (idElemento)
+                        where n.idCarrito = @unIdCarrito
+                        and e.idEstadoMantenimiento = 1
                         Order by posicionCarrito ASC;";
 
         DynamicParameters parameters = new DynamicParameters();

@@ -379,7 +379,7 @@
             lblTipoElementoCrear.ForeColor = Color.Black;
             lblTipoElementoCrear.Location = new Point(8, 15);
             lblTipoElementoCrear.Name = "lblTipoElementoCrear";
-            lblTipoElementoCrear.Size = new Size(102, 15);
+            lblTipoElementoCrear.Size = new Size(103, 15);
             lblTipoElementoCrear.TabIndex = 50;
             lblTipoElementoCrear.Text = "Tipo de elemento:";
             // 
@@ -589,7 +589,7 @@
             lblTipoElemento1.ForeColor = Color.Black;
             lblTipoElemento1.Location = new Point(13, 66);
             lblTipoElemento1.Name = "lblTipoElemento1";
-            lblTipoElemento1.Size = new Size(86, 15);
+            lblTipoElemento1.Size = new Size(87, 15);
             lblTipoElemento1.TabIndex = 62;
             lblTipoElemento1.Text = "Tipo elemento:";
             // 
@@ -710,7 +710,7 @@
             lblTipoElemento2.ForeColor = Color.Black;
             lblTipoElemento2.Location = new Point(8, 66);
             lblTipoElemento2.Name = "lblTipoElemento2";
-            lblTipoElemento2.Size = new Size(86, 15);
+            lblTipoElemento2.Size = new Size(87, 15);
             lblTipoElemento2.TabIndex = 54;
             lblTipoElemento2.Text = "Tipo elemento:";
             // 
@@ -951,7 +951,7 @@
             lblTipoElementoActualizar.ForeColor = Color.Black;
             lblTipoElementoActualizar.Location = new Point(269, 442);
             lblTipoElementoActualizar.Name = "lblTipoElementoActualizar";
-            lblTipoElementoActualizar.Size = new Size(102, 15);
+            lblTipoElementoActualizar.Size = new Size(103, 15);
             lblTipoElementoActualizar.TabIndex = 50;
             lblTipoElementoActualizar.Text = "Tipo de elemento:";
             // 
@@ -1256,7 +1256,7 @@
             guna2Panel7.Controls.Add(panel4);
             guna2Panel7.CustomizableEdges = customizableEdges67;
             guna2Panel7.FillColor = SystemColors.ButtonHighlight;
-            guna2Panel7.Location = new Point(526, 120);
+            guna2Panel7.Location = new Point(583, 120);
             guna2Panel7.Name = "guna2Panel7";
             guna2Panel7.ShadowDecoration.CustomizableEdges = customizableEdges68;
             guna2Panel7.Size = new Size(493, 607);
@@ -1715,7 +1715,7 @@
             guna2Panel28.Controls.Add(panel10);
             guna2Panel28.CustomizableEdges = customizableEdges95;
             guna2Panel28.FillColor = SystemColors.ButtonHighlight;
-            guna2Panel28.Location = new Point(529, 1561);
+            guna2Panel28.Location = new Point(582, 1561);
             guna2Panel28.Name = "guna2Panel28";
             guna2Panel28.ShadowDecoration.CustomizableEdges = customizableEdges96;
             guna2Panel28.Size = new Size(493, 607);
@@ -2043,7 +2043,7 @@
             guna2Panel5.Controls.Add(guna2Panel27);
             guna2Panel5.CustomizableEdges = customizableEdges105;
             guna2Panel5.FillColor = SystemColors.ButtonHighlight;
-            guna2Panel5.Location = new Point(554, 747);
+            guna2Panel5.Location = new Point(611, 747);
             guna2Panel5.Name = "guna2Panel5";
             guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges106;
             guna2Panel5.Size = new Size(465, 598);
@@ -2366,7 +2366,7 @@
             guna2Panel4.Controls.Add(guna2HtmlLabel20);
             guna2Panel4.CustomizableEdges = customizableEdges115;
             guna2Panel4.FillColor = Color.FromArgb(252, 201, 52);
-            guna2Panel4.Location = new Point(554, 1360);
+            guna2Panel4.Location = new Point(611, 1360);
             guna2Panel4.Name = "guna2Panel4";
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges116;
             guna2Panel4.Size = new Size(468, 74);
@@ -2663,6 +2663,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Gainsboro;
             Controls.Add(guna2Panel28);
             Controls.Add(guna2Panel11);
             Controls.Add(guna2Panel4);
@@ -2675,7 +2676,7 @@
             Controls.Add(guna2Panel6);
             Controls.Add(pnlPresentacionNotebook);
             Name = "CategoriasUC";
-            Size = new Size(1034, 2190);
+            Size = new Size(1097, 2190);
             Load += CategoriasUC_Load;
             guna2Panel6.ResumeLayout(false);
             guna2Panel6.PerformLayout();

@@ -128,7 +128,7 @@
             pnlDataGridElementos.Location = new Point(16, 122);
             pnlDataGridElementos.Name = "pnlDataGridElementos";
             pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            pnlDataGridElementos.Size = new Size(1022, 534);
+            pnlDataGridElementos.Size = new Size(1079, 561);
             pnlDataGridElementos.TabIndex = 62;
             // 
             // txtMotivo
@@ -150,7 +150,7 @@
             txtMotivo.ForeColor = Color.Black;
             txtMotivo.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
             txtMotivo.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            txtMotivo.Location = new Point(688, 324);
+            txtMotivo.Location = new Point(755, 326);
             txtMotivo.Margin = new Padding(4, 5, 4, 5);
             txtMotivo.Multiline = true;
             txtMotivo.Name = "txtMotivo";
@@ -162,7 +162,7 @@
             txtMotivo.ShadowDecoration.BorderRadius = 10;
             txtMotivo.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtMotivo.ShadowDecoration.Depth = 5;
-            txtMotivo.Size = new Size(304, 174);
+            txtMotivo.Size = new Size(304, 194);
             txtMotivo.TabIndex = 104;
             txtMotivo.TextOffset = new Point(5, 0);
             // 
@@ -172,7 +172,7 @@
             label5.BackColor = SystemColors.ButtonHighlight;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(688, 304);
+            label5.Location = new Point(755, 306);
             label5.Name = "label5";
             label5.Size = new Size(48, 15);
             label5.TabIndex = 105;
@@ -197,7 +197,7 @@
             txtDescripcion.ForeColor = Color.Black;
             txtDescripcion.HoverState.BorderColor = Color.FromArgb(125, 100, 180);
             txtDescripcion.HoverState.FillColor = Color.FromArgb(248, 246, 252);
-            txtDescripcion.Location = new Point(688, 92);
+            txtDescripcion.Location = new Point(755, 91);
             txtDescripcion.Margin = new Padding(4, 5, 4, 5);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
@@ -209,7 +209,7 @@
             txtDescripcion.ShadowDecoration.BorderRadius = 10;
             txtDescripcion.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtDescripcion.ShadowDecoration.Depth = 5;
-            txtDescripcion.Size = new Size(304, 174);
+            txtDescripcion.Size = new Size(304, 202);
             txtDescripcion.TabIndex = 102;
             txtDescripcion.TextOffset = new Point(5, 0);
             // 
@@ -219,7 +219,7 @@
             lblDescripcion.BackColor = SystemColors.ButtonHighlight;
             lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescripcion.ForeColor = Color.Black;
-            lblDescripcion.Location = new Point(688, 72);
+            lblDescripcion.Location = new Point(755, 71);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(72, 15);
             lblDescripcion.TabIndex = 103;
@@ -258,7 +258,7 @@
             dgvInventario.RowHeadersVisible = false;
             dgvInventario.RowTemplate.Height = 35;
             dgvInventario.ScrollBars = ScrollBars.Vertical;
-            dgvInventario.Size = new Size(642, 426);
+            dgvInventario.Size = new Size(705, 448);
             dgvInventario.TabIndex = 62;
             dgvInventario.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dgvInventario.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -300,15 +300,15 @@
             panel2.BackColor = Color.LightGray;
             panel2.Location = new Point(21, 57);
             panel2.Name = "panel2";
-            panel2.Size = new Size(971, 1);
+            panel2.Size = new Size(1038, 1);
             panel2.TabIndex = 2;
             // 
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
-            panel1.Location = new Point(21, 514);
+            panel1.Location = new Point(21, 540);
             panel1.Name = "panel1";
-            panel1.Size = new Size(971, 1);
+            panel1.Size = new Size(1038, 1);
             panel1.TabIndex = 1;
             // 
             // InventarioUC
@@ -319,7 +319,7 @@
             Controls.Add(guna2Panel5);
             Controls.Add(guna2Panel6);
             Name = "InventarioUC";
-            Size = new Size(1050, 670);
+            Size = new Size(1113, 698);
             Load += InventarioUC_Load;
             guna2Panel5.ResumeLayout(false);
             guna2Panel5.PerformLayout();

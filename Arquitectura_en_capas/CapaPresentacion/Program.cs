@@ -29,20 +29,11 @@ namespace Sistema_de_notebooks
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            FormPantallaCarga splash = new FormPantallaCarga();
-            splash.Show();
-
-            // Mantener el splash visible sin congelar la UI
-            while (splash.Visible)
-            {
-                Application.DoEvents();
-            }
-
             //if (dbConnection.State == ConnectionState.Closed)
             //{
             //    dbConnection.Open();
             //}
-            Application.Run(new LoginState(dbConnection));
+            Application.Run(new FormPantallaCarga(dbConnection));
         }
     }
 }

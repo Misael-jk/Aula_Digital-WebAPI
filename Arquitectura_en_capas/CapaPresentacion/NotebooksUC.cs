@@ -82,7 +82,6 @@ namespace CapaPresentacion
         #region LOAD
         private void NotebooksUC_Load(object sender, EventArgs e)
         {
-            circleButton2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             lstSugerencias.MouseMove += (s, ev) => navegandoLista = true;
             lstSugerencias.MouseLeave += (s, ev) => navegandoLista = false;
 

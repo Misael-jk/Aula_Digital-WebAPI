@@ -30,6 +30,8 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -41,9 +43,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlDataGridElementos = new Guna.UI2.WinForms.Guna2Panel();
+            btnActualizarPrestamos = new Guna.UI2.WinForms.Guna2Button();
             btnDevoluciones = new Guna.UI2.WinForms.Guna2Button();
             btnCrearNotebook_M = new Guna.UI2.WinForms.Guna2Button();
             panel2 = new Panel();
@@ -53,7 +54,6 @@
             lblPresentacion = new Guna.UI2.WinForms.Guna2HtmlLabel();
             pnlPresentacionNotebook = new Guna.UI2.WinForms.Guna2Panel();
             lblNotebooksTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            btnActualizarPrestamos = new Guna.UI2.WinForms.Guna2Button();
             pnlDataGridElementos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgPrestamosYDevoluciones).BeginInit();
             guna2Panel3.SuspendLayout();
@@ -75,8 +75,35 @@
             pnlDataGridElementos.Location = new Point(20, 125);
             pnlDataGridElementos.Name = "pnlDataGridElementos";
             pnlDataGridElementos.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            pnlDataGridElementos.Size = new Size(1009, 533);
+            pnlDataGridElementos.Size = new Size(1075, 558);
             pnlDataGridElementos.TabIndex = 52;
+            // 
+            // btnActualizarPrestamos
+            // 
+            btnActualizarPrestamos.BackColor = Color.Transparent;
+            btnActualizarPrestamos.BorderRadius = 8;
+            btnActualizarPrestamos.Cursor = Cursors.Hand;
+            btnActualizarPrestamos.CustomizableEdges = customizableEdges1;
+            btnActualizarPrestamos.DisabledState.BorderColor = Color.DarkGray;
+            btnActualizarPrestamos.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnActualizarPrestamos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnActualizarPrestamos.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnActualizarPrestamos.FillColor = Color.FromArgb(105, 80, 165);
+            btnActualizarPrestamos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnActualizarPrestamos.ForeColor = Color.White;
+            btnActualizarPrestamos.HoverState.FillColor = Color.FromArgb(150, 115, 220);
+            btnActualizarPrestamos.HoverState.ForeColor = Color.White;
+            btnActualizarPrestamos.Location = new Point(12, 7);
+            btnActualizarPrestamos.Name = "btnActualizarPrestamos";
+            btnActualizarPrestamos.PressedColor = Color.FromArgb(105, 50, 140);
+            btnActualizarPrestamos.ShadowDecoration.Color = Color.FromArgb(200, 185, 255);
+            btnActualizarPrestamos.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnActualizarPrestamos.ShadowDecoration.Enabled = true;
+            btnActualizarPrestamos.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
+            btnActualizarPrestamos.Size = new Size(134, 26);
+            btnActualizarPrestamos.TabIndex = 16;
+            btnActualizarPrestamos.Text = "Actualizar";
+            btnActualizarPrestamos.Click += btnActualizarPrestamos_Click;
             // 
             // btnDevoluciones
             // 
@@ -93,7 +120,7 @@
             btnDevoluciones.ForeColor = Color.Firebrick;
             btnDevoluciones.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnDevoluciones.HoverState.ForeColor = Color.White;
-            btnDevoluciones.Location = new Point(658, 497);
+            btnDevoluciones.Location = new Point(728, 518);
             btnDevoluciones.Name = "btnDevoluciones";
             btnDevoluciones.PressedColor = Color.FromArgb(255, 170, 20);
             btnDevoluciones.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -120,7 +147,7 @@
             btnCrearNotebook_M.ForeColor = Color.WhiteSmoke;
             btnCrearNotebook_M.HoverState.FillColor = Color.FromArgb(235, 115, 125);
             btnCrearNotebook_M.HoverState.ForeColor = Color.White;
-            btnCrearNotebook_M.Location = new Point(13, 497);
+            btnCrearNotebook_M.Location = new Point(11, 518);
             btnCrearNotebook_M.Name = "btnCrearNotebook_M";
             btnCrearNotebook_M.PressedColor = Color.OliveDrab;
             btnCrearNotebook_M.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
@@ -137,15 +164,15 @@
             panel2.BackColor = Color.LightGray;
             panel2.Location = new Point(13, 39);
             panel2.Name = "panel2";
-            panel2.Size = new Size(977, 1);
+            panel2.Size = new Size(1047, 1);
             panel2.TabIndex = 2;
             // 
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
-            panel1.Location = new Point(11, 483);
+            panel1.Location = new Point(11, 499);
             panel1.Name = "panel1";
-            panel1.Size = new Size(977, 1);
+            panel1.Size = new Size(1049, 1);
             panel1.TabIndex = 1;
             // 
             // dvgPrestamosYDevoluciones
@@ -180,7 +207,7 @@
             dvgPrestamosYDevoluciones.RowHeadersVisible = false;
             dvgPrestamosYDevoluciones.RowTemplate.Height = 35;
             dvgPrestamosYDevoluciones.ScrollBars = ScrollBars.Vertical;
-            dvgPrestamosYDevoluciones.Size = new Size(977, 429);
+            dvgPrestamosYDevoluciones.Size = new Size(1049, 447);
             dvgPrestamosYDevoluciones.TabIndex = 0;
             dvgPrestamosYDevoluciones.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(248, 248, 248);
             dvgPrestamosYDevoluciones.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F);
@@ -214,7 +241,7 @@
             guna2Panel3.Location = new Point(20, 59);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Panel3.Size = new Size(1009, 51);
+            guna2Panel3.Size = new Size(1075, 51);
             guna2Panel3.TabIndex = 57;
             // 
             // lblPresentacion
@@ -239,7 +266,7 @@
             pnlPresentacionNotebook.Location = new Point(20, 12);
             pnlPresentacionNotebook.Name = "pnlPresentacionNotebook";
             pnlPresentacionNotebook.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            pnlPresentacionNotebook.Size = new Size(1009, 65);
+            pnlPresentacionNotebook.Size = new Size(1075, 65);
             pnlPresentacionNotebook.TabIndex = 56;
             // 
             // lblNotebooksTitulo
@@ -254,33 +281,6 @@
             lblNotebooksTitulo.Text = "<b>Prestamos y devoluciones</b>";
             lblNotebooksTitulo.TextAlignment = ContentAlignment.MiddleLeft;
             // 
-            // btnActualizarPrestamos
-            // 
-            btnActualizarPrestamos.BackColor = Color.Transparent;
-            btnActualizarPrestamos.BorderRadius = 8;
-            btnActualizarPrestamos.Cursor = Cursors.Hand;
-            btnActualizarPrestamos.CustomizableEdges = customizableEdges1;
-            btnActualizarPrestamos.DisabledState.BorderColor = Color.DarkGray;
-            btnActualizarPrestamos.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnActualizarPrestamos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnActualizarPrestamos.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnActualizarPrestamos.FillColor = Color.FromArgb(105, 80, 165);
-            btnActualizarPrestamos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnActualizarPrestamos.ForeColor = Color.White;
-            btnActualizarPrestamos.HoverState.FillColor = Color.FromArgb(150, 115, 220);
-            btnActualizarPrestamos.HoverState.ForeColor = Color.White;
-            btnActualizarPrestamos.Location = new Point(12, 7);
-            btnActualizarPrestamos.Name = "btnActualizarPrestamos";
-            btnActualizarPrestamos.PressedColor = Color.FromArgb(105, 50, 140);
-            btnActualizarPrestamos.ShadowDecoration.Color = Color.FromArgb(200, 185, 255);
-            btnActualizarPrestamos.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnActualizarPrestamos.ShadowDecoration.Enabled = true;
-            btnActualizarPrestamos.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
-            btnActualizarPrestamos.Size = new Size(134, 26);
-            btnActualizarPrestamos.TabIndex = 16;
-            btnActualizarPrestamos.Text = "Actualizar";
-            btnActualizarPrestamos.Click += btnActualizarPrestamos_Click;
-            // 
             // PrestamosYDevolucionesUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -290,7 +290,7 @@
             Controls.Add(pnlPresentacionNotebook);
             Controls.Add(pnlDataGridElementos);
             Name = "PrestamosYDevolucionesUC";
-            Size = new Size(1050, 670);
+            Size = new Size(1113, 698);
             Load += PrestamosYDevolucionesUC_Load;
             pnlDataGridElementos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgPrestamosYDevoluciones).EndInit();

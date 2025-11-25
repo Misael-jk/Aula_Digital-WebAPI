@@ -25,19 +25,16 @@ public class DevolucionCN
     }
 
     #region INSERT DEVOLUCION
-    public void CrearDevolucion(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<string>? Observaciones, int idUsuario, int? idCarrito)
+    public void CrearDevolucion(Devolucion devolucionNEW, IEnumerable<int> idsElementos, IEnumerable<string>? Observaciones, int idUsuario)
     {
         try
         {
             uow.BeginTransaction();
 
             if (uow.RepoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
-            {
                 throw new Exception("Ya existe una devolución asociada a este prestamo.");
-            }
 
             Prestamos? prestamo = uow.RepoPrestamos.GetById(devolucionNEW.IdPrestamo);
-
             if (prestamo == null)
                 throw new Exception("No existe el préstamo asociado.");
 
@@ -48,29 +45,39 @@ public class DevolucionCN
             int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(prestamo.IdPrestamo);
             int totalDevueltos = uow.RepoDevolucionDetalle.CountByDevolucion(devolucionNEW.IdDevolucion);
 
-            if (totalPrestados == totalDevueltos)
-            {
-                uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 2);
-            }
-            else
-            {
-                uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 4);
-            }
+            // estado del préstamo
+            uow.RepoPrestamos.UpdateEstado(
+                prestamo.IdPrestamo,
+                totalPrestados == totalDevueltos ? 2 : 4
+            );
 
-            if (idCarrito.HasValue && idCarrito == prestamo.IdCarrito)
+            // --------------------------
+            //     LÓGICA DE CARRITO
+            // --------------------------
+            if (prestamo.IdCarrito != null)
             {
-                var pendientes = uow.RepoPrestamoDetalle.GetElementosPendientes(prestamo.IdPrestamo);
+                int idCarrito = prestamo.IdCarrito.Value;
 
+                // Obtener SOLO las notebooks que pertenecen al carrito y están en este préstamo
+                var notebooksDelCarritoEnEstePrestamo =
+                    uow.RepoPrestamoDetalle.GetIdsElementosPorPrestamoFiltrandoCarrito(prestamo.IdPrestamo, idCarrito);
+
+                // Obtener cuáles siguen pendientes dentro de este préstamo
+                var pendientes = notebooksDelCarritoEnEstePrestamo
+                                    .Except(uow.RepoDevolucionDetalle.GetIdsElementosByIdDevolucion(devolucionNEW.IdDevolucion))
+                                    .ToList();
+
+                // Si no faltan notebooks → liberar carrito
                 if (!pendientes.Any())
                 {
-                    uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
+                    uow.RepoCarritos.UpdateDisponible(idCarrito, 1);
 
                     HistorialCambios historial = new HistorialCambios
                     {
                         IdTipoAccion = 6,
                         IdUsuario = idUsuario,
                         FechaCambio = DateTime.Now,
-                        Descripcion = $"El carrito {prestamo.IdCarrito.Value} fue liberado."
+                        Descripcion = $"El carrito {idCarrito} fue liberado."
                     };
 
                     uow.RepoHistorialCambio.Insert(historial);
@@ -78,7 +85,7 @@ public class DevolucionCN
                     uow.RepoHistorialCarrito.Insert(new HistorialCarritos
                     {
                         IdHistorialCambio = historial.IdHistorialCambio,
-                        IdCarrito = prestamo.IdCarrito.Value
+                        IdCarrito = idCarrito
                     });
                 }
             }
@@ -94,48 +101,57 @@ public class DevolucionCN
     #endregion
 
     #region DEVOLUCION PARCIAL
-    public void CrearDevolucionParcial(int idPrestamo, IEnumerable<int> idsElementos, IEnumerable<string>? Observaciones, int idUsuario, int? idCarrito)
+    public void CrearDevolucionParcial(int idPrestamo, IEnumerable<int> idsElementos, IEnumerable<string>? Observaciones, int idUsuario)
     {
         try
         {
             uow.BeginTransaction();
 
             Devolucion? devolucion = uow.RepoDevolucion.GetByPrestamo(idPrestamo);
-
             if (devolucion == null)
                 throw new Exception("No existe una devolución asociada al préstamo.");
 
             Prestamos? prestamo = uow.RepoPrestamos.GetById(idPrestamo);
-
             if (prestamo == null)
                 throw new Exception("No existe el préstamo asociado.");
 
             InsertDevolucionDetalle(devolucion, idsElementos, Observaciones, idUsuario);
 
-            // actualizar estado del préstamo
             int totalPrestados = uow.RepoPrestamoDetalle.GetCountByPrestamo(prestamo.IdPrestamo);
             int totalDevueltos = uow.RepoDevolucionDetalle.CountByDevolucion(devolucion.IdDevolucion);
 
-            if (totalPrestados == totalDevueltos)
-                uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 2);
-            else
-                uow.RepoPrestamos.UpdateEstado(prestamo.IdPrestamo, 4);
+            // actualizar estado del préstamo
+            uow.RepoPrestamos.UpdateEstado(
+                idPrestamo,
+                totalPrestados == totalDevueltos ? 2 : 4
+            );
 
-            // liberar carrito si corresponde
-            if (idCarrito.HasValue && idCarrito == prestamo.IdCarrito)
+            // --------------------------------
+            //       LÓGICA DE CARRITO
+            // --------------------------------
+            if (prestamo.IdCarrito != null)
             {
-                var pendientes = uow.RepoPrestamoDetalle.GetElementosPendientes(prestamo.IdPrestamo);
+                int idCarrito = prestamo.IdCarrito.Value;
+
+                // notebooks del carrito pertenecientes a este préstamo
+                var notebooksDelCarritoEnEstePrestamo =
+                    uow.RepoPrestamoDetalle.GetIdsElementosPorPrestamoFiltrandoCarrito(idPrestamo, idCarrito);
+
+                // devueltas
+                var devueltas = uow.RepoDevolucionDetalle.GetIdsElementosByIdDevolucion(devolucion.IdDevolucion);
+
+                var pendientes = notebooksDelCarritoEnEstePrestamo.Except(devueltas).ToList();
 
                 if (!pendientes.Any())
                 {
-                    uow.RepoCarritos.UpdateDisponible(prestamo.IdCarrito.Value, 1);
+                    uow.RepoCarritos.UpdateDisponible(idCarrito, 1);
 
                     HistorialCambios historial = new HistorialCambios
                     {
                         IdTipoAccion = 6,
                         IdUsuario = idUsuario,
                         FechaCambio = DateTime.Now,
-                        Descripcion = $"El carrito {prestamo.IdCarrito.Value} fue liberado."
+                        Descripcion = $"El carrito {idCarrito} fue liberado."
                     };
 
                     uow.RepoHistorialCambio.Insert(historial);
@@ -143,7 +159,7 @@ public class DevolucionCN
                     uow.RepoHistorialCarrito.Insert(new HistorialCarritos
                     {
                         IdHistorialCambio = historial.IdHistorialCambio,
-                        IdCarrito = prestamo.IdCarrito.Value
+                        IdCarrito = idCarrito
                     });
                 }
             }

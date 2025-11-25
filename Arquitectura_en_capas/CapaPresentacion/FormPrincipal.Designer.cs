@@ -94,7 +94,7 @@
             pnlBanner.Dock = DockStyle.Top;
             pnlBanner.Location = new Point(0, 0);
             pnlBanner.Name = "pnlBanner";
-            pnlBanner.Size = new Size(1300, 29);
+            pnlBanner.Size = new Size(1366, 29);
             pnlBanner.TabIndex = 0;
             // 
             // lblPort
@@ -121,7 +121,7 @@
             btnSkip.IconColor = SystemColors.ButtonHighlight;
             btnSkip.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSkip.IconSize = 20;
-            btnSkip.Location = new Point(1242, 0);
+            btnSkip.Location = new Point(1308, 0);
             btnSkip.Name = "btnSkip";
             btnSkip.Padding = new Padding(19, 22, 20, 20);
             btnSkip.Size = new Size(29, 29);
@@ -142,7 +142,7 @@
             BtnCerrar1.IconColor = SystemColors.ButtonHighlight;
             BtnCerrar1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnCerrar1.IconSize = 20;
-            BtnCerrar1.Location = new Point(1271, 0);
+            BtnCerrar1.Location = new Point(1337, 0);
             BtnCerrar1.Name = "BtnCerrar1";
             BtnCerrar1.Padding = new Padding(19, 22, 20, 20);
             BtnCerrar1.Size = new Size(29, 29);
@@ -154,9 +154,9 @@
             // pnlContenedor
             // 
             pnlContenedor.AutoScroll = true;
-            pnlContenedor.Location = new Point(249, 30);
+            pnlContenedor.Location = new Point(253, 30);
             pnlContenedor.Name = "pnlContenedor";
-            pnlContenedor.Size = new Size(1051, 671);
+            pnlContenedor.Size = new Size(1113, 698);
             pnlContenedor.TabIndex = 2;
             // 
             // pnlSeccion
@@ -187,7 +187,7 @@
             pnlSeccion.Location = new Point(0, 29);
             pnlSeccion.Name = "pnlSeccion";
             pnlSeccion.ShadowDecoration.CustomizableEdges = customizableEdges27;
-            pnlSeccion.Size = new Size(253, 671);
+            pnlSeccion.Size = new Size(253, 699);
             pnlSeccion.TabIndex = 1;
             // 
             // guna2Button3
@@ -533,18 +533,18 @@
             pnlGestionUsuario.AutoScroll = true;
             pnlGestionUsuario.Location = new Point(249, 30);
             pnlGestionUsuario.Name = "pnlGestionUsuario";
-            pnlGestionUsuario.Size = new Size(1051, 671);
+            pnlGestionUsuario.Size = new Size(1117, 698);
             pnlGestionUsuario.TabIndex = 3;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1300, 700);
-            Controls.Add(pnlGestionUsuario);
+            ClientSize = new Size(1366, 728);
             Controls.Add(pnlSeccion);
             Controls.Add(pnlBanner);
             Controls.Add(pnlContenedor);
+            Controls.Add(pnlGestionUsuario);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPrincipal";

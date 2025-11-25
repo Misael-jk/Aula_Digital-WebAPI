@@ -31,7 +31,7 @@ public class RepoEstadosPrestamo : RepoBase, IRepoEstadosPrestamo
     #region Obtener por Id los estados de los prestamos
     public EstadosPrestamo? GetById(int idEstadoPrestamo)
     {
-        string query = "select * from EstadosPrestamo where idEstadoPrestamo = @idEstadoPrestamo";
+        string query = "select * from EstadosPrestamo where idEstadoPrestamo = @unidEstadoPrestamo";
 
         DynamicParameters parameters = new DynamicParameters();
         try

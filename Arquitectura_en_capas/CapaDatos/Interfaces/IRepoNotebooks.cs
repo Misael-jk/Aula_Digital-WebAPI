@@ -34,4 +34,5 @@ public interface IRepoNotebooks
     public int? CantidadEstados(int idEstado);
     public int CantidadTotal();
     public IEnumerable<int> GetIdNotebooksPrestadasByCarrito(int idCarrito);
+    public IEnumerable<int> GetIdNotebooksDisponiblesByCarrito(int idCarrito);
 }
