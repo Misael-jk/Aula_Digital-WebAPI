@@ -385,22 +385,25 @@ public class RepoNotebooks : RepoBase, IRepoNotebooks
     }
     #endregion
 
-    #region OBTENER NOTEBOOK POR CODIGO O SERIE
-    public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra)
+    #region OBTENER NOTEBOOK POR CODIGO O SERIE O PATRIMONIO
+    public Notebooks? GetNotebookBySerieOrCodigoOrPatrimonio(string? numeroSerie, string? codigoBarra, string? patrimonio)
     {
-        string query = @"select idEstadoMantenimiento, numeroSerie, codigoBarra
+        string query = @"select *
                          from Elementos e
                          LEFT JOIN Notebooks n ON e.idElemento = n.idElemento
-                         where (numeroSerie = @numeroSerie or codigoBarra = @codigoBarra)
-                         and n.idCarrito is null
-                         and idEstadoMantenimiento = 1 
-                         and habilitado = 1
-                         limit 1;";
+                         WHERE (@numeroSerie IS NULL OR e.numeroSerie = @numeroSerie)
+                         AND (@codigoBarra IS NULL OR e.codigoBarra = @codigoBarra)
+                         AND (@patrimonio IS NULL OR e.patrimonio = @patrimonio)
+                         AND e.idTipoElemento = 1
+                         AND e.idEstadoMantenimiento = 1
+                         AND n.idCarrito is null
+                         AND habilitado = 1;";
 
         DynamicParameters parameters = new DynamicParameters();
 
         parameters.Add("numeroSerie", numeroSerie);
         parameters.Add("codigoBarra", codigoBarra);
+        parameters.Add("patrimonio", patrimonio);
 
         try
         {

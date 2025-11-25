@@ -21,7 +21,7 @@ public interface IRepoNotebooks
     public IEnumerable<Notebooks> GetNroSerieByNotebook();
     public IEnumerable<Notebooks> GetCodBarraByNotebook();
     public IEnumerable<Notebooks> GetNotebookByCarrito(int idCarrito);
-    public Notebooks? GetNotebookBySerieOrCodigo(string numeroSerie, string codigoBarra);
+    public Notebooks? GetNotebookBySerieOrCodigoOrPatrimonio(string? numeroSerie, string? codigoBarra, string? patrimonio);
     public IEnumerable<string> GetSerieBarraPatrimonio(string text, int limit);
     public IEnumerable<string> GetEquiposNotebooks();
     public Carritos? GetCarritoByNotebook(int idNotebook);
