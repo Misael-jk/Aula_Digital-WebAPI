@@ -57,7 +57,7 @@ namespace CapaPresentacion
         {
             if (acAnterior is CarritoUC carritoUC)
             {
-                carritoUC.ActualizarDatagrid();
+                carritoUC.MostrarDatos();
             }
 
             formPrincipal.MostrarUserControl(acAnterior);

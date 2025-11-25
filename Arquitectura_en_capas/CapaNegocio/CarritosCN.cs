@@ -29,6 +29,11 @@ public class CarritosCN
     {
         return mapperCarritos.GetAllDTO();
     }
+
+    public IEnumerable<CarritosDTO> ObtenerPorEstado(string estado)
+    {
+        return mapperCarritos.GetAllByEstado(estado);
+    }
     #endregion
 
     #region INSERT CARRITO

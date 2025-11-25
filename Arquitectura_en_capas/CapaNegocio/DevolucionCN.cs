@@ -51,9 +51,6 @@ public class DevolucionCN
                 totalPrestados == totalDevueltos ? 2 : 4
             );
 
-            // --------------------------
-            //     LÓGICA DE CARRITO
-            // --------------------------
             if (prestamo.IdCarrito != null)
             {
                 int idCarrito = prestamo.IdCarrito.Value;
@@ -67,7 +64,6 @@ public class DevolucionCN
                                     .Except(uow.RepoDevolucionDetalle.GetIdsElementosByIdDevolucion(devolucionNEW.IdDevolucion))
                                     .ToList();
 
-                // Si no faltan notebooks → liberar carrito
                 if (!pendientes.Any())
                 {
                     uow.RepoCarritos.UpdateDisponible(idCarrito, 1);

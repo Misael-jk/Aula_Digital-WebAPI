@@ -33,6 +33,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -44,14 +46,12 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlFondoLateral = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pnlBanner = new Panel();
             iconButton1 = new FontAwesome.Sharp.IconButton();
-            lblIDCarrito = new Label();
             ptbCarrito = new PictureBox();
             pnlDatoCarrito = new Guna.UI2.WinForms.Guna2Panel();
+            Capacidad = new Guna.UI2.WinForms.Guna2TextBox();
             cmbUbicacion = new Guna.UI2.WinForms.Guna2ComboBox();
             cmbModelo = new Guna.UI2.WinForms.Guna2ComboBox();
             btnCrearCarrito = new Guna.UI2.WinForms.Guna2Button();
@@ -62,7 +62,6 @@
             iconButton2 = new FontAwesome.Sharp.IconButton();
             guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(components);
             guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(components);
-            Capacidad = new Guna.UI2.WinForms.Guna2TextBox();
             pnlFondoLateral.SuspendLayout();
             pnlBanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbCarrito).BeginInit();
@@ -73,7 +72,6 @@
             // pnlFondoLateral
             // 
             pnlFondoLateral.Controls.Add(pnlBanner);
-            pnlFondoLateral.Controls.Add(lblIDCarrito);
             pnlFondoLateral.Controls.Add(ptbCarrito);
             pnlFondoLateral.CustomizableEdges = customizableEdges1;
             pnlFondoLateral.Dock = DockStyle.Left;
@@ -115,18 +113,6 @@
             iconButton1.TabStop = false;
             iconButton1.UseVisualStyleBackColor = false;
             // 
-            // lblIDCarrito
-            // 
-            lblIDCarrito.AutoSize = true;
-            lblIDCarrito.BackColor = Color.Transparent;
-            lblIDCarrito.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblIDCarrito.ForeColor = SystemColors.ButtonHighlight;
-            lblIDCarrito.Location = new Point(181, 41);
-            lblIDCarrito.Name = "lblIDCarrito";
-            lblIDCarrito.Size = new Size(40, 32);
-            lblIDCarrito.TabIndex = 5;
-            lblIDCarrito.Text = "ID";
-            // 
             // ptbCarrito
             // 
             ptbCarrito.BackColor = Color.Transparent;
@@ -153,6 +139,29 @@
             pnlDatoCarrito.ShadowDecoration.CustomizableEdges = customizableEdges16;
             pnlDatoCarrito.Size = new Size(343, 351);
             pnlDatoCarrito.TabIndex = 6;
+            // 
+            // Capacidad
+            // 
+            Capacidad.BorderRadius = 7;
+            Capacidad.CustomizableEdges = customizableEdges3;
+            Capacidad.DefaultText = "";
+            Capacidad.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            Capacidad.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            Capacidad.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            Capacidad.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            Capacidad.FocusedState.BorderColor = Color.DodgerBlue;
+            Capacidad.Font = new Font("Segoe UI", 9F);
+            Capacidad.ForeColor = Color.Black;
+            Capacidad.HoverState.BorderColor = Color.DodgerBlue;
+            Capacidad.IconLeft = Properties.Resources.UserIcon;
+            Capacidad.Location = new Point(28, 184);
+            Capacidad.Name = "Capacidad";
+            Capacidad.PlaceholderForeColor = Color.DarkGray;
+            Capacidad.PlaceholderText = "Ingrese la capacidad del carrito";
+            Capacidad.SelectedText = "";
+            Capacidad.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            Capacidad.Size = new Size(288, 32);
+            Capacidad.TabIndex = 34;
             // 
             // cmbUbicacion
             // 
@@ -322,29 +331,6 @@
             guna2DragControl2.TargetControl = pnlBanner;
             guna2DragControl2.UseTransparentDrag = true;
             // 
-            // Capacidad
-            // 
-            Capacidad.BorderRadius = 7;
-            Capacidad.CustomizableEdges = customizableEdges3;
-            Capacidad.DefaultText = "";
-            Capacidad.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            Capacidad.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            Capacidad.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            Capacidad.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            Capacidad.FocusedState.BorderColor = Color.DodgerBlue;
-            Capacidad.Font = new Font("Segoe UI", 9F);
-            Capacidad.ForeColor = Color.Black;
-            Capacidad.HoverState.BorderColor = Color.DodgerBlue;
-            Capacidad.IconLeft = Properties.Resources.UserIcon;
-            Capacidad.Location = new Point(28, 184);
-            Capacidad.Name = "Capacidad";
-            Capacidad.PlaceholderForeColor = Color.DarkGray;
-            Capacidad.PlaceholderText = "Ingrese la capacidad del carrito";
-            Capacidad.SelectedText = "";
-            Capacidad.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            Capacidad.Size = new Size(288, 32);
-            Capacidad.TabIndex = 34;
-            // 
             // FormCRUDCarritos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -359,7 +345,6 @@
             Text = "FormCRUDCarritos";
             Load += FormCRUDCarritos_Load;
             pnlFondoLateral.ResumeLayout(false);
-            pnlFondoLateral.PerformLayout();
             pnlBanner.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ptbCarrito).EndInit();
             pnlDatoCarrito.ResumeLayout(false);
@@ -370,7 +355,6 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2CustomGradientPanel pnlFondoLateral;
-        private Label lblIDCarrito;
         private PictureBox ptbCarrito;
         private Guna.UI2.WinForms.Guna2Panel pnlDatoCarrito;
         private Guna.UI2.WinForms.Guna2Button btnCrearCarrito;

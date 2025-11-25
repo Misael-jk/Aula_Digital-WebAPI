@@ -28,4 +28,26 @@ public class MapperCarrritos : RepoBase, IMapperCarritos
         },
         splitOn: "IdCarrito,EstadoMantenimientoNombre,NombreUbicacion,NombreModelo");
     }
+
+    public IEnumerable<CarritosDTO> GetAllByEstado(string estado)
+    {
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unestado", estado);
+
+        return Conexion.Query<Carritos, EstadosMantenimiento, Ubicacion, Modelos, CarritosDTO>(
+"select * from View_GetCarritoDTO where e.estadoMantenimiento = @unestado",
+(carrito, estadoMantenimiento, ubicacion, modelo) => new CarritosDTO
+{
+    IdCarrito = carrito.IdCarrito,
+    Equipo = carrito.EquipoCarrito,
+    NumeroSerieCarrito = carrito.NumeroSerieCarrito,
+    Capacidad = carrito.Capacidad,
+    EstadoMantenimiento = estadoMantenimiento.EstadoMantenimientoNombre,
+    UbicacionActual = ubicacion.NombreUbicacion,
+    Modelo = modelo.NombreModelo,
+},
+splitOn: "IdCarrito,EstadoMantenimientoNombre,NombreUbicacion,NombreModelo");
+    }
+
+    
 }

@@ -276,6 +276,7 @@ namespace CapaPresentacion
         }
         #endregion
 
+        #region Mostrar Sugerencias
         private void MostrarSugerenciasIdentificadores(string q)
         {
             try
@@ -306,7 +307,9 @@ namespace CapaPresentacion
                 throw new Exception("ERROR En las sugerencias");
             }
         }
+        #endregion
 
+        #region KEYDOWN
         private void txtSerieBarraPatrimonio_KeyDown(object sender, KeyEventArgs e)
         {
             if (!lstSugerencias.Visible) return;
@@ -356,6 +359,7 @@ namespace CapaPresentacion
             Timer.Stop();
             Timer.Start();
         }
+        #endregion
 
         private void LstSugerencias_Click(object sender, EventArgs e)
         {

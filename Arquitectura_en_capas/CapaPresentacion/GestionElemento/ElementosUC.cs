@@ -64,10 +64,7 @@ namespace CapaPresentacion
             // El ListBox
             lstSugerencias.BringToFront();
             lstSugerencias.Height = 120;
-            lstSugerencias.Location = new Point(
-            txtSerieBarraPatrimonio.Left,
-            txtSerieBarraPatrimonio.Bottom + 3
-            );
+            lstSugerencias.Location = new Point(txtSerieBarraPatrimonio.Left, txtSerieBarraPatrimonio.Bottom + 3);
 
             // Eventos 
             lstSugerencias.Click += LstSugerencias_Click;
@@ -134,7 +131,19 @@ namespace CapaPresentacion
         {
             try
             {
-                IEnumerable<ElementosDTO> elementos = idEstado == 0 ? elementosCN.ObtenerElementos() : elementosCN.GetAllByEstado(idEstado);
+                IEnumerable<ElementosDTO> elementosFiltrados;
+
+                if (idEstado == 0)
+                {
+                    elementosFiltrados = elementosCN.ObtenerElementos();
+                }
+                else
+                {
+                    EstadosMantenimiento? estado = elementosCN.ObtenerEstadoMantenimientoPorID(idEstado);
+                    elementosFiltrados = elementosCN.GetAllByEstado(estado?.EstadoMantenimientoNombre);
+                }
+
+                dgvElementos_M.DataSource = elementosFiltrados.ToList();
             }
             catch (Exception ex)
             {

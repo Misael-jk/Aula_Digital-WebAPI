@@ -31,9 +31,9 @@ namespace CapaNegocio
             return _mapperElementos.GetAllDTO();
         }
 
-        public IEnumerable<ElementosDTO> GetAllByEstado(int idEstado)
+        public IEnumerable<ElementosDTO> GetAllByEstado(string idEstado)
         {
-            return _mapperElementos.GetByEstado(idEstado);
+            return _mapperElementos.GetAllByEstado(idEstado);
         }
 
         public IEnumerable<ElementosDTO> BuscarElementos(string? text, int? idTipo, int? idModelo)

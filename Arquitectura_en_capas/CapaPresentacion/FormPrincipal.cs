@@ -443,7 +443,7 @@ namespace CapaPresentacion
 
             pnlContenedor.Controls.Clear();
 
-            carritoUC.ActualizarDatagrid();
+            carritoUC.MostrarDatos();
             carritoUC.RenovarDatos();
             if (!pnlContenedor.Controls.Contains(carritoUC))
             {
