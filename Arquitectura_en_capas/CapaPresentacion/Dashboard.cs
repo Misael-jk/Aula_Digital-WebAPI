@@ -20,7 +20,6 @@ namespace CapaPresentacion
         private readonly NotebooksCN notebooksCN;
 
         #region DEVOLUCION
-        private readonly PrestamosYDevolucionesUC prestamosYDevolucionesUC;
         private readonly FormPrincipal _formPrincipal;
         private readonly PrestamosCN prestamosCN;
         private Usuarios userActual;
@@ -28,7 +27,7 @@ namespace CapaPresentacion
         private int idPrestamoSeleccionado;
         #endregion
 
-        public Dashboard(IMapperPrestamosActivos mapperPrestamosActivos, IMapperNotebooksPrestadas mapperNotebooksPrestadas, IMapperRankingDocente mapperRankingDocente, NotebooksCN notebooksCN, FormPrincipal formPrincipal, Usuarios userVerificado, PrestamosYDevolucionesUC prestamosYDevolucionesUC, PrestamosCN prestamosCN, DevolucionCN devolucionCN)
+        public Dashboard(IMapperPrestamosActivos mapperPrestamosActivos, IMapperNotebooksPrestadas mapperNotebooksPrestadas, IMapperRankingDocente mapperRankingDocente, NotebooksCN notebooksCN, FormPrincipal formPrincipal, Usuarios userVerificado, PrestamosCN prestamosCN, DevolucionCN devolucionCN)
         {
             InitializeComponent();
             this.mapperPrestamosActivos = mapperPrestamosActivos;
@@ -39,7 +38,6 @@ namespace CapaPresentacion
             #region Devolucion
             this._formPrincipal = formPrincipal;
             this.userActual = userVerificado;
-            this.prestamosYDevolucionesUC = prestamosYDevolucionesUC;
             this.prestamosCN = prestamosCN;
             this.devolucionCN = devolucionCN;
             #endregion
@@ -72,6 +70,8 @@ namespace CapaPresentacion
             dgvPrestamosActivos.Columns["Prestadas"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvPrestamosActivos.Columns["Devueltas"].Width = 70;
             dgvPrestamosActivos.Columns["Devueltas"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            { }
 
             if (dgvPrestamosActivos.RowCount > 0)
             {
@@ -202,7 +202,7 @@ namespace CapaPresentacion
 
         private void btnDevolucion_Click(object sender, EventArgs e)
         {
-            var devolucion = new DevolucionGestionUC(prestamosYDevolucionesUC, _formPrincipal, prestamosCN, userActual, devolucionCN, idPrestamoSeleccionado);
+            var devolucion = new DevolucionGestionUC(_formPrincipal, prestamosCN, userActual, devolucionCN, idPrestamoSeleccionado, this);
            _formPrincipal.MostrarUserControl(devolucion);
         }
     }

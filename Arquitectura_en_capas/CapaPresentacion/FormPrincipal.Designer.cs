@@ -543,11 +543,11 @@
             // 
             lblRol.AutoSize = true;
             lblRol.Enabled = false;
-            lblRol.Font = new Font("Segoe UI", 8F, FontStyle.Italic);
+            lblRol.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblRol.ForeColor = SystemColors.ButtonHighlight;
             lblRol.Location = new Point(69, 40);
             lblRol.Name = "lblRol";
-            lblRol.Size = new Size(22, 13);
+            lblRol.Size = new Size(23, 13);
             lblRol.TabIndex = 10;
             lblRol.Text = "Rol";
             // 

@@ -6,8 +6,8 @@ namespace CapaPresentacion
 {
     public partial class DevolucionGestionUC : UserControl
     {
-        private readonly PrestamosYDevolucionesUC prestamosYDevolucionesUC;
         private readonly FormPrincipal _formPrincipal;
+        private readonly UserControl ucAnterior;
         private readonly PrestamosCN prestamosCN;
         private Usuarios userActual;
         private readonly DevolucionCN devolucionCN;
@@ -17,16 +17,15 @@ namespace CapaPresentacion
         private List<int> ElementosDevueltos = new List<int>();
         private int? idCarrito;
 
-        public DevolucionGestionUC(PrestamosYDevolucionesUC prestamosYDevolucionesUC, FormPrincipal _formPrincipal, PrestamosCN prestamosCN, Usuarios userActual, DevolucionCN devolucionCN, int idPrestamoSeleccionado)
+        public DevolucionGestionUC(FormPrincipal _formPrincipal, PrestamosCN prestamosCN, Usuarios userActual, DevolucionCN devolucionCN, int idPrestamoSeleccionado, UserControl ucAnterior)
         {
             InitializeComponent();
-
-            this.prestamosYDevolucionesUC = prestamosYDevolucionesUC;
             this._formPrincipal = _formPrincipal;
             this.prestamosCN = prestamosCN;
             this.userActual = userActual;
             this.devolucionCN = devolucionCN;
             this.idPrestamoSeleccionado = idPrestamoSeleccionado;
+            this.ucAnterior = ucAnterior;
 
             // Evitar que la selección tape el color real
             dgvPrestamoDetalle.DefaultCellStyle.SelectionBackColor = dgvPrestamoDetalle.DefaultCellStyle.BackColor;
@@ -389,8 +388,16 @@ namespace CapaPresentacion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            prestamosYDevolucionesUC.ActualizarDataGrid();
-            _formPrincipal.MostrarUserControl(prestamosYDevolucionesUC);
+            if(ucAnterior is PrestamosYDevolucionesUC prestamosDevolucionesUC)
+            {
+                prestamosDevolucionesUC.ActualizarDataGrid();
+            }
+            else if(ucAnterior is Dashboard dashboard)
+            {
+                dashboard.MostrarDatos();
+            }
+
+            _formPrincipal.MostrarUserControl(ucAnterior);
         }
 
         private void ActualizarEstadoBotones()
