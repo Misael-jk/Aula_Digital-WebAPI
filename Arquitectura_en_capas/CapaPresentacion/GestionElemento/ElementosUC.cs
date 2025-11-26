@@ -495,7 +495,7 @@ namespace CapaPresentacion
             {
                 string? estado = e.Value.ToString();
 
-                if (estado == "En Reparacion")
+                if (estado == "En reparacion")
                 {
                     e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
                     e.CellStyle.ForeColor = Color.Black;
