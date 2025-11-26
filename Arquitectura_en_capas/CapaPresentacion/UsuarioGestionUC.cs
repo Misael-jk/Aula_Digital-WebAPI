@@ -19,8 +19,8 @@ namespace CapaPresentacion
         private readonly UsuariosBajasCN usuarioBajas;
         private readonly IRepoHistorialCambio repoHistorialCambio;
 
-        private Usuarios? UsuarioActual;        // Usuario logueado
-        private Usuarios? UsuarioCopia;         // Datos originales del usuario cargado
+        private Usuarios? UsuarioActual;
+        private Usuarios? UsuarioCopia;
 
         private int _idActual;
         private string? PerfilCambio;
@@ -53,10 +53,6 @@ namespace CapaPresentacion
             ActualizarUC(_idActual);
         }
 
-        // ======================================================================
-        // CARGA PRINCIPAL
-        // ======================================================================
-
         public void ActualizarUC(int idUsuario)
         {
             _idActual = idUsuario;
@@ -78,10 +74,6 @@ namespace CapaPresentacion
             RenovarCantidadAcciones();
         }
 
-        // ======================================================================
-        // FOTO PERFIL
-        // ======================================================================
-
         private void CargarFotoPerfil(string? ruta)
         {
             if (string.IsNullOrEmpty(ruta))
@@ -94,7 +86,6 @@ namespace CapaPresentacion
 
             int indexEncontrado = -1;
 
-            // Buscar el índice según el nombre
             for (int i = 0; i < _fotosPerfil.Count; i++)
             {
                 if (_fotosPerfil[i].Nombre == ruta)
@@ -106,8 +97,8 @@ namespace CapaPresentacion
 
             if (indexEncontrado != -1)
             {
-                numeroFoto = indexEncontrado;          // <-- índice de la lista
-                PerfilCambio = ruta;                   // nombre ej: "fotoperfil3"
+                numeroFoto = indexEncontrado;
+                PerfilCambio = ruta;
                 ptbPerfil.Image = _fotosPerfil[indexEncontrado].Imagen;
             }
         }
@@ -126,10 +117,6 @@ namespace CapaPresentacion
 
             VerificarCambios(sender, e);
         }
-
-        // ======================================================================
-        // VISIBILIDAD Y ESTADOS
-        // ======================================================================
 
         private void VerificarHabilitado()
         {
@@ -158,10 +145,6 @@ namespace CapaPresentacion
             btnDeshabilitar.Enabled = estado;
             btnCancelar.Enabled = estado;
         }
-
-        // ======================================================================
-        // ACTUALIZAR / REVERTIR CAMBIOS
-        // ======================================================================
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
@@ -198,10 +181,6 @@ namespace CapaPresentacion
 
             HabilitarBotones(false, false);
         }
-
-        // ======================================================================
-        // HABILITAR / DESHABILITAR USUARIO
-        // ======================================================================
 
         private void btnDeshabilitar_Click(object sender, EventArgs e)
         {
@@ -248,10 +227,6 @@ namespace CapaPresentacion
             btnDeshabilitar.Enabled = true;
         }
 
-        // ======================================================================
-        // CAMBIOS
-        // ======================================================================
-
         private void VerificarCambios(object sender, EventArgs e)
         {
             bool cambio =
@@ -270,9 +245,6 @@ namespace CapaPresentacion
             btnRestablecerCambios.Enabled = rest;
         }
 
-        // ======================================================================
-        // VARIOS
-        // ======================================================================
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
