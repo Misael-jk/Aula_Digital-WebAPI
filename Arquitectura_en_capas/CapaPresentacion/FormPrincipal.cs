@@ -291,6 +291,16 @@ namespace CapaPresentacion
                 btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil4;
             }
 
+            if (usuarios?.FotoPerfil == "fotoperfil5")
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil5;
+            }
+
+            if (usuarios?.FotoPerfil == "fotoperfil6")
+            {
+                btnVerPerfil.BackgroundImage = Properties.Resources.fotoperfil6;
+            }
+
             lblUsuario.Text = usuarios?.Nombre + " " + usuarios?.Apellido;
             lblRol.Text = rolUserVerficado.Rol;
 
@@ -320,15 +330,20 @@ namespace CapaPresentacion
             if (usuarioGestion == null)
                 usuarioGestion = new UsuarioGestionuc(usuariosCN, usuariosBajasCN, idUsuarioSeleccionado, repoHistorialCambio, userVerificado);
 
-
             if (!pnlGestionUsuario.Controls.Contains(usuarioGestion))
             {
                 pnlGestionUsuario.Controls.Add(usuarioGestion);
                 usuarioGestion.Dock = DockStyle.Fill;
             }
 
+            // 🔥 MUY IMPORTANTE: refrescar antes de actualizar
+            usuarioGestion.BringToFront();
+            usuarioGestion.Refresh();
+
+            // Cargar los datos recién ahora
             usuarioGestion.ActualizarUC(idUsuarioSeleccionado);
         }
+
 
         #endregion
 
