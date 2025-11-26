@@ -1,15 +1,6 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CapaPresentacion
 {
@@ -36,24 +27,6 @@ namespace CapaPresentacion
             cmbRol.ValueMember = "IdRol";
 
             lblNoPuedeActualizar.Visible = false;
-            ValidarPassword();
-        }
-
-        private void ValidarPassword()
-        {
-            if (string.IsNullOrWhiteSpace(txtContraseña.Text))
-            {
-                lblNoPuedeActualizar.Text = "Debes poner tu contraseña";
-                lblNoPuedeActualizar.Visible = true;
-                return;
-            }
-
-            if(txtContraseña.Text != txtRepetirContraseña.Text)
-            {
-                lblNoPuedeActualizar.Text = "Las contraseñas no coinciden";
-                lblNoPuedeActualizar.Visible = true;
-                return;
-            }
         }
         private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -63,6 +36,20 @@ namespace CapaPresentacion
         {
             string nombre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtNombre.Text.Trim().ToLower());
             string apellido = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtApellido.Text.Trim().ToLower());
+
+            if (string.IsNullOrWhiteSpace(txtContraseña.Text))
+            {
+                lblNoPuedeActualizar.Text = "Debes poner tu contraseña";
+                lblNoPuedeActualizar.Visible = true;
+                return;
+            }
+
+            if (txtContraseña.Text != txtRepetirContraseña.Text)
+            {
+                lblNoPuedeActualizar.Text = "Las contraseñas no coinciden";
+                lblNoPuedeActualizar.Visible = true;
+                return;
+            }
 
             var usuario = new Usuarios
             {

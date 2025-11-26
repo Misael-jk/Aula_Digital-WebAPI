@@ -227,8 +227,12 @@ namespace CapaPresentacion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            var form = (FormPrincipal)this.FindForm();
-            form.CerrarGestionUsuario();
+            FormPrincipal? form = this.FindForm() as FormPrincipal;
+
+            if (form != null)
+            {
+                form.CerrarGestionUsuario();
+            }
         }
 
         private void RenovarCantidadAcciones()

@@ -30,8 +30,8 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearUsuarioUC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -48,9 +48,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             cmbRol = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
+            chcPassword = new CheckBox();
             lblNoPuedeActualizar = new Guna.UI2.WinForms.Guna2HtmlLabel();
             label6 = new Label();
             guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -68,8 +72,7 @@
             txtUsuario = new Guna.UI2.WinForms.Guna2TextBox();
             lblEquipo = new Label();
             panel3 = new Panel();
-            btnVolver = new Guna.UI2.WinForms.Guna2CircleButton();
-            chcPassword = new CheckBox();
+            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).BeginInit();
             SuspendLayout();
@@ -96,6 +99,7 @@
             // guna2Panel2
             // 
             guna2Panel2.BackColor = Color.Transparent;
+            guna2Panel2.Controls.Add(btnVolver);
             guna2Panel2.Controls.Add(chcPassword);
             guna2Panel2.Controls.Add(lblNoPuedeActualizar);
             guna2Panel2.Controls.Add(label6);
@@ -115,20 +119,51 @@
             guna2Panel2.Controls.Add(txtUsuario);
             guna2Panel2.Controls.Add(lblEquipo);
             guna2Panel2.Controls.Add(panel3);
-            guna2Panel2.CustomizableEdges = customizableEdges18;
+            guna2Panel2.CustomizableEdges = customizableEdges19;
             guna2Panel2.FillColor = SystemColors.ButtonHighlight;
             guna2Panel2.Location = new Point(305, 21);
             guna2Panel2.Name = "guna2Panel2";
-            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2Panel2.Size = new Size(441, 630);
             guna2Panel2.TabIndex = 56;
+            // 
+            // btnVolver
+            // 
+            btnVolver.BackColor = Color.Transparent;
+            btnVolver.DisabledState.BorderColor = Color.DarkGray;
+            btnVolver.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnVolver.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnVolver.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVolver.FillColor = Color.BlueViolet;
+            btnVolver.Font = new Font("Segoe UI", 9F);
+            btnVolver.ForeColor = Color.White;
+            btnVolver.Image = (Image)resources.GetObject("btnVolver.Image");
+            btnVolver.Location = new Point(11, 9);
+            btnVolver.Name = "btnVolver";
+            btnVolver.PressedColor = Color.Indigo;
+            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnVolver.Size = new Size(29, 30);
+            btnVolver.TabIndex = 57;
+            btnVolver.Click += btnVolver_Click;
+            // 
+            // chcPassword
+            // 
+            chcPassword.AutoSize = true;
+            chcPassword.Location = new Point(23, 587);
+            chcPassword.Name = "chcPassword";
+            chcPassword.Size = new Size(130, 19);
+            chcPassword.TabIndex = 111;
+            chcPassword.Text = "Mostrar Contraseña";
+            chcPassword.UseVisualStyleBackColor = true;
+            chcPassword.CheckedChanged += chcPassword_CheckedChanged;
             // 
             // lblNoPuedeActualizar
             // 
             lblNoPuedeActualizar.BackColor = Color.Transparent;
             lblNoPuedeActualizar.Font = new Font("Segoe UI Variable Small", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblNoPuedeActualizar.ForeColor = Color.Red;
-            lblNoPuedeActualizar.Location = new Point(23, 554);
+            lblNoPuedeActualizar.Location = new Point(238, 448);
             lblNoPuedeActualizar.Name = "lblNoPuedeActualizar";
             lblNoPuedeActualizar.Size = new Size(137, 17);
             lblNoPuedeActualizar.TabIndex = 110;
@@ -156,7 +191,7 @@
             guna2CirclePictureBox1.ImageRotate = 0F;
             guna2CirclePictureBox1.Location = new Point(135, 20);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(170, 170);
             guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -180,7 +215,7 @@
             txtRepetirContraseña.Animated = true;
             txtRepetirContraseña.BorderRadius = 10;
             txtRepetirContraseña.Cursor = Cursors.IBeam;
-            txtRepetirContraseña.CustomizableEdges = customizableEdges4;
+            txtRepetirContraseña.CustomizableEdges = customizableEdges5;
             txtRepetirContraseña.DefaultText = "";
             txtRepetirContraseña.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtRepetirContraseña.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -200,7 +235,7 @@
             txtRepetirContraseña.PlaceholderText = "Ingrese nombre";
             txtRepetirContraseña.SelectedText = "";
             txtRepetirContraseña.ShadowDecoration.BorderRadius = 10;
-            txtRepetirContraseña.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            txtRepetirContraseña.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtRepetirContraseña.ShadowDecoration.Depth = 5;
             txtRepetirContraseña.Size = new Size(200, 36);
             txtRepetirContraseña.TabIndex = 106;
@@ -224,7 +259,7 @@
             txtContraseña.Animated = true;
             txtContraseña.BorderRadius = 10;
             txtContraseña.Cursor = Cursors.IBeam;
-            txtContraseña.CustomizableEdges = customizableEdges6;
+            txtContraseña.CustomizableEdges = customizableEdges7;
             txtContraseña.DefaultText = "";
             txtContraseña.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtContraseña.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -244,9 +279,9 @@
             txtContraseña.PlaceholderText = "Ingrese nombre";
             txtContraseña.SelectedText = "";
             txtContraseña.ShadowDecoration.BorderRadius = 10;
-            txtContraseña.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            txtContraseña.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtContraseña.ShadowDecoration.Depth = 5;
-            txtContraseña.Size = new Size(394, 36);
+            txtContraseña.Size = new Size(202, 36);
             txtContraseña.TabIndex = 103;
             txtContraseña.TextOffset = new Point(5, 0);
             txtContraseña.UseSystemPasswordChar = true;
@@ -256,7 +291,7 @@
             txtEmail.Animated = true;
             txtEmail.BorderRadius = 10;
             txtEmail.Cursor = Cursors.IBeam;
-            txtEmail.CustomizableEdges = customizableEdges8;
+            txtEmail.CustomizableEdges = customizableEdges9;
             txtEmail.DefaultText = "";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -276,7 +311,7 @@
             txtEmail.PlaceholderText = "Ingrese email";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.BorderRadius = 10;
-            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtEmail.ShadowDecoration.Depth = 5;
             txtEmail.Size = new Size(393, 36);
             txtEmail.TabIndex = 97;
@@ -299,7 +334,7 @@
             txtApellido.Animated = true;
             txtApellido.BorderRadius = 10;
             txtApellido.Cursor = Cursors.IBeam;
-            txtApellido.CustomizableEdges = customizableEdges10;
+            txtApellido.CustomizableEdges = customizableEdges11;
             txtApellido.DefaultText = "";
             txtApellido.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtApellido.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -319,7 +354,7 @@
             txtApellido.PlaceholderText = "Ingrese apellido";
             txtApellido.SelectedText = "";
             txtApellido.ShadowDecoration.BorderRadius = 10;
-            txtApellido.ShadowDecoration.CustomizableEdges = customizableEdges11;
+            txtApellido.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtApellido.ShadowDecoration.Depth = 5;
             txtApellido.Size = new Size(199, 36);
             txtApellido.TabIndex = 95;
@@ -342,7 +377,7 @@
             txtNombre.Animated = true;
             txtNombre.BorderRadius = 10;
             txtNombre.Cursor = Cursors.IBeam;
-            txtNombre.CustomizableEdges = customizableEdges12;
+            txtNombre.CustomizableEdges = customizableEdges13;
             txtNombre.DefaultText = "";
             txtNombre.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNombre.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -362,7 +397,7 @@
             txtNombre.PlaceholderText = "Ingrese nombre";
             txtNombre.SelectedText = "";
             txtNombre.ShadowDecoration.BorderRadius = 10;
-            txtNombre.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            txtNombre.ShadowDecoration.CustomizableEdges = customizableEdges14;
             txtNombre.ShadowDecoration.Depth = 5;
             txtNombre.Size = new Size(179, 36);
             txtNombre.TabIndex = 93;
@@ -385,7 +420,7 @@
             btnCrear.BackColor = Color.Transparent;
             btnCrear.BorderRadius = 8;
             btnCrear.Cursor = Cursors.Hand;
-            btnCrear.CustomizableEdges = customizableEdges14;
+            btnCrear.CustomizableEdges = customizableEdges15;
             btnCrear.DisabledState.BorderColor = Color.DarkGray;
             btnCrear.DisabledState.CustomBorderColor = Color.DarkGray;
             btnCrear.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -399,7 +434,7 @@
             btnCrear.Name = "btnCrear";
             btnCrear.PressedColor = Color.FromArgb(255, 170, 20);
             btnCrear.ShadowDecoration.Color = Color.FromArgb(255, 200, 200);
-            btnCrear.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            btnCrear.ShadowDecoration.CustomizableEdges = customizableEdges16;
             btnCrear.ShadowDecoration.Enabled = true;
             btnCrear.ShadowDecoration.Shadow = new Padding(2, 2, 4, 4);
             btnCrear.Size = new Size(167, 30);
@@ -412,7 +447,7 @@
             txtUsuario.Animated = true;
             txtUsuario.BorderRadius = 10;
             txtUsuario.Cursor = Cursors.IBeam;
-            txtUsuario.CustomizableEdges = customizableEdges16;
+            txtUsuario.CustomizableEdges = customizableEdges17;
             txtUsuario.DefaultText = "";
             txtUsuario.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtUsuario.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -432,7 +467,7 @@
             txtUsuario.PlaceholderText = "Ingrese usuario";
             txtUsuario.SelectedText = "";
             txtUsuario.ShadowDecoration.BorderRadius = 10;
-            txtUsuario.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            txtUsuario.ShadowDecoration.CustomizableEdges = customizableEdges18;
             txtUsuario.ShadowDecoration.Depth = 5;
             txtUsuario.Size = new Size(394, 36);
             txtUsuario.TabIndex = 85;
@@ -458,42 +493,26 @@
             panel3.Size = new Size(392, 1);
             panel3.TabIndex = 72;
             // 
-            // btnVolver
+            // guna2CustomGradientPanel1
             // 
-            btnVolver.DisabledState.BorderColor = Color.DarkGray;
-            btnVolver.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnVolver.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnVolver.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnVolver.FillColor = Color.BlueViolet;
-            btnVolver.Font = new Font("Segoe UI", 9F);
-            btnVolver.ForeColor = Color.White;
-            btnVolver.Image = (Image)resources.GetObject("btnVolver.Image");
-            btnVolver.Location = new Point(3, 3);
-            btnVolver.Name = "btnVolver";
-            btnVolver.PressedColor = Color.Indigo;
-            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            btnVolver.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnVolver.Size = new Size(48, 47);
-            btnVolver.TabIndex = 57;
-            btnVolver.Click += btnVolver_Click;
-            // 
-            // chcPassword
-            // 
-            chcPassword.AutoSize = true;
-            chcPassword.Location = new Point(23, 587);
-            chcPassword.Name = "chcPassword";
-            chcPassword.Size = new Size(130, 19);
-            chcPassword.TabIndex = 111;
-            chcPassword.Text = "Mostrar Contraseña";
-            chcPassword.UseVisualStyleBackColor = true;
-            chcPassword.CheckedChanged += chcPassword_CheckedChanged;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges21;
+            guna2CustomGradientPanel1.Dock = DockStyle.Fill;
+            guna2CustomGradientPanel1.FillColor = Color.MidnightBlue;
+            guna2CustomGradientPanel1.FillColor2 = Color.MediumBlue;
+            guna2CustomGradientPanel1.FillColor3 = Color.Orange;
+            guna2CustomGradientPanel1.FillColor4 = Color.Crimson;
+            guna2CustomGradientPanel1.Location = new Point(0, 0);
+            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            guna2CustomGradientPanel1.Size = new Size(1050, 670);
+            guna2CustomGradientPanel1.TabIndex = 58;
             // 
             // CrearUsuarioUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(btnVolver);
             Controls.Add(guna2Panel2);
+            Controls.Add(guna2CustomGradientPanel1);
             Name = "CrearUsuarioUC";
             Size = new Size(1050, 670);
             Load += CrearUsuarioUC_Load;
@@ -525,5 +544,6 @@
         private Label label6;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNoPuedeActualizar;
         private CheckBox chcPassword;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
     }
 }
