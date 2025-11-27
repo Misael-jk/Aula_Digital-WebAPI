@@ -54,6 +54,11 @@ namespace CapaPresentacion
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1157);
 
+            if (userVerificado.IdRol == 3)
+            {
+                btnCrearElemento_M.Enabled = false;
+                btnGestionarElemento_M.Enabled = false;
+            }
 
             // AutoCompletes
             txtTipoElemento.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -497,12 +502,22 @@ namespace CapaPresentacion
 
                 if (estado == "En reparacion")
                 {
-                    e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
+                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
                     e.CellStyle.ForeColor = Color.Black;
                 }
                 else if (estado == "Prestado")
                 {
-                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
+                    e.CellStyle.BackColor = Color.FromArgb(59, 130, 246);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Roto")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Faltantes")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(105, 80, 165);
                     e.CellStyle.ForeColor = Color.Black;
                 }
                 else
@@ -540,7 +555,7 @@ namespace CapaPresentacion
             var detalleUC = new ElementoGestionUC(formPrincipal, this, elementosCN, elementosBajasCN, idElemento, userVerificado);
             formPrincipal.MostrarUserControl(detalleUC);
         }
-        
+
         private void CargarGrafico()
         {
             List<(string Nombre, int Cantidad)> datos = elementosCN.ObtenerElementosPorTipo();
@@ -579,5 +594,6 @@ namespace CapaPresentacion
             lblCantFaltantes.Text = elementosCN.SumarElementosPorEstado(5).ToString();
             lblCantTotal.Text = elementosCN.TotalElementos().ToString();
         }
+
     }
 }

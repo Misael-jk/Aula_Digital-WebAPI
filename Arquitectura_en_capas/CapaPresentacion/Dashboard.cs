@@ -46,17 +46,21 @@ namespace CapaPresentacion
         }
 
         public void MostrarDatos()
-        {
-            //var elemento = mapperHistorialElemento.GetAllDTO();
-            //dataGridView1.DataSource = elemento.ToList();
+        { 
             dgvPrestamosActivos.DataSource = mapperPrestamosActivos.GetAllDTO().ToList();
             CargarGraficoNotebooksPorMes();
             CargarRankingDocentes();
             CargarConteos();
+            ActualizarPanel();
         }
 
         private void Dashboard_Load_1(object sender, EventArgs e)
         {
+            if(userActual.IdRol == 3)
+            {
+                btnDevolucion.Enabled = false;
+            }
+
             MostrarDatos();
 
             dgvPrestamosActivos.Columns["IdPrestamo"].HeaderText = "ID";
@@ -71,16 +75,23 @@ namespace CapaPresentacion
             dgvPrestamosActivos.Columns["Devueltas"].Width = 70;
             dgvPrestamosActivos.Columns["Devueltas"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            { }
+            ActualizarPanel();
+        }
 
-            if (dgvPrestamosActivos.RowCount > 0)
+        private void ActualizarPanel()
+        {
+            var activo = prestamosCN.PrestamoActivo();
+
+            if (activo)
             {
                 pnlDevolucionesPendientes.Visible = true;
+                PnlSinPrestamos.Visible = false;
                 pnlDevolucionesPendientes.BringToFront();
             }
             else
             {
                 PnlSinPrestamos.Visible = true;
+                pnlDevolucionesPendientes.Visible = false;
                 PnlSinPrestamos.BringToFront();
             }
         }

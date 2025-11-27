@@ -260,6 +260,13 @@ namespace CapaPresentacion
                 btnMantenimiento.Visible = true;
                 BtnUsuario.Visible = true;
             }
+            else if(rolUserVerficado.Rol == "Invitado")
+            {
+                btnMantenimiento.Visible = false;
+                BtnUsuario.Visible = false;
+                BtnCategoria.Visible = false;
+                BtnDocentes.Visible = false;
+            }
             else
             {
                 btnMantenimiento.Visible = false;

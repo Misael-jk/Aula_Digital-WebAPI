@@ -96,6 +96,7 @@
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             lblPresentacion = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            pictureBox1 = new PictureBox();
             guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
@@ -126,13 +127,13 @@
             guna2Panel15 = new Guna.UI2.WinForms.Guna2Panel();
             ptbEstado = new PictureBox();
             guna2HtmlLabel20 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvElementos_M).BeginInit();
             pnlDataGridElementos.SuspendLayout();
             guna2Panel2.SuspendLayout();
             pnlPresentacionNotebook.SuspendLayout();
             guna2Panel3.SuspendLayout();
             guna2Panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             guna2Panel5.SuspendLayout();
             guna2Panel6.SuspendLayout();
             guna2Panel7.SuspendLayout();
@@ -144,7 +145,6 @@
             guna2Panel13.SuspendLayout();
             guna2Panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // dgvElementos_M
@@ -630,6 +630,16 @@
             guna2Panel4.Size = new Size(422, 98);
             guna2Panel4.TabIndex = 49;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Espacio_Digital_Logo_removebg_preview;
+            pictureBox1.Location = new Point(10, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(400, 91);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
             // guna2Panel5
             // 
             guna2Panel5.BackColor = Color.Transparent;
@@ -748,11 +758,11 @@
             guna2HtmlLabel9.BackColor = Color.Transparent;
             guna2HtmlLabel9.Font = new Font("Nirmala UI", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel9.ForeColor = SystemColors.ActiveCaptionText;
-            guna2HtmlLabel9.Location = new Point(8, 10);
+            guna2HtmlLabel9.Location = new Point(61, 10);
             guna2HtmlLabel9.Name = "guna2HtmlLabel9";
-            guna2HtmlLabel9.Size = new Size(178, 37);
+            guna2HtmlLabel9.Size = new Size(65, 37);
             guna2HtmlLabel9.TabIndex = 5;
-            guna2HtmlLabel9.Text = "Para reparacion";
+            guna2HtmlLabel9.Text = "Rotas";
             guna2HtmlLabel9.TextAlignment = ContentAlignment.MiddleLeft;
             // 
             // guna2Panel9
@@ -1000,16 +1010,6 @@
             guna2HtmlLabel20.Text = "Aclaración: Los conteos no incluyen a dichos elementos que <br>fueron deshabilitados previamente y tampoco a las notebooks.";
             guna2HtmlLabel20.TextAlignment = ContentAlignment.MiddleLeft;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.Espacio_Digital_Logo_removebg_preview;
-            pictureBox1.Location = new Point(10, 4);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(400, 91);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
-            // 
             // ElementosUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1042,6 +1042,7 @@
             guna2Panel3.ResumeLayout(false);
             guna2Panel3.PerformLayout();
             guna2Panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             guna2Panel5.ResumeLayout(false);
             guna2Panel5.PerformLayout();
             guna2Panel6.ResumeLayout(false);
@@ -1063,7 +1064,6 @@
             guna2Panel15.ResumeLayout(false);
             guna2Panel15.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptbEstado).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 

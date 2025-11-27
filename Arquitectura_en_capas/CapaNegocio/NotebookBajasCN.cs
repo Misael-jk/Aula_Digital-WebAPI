@@ -41,6 +41,7 @@ public class NotebookBajasCN
             if (notebook.Habilitado)
                 throw new Exception("La notebook ya esta habilitada.");
 
+            notebook.IdEstadoMantenimiento = 1;
             notebook.Habilitado = true;
             notebook.FechaBaja = null;
 

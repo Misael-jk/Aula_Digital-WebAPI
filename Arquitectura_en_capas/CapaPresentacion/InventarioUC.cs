@@ -1,4 +1,5 @@
 ﻿using CapaDatos.InterfacesDTO;
+using CapaEntidad;
 
 namespace CapaPresentacion
 {
@@ -27,11 +28,12 @@ namespace CapaPresentacion
 
         private void dgvInventario_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > 0) return;
+            if (e.RowIndex < 0) return;
 
 
             string? motivo = dgvInventario.Rows[e.RowIndex].Cells["Motivo"].Value.ToString();
             string? descripcion = dgvInventario.Rows[e.RowIndex].Cells["Observacion"].Value.ToString();
+
 
             txtMotivo.Text = motivo ?? "Sin Motivo";
             txtDescripcion.Text = descripcion ?? "No hay descripcion";

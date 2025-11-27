@@ -260,8 +260,8 @@ namespace CapaPresentacion
             lblCantModifico.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 2).ToString();
             lblCantInhabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 3).ToString();
             lblCantRehabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 4).ToString();
-            lblCantPrestamos.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 5).ToString();
-            lblCantDevoluciones.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 6).ToString();
+            lblCantPrestamos.Text = repoHistorialCambio.CantidadPrestamosByUser(_idActual).ToString();
+            lblCantDevoluciones.Text = repoHistorialCambio.CantidadDevolucionByUser(_idActual).ToString();
         }
 
         private void btnCambiarContraseña_Click(object sender, EventArgs e)
