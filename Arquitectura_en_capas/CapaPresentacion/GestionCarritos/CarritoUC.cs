@@ -1,19 +1,6 @@
-﻿using CapaDatos.Interfaces;
-using CapaDatos.InterfacesDTO;
-using CapaDatos.MappersDTO;
-using CapaDatos.Repos;
-using CapaDTOs;
+﻿using CapaDTOs;
 using CapaEntidad;
 using CapaNegocio;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CapaPresentacion
 {
@@ -60,6 +47,12 @@ namespace CapaPresentacion
 
         private void CarritoUC_Load(object sender, EventArgs e)
         {
+            if (userVerificado.IdRol == 3)
+            {
+                btnCrearElemento_M.Enabled = false;
+                btnGestionarElemento_M.Enabled = false;
+            }
+
             ActualizarDatagrid(0);
 
             RenovarDatos();
@@ -135,5 +128,40 @@ namespace CapaPresentacion
             {
             }
         }
+
+        private void dgvCarritos_M_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvCarritos_M.Columns[e.ColumnIndex].Name == "Estado" && e.Value != null)
+            {
+                string? estado = e.Value.ToString();
+
+                if (estado == "En reparacion")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Prestado")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(59, 130, 246);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Roto")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Faltantes")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(105, 80, 165);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    return;
+                }
+
+                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
+                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
+            }
     }
 }

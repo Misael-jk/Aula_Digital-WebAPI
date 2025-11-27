@@ -13,5 +13,6 @@ public interface IRepoPrestamos
     public IEnumerable<Prestamos> GetByEncargado(int idEncargado);
     public IEnumerable<Prestamos> GetByDocente(int idDocente);
     public void UpdateEstado(int idPrestamo, int idEstadoPrestamo);
+    public bool PrestamoActivo();
     public void SetTransaction(IDbTransaction? transaction);
 }

@@ -238,6 +238,10 @@ public class PrestamosCN
     #endregion
 
     #region FILTROS
+    public bool PrestamoActivo()
+    {
+        return uow.RepoPrestamos.PrestamoActivo();
+    }
 
     #region Prestamo detalle
     public List<int> ObtenerIDsElementosPorPrestamo(int idPrestamo)

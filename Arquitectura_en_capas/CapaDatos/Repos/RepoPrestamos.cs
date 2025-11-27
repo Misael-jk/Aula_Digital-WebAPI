@@ -168,4 +168,26 @@ public class RepoPrestamos : RepoBase, IRepoPrestamos
         }
     }
     #endregion
+
+    public bool PrestamoActivo()
+    {
+        try
+        {
+            string query = @"select exists (select *
+                                            from Prestamos p
+                                            join PrestamoDetalle pd on p.idPrestamo = pd.idPrestamo
+                                            left join Devoluciones dv on dv.idPrestamo = p.idPrestamo
+                                            left join DevolucionDetalle dd on dv.idDevolucion = dd.idDevolucion and dd.idElemento = pd.idElemento
+                                            where dd.idElemento is null
+                                            and p.idEstadoPrestamo in (1, 4));";
+
+            int activo = Conexion.ExecuteScalar<int>(query, transaction: Transaction);
+
+            return activo > 0;
+        }
+        catch (Exception)
+        {
+            throw new Exception("Hubo un error al verificar si hay prestamos activos");
+        }
+    }
 }

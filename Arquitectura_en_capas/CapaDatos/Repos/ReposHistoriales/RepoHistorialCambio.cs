@@ -164,4 +164,45 @@ public class RepoHistorialCambio : RepoBase, IRepoHistorialCambio
         }
     }
     #endregion
+
+    #region Cantidad de Acciones de Prestamos por Usuarios
+    public int CantidadPrestamosByUser(int idUsuario)
+    {
+        string query = @"select count(*)
+                        from prestamos p 
+                        where p.idUsuarioRecibio = @unidUsuario";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidUsuario", idUsuario);
+
+        try 
+        {
+            return Conexion.QueryFirstOrDefault<int>(query, parameters, transaction: Transaction);
+        }
+        catch(Exception)
+        {
+            throw new Exception("Error al obtener la cantidad de acciones de Prestamos");
+        }
+    }
+    #endregion
+
+    public int CantidadDevolucionByUser(int idUsuario)
+    {
+        string query = @"select count(d.idDevolucion)
+                         from Devoluciones d 
+                         join Prestamos p on p.idPrestamo = d.idPrestamo
+                         where p.idUsuarioRecibio = @unidUsuario";
+
+        DynamicParameters parameters = new DynamicParameters();
+        parameters.Add("unidUsuario", idUsuario);
+
+        try
+        {
+            return Conexion.QueryFirstOrDefault<int>(query, parameters, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al obtener la cantidad de acciones de Devolucion");
+        }
+    }
 }
