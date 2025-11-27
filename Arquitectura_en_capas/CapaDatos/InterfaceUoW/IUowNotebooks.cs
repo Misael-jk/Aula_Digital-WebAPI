@@ -14,6 +14,7 @@ public interface IUowNotebooks
     public IRepoVarianteElemento RepoVarianteElemento { get; }
     public IRepoTipoElemento RepoTipoElemento { get; }
     public IRepoElemento RepoElemento { get; }
+    public IRepoUsuarios RepoUsuarios { get; }
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

@@ -41,6 +41,8 @@ public class PrestamosCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(prestamo.IdUsuario);
+
             ValidarPrestamos(prestamo, idsElementos, idCarrito);
 
             uow.RepoPrestamos.Insert(prestamo);
@@ -130,6 +132,8 @@ public class PrestamosCN
     {
         using (TransactionScope scope = new TransactionScope())
         {
+            ValidarPermisos(prestamo.IdUsuario);
+
             if (uow.RepoDocentes.GetById(prestamo.IdDocente) == null)
             {
                 throw new Exception("El docente no existe");
@@ -477,6 +481,23 @@ public class PrestamosCN
         }
 
         #endregion
+    }
+    #endregion
+
+    #region Validar permisos del usuario
+    private void ValidarPermisos(int idUsuario)
+    {
+        Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
+
+        if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+        {
+            throw new Exception("El usuario no existe.");
+        }
+
+        if (usuarios?.IdRol == 3)
+        {
+            throw new Exception("Este usuario es invitado, no tiene permitido realizar atribuciones en el sistema");
+        }
     }
     #endregion
 

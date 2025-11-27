@@ -15,6 +15,7 @@ public class UowCarritos : UowBase, IUowCarritos
     public IRepoUbicacion RepoUbicacion { get; }
     public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
     public IRepoNotebooks RepoNotebooks { get; }
+    public IRepoUsuarios RepoUsuarios { get; }
 
     public UowCarritos(IDbConnection conexion) : base(conexion)
     {
@@ -24,14 +25,13 @@ public class UowCarritos : UowBase, IUowCarritos
         RepoHistorialNotebooks = new RepoHistorialNotebook(Conexion, Transaction);
         RepoNotebooks = new RepoNotebooks(Conexion, Transaction);
 
-
         // REPOS AUXILIARES / LECTURA
 
         RepoModelo = new RepoModelo(Conexion, Transaction);
         RepoUbicacion = new RepoUbicacion(Conexion, Transaction);
         RepoEstadosMantenimiento = new RepoEstadosMantenimiento(Conexion, Transaction);
-        
-        
+        RepoUsuarios = new RepoUsuarios(Conexion, Transaction);
+
     }
 
     protected override void CambiarTransacion(IDbTransaction? transaction)
@@ -45,5 +45,6 @@ public class UowCarritos : UowBase, IUowCarritos
         RepoModelo.SetTransaction(transaction);
         RepoUbicacion.SetTransaction(transaction);
         RepoEstadosMantenimiento.SetTransaction(transaction);
+        RepoUsuarios.SetTransaction(transaction);
     }
 }

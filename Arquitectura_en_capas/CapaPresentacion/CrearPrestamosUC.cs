@@ -22,10 +22,8 @@ namespace CapaPresentacion
         private Usuarios userActual;
         private int _idPrestamo = 0;
 
-        // texto activo para filtro (uno solo)
         private Guna.UI2.WinForms.Guna2TextBox? txtActivoParaFiltro = null;
 
-        // datos del flujo
         private int? _idDocenteDelPrestamo;
         private List<int> ElementosSeleccionados = new List<int>();
         private int? _idElementoEncontrado;
