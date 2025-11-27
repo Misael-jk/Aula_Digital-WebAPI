@@ -68,6 +68,8 @@ namespace CapaNegocio
         #region INSERT ELEMENTO
         public void CrearElemento(Elemento elementoNEW, int idUsuario)
         {
+            ValidarPermisos(idUsuario);
+
             ValidarDatos(elementoNEW);
 
             try
@@ -108,6 +110,8 @@ namespace CapaNegocio
         #region UPDATE ELEMENTO
         public void ActualizarElemento(Elemento elementoNEW, int idUsuario, string motivo, string descripcion)
         {
+            ValidarPermisos(idUsuario);
+
             ValidarDatos(elementoNEW);
 
             try
@@ -150,6 +154,8 @@ namespace CapaNegocio
             try
             {
                 uow.BeginTransaction();
+
+                ValidarPermisos(idUsuario);
 
                 Elemento? elemento = uow.RepoElemento.GetById(idElemento);
 
@@ -671,6 +677,23 @@ namespace CapaNegocio
             }
             #endregion
 
+        }
+        #endregion
+
+        #region Validar permisos del usuario
+        private void ValidarPermisos(int idUsuario)
+        {
+            Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
+
+            if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+            {
+                throw new Exception("El usuario no existe.");
+            }
+
+            if (usuarios?.IdRol == 3)
+            {
+                throw new Exception("Este usuario es invitado, no tiene permitido realizar atribuciones en el sistema");
+            }
         }
         #endregion
     }

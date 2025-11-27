@@ -45,6 +45,8 @@ public class CarritosCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(idUsuario);
+
             ValidarReposInsert(CarritoNEW);
 
             uow.RepoCarritos.Insert(CarritoNEW);
@@ -93,6 +95,8 @@ public class CarritosCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(idUsuario);
+
             ValidarReposUpdate(carritoNEW);
 
             uow.RepoCarritos.Update(carritoNEW);
@@ -129,6 +133,8 @@ public class CarritosCN
     {
         try
         {
+            ValidarPermisos(idUsuario);
+
             uow.BeginTransaction();
 
             Carritos? carritoOLD = uow.RepoCarritos.GetById(idCarritos);
@@ -167,7 +173,7 @@ public class CarritosCN
                 throw new Exception("No se puede deshabilitar un carrito que aún contiene notebooks.");
             }
 
-            carritoOLD.IdEstadoMantenimiento = 6; // Dado de baja
+            carritoOLD.IdEstadoMantenimiento = 6;
             carritoOLD.FechaBaja = DateTime.Now;
             carritoOLD.Habilitado = false;
 
@@ -203,6 +209,7 @@ public class CarritosCN
     #region DELETE CARRITO
     public void EliminarCarrito(int idCarrito)
     {
+
         Carritos? carrito = uow.RepoCarritos.GetById(idCarrito);
 
         if (carrito == null)
@@ -346,6 +353,8 @@ public class CarritosCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(idUsuario);
+
             #region VALIDACION DE CARRITOS
             Carritos? carrito = uow.RepoCarritos.GetById(idCarrito);
 
@@ -469,6 +478,8 @@ public class CarritosCN
         try
         {
             uow.BeginTransaction();
+
+            ValidarPermisos(idUsuario);
 
             #region VALIDACION DE LA NOTEBOOK
             Notebooks? notebooks = uow.RepoNotebooks.GetById(idNotebook);
@@ -635,7 +646,7 @@ public class CarritosCN
             throw new ValidationException("La capacidad del carrito debe ser mayor que 25.");
         }
 
-        if (carrito.Capacidad > 40) 
+        if (carrito.Capacidad > 40)
             throw new ValidationException("La capacidad del carrito no puede superar 40.");
     }
     #endregion
@@ -848,4 +859,20 @@ public class CarritosCN
     }
     #endregion
 
+    #region Validar permisos del usuario
+    private void ValidarPermisos(int idUsuario)
+    {
+        Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
+
+        if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+        {
+            throw new Exception("El usuario no existe.");
+        }
+
+        if (usuarios?.IdRol == 3)
+        {
+            throw new Exception("Este usuario es invitado, no tiene permitido realizar atribuciones en el sistema");
+        }
+    }
+    #endregion
 }

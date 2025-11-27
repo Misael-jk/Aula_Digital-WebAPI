@@ -22,6 +22,7 @@ namespace CapaPresentacion
         private Usuarios? UsuarioActual;
         private Usuarios? UsuarioCopia;
 
+        private string _contraseña;
         private int _idActual;
         private string? PerfilCambio;
         private int numeroFoto;
@@ -66,7 +67,7 @@ namespace CapaPresentacion
             txtNombre.Text = datos.Nombre;
             txtApellido.Text = datos.Apellido;
             txtEmail.Text = datos.Email;
-            txtContraseña.Text = datos.Password;
+            _contraseña = datos.Password;
             lblRol.Tag = datos.IdRol;
 
             CargarFotoPerfil(datos.FotoPerfil);
@@ -86,7 +87,6 @@ namespace CapaPresentacion
 
             int indexEncontrado = -1;
 
-            // Buscar el índice según el nombre
             for (int i = 0; i < _fotosPerfil.Count; i++)
             {
                 if (_fotosPerfil[i].Nombre == ruta)
@@ -141,7 +141,8 @@ namespace CapaPresentacion
             txtNombre.Enabled = estado;
             txtApellido.Enabled = estado;
             txtEmail.Enabled = estado;
-            txtContraseña.Enabled = estado;
+            btnCambiarContraseña.Enabled = estado;
+            btnCambiarPerfil.Enabled = estado;
 
             btnDeshabilitar.Enabled = estado;
             btnCancelar.Enabled = estado;
@@ -153,7 +154,7 @@ namespace CapaPresentacion
             {
                 IdUsuario = _idActual,
                 Usuario = txtUsuario.Text,
-                Password = txtContraseña.Text,
+                Password = _contraseña,
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
@@ -182,10 +183,6 @@ namespace CapaPresentacion
 
             HabilitarBotones(false, false);
         }
-
-        // ======================================================================
-        // HABILITAR / DESHABILITAR USUARIO
-        // ======================================================================
 
         private void btnDeshabilitar_Click(object sender, EventArgs e)
         {
@@ -324,6 +321,7 @@ namespace CapaPresentacion
             btnRestablecerCambios.Enabled = rest;
         }
 
+
         private void btnVolver_Click(object sender, EventArgs e)
         {
             var form = (FormPrincipal)this.FindForm();
@@ -336,8 +334,14 @@ namespace CapaPresentacion
             lblCantModifico.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 2).ToString();
             lblCantInhabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 3).ToString();
             lblCantRehabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 4).ToString();
-            lblCantPrestamos.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 5).ToString();
-            lblCantDevoluciones.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 6).ToString();
+            lblCantPrestamos.Text = repoHistorialCambio.CantidadPrestamosByUser(_idActual).ToString();
+            lblCantDevoluciones.Text = repoHistorialCambio.CantidadDevolucionByUser(_idActual).ToString();
+        }
+
+        private void btnCambiarContraseña_Click(object sender, EventArgs e)
+        {
+            FormCambiarContraseña CambiarContraseña = new FormCambiarContraseña(usuarioCN, _idActual, this);
+            CambiarContraseña.Show();
         }
     }
 }

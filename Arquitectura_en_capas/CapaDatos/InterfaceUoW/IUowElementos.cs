@@ -12,6 +12,7 @@ public interface IUowElementos
     public IRepoVarianteElemento RepoVarianteElemento { get; }
     public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
     public IRepoTipoElemento RepoTipoElemento { get; }
+    public IRepoUsuarios RepoUsuarios { get; }
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

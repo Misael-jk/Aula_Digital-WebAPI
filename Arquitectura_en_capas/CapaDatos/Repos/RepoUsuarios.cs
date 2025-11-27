@@ -68,6 +68,26 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     }
     #endregion
 
+    #region Actualizar contraseña
+    public void UpdatePassword(int idUsuario, string NuevaContraseña)
+    {
+        string query = "update Usuarios set pass = @nuevaContraseña where idUsuario = @idUsuario";
+
+        DynamicParameters parametros = new DynamicParameters();
+        try
+        {
+            parametros.Add("idUsuario", idUsuario);
+            parametros.Add("nuevaContraseña", NuevaContraseña);
+
+            Conexion.Execute(query, parametros, transaction: Transaction);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Error al actualizar");
+        }
+    }
+    #endregion
+
     #region Eliminar Elemento
     public void Delete(int idUsuario)
     {
