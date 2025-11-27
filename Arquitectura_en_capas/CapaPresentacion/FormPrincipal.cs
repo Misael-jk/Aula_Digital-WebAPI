@@ -404,7 +404,7 @@ namespace CapaPresentacion
             CerrarGestionUsuario();
 
             if (dashboard == null)
-                dashboard = new Dashboard(mapperPrestamosActivos, mapperNotebooksPrestadas, mapperRankingDocente, notebooksCN, this, userVerificado, prestamosYDevolucionesUC, prestamosCN, devolucionCN);
+                dashboard = new Dashboard(mapperPrestamosActivos, mapperNotebooksPrestadas, mapperRankingDocente, notebooksCN, this, userVerificado, prestamosCN, devolucionCN);
 
             CambiarNombrePort(BtnDashboard.Text);
             pnlContenedor.Controls.Clear();
@@ -648,6 +648,8 @@ namespace CapaPresentacion
                 pnlContenedor.Controls.Add(prestamosYDevolucionesUC);
                 prestamosYDevolucionesUC.Dock = DockStyle.Fill;
             }
+
+            prestamosYDevolucionesUC.ActualizarDataGrid();
 
             MostrarSolo(prestamosYDevolucionesUC);
 

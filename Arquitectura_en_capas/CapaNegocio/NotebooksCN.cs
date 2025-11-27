@@ -51,6 +51,9 @@ public class NotebooksCN
         try
         {
             uow.BeginTransaction();
+
+            ValidarPermisos(idUsuario);
+
             ValidarInsert(notebookNEW);
 
             uow.RepoNotebooks.Insert(notebookNEW);
@@ -91,6 +94,8 @@ public class NotebooksCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(idUsuario);
+
             ValidarUpdate(notebookNEW);
 
             uow.RepoNotebooks.Update(notebookNEW);
@@ -127,6 +132,8 @@ public class NotebooksCN
         try
         {
             uow.BeginTransaction();
+
+            ValidarPermisos(idUsuario);
 
             Notebooks? notebook = uow.RepoNotebooks.GetById(idNotebook);
             if (notebook == null)
@@ -699,6 +706,23 @@ public class NotebooksCN
            throw new Exception("Las notebooks no pueden tener variante de elemento.");
         }
         #endregion
+    }
+    #endregion
+
+    #region Validar permisos del usuario
+    private void ValidarPermisos(int idUsuario)
+    {
+        Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
+
+        if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+        {
+            throw new Exception("El usuario no existe.");
+        }
+
+        if (usuarios?.IdRol == 3)
+        {
+            throw new Exception("Este usuario es invitado, no tiene permitido realizar atribuciones en el sistema");
+        }
     }
     #endregion
 }

@@ -105,6 +105,13 @@ public class UsuariosCN
     }
     #endregion
 
+    #region Actualizar Usuario
+    public void CambiarContraseña(int idUsuario, string NuevaContraseña)
+    {
+        repoUsuarios.UpdatePassword(idUsuario, NuevaContraseña);
+    }
+    #endregion
+
     #region DESHABILITAR USUARIO
     public void DeshabilitarUsuario(int idUsuario)
     {

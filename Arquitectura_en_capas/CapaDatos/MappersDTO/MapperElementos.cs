@@ -105,7 +105,7 @@ public class MapperElementos : RepoBase, IMapperElementos
         parameters.Add("unestado", estado);
 
         return Conexion.Query<Elemento, VariantesElemento, TipoElemento, EstadosMantenimiento, Modelos, Ubicacion, ElementosDTO>(
-    "select * from View_GetElementosDTO where ee.estadoMantenimiento = @unestado",
+    "select * from View_GetElementosDTO where EstadoMantenimientoNombre = @unestado",
     (elemento, variante, tipo, estado, modelo, ubicacion) => new ElementosDTO
     {
         IdElemento = elemento.IdElemento,
@@ -118,6 +118,7 @@ public class MapperElementos : RepoBase, IMapperElementos
         Modelo = modelo.NombreModelo,
         Ubicacion = ubicacion.NombreUbicacion
     },
+    parameters,
     splitOn: "IdElemento,Variante,ElementoTipo,EstadoMantenimientoNombre,NombreModelo,NombreUbicacion"
 ).ToList();
     }

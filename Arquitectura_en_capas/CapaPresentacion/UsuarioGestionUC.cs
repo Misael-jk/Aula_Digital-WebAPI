@@ -22,6 +22,7 @@ namespace CapaPresentacion
         private Usuarios? UsuarioActual;
         private Usuarios? UsuarioCopia;
 
+        private string _contraseña;
         private int _idActual;
         private string? PerfilCambio;
         private int numeroFoto;
@@ -66,7 +67,7 @@ namespace CapaPresentacion
             txtNombre.Text = datos.Nombre;
             txtApellido.Text = datos.Apellido;
             txtEmail.Text = datos.Email;
-            txtContraseña.Text = datos.Password;
+            _contraseña = datos.Password;
             lblRol.Tag = datos.IdRol;
 
             CargarFotoPerfil(datos.FotoPerfil);
@@ -140,7 +141,8 @@ namespace CapaPresentacion
             txtNombre.Enabled = estado;
             txtApellido.Enabled = estado;
             txtEmail.Enabled = estado;
-            txtContraseña.Enabled = estado;
+            btnCambiarContraseña.Enabled = estado;
+            btnCambiarPerfil.Enabled = estado;
 
             btnDeshabilitar.Enabled = estado;
             btnCancelar.Enabled = estado;
@@ -152,7 +154,7 @@ namespace CapaPresentacion
             {
                 IdUsuario = _idActual,
                 Usuario = txtUsuario.Text,
-                Password = txtContraseña.Text,
+                Password = _contraseña,
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Email = txtEmail.Text,
@@ -260,6 +262,12 @@ namespace CapaPresentacion
             lblCantRehabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 4).ToString();
             lblCantPrestamos.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 5).ToString();
             lblCantDevoluciones.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 6).ToString();
+        }
+
+        private void btnCambiarContraseña_Click(object sender, EventArgs e)
+        {
+            FormCambiarContraseña CambiarContraseña = new FormCambiarContraseña(usuarioCN, _idActual, this);
+            CambiarContraseña.Show();
         }
     }
 }

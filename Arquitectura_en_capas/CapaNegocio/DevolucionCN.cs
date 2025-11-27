@@ -31,6 +31,8 @@ public class DevolucionCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(idUsuario);
+
             if (uow.RepoDevolucion.GetByPrestamo(devolucionNEW.IdPrestamo) != null)
                 throw new Exception("Ya existe una devolución asociada a este prestamo.");
 
@@ -103,6 +105,8 @@ public class DevolucionCN
         {
             uow.BeginTransaction();
 
+            ValidarPermisos(idUsuario);
+
             Devolucion? devolucion = uow.RepoDevolucion.GetByPrestamo(idPrestamo);
             if (devolucion == null)
                 throw new Exception("No existe una devolución asociada al préstamo.");
@@ -174,6 +178,8 @@ public class DevolucionCN
     #region AUX INSERT DEVOLUCION DETALLE, HISTORICOS y ANOMALIAS
     private void InsertDevolucionDetalle(Devolucion devolucion, IEnumerable<int> idsElementos, IEnumerable<string>? Observaciones, int idUsuario)
     {
+        ValidarPermisos(idUsuario);
+
         if (idsElementos == null)
             throw new ArgumentNullException(nameof(idsElementos));
 
@@ -274,7 +280,7 @@ public class DevolucionCN
         #region USUARIO
         if (uow.RepoUsuarios.GetById(devolucion.IdUsuario) == null)
         {
-            throw new Exception("El usuario no existe.");
+            throw new Exception("El usuario no existe");
         }
         #endregion
 
@@ -314,6 +320,23 @@ public class DevolucionCN
         #endregion
     }
 
+    #endregion
+
+    #region Validar permisos del usuario
+    private void ValidarPermisos(int idUsuario)
+    {
+        Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
+
+        if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+        {
+            throw new Exception("El usuario no existe.");
+        }
+
+        if (usuarios?.IdRol == 3)
+        {
+            throw new Exception("Este usuario es invitado, no tiene permitido realizar atribuciones en el sistema");
+        }
+    }
     #endregion
 
     #region OBTENER DEVOLUCION POR ID

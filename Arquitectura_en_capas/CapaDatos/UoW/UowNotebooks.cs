@@ -17,6 +17,7 @@ public class UowNotebooks : UowBase, IUowNotebooks
     public IRepoVarianteElemento RepoVarianteElemento {get;}
     public IRepoTipoElemento RepoTipoElemento { get; }
     public IRepoElemento RepoElemento { get; }
+    public IRepoUsuarios RepoUsuarios { get; }
 
     public UowNotebooks(IDbConnection conexion) : base(conexion)
     {
@@ -25,6 +26,7 @@ public class UowNotebooks : UowBase, IUowNotebooks
         RepoHistorialNotebook = new RepoHistorialNotebook(conexion, Transaction);
         RepoCarritos = new RepoCarritos(conexion, Transaction);
         RepoElemento = new RepoElemento(conexion, Transaction);
+        RepoUsuarios = new RepoUsuarios(conexion, Transaction);
 
 
         //REPO DE LECTURA
@@ -49,5 +51,6 @@ public class UowNotebooks : UowBase, IUowNotebooks
         RepoEstadosMantenimiento.SetTransaction(transaction);
         RepoVarianteElemento.SetTransaction(transaction);
         RepoTipoElemento.SetTransaction(transaction);
+        RepoUsuarios.SetTransaction(transaction);
     }
 }

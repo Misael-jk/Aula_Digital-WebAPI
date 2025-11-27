@@ -13,6 +13,7 @@ public interface IUowCarritos : IDisposable
     public IRepoUbicacion RepoUbicacion { get; }
     public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
     public IRepoNotebooks RepoNotebooks { get;  }
+    public IRepoUsuarios RepoUsuarios { get; }
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

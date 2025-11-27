@@ -46,6 +46,7 @@ public class MapperCarrritos : RepoBase, IMapperCarritos
     UbicacionActual = ubicacion.NombreUbicacion,
     Modelo = modelo.NombreModelo,
 },
+parameters,
 splitOn: "IdCarrito,EstadoMantenimientoNombre,NombreUbicacion,NombreModelo");
     }
 

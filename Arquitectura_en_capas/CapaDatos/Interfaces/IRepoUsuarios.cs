@@ -12,5 +12,6 @@ public interface IRepoUsuarios
     public Usuarios? GetByUserPass(string user, string password);
     public Usuarios? GetById(int idUsuario);
     public Usuarios? GetByUser(string usuario);
+    public void UpdatePassword(int idUsuario, string NuevaContraseña);
     public void SetTransaction(IDbTransaction? transaction);
 }

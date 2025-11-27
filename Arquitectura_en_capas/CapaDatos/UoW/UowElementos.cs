@@ -15,7 +15,7 @@ public class UowElementos : UowBase, IUowElementos
     public IRepoVarianteElemento RepoVarianteElemento { get; }
     public IRepoEstadosMantenimiento RepoEstadosMantenimiento { get; }
     public IRepoTipoElemento RepoTipoElemento { get; }
-
+    public IRepoUsuarios RepoUsuarios { get; }
 
     public UowElementos(IDbConnection conexion) : base(conexion)
     {
@@ -30,6 +30,7 @@ public class UowElementos : UowBase, IUowElementos
         RepoVarianteElemento = new RepoVarianteElemento(conexion, Transaction);
         RepoEstadosMantenimiento = new RepoEstadosMantenimiento(conexion, Transaction);
         RepoTipoElemento = new RepoTipoElemento(conexion, Transaction);
+        RepoUsuarios = new RepoUsuarios(conexion, Transaction);
     }
 
     protected override void CambiarTransacion(IDbTransaction? transaction)
@@ -43,5 +44,6 @@ public class UowElementos : UowBase, IUowElementos
         RepoVarianteElemento.SetTransaction(transaction);
         RepoEstadosMantenimiento.SetTransaction(transaction);
         RepoTipoElemento.SetTransaction(transaction);
+        RepoUsuarios.SetTransaction(transaction);
     }
 }
