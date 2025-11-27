@@ -13,5 +13,7 @@ public interface IRepoHistorialCambio
     public HistorialCambios? GetUltimateDateByIdCarrito(int idCarrito);
     public string? GetLastDateByUser(int idUsuario);
     public int CantidadAccionByUser(int  idUsuario, int idAccion);
+    public int CantidadPrestamosByUser(int idUsuario);
+    public int CantidadDevolucionByUser(int idUsuario);
     public void SetTransaction(IDbTransaction? transaction);
 }

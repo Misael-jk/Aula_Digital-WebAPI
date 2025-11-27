@@ -268,6 +268,7 @@
             dgvCarritos_M.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dgvCarritos_M.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
             dgvCarritos_M.CellClick += dgvCarritos_M_CellClick;
+            dgvCarritos_M.CellFormatting += dgvCarritos_M_CellFormatting;
             // 
             // pnlPresentacionNotebook
             // 

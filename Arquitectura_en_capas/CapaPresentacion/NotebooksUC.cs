@@ -82,6 +82,12 @@ namespace CapaPresentacion
         #region LOAD
         private void NotebooksUC_Load(object sender, EventArgs e)
         {
+            if (usuarioActual.IdRol == 3)
+            {
+                btnCrearNotebook_M.Enabled = false;
+                btnGestionarNotebook_M.Enabled = false;
+            }
+
             // Scrollbar
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(0, 1157);
@@ -555,9 +561,9 @@ namespace CapaPresentacion
             CartesianChart chart = new CartesianChart
             {
                 Dock = DockStyle.Fill,
-                Series = new ISeries[] 
-                { 
-                    series 
+                Series = new ISeries[]
+                {
+                    series
                 },
 
                 XAxes = new Axis[]
@@ -639,5 +645,40 @@ namespace CapaPresentacion
             catch { }
         }
 
+        private void dgvNotebooks_M_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvNotebooks_M.Columns[e.ColumnIndex].Name == "Estado" && e.Value != null)
+            {
+                string? estado = e.Value.ToString();
+
+                if (estado == "En reparacion")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 230, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if (estado == "Prestado")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(59, 130, 246);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if(estado == "Roto")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(255, 150, 150);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else if(estado == "Faltantes")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(105, 80, 165);
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    return;
+                }
+
+                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
+                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
+            }
+        }
     }
 }

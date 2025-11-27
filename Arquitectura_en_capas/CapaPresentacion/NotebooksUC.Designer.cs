@@ -642,6 +642,7 @@
             dgvNotebooks_M.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(230, 225, 250);
             dgvNotebooks_M.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
             dgvNotebooks_M.CellClick += dtgNotebook_CellClick;
+            dgvNotebooks_M.CellFormatting += dgvNotebooks_M_CellFormatting;
             // 
             // pnlPresentacionNotebook
             // 
