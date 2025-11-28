@@ -714,7 +714,7 @@ public class NotebooksCN
     {
         Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
 
-        if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+        if (usuarios == null)
         {
             throw new Exception("El usuario no existe.");
         }

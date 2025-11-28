@@ -327,7 +327,7 @@ public class DevolucionCN
     {
         Usuarios? usuarios = uow.RepoUsuarios.GetById(idUsuario);
 
-        if (uow.RepoUsuarios.GetById(Convert.ToInt32(usuarios?.IdUsuario)) == null)
+        if (usuarios?.IdUsuario == null)
         {
             throw new Exception("El usuario no existe.");
         }

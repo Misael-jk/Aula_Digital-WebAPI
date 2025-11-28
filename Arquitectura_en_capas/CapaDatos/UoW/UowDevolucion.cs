@@ -60,6 +60,10 @@ public class UowDevolucion : UowBase, IUowDevolucion
         RepoHistorialElementos.SetTransaction(transaction);
         RepoHistorialNotebook.SetTransaction(transaction);
         RepoPrestamoDetalle.SetTransaction(transaction);
-        RepoDevolucionDetalle.SetTransaction(transaction);
+        RepoTipoElemento.SetTransaction(transaction);
+        RepoUsuarios.SetTransaction(transaction);
+        RepoDocentes.SetTransaction(transaction);
+        RepoEstadosPrestamo.SetTransaction(transaction);
+        RepoEstadosMantenimiento.SetTransaction(transaction);
     }
 }

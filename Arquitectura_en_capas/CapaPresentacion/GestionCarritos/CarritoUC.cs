@@ -163,5 +163,6 @@ namespace CapaPresentacion
                 e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
                 e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
             }
+        }
     }
 }

@@ -166,7 +166,7 @@ namespace CapaPresentacion
             usuarioCN.ActualizarUsuario(usuario);
             HabilitarBotones(false, false);
 
-            var form = (FormPrincipal)this.FindForm();
+            FormPrincipal? form = this.FindForm() as FormPrincipal;
             form?.CargarDatosDelUsuarioActual();
 
             ActualizarUC(_idActual);
@@ -210,26 +210,6 @@ namespace CapaPresentacion
             }
         }
 
-<<<<<<< HEAD
-=======
-        private void VerificarCambios(object sender, EventArgs e)
-        {
-            if (txtUsuario.Text != (_usuario ?? "") || txtNombre.Text != (_Nombre ?? "") || txtApellido.Text != (_apellido ?? "") || txtEmail.Text != (_email ?? "") || PerfilCambio != (_rutaFoto ?? ""))
-            {
-                HabilitarBotones(true, true);
-            }
-            else
-            {
-                HabilitarBotones(false, false);
-            }
-        }
-
-        private void HabilitarBotones(bool actu, bool rest)
-        {
-            btnActualizar.Enabled = actu;
-            btnRestablecerCambios.Enabled = rest;
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             FormPrincipal? form = this.FindForm() as FormPrincipal;
@@ -240,50 +220,7 @@ namespace CapaPresentacion
             }
         }
 
-        private void RenovarCantidadAcciones()
-        {
-            lblCantImplemento.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 1).ToString();
-            lblCantModifico.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 2).ToString();
-            lblCantInhabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 3).ToString();
-            lblCantRehabilito.Text = repoHistorialCambio.CantidadAccionByUser(_idActual, 4).ToString();
-            lblCantPrestamos.Text = repoHistorialCambio.CantidadPrestamosByUser(_idActual).ToString();
-            lblCantDevoluciones.Text = repoHistorialCambio.CantidadDevolucionByUser(_idActual).ToString();
-        }
 
-        private void btnCambiarPerfil_Click(object sender, EventArgs e)
-        {
-            numeroFoto++;
-
-            if (numeroFoto > 4)
-            {
-                numeroFoto = 1;
-            }
-
-            if (numeroFoto == 1)
-            {
-                PerfilCambio = "fotoperfil1";
-                ptbPerfil.Image = Properties.Resources.fotoperfil1;
-            }
-            else if (numeroFoto == 2)
-            {
-                PerfilCambio = "fotoperfil2";
-                ptbPerfil.Image = Properties.Resources.fotoperfil2;
-            }
-            else if (numeroFoto == 3)
-            {
-                PerfilCambio = "fotoperfil3";
-                ptbPerfil.Image = Properties.Resources.fotoperfil3;
-            }
-            else if (numeroFoto == 4)
-            {
-                PerfilCambio = "fotoperfil4";
-                ptbPerfil.Image = Properties.Resources.fotoperfil4;
-            }
-
-            VerificarCambios(sender, e);
-        }
-
->>>>>>> 15ea417 (Arreglando errores (Restrospectiva))
         private void btnDeshabilitar2_Click(object sender, EventArgs e)
         {
             btnActualizar.Visible = false;
@@ -319,13 +256,6 @@ namespace CapaPresentacion
         {
             btnActualizar.Enabled = actu;
             btnRestablecerCambios.Enabled = rest;
-        }
-
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            var form = (FormPrincipal)this.FindForm();
-            form?.CerrarGestionUsuario();
         }
 
         private void RenovarCantidadAcciones()

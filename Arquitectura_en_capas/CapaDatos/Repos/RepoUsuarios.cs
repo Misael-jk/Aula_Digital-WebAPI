@@ -147,17 +147,17 @@ public class RepoUsuarios : RepoBase, IRepoUsuarios
     #region Obtener por ID
     public Usuarios? GetById(int idUsuario)
     {
-        string query = "select idUsuario, usuario, pass AS 'Password', nombre, apellido, idRol, email, fotoPerfil, habilitado, fechaBaja from Usuarios where idUsuario = @idUsuario";
+        string query = "select idUsuario, usuario, pass AS 'Password', nombre, apellido, idRol, email, fotoPerfil, habilitado, fechaBaja from Usuarios where idUsuario = @unidUsuario";
 
         DynamicParameters parametros = new DynamicParameters();
         try
         {
-            parametros.Add("@idUsuario", idUsuario);
+            parametros.Add("unidUsuario", idUsuario);
             return Conexion.QueryFirstOrDefault<Usuarios>(query, parametros, transaction: Transaction);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw new Exception("Error al obtener el ID del Usuario");
+            throw new Exception("Error al obtener el ID del Usuario" + ex);
         }
     }
     #endregion
