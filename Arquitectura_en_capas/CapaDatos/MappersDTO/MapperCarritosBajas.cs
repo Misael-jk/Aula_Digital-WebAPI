@@ -1,0 +1,34 @@
+﻿using CapaDatos.InterfacesDTO;
+using CapaDTOs;
+using CapaEntidad;
+using Dapper;
+using System.Data;
+
+namespace CapaDatos.MappersDTO;
+
+public class MapperCarritosBajas : RepoBase, IMapperCarritosBajas
+{
+    public MapperCarritosBajas(IDbConnection conexion, IDbTransaction? transaction = null)
+        : base(conexion, transaction)
+    {
+    }
+
+    public IEnumerable<CarritosBajasDTO> GetAllDTO()
+    {
+        return Conexion.Query<Carritos, Ubicacion, Modelos, EstadosMantenimiento, CarritosBajasDTO>(
+            "select * from View_GetCarritoBajasDTO",
+            (carrito, ubicacion, modelo, estado) => new CarritosBajasDTO
+            {
+                IdCarrito = carrito.IdCarrito,
+                Equipo = carrito.EquipoCarrito,
+                NumeroSerieCarrito = carrito.NumeroSerieCarrito,
+                Capacidad = carrito.Capacidad,
+                FechaBaja = carrito.FechaBaja,
+                Ubicacion = ubicacion.NombreUbicacion,
+                Modelo = modelo.NombreModelo,
+                EstadoMantenimiento = estado.EstadoMantenimientoNombre
+            },
+            splitOn: "NumeroSerieCarrito,NombreUbicacion,NombreModelo,EstadoMantenimientoNombre"
+        ).ToList();
+    }
+}

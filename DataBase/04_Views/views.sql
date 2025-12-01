@@ -1,0 +1,12 @@
+SOURCE 04_Views/01_viewElementos.sql
+SOURCE 04_Views/02_viewUsuarios.sql
+SOURCE 04_Views/03_viewHistorialElemento.sql
+SOURCE 04_Views/04_viewCarritos.sql
+SOURCE 04_Views/05_viewDocentes.sql
+SOURCE 04_Views/06_viewModelos.sql
+SOURCE 04_Views/07_viewInventario.sql
+SOURCE 04_Views/08_viewNotebook.sql
+SOURCE 04_Views/09_viewHistorialCarrito.sql
+SOURCE 04_Views/10_viewHistorialNotebook.sql
+SOURCE 04_Views/11_viewVariantesElemento.sql
+SOURCE 04_Views/12_viewPrestamosActivos.sql

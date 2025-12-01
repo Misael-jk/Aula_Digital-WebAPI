@@ -1,0 +1,3 @@
+SOURCE 03_StoredProcedure/01_inserts.sql
+SOURCE 03_StoredProcedure/02_updates.sql
+SOURCE 03_StoredProcedure/03_deletes.sql
