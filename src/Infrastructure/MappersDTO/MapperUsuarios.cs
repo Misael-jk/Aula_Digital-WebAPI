@@ -2,7 +2,8 @@
 using CapaDatos.InterfacesDTO;
 using System.Data;
 using CapaDTOs;
-using CapaEntidad;
+using Core.Entities.Catalogos;
+using Core.Entities.Aggregates.Usuario;
 
 namespace CapaDatos.MappersDTO;
 

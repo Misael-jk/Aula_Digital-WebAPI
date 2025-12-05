@@ -4,6 +4,8 @@ using CapaDatos.Repos;
 using CapaDTOs;
 using CapaDTOs.AuditoriaDTO;
 using CapaEntidad;
+using Core.Entities.Aggregates.Usuario;
+using Core.Entities.Catalogos;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 

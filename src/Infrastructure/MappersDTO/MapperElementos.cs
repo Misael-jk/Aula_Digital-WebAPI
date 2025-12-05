@@ -3,6 +3,7 @@ using CapaDTOs;
 using CapaDatos.InterfacesDTO;
 using Dapper;
 using System.Data;
+using Core.Entities.Catalogos;
 
 namespace CapaDatos.MappersDTO;
 

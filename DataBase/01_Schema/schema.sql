@@ -127,25 +127,51 @@ create table Docentes (
 create table Ubicacion(
 	idUbicacion tinyint not null auto_increment,
 	ubicacion varchar(40) not null,
+    fechaAlta datetime not null,
+    fechaModificacion datetime,
+    creadorPor smallint,
+    modificadoPor smallint,
 	constraint PK_Ubicacion primary key (idUbicacion)
+    constraint UQ_Ubicacion unique (ubicacion),
+    constraint FK_Ubicacion_CreadorPor foreign key (creadorPor) 
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE,
+    constraint FK_Ubicacion_ModificadoPor foreign key (modificadoPor) 
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
 create table TipoElemento (
     idTipoElemento tinyint not null auto_increment,
     elemento varchar(40) not null,
-    constraint PK_TipoElemento primary key (idTipoElemento)
+    fechaAlta datetime not null,
+    fechaModificacion datetime,
+    creadorPor smallint,
+    modificadoPor smallint,
+    constraint PK_TipoElemento primary key (idTipoElemento),
+    constraint UQ_TipoElemento unique (elemento),
+    constraint FK_TipoElemento_CreadorPor foreign key (creadorPor) 
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE,
+    constraint FK_TipoElemento_ModificadoPor foreign key (modificadoPor)
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
 create table Modelo (
-idModelo tinyint not null auto_increment,
-idTipoElemento tinyint not null,
-modelo varchar(40) not null,
-constraint PK_Modelo primary key (idModelo),
-constraint UQ_Modelo unique (idTipoElemento, modelo),
-constraint FK_Modelo_TipoElemento foreign key (idTipoElemento)
-	references TipoElemento (idTipoElemento)
+    idModelo tinyint not null auto_increment,
+    idTipoElemento tinyint not null,
+    modelo varchar(40) not null,
+    fechaAlta datetime not null,
+    fechaModificacion datetime,
+    creadorPor smallint,
+    modificadoPor smallint,
+    constraint PK_Modelo primary key (idModelo),
+    constraint UQ_Modelo unique (idTipoElemento, modelo),
+    constraint FK_Modelo_TipoElemento foreign key (idTipoElemento)
+        references TipoElemento (idTipoElemento),
+    constraint FK_Modelo_CreadorPor foreign key (creadorPor) 
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE,
+    constraint FK_Modelo_ModificadoPor foreign key (modificadoPor)
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
@@ -160,13 +186,21 @@ create table VariantesElemento (
     idVariante smallint not null auto_increment,
     idTipoElemento tinyint not null,
     subtipo varchar(40) not null,        
-    idModelo tinyint,                
+    idModelo tinyint,
+    fechaAlta datetime not null,
+    fechaModificacion datetime,
+    creadorPor smallint,
+    modificadoPor smallint,
     constraint PK_VariantesElemento primary key (idVariante),
     constraint UQ_VariantesElemento unique (idTipoElemento, subtipo),
     constraint FK_VariantesElemento_TipoElemento foreign key (idTipoElemento)
         references TipoElemento (idTipoElemento),
     constraint FK_VariantesElemento_Modelo foreign key (idModelo)
         references Modelo (idModelo)
+    constraint FK_VariantesElemento_CreadorPor foreign key (creadorPor)
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE,
+    constraint FK_VariantesElemento_ModificadoPor foreign key (modificadoPor)
+        references Usuarios(idUsuario) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 

@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using CapaDatos.Interfaces;
-using CapaEntidad;
 using System.Data;
+using Core.Entities.Aggregates.Carritos;
 
 namespace CapaDatos.Repos;
 

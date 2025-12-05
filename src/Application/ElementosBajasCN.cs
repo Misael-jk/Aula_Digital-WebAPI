@@ -3,6 +3,7 @@ using CapaDatos.InterfacesDTO;
 using CapaDatos.InterfaceUoW;
 using CapaDTOs;
 using CapaEntidad;
+using Core.Entities.Catalogos;
 
 namespace CapaNegocio;
 

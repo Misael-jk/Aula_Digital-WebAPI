@@ -1,5 +1,5 @@
 ﻿using CapaDatos.Interfaces;
-using CapaEntidad;
+using Core.Entities.Aggregates.Prestamos.Devolucion;
 using Dapper;
 using System.Data;
 

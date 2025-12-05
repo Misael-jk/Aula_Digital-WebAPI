@@ -1,7 +1,7 @@
 ﻿using CapaDatos.Interfaces;
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
-using CapaEntidad;
+using Core.Entities.Catalogos;
 using System.Text.RegularExpressions;
 
 namespace CapaNegocio;

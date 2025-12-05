@@ -1,4 +1,4 @@
-﻿using CapaEntidad;
+﻿using Core.Entities.Aggregates.Elementos;
 using System.Data;
 
 namespace CapaDatos.Interfaces;

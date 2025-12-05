@@ -1,7 +1,8 @@
 ﻿using CapaDatos.Interfaces;
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
-using CapaEntidad;
+using Core.Entities.Aggregates.Usuario;
+using Core.Entities.Catalogos;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using System.Text.RegularExpressions;

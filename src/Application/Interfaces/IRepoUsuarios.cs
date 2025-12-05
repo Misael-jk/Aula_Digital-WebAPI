@@ -1,4 +1,4 @@
-﻿using CapaEntidad;
+﻿using Core.Entities.Aggregates.Usuario;
 using System.Data;
 
 namespace CapaDatos.Interfaces;

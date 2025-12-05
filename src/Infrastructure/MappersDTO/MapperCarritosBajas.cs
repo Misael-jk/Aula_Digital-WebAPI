@@ -1,6 +1,7 @@
 ﻿using CapaDatos.InterfacesDTO;
 using CapaDTOs;
-using CapaEntidad;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Catalogos;
 using Dapper;
 using System.Data;
 

@@ -1,5 +1,5 @@
 ﻿using CapaDatos.Interfaces;
-using CapaEntidad;
+using Core.Entities.Catalogos;
 using Dapper;
 using System.Data;
 

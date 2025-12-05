@@ -1,4 +1,5 @@
-﻿using CapaEntidad;
+﻿using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Notebooks;
 using System.Data;
 
 namespace CapaDatos.Interfaces;

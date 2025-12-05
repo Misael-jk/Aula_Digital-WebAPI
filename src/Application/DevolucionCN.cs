@@ -1,8 +1,10 @@
-﻿using CapaEntidad;
-using System.Data;
+﻿using System.Data;
 using CapaDatos.InterfacesDTO;
 using CapaDTOs;
 using CapaDatos.InterfaceUoW;
+using Core.Entities.Aggregates.Usuario;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Prestamos;
 
 namespace CapaNegocio;
 

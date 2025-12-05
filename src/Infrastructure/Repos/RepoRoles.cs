@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using CapaDatos.Interfaces;
-using CapaEntidad;
 using System.Data;
+using Core.Entities.Catalogos;
 
 namespace CapaDatos.Repos;
 public class RepoRoles : RepoBase, IRepoRoles

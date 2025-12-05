@@ -3,6 +3,9 @@ using CapaDatos.InterfacesDTO;
 using CapaEntidad;
 using Dapper;
 using System.Data;
+using Core.Entities.Catalogos;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Notebooks;
 
 namespace CapaDatos.MappersDTO;
 

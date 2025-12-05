@@ -1,8 +1,11 @@
 ﻿using CapaDTOs;
 using CapaDatos.InterfacesDTO;
-using CapaEntidad;
 using Dapper;
 using System.Data;
+using Core.Entities.Catalogos;
+using Core.Entities.Aggregates.Usuario;
+using Core.Entities.Aggregates.Docentes;
+using Core.Entities.Aggregates.Prestamos;
 
 namespace CapaDatos.MappersDTO;
 

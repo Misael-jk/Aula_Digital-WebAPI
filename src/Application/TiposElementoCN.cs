@@ -1,5 +1,5 @@
 ﻿using CapaDatos.Interfaces;
-using CapaEntidad;
+using Core.Entities.Catalogos;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 

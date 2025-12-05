@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations;
 using CapaDatos.InterfaceUoW;
 using System.Globalization;
 using CapaDTOs.AuditoriaDTO;
+using Core.Entities.Catalogos;
+using Core.Entities.Aggregates.Usuario;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Notebooks;
 
 namespace CapaNegocio;
 

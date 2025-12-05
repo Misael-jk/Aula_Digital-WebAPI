@@ -1,4 +1,4 @@
-﻿using CapaEntidad;
+﻿using Core.Entities.Catalogos;
 using System.Data;
 
 namespace CapaDatos.Interfaces;

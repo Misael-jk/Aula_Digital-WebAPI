@@ -1,7 +1,8 @@
 ﻿using CapaDatos.InterfacesDTO;
 using CapaDTOs;
 using CapaDTOs.MantenimientoDTO;
-using CapaEntidad;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Notebooks;
 using Dapper;
 using System.Data;
 

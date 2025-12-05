@@ -1,9 +1,14 @@
-﻿using CapaEntidad;
-using CapaDatos.InterfacesDTO;
+﻿using CapaDatos.InterfacesDTO;
 using CapaDTOs;
 using System.Transactions;
 using CapaDatos.InterfaceUoW;
 using System.Collections;
+using Core.Entities.Catalogos;
+using Core.Entities.Aggregates.Usuario;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Notebooks;
+using Core.Entities.Aggregates.Docentes;
+using Core.Entities.Aggregates.Prestamos;
 
 namespace CapaNegocio;
 

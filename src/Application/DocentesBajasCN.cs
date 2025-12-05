@@ -2,7 +2,7 @@
 using CapaDatos.InterfacesDTO;
 using CapaDatos.Repos;
 using CapaDTOs;
-using CapaEntidad;
+using Core.Entities.Aggregates.Docentes;
 
 namespace CapaNegocio;
 

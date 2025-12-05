@@ -1,5 +1,6 @@
 ﻿using CapaDatos.Interfaces;
-using CapaEntidad;
+using Core.Entities.Aggregates.Carritos;
+using Core.Entities.Aggregates.Notebooks;
 using Dapper;
 using System.Data;
 

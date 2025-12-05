@@ -1,5 +1,5 @@
 ﻿using CapaDatos.Interfaces;
-using CapaEntidad;
+using Core.Entities.Aggregates.Docentes;
 using Dapper;
 using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;

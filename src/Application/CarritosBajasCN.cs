@@ -4,6 +4,7 @@ using CapaDatos.InterfaceUoW;
 using CapaDatos.Repos;
 using CapaDTOs;
 using CapaEntidad;
+using Core.Entities.Aggregates.Carritos;
 using System.Configuration;
 
 namespace CapaNegocio;
